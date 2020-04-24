@@ -1,0 +1,70 @@
+{
+  "root": true,
+  "extends": [
+		"airbnb-typescript",
+		"plugin:@typescript-eslint/recommended",
+		"prettier",
+		"prettier/@typescript-eslint",
+		"prettier/react"
+	],
+  "env": {
+		"browser": true,
+		"es6": true
+  },
+  "parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"project": "./tsconfig.json"
+  },
+  "plugins": [
+		"@typescript-eslint/eslint-plugin",
+		"react",
+		"prettier",
+		"import"
+  ],
+  "rules": {
+		"no-irregular-whitespace": "warn",
+		"no-trailing-spaces": "warn",
+		"arrow-parens": ["error", "always"],
+		"react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx", ".tsx"]
+      }
+		],
+		"prefer-spread": "error",
+		"prefer-template": "error",
+		"no-console": "warn",
+		"prettier/prettier": "error",
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": "warn",
+		"valid-typeof": "off",
+		"@typescript-eslint/interface-name-prefix": [2, "always"],
+		"import/no-cycle": [0, "never"],
+		"import/no-unresolved": "error"
+	},
+	"settings": {
+		"import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+		"import/resolver": {
+			"typescript": {}
+		},
+		"react": {
+			"version": "detect"
+		}
+	},
+	"overrides": [
+    {
+      "files": ["*.d.ts", "*.ts", "*.tsx"],
+      "rules": {
+				"@typescript-eslint/no-unused-vars": [2, { "args": "none" }],
+				"no-unused-vars": "off",
+				"@typescript-eslint/interface-name-prefix": [0, "never"]
+      }
+    }
+  ]
+}

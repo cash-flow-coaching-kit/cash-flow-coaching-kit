@@ -1,0 +1,2 @@
+[alias]
+  cz = ./node_modules/.bin/git-cz
