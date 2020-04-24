@@ -1,11 +1,8 @@
 import React, { ReactElement } from "react"
+import { AppRouter } from "./components/Routing"
 
 const App = (): ReactElement => {
-	return (
-		<div className="App">
-			<h1>What up!</h1>
-		</div>
-	)
+	return <AppRouter />
 }
 
 export default App
