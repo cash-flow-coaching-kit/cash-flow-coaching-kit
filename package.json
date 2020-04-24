@@ -12,6 +12,7 @@
 		"@types/node": "^12.0.0",
 		"@types/react": "^16.9.0",
 		"@types/react-dom": "^16.9.0",
+		"dexie": "^2.0.4",
 		"electron": "^8.2.3",
 		"node-sass": "^4.14.0",
 		"react": "^16.13.1",
@@ -29,7 +30,7 @@
 		"react-start": "BROWSER=none react-scripts start",
 		"pack": "build --dir",
 		"dist": "npm run build && build",
-		"postinstall": "install-app-deps && git config include.path '../.gitalias'"
+		"postinstall": "electron-builder install-app-deps && git config include.path '../.gitalias'"
 	},
 	"browserslist": {
 		"production": [
