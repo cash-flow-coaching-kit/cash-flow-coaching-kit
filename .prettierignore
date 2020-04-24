@@ -1,3 +1,5 @@
 public/**/*
 src/serviceWorker.ts
 package.json
+src/start-react.js
+src/start.js
