@@ -1,7 +1,8 @@
-import React, { ReactElement, useState, ReactNode, MouseEvent } from "react"
+import React, { ReactElement, useState, MouseEvent } from "react"
 import { Fab, Drawer, Button, Box, Typography } from "@material-ui/core"
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 import HighlightOffIcon from "@material-ui/icons/HighlightOff"
+import loadable from "@loadable/component"
 import usePageTipStyles from "./style"
 
 /**
@@ -10,8 +11,19 @@ import usePageTipStyles from "./style"
  * @interface IPageTip
  */
 interface IPageTip {
-	children: ReactNode
+	tip: string
 }
+
+/**
+ * Loadable component to dynamically render the tip content
+ *
+ */
+const AsyncTip = loadable(
+	(props: { tip: string }) => import(`../../content/tips/${props.tip}`),
+	{
+		fallback: <div>Loading...</div>,
+	}
+)
 
 /**
  * Renders a page tip tooltip at the bottom left of the page
@@ -19,7 +31,7 @@ interface IPageTip {
  * @param {ReactNode} { children } Content to render in the slideout drawer
  * @returns {ReactElement}
  */
-const PageTip = ({ children }: IPageTip): ReactElement => {
+const PageTip = ({ tip }: IPageTip): ReactElement => {
 	const style = usePageTipStyles()
 	const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
 
@@ -71,7 +83,7 @@ const PageTip = ({ children }: IPageTip): ReactElement => {
 					</Button>
 				</Box>
 
-				{children}
+				<AsyncTip tip={tip} />
 			</Drawer>
 		</>
 	)

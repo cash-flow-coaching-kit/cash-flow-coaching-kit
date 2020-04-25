@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles"
 
 const usePageTipStyles = makeStyles((theme) => ({
 	root: {
-		position: "absolute",
+		position: "fixed",
 		left: theme.spacing(2),
 		bottom: theme.spacing(2),
 	},
