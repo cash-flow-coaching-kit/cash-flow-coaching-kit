@@ -1,17 +1,10 @@
 import RecentActorsIcon from "@material-ui/icons/RecentActors"
 import DescriptionIcon from "@material-ui/icons/Description"
-import { OverridableComponent } from "@material-ui/core/OverridableComponent"
-import { SvgIconTypeMap } from "@material-ui/core"
 
 import { PrivateRoutes } from "../../../util/routes/routes"
+import { INavRoutes } from "../shared/NavigationLinks"
 
-export interface PrimaryNavRoutes {
-	route: PrivateRoutes
-	title: string
-	Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>
-}
-
-const routes: PrimaryNavRoutes[] = [
+const routes: INavRoutes[] = [
 	{
 		route: PrivateRoutes.ClientList,
 		title: "Client List",

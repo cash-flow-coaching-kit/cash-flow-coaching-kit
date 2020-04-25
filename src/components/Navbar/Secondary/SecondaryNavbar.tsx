@@ -4,6 +4,8 @@ import Box from "@material-ui/core/Box"
 import Toolbar from "@material-ui/core/Toolbar"
 import Button from "@material-ui/core/Button"
 import { useSharedNavStyles } from "../shared/style"
+import { NavigationRoutes } from "../shared/NavigationLinks"
+import routes from "./config"
 
 const SecondaryNavbar = (): ReactElement => {
 	const sharedStyle = useSharedNavStyles()
@@ -20,21 +22,11 @@ const SecondaryNavbar = (): ReactElement => {
 						Show me how
 					</Button>
 					<Box className={sharedStyle.box}>
-						<Button className={sharedStyle.button} color="inherit">
-							Health Check
-						</Button>
-						<Button className={sharedStyle.button} color="inherit">
-							Discover Topics
-						</Button>
-						<Button className={sharedStyle.button} color="inherit">
-							Cash Flow Canvas
-						</Button>
-						<Button className={sharedStyle.button} color="inherit">
-							Change Levers
-						</Button>
-						<Button className={sharedStyle.button} color="inherit">
-							Action Checklist
-						</Button>
+						<NavigationRoutes
+							routes={routes}
+							color="inherit"
+							className={sharedStyle.button}
+						/>
 					</Box>
 				</Toolbar>
 			</AppBar>

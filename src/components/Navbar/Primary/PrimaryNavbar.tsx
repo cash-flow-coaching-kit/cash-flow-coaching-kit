@@ -5,7 +5,8 @@ import Toolbar from "@material-ui/core/Toolbar"
 import Button from "@material-ui/core/Button"
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 import { useSharedNavStyles } from "../shared/style"
-import routes, { PrimaryNavRoutes } from "./config"
+import routes from "./config"
+import { NavigationRoutes } from "../shared/NavigationLinks"
 
 const PrimaryNavbar = (): ReactElement => {
 	const sharedStyle = useSharedNavStyles()
@@ -15,17 +16,11 @@ const PrimaryNavbar = (): ReactElement => {
 			<AppBar position="static" color="default">
 				<Toolbar>
 					<Box className={sharedStyle.box}>
-						{routes.map(
-							({ route, title, Icon }: PrimaryNavRoutes): ReactElement => (
-								<Button
-									className={sharedStyle.button}
-									color="inherit"
-									startIcon={Icon ? <Icon /> : null}
-								>
-									{title}
-								</Button>
-							)
-						)}
+						<NavigationRoutes
+							routes={routes}
+							color="inherit"
+							className={sharedStyle.button}
+						/>
 
 						<Button
 							className={sharedStyle.button}
