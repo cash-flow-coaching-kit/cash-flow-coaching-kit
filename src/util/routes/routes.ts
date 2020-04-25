@@ -1,4 +1,5 @@
 export enum PrivateRoutes {
+	CoachingKit = "/coaching-kit",
 	ClientList = "/client-list",
 	SessionFiles = "/session-files",
 	HealthCheck = "/health-check",

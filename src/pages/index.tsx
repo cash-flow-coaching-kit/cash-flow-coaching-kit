@@ -6,7 +6,7 @@ const Homepage = (): ReactElement => {
 	return (
 		<>
 			<h1>Homepage</h1>
-			<Link to={PrivateRoutes.ClientList}>Client List</Link>
+			<Link to={PrivateRoutes.CoachingKit}>Coaching kit</Link>
 		</>
 	)
 }

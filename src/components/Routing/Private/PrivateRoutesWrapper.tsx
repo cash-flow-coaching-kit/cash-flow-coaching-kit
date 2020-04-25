@@ -8,10 +8,14 @@ import DTListing from "../../../pages/DiscoverTopics/listing"
 import CFCCanvas from "../../../pages/CashFlowCanvas/canvas"
 import ChangeLevers from "../../../pages/change-levers"
 import ActionItems from "../../../pages/action-items"
+import CoachingKit from "../../../pages/coaching-kit"
 
 const PrivateRoutesWrapper = (): ReactElement => {
 	return (
 		<>
+			<Route path={PrivateRoutes.CoachingKit}>
+				<CoachingKit />
+			</Route>
 			<Route path={PrivateRoutes.ClientList}>
 				<ClientList />
 			</Route>
