@@ -1,13 +1,15 @@
 import React, { ReactElement } from "react"
-import AppBar from "@material-ui/core/AppBar"
-import Box from "@material-ui/core/Box"
-import Toolbar from "@material-ui/core/Toolbar"
-import Button from "@material-ui/core/Button"
+import { AppBar, Box, Toolbar, Button } from "@material-ui/core"
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 import { useSharedNavStyles } from "../shared/style"
 import routes from "./config"
 import { NavigationRoutes } from "../shared/NavigationLinks"
 
+/**
+ * Renders the primary navigation
+ *
+ * @returns {ReactElement}
+ */
 const PrimaryNavbar = (): ReactElement => {
 	const sharedStyle = useSharedNavStyles()
 
@@ -22,6 +24,7 @@ const PrimaryNavbar = (): ReactElement => {
 							className={sharedStyle.button}
 						/>
 
+						{/* TODO: Pull into a separate component to add modal trigger and content */}
 						<Button
 							className={sharedStyle.button}
 							color="inherit"

@@ -10,6 +10,12 @@ import ChangeLevers from "../../../pages/change-levers"
 import ActionItems from "../../../pages/action-items"
 import CoachingKit from "../../../pages/coaching-kit"
 
+/**
+ * Private route definitions, these pages should not be available
+ * without the user entering a client
+ *
+ * @returns {ReactElement}
+ */
 const PrivateRoutesWrapper = (): ReactElement => {
 	return (
 		<>

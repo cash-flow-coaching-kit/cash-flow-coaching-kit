@@ -1,12 +1,14 @@
 import React, { ReactElement } from "react"
-import AppBar from "@material-ui/core/AppBar"
-import Box from "@material-ui/core/Box"
-import Toolbar from "@material-ui/core/Toolbar"
-import Button from "@material-ui/core/Button"
+import { AppBar, Box, Toolbar, Button } from "@material-ui/core"
 import { useSharedNavStyles } from "../shared/style"
 import { NavigationRoutes } from "../shared/NavigationLinks"
 import routes from "./config"
 
+/**
+ * Renders the secondary navigation
+ *
+ * @returns {ReactElement}
+ */
 const SecondaryNavbar = (): ReactElement => {
 	const sharedStyle = useSharedNavStyles()
 
@@ -14,6 +16,7 @@ const SecondaryNavbar = (): ReactElement => {
 		<div className={sharedStyle.root}>
 			<AppBar position="static">
 				<Toolbar>
+					{/* TODO: Extract into a custom component to all for dynamic population based on the page */}
 					<Button
 						className={sharedStyle.button}
 						color="inherit"
@@ -21,6 +24,7 @@ const SecondaryNavbar = (): ReactElement => {
 					>
 						Show me how
 					</Button>
+
 					<Box className={sharedStyle.box}>
 						<NavigationRoutes
 							routes={routes}

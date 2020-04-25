@@ -1,10 +1,21 @@
 import React, { ReactNode, ReactElement } from "react"
 import { PrimaryNavbar, SecondaryNavbar } from "../../Navbar"
 
+/**
+ * Private page props interface
+ *
+ * @interface IPrivatePage
+ */
 interface IPrivatePage {
 	children: ReactNode
 }
 
+/**
+ * Private page layout, renders the navigation and the children provided to it.
+ *
+ * @param {ReactNode} { children } Page content to render below the navigation
+ * @returns {ReactElement}
+ */
 const PrivatePage = ({ children }: IPrivatePage): ReactElement => {
 	return (
 		<>

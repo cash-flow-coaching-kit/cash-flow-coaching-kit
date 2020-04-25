@@ -1,3 +1,9 @@
+/**
+ * Private route definitions
+ *
+ * @export
+ * @enum {number}
+ */
 export enum PrivateRoutes {
 	CoachingKit = "/coaching-kit",
 	ClientList = "/client-list",
@@ -9,6 +15,12 @@ export enum PrivateRoutes {
 	ActionChecklist = "/action-checklist",
 }
 
+/**
+ * Public route definitions
+ *
+ * @export
+ * @enum {number}
+ */
 export enum PublicRoutes {
 	Home = "/",
 }

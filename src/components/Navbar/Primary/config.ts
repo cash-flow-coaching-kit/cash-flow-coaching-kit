@@ -4,6 +4,7 @@ import DescriptionIcon from "@material-ui/icons/Description"
 import { PrivateRoutes } from "../../../util/routes/routes"
 import { INavRoutes } from "../shared/NavigationLinks"
 
+// Nav routes definition for the Primary navigation
 const routes: INavRoutes[] = [
 	{
 		route: PrivateRoutes.ClientList,

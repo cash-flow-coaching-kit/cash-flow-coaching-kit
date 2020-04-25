@@ -1,6 +1,7 @@
 import { PrivateRoutes } from "../../../util/routes/routes"
 import { INavRoutes } from "../shared/NavigationLinks"
 
+// Nav routes definition for the Secondary navigation
 const routes: INavRoutes[] = [
 	{
 		route: PrivateRoutes.HealthCheck,

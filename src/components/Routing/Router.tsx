@@ -3,6 +3,11 @@ import { HashRouter as Router, Switch } from "react-router-dom"
 import PublicRoutesWrapper from "./Public"
 import PrivateRoutesWrapper from "./Private"
 
+/**
+ * Application router component
+ *
+ * @returns {ReactElement}
+ */
 const AppRouter = (): ReactElement => {
 	return (
 		<Router>
