@@ -96,7 +96,7 @@ const Homepage = (): ReactElement => {
 							See client list
 						</Button>
 					) : (
-						<NewClientDialog />
+						<NewClientDialog triggerText="Get Started" />
 					)}
 				</Box>
 			</Container>

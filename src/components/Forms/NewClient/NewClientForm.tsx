@@ -38,11 +38,12 @@ const NewClientForm = (): ReactElement => {
 			return errors
 		},
 		onSubmit: async (values) => {
-			const success = await addClient(dispatch, {
+			await addClient(dispatch, {
 				id: 1,
 				name: values.businessName,
 			})
-			console.log(success)
+
+			form.resetForm()
 		},
 	})
 
@@ -69,6 +70,7 @@ const NewClientForm = (): ReactElement => {
 						? form.errors.businessName
 						: null
 				}
+				autoFocus
 			/>
 			<Box>
 				<Button

@@ -7,6 +7,9 @@ import {
 	DialogActions,
 	DialogContentText,
 	makeStyles,
+	ButtonProps,
+	ButtonClassKey,
+	StandardProps,
 } from "@material-ui/core"
 import NewClientForm from "../../components/Forms/NewClient"
 
@@ -19,7 +22,15 @@ const useNCDStyles = makeStyles((theme) => ({
 	},
 }))
 
-const NewClientDialog = (): ReactElement => {
+interface INewClientDialogProps
+	extends StandardProps<ButtonProps, ButtonClassKey> {
+	triggerText: string
+}
+
+const NewClientDialog = ({
+	triggerText,
+	...props
+}: INewClientDialogProps): ReactElement => {
 	const [open, setOpen] = useState<boolean>(false)
 	const styles = useNCDStyles()
 
@@ -38,8 +49,10 @@ const NewClientDialog = (): ReactElement => {
 				variant="contained"
 				size="large"
 				onClick={handleOpen}
+				// eslint-disable-next-line react/jsx-props-no-spreading
+				{...props}
 			>
-				Get started
+				{triggerText}
 			</Button>
 			<Dialog
 				open={open}
