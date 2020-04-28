@@ -1,16 +1,12 @@
 import Dexie from "dexie"
-
-export interface IClient {
-	id?: number
-	name: string
-}
+import { IBaseClient } from "../../state/client/client-outline"
 
 class ClientDatabase extends Dexie {
-	clients!: Dexie.Table<IClient, number>
+	clients!: Dexie.Table<IBaseClient, number>
 
 	constructor() {
 		super("ClientDatabase")
-		this.version(1).stores({
+		this.version(1.1).stores({
 			clients: "++id,name",
 		})
 
