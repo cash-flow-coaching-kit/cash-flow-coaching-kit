@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useState } from "react"
 import { OverridableComponent } from "@material-ui/core/OverridableComponent"
 import {
 	SvgIconTypeMap,
@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core"
 import { Link as RouterLink } from "react-router-dom"
 import { PublicRoutes, PrivateRoutes } from "../../../util/routes/routes"
+import { generateKey, constructKey } from "../../../util/key"
 
 /**
  * Navigation Route objects for rendering
@@ -46,16 +47,19 @@ export const NavigationRoutes = ({
 	routes,
 	...buttonProps
 }: INavigationRoutesProps): ReactElement => {
+	const [key] = useState(generateKey())
+
 	return (
 		<>
 			{routes.map(
-				({ route, title, Icon }: INavRoutes): ReactElement => (
+				({ route, title, Icon }: INavRoutes, idx: number): ReactElement => (
 					<Button
 						startIcon={Icon ? <Icon /> : null}
 						component={RouterLink}
 						to={route}
 						// eslint-disable-next-line react/jsx-props-no-spreading
 						{...buttonProps}
+						key={constructKey(key, idx)}
 					>
 						{title}
 					</Button>
