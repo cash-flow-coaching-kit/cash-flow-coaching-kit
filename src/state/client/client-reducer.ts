@@ -44,6 +44,13 @@ const ClientReducer: Reducer<IClientState, IClientReducerAction> = (
 				},
 			}
 		}
+		case ClientActionTypes.ChangeCurrentClient: {
+			const newstate = { ...state }
+			newstate.state.currentClient = action.payload
+			return {
+				...newstate,
+			}
+		}
 		default: {
 			throw new Error(`Unsupported action type: ${JSON.stringify(action)}`)
 		}
