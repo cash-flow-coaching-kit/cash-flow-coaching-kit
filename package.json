@@ -19,6 +19,7 @@
 		"@types/react-router-dom": "^5.1.4",
 		"dexie": "^2.0.4",
 		"electron": "^8.2.3",
+		"formik": "^2.1.4",
 		"node-sass": "^4.14.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
