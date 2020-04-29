@@ -1,11 +1,14 @@
 import React, { ReactElement } from "react"
 import { Typography, List } from "@material-ui/core"
+import useSharedTipStyling from "./style"
 
 const ClientListTips = (): ReactElement => {
+	const styles = useSharedTipStyling()
+
 	return (
 		<>
 			<Typography variant="h6">Important</Typography>
-			<List>
+			<List className={styles.list}>
 				<Typography component="li">
 					Clearing your browser history will erase all client data - ensure you
 					export data regularly
@@ -23,7 +26,7 @@ const ClientListTips = (): ReactElement => {
 				</Typography>
 			</List>
 			<Typography variant="h6">Next Steps</Typography>
-			<List>
+			<List className={styles.list}>
 				<Typography component="li">
 					Update your client’s data each time you have a coaching conversation
 					to record their progress
