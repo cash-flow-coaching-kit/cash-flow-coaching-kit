@@ -14,13 +14,19 @@ const addClient = async (
 		const key = await ClientDB.clients.add({
 			name: client.name,
 		})
+		const newclient: IBaseClient = {
+			...client,
+			id: key,
+		}
 
 		dispatch({
 			type: ClientActionTypes.AddClient,
-			payload: {
-				...client,
-				id: key,
-			},
+			payload: newclient,
+		})
+
+		dispatch({
+			type: ClientActionTypes.ChangeCurrentClient,
+			payload: newclient,
 		})
 	})
 

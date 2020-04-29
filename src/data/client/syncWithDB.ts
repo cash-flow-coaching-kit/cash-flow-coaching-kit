@@ -15,6 +15,13 @@ const syncClientsWithDb = async (
 			type: ClientActionTypes.BulkAdd,
 			payload: clients,
 		})
+
+		if (clients.length > 0) {
+			dispatch({
+				type: ClientActionTypes.ChangeCurrentClient,
+				payload: clients[0],
+			})
+		}
 	})
 }
 
