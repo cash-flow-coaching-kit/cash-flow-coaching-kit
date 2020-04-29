@@ -16,12 +16,13 @@ import { Link } from "react-router-dom"
 import DeleteIcon from "@material-ui/icons/Delete"
 import AddIcon from "@material-ui/icons/Add"
 import RefreshIcon from "@material-ui/icons/Refresh"
+import { format } from "date-fns"
 import useIndexedDB from "../../../data/hooks/useIndexedDB"
 import HealthCheckDB, {
 	IBaseHealthCheck,
 } from "../../../data/healthChecks/HealthCheckDatabase"
 import { ClientContext } from "../../../state/client"
-import { PrivateRoutes } from "../../../util/routes/routes"
+import { PrivateRoutes, routeVarReplacement } from "../../../util/routes/routes"
 import { constructKey, generateKey } from "../../../util/key"
 
 const useListingStyles = makeStyles((theme) => ({
@@ -84,10 +85,21 @@ const Listing = (): ReactElement => {
 				<List>
 					{clientQuizzes.map(
 						(quiz, idx): ReactElement => (
-							<ListItem key={constructKey(key, idx)}>
+							<ListItem
+								key={constructKey(key, idx)}
+								button
+								component={Link}
+								to={routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
+									[":id", `${quiz.id}`],
+								])}
+							>
 								<ListItemText
-									primary="Health check"
-									secondary={quiz.createdAt}
+									primary="Completed Health Check"
+									secondary={
+										quiz.createdAt
+											? format(quiz.createdAt, "dd/MM/yyyy hh:mm a")
+											: false
+									}
 								/>
 								<ListItemSecondaryAction>
 									<IconButton>
