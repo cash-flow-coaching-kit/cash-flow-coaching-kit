@@ -3,6 +3,7 @@ import { Dispatch } from "react"
 export interface IBaseClient {
 	id?: number
 	name: string
+	createdAt?: number
 }
 
 export enum ClientActionTypes {

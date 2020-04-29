@@ -6,11 +6,20 @@ class ClientDatabase extends Dexie {
 
 	constructor() {
 		super("ClientDatabase")
+		this.applyMigrations()
+
+		this.clients = this.table("clients")
+	}
+
+	private applyMigrations(): void {
+		// Version 1.1
 		this.version(1.1).stores({
 			clients: "++id,name",
 		})
 
-		this.clients = this.table("clients")
+		this.version(1.2).stores({
+			clients: "++id, name, createdAt",
+		})
 	}
 }
 
