@@ -10,6 +10,7 @@ import ChangeLevers from "../../../pages/change-levers"
 import ActionItems from "../../../pages/action-items"
 import CoachingKit from "../../../pages/coaching-kit"
 import HCListing from "../../../pages/HealthCheck/listing"
+import HCSummary from "../../../pages/HealthCheck/summary"
 
 /**
  * Private route definitions, these pages should not be available
@@ -34,6 +35,9 @@ const PrivateRoutesWrapper = (): ReactElement => {
 			</Route>
 			<Route exact path={PrivateRoutes.HealthCheckList}>
 				<HCListing />
+			</Route>
+			<Route exact path={PrivateRoutes.HealthCheckSummary}>
+				<HCSummary />
 			</Route>
 			<Route path={PrivateRoutes.DiscoverTopics}>
 				<DTListing />
