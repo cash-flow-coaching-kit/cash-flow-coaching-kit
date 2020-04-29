@@ -1,10 +1,12 @@
 import React, { ReactElement } from "react"
+import { AppRouter } from "./components/Routing"
+import { ClientProvider } from "./state/client"
 
 const App = (): ReactElement => {
 	return (
-		<div className="App">
-			<h1>What up!</h1>
-		</div>
+		<ClientProvider>
+			<AppRouter />
+		</ClientProvider>
 	)
 }
 
