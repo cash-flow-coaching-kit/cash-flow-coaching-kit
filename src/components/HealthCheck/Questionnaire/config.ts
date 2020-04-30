@@ -1,8 +1,10 @@
-import { makeStyles } from "@material-ui/core"
+import { makeStyles, SvgIconTypeMap } from "@material-ui/core"
 import EmojiEmotionsOutlinedIcon from "@material-ui/icons/EmojiEmotionsOutlined"
 import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied"
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied"
 import { green, red, orange } from "@material-ui/core/colors"
+import { OverridableComponent } from "@material-ui/core/OverridableComponent"
+import findObjectIndexByValue from "../../../util/findObjectIndexByValue"
 
 // eslint-disable-next-line import/prefer-default-export
 export const questions = [
@@ -38,7 +40,14 @@ export const useQuestionnaireStyles = makeStyles((theme) => ({
 	},
 }))
 
-export const options = [
+export interface IQuestionOptions {
+	title: string
+	Icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>
+	color: string
+	answer: number
+}
+
+export const options: IQuestionOptions[] = [
 	{
 		title: "Confident",
 		Icon: EmojiEmotionsOutlinedIcon,
@@ -58,3 +67,10 @@ export const options = [
 		answer: 0,
 	},
 ]
+
+export const getOptionByAnswer = (
+	answer: number,
+	opts: IQuestionOptions[]
+): IQuestionOptions => {
+	return opts[findObjectIndexByValue(opts, "answer", answer)]
+}
