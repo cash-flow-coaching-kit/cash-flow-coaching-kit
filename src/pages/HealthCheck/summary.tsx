@@ -1,63 +1,91 @@
-import React, { ReactElement, useEffect, useState } from "react"
+import React, { ReactElement, useEffect, useState, useContext } from "react"
 import { useParams, Link } from "react-router-dom"
-import { Grid, Typography } from "@material-ui/core"
-import { format } from "date-fns"
+import {
+	Grid,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+} from "@material-ui/core"
+import ListIcon from "@material-ui/icons/List"
 import { PrivatePage, PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav/ExpandableNav"
 import findHCById from "../../data/healthChecks/findHCById"
 import { IBaseHealthCheck } from "../../data/healthChecks/HealthCheckDatabase"
 import { PrivateRoutes } from "../../util/routes/routes"
+import { ClientContext } from "../../state/client"
+import { questions } from "../../components/HealthCheck/Questionnaire/config"
+import {
+	InvalidHC,
+	SummaryTitle,
+	QuestionSummaries,
+} from "../../components/HealthCheck/Summary"
 
-const InvalidHC = (): ReactElement => (
-	<>
-		<Typography> </Typography>
-		<Typography>
-			The requested Health check does not exist. Please select another Health
-			check from the{" "}
-			<Link to={PrivateRoutes.HealthCheckList}>listing page</Link> or{" "}
-			<Link to={PrivateRoutes.HealthCheckQuiz}>start a new quiz</Link>.
-		</Typography>
-	</>
-)
+const QUESTIONS_OFFSET = 4
 
 const HCSummary = (): ReactElement => {
+	const {
+		state: { currentClient },
+	} = useContext(ClientContext)
 	const { id } = useParams()
 	const [healthCheck, setHealthCheck] = useState<IBaseHealthCheck | undefined>()
+	const [fourQuestions, setFourQuestions] = useState<number[] | undefined>(
+		undefined
+	)
+	const [tileAnswers, setTileAnswers] = useState<number[] | undefined>(
+		undefined
+	)
 
 	useEffect(() => {
-		if (id) {
+		if (id && currentClient) {
 			;(async function getHC(): Promise<void> {
-				setHealthCheck(await findHCById(parseInt(id, 10)))
+				if (typeof currentClient.id !== "undefined") {
+					const hc: IBaseHealthCheck = await findHCById(
+						parseInt(id, 10),
+						currentClient.id
+					)
+					setHealthCheck(hc)
+					setFourQuestions(hc.answers.slice(0, QUESTIONS_OFFSET))
+					setTileAnswers(hc.answers.slice(QUESTIONS_OFFSET))
+				}
 			})()
 		}
-	}, [id])
+	}, [id, currentClient])
 
 	return (
 		<PrivatePage>
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={9}>
-						{healthCheck ? (
+						{healthCheck && tileAnswers ? (
 							<>
-								<Typography variant="h5" align="center">
-									Your health check results{" "}
-									{healthCheck.createdAt
-										? `on the ${format(
-												healthCheck.createdAt,
-												"do 'of' MMMM yyyy"
-										  )}`
-										: false}
-								</Typography>
-								{healthCheck.clientId}
+								<SummaryTitle createdAt={healthCheck.createdAt} />
+								<QuestionSummaries
+									questions={questions.slice(QUESTIONS_OFFSET)}
+									tileAnswers={tileAnswers}
+								/>
 							</>
 						) : (
 							<InvalidHC />
 						)}
 					</Grid>
 					<Grid item xs={3}>
-						<FourQuestions />
-						<ExpandableNav>Hello</ExpandableNav>
+						<FourQuestions answers={fourQuestions} />
+						<ExpandableNav>
+							<List component="nav" disablePadding>
+								<ListItem
+									button
+									component={Link}
+									to={PrivateRoutes.HealthCheckList}
+								>
+									<ListItemIcon>
+										<ListIcon />
+									</ListItemIcon>
+									<ListItemText>List of Health Checks</ListItemText>
+								</ListItem>
+							</List>
+						</ExpandableNav>
 					</Grid>
 				</Grid>
 			</PageContainer>
