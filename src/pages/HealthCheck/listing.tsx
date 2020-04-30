@@ -1,10 +1,23 @@
 import React, { ReactElement } from "react"
-import { PrivatePage } from "../../components/Layouts"
+import { Typography, Grid } from "@material-ui/core"
+import { PrivatePage, PageContainer } from "../../components/Layouts"
+import { SectionTitle } from "../../components/Content"
+import Listing from "../../components/HealthCheck/Listing/Listing"
 
 const HCListing = (): ReactElement => {
 	return (
 		<PrivatePage>
-			<h1>HCListing</h1>
+			<PageContainer>
+				<SectionTitle>
+					Saved Health Checks{" "}
+					<Typography variant="subtitle1" component="p" color="textSecondary">
+						View a previous Health Check by selecting from the list below.
+					</Typography>
+				</SectionTitle>
+				<Grid item xs={6}>
+					<Listing />
+				</Grid>
+			</PageContainer>
 		</PrivatePage>
 	)
 }

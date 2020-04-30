@@ -1,6 +1,7 @@
 import RecentActorsIcon from "@material-ui/icons/RecentActors"
 import DescriptionIcon from "@material-ui/icons/Description"
 
+import { makeStyles } from "@material-ui/core"
 import { PrivateRoutes } from "../../../util/routes/routes"
 import { INavRoutes } from "../shared/NavigationLinks"
 
@@ -17,5 +18,15 @@ const routes: INavRoutes[] = [
 		Icon: DescriptionIcon,
 	},
 ]
+
+export const usePrimaryStyles = makeStyles((theme) => ({
+	clientCaption: {
+		textTransform: "uppercase",
+		lineHeight: 1,
+	},
+	clientName: {
+		lineHeight: 1,
+	},
+}))
 
 export default routes

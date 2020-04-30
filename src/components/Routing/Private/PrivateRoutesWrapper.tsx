@@ -16,6 +16,8 @@ import DTPlanningFinanicalCommitments from "../../../pages/DiscoverTopics/planni
 import DTRecordKeeping from "../../../pages/DiscoverTopics/record-keeping"
 import DTSellingClosingSuccession from "../../../pages/DiscoverTopics/selling-closing-succession"
 import DTTrackingPerformance from "../../../pages/DiscoverTopics/tracking-performance"
+import HCListing from "../../../pages/HealthCheck/listing"
+import HCSummary from "../../../pages/HealthCheck/summary"
 
 /**
  * Private route definitions, these pages should not be available
@@ -35,8 +37,14 @@ const PrivateRoutesWrapper = (): ReactElement => {
 			<Route path={PrivateRoutes.SessionFiles}>
 				<SessionFiles />
 			</Route>
-			<Route path={PrivateRoutes.HealthCheck}>
+			<Route exact path={PrivateRoutes.HealthCheckQuiz}>
 				<HCQuestionnaire />
+			</Route>
+			<Route exact path={PrivateRoutes.HealthCheckList}>
+				<HCListing />
+			</Route>
+			<Route exact path={PrivateRoutes.HealthCheckSummary}>
+				<HCSummary />
 			</Route>
 			<Route path={PrivateRoutes.DiscoverTopics}>
 				<DTListing />

@@ -1,6 +1,6 @@
 import Dexie from "dexie"
 
-interface IBaseHealthCheck {
+export interface IBaseHealthCheck {
 	id?: number
 	clientId: number
 	answers: number[]

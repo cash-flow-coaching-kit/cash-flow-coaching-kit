@@ -4,7 +4,7 @@ import { INavRoutes } from "../shared/NavigationLinks"
 // Nav routes definition for the Secondary navigation
 const routes: INavRoutes[] = [
 	{
-		route: PrivateRoutes.HealthCheck,
+		route: PrivateRoutes.HealthCheckQuiz,
 		title: "Health Check",
 	},
 	{
