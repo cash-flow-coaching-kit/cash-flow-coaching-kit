@@ -15,6 +15,7 @@ import Questionnaire from "../../components/HealthCheck/Questionnaire/Questionna
 import PageTip from "../../components/PageTip"
 import ExpandableNav from "../../components/ExpandableNav/ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
+import NewQuestionnaire from "../../components/HealthCheck/Questionnaire/NewQuestionnaire"
 
 const HCQuestionnaire = (): ReactElement => {
 	return (
@@ -25,7 +26,7 @@ const HCQuestionnaire = (): ReactElement => {
 						<Typography variant="h5" align="center">
 							Ten easy questions to learn more about the health of your business
 						</Typography>
-						<Questionnaire />
+						<NewQuestionnaire />
 					</Grid>
 					<Grid item xs={3}>
 						<FourQuestions />

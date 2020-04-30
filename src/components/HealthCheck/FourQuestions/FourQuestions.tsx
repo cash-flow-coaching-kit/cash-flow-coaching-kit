@@ -14,6 +14,7 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { generateKey, constructKey } from "../../../util/key"
 import { options, getOptionByAnswer } from "../Questionnaire/config"
+import { fourQuestionsContent } from "../shared/config"
 
 const useFourQsStyles = makeStyles((theme) => ({
 	list: {
@@ -30,13 +31,6 @@ const useFourQsStyles = makeStyles((theme) => ({
 		margin: 0,
 	},
 }))
-
-const fourQuestionsContent = [
-	"1. Am I trading profitably?",
-	"2. Have I put enough aside to meet my regular financial commitments?",
-	"3. Does my business have enough to spend on myself and pay others?",
-	"4. Is my business improving its financial position?",
-]
 
 interface IFourQuestionsProps {
 	answers?: number[]
@@ -72,7 +66,7 @@ const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 									}`}
 								>
 									<ListItemText className={styles.listItemText}>
-										{content}
+										{`${idx + 1}. ${content}`}
 										{answerText(idx)}
 									</ListItemText>
 								</ListItem>
