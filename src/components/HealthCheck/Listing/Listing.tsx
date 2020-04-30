@@ -2,30 +2,27 @@ import React, { ReactElement, useEffect, useContext, useState } from "react"
 import {
 	Card,
 	CardContent,
-	List,
-	Typography,
-	ListItem,
-	ListItemText,
-	ListItemSecondaryAction,
 	IconButton,
 	Divider,
 	Button,
 	makeStyles,
 } from "@material-ui/core"
 import { Link } from "react-router-dom"
-import DeleteIcon from "@material-ui/icons/Delete"
 import AddIcon from "@material-ui/icons/Add"
 import RefreshIcon from "@material-ui/icons/Refresh"
-import { format } from "date-fns"
+import { useMachine } from "@xstate/react"
 import useIndexedDB from "../../../data/hooks/useIndexedDB"
 import HealthCheckDB, {
 	IBaseHealthCheck,
 } from "../../../data/healthChecks/HealthCheckDatabase"
 import { ClientContext } from "../../../state/client"
-import { PrivateRoutes, routeVarReplacement } from "../../../util/routes/routes"
-import { constructKey, generateKey } from "../../../util/key"
+import { PrivateRoutes } from "../../../util/routes/routes"
+import { HCListingMachine } from "./machine"
+import EmptyListing from "./EmptyListing"
+import QuizList from "./QuizList"
+import Loading from "../../Loading"
 
-const useListingStyles = makeStyles((theme) => ({
+const useListingStyles = makeStyles(() => ({
 	actions: {
 		display: "flex",
 		justifyContent: "space-between",
@@ -34,25 +31,50 @@ const useListingStyles = makeStyles((theme) => ({
 }))
 
 const Listing = (): ReactElement => {
+	const [state, send] = useMachine(HCListingMachine)
 	const {
 		state: { currentClient },
 	} = useContext(ClientContext)
-	const [quizzes, retrive] = useIndexedDB<IBaseHealthCheck>(
+	const [quizzes, retrive, loading] = useIndexedDB<IBaseHealthCheck>(
 		HealthCheckDB,
 		HealthCheckDB.healthChecks,
 		[]
 	)
 	const [clientQuizzes, setClientQuizzess] = useState<IBaseHealthCheck[]>([])
-	const [key] = useState(generateKey())
 	const styles = useListingStyles()
 
 	useEffect(() => {
-		if (currentClient) {
-			setClientQuizzess(
-				quizzes.filter(({ clientId }) => clientId === currentClient.id)
+		if (!loading) {
+			if (!currentClient) {
+				send("IS_EMPTY")
+				return
+			}
+
+			const retrivedQuizzes = quizzes.filter(
+				({ clientId }) => clientId === currentClient.id
 			)
+			if (retrivedQuizzes.length === 0) {
+				send("IS_EMPTY")
+			} else {
+				setClientQuizzess(retrivedQuizzes)
+				send("HAS_ITEMS")
+			}
 		}
-	}, [quizzes, currentClient])
+	}, [quizzes, currentClient, loading])
+
+	const renderQuizData = (): ReactElement => {
+		switch (state.value) {
+			case "empty":
+				return <EmptyListing />
+
+			case "hasItems":
+				return <QuizList clientQuizzes={clientQuizzes} />
+
+			case "loading":
+			default:
+				return <Loading />
+		}
+	}
 
 	return (
 		<Card>
@@ -72,45 +94,7 @@ const Listing = (): ReactElement => {
 				</IconButton>
 			</CardContent>
 			<Divider />
-			{clientQuizzes.length === 0 ? (
-				<CardContent>
-					<Typography variant="h6">No quizzes have been found</Typography>
-					<Typography>
-						Check that you have the correct{" "}
-						<Link to={PrivateRoutes.ClientList}>client selected</Link> or{" "}
-						<Link to={PrivateRoutes.HealthCheckQuiz}>start a new quiz</Link>.
-					</Typography>
-				</CardContent>
-			) : (
-				<List>
-					{clientQuizzes.map(
-						(quiz, idx): ReactElement => (
-							<ListItem
-								key={constructKey(key, idx)}
-								button
-								component={Link}
-								to={routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
-									[":id", `${quiz.id}`],
-								])}
-							>
-								<ListItemText
-									primary="Completed Health Check"
-									secondary={
-										quiz.createdAt
-											? format(quiz.createdAt, "dd/MM/yyyy hh:mm a")
-											: false
-									}
-								/>
-								<ListItemSecondaryAction>
-									<IconButton>
-										<DeleteIcon />
-									</IconButton>
-								</ListItemSecondaryAction>
-							</ListItem>
-						)
-					)}
-				</List>
-			)}
+			{renderQuizData()}
 		</Card>
 	)
 }
