@@ -1,55 +1,93 @@
-import React, { ReactElement, useState, MouseEvent, useContext } from "react"
+import React, {
+	useState,
+	ReactElement,
+	useEffect,
+	MouseEvent,
+	useContext,
+} from "react"
 import {
-	Typography,
 	Box,
-	Button,
+	Typography,
 	Grid,
 	Card,
 	CardActionArea,
 	CardContent,
+	Button,
 } from "@material-ui/core"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import { useHistory } from "react-router-dom"
-
-import { questions, useQuestionnaireStyles, options } from "./config"
-import { generateKey, constructKey } from "../../../util/key"
-import addHealthCheck from "../../../data/healthChecks/addHC"
+import { useQuestionnaireStyles } from "./config"
+import { questions, answerTheming } from "../shared/config"
+import { IQuestionStructure, QuestionOptions } from "../shared/outline"
+import { getOptionByAnswer } from "../shared/utilities"
+import { constructKey, generateKey } from "../../../util/key"
 import { ClientContext } from "../../../state/client"
-import { PrivateRoutes, routeVarReplacement } from "../../../util/routes/routes"
+import addHealthCheck from "../../../data/healthChecks/addHC"
+import { routeVarReplacement, PrivateRoutes } from "../../../util/routes/routes"
+
+interface IQuestionnaireOptions {
+	optionKey: QuestionOptions
+	option: string
+	changeAnswer(e: MouseEvent<HTMLDivElement>, answer: QuestionOptions): void
+	currentAnswer: QuestionOptions | boolean
+}
+
+const QuestionnaireOptions = ({
+	optionKey,
+	option,
+	currentAnswer,
+	changeAnswer,
+}: IQuestionnaireOptions): ReactElement => {
+	const theme = getOptionByAnswer(optionKey, answerTheming)
+
+	return (
+		<Grid item xs={4}>
+			<Card
+				raised={currentAnswer ? currentAnswer === optionKey : false}
+				onClick={(e: MouseEvent<HTMLDivElement>): void => {
+					changeAnswer(e, optionKey)
+				}}
+			>
+				<CardActionArea>
+					<CardContent>
+						<Typography variant="h6">{option}</Typography>
+						<theme.Icon style={{ color: theme.color, fontSize: 50 }} />
+					</CardContent>
+				</CardActionArea>
+			</Card>
+		</Grid>
+	)
+}
 
 const Questionnaire = (): ReactElement => {
 	const {
 		state: { currentClient },
 	} = useContext(ClientContext)
-	const [answers, setAnswers] = useState<number[]>([])
-	const [question, setQuestion] = useState<number>(0)
-	const [key] = useState(generateKey())
 	const styles = useQuestionnaireStyles()
+	const [answers, setAnswers] = useState<QuestionOptions[]>([])
+	const [questionCount, setQuestionCount] = useState<number>(0)
+	const [currentQuestion, setCurrentQuestion] = useState<IQuestionStructure>(
+		questions[questionCount]
+	)
+	const [key] = useState(generateKey())
 	const history = useHistory()
 
-	const cardActive = (answer: number): boolean => {
-		if (
-			typeof answers[question] !== "undefined" &&
-			answers[question] === answer
-		) {
-			return true
-		}
-
-		return false
-	}
+	useEffect(() => {
+		setCurrentQuestion(questions[questionCount])
+	}, [questionCount])
 
 	const changeAnswer = (
 		e: MouseEvent<HTMLDivElement>,
-		answer: number
+		answer: QuestionOptions
 	): void => {
 		e.preventDefault()
 		const copy = [...answers]
-		copy[question] = answer
+		copy[questionCount] = answer
 		setAnswers([...copy])
 	}
 
-	const isFinalQuestion = (): boolean => question === questions.length - 1
+	const isFinalQuestion = (): boolean => questionCount === questions.length - 1
 
 	const handleSubmit = async (): Promise<void> => {
 		if (
@@ -78,30 +116,24 @@ const Questionnaire = (): ReactElement => {
 	return (
 		<Box>
 			<Typography variant="subtitle1" className={styles.subtitle}>
-				Question {question + 1}
+				Question {questionCount + 1}
 			</Typography>
 			<Typography variant="h4" className={styles.title}>
-				{questions[question]}
+				{currentQuestion.question}
 			</Typography>
 
 			<Grid container spacing={2}>
-				{options.map((option, idx) => (
-					<Grid item xs={4} key={constructKey(key, idx)}>
-						<Card
-							raised={cardActive(option.answer)}
-							onClick={(e: MouseEvent<HTMLDivElement>): void =>
-								changeAnswer(e, option.answer)
-							}
-						>
-							<CardActionArea>
-								<CardContent className={styles.cardContent}>
-									<Typography variant="h6">{option.title}</Typography>
-									<option.Icon style={{ color: option.color, fontSize: 50 }} />
-								</CardContent>
-							</CardActionArea>
-						</Card>
-					</Grid>
-				))}
+				{(Object.keys(currentQuestion.options) as QuestionOptions[]).map(
+					(option: QuestionOptions, idx: number): ReactElement => (
+						<QuestionnaireOptions
+							optionKey={option}
+							option={currentQuestion.options[option]}
+							key={constructKey(key, idx)}
+							changeAnswer={changeAnswer}
+							currentAnswer={answers[questionCount] || false}
+						/>
+					)
+				)}
 			</Grid>
 
 			<Box className={styles.actions}>
@@ -109,10 +141,10 @@ const Questionnaire = (): ReactElement => {
 					startIcon={<ChevronLeftIcon />}
 					variant="outlined"
 					color="primary"
-					disabled={question === 0}
+					disabled={questionCount === 0}
 					onClick={(e: MouseEvent<HTMLButtonElement>): void => {
 						e.preventDefault()
-						setQuestion(question - 1)
+						setQuestionCount(questionCount - 1)
 					}}
 				>
 					Previous question
@@ -121,11 +153,11 @@ const Questionnaire = (): ReactElement => {
 					endIcon={<ChevronRightIcon />}
 					variant="contained"
 					color="primary"
-					disabled={typeof answers[question] === "undefined"}
+					disabled={typeof answers[questionCount] === "undefined"}
 					onClick={(e: MouseEvent<HTMLButtonElement>): void => {
 						e.preventDefault()
 						if (!isFinalQuestion()) {
-							setQuestion(question + 1)
+							setQuestionCount(questionCount + 1)
 						} else {
 							handleSubmit()
 						}

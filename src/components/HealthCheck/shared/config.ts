@@ -7,6 +7,7 @@ import {
 	IAnswerTheme,
 	QuestionOptionsRecord,
 } from "./outline"
+import { PrivateRoutes } from "../../../util/routes/routes"
 
 const questionOptionsMap = (
 	questions: string[],
@@ -33,15 +34,6 @@ const fourQuestionOptions: QuestionOptionsRecord = {
 	neutral: "I don't know",
 }
 
-export const additionalQuestions = [
-	"How do you feel about planning your business?",
-	"How do you feel about understanding your cash flow?",
-	"How do you feel about keeping your books and records?",
-	"How do you feel about meeting your regular financial commitments?",
-	"How do you feel about funding your business?",
-	"How do you feel about tracking your business performance?",
-]
-
 const additionalQuestionsOptions: QuestionOptionsRecord = {
 	positive: "Confident",
 	negative: "Not Confident",
@@ -50,7 +42,37 @@ const additionalQuestionsOptions: QuestionOptionsRecord = {
 
 export const questions: IQuestionStructure[] = [
 	...questionOptionsMap(fourQuestionsContent, fourQuestionOptions),
-	...questionOptionsMap(additionalQuestions, additionalQuestionsOptions),
+	{
+		question: "How do you feel about planning your business?",
+		options: { ...additionalQuestionsOptions },
+		learnMore: PrivateRoutes.DiscoverTopics,
+	},
+	{
+		question: "How do you feel about understanding your cash flow?",
+		options: { ...additionalQuestionsOptions },
+		learnMore: PrivateRoutes.DiscoverTopics,
+	},
+	{
+		question: "How do you feel about keeping your books and records?",
+		options: { ...additionalQuestionsOptions },
+		learnMore: PrivateRoutes.DiscoverTopics,
+	},
+	{
+		question:
+			"How do you feel about meeting your regular financial commitments?",
+		options: { ...additionalQuestionsOptions },
+		learnMore: PrivateRoutes.DiscoverTopics,
+	},
+	{
+		question: "How do you feel about funding your business?",
+		options: { ...additionalQuestionsOptions },
+		learnMore: PrivateRoutes.DiscoverTopics,
+	},
+	{
+		question: "How do you feel about tracking your business performance?",
+		options: { ...additionalQuestionsOptions },
+		learnMore: PrivateRoutes.DiscoverTopics,
+	},
 ]
 
 export const answerTheming: IAnswerTheme[] = [

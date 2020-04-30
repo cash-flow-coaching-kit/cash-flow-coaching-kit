@@ -7,8 +7,11 @@ import {
 	CardActions,
 	Button,
 } from "@material-ui/core"
+import { Link } from "react-router-dom"
 import { generateKey, constructKey } from "../../../util/key"
-import { getOptionByAnswer, options } from "../Questionnaire/config"
+import { QuestionOptions, IQuestionStructure } from "../shared/outline"
+import { answerTheming } from "../shared/config"
+import { getOptionByAnswer } from "../shared/utilities"
 
 const useSummaryStyles = makeStyles((theme) => ({
 	gridRoot: {
@@ -28,8 +31,8 @@ const useSummaryStyles = makeStyles((theme) => ({
 }))
 
 interface IQuestionSummaries {
-	questions: string[]
-	tileAnswers: number[]
+	questions: IQuestionStructure[]
+	tileAnswers: QuestionOptions[]
 }
 
 const QuestionSummaries = ({
@@ -47,10 +50,10 @@ const QuestionSummaries = ({
 			className={styles.gridRoot}
 		>
 			{questions.map(
-				(q: string, idx: number): ReactElement => {
-					const { title, Icon, color } = getOptionByAnswer(
+				(q: IQuestionStructure, idx: number): ReactElement => {
+					const { Icon, color } = getOptionByAnswer(
 						tileAnswers[idx],
-						options
+						answerTheming
 					)
 
 					return (
@@ -62,9 +65,9 @@ const QuestionSummaries = ({
 						>
 							<Card className={styles.cardRoot}>
 								<CardHeader
-									title={q}
+									title={q.question}
 									avatar={<Icon style={{ color }} />}
-									subheader={title}
+									subheader={q.options[tileAnswers[idx]]}
 									subheaderTypographyProps={{
 										style: {
 											color,
@@ -73,11 +76,19 @@ const QuestionSummaries = ({
 									}}
 									className={styles.cardHeader}
 								/>
-								<CardActions>
-									<Button color="primary" variant="outlined" size="small">
-										Learn more
-									</Button>
-								</CardActions>
+								{q.learnMore && (
+									<CardActions>
+										<Button
+											color="primary"
+											variant="outlined"
+											size="small"
+											component={Link}
+											to={q.learnMore}
+										>
+											Learn more
+										</Button>
+									</CardActions>
+								)}
 							</Card>
 						</Grid>
 					)

@@ -1,9 +1,10 @@
 import Dexie from "dexie"
+import { QuestionOptions } from "../../components/HealthCheck/shared/outline"
 
 export interface IBaseHealthCheck {
 	id?: number
 	clientId: number
-	answers: number[]
+	answers: QuestionOptions[]
 	createdAt?: number
 }
 

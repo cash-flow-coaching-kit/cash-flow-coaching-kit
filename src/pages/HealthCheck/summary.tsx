@@ -15,12 +15,13 @@ import findHCById from "../../data/healthChecks/findHCById"
 import { IBaseHealthCheck } from "../../data/healthChecks/HealthCheckDatabase"
 import { PrivateRoutes } from "../../util/routes/routes"
 import { ClientContext } from "../../state/client"
-import { questions } from "../../components/HealthCheck/Questionnaire/config"
 import {
 	InvalidHC,
 	SummaryTitle,
 	QuestionSummaries,
 } from "../../components/HealthCheck/Summary"
+import { QuestionOptions } from "../../components/HealthCheck/shared/outline"
+import { questions } from "../../components/HealthCheck/shared/config"
 
 const QUESTIONS_OFFSET = 4
 
@@ -30,10 +31,10 @@ const HCSummary = (): ReactElement => {
 	} = useContext(ClientContext)
 	const { id } = useParams()
 	const [healthCheck, setHealthCheck] = useState<IBaseHealthCheck | undefined>()
-	const [fourQuestions, setFourQuestions] = useState<number[] | undefined>(
-		undefined
-	)
-	const [tileAnswers, setTileAnswers] = useState<number[] | undefined>(
+	const [fourQuestions, setFourQuestions] = useState<
+		QuestionOptions[] | undefined
+	>(undefined)
+	const [tileAnswers, setTileAnswers] = useState<QuestionOptions[] | undefined>(
 		undefined
 	)
 
@@ -71,7 +72,7 @@ const HCSummary = (): ReactElement => {
 						)}
 					</Grid>
 					<Grid item xs={3}>
-						<FourQuestions answers={fourQuestions} />
+						<FourQuestions answers={fourQuestions || []} />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
 								<ListItem

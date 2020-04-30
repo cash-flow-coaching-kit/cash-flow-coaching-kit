@@ -11,11 +11,10 @@ import { Link } from "react-router-dom"
 import ListIcon from "@material-ui/icons/List"
 import { PrivatePage, PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
-import Questionnaire from "../../components/HealthCheck/Questionnaire/Questionnaire"
 import PageTip from "../../components/PageTip"
 import ExpandableNav from "../../components/ExpandableNav/ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
-import NewQuestionnaire from "../../components/HealthCheck/Questionnaire/NewQuestionnaire"
+import Questionnaire from "../../components/HealthCheck/Questionnaire/Questionnaire"
 
 const HCQuestionnaire = (): ReactElement => {
 	return (
@@ -26,7 +25,7 @@ const HCQuestionnaire = (): ReactElement => {
 						<Typography variant="h5" align="center">
 							Ten easy questions to learn more about the health of your business
 						</Typography>
-						<NewQuestionnaire />
+						<Questionnaire />
 					</Grid>
 					<Grid item xs={3}>
 						<FourQuestions />
