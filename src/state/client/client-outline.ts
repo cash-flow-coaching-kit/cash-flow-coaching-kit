@@ -11,6 +11,7 @@ export enum ClientActionTypes {
 	RemoveClient = "remove_client",
 	BulkAdd = "bulk_add",
 	ChangeCurrentClient = "change_current_client",
+	UpdateClientSynced = "change_client_syned",
 }
 
 export type IClientReducerAction =
@@ -18,10 +19,12 @@ export type IClientReducerAction =
 	| { type: ClientActionTypes.RemoveClient; payload: number }
 	| { type: ClientActionTypes.BulkAdd; payload: IBaseClient[] }
 	| { type: ClientActionTypes.ChangeCurrentClient; payload: IBaseClient }
+	| { type: ClientActionTypes.UpdateClientSynced; payload: boolean }
 
 export interface IClientData {
 	clients: IBaseClient[]
 	currentClient?: IBaseClient
+	clientSynced: boolean
 }
 
 export interface IClientState {

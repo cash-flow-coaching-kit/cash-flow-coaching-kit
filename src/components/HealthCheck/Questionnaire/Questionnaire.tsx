@@ -5,60 +5,19 @@ import React, {
 	MouseEvent,
 	useContext,
 } from "react"
-import {
-	Box,
-	Typography,
-	Grid,
-	Card,
-	CardActionArea,
-	CardContent,
-	Button,
-} from "@material-ui/core"
+import { Box, Typography, Grid, Button } from "@material-ui/core"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import { useHistory } from "react-router-dom"
 import { useQuestionnaireStyles } from "./config"
-import { questions, answerTheming } from "../shared/config"
+import { questions } from "../shared/config"
 import { IQuestionStructure, QuestionOptions } from "../shared/outline"
-import { getOptionByAnswer } from "../shared/utilities"
 import { constructKey, generateKey } from "../../../util/key"
 import { ClientContext } from "../../../state/client"
 import addHealthCheck from "../../../data/healthChecks/addHC"
 import { routeVarReplacement, PrivateRoutes } from "../../../util/routes/routes"
-
-interface IQuestionnaireOptions {
-	optionKey: QuestionOptions
-	option: string
-	changeAnswer(e: MouseEvent<HTMLDivElement>, answer: QuestionOptions): void
-	currentAnswer: QuestionOptions | boolean
-}
-
-const QuestionnaireOptions = ({
-	optionKey,
-	option,
-	currentAnswer,
-	changeAnswer,
-}: IQuestionnaireOptions): ReactElement => {
-	const theme = getOptionByAnswer(optionKey, answerTheming)
-
-	return (
-		<Grid item xs={4}>
-			<Card
-				raised={currentAnswer ? currentAnswer === optionKey : false}
-				onClick={(e: MouseEvent<HTMLDivElement>): void => {
-					changeAnswer(e, optionKey)
-				}}
-			>
-				<CardActionArea>
-					<CardContent>
-						<Typography variant="h6">{option}</Typography>
-						<theme.Icon style={{ color: theme.color, fontSize: 50 }} />
-					</CardContent>
-				</CardActionArea>
-			</Card>
-		</Grid>
-	)
-}
+import OptionTile from "./OptionTile"
+import NoClientError from "../../NoClientError"
 
 const Questionnaire = (): ReactElement => {
 	const {
@@ -94,9 +53,13 @@ const Questionnaire = (): ReactElement => {
 			typeof currentClient === "undefined" ||
 			typeof currentClient.id === "undefined"
 		) {
-			console.error("Requires a client to be selected")
+			// eslint-disable-next-line no-alert
+			alert(
+				"A client needs to be selected, please add or select a client before submitting"
+			)
 			return
 		}
+
 		try {
 			const dbKey = await addHealthCheck({
 				clientId: currentClient.id,
@@ -122,16 +85,20 @@ const Questionnaire = (): ReactElement => {
 				{currentQuestion.question}
 			</Typography>
 
+			<NoClientError />
+
 			<Grid container spacing={2}>
 				{(Object.keys(currentQuestion.options) as QuestionOptions[]).map(
 					(option: QuestionOptions, idx: number): ReactElement => (
-						<QuestionnaireOptions
-							optionKey={option}
-							option={currentQuestion.options[option]}
-							key={constructKey(key, idx)}
-							changeAnswer={changeAnswer}
-							currentAnswer={answers[questionCount] || false}
-						/>
+						<Grid item xs={4}>
+							<OptionTile
+								optionKey={option}
+								option={currentQuestion.options[option]}
+								key={constructKey(key, idx)}
+								changeAnswer={changeAnswer}
+								currentAnswer={answers[questionCount] || false}
+							/>
+						</Grid>
 					)
 				)}
 			</Grid>

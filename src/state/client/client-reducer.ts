@@ -21,28 +21,21 @@ const ClientReducer: Reducer<IClientState, IClientReducerAction> = (
 			} = action
 
 			if (findObjectIndexByValue(clients, "id", id) !== -1) {
-				console.error(`client ${id} exists`)
-				return state
+				return { ...state }
 			}
 
-			return {
-				...state,
-				state: {
-					clients: [...state.state.clients, action.payload],
-				},
-			}
+			const newstate = { ...state }
+			newstate.state.clients = [...state.state.clients, action.payload]
+			return { ...newstate }
 		}
 		case ClientActionTypes.RemoveClient: {
 			return state
 		}
 		case ClientActionTypes.BulkAdd: {
 			const { payload } = action
-			return {
-				...state,
-				state: {
-					clients: [...payload],
-				},
-			}
+			const newstate = { ...state }
+			newstate.state.clients = [...payload]
+			return { ...newstate }
 		}
 		case ClientActionTypes.ChangeCurrentClient: {
 			const newstate = { ...state }
@@ -50,6 +43,11 @@ const ClientReducer: Reducer<IClientState, IClientReducerAction> = (
 			return {
 				...newstate,
 			}
+		}
+		case ClientActionTypes.UpdateClientSynced: {
+			const newstate = { ...state }
+			newstate.state.clientSynced = action.payload
+			return { ...newstate }
 		}
 		default: {
 			throw new Error(`Unsupported action type: ${JSON.stringify(action)}`)

@@ -14,9 +14,4 @@ export const useQuestionnaireStyles = makeStyles((theme) => ({
 	title: {
 		marginBottom: theme.spacing(3),
 	},
-	cardContent: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-	},
 }))

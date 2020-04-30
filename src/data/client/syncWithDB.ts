@@ -22,6 +22,11 @@ const syncClientsWithDb = async (
 				payload: clients[0],
 			})
 		}
+
+		dispatch({
+			type: ClientActionTypes.UpdateClientSynced,
+			payload: true,
+		})
 	})
 }
 
