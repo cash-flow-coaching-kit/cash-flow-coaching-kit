@@ -1,8 +1,11 @@
 import HealthCheckDB, { IBaseHealthCheck } from "./HealthCheckDatabase"
 
-const findHCById = (id: number): Promise<IBaseHealthCheck> => {
+const findHCById = (
+	id: number,
+	clientId: number
+): Promise<IBaseHealthCheck> => {
 	return HealthCheckDB.transaction("r", HealthCheckDB.healthChecks, () => {
-		return HealthCheckDB.healthChecks.where("id").equals(id).first()
+		return HealthCheckDB.healthChecks.where({ id, clientId }).first()
 	})
 }
 
