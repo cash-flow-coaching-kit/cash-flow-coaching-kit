@@ -16,7 +16,7 @@ import { questions, useQuestionnaireStyles, options } from "./config"
 import { generateKey, constructKey } from "../../../util/key"
 import addHealthCheck from "../../../data/healthChecks/addHC"
 import { ClientContext } from "../../../state/client"
-import { PrivateRoutes } from "../../../util/routes/routes"
+import { PrivateRoutes, routeVarReplacement } from "../../../util/routes/routes"
 
 const Questionnaire = (): ReactElement => {
 	const {
@@ -60,14 +60,16 @@ const Questionnaire = (): ReactElement => {
 			return
 		}
 		try {
-			// const dbKey = await ...
-			await addHealthCheck({
+			const dbKey = await addHealthCheck({
 				clientId: currentClient.id,
 				answers,
 			})
 
-			// push `summary/{dbKey}`
-			history.push(PrivateRoutes.HealthCheckList)
+			history.push(
+				routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
+					[":id", `${dbKey}`],
+				])
+			)
 		} catch (e) {
 			console.error(e.stack || e)
 		}
