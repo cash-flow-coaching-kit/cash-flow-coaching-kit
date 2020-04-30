@@ -9,6 +9,8 @@ import CFCCanvas from "../../../pages/CashFlowCanvas/canvas"
 import ChangeLevers from "../../../pages/change-levers"
 import ActionItems from "../../../pages/action-items"
 import CoachingKit from "../../../pages/coaching-kit"
+import HCListing from "../../../pages/HealthCheck/listing"
+import HCSummary from "../../../pages/HealthCheck/summary"
 
 /**
  * Private route definitions, these pages should not be available
@@ -28,8 +30,14 @@ const PrivateRoutesWrapper = (): ReactElement => {
 			<Route path={PrivateRoutes.SessionFiles}>
 				<SessionFiles />
 			</Route>
-			<Route path={PrivateRoutes.HealthCheck}>
+			<Route exact path={PrivateRoutes.HealthCheckQuiz}>
 				<HCQuestionnaire />
+			</Route>
+			<Route exact path={PrivateRoutes.HealthCheckList}>
+				<HCListing />
+			</Route>
+			<Route exact path={PrivateRoutes.HealthCheckSummary}>
+				<HCSummary />
 			</Route>
 			<Route path={PrivateRoutes.DiscoverTopics}>
 				<DTListing />
