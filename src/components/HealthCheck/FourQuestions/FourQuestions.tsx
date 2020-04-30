@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { generateKey, constructKey } from "../../../util/key"
+import { options, getOptionByAnswer } from "../Questionnaire/config"
 
 const useFourQsStyles = makeStyles((theme) => ({
 	list: {
@@ -37,9 +38,22 @@ const fourQuestionsContent = [
 	"4. Is my business improving its financial position?",
 ]
 
-const FourQuestions = (): ReactElement => {
+interface IFourQuestionsProps {
+	answers?: number[]
+}
+
+const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 	const styles = useFourQsStyles()
 	const [key] = useState(generateKey())
+
+	const answerText = (idx: number): ReactElement | boolean => {
+		if (answers && typeof answers[idx] !== "undefined") {
+			const { title, color } = getOptionByAnswer(answers[idx], options)
+			return <Typography style={{ color, fontWeight: 500 }}>{title}</Typography>
+		}
+
+		return false
+	}
 
 	return (
 		<ExpansionPanel defaultExpanded>
@@ -59,6 +73,7 @@ const FourQuestions = (): ReactElement => {
 								>
 									<ListItemText className={styles.listItemText}>
 										{content}
+										{answerText(idx)}
 									</ListItemText>
 								</ListItem>
 								{idx !== fourQuestionsContent.length - 1 ? <Divider /> : false}
