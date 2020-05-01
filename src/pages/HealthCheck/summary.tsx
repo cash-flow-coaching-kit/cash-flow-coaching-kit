@@ -25,6 +25,11 @@ import { questions } from "../../components/HealthCheck/shared/config"
 
 const QUESTIONS_OFFSET = 4
 
+/**
+ * Health check summary page
+ *
+ * @returns ReactElement
+ */
 const HCSummary = (): ReactElement => {
 	const {
 		state: { currentClient },
@@ -42,6 +47,7 @@ const HCSummary = (): ReactElement => {
 		if (id && currentClient) {
 			;(async function getHC(): Promise<void> {
 				if (typeof currentClient.id !== "undefined") {
+					// Fetches the health checks for the client and sets state values
 					const hc: IBaseHealthCheck = await findHCById(
 						parseInt(id, 10),
 						currentClient.id

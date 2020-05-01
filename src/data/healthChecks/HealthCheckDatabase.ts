@@ -1,6 +1,12 @@
 import Dexie from "dexie"
 import { QuestionOptions } from "../../components/HealthCheck/shared/outline"
 
+/**
+ * Health check structure
+ *
+ * @export
+ * @interface IBaseHealthCheck
+ */
 export interface IBaseHealthCheck {
 	id?: number
 	clientId: number
@@ -8,9 +14,26 @@ export interface IBaseHealthCheck {
 	createdAt?: number
 }
 
+/**
+ * Health check database definition
+ *
+ * @class HealthCheckDatabase
+ * @extends {Dexie}
+ */
 class HealthCheckDatabase extends Dexie {
+	/**
+	 * Table used to store health checks
+	 *
+	 * @type {Dexie.Table<IBaseHealthCheck, number>}
+	 * @memberof HealthCheckDatabase
+	 */
 	healthChecks!: Dexie.Table<IBaseHealthCheck, number>
 
+	/**
+	 * Creates an instance of HealthCheckDatabase.
+	 *
+	 * @memberof HealthCheckDatabase
+	 */
 	constructor() {
 		super("HealthCheckDatabase")
 		this.applyMigrations()
@@ -18,6 +41,13 @@ class HealthCheckDatabase extends Dexie {
 		this.healthChecks = this.table("healthChecks")
 	}
 
+	/**
+	 * Applys the migration for the database.
+	 * Add new migrations when the database needs to update
+	 *
+	 * @private
+	 * @memberof HealthCheckDatabase
+	 */
 	private applyMigrations(): void {
 		// Version 1
 		this.version(1).stores({

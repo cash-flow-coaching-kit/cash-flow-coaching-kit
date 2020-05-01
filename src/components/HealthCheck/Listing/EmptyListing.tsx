@@ -3,6 +3,11 @@ import { CardContent, Typography } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { PrivateRoutes } from "../../../util/routes/routes"
 
+/**
+ * Message displayed when a client has no completed quizzes
+ *
+ * @returns ReactElement
+ */
 const EmptyListing = (): ReactElement => {
 	return (
 		<CardContent>

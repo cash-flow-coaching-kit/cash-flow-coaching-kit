@@ -13,6 +13,12 @@ import { IBaseHealthCheck } from "../../../data/healthChecks/HealthCheckDatabase
 import { constructKey, generateKey } from "../../../util/key"
 import { routeVarReplacement, PrivateRoutes } from "../../../util/routes/routes"
 
+/**
+ * Renders a list of completed health checks
+ *
+ * @param {IBaseHealthCheck[]} { clientQuizzes }
+ * @returns ReactElement
+ */
 const QuizList = ({
 	clientQuizzes,
 }: {

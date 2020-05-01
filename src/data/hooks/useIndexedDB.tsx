@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react"
 import Dexie from "dexie"
 
+/**
+ * Hook to interact with the indexeddb
+ *
+ * @template RT
+ * @param {Dexie} db
+ * @param {Dexie.Table<RT, number>} table
+ * @param {RT[]} initial
+ * @returns {[RT[], () => Promise<RT[]>, boolean]}
+ */
 function useIndexedDB<RT>(
 	db: Dexie,
 	table: Dexie.Table<RT, number>,

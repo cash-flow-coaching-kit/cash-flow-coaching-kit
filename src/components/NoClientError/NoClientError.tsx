@@ -3,12 +3,23 @@ import { Typography } from "@material-ui/core"
 import { useTheme } from "@material-ui/core/styles"
 import { ClientContext } from "../../state/client"
 
+/**
+ * Displays component if there is no current client
+ *
+ * @returns ReactElement
+ */
 const NoClientError = (): ReactElement => {
 	const theme = useTheme()
 	const {
 		state: { currentClient, clientSynced },
 	} = useContext(ClientContext)
 
+	/**
+	 * Checks if the current client is undefined after syncing with
+	 * the indexeddb
+	 *
+	 * @returns boolean
+	 */
 	const noClient = (): boolean =>
 		clientSynced &&
 		(typeof currentClient === "undefined" ||

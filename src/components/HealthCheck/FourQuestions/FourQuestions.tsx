@@ -21,6 +21,7 @@ import {
 import { QuestionOptions } from "../shared/outline"
 import { getOptionByAnswer } from "../shared/utilities"
 
+// Four question styling
 const useFourQsStyles = makeStyles((theme) => ({
 	list: {
 		width: "100%",
@@ -37,14 +38,33 @@ const useFourQsStyles = makeStyles((theme) => ({
 	},
 }))
 
+/**
+ * FourQuestions component props
+ *
+ * @interface IFourQuestionsProps
+ */
 interface IFourQuestionsProps {
 	answers?: QuestionOptions[]
 }
 
+/**
+ * Component to render the Four key questions with optional
+ * answers, used on the questionnaire summary page
+ *
+ * @param {QuestionOptions[]} { answers? }
+ * @returns ReactElement
+ */
 const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 	const styles = useFourQsStyles()
 	const [key] = useState(generateKey())
 
+	/**
+	 * Checks if a question has a answer and displays the answer
+	 * with a theme
+	 *
+	 * @param {number} idx Question index
+	 * @returns (boolean | ReactElement)
+	 */
 	const answerText = (idx: number): ReactElement | boolean => {
 		if (answers && typeof answers[idx] !== "undefined") {
 			const { color } = getOptionByAnswer(answers[idx], answerTheming)

@@ -9,6 +9,13 @@ import {
 } from "./outline"
 import { PrivateRoutes } from "../../../util/routes/routes"
 
+/**
+ * Merges a list of questions with a set of answer options
+ *
+ * @param {string[]} questions Questions to merge with the option set
+ * @param {QuestionOptionsRecord} options object of options
+ * @returns {IQuestionStructure[]}
+ */
 const questionOptionsMap = (
 	questions: string[],
 	options: QuestionOptionsRecord
@@ -21,6 +28,11 @@ const questionOptionsMap = (
 	)
 }
 
+/**
+ * Four key questions
+ *
+ * @exports
+ */
 export const fourQuestionsContent = [
 	"Am I trading profitably?",
 	"Have I put enough aside to meet my regular financial commitments?",
@@ -28,18 +40,30 @@ export const fourQuestionsContent = [
 	"Is my business improving its financial position?",
 ]
 
+/**
+ * Options for the four key questions
+ *
+ */
 const fourQuestionOptions: QuestionOptionsRecord = {
 	positive: "Yes",
 	negative: "No",
 	neutral: "I don't know",
 }
 
+/**
+ * Generic options for the questions in the health check
+ *
+ */
 const additionalQuestionsOptions: QuestionOptionsRecord = {
 	positive: "Confident",
 	negative: "Not Confident",
 	neutral: "Unsure",
 }
 
+/**
+ * Defines a list of questions used in the health check
+ *
+ */
 export const questions: IQuestionStructure[] = [
 	...questionOptionsMap(fourQuestionsContent, fourQuestionOptions),
 	{
@@ -75,6 +99,11 @@ export const questions: IQuestionStructure[] = [
 	},
 ]
 
+/**
+ * Theming for the different health check answers
+ *
+ * @exports
+ */
 export const answerTheming: IAnswerTheme[] = [
 	{
 		Icon: EmojiEmotionsOutlinedIcon,

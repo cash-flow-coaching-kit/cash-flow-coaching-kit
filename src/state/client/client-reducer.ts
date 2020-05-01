@@ -7,6 +7,13 @@ import {
 } from "./client-outline"
 import findObjectIndexByValue from "../../util/findObjectIndexByValue"
 
+/**
+ * Reducer used for the client state
+ *
+ * @param {IClientState} state Current state
+ * @param {IClientReducerAction} action action to perform
+ * @returns IClientState
+ */
 const ClientReducer: Reducer<IClientState, IClientReducerAction> = (
 	state: IClientState,
 	action: IClientReducerAction

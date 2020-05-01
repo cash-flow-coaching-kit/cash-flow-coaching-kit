@@ -4,6 +4,7 @@ import { useFormik } from "formik"
 import addClient from "../../../data/client/addClient"
 import { ClientContext } from "../../../state/client"
 
+// Client form styles definition
 const useClientFormStyles = makeStyles((theme) => ({
 	input: {
 		width: "100%",
@@ -11,14 +12,29 @@ const useClientFormStyles = makeStyles((theme) => ({
 	},
 }))
 
+/**
+ * Interface for the form values
+ *
+ * @interface INCFormValues
+ */
 interface INCFormValues {
 	businessName: string
 }
 
+/**
+ * Interface for the form errors
+ *
+ * @interface INCFormErrors
+ */
 interface INCFormErrors {
 	businessName?: string
 }
 
+/**
+ * Form used to register a new client. Uses Formik
+ *
+ * @returns ReactElement
+ */
 const NewClientForm = (): ReactElement => {
 	const { dispatch } = useContext(ClientContext)
 	const styles = useClientFormStyles()
@@ -26,11 +42,13 @@ const NewClientForm = (): ReactElement => {
 		businessName: "",
 	}
 
+	// Defines the Formik form
 	const form = useFormik({
 		initialValues,
 		validate: (values): INCFormErrors => {
 			const errors: INCFormErrors = {}
 
+			// Minor validation
 			if (values.businessName === "") {
 				errors.businessName = "Please enter a business name"
 			}
@@ -38,15 +56,24 @@ const NewClientForm = (): ReactElement => {
 			return errors
 		},
 		onSubmit: async (values) => {
+			// Adds a client to the db + state
 			await addClient(dispatch, {
 				id: 1,
 				name: values.businessName,
 			})
 
+			// resets the form
 			form.resetForm()
 		},
 	})
 
+	/**
+	 * Checks if there is a error for a specific field
+	 *
+	 * @param {INCFormErrors} errors Form error object
+	 * @param {keyof INCFormErrors} key Error item to look for
+	 * @returns boolean
+	 */
 	const hasError = (
 		errors: INCFormErrors,
 		key: keyof INCFormErrors

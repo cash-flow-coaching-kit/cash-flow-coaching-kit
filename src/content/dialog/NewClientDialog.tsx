@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core"
 import NewClientForm from "../../components/Forms/NewClient"
 
+// New client styling
 const useNCDStyles = makeStyles((theme) => ({
 	content: {
 		borderStyle: "solid",
@@ -22,11 +23,24 @@ const useNCDStyles = makeStyles((theme) => ({
 	},
 }))
 
+/**
+ * Prop definition for the `<NewClientDialog>` component
+ *
+ * @interface INewClientDialogProps
+ * @extends {StandardProps<ButtonProps, ButtonClassKey>}
+ */
 interface INewClientDialogProps
 	extends StandardProps<ButtonProps, ButtonClassKey> {
 	triggerText: string
 }
 
+/**
+ * Modal used when creating a new client. Props extends the default
+ * Button props and are applied to the trigger
+ *
+ * @param {INewClientDialogProps} {props}
+ * @returns ReactElement
+ */
 const NewClientDialog = ({
 	triggerText,
 	...props
@@ -34,10 +48,20 @@ const NewClientDialog = ({
 	const [open, setOpen] = useState<boolean>(false)
 	const styles = useNCDStyles()
 
+	/**
+	 * Handles the opening of the modal
+	 *
+	 * @returns void
+	 */
 	const handleOpen = (): void => {
 		setOpen(true)
 	}
 
+	/**
+	 * Handles the closing of the modal
+	 *
+	 * @returns void
+	 */
 	const handleClose = (): void => {
 		setOpen(false)
 	}

@@ -4,6 +4,11 @@ import { PrivatePage, PageContainer } from "../../components/Layouts"
 import { SectionTitle } from "../../components/Content"
 import Listing from "../../components/HealthCheck/Listing/Listing"
 
+/**
+ * Health check listing page
+ *
+ * @returns ReactElement
+ */
 const HCListing = (): ReactElement => {
 	return (
 		<PrivatePage>

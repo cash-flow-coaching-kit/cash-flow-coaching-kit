@@ -9,6 +9,7 @@ import {
 
 type SectionTitleProps = StandardProps<TypographyProps, TypographyClassKey>
 
+// Section title styles
 const useSTStyles = makeStyles((theme) => ({
 	title: {
 		fontWeight: 500,
@@ -16,6 +17,12 @@ const useSTStyles = makeStyles((theme) => ({
 	},
 }))
 
+/**
+ * Abstraction for the Typography for a consistent heading for sections
+ *
+ * @param {SectionTitleProps} props Mimics the props for `<Typography>`
+ * @returns ReactElement
+ */
 const SectionTitle = ({
 	children,
 	className,

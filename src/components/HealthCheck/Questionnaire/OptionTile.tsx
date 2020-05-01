@@ -10,6 +10,11 @@ import { QuestionOptions } from "../shared/outline"
 import { getOptionByAnswer } from "../shared/utilities"
 import { answerTheming } from "../shared/config"
 
+/**
+ * OptionTile props
+ *
+ * @interface IQuestionnaireOptions
+ */
 interface IQuestionnaireOptions {
 	optionKey: QuestionOptions
 	option: string
@@ -17,6 +22,7 @@ interface IQuestionnaireOptions {
 	currentAnswer: QuestionOptions | boolean
 }
 
+// Option tile styles
 const useOptionTileStyles = makeStyles(() => ({
 	cardContent: {
 		display: "flex",
@@ -25,6 +31,15 @@ const useOptionTileStyles = makeStyles(() => ({
 	},
 }))
 
+/**
+ * A single tile for the Health check questionnaire
+ *
+ * @param {QuestionOptions} {optionKey}
+ * @param {string} {option}
+ * @param {(QuestionOptions | boolean)} {currentAnswer}
+ * @param {Function} {changeAnswer}
+ * @returns ReactElement
+ */
 const OptionTile = ({
 	optionKey,
 	option,

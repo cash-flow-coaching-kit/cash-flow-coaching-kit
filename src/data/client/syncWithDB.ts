@@ -5,6 +5,13 @@ import {
 	ClientActionTypes,
 } from "../../state/client/client-outline"
 
+/**
+ * Syncs the client state with the db
+ *
+ * @param {Dispatch<IClientReducerAction>} dispatch Dispatch method for the client state
+ * @returns Promise<void>
+ * TODO: return promise to be resovled from the form
+ */
 const syncClientsWithDb = async (
 	dispatch: Dispatch<IClientReducerAction>
 ): Promise<void> => {

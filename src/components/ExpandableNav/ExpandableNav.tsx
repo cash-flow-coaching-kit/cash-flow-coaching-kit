@@ -8,11 +8,18 @@ import {
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
+/**
+ * Prop interface for `<ExpandableNav>`
+ *
+ * @export
+ * @interface IExpandableNavProps
+ */
 export interface IExpandableNavProps {
 	title?: string
 	children: ReactNode
 }
 
+// Styles for the Expandable nav
 const useExpandableNavStyles = makeStyles((theme) => ({
 	details: {
 		paddingLeft: 0,
@@ -21,6 +28,15 @@ const useExpandableNavStyles = makeStyles((theme) => ({
 	},
 }))
 
+/**
+ * Sets up the core for the `ExpansionPanel` component. As a developer,
+ * you'll have to provide the content for the `<ExpansionPanelDetails>`
+ * component
+ *
+ * @param {string} {title} Title to display in the summary. Defaults to "Control Panel"
+ * @param {ReactNode} {children} Content for display inside `<ExpansionPanelDetails>`
+ * @returns ReactElement
+ */
 const ExpandableNav = ({
 	title = "Control Panel",
 	children,

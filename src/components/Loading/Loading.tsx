@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react"
 import { Box, CircularProgress, makeStyles } from "@material-ui/core"
 
+// Loading styles
 const useLoadingStyles = makeStyles((theme) => ({
 	root: {
 		display: "flex",
@@ -10,6 +11,11 @@ const useLoadingStyles = makeStyles((theme) => ({
 	},
 }))
 
+/**
+ * Loading component
+ *
+ * @returns ReactElement
+ */
 const Loading = (): ReactElement => {
 	const styles = useLoadingStyles()
 

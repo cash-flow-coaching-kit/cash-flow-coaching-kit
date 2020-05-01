@@ -16,6 +16,11 @@ import ExpandableNav from "../../components/ExpandableNav/ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Questionnaire from "../../components/HealthCheck/Questionnaire/Questionnaire"
 
+/**
+ * Health check questionnaire page
+ *
+ * @returns ReactElement
+ */
 const HCQuestionnaire = (): ReactElement => {
 	return (
 		<PrivatePage>

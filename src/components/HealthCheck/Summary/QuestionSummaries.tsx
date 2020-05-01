@@ -13,6 +13,7 @@ import { QuestionOptions, IQuestionStructure } from "../shared/outline"
 import { answerTheming } from "../shared/config"
 import { getOptionByAnswer } from "../shared/utilities"
 
+// Styles for the health check summary
 const useSummaryStyles = makeStyles((theme) => ({
 	gridRoot: {
 		marginTop: theme.spacing(3),
@@ -30,11 +31,23 @@ const useSummaryStyles = makeStyles((theme) => ({
 	},
 }))
 
+/**
+ * Prop structure for the `<QuestionSummaries>` component
+ *
+ */
 interface IQuestionSummaries {
 	questions: IQuestionStructure[]
 	tileAnswers: QuestionOptions[]
 }
 
+/**
+ * Component to display the summary cards for the answers
+ * given to the "additional" questions
+ *
+ * @param {IQuestionStructure[]} {questions} questions to loop through and display the answers
+ * @param {QuestionOptions[]} {tileAnswers} answers given to those questions
+ * @returns ReactElement
+ */
 const QuestionSummaries = ({
 	questions,
 	tileAnswers,

@@ -27,12 +27,20 @@ import { PublicRoutes } from "../../util/routes/routes"
 import { ClientActionTypes } from "../../state/client/client-outline"
 import { NewClientDialog } from "../../content/dialog"
 
+// Client listing styles
 const useCLStyles = makeStyles((theme) => ({
 	button: {
 		marginRight: theme.spacing(2),
 	},
 }))
 
+// TODO: Pass clients and current clients to component
+/**
+ * Renders a list of current clients with the ability to change
+ * which client is being edited
+ *
+ * @returns ReactElement
+ */
 const ClientList = (): ReactElement => {
 	const {
 		state: { clients, currentClient },
@@ -40,7 +48,14 @@ const ClientList = (): ReactElement => {
 	} = useContext(ClientContext)
 	const [key] = useState(generateKey())
 
+	/**
+	 * Changes the current client selected for editing
+	 *
+	 * @param {ChangeEvent<HTMLInputElement>} event Event created by the radio change
+	 * @returns void
+	 */
 	const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+		// TODO: Pass the client to the method instead of performing a find
 		dispatch({
 			type: ClientActionTypes.ChangeCurrentClient,
 			payload:
@@ -50,6 +65,12 @@ const ClientList = (): ReactElement => {
 		})
 	}
 
+	/**
+	 * Check if the rendering client is the current client
+	 *
+	 * @param {number} id client id to compare against the current client
+	 * @returns boolean
+	 */
 	const checkChecked = (id = -1): boolean => {
 		if (currentClient && currentClient.id === id) {
 			return true
@@ -86,6 +107,12 @@ const ClientList = (): ReactElement => {
 	)
 }
 
+/**
+ * Component to render the whole Client Listing component
+ * with section title, controls and the Client List
+ *
+ * @returns ReactElement
+ */
 const ClientListing = (): ReactElement => {
 	const {
 		state: { clients },

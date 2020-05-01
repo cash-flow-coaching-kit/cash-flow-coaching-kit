@@ -28,7 +28,7 @@ const AsyncTip = loadable(
 /**
  * Renders a page tip tooltip at the bottom left of the page
  *
- * @param {ReactNode} { children } Content to render in the slideout drawer
+ * @param {string} { tip } File name (no extension) for the tip component
  * @returns {ReactElement}
  */
 const PageTip = ({ tip }: IPageTip): ReactElement => {

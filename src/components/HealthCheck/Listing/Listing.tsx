@@ -22,6 +22,7 @@ import EmptyListing from "./EmptyListing"
 import QuizList from "./QuizList"
 import Loading from "../../Loading"
 
+// Health check Listing styling
 const useListingStyles = makeStyles(() => ({
 	actions: {
 		display: "flex",
@@ -30,6 +31,12 @@ const useListingStyles = makeStyles(() => ({
 	},
 }))
 
+/**
+ * Component used to render the completed health checks for the
+ * current client
+ *
+ * @returns ReactElement
+ */
 const Listing = (): ReactElement => {
 	const [state, send] = useMachine(HCListingMachine)
 	const {
@@ -44,24 +51,36 @@ const Listing = (): ReactElement => {
 	const styles = useListingStyles()
 
 	useEffect(() => {
+		// Find fetching for the indexeddb is completed
 		if (!loading) {
+			// If there isn't a client, show empty warning
 			if (!currentClient) {
 				send("IS_EMPTY")
 				return
 			}
 
+			// Filter by client id
+			// TODO: Modify useIndexeddb to be able to do better queries
 			const retrivedQuizzes = quizzes.filter(
 				({ clientId }) => clientId === currentClient.id
 			)
+			// If there isn't any clients
 			if (retrivedQuizzes.length === 0) {
+				// show empty warning
 				send("IS_EMPTY")
 			} else {
+				// set the client quizzes and show the items
 				setClientQuizzess(retrivedQuizzes)
 				send("HAS_ITEMS")
 			}
 		}
 	}, [quizzes, currentClient, loading])
 
+	/**
+	 * Render a specific component for state of the state machine
+	 *
+	 * @returns ReactElement
+	 */
 	const renderQuizData = (): ReactElement => {
 		switch (state.value) {
 			case "empty":

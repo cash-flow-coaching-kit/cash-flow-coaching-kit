@@ -9,6 +9,11 @@ import ClientReducer from "./client-reducer"
 import { IClientState, IClientReducerAction } from "./client-outline"
 import ClientContext, { defaultClientState } from "./client-context"
 
+/**
+ * Context state provider element
+ *
+ * @param {ReactNode} {children}
+ */
 const ClientProvider = (props: { children: ReactNode }): ReactElement => {
 	const [state, dispatch] = useReducer<
 		Reducer<IClientState, IClientReducerAction>

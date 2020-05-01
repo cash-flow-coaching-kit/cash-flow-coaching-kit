@@ -19,6 +19,12 @@ import { routeVarReplacement, PrivateRoutes } from "../../../util/routes/routes"
 import OptionTile from "./OptionTile"
 import NoClientError from "../../NoClientError"
 
+/**
+ * Questionnaire component for the Health checks
+ * handles the logic for answering and submitting the quiz
+ *
+ * @returns ReactElement
+ */
 const Questionnaire = (): ReactElement => {
 	const {
 		state: { currentClient },
@@ -36,6 +42,13 @@ const Questionnaire = (): ReactElement => {
 		setCurrentQuestion(questions[questionCount])
 	}, [questionCount])
 
+	/**
+	 * Changes the selected answer for the current question
+	 *
+	 * @param {MouseEvent<HTMLDivElement>} e Change event from clicking on the option
+	 * @param {QuestionOptions} answer Answer that was selected
+	 * @returns void
+	 */
 	const changeAnswer = (
 		e: MouseEvent<HTMLDivElement>,
 		answer: QuestionOptions
@@ -46,8 +59,19 @@ const Questionnaire = (): ReactElement => {
 		setAnswers([...copy])
 	}
 
+	/**
+	 * Conditional to check if the user is on the final question
+	 *
+	 * @returns boolean
+	 */
 	const isFinalQuestion = (): boolean => questionCount === questions.length - 1
 
+	/**
+	 * Submits the questionnaire and redirects to the summary page
+	 *
+	 * @async
+	 * @returns Promise<void>
+	 */
 	const handleSubmit = async (): Promise<void> => {
 		if (
 			typeof currentClient === "undefined" ||
@@ -72,6 +96,7 @@ const Questionnaire = (): ReactElement => {
 				])
 			)
 		} catch (e) {
+			// TODO: Proper error checking
 			console.error(e.stack || e)
 		}
 	}
