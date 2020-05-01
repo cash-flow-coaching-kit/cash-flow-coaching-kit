@@ -54,3 +54,26 @@ The project is setup to use conventional commits and a git alias was automatical
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Component structure
+
+```
+Component
+- README.md
+- Component.tsx
+- index.ts
+- _partials
+  - subcomponent.tsx
+  - anothercomponent.tsx
+  - index.ts
+- _config
+  - shape.ts
+  - utilities.ts
+  - machine.ts
+  - styles.ts
+- _tests
+  - Component.test.tsx
+- Element
+  - Element.tsx
+  - index.ts
+```

@@ -3,7 +3,6 @@ import { Box, Card, Divider, CardContent } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
 import { useMachine } from "@xstate/react"
 import { ClientContext } from "../../state/client"
-import { SectionTitle } from "../Content"
 import { NewClientDialog } from "../../content/dialog"
 import { useCLStyles } from "./_config/styles"
 import { NoClients, ClientList, ImportClient } from "./_partials"
@@ -11,6 +10,7 @@ import { IClientState } from "../../state/client/client-outline"
 import { hasClients } from "./_config/utilities"
 import ClientListingMachine from "./_config/machine"
 import Loading from "../Loading"
+import SectionTitle from "../SectionTitle"
 
 /**
  * Component to render the whole Client Listing component

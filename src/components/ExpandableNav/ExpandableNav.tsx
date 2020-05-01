@@ -1,32 +1,13 @@
-import React, { ReactElement, ReactNode } from "react"
+import React, { ReactElement } from "react"
 import {
 	ExpansionPanel,
 	ExpansionPanelSummary,
 	Typography,
 	ExpansionPanelDetails,
-	makeStyles,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-
-/**
- * Prop interface for `<ExpandableNav>`
- *
- * @export
- * @interface IExpandableNavProps
- */
-export interface IExpandableNavProps {
-	title?: string
-	children: ReactNode
-}
-
-// Styles for the Expandable nav
-const useExpandableNavStyles = makeStyles((theme) => ({
-	details: {
-		paddingLeft: 0,
-		paddingRight: 0,
-		flexDirection: "column",
-	},
-}))
+import { IExpandableNavProps } from "./_config/shape"
+import useExpandableNavStyles from "./_config/styles"
 
 /**
  * Sets up the core for the `ExpansionPanel` component. As a developer,

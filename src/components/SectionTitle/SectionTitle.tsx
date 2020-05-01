@@ -1,21 +1,7 @@
 import React, { ReactElement } from "react"
-import {
-	StandardProps,
-	TypographyProps,
-	TypographyClassKey,
-	Typography,
-	makeStyles,
-} from "@material-ui/core"
-
-type SectionTitleProps = StandardProps<TypographyProps, TypographyClassKey>
-
-// Section title styles
-const useSTStyles = makeStyles((theme) => ({
-	title: {
-		fontWeight: 500,
-		marginBottom: theme.spacing(2),
-	},
-}))
+import { Typography } from "@material-ui/core"
+import { SectionTitleProps } from "./_config/shape"
+import useSTStyles from "./_config/styles"
 
 /**
  * Abstraction for the Typography for a consistent heading for sections

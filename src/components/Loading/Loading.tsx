@@ -1,15 +1,6 @@
 import React, { ReactElement } from "react"
-import { Box, CircularProgress, makeStyles } from "@material-ui/core"
-
-// Loading styles
-const useLoadingStyles = makeStyles((theme) => ({
-	root: {
-		display: "flex",
-		justifyContent: "center",
-		paddingTop: theme.spacing(2),
-		paddingBottom: theme.spacing(2),
-	},
-}))
+import { Box, CircularProgress } from "@material-ui/core"
+import useLoadingStyles from "./_config/styles"
 
 /**
  * Loading component

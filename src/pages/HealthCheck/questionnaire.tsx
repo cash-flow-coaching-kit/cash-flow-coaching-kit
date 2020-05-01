@@ -12,7 +12,7 @@ import ListIcon from "@material-ui/icons/List"
 import { PrivatePage, PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import PageTip from "../../components/PageTip"
-import ExpandableNav from "../../components/ExpandableNav/ExpandableNav"
+import ExpandableNav from "../../components/ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Questionnaire from "../../components/HealthCheck/Questionnaire/Questionnaire"
 

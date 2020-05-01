@@ -3,7 +3,7 @@ import { Typography, Grid, makeStyles } from "@material-ui/core"
 import { PrivatePage, PageContainer } from "../components/Layouts"
 import PageTip from "../components/PageTip"
 import ClientListing from "../components/ClientListing"
-import { SectionTitle } from "../components/Content"
+import SectionTitle from "../components/SectionTitle"
 
 // Client list styling
 const useCLStyles = makeStyles((theme) => ({

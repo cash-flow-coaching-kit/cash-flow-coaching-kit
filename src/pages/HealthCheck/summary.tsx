@@ -10,7 +10,7 @@ import {
 import ListIcon from "@material-ui/icons/List"
 import { PrivatePage, PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
-import ExpandableNav from "../../components/ExpandableNav/ExpandableNav"
+import ExpandableNav from "../../components/ExpandableNav"
 import findHCById from "../../data/healthChecks/findHCById"
 import { IBaseHealthCheck } from "../../data/healthChecks/HealthCheckDatabase"
 import { PrivateRoutes } from "../../util/routes/routes"

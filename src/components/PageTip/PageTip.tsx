@@ -2,34 +2,15 @@ import React, { ReactElement, useState, MouseEvent } from "react"
 import { Fab, Drawer, Button, Box, Typography } from "@material-ui/core"
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 import HighlightOffIcon from "@material-ui/icons/HighlightOff"
-import loadable from "@loadable/component"
-import usePageTipStyles from "./style"
-
-/**
- * Page tip component props
- *
- * @interface IPageTip
- */
-interface IPageTip {
-	tip: string
-}
-
-/**
- * Loadable component to dynamically render the tip content
- *
- */
-const AsyncTip = loadable(
-	(props: { tip: string }) => import(`../../content/tips/${props.tip}`),
-	{
-		fallback: <div>Loading...</div>,
-	}
-)
+import usePageTipStyles from "./_config/style"
+import { IPageTip } from "./_config/shape"
+import { AsyncTip } from "./_partials"
 
 /**
  * Renders a page tip tooltip at the bottom left of the page
  *
- * @param {string} { tip } File name (no extension) for the tip component
- * @returns {ReactElement}
+ * @param {string} {tip} File name (no extension) for the tip component
+ * @returns ReactElement
  */
 const PageTip = ({ tip }: IPageTip): ReactElement => {
 	const style = usePageTipStyles()
