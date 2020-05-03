@@ -5,7 +5,6 @@ import {
 	IconButton,
 	Divider,
 	Button,
-	makeStyles,
 } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import AddIcon from "@material-ui/icons/Add"
@@ -17,19 +16,10 @@ import HealthCheckDB, {
 } from "../../../data/healthChecks/HealthCheckDatabase"
 import { ClientContext } from "../../../state/client"
 import { PrivateRoutes } from "../../../util/routes/routes"
-import { HCListingMachine } from "./machine"
-import EmptyListing from "./EmptyListing"
-import QuizList from "./QuizList"
+import { HCListingMachine } from "./_config/machine"
+import { EmptyListing, QuizList } from "./_partials"
 import Loading from "../../Loading"
-
-// Health check Listing styling
-const useListingStyles = makeStyles(() => ({
-	actions: {
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center",
-	},
-}))
+import useListingStyles from "./_config/styles"
 
 /**
  * Component used to render the completed health checks for the

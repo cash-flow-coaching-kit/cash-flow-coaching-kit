@@ -1,44 +1,12 @@
 import React, { useState, ReactElement } from "react"
-import {
-	makeStyles,
-	Grid,
-	Card,
-	CardHeader,
-	CardActions,
-	Button,
-} from "@material-ui/core"
+import { Grid, Card, CardHeader, CardActions, Button } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { generateKey, constructKey } from "../../../util/key"
-import { QuestionOptions, IQuestionStructure } from "../shared/outline"
-import { answerTheming } from "../shared/config"
-import { getOptionByAnswer } from "../shared/utilities"
-
-// Styles for the health check summary
-const useSummaryStyles = makeStyles((theme) => ({
-	gridRoot: {
-		marginTop: theme.spacing(3),
-	},
-	gridItem: {
-		display: "flex",
-	},
-	cardRoot: {
-		display: "flex",
-		flexDirection: "column",
-	},
-	cardHeader: {
-		flexGrow: 2,
-		alignItems: "flex-start",
-	},
-}))
-
-/**
- * Prop structure for the `<QuestionSummaries>` component
- *
- */
-interface IQuestionSummaries {
-	questions: IQuestionStructure[]
-	tileAnswers: QuestionOptions[]
-}
+import { IQuestionStructure } from "../_config/shape"
+import { answerTheming } from "../_config/data"
+import { getOptionByAnswer } from "../_config/utilities"
+import { IQuestionSummaries } from "./_config/shape"
+import { useSummaryStyles } from "./_config/styles"
 
 /**
  * Component to display the summary cards for the answers

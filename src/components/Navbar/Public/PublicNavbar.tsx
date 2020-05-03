@@ -1,13 +1,10 @@
 import React, { ReactElement } from "react"
 import { AppBar, Box, Toolbar, Button } from "@material-ui/core"
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
-import { useSharedNavStyles } from "../shared/style"
-import { NavigationRoutes } from "../shared/NavigationLinks"
-import routes from "./config"
-
-interface IPublicNavbarProps {
-	hasClients: boolean
-}
+import { useSharedNavStyles } from "../_config/style"
+import { NavigationRoutes } from "../_partials"
+import { routes } from "./_config/data"
+import { IPublicNavbarProps } from "./_config/shape"
 
 /**
  * Renders the primary navigation

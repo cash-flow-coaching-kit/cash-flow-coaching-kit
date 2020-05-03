@@ -7,45 +7,15 @@ import {
 	List,
 	ListItem,
 	ListItemText,
-	makeStyles,
 	Divider,
 	Box,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { generateKey, constructKey } from "../../../util/key"
-import {
-	fourQuestionsContent,
-	answerTheming,
-	questions,
-} from "../shared/config"
-import { QuestionOptions } from "../shared/outline"
-import { getOptionByAnswer } from "../shared/utilities"
-
-// Four question styling
-const useFourQsStyles = makeStyles((theme) => ({
-	list: {
-		width: "100%",
-		padding: 0,
-	},
-	listItem: {
-		padding: `${theme.spacing(1)}px 0`,
-	},
-	listItemFirst: {
-		paddingTop: 0,
-	},
-	listItemText: {
-		margin: 0,
-	},
-}))
-
-/**
- * FourQuestions component props
- *
- * @interface IFourQuestionsProps
- */
-interface IFourQuestionsProps {
-	answers?: QuestionOptions[]
-}
+import { fourQuestionsContent } from "../_config/data"
+import useFourQsStyles from "./_config/styles"
+import { IFourQuestionsProps } from "./_config/shape"
+import { answerText } from "./_config/utilities"
 
 /**
  * Component to render the Four key questions with optional
@@ -57,26 +27,6 @@ interface IFourQuestionsProps {
 const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 	const styles = useFourQsStyles()
 	const [key] = useState(generateKey())
-
-	/**
-	 * Checks if a question has a answer and displays the answer
-	 * with a theme
-	 *
-	 * @param {number} idx Question index
-	 * @returns (boolean | ReactElement)
-	 */
-	const answerText = (idx: number): ReactElement | boolean => {
-		if (answers && typeof answers[idx] !== "undefined") {
-			const { color } = getOptionByAnswer(answers[idx], answerTheming)
-			return (
-				<Typography style={{ color, fontWeight: 500 }}>
-					{questions[idx].options[answers[idx]]}
-				</Typography>
-			)
-		}
-
-		return false
-	}
 
 	return (
 		<ExpansionPanel defaultExpanded>
@@ -96,7 +46,7 @@ const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 								>
 									<ListItemText className={styles.listItemText}>
 										{`${idx + 1}. ${content}`}
-										{answerText(idx)}
+										{answerText(idx, answers)}
 									</ListItemText>
 								</ListItem>
 								{idx !== fourQuestionsContent.length - 1 ? <Divider /> : false}

@@ -1,29 +1,7 @@
-import React, { ReactElement, ReactNode } from "react"
-import {
-	Container,
-	makeStyles,
-	StandardProps,
-	ContainerProps,
-	ContainerClassKey,
-} from "@material-ui/core"
-
-/**
- * Prop structure for the `<PageContainer>` component
- *
- * @interface IPageContainer
- * @extends {StandardProps<ContainerProps, ContainerClassKey>}
- */
-interface IPageContainer
-	extends StandardProps<ContainerProps, ContainerClassKey> {
-	children: ReactNode
-}
-
-// Styles for the Page Container
-const usePCStyles = makeStyles((theme) => ({
-	container: {
-		paddingTop: theme.spacing(5),
-	},
-}))
+import React, { ReactElement } from "react"
+import { Container } from "@material-ui/core"
+import { IPageContainer } from "./_config/shape"
+import usePCStyles from "./_config/styles"
 
 /**
  * Abstraction on the `<Container>` component for a consistent page spacing

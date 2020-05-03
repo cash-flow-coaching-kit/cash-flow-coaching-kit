@@ -1,34 +1,10 @@
 import React, { ReactElement, useContext } from "react"
-import { makeStyles, TextField, Button, Box } from "@material-ui/core"
+import { TextField, Button, Box } from "@material-ui/core"
 import { useFormik } from "formik"
 import addClient from "../../../data/client/addClient"
 import { ClientContext } from "../../../state/client"
-
-// Client form styles definition
-const useClientFormStyles = makeStyles((theme) => ({
-	input: {
-		width: "100%",
-		marginBottom: theme.spacing(2),
-	},
-}))
-
-/**
- * Interface for the form values
- *
- * @interface INCFormValues
- */
-interface INCFormValues {
-	businessName: string
-}
-
-/**
- * Interface for the form errors
- *
- * @interface INCFormErrors
- */
-interface INCFormErrors {
-	businessName?: string
-}
+import useClientFormStyles from "./_config/styles"
+import { INCFormValues, INCFormErrors } from "./_config/shape"
 
 /**
  * Form used to register a new client. Uses Formik

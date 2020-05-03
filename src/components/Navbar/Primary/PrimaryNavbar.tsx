@@ -1,10 +1,11 @@
 import React, { ReactElement, useContext } from "react"
 import { AppBar, Box, Toolbar, Button, Typography } from "@material-ui/core"
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
-import { useSharedNavStyles } from "../shared/style"
-import routes, { usePrimaryStyles } from "./config"
-import { NavigationRoutes } from "../shared/NavigationLinks"
+import { useSharedNavStyles } from "../_config/style"
+import { NavigationRoutes } from "../_partials"
 import { ClientContext } from "../../../state/client"
+import usePrimaryStyles from "./_config/styles"
+import { routes } from "./_config/data"
 
 /**
  * Renders the primary navigation

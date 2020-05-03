@@ -15,13 +15,13 @@ import findHCById from "../../data/healthChecks/findHCById"
 import { IBaseHealthCheck } from "../../data/healthChecks/HealthCheckDatabase"
 import { PrivateRoutes } from "../../util/routes/routes"
 import { ClientContext } from "../../state/client"
+import QuestionSummaries from "../../components/HealthCheck/Summary"
+import { QuestionOptions } from "../../components/HealthCheck/_config/shape"
+import { questions } from "../../components/HealthCheck/_config/data"
 import {
-	InvalidHC,
 	SummaryTitle,
-	QuestionSummaries,
-} from "../../components/HealthCheck/Summary"
-import { QuestionOptions } from "../../components/HealthCheck/shared/outline"
-import { questions } from "../../components/HealthCheck/shared/config"
+	InvalidHC,
+} from "../../components/HealthCheck/Summary/_partials"
 
 const QUESTIONS_OFFSET = 4
 

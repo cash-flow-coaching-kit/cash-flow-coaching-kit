@@ -1,5 +1,5 @@
 import Dexie from "dexie"
-import { QuestionOptions } from "../../components/HealthCheck/shared/outline"
+import { QuestionOptions } from "../../components/HealthCheck/_config/shape"
 
 /**
  * Health check structure
