@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useContext } from "react"
 import {
 	AppBar,
 	Toolbar,
@@ -12,23 +12,44 @@ import {
 	KeyboardDatePicker,
 } from "@material-ui/pickers"
 import useActionHeaderStyles from "./_config/style"
+import { ActionChecklistContext } from "../../../state/action-checklist"
+import { ActionChecklistActionTypes } from "../../../state/action-checklist/shape"
 
 const ActionHeader = (): ReactElement => {
 	const styles = useActionHeaderStyles()
-
-	const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-		new Date()
+	const { hideCompleted, reviewBy, dispatch } = useContext(
+		ActionChecklistContext
 	)
 
+	const handleHideChange = (
+		event: React.ChangeEvent<HTMLInputElement>
+	): void => {
+		dispatch({
+			type: ActionChecklistActionTypes.ChangeHideCompleted,
+			payload: event.target.checked,
+		})
+	}
+
 	const handleDateChange = (date: Date | null): void => {
-		setSelectedDate(date)
+		if (date !== null) {
+			dispatch({
+				type: ActionChecklistActionTypes.ChangeReviewBy,
+				payload: date,
+			})
+		}
 	}
 
 	return (
 		<AppBar position="static" color="default" className={styles.appbar}>
 			<Toolbar>
 				<FormControlLabel
-					control={<Checkbox name="hide-items" />}
+					control={
+						<Checkbox
+							checked={hideCompleted}
+							onChange={handleHideChange}
+							name="hide-items"
+						/>
+					}
 					label="Hide completed item"
 				/>
 				<Box className={styles.box}>
@@ -41,7 +62,7 @@ const ActionHeader = (): ReactElement => {
 							margin="normal"
 							id="review-by-date"
 							label="Review by"
-							value={selectedDate}
+							value={reviewBy}
 							onChange={handleDateChange}
 							KeyboardButtonProps={{
 								"aria-label": "change date",
