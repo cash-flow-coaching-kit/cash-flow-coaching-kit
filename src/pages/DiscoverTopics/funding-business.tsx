@@ -10,7 +10,7 @@ import {
 	CardMedia,
 	Button,
 } from "@material-ui/core"
-import { SectionTitle } from "../../components/Content"
+import SectionTitle from "../../components/SectionTitle"
 import { PrivatePage, PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 
