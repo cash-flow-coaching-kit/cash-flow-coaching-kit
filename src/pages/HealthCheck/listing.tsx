@@ -1,9 +1,14 @@
 import React, { ReactElement } from "react"
 import { Typography, Grid } from "@material-ui/core"
 import { PrivatePage, PageContainer } from "../../components/Layouts"
-import { SectionTitle } from "../../components/Content"
 import Listing from "../../components/HealthCheck/Listing/Listing"
+import SectionTitle from "../../components/SectionTitle"
 
+/**
+ * Health check listing page
+ *
+ * @returns ReactElement
+ */
 const HCListing = (): ReactElement => {
 	return (
 		<PrivatePage>

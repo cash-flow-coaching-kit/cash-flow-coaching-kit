@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react"
 import { AppBar, Box, Toolbar, Button } from "@material-ui/core"
-import { useSharedNavStyles } from "../shared/style"
-import { NavigationRoutes } from "../shared/NavigationLinks"
-import routes from "./config"
+import { useSharedNavStyles } from "../_config/style"
+import { NavigationRoutes } from "../_partials"
+import { routes } from "./_config/data"
 
 /**
  * Renders the secondary navigation

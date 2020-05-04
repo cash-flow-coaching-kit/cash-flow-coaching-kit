@@ -1,14 +1,6 @@
-import React, { ReactNode, ReactElement } from "react"
+import React, { ReactElement } from "react"
 import { PrimaryNavbar, SecondaryNavbar } from "../../Navbar"
-
-/**
- * Private page props interface
- *
- * @interface IPrivatePage
- */
-interface IPrivatePage {
-	children: ReactNode
-}
+import { IPrivatePage } from "./_config/shape"
 
 /**
  * Private page layout, renders the navigation and the children provided to it.

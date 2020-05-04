@@ -7,53 +7,26 @@ import {
 	List,
 	ListItem,
 	ListItemText,
-	makeStyles,
 	Divider,
 	Box,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { generateKey, constructKey } from "../../../util/key"
-import { options, getOptionByAnswer } from "../Questionnaire/config"
+import { fourQuestionsContent } from "../_config/data"
+import useFourQsStyles from "./_config/styles"
+import { IFourQuestionsProps } from "./_config/shape"
+import { answerText } from "./_config/utilities"
 
-const useFourQsStyles = makeStyles((theme) => ({
-	list: {
-		width: "100%",
-		padding: 0,
-	},
-	listItem: {
-		padding: `${theme.spacing(1)}px 0`,
-	},
-	listItemFirst: {
-		paddingTop: 0,
-	},
-	listItemText: {
-		margin: 0,
-	},
-}))
-
-const fourQuestionsContent = [
-	"1. Am I trading profitably?",
-	"2. Have I put enough aside to meet my regular financial commitments?",
-	"3. Does my business have enough to spend on myself and pay others?",
-	"4. Is my business improving its financial position?",
-]
-
-interface IFourQuestionsProps {
-	answers?: number[]
-}
-
+/**
+ * Component to render the Four key questions with optional
+ * answers, used on the questionnaire summary page
+ *
+ * @param {QuestionOptions[]} { answers? }
+ * @returns ReactElement
+ */
 const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 	const styles = useFourQsStyles()
 	const [key] = useState(generateKey())
-
-	const answerText = (idx: number): ReactElement | boolean => {
-		if (answers && typeof answers[idx] !== "undefined") {
-			const { title, color } = getOptionByAnswer(answers[idx], options)
-			return <Typography style={{ color, fontWeight: 500 }}>{title}</Typography>
-		}
-
-		return false
-	}
 
 	return (
 		<ExpansionPanel defaultExpanded>
@@ -72,8 +45,8 @@ const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 									}`}
 								>
 									<ListItemText className={styles.listItemText}>
-										{content}
-										{answerText(idx)}
+										{`${idx + 1}. ${content}`}
+										{answerText(idx, answers)}
 									</ListItemText>
 								</ListItem>
 								{idx !== fourQuestionsContent.length - 1 ? <Divider /> : false}

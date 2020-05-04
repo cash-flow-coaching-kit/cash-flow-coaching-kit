@@ -1,96 +1,55 @@
-import React, { useContext, ReactElement, useState, ChangeEvent } from "react"
-import {
-	Box,
-	List,
-	ListItem,
-	ListItemText,
-	ListItemSecondaryAction,
-	IconButton,
-	Card,
-	Divider,
-	Button,
-	CardContent,
-	makeStyles,
-	Typography,
-	ListItemIcon,
-	Radio,
-} from "@material-ui/core"
-import DeleteIcon from "@material-ui/icons/Delete"
-import GetAppIcon from "@material-ui/icons/GetApp"
+import React, { useContext, ReactElement, useEffect } from "react"
+import { Box, Card, Divider, CardContent } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
-import PublishIcon from "@material-ui/icons/Publish"
-import { Link } from "react-router-dom"
+import { useMachine } from "@xstate/react"
 import { ClientContext } from "../../state/client"
-import { generateKey, constructKey } from "../../util/key"
-import { SectionTitle } from "../Content"
-import { PublicRoutes } from "../../util/routes/routes"
-import { ClientActionTypes } from "../../state/client/client-outline"
 import { NewClientDialog } from "../../content/dialog"
+import { useCLStyles } from "./_config/styles"
+import { NoClients, ClientList, ImportClient } from "./_partials"
+import { IClientState } from "../../state/client/client-outline"
+import { hasClients } from "./_config/utilities"
+import ClientListingMachine from "./_config/machine"
+import Loading from "../Loading"
+import SectionTitle from "../SectionTitle"
 
-const useCLStyles = makeStyles((theme) => ({
-	button: {
-		marginRight: theme.spacing(2),
-	},
-}))
-
-const ClientList = (): ReactElement => {
-	const {
-		state: { clients, currentClient },
-		dispatch,
-	} = useContext(ClientContext)
-	const [key] = useState(generateKey())
-
-	const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-		dispatch({
-			type: ClientActionTypes.ChangeCurrentClient,
-			payload:
-				clients.find(
-					(c) => c.id && c.id === parseInt(event.target.value, 10)
-				) || clients[0],
-		})
-	}
-
-	const checkChecked = (id = -1): boolean => {
-		if (currentClient && currentClient.id === id) {
-			return true
-		}
-
-		return false
-	}
-
-	return (
-		<List>
-			{clients.map((client, idx) => (
-				<ListItem key={constructKey(key, idx)}>
-					<ListItemIcon>
-						<Radio
-							checked={checkChecked(client.id)}
-							value={client.id}
-							inputProps={{ "aria-label": client.name }}
-							onChange={handleChange}
-							name="selected-client"
-						/>
-					</ListItemIcon>
-					<ListItemText primary={client.name} />
-					<ListItemSecondaryAction>
-						<IconButton>
-							<PublishIcon />
-						</IconButton>
-						<IconButton>
-							<DeleteIcon />
-						</IconButton>
-					</ListItemSecondaryAction>
-				</ListItem>
-			))}
-		</List>
-	)
-}
-
+/**
+ * Component to render the whole Client Listing component
+ * with section title, controls and the Client List
+ *
+ * @returns ReactElement
+ */
 const ClientListing = (): ReactElement => {
-	const {
-		state: { clients },
-	} = useContext(ClientContext)
+	const clientStore: IClientState = useContext(ClientContext)
+	const [state, send] = useMachine(ClientListingMachine)
 	const styles = useCLStyles()
+
+	// Change the state of the component once clients are synced
+	useEffect(() => {
+		if (clientStore.state.clientSynced) {
+			if (hasClients(clientStore)) {
+				send("HAS_DATA")
+			} else {
+				send("IS_EMPTY")
+			}
+		}
+	}, [clientStore.state.clientSynced])
+
+	/**
+	 * Renders components based on the component state
+	 *
+	 * @returns ReactElement
+	 */
+	const renderWithMachine = (): ReactElement => {
+		switch (state.value) {
+			case "data":
+				return <ClientList store={clientStore} />
+			case "empty":
+				return <NoClients />
+			case "loading":
+			default:
+				return <Loading />
+		}
+	}
 
 	return (
 		<Box>
@@ -103,23 +62,10 @@ const ClientListing = (): ReactElement => {
 						className={styles.button}
 						size="medium"
 					/>
-					<Button variant="outlined" startIcon={<GetAppIcon />}>
-						Import
-					</Button>
+					<ImportClient />
 				</CardContent>
 				<Divider />
-				{clients.length === 0 ? (
-					<CardContent>
-						<Typography variant="h6">No clients found</Typography>
-						<Typography>
-							You are able to import previously exported clients or go{" "}
-							<Link to={PublicRoutes.Home}>Home</Link> to read additional
-							information
-						</Typography>
-					</CardContent>
-				) : (
-					<ClientList />
-				)}
+				{renderWithMachine()}
 			</Card>
 		</Box>
 	)

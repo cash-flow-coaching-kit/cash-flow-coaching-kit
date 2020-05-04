@@ -1,24 +1,16 @@
 import React, { ReactElement, useContext } from "react"
-import { makeStyles, TextField, Button, Box } from "@material-ui/core"
+import { TextField, Button, Box } from "@material-ui/core"
 import { useFormik } from "formik"
 import addClient from "../../../data/client/addClient"
 import { ClientContext } from "../../../state/client"
+import useClientFormStyles from "./_config/styles"
+import { INCFormValues, INCFormErrors } from "./_config/shape"
 
-const useClientFormStyles = makeStyles((theme) => ({
-	input: {
-		width: "100%",
-		marginBottom: theme.spacing(2),
-	},
-}))
-
-interface INCFormValues {
-	businessName: string
-}
-
-interface INCFormErrors {
-	businessName?: string
-}
-
+/**
+ * Form used to register a new client. Uses Formik
+ *
+ * @returns ReactElement
+ */
 const NewClientForm = (): ReactElement => {
 	const { dispatch } = useContext(ClientContext)
 	const styles = useClientFormStyles()
@@ -26,11 +18,13 @@ const NewClientForm = (): ReactElement => {
 		businessName: "",
 	}
 
+	// Defines the Formik form
 	const form = useFormik({
 		initialValues,
 		validate: (values): INCFormErrors => {
 			const errors: INCFormErrors = {}
 
+			// Minor validation
 			if (values.businessName === "") {
 				errors.businessName = "Please enter a business name"
 			}
@@ -38,15 +32,24 @@ const NewClientForm = (): ReactElement => {
 			return errors
 		},
 		onSubmit: async (values) => {
+			// Adds a client to the db + state
 			await addClient(dispatch, {
 				id: 1,
 				name: values.businessName,
 			})
 
+			// resets the form
 			form.resetForm()
 		},
 	})
 
+	/**
+	 * Checks if there is a error for a specific field
+	 *
+	 * @param {INCFormErrors} errors Form error object
+	 * @param {keyof INCFormErrors} key Error item to look for
+	 * @returns boolean
+	 */
 	const hasError = (
 		errors: INCFormErrors,
 		key: keyof INCFormErrors

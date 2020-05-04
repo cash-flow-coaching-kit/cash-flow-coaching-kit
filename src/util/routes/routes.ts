@@ -36,6 +36,15 @@ export enum PublicRoutes {
 	Home = "/",
 }
 
+/**
+ * Replaces a variable element in a route with a value
+ *
+ * [[":id", "1"]] -> /health-check/summary/:id = /health-check/summary/1
+ *
+ * @param {PrivateRoutes|PublicRoutes} route Route to replace a value from
+ * @param {[string, string][]} replacements Items to find and replace
+ * @returns string
+ */
 export const routeVarReplacement = (
 	route: PrivateRoutes | PublicRoutes,
 	replacements: [string, string][]
