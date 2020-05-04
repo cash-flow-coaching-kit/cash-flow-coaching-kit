@@ -2,6 +2,11 @@ import React, { ReactElement } from "react"
 import { Typography, List } from "@material-ui/core"
 import useSharedTipStyling from "./style"
 
+/**
+ * Tip displayed on the Health check questionnaire page
+ *
+ * @returns ReactElement
+ */
 const HCQuestionnaire = (): ReactElement => {
 	const styles = useSharedTipStyling()
 

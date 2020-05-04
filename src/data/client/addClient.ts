@@ -6,6 +6,14 @@ import {
 } from "../../state/client/client-outline"
 import ClientDB from "./ClientDatabase"
 
+/**
+ * Method for adding a new client to the application
+ *
+ * @param {Dispatch<IClientReducerAction>} dispatch Dispatch method for the client state
+ * @param {IBaseClient} client client to be added
+ * @returns Promise<void>
+ * TODO: return promise to be resovled from the form
+ */
 const addClient = async (
 	dispatch: Dispatch<IClientReducerAction>,
 	client: IBaseClient

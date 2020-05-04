@@ -10,30 +10,36 @@ import {
 import ListIcon from "@material-ui/icons/List"
 import { PrivatePage, PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
-import ExpandableNav from "../../components/ExpandableNav/ExpandableNav"
+import ExpandableNav from "../../components/ExpandableNav"
 import findHCById from "../../data/healthChecks/findHCById"
 import { IBaseHealthCheck } from "../../data/healthChecks/HealthCheckDatabase"
 import { PrivateRoutes } from "../../util/routes/routes"
 import { ClientContext } from "../../state/client"
-import { questions } from "../../components/HealthCheck/Questionnaire/config"
+import QuestionSummaries from "../../components/HealthCheck/Summary"
+import { QuestionOptions } from "../../components/HealthCheck/_config/shape"
+import { questions } from "../../components/HealthCheck/_config/data"
 import {
-	InvalidHC,
 	SummaryTitle,
-	QuestionSummaries,
-} from "../../components/HealthCheck/Summary"
+	InvalidHC,
+} from "../../components/HealthCheck/Summary/_partials"
 
 const QUESTIONS_OFFSET = 4
 
+/**
+ * Health check summary page
+ *
+ * @returns ReactElement
+ */
 const HCSummary = (): ReactElement => {
 	const {
 		state: { currentClient },
 	} = useContext(ClientContext)
 	const { id } = useParams()
 	const [healthCheck, setHealthCheck] = useState<IBaseHealthCheck | undefined>()
-	const [fourQuestions, setFourQuestions] = useState<number[] | undefined>(
-		undefined
-	)
-	const [tileAnswers, setTileAnswers] = useState<number[] | undefined>(
+	const [fourQuestions, setFourQuestions] = useState<
+		QuestionOptions[] | undefined
+	>(undefined)
+	const [tileAnswers, setTileAnswers] = useState<QuestionOptions[] | undefined>(
 		undefined
 	)
 
@@ -41,6 +47,7 @@ const HCSummary = (): ReactElement => {
 		if (id && currentClient) {
 			;(async function getHC(): Promise<void> {
 				if (typeof currentClient.id !== "undefined") {
+					// Fetches the health checks for the client and sets state values
 					const hc: IBaseHealthCheck = await findHCById(
 						parseInt(id, 10),
 						currentClient.id
@@ -71,7 +78,7 @@ const HCSummary = (): ReactElement => {
 						)}
 					</Grid>
 					<Grid item xs={3}>
-						<FourQuestions answers={fourQuestions} />
+						<FourQuestions answers={fourQuestions || []} />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
 								<ListItem

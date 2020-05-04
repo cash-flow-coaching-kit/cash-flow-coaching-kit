@@ -2,6 +2,11 @@ import React, { ReactElement } from "react"
 import { Typography, List } from "@material-ui/core"
 import useSharedTipStyling from "./style"
 
+/**
+ * Tip displayed on the client listing page
+ *
+ * @returns ReactElement
+ */
 const ClientListTips = (): ReactElement => {
 	const styles = useSharedTipStyling()
 

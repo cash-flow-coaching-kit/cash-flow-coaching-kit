@@ -1,37 +1,21 @@
 import React, { useState, ReactElement } from "react"
-import {
-	makeStyles,
-	Grid,
-	Card,
-	CardHeader,
-	CardActions,
-	Button,
-} from "@material-ui/core"
+import { Grid, Card, CardHeader, CardActions, Button } from "@material-ui/core"
+import { Link } from "react-router-dom"
 import { generateKey, constructKey } from "../../../util/key"
-import { getOptionByAnswer, options } from "../Questionnaire/config"
+import { IQuestionStructure } from "../_config/shape"
+import { answerTheming } from "../_config/data"
+import { getOptionByAnswer } from "../_config/utilities"
+import { IQuestionSummaries } from "./_config/shape"
+import { useSummaryStyles } from "./_config/styles"
 
-const useSummaryStyles = makeStyles((theme) => ({
-	gridRoot: {
-		marginTop: theme.spacing(3),
-	},
-	gridItem: {
-		display: "flex",
-	},
-	cardRoot: {
-		display: "flex",
-		flexDirection: "column",
-	},
-	cardHeader: {
-		flexGrow: 2,
-		alignItems: "flex-start",
-	},
-}))
-
-interface IQuestionSummaries {
-	questions: string[]
-	tileAnswers: number[]
-}
-
+/**
+ * Component to display the summary cards for the answers
+ * given to the "additional" questions
+ *
+ * @param {IQuestionStructure[]} {questions} questions to loop through and display the answers
+ * @param {QuestionOptions[]} {tileAnswers} answers given to those questions
+ * @returns ReactElement
+ */
 const QuestionSummaries = ({
 	questions,
 	tileAnswers,
@@ -47,10 +31,10 @@ const QuestionSummaries = ({
 			className={styles.gridRoot}
 		>
 			{questions.map(
-				(q: string, idx: number): ReactElement => {
-					const { title, Icon, color } = getOptionByAnswer(
+				(q: IQuestionStructure, idx: number): ReactElement => {
+					const { Icon, color } = getOptionByAnswer(
 						tileAnswers[idx],
-						options
+						answerTheming
 					)
 
 					return (
@@ -62,9 +46,9 @@ const QuestionSummaries = ({
 						>
 							<Card className={styles.cardRoot}>
 								<CardHeader
-									title={q}
+									title={q.question}
 									avatar={<Icon style={{ color }} />}
-									subheader={title}
+									subheader={q.options[tileAnswers[idx]]}
 									subheaderTypographyProps={{
 										style: {
 											color,
@@ -73,11 +57,19 @@ const QuestionSummaries = ({
 									}}
 									className={styles.cardHeader}
 								/>
-								<CardActions>
-									<Button color="primary" variant="outlined" size="small">
-										Learn more
-									</Button>
-								</CardActions>
+								{q.learnMore && (
+									<CardActions>
+										<Button
+											color="primary"
+											variant="outlined"
+											size="small"
+											component={Link}
+											to={q.learnMore}
+										>
+											Learn more
+										</Button>
+									</CardActions>
+								)}
 							</Card>
 						</Grid>
 					)
