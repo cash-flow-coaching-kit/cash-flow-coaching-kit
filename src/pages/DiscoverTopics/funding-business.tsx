@@ -9,10 +9,14 @@ import {
 	CardActions,
 	CardMedia,
 	Button,
+	ExpansionPanel,
+	ExpansionPanelSummary,
+	ExpansionPanelDetails,
 } from "@material-ui/core"
 import SectionTitle from "../../components/SectionTitle"
 import { PrivatePage, PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 const useDTStyles = makeStyles((theme) => ({
 	tagline: {
@@ -206,6 +210,151 @@ const DTFundingBusiness = (): ReactElement => {
 				<SectionTitle className={styles.SectionTitle}>
 					QUICKSNAPS - What to look for when funding your business.
 				</SectionTitle>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Typography variant="h5">Purpose of Funding</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									Understanding the purpose of funding and the best use of it
+									can allow you to make better decisions and ensure you are
+									correctly identifying the need.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li">
+										Depending on where you are in your business lifecycle, will
+										the funding be used to start the business, to support your
+										working capital commitments or to assist with expansion?
+									</Typography>
+									<Typography component="li">
+										Is funding needed for short-term cash flow issues or
+										long-term asset purchases? There are different products that
+										have different advantages and disadvantages that may make it
+										more preferable for short-term needs or long-term needs e.g.
+										credit card vs. line of credit.
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Typography variant="h5">Having Enough Funding</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									Ensuring you have enough funding to meet financial commitments
+									is essential in respect to your cash flow. Alternate avenues
+									exist to obtain funding, with some options provided in this
+									quicksnap.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li">
+										Debt is not necessarily a bad thing – it can help start or
+										grow your business.
+									</Typography>
+									<Typography component="li">
+										If you are not able to personally provide funding, there are
+										many different options such as government grants, banks or
+										crowdfunding.
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Typography variant="h5">Funding opportunities</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									Looking at new avenues for funding could allow growth or
+									increased cash flow now.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li">
+										What are the different funding opportunities for your
+										business?
+									</Typography>
+									<Typography component="li">
+										What are the advantages and disadvantages of each funding
+										opportunity?
+									</Typography>
+									<Typography component="li">
+										Are you able to meet the commitments of your preferred
+										financing method?
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Typography variant="h5">Right terms</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									Understanding the terms in which you need to pay debts can
+									have a dramatic impact on your cash flow.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li">
+										Do you have enough free cash flow to meet repayments or will
+										the terms of your funding constrain ongoing operations of
+										the business?
+									</Typography>
+									<Typography component="li">
+										Can you renegotiate? Do you have flexibility in the agreed
+										terms and can you negotiate these with the bank if required?
+									</Typography>
+									<Typography component="li">
+										Are you paying down debt too quickly? Could you use this
+										cash more effectively for an alternative purpose?
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />
