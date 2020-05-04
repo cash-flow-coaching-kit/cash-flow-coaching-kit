@@ -11,6 +11,7 @@ import ActionChecklist from "../../../pages/action-items"
 import CoachingKit from "../../../pages/coaching-kit"
 import HCListing from "../../../pages/HealthCheck/listing"
 import HCSummary from "../../../pages/HealthCheck/summary"
+import { ActionChecklistProvider } from "../../../state/action-checklist"
 
 /**
  * Private route definitions, these pages should not be available
@@ -45,12 +46,19 @@ const PrivateRoutesWrapper = (): ReactElement => {
 			<Route path={PrivateRoutes.CFC}>
 				<CFCCanvas />
 			</Route>
-			<Route path={PrivateRoutes.ChangeLevers}>
-				<ChangeLevers />
-			</Route>
-			<Route path={PrivateRoutes.ActionChecklist}>
-				<ActionChecklist />
-			</Route>
+
+			{/*
+				Wrap change levers and action checklist in provider since
+				they require the state values provided by this context setup
+			*/}
+			<ActionChecklistProvider>
+				<Route path={PrivateRoutes.ChangeLevers}>
+					<ChangeLevers />
+				</Route>
+				<Route path={PrivateRoutes.ActionChecklist}>
+					<ActionChecklist />
+				</Route>
+			</ActionChecklistProvider>
 		</>
 	)
 }
