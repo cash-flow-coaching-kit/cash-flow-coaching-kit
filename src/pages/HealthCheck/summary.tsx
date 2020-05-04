@@ -8,12 +8,13 @@ import {
 	ListItemText,
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
+import ReplayIcon from "@material-ui/icons/Replay"
 import { PrivatePage, PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
 import findHCById from "../../data/healthChecks/findHCById"
 import { IBaseHealthCheck } from "../../data/healthChecks/HealthCheckDatabase"
-import { PrivateRoutes } from "../../util/routes/routes"
+import { PrivateRoutes, routeVarReplacement } from "../../util/routes/routes"
 import { ClientContext } from "../../state/client"
 import QuestionSummaries from "../../components/HealthCheck/Summary"
 import { QuestionOptions } from "../../components/HealthCheck/_config/shape"
@@ -90,6 +91,18 @@ const HCSummary = (): ReactElement => {
 										<ListIcon />
 									</ListItemIcon>
 									<ListItemText>List of Health Checks</ListItemText>
+								</ListItem>
+								<ListItem
+									button
+									component={Link}
+									to={routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
+										[":id?", `${healthCheck?.id || ""}`],
+									])}
+								>
+									<ListItemIcon>
+										<ReplayIcon />
+									</ListItemIcon>
+									<ListItemText>Re-take Health Check</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>
