@@ -20,6 +20,8 @@ import { HCListingMachine } from "./_config/machine"
 import { EmptyListing, QuizList } from "./_partials"
 import Loading from "../../Loading"
 import useListingStyles from "./_config/styles"
+import deleteHealthCheck from "../../../data/healthChecks/deleteHC"
+import findObjectIndexByValue from "../../../util/findObjectIndexByValue"
 
 /**
  * Component used to render the completed health checks for the
@@ -67,6 +69,26 @@ const Listing = (): ReactElement => {
 	}, [quizzes, currentClient, loading])
 
 	/**
+	 * Removes a quiz from the db and state
+	 *
+	 * @param {number} id ID of the health check to remove
+	 * @returns Promise<void>
+	 */
+	const removeHealthCheck = async (id: number): Promise<void> => {
+		try {
+			const count = await deleteHealthCheck(id)
+			if (count > 0) {
+				const quizToRemove = findObjectIndexByValue(clientQuizzes, "id", id)
+				const copy = [...clientQuizzes]
+				copy.splice(quizToRemove, 1)
+				setClientQuizzess([...copy])
+			}
+		} catch (e) {
+			console.error(e.stack || e)
+		}
+	}
+
+	/**
 	 * Render a specific component for state of the state machine
 	 *
 	 * @returns ReactElement
@@ -77,7 +99,12 @@ const Listing = (): ReactElement => {
 				return <EmptyListing />
 
 			case "hasItems":
-				return <QuizList clientQuizzes={clientQuizzes} />
+				return (
+					<QuizList
+						clientQuizzes={clientQuizzes}
+						removeHealthCheck={removeHealthCheck}
+					/>
+				)
 
 			case "loading":
 			default:

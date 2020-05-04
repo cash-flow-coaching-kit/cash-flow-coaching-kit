@@ -18,6 +18,8 @@ import addHealthCheck from "../../../data/healthChecks/addHC"
 import { routeVarReplacement, PrivateRoutes } from "../../../util/routes/routes"
 import { OptionTile } from "./_partials"
 import NoClientError from "../../NoClientError"
+import { IQuestionnaireProps } from "./_config/shape"
+import updateHC from "../../../data/healthChecks/updateHC"
 
 /**
  * Questionnaire component for the Health checks
@@ -25,12 +27,15 @@ import NoClientError from "../../NoClientError"
  *
  * @returns ReactElement
  */
-const Questionnaire = (): ReactElement => {
+const Questionnaire = ({
+	previousAnswers = [],
+	dbID,
+}: IQuestionnaireProps): ReactElement => {
 	const {
 		state: { currentClient },
 	} = useContext(ClientContext)
 	const styles = useQuestionnaireStyles()
-	const [answers, setAnswers] = useState<QuestionOptions[]>([])
+	const [answers, setAnswers] = useState<QuestionOptions[]>(previousAnswers)
 	const [questionCount, setQuestionCount] = useState<number>(0)
 	const [currentQuestion, setCurrentQuestion] = useState<IQuestionStructure>(
 		questions[questionCount]
@@ -41,6 +46,13 @@ const Questionnaire = (): ReactElement => {
 	useEffect(() => {
 		setCurrentQuestion(questions[questionCount])
 	}, [questionCount])
+
+	useEffect(() => {
+		if (previousAnswers !== answers) {
+			setAnswers(previousAnswers)
+			setQuestionCount(0)
+		}
+	}, [previousAnswers])
 
 	/**
 	 * Changes the selected answer for the current question
@@ -67,6 +79,17 @@ const Questionnaire = (): ReactElement => {
 	const isFinalQuestion = (): boolean => questionCount === questions.length - 1
 
 	/**
+	 * Redirects to the summary page
+	 *
+	 * @param {number} id ID of the health check to redirect to
+	 */
+	const redirectToSummary = (id: number): void => {
+		history.push(
+			routeVarReplacement(PrivateRoutes.HealthCheckSummary, [[":id", `${id}`]])
+		)
+	}
+
+	/**
 	 * Submits the questionnaire and redirects to the summary page
 	 *
 	 * @async
@@ -85,16 +108,18 @@ const Questionnaire = (): ReactElement => {
 		}
 
 		try {
-			const dbKey = await addHealthCheck({
-				clientId: currentClient.id,
-				answers,
-			})
-
-			history.push(
-				routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
-					[":id", `${dbKey}`],
-				])
-			)
+			if (typeof dbID === "undefined") {
+				const dbKey = await addHealthCheck({
+					clientId: currentClient.id,
+					answers,
+				})
+				redirectToSummary(dbKey)
+			} else {
+				await updateHC(dbID, {
+					answers,
+				})
+				redirectToSummary(dbID)
+			}
 		} catch (e) {
 			// TODO: Proper error checking
 			console.error(e.stack || e)
@@ -115,11 +140,10 @@ const Questionnaire = (): ReactElement => {
 			<Grid container spacing={2}>
 				{(Object.keys(currentQuestion.options) as QuestionOptions[]).map(
 					(option: QuestionOptions, idx: number): ReactElement => (
-						<Grid item xs={4}>
+						<Grid item xs={4} key={constructKey(key, idx)}>
 							<OptionTile
 								optionKey={option}
 								option={currentQuestion.options[option]}
-								key={constructKey(key, idx)}
 								changeAnswer={changeAnswer}
 								currentAnswer={answers[questionCount] || false}
 							/>

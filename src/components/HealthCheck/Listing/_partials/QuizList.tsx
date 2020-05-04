@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react"
+import React, { ReactElement, useState, MouseEvent } from "react"
 import {
 	List,
 	ListItem,
@@ -19,10 +19,14 @@ import { IQuizListProps } from "../_config/shape"
 /**
  * Renders a list of completed health checks
  *
- * @param {IBaseHealthCheck[]} { clientQuizzes }
+ * @param {IBaseHealthCheck[]} {clientQuizzes}
+ * @param {Function} {removeHealthCheck}
  * @returns ReactElement
  */
-const QuizList = ({ clientQuizzes }: IQuizListProps): ReactElement => {
+const QuizList = ({
+	clientQuizzes,
+	removeHealthCheck,
+}: IQuizListProps): ReactElement => {
 	const [key] = useState(generateKey())
 
 	return (
@@ -46,7 +50,12 @@ const QuizList = ({ clientQuizzes }: IQuizListProps): ReactElement => {
 							}
 						/>
 						<ListItemSecondaryAction>
-							<IconButton>
+							<IconButton
+								onClick={(e: MouseEvent<HTMLButtonElement>): void => {
+									e.preventDefault()
+									removeHealthCheck(quiz.id || -1)
+								}}
+							>
 								<DeleteIcon />
 							</IconButton>
 						</ListItemSecondaryAction>

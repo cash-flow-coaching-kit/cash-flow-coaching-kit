@@ -1,11 +1,14 @@
 /* eslint-disable import/prefer-default-export */
-import { PrivateRoutes } from "../../../../util/routes/routes"
+import {
+	PrivateRoutes,
+	routeVarReplacement,
+} from "../../../../util/routes/routes"
 import { INavRoutes } from "../../_config/shape"
 
 // Nav routes definition for the Secondary navigation
 export const routes: INavRoutes[] = [
 	{
-		route: PrivateRoutes.HealthCheckQuiz,
+		route: routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [[":id?", ""]]),
 		title: "Health Check",
 	},
 	{
