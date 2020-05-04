@@ -115,11 +115,10 @@ const Questionnaire = (): ReactElement => {
 			<Grid container spacing={2}>
 				{(Object.keys(currentQuestion.options) as QuestionOptions[]).map(
 					(option: QuestionOptions, idx: number): ReactElement => (
-						<Grid item xs={4}>
+						<Grid item xs={4} key={constructKey(key, idx)}>
 							<OptionTile
 								optionKey={option}
 								option={currentQuestion.options[option]}
-								key={constructKey(key, idx)}
 								changeAnswer={changeAnswer}
 								currentAnswer={answers[questionCount] || false}
 							/>

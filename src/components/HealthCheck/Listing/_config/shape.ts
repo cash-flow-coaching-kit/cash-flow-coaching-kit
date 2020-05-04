@@ -8,4 +8,5 @@ import { IBaseHealthCheck } from "../../../../data/healthChecks/HealthCheckDatab
  */
 export interface IQuizListProps {
 	clientQuizzes: IBaseHealthCheck[]
+	removeHealthCheck(id: number): Promise<void>
 }
