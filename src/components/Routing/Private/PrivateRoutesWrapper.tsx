@@ -7,7 +7,7 @@ import HCQuestionnaire from "../../../pages/HealthCheck/questionnaire"
 import DTListing from "../../../pages/DiscoverTopics/listing"
 import CFCCanvas from "../../../pages/CashFlowCanvas/canvas"
 import ChangeLevers from "../../../pages/change-levers"
-import ActionItems from "../../../pages/action-items"
+import ActionChecklist from "../../../pages/action-items"
 import CoachingKit from "../../../pages/coaching-kit"
 import HCListing from "../../../pages/HealthCheck/listing"
 import HCSummary from "../../../pages/HealthCheck/summary"
@@ -49,7 +49,7 @@ const PrivateRoutesWrapper = (): ReactElement => {
 				<ChangeLevers />
 			</Route>
 			<Route path={PrivateRoutes.ActionChecklist}>
-				<ActionItems />
+				<ActionChecklist />
 			</Route>
 		</>
 	)
