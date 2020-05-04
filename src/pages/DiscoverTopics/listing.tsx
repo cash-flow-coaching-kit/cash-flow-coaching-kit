@@ -6,7 +6,6 @@ import {
 	makeStyles,
 	List,
 	Card,
-	CardActionArea,
 	CardActions,
 	CardContent,
 	CardMedia,
@@ -70,20 +69,18 @@ const DTListing = (): ReactElement => {
 						<Grid container spacing={2}>
 							<Grid item xs={4}>
 								<Card>
-									<CardActionArea>
-										<CardMedia
-											component="img"
-											alt="Planning your business"
-											height="140"
-											image="https://www.cashflowcoachingkit.com.au/static/media/planning-business.ebd51a56.png"
-											title="Planning your business"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="body1" component="h3">
-												Planning Your business
-											</Typography>
-										</CardContent>
-									</CardActionArea>
+									<CardMedia
+										component="img"
+										alt="Planning your business"
+										height="140"
+										image="https://www.cashflowcoachingkit.com.au/static/media/planning-business.ebd51a56.png"
+										title="Planning your business"
+									/>
+									<CardContent>
+										<Typography gutterBottom variant="body1" component="h3">
+											Planning Your business
+										</Typography>
+									</CardContent>
 									<CardActions>
 										<Button
 											size="small"
@@ -97,20 +94,18 @@ const DTListing = (): ReactElement => {
 							</Grid>
 							<Grid item xs={4}>
 								<Card>
-									<CardActionArea>
-										<CardMedia
-											component="img"
-											alt="Record Keeping"
-											height="140"
-											image="https://www.cashflowcoachingkit.com.au/static/media/budget.e07d4e44.png"
-											title="Record Keeping"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="body1" component="h3">
-												Record Keeping
-											</Typography>
-										</CardContent>
-									</CardActionArea>
+									<CardMedia
+										component="img"
+										alt="Record Keeping"
+										height="140"
+										image="https://www.cashflowcoachingkit.com.au/static/media/budget.e07d4e44.png"
+										title="Record Keeping"
+									/>
+									<CardContent>
+										<Typography gutterBottom variant="body1" component="h3">
+											Record Keeping
+										</Typography>
+									</CardContent>
 									<CardActions>
 										<Button
 											size="small"
@@ -124,20 +119,18 @@ const DTListing = (): ReactElement => {
 							</Grid>
 							<Grid item xs={4}>
 								<Card>
-									<CardActionArea>
-										<CardMedia
-											component="img"
-											alt="Funding your business"
-											height="140"
-											image="https://www.cashflowcoachingkit.com.au/static/media/funding.a3b58fb3.png"
-											title="Funding your business"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="body1" component="h3">
-												Funding your business
-											</Typography>
-										</CardContent>
-									</CardActionArea>
+									<CardMedia
+										component="img"
+										alt="Funding your business"
+										height="140"
+										image="https://www.cashflowcoachingkit.com.au/static/media/funding.a3b58fb3.png"
+										title="Funding your business"
+									/>
+									<CardContent>
+										<Typography gutterBottom variant="body1" component="h3">
+											Funding your business
+										</Typography>
+									</CardContent>
 									<CardActions>
 										<Button
 											size="small"
@@ -151,20 +144,18 @@ const DTListing = (): ReactElement => {
 							</Grid>
 							<Grid item xs={4}>
 								<Card>
-									<CardActionArea>
-										<CardMedia
-											component="img"
-											alt="Managing your cash flow"
-											height="140"
-											image="https://www.cashflowcoachingkit.com.au/static/media/managing.1825be92.png"
-											title="Managing your cash flow"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="body1" component="h3">
-												Managing your cash flow
-											</Typography>
-										</CardContent>
-									</CardActionArea>
+									<CardMedia
+										component="img"
+										alt="Managing your cash flow"
+										height="140"
+										image="https://www.cashflowcoachingkit.com.au/static/media/managing.1825be92.png"
+										title="Managing your cash flow"
+									/>
+									<CardContent>
+										<Typography gutterBottom variant="body1" component="h3">
+											Managing your cash flow
+										</Typography>
+									</CardContent>
 									<CardActions>
 										<Button
 											size="small"
@@ -178,20 +169,18 @@ const DTListing = (): ReactElement => {
 							</Grid>
 							<Grid item xs={4}>
 								<Card>
-									<CardActionArea>
-										<CardMedia
-											component="img"
-											alt="Planning your regular Financial commitments"
-											height="140"
-											image="https://www.cashflowcoachingkit.com.au/static/media/planning-commitments.71750b55.png"
-											title="Planning your regular Financial commitments"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="body1" component="h3">
-												Planning your regular Financial commitments
-											</Typography>
-										</CardContent>
-									</CardActionArea>
+									<CardMedia
+										component="img"
+										alt="Planning your regular Financial commitments"
+										height="140"
+										image="https://www.cashflowcoachingkit.com.au/static/media/planning-commitments.71750b55.png"
+										title="Planning your regular Financial commitments"
+									/>
+									<CardContent>
+										<Typography gutterBottom variant="body1" component="h3">
+											Planning your regular Financial commitments
+										</Typography>
+									</CardContent>
 									<CardActions>
 										<Button
 											size="small"
@@ -205,20 +194,18 @@ const DTListing = (): ReactElement => {
 							</Grid>{" "}
 							<Grid item xs={4}>
 								<Card>
-									<CardActionArea>
-										<CardMedia
-											component="img"
-											alt="Tracking your performance"
-											height="140"
-											image="https://www.cashflowcoachingkit.com.au/static/media/tracking.66e33c25.png"
-											title="Tracking your performance"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="body1" component="h3">
-												Tracking your performance
-											</Typography>
-										</CardContent>
-									</CardActionArea>
+									<CardMedia
+										component="img"
+										alt="Tracking your performance"
+										height="140"
+										image="https://www.cashflowcoachingkit.com.au/static/media/tracking.66e33c25.png"
+										title="Tracking your performance"
+									/>
+									<CardContent>
+										<Typography gutterBottom variant="body1" component="h3">
+											Tracking your performance
+										</Typography>
+									</CardContent>
 									<CardActions>
 										<Button
 											size="small"
