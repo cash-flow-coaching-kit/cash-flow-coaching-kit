@@ -8,7 +8,7 @@ export enum PrivateRoutes {
 	CoachingKit = "/coaching-kit",
 	ClientList = "/client/list",
 	SessionFiles = "/session-files",
-	HealthCheckQuiz = "/health-check/quiz",
+	HealthCheckQuiz = "/health-check/quiz/:id?",
 	HealthCheckList = "/health-check/listing",
 	HealthCheckSummary = "/health-check/summary/:id",
 	DiscoverTopics = "/discover-topics",

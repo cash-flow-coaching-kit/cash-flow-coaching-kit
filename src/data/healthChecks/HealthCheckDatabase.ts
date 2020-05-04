@@ -15,6 +15,16 @@ export interface IBaseHealthCheck {
 }
 
 /**
+ * Health check structure when updating content
+ *
+ * @export
+ * @interface IBaseHealthCheckForUpdating
+ */
+export interface IBaseHealthCheckForUpdating {
+	answers?: QuestionOptions[]
+}
+
+/**
  * Health check database definition
  *
  * @class HealthCheckDatabase
