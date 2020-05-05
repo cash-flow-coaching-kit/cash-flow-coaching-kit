@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core"
 
+// style definition for action container component
 export const useActionContainerStyles = makeStyles((theme) => ({
 	dropdownBody: {
 		paddingRight: theme.spacing(2),
@@ -7,6 +8,7 @@ export const useActionContainerStyles = makeStyles((theme) => ({
 	},
 }))
 
+// style definition for action styles component
 export const useActionsStyles = makeStyles((theme) => ({
 	actionsWrapper: {
 		display: "flex",
@@ -15,6 +17,7 @@ export const useActionsStyles = makeStyles((theme) => ({
 	},
 }))
 
+// style definition for action item component
 export const useActionItemStyles = makeStyles((theme) => ({
 	gridRoot: {
 		alignItems: "center",

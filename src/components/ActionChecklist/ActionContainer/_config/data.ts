@@ -1,6 +1,7 @@
+/* eslint-disable import/prefer-default-export */
 import { PossibleActionItems } from "../../../../state/action-checklist/shape"
 
-// eslint-disable-next-line import/prefer-default-export
+// Action title mapping object
 export const actionTitleMapping: Record<PossibleActionItems, string> = {
 	cashInActions: "Cash IN actions",
 	cashOutActions: "Cash OUT actions",

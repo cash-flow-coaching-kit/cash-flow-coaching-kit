@@ -11,17 +11,13 @@ import { ActionChecklistActionTypes } from "../../../state/action-checklist/shap
 import lastInArray from "../../../util/array/lastInArray"
 import { generateKey, constructKey } from "../../../util/lists/key"
 
-interface IStructure {
-	items: {
-		[key: string]: {
-			id: string
-			completed: boolean
-			description: string
-		}
-	}
-	order: string[]
-}
-
+/**
+ * A single Action items wrapper
+ *
+ * @param {PossibleActionItems} {identfier}
+ * @param {ISingleActionItem} {data}
+ * @returns ReactElement
+ */
 const ActionContainer = ({
 	identfier,
 	data,
@@ -30,6 +26,12 @@ const ActionContainer = ({
 	const { dispatch } = useContext(ActionChecklistContext)
 	const [key] = useState(generateKey())
 
+	/**
+	 * Event that triggers once a item is dropped
+	 *
+	 * @param {DropResult} results
+	 * @returns void
+	 */
 	const onDragEnd = (results: DropResult): void => {
 		// TODO: Implement with a reducer action
 		// const { destination, source, draggableId } = results
@@ -53,6 +55,12 @@ const ActionContainer = ({
 		// })
 	}
 
+	/**
+	 * Handles the state change when adding a new action item
+	 *
+	 * @param {MouseEvent<HTMLButtonElement>} e
+	 * @returns void
+	 */
 	const addNewAction = (e: MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault()
 		dispatch({
@@ -63,6 +71,12 @@ const ActionContainer = ({
 		})
 	}
 
+	/**
+	 * Checks if the latest item has content before
+	 * letting a user add more actions
+	 *
+	 * @returns boolean
+	 */
 	const preventAddingNew = (): boolean => {
 		const keys = Object.keys(data.items)
 		return data.items[lastInArray(keys)].description === ""

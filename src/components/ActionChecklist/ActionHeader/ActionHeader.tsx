@@ -15,12 +15,24 @@ import useActionHeaderStyles from "./_config/style"
 import { ActionChecklistContext } from "../../../state/action-checklist"
 import { ActionChecklistActionTypes } from "../../../state/action-checklist/shape"
 
+/**
+ * Header component for the Action Checklist page
+ *
+ * @returns ReactElement
+ */
 const ActionHeader = (): ReactElement => {
 	const styles = useActionHeaderStyles()
 	const { hideCompleted, reviewBy, dispatch } = useContext(
 		ActionChecklistContext
 	)
 
+	/**
+	 * Change the state of the "hide all completed"
+	 * checkbox
+	 *
+	 * @param {React.ChangeEvent<HTMLInputElement>} event
+	 * @returns void
+	 */
 	const handleHideChange = (
 		event: React.ChangeEvent<HTMLInputElement>
 	): void => {
@@ -30,6 +42,12 @@ const ActionHeader = (): ReactElement => {
 		})
 	}
 
+	/**
+	 * Change the state of the "Review by" date
+	 *
+	 * @param {Date|null} date
+	 * @returns void
+	 */
 	const handleDateChange = (date: Date | null): void => {
 		if (date !== null) {
 			dispatch({

@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core"
 
+// Styles definition for the Action Header components
 const useActionHeaderStyles = makeStyles((theme) => ({
 	appbar: {
 		background: "white",

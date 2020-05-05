@@ -18,9 +18,37 @@ import { ActionChecklistContext } from "../state/action-checklist"
 import { generateKey, constructKey } from "../util/lists/key"
 import { PossibleActionItems } from "../state/action-checklist/shape"
 
+/**
+ * Action Checklist page component
+ *
+ * @returns ReactElement
+ */
 const ActionChecklist = (): ReactElement => {
 	const { actionItems } = useContext(ActionChecklistContext)
 	const [key] = useState(generateKey())
+
+	/**
+	 * Renders all the action containers based on
+	 * current state data
+	 *
+	 * @returns ReactElement[]
+	 */
+	const renderActionContainers = (): ReactElement[] => {
+		return (Object.keys(actionItems) as PossibleActionItems[]).map(
+			(id, idx): ReactElement => {
+				const item = actionItems[id]
+				return item ? (
+					<ActionContainer
+						key={constructKey(key, idx)}
+						identfier={id}
+						data={item}
+					/>
+				) : (
+					<Fragment key={constructKey(key, idx)} />
+				)
+			}
+		)
+	}
 
 	return (
 		<>
@@ -29,22 +57,7 @@ const ActionChecklist = (): ReactElement => {
 					<Grid item xs={9}>
 						<SectionTitle>Action Items</SectionTitle>
 						<ActionHeader />
-						<Box>
-							{(Object.keys(actionItems) as PossibleActionItems[]).map(
-								(id, idx): ReactElement => {
-									const item = actionItems[id]
-									return item ? (
-										<ActionContainer
-											key={constructKey(key, idx)}
-											identfier={id}
-											data={item}
-										/>
-									) : (
-										<Fragment key={constructKey(key, idx)} />
-									)
-								}
-							)}
-						</Box>
+						<Box>{renderActionContainers()}</Box>
 					</Grid>
 					<Grid item xs={3}>
 						<FourQuestions />
