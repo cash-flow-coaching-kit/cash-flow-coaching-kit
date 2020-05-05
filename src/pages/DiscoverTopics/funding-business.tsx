@@ -55,7 +55,12 @@ const DTFundingBusiness = (): ReactElement => {
 	return (
 		<PrivatePage>
 			<PageContainer>
-				<Typography variant="h5" align="center" className={styles.tagline}>
+				<Typography
+					variant="h5"
+					component="h1"
+					align="center"
+					className={styles.tagline}
+				>
 					Funding your business
 				</Typography>
 
