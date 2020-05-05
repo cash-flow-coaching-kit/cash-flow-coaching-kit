@@ -5,6 +5,7 @@ import {
 	IconButton,
 	Divider,
 	Button,
+	Tooltip,
 } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import AddIcon from "@material-ui/icons/Add"
@@ -21,7 +22,7 @@ import { EmptyListing, QuizList } from "./_partials"
 import Loading from "../../Loading"
 import useListingStyles from "./_config/styles"
 import deleteHealthCheck from "../../../data/healthChecks/deleteHC"
-import findObjectIndexByValue from "../../../util/findObjectIndexByValue"
+import findObjectIndexByValue from "../../../util/array/findObjectIndexByValue"
 
 /**
  * Component used to render the completed health checks for the
@@ -125,9 +126,11 @@ const Listing = (): ReactElement => {
 				>
 					Start a new Health Check
 				</Button>
-				<IconButton onClick={retrive}>
-					<RefreshIcon />
-				</IconButton>
+				<Tooltip title="Refresh data">
+					<IconButton onClick={retrive}>
+						<RefreshIcon />
+					</IconButton>
+				</Tooltip>
 			</CardContent>
 			<Divider />
 			{renderQuizData()}

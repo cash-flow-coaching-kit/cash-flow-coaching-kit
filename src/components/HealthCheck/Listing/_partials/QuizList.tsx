@@ -5,11 +5,12 @@ import {
 	ListItemText,
 	ListItemSecondaryAction,
 	IconButton,
+	Tooltip,
 } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { format } from "date-fns"
 import DeleteIcon from "@material-ui/icons/Delete"
-import { constructKey, generateKey } from "../../../../util/key"
+import { constructKey, generateKey } from "../../../../util/lists/key"
 import {
 	routeVarReplacement,
 	PrivateRoutes,
@@ -50,14 +51,16 @@ const QuizList = ({
 							}
 						/>
 						<ListItemSecondaryAction>
-							<IconButton
-								onClick={(e: MouseEvent<HTMLButtonElement>): void => {
-									e.preventDefault()
-									removeHealthCheck(quiz.id || -1)
-								}}
-							>
-								<DeleteIcon />
-							</IconButton>
+							<Tooltip title="Delete">
+								<IconButton
+									onClick={(e: MouseEvent<HTMLButtonElement>): void => {
+										e.preventDefault()
+										removeHealthCheck(quiz.id || -1)
+									}}
+								>
+									<DeleteIcon />
+								</IconButton>
+							</Tooltip>
 						</ListItemSecondaryAction>
 					</ListItem>
 				)

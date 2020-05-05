@@ -7,10 +7,11 @@ import {
 	ListItemText,
 	ListItemSecondaryAction,
 	IconButton,
+	Tooltip,
 } from "@material-ui/core"
 import DeleteIcon from "@material-ui/icons/Delete"
 import PublishIcon from "@material-ui/icons/Publish"
-import { generateKey, constructKey } from "../../../util/key"
+import { generateKey, constructKey } from "../../../util/lists/key"
 import {
 	ClientActionTypes,
 	IBaseClient,
@@ -50,24 +51,30 @@ const ClientList = ({
 			{clients.map((client, idx) => (
 				<ListItem key={constructKey(key, idx)}>
 					<ListItemIcon>
-						<Radio
-							checked={isClientSelected(currentClient, client.id)}
-							value={client.id}
-							inputProps={{ "aria-label": client.name }}
-							onChange={(): void => {
-								handleChange(client)
-							}}
-							name="selected-client"
-						/>
+						<Tooltip title="Manage client">
+							<Radio
+								checked={isClientSelected(currentClient, client.id)}
+								value={client.id}
+								inputProps={{ "aria-label": client.name }}
+								onChange={(): void => {
+									handleChange(client)
+								}}
+								name="selected-client"
+							/>
+						</Tooltip>
 					</ListItemIcon>
 					<ListItemText primary={client.name} />
 					<ListItemSecondaryAction>
-						<IconButton>
-							<PublishIcon />
-						</IconButton>
-						<IconButton>
-							<DeleteIcon />
-						</IconButton>
+						<Tooltip title="Export data">
+							<IconButton>
+								<PublishIcon />
+							</IconButton>
+						</Tooltip>
+						<Tooltip title="Delete">
+							<IconButton>
+								<DeleteIcon />
+							</IconButton>
+						</Tooltip>
 					</ListItemSecondaryAction>
 				</ListItem>
 			))}

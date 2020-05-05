@@ -5,7 +5,6 @@ import {
 	IClientReducerAction,
 	ClientActionTypes,
 } from "./client-outline"
-import findObjectIndexByValue from "../../util/findObjectIndexByValue"
 
 /**
  * Reducer used for the client state
@@ -20,17 +19,6 @@ const ClientReducer: Reducer<IClientState, IClientReducerAction> = (
 ): IClientState => {
 	switch (action.type) {
 		case ClientActionTypes.AddClient: {
-			const {
-				state: { clients },
-			} = state
-			const {
-				payload: { id },
-			} = action
-
-			if (findObjectIndexByValue(clients, "id", id) !== -1) {
-				return { ...state }
-			}
-
 			const newstate = { ...state }
 			newstate.state.clients = [...state.state.clients, action.payload]
 			return { ...newstate }
