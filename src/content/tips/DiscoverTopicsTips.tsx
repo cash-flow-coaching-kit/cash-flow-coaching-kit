@@ -1,19 +1,22 @@
 import React, { ReactElement } from "react"
 import { Typography, List } from "@material-ui/core"
+import useSharedTipStyling from "./style"
 
 const DiscoverTopicsTips = (): ReactElement => {
+	const styles = useSharedTipStyling()
 	return (
 		<>
-			<List>
+			<List className={styles.list}>
 				<Typography component="li">
-					Health Check results guide the coaching conversation
+					<strong>Health Check</strong> results guide the coaching conversation
 				</Typography>
 				<Typography component="li">
-					Discover Topics build knowledge of key financial concepts
+					<strong>Discover Topics</strong> build knowledge of key financial
+					concepts
 				</Typography>
 				<Typography component="li">
-					Quicksnaps provide a summary of the knowledge topic and questions to
-					consider
+					<strong>Quicksnaps</strong> provide a summary of the knowledge topic
+					and questions to consider
 				</Typography>
 				<Typography component="li">
 					Topic activities can help small business apply their learning
