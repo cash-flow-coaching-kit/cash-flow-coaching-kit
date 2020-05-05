@@ -20,7 +20,7 @@ export enum PrivateRoutes {
 	DTFundingBusiness = "/funding-business",
 	DTManagingCashFlow = "/managing-cash-flow",
 	DTPlanningBusiness = "/planning-business",
-	DTPlanningFinanicalCommitments = "/planning-financial-commiments",
+	DTPlanningFinanicalCommitments = "/planning-financial-commitments",
 	DTRecordKeeping = "/record-keeping",
 	DTSellingClosingSuccession = "/selling-closing-succession",
 	DTTrackingPerformance = "/tracking-performance",
