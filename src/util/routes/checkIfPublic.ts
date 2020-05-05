@@ -1,5 +1,5 @@
 import { RouteProps } from "react-router-dom"
-import { PublicRoutes } from "./routes/routes"
+import { PublicRoutes } from "./routes"
 
 /**
  * Checks if the current location path is in the Public Routes enum
