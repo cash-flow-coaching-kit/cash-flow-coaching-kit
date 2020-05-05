@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useContext, useState, Fragment } from "react"
 import {
 	Grid,
 	List,
@@ -12,10 +12,16 @@ import { PageContainer } from "../components/Layouts"
 import SectionTitle from "../components/SectionTitle"
 import FourQuestions from "../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../components/ExpandableNav"
-import { ActionHeader } from "../components/ActionChecklist"
+import { ActionHeader, ActionContainer } from "../components/ActionChecklist"
 import PageTip from "../components/PageTip"
+import { ActionChecklistContext } from "../state/action-checklist"
+import { generateKey, constructKey } from "../util/lists/key"
+import { PossibleActionItems } from "../state/action-checklist/shape"
 
 const ActionChecklist = (): ReactElement => {
+	const { actionItems } = useContext(ActionChecklistContext)
+	const [key] = useState(generateKey())
+
 	return (
 		<>
 			<PageContainer>
@@ -24,8 +30,20 @@ const ActionChecklist = (): ReactElement => {
 						<SectionTitle>Action Items</SectionTitle>
 						<ActionHeader />
 						<Box>
-							<ExpandableNav title="Cash IN actions">Hello</ExpandableNav>
-							<ExpandableNav title="Cash OUT actions">Hello</ExpandableNav>
+							{(Object.keys(actionItems) as PossibleActionItems[]).map(
+								(id, idx): ReactElement => {
+									const item = actionItems[id]
+									return item ? (
+										<ActionContainer
+											key={constructKey(key, idx)}
+											identfier={id}
+											data={item}
+										/>
+									) : (
+										<Fragment key={constructKey(key, idx)} />
+									)
+								}
+							)}
 						</Box>
 					</Grid>
 					<Grid item xs={3}>
