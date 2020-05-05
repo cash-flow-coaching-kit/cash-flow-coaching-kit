@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core"
 import { Link, useParams } from "react-router-dom"
 import ListIcon from "@material-ui/icons/List"
-import { PrivatePage, PageContainer } from "../../components/Layouts"
+import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import PageTip from "../../components/PageTip"
 import ExpandableNav from "../../components/ExpandableNav"
@@ -48,7 +48,7 @@ const HCQuestionnaire = (): ReactElement => {
 	}, [id, currentClient])
 
 	return (
-		<PrivatePage>
+		<>
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={9}>
@@ -85,7 +85,7 @@ const HCQuestionnaire = (): ReactElement => {
 			</PageContainer>
 
 			<PageTip tip="HCQuestionnaire" />
-		</PrivatePage>
+		</>
 	)
 }
 

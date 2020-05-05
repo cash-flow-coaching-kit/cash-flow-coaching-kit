@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
 import ReplayIcon from "@material-ui/icons/Replay"
-import { PrivatePage, PageContainer } from "../../components/Layouts"
+import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
 import findHCById from "../../data/healthChecks/findHCById"
@@ -62,7 +62,7 @@ const HCSummary = (): ReactElement => {
 	}, [id, currentClient])
 
 	return (
-		<PrivatePage>
+		<>
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={9}>
@@ -109,7 +109,7 @@ const HCSummary = (): ReactElement => {
 					</Grid>
 				</Grid>
 			</PageContainer>
-		</PrivatePage>
+		</>
 	)
 }
 

@@ -8,7 +8,7 @@ import {
 	Box,
 } from "@material-ui/core"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
-import { PrivatePage, PageContainer } from "../components/Layouts"
+import { PageContainer } from "../components/Layouts"
 import SectionTitle from "../components/SectionTitle"
 import FourQuestions from "../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../components/ExpandableNav"
@@ -17,7 +17,7 @@ import PageTip from "../components/PageTip"
 
 const ActionChecklist = (): ReactElement => {
 	return (
-		<PrivatePage>
+		<>
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={9}>
@@ -45,7 +45,7 @@ const ActionChecklist = (): ReactElement => {
 			</PageContainer>
 
 			<PageTip tip="ActionChecklistTip" />
-		</PrivatePage>
+		</>
 	)
 }
 

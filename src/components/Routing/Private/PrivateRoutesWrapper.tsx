@@ -12,6 +12,7 @@ import CoachingKit from "../../../pages/coaching-kit"
 import HCListing from "../../../pages/HealthCheck/listing"
 import HCSummary from "../../../pages/HealthCheck/summary"
 import { ActionChecklistProvider } from "../../../state/action-checklist"
+import { PrivatePage } from "../../Layouts"
 
 /**
  * Private route definitions, these pages should not be available
@@ -21,7 +22,7 @@ import { ActionChecklistProvider } from "../../../state/action-checklist"
  */
 const PrivateRoutesWrapper = (): ReactElement => {
 	return (
-		<>
+		<PrivatePage>
 			<Route path={PrivateRoutes.CoachingKit}>
 				<CoachingKit />
 			</Route>
@@ -59,7 +60,7 @@ const PrivateRoutesWrapper = (): ReactElement => {
 					<ActionChecklist />
 				</Route>
 			</ActionChecklistProvider>
-		</>
+		</PrivatePage>
 	)
 }
 
