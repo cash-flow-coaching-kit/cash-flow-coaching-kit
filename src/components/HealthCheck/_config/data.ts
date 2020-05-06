@@ -51,33 +51,33 @@ export const questions: IQuestionStructure[] = [
 	{
 		question: "How do you feel about planning your business?",
 		options: { ...additionalQuestionsOptions },
-		learnMore: PrivateRoutes.DiscoverTopics,
+		learnMore: PrivateRoutes.DTPlanningBusiness,
 	},
 	{
 		question: "How do you feel about understanding your cash flow?",
 		options: { ...additionalQuestionsOptions },
-		learnMore: PrivateRoutes.DiscoverTopics,
+		learnMore: PrivateRoutes.DTManagingCashFlow,
 	},
 	{
 		question: "How do you feel about keeping your books and records?",
 		options: { ...additionalQuestionsOptions },
-		learnMore: PrivateRoutes.DiscoverTopics,
+		learnMore: PrivateRoutes.DTRecordKeeping,
 	},
 	{
 		question:
 			"How do you feel about meeting your regular financial commitments?",
 		options: { ...additionalQuestionsOptions },
-		learnMore: PrivateRoutes.DiscoverTopics,
+		learnMore: PrivateRoutes.DTPlanningFinanicalCommitments,
 	},
 	{
 		question: "How do you feel about funding your business?",
 		options: { ...additionalQuestionsOptions },
-		learnMore: PrivateRoutes.DiscoverTopics,
+		learnMore: PrivateRoutes.DTFundingBusiness,
 	},
 	{
 		question: "How do you feel about tracking your business performance?",
 		options: { ...additionalQuestionsOptions },
-		learnMore: PrivateRoutes.DiscoverTopics,
+		learnMore: PrivateRoutes.DTTrackingPerformance,
 	},
 ]
 
