@@ -9,6 +9,13 @@ import CFCCanvas from "../../../pages/CashFlowCanvas/canvas"
 import ChangeLevers from "../../../pages/change-levers"
 import ActionChecklist from "../../../pages/action-items"
 import CoachingKit from "../../../pages/coaching-kit"
+import DTFundingBusiness from "../../../pages/DiscoverTopics/funding-business"
+import DTManagingCashFlow from "../../../pages/DiscoverTopics/managing-cash-flow"
+import DTPlanningBusiness from "../../../pages/DiscoverTopics/planning-business"
+import DTPlanningFinanicalCommitments from "../../../pages/DiscoverTopics/planning-financial-commitments"
+import DTRecordKeeping from "../../../pages/DiscoverTopics/record-keeping"
+import DTSellingClosingSuccession from "../../../pages/DiscoverTopics/selling-closing-succession"
+import DTTrackingPerformance from "../../../pages/DiscoverTopics/tracking-performance"
 import HCListing from "../../../pages/HealthCheck/listing"
 import HCSummary from "../../../pages/HealthCheck/summary"
 import { ActionChecklistProvider } from "../../../state/action-checklist"
@@ -60,6 +67,28 @@ const PrivateRoutesWrapper = (): ReactElement => {
 					<ActionChecklist />
 				</Route>
 			</ActionChecklistProvider>
+
+			<Route path={PrivateRoutes.DTFundingBusiness}>
+				<DTFundingBusiness />
+			</Route>
+			<Route path={PrivateRoutes.DTManagingCashFlow}>
+				<DTManagingCashFlow />
+			</Route>
+			<Route path={PrivateRoutes.DTPlanningBusiness}>
+				<DTPlanningBusiness />
+			</Route>
+			<Route path={PrivateRoutes.DTPlanningFinanicalCommitments}>
+				<DTPlanningFinanicalCommitments />
+			</Route>
+			<Route path={PrivateRoutes.DTRecordKeeping}>
+				<DTRecordKeeping />
+			</Route>
+			<Route path={PrivateRoutes.DTSellingClosingSuccession}>
+				<DTSellingClosingSuccession />
+			</Route>
+			<Route path={PrivateRoutes.DTTrackingPerformance}>
+				<DTTrackingPerformance />
+			</Route>
 		</PrivatePage>
 	)
 }

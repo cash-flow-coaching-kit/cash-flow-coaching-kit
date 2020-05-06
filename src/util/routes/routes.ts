@@ -1,3 +1,5 @@
+import DTManagingCashFlow from "../../pages/DiscoverTopics/managing-cash-flow"
+
 /**
  * Private route definitions
  *
@@ -15,6 +17,13 @@ export enum PrivateRoutes {
 	CFC = "/cash-flow-canvas",
 	ChangeLevers = "/change-levers",
 	ActionChecklist = "/action-checklist",
+	DTFundingBusiness = "/funding-business",
+	DTManagingCashFlow = "/managing-cash-flow",
+	DTPlanningBusiness = "/planning-business",
+	DTPlanningFinanicalCommitments = "/planning-financial-commitments",
+	DTRecordKeeping = "/record-keeping",
+	DTSellingClosingSuccession = "/selling-closing-succession",
+	DTTrackingPerformance = "/tracking-performance",
 }
 
 /**
