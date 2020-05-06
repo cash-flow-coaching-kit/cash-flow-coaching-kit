@@ -1,4 +1,4 @@
-import Dexie from "dexie"
+import Dexie, { IndexableType } from "dexie"
 import { DatabaseId } from "./shape"
 
 /**
@@ -10,7 +10,7 @@ import { DatabaseId } from "./shape"
  * @template E Database entity structure
  * @template I Database id type
  */
-abstract class ILogicLayer<E, I = DatabaseId> {
+abstract class ILogicLayer<E, B, I = DatabaseId> {
 	protected database!: Dexie
 
 	protected table!: Dexie.Table<E, I>
@@ -34,12 +34,32 @@ abstract class ILogicLayer<E, I = DatabaseId> {
 		})
 	}
 
+	protected defaultDelete<T extends IndexableType>(id: T): Promise<number> {
+		return this.database.transaction("rw", this.table, () => {
+			return this.table.where("id").equals(id).delete()
+		})
+	}
+
+	protected defaultUpdate(id: I, data: B): Promise<number> {
+		return this.database.transaction("rw", this.table, () => {
+			return this.table.update(id, data)
+		})
+	}
+
 	public create(data: E): Promise<I> {
 		return this.defaultCreate(data)
 	}
 
 	public syncWithDatabase(): Promise<E[]> {
 		return this.defaultSync()
+	}
+
+	public delete<T extends IndexableType>(id: T): Promise<number> {
+		return this.defaultDelete(id)
+	}
+
+	public update(id: I, data: B): Promise<number> {
+		return this.defaultUpdate(id, data)
 	}
 }
 

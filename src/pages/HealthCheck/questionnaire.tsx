@@ -18,7 +18,7 @@ import Questionnaire from "../../components/HealthCheck/Questionnaire/Questionna
 import { QuestionOptions } from "../../components/HealthCheck/_config/shape"
 import Loading from "../../components/Loading"
 import { ClientContext } from "../../state/client"
-import findHCById from "../../data/healthChecks/findHCById"
+import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
 
 /**
  * Health check questionnaire page
@@ -37,7 +37,10 @@ const HCQuestionnaire = (): ReactElement => {
 		if (typeof currentClient !== "undefined") {
 			;(async function fetchHC(): Promise<void> {
 				if (id && typeof currentClient.id !== "undefined") {
-					const hc = await findHCById(parseInt(id, 10), currentClient.id)
+					const hc = await HealthCheckUseCase.findByClientId(
+						parseInt(id, 10),
+						currentClient.id
+					)
 					setAnswers(hc ? hc.answers : [])
 					setLoading(false)
 				} else {

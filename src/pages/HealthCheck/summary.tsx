@@ -12,7 +12,6 @@ import ReplayIcon from "@material-ui/icons/Replay"
 import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
-import findHCById from "../../data/healthChecks/findHCById"
 import { PrivateRoutes, routeVarReplacement } from "../../util/routes/routes"
 import { ClientContext } from "../../state/client"
 import QuestionSummaries from "../../components/HealthCheck/Summary"
@@ -23,6 +22,7 @@ import {
 	InvalidHC,
 } from "../../components/HealthCheck/Summary/_partials"
 import { HealthCheckDataStruct } from "../../data/_config/shape"
+import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
 
 const QUESTIONS_OFFSET = 4
 
@@ -51,7 +51,7 @@ const HCSummary = (): ReactElement => {
 			;(async function getHC(): Promise<void> {
 				if (typeof currentClient.id !== "undefined") {
 					// Fetches the health checks for the client and sets state values
-					const hc: HealthCheckDataStruct = await findHCById(
+					const hc: HealthCheckDataStruct = await HealthCheckUseCase.findByClientId(
 						parseInt(id, 10),
 						currentClient.id
 					)

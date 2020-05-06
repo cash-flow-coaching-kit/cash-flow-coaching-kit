@@ -19,9 +19,9 @@ import { HCListingMachine } from "./_config/machine"
 import { EmptyListing, QuizList } from "./_partials"
 import Loading from "../../Loading"
 import useListingStyles from "./_config/styles"
-import deleteHealthCheck from "../../../data/healthChecks/deleteHC"
 import findObjectIndexByValue from "../../../util/array/findObjectIndexByValue"
 import { HealthCheckDataStruct } from "../../../data/_config/shape"
+import HealthCheckUseCase from "../../../data/healthChecks/HealthCheckLogic"
 
 /**
  * Component used to render the completed health checks for the
@@ -46,7 +46,7 @@ const Listing = (): ReactElement => {
 
 	useEffect(() => {
 		// Find fetching for the indexeddb is completed
-		if (!loading) {
+		if (!loading && currentClient) {
 			// If there isn't a client, show empty warning
 			if (!currentClient) {
 				send("IS_EMPTY")
@@ -60,9 +60,11 @@ const Listing = (): ReactElement => {
 			)
 			// If there isn't any clients
 			if (retrivedQuizzes.length === 0) {
+				console.log("empty", retrivedQuizzes)
 				// show empty warning
 				send("IS_EMPTY")
 			} else {
+				console.log("not empty", retrivedQuizzes)
 				// set the client quizzes and show the items
 				setClientQuizzess(retrivedQuizzes)
 				send("HAS_ITEMS")
@@ -78,7 +80,7 @@ const Listing = (): ReactElement => {
 	 */
 	const removeHealthCheck = async (id: number): Promise<void> => {
 		try {
-			const count = await deleteHealthCheck(id)
+			const count = await HealthCheckUseCase.delete(id)
 			if (count > 0) {
 				const quizToRemove = findObjectIndexByValue(clientQuizzes, "id", id)
 				const copy = [...clientQuizzes]

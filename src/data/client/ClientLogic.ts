@@ -1,8 +1,8 @@
 import ILogicLayer from "../_config/logicLayer"
-import { ClientDataStruct } from "../_config/shape"
+import { ClientDataStruct, BaseClientStruct } from "../_config/shape"
 import ClientDB from "./ClientDatabase"
 
-class ClientLogic extends ILogicLayer<ClientDataStruct> {
+class ClientLogic extends ILogicLayer<ClientDataStruct, BaseClientStruct> {
 	constructor() {
 		super(ClientDB, ClientDB.clients)
 	}

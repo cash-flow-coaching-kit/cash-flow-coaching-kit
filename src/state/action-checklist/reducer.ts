@@ -38,8 +38,6 @@ const ActionChecklistReducer: Reducer<
 			}
 		}
 		case ActionChecklistActionTypes.UpdateDatabaseSync: {
-			console.log("Complete db sync")
-
 			return {
 				...state,
 				databaseSyced: true,
