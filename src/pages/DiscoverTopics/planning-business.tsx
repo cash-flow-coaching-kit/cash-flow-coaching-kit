@@ -2,7 +2,6 @@ import React, { ReactElement } from "react"
 import {
 	Typography,
 	Grid,
-	makeStyles,
 	List,
 	Card,
 	CardHeader,
@@ -19,35 +18,7 @@ import { PrivatePage, PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
-
-const useDTStyles = makeStyles((theme) => ({
-	tagline: {
-		marginBottom: theme.spacing(4),
-	},
-	container: {
-		paddingTop: theme.spacing(5),
-	},
-	grid: {
-		paddingTop: theme.spacing(5),
-	},
-	SectionTitle: {
-		paddingTop: theme.spacing(5),
-	},
-	embed: {
-		minHeight: "300px",
-		border: "none",
-	},
-	button: {
-		margin: theme.spacing(1),
-	},
-	containerPurple: {
-		backgroundColor: "#cfe8fc",
-	},
-	list: {
-		listStyle: "disc",
-		paddingLeft: theme.spacing(2),
-	},
-}))
+import useDTStyles from "./_config/styles"
 
 const DTPlanningBusiness = (): ReactElement => {
 	const styles = useDTStyles()

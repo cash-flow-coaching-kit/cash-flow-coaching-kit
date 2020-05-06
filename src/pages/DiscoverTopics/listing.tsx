@@ -3,7 +3,6 @@ import { Link as RouterLink } from "react-router-dom"
 import {
 	Typography,
 	Grid,
-	makeStyles,
 	List,
 	Card,
 	CardActions,
@@ -15,12 +14,7 @@ import { PrivatePage, PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import SectionTitle from "../../components/SectionTitle"
 import { PrivateRoutes } from "../../util/routes/routes"
-
-const useDTStyles = makeStyles((theme) => ({
-	tagline: {
-		marginBottom: theme.spacing(4),
-	},
-}))
+import useDTStyles from "./_config/styles"
 
 const DTListing = (): ReactElement => {
 	const styles = useDTStyles()
