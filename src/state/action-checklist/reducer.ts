@@ -4,7 +4,6 @@ import {
 	ActionChecklistReducerActions,
 	ActionChecklistActionTypes,
 } from "./shape"
-import { generateKey } from "../../util/lists/key"
 
 /**
  * Reducer method for the Action Checklist context
@@ -35,39 +34,6 @@ const ActionChecklistReducer: Reducer<
 			return {
 				...state,
 				reviewBy: payload,
-			}
-		}
-		case ActionChecklistActionTypes.AddNewActionItem: {
-			const {
-				payload: { key },
-			} = action
-			let copyActionItem = { ...state.actionItems }[key]
-			const copyItems = copyActionItem?.items || {}
-			const copyOrder = copyActionItem?.order || []
-
-			// TODO: Use the id that comes from the DB
-			const id = generateKey()
-
-			copyActionItem = {
-				items: {
-					...copyItems,
-					[id]: {
-						id,
-						completed: false,
-						description: "",
-					},
-				},
-				order: copyOrder.concat(id),
-			}
-
-			return {
-				...state,
-				actionItems: {
-					...state.actionItems,
-					[key]: {
-						...copyActionItem,
-					},
-				},
 			}
 		}
 		default: {

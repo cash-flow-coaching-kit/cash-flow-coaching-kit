@@ -1,4 +1,8 @@
 import { Dispatch } from "react"
+import {
+	ActionChecklistPriorityStruct,
+	ActionChecklistStruct,
+} from "../../data/_config/shape"
 
 /**
  * Possible action item groups
@@ -16,31 +20,6 @@ export type PossibleActionItems =
 	| "planningCommitments"
 	| "tracking"
 	| "transition"
-
-/**
- * Data structure for a single item in the action items structure
- *
- * @export
- * @interface IActionItemDataStructure
- */
-export interface IActionItemDataStructure {
-	id: string
-	completed: boolean
-	description: string
-}
-
-/**
- * Data structure per action item
- *
- * @export
- * @interface ISingleActionItem
- */
-export interface ISingleActionItem {
-	items: {
-		[key: string]: IActionItemDataStructure
-	}
-	order: string[]
-}
 
 /**
  * Actions that can be performed for state changes
@@ -87,6 +66,7 @@ export interface IActionChecklistState {
 	hideCompleted: boolean
 	reviewBy: Date
 	databaseSyced: boolean
-	actionItems: Record<PossibleActionItems, ISingleActionItem | null>
+	priority: ActionChecklistPriorityStruct[]
+	checklistCollection: ActionChecklistStruct[]
 	dispatch: Dispatch<ActionChecklistReducerActions>
 }

@@ -1,4 +1,10 @@
-import React, { ReactElement, MouseEvent, useContext, useState } from "react"
+import React, {
+	ReactElement,
+	MouseEvent,
+	useContext,
+	useState,
+	Fragment,
+} from "react"
 import { Box } from "@material-ui/core"
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 import ExpandableNav from "../../ExpandableNav"
@@ -10,6 +16,11 @@ import { ActionChecklistContext } from "../../../state/action-checklist"
 import { ActionChecklistActionTypes } from "../../../state/action-checklist/shape"
 import lastInArray from "../../../util/array/lastInArray"
 import { generateKey, constructKey } from "../../../util/lists/key"
+import {
+	ActionChecklistId,
+	ActionChecklistStruct,
+} from "../../../data/_config/shape"
+import findObjectIndexByValue from "../../../util/array/findObjectIndexByValue"
 
 /**
  * A single Action items wrapper
@@ -21,6 +32,7 @@ import { generateKey, constructKey } from "../../../util/lists/key"
 const ActionContainer = ({
 	identfier,
 	data,
+	priority,
 }: IActionContainerProps): ReactElement => {
 	const styles = useActionContainerStyles()
 	const { dispatch } = useContext(ActionChecklistContext)
@@ -78,8 +90,26 @@ const ActionContainer = ({
 	 * @returns boolean
 	 */
 	const preventAddingNew = (): boolean => {
-		const keys = Object.keys(data.items)
-		return data.items[lastInArray(keys)].description === ""
+		return lastInArray(data).description === ""
+	}
+
+	const mapThroughPriorityOrder = (
+		id: ActionChecklistId,
+		idx: number
+	): ReactElement => {
+		const index = findObjectIndexByValue(data, "id", id)
+
+		if (index === -1) return <Fragment key={constructKey(key, idx)} />
+
+		const checklistItem: ActionChecklistStruct = data[index]
+		return (
+			<ActionItem
+				key={constructKey(key, idx)}
+				draggableId={checklistItem?.id || -1}
+				index={idx}
+				data={checklistItem}
+			/>
+		)
 	}
 
 	return (
@@ -93,14 +123,7 @@ const ActionContainer = ({
 								{...provided.droppableProps}
 								ref={provided.innerRef}
 							>
-								{data.order.map((id, index) => (
-									<ActionItem
-										key={constructKey(key, index)}
-										draggableId={data.items[id].id}
-										index={index}
-										data={data.items[id]}
-									/>
-								))}
+								{priority.order.map(mapThroughPriorityOrder)}
 								{provided.placeholder}
 							</div>
 						)}

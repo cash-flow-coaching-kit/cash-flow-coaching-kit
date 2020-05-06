@@ -13,7 +13,6 @@ import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
 import findHCById from "../../data/healthChecks/findHCById"
-import { IBaseHealthCheck } from "../../data/healthChecks/HealthCheckDatabase"
 import { PrivateRoutes, routeVarReplacement } from "../../util/routes/routes"
 import { ClientContext } from "../../state/client"
 import QuestionSummaries from "../../components/HealthCheck/Summary"
@@ -23,6 +22,7 @@ import {
 	SummaryTitle,
 	InvalidHC,
 } from "../../components/HealthCheck/Summary/_partials"
+import { HealthCheckDataStruct } from "../../data/_config/shape"
 
 const QUESTIONS_OFFSET = 4
 
@@ -36,7 +36,9 @@ const HCSummary = (): ReactElement => {
 		state: { currentClient },
 	} = useContext(ClientContext)
 	const { id } = useParams()
-	const [healthCheck, setHealthCheck] = useState<IBaseHealthCheck | undefined>()
+	const [healthCheck, setHealthCheck] = useState<
+		HealthCheckDataStruct | undefined
+	>()
 	const [fourQuestions, setFourQuestions] = useState<
 		QuestionOptions[] | undefined
 	>(undefined)
@@ -49,7 +51,7 @@ const HCSummary = (): ReactElement => {
 			;(async function getHC(): Promise<void> {
 				if (typeof currentClient.id !== "undefined") {
 					// Fetches the health checks for the client and sets state values
-					const hc: IBaseHealthCheck = await findHCById(
+					const hc: HealthCheckDataStruct = await findHCById(
 						parseInt(id, 10),
 						currentClient.id
 					)

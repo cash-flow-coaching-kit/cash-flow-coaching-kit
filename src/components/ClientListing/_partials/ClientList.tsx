@@ -12,12 +12,10 @@ import {
 import DeleteIcon from "@material-ui/icons/Delete"
 import PublishIcon from "@material-ui/icons/Publish"
 import { generateKey, constructKey } from "../../../util/lists/key"
-import {
-	ClientActionTypes,
-	IBaseClient,
-} from "../../../state/client/client-outline"
+import { ClientActionTypes } from "../../../state/client/client-outline"
 import { IClientListProps } from "../_config/shape"
 import { isClientSelected } from "../_config/utilities"
+import { ClientDataStruct } from "../../../data/_config/shape"
 
 /**
  * Renders a list of current clients with the ability to change
@@ -39,7 +37,7 @@ const ClientList = ({
 	 * @param {ChangeEvent<HTMLInputElement>} event Event created by the radio change
 	 * @returns void
 	 */
-	const handleChange = (client: IBaseClient): void => {
+	const handleChange = (client: ClientDataStruct): void => {
 		dispatch({
 			type: ClientActionTypes.ChangeCurrentClient,
 			payload: client,

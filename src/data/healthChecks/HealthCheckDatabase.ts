@@ -1,28 +1,5 @@
 import Dexie from "dexie"
-import { QuestionOptions } from "../../components/HealthCheck/_config/shape"
-
-/**
- * Health check structure
- *
- * @export
- * @interface IBaseHealthCheck
- */
-export interface IBaseHealthCheck {
-	id?: number
-	clientId: number
-	answers: QuestionOptions[]
-	createdAt?: number
-}
-
-/**
- * Health check structure when updating content
- *
- * @export
- * @interface IBaseHealthCheckForUpdating
- */
-export interface IBaseHealthCheckForUpdating {
-	answers?: QuestionOptions[]
-}
+import { HealthCheckDataStruct, HealthCheckId } from "../_config/shape"
 
 /**
  * Health check database definition
@@ -37,7 +14,7 @@ class HealthCheckDatabase extends Dexie {
 	 * @type {Dexie.Table<IBaseHealthCheck, number>}
 	 * @memberof HealthCheckDatabase
 	 */
-	healthChecks!: Dexie.Table<IBaseHealthCheck, number>
+	healthChecks!: Dexie.Table<HealthCheckDataStruct, HealthCheckId>
 
 	/**
 	 * Creates an instance of HealthCheckDatabase.

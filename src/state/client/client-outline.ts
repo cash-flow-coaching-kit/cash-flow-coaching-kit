@@ -1,16 +1,5 @@
 import { Dispatch } from "react"
-
-/**
- * Client data structure
- *
- * @export
- * @interface IBaseClient
- */
-export interface IBaseClient {
-	id?: number
-	name: string
-	createdAt?: number
-}
+import { ClientDataStruct } from "../../data/_config/shape"
 
 /**
  * Actions that can be performed for state changes
@@ -35,10 +24,10 @@ export enum ClientActionTypes {
  * @type IClientReducerAction
  */
 export type IClientReducerAction =
-	| { type: ClientActionTypes.AddClient; payload: IBaseClient }
+	| { type: ClientActionTypes.AddClient; payload: ClientDataStruct }
 	| { type: ClientActionTypes.RemoveClient; payload: number }
-	| { type: ClientActionTypes.BulkAdd; payload: IBaseClient[] }
-	| { type: ClientActionTypes.ChangeCurrentClient; payload: IBaseClient }
+	| { type: ClientActionTypes.BulkAdd; payload: ClientDataStruct[] }
+	| { type: ClientActionTypes.ChangeCurrentClient; payload: ClientDataStruct }
 	| { type: ClientActionTypes.UpdateClientSynced; payload: boolean }
 
 /**
@@ -48,8 +37,8 @@ export type IClientReducerAction =
  * @interface IClientData
  */
 export interface IClientData {
-	clients: IBaseClient[]
-	currentClient?: IBaseClient
+	clients: ClientDataStruct[]
+	currentClient?: ClientDataStruct
 	clientSynced: boolean
 }
 

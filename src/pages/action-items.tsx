@@ -17,6 +17,11 @@ import PageTip from "../components/PageTip"
 import { ActionChecklistContext } from "../state/action-checklist"
 import { generateKey, constructKey } from "../util/lists/key"
 import { PossibleActionItems } from "../state/action-checklist/shape"
+import { ActionItemMapping } from "../components/ActionChecklist/_config/data"
+import {
+	ActionChecklistStruct,
+	ActionChecklistPriorityStruct,
+} from "../data/_config/shape"
 
 /**
  * Action Checklist page component
@@ -24,8 +29,14 @@ import { PossibleActionItems } from "../state/action-checklist/shape"
  * @returns ReactElement
  */
 const ActionChecklist = (): ReactElement => {
-	const { actionItems } = useContext(ActionChecklistContext)
+	const { checklistCollection, priority } = useContext(ActionChecklistContext)
 	const [key] = useState(generateKey())
+
+	const filterByActionType = (type: PossibleActionItems) => (
+		item: ActionChecklistStruct | ActionChecklistPriorityStruct
+	): boolean => {
+		return item.actionContainer === type
+	}
 
 	/**
 	 * Renders all the action containers based on
@@ -34,18 +45,22 @@ const ActionChecklist = (): ReactElement => {
 	 * @returns ReactElement[]
 	 */
 	const renderActionContainers = (): ReactElement[] => {
-		return (Object.keys(actionItems) as PossibleActionItems[]).map(
-			(id, idx): ReactElement => {
-				const item = actionItems[id]
-				return item ? (
-					<ActionContainer
-						key={constructKey(key, idx)}
-						identfier={id}
-						data={item}
-					/>
-				) : (
-					<Fragment key={constructKey(key, idx)} />
-				)
+		return (Object.keys(ActionItemMapping) as PossibleActionItems[]).map(
+			(item, idx) => {
+				const data = checklistCollection.filter(filterByActionType(item))
+				const containerPriority = priority.filter(filterByActionType(item))
+
+				if (data.length > 0) {
+					return (
+						<ActionContainer
+							key={constructKey(key, idx)}
+							identfier={item}
+							data={data}
+							priority={containerPriority[0] || []}
+						/>
+					)
+				}
+				return <Fragment key={constructKey(key, idx)} />
 			}
 		)
 	}

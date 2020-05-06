@@ -21,5 +21,6 @@
 		"javascript",
 		"javascriptreact"
 	],
-	"eslint.packageManager": "yarn"
+	"eslint.packageManager": "yarn",
+	"typescript.referencesCodeLens.enabled": true
 }

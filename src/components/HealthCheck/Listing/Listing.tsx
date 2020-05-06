@@ -12,17 +12,16 @@ import AddIcon from "@material-ui/icons/Add"
 import RefreshIcon from "@material-ui/icons/Refresh"
 import { useMachine } from "@xstate/react"
 import useIndexedDB from "../../../data/hooks/useIndexedDB"
-import HealthCheckDB, {
-	IBaseHealthCheck,
-} from "../../../data/healthChecks/HealthCheckDatabase"
+import HealthCheckDB from "../../../data/healthChecks/HealthCheckDatabase"
 import { ClientContext } from "../../../state/client"
-import { PrivateRoutes } from "../../../util/routes/routes"
+import { PrivateRoutes, routeVarReplacement } from "../../../util/routes/routes"
 import { HCListingMachine } from "./_config/machine"
 import { EmptyListing, QuizList } from "./_partials"
 import Loading from "../../Loading"
 import useListingStyles from "./_config/styles"
 import deleteHealthCheck from "../../../data/healthChecks/deleteHC"
 import findObjectIndexByValue from "../../../util/array/findObjectIndexByValue"
+import { HealthCheckDataStruct } from "../../../data/_config/shape"
 
 /**
  * Component used to render the completed health checks for the
@@ -35,12 +34,14 @@ const Listing = (): ReactElement => {
 	const {
 		state: { currentClient },
 	} = useContext(ClientContext)
-	const [quizzes, retrive, loading] = useIndexedDB<IBaseHealthCheck>(
+	const [quizzes, retrive, loading] = useIndexedDB<HealthCheckDataStruct>(
 		HealthCheckDB,
 		HealthCheckDB.healthChecks,
 		[]
 	)
-	const [clientQuizzes, setClientQuizzess] = useState<IBaseHealthCheck[]>([])
+	const [clientQuizzes, setClientQuizzess] = useState<HealthCheckDataStruct[]>(
+		[]
+	)
 	const styles = useListingStyles()
 
 	useEffect(() => {
@@ -120,7 +121,9 @@ const Listing = (): ReactElement => {
 					startIcon={<AddIcon />}
 					size="medium"
 					component={Link}
-					to={PrivateRoutes.HealthCheckQuiz}
+					to={routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
+						[":id?", ""],
+					])}
 					color="primary"
 					variant="contained"
 				>

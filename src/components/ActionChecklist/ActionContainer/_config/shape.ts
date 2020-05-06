@@ -1,9 +1,9 @@
 import { MouseEvent } from "react"
+import { PossibleActionItems } from "../../../../state/action-checklist/shape"
 import {
-	PossibleActionItems,
-	ISingleActionItem,
-	IActionItemDataStructure,
-} from "../../../../state/action-checklist/shape"
+	ActionChecklistStruct,
+	ActionChecklistPriorityStruct,
+} from "../../../../data/_config/shape"
 
 /**
  * Prop definition for the ActionContainer component
@@ -13,7 +13,8 @@ import {
  */
 export interface IActionContainerProps {
 	identfier: PossibleActionItems
-	data: ISingleActionItem
+	data: ActionChecklistStruct[]
+	priority: ActionChecklistPriorityStruct
 }
 
 /**
@@ -24,8 +25,8 @@ export interface IActionContainerProps {
  */
 export interface IActionItemProps {
 	index: number
-	draggableId: string
-	data: IActionItemDataStructure
+	draggableId: number
+	data: ActionChecklistStruct
 }
 
 /**

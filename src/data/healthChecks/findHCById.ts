@@ -1,4 +1,9 @@
-import HealthCheckDB, { IBaseHealthCheck } from "./HealthCheckDatabase"
+import HealthCheckDB from "./HealthCheckDatabase"
+import {
+	HealthCheckId,
+	ClientId,
+	HealthCheckDataStruct,
+} from "../_config/shape"
 
 /**
  * Finds a health check by a id and a client id.
@@ -8,9 +13,9 @@ import HealthCheckDB, { IBaseHealthCheck } from "./HealthCheckDatabase"
  * @returns Promise<IBaseHealthCheck>
  */
 const findHCById = (
-	id: number,
-	clientId: number
-): Promise<IBaseHealthCheck> => {
+	id: HealthCheckId,
+	clientId: ClientId
+): Promise<HealthCheckDataStruct> => {
 	return HealthCheckDB.transaction("r", HealthCheckDB.healthChecks, () => {
 		return HealthCheckDB.healthChecks.where({ id, clientId }).first()
 	})

@@ -21,7 +21,7 @@ const ActionItem = ({
 	const styles = useActionItemStyles()
 
 	return (
-		<Draggable draggableId={draggableId} index={index}>
+		<Draggable draggableId={`${draggableId}`} index={index}>
 			{(provided): ReactElement => (
 				<div
 					// eslint-disable-next-line react/jsx-props-no-spreading

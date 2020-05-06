@@ -2,9 +2,9 @@ import { Dispatch } from "react"
 import {
 	ClientActionTypes,
 	IClientReducerAction,
-	IBaseClient,
 } from "../../state/client/client-outline"
 import ClientDB from "./ClientDatabase"
+import { ClientDataStruct } from "../_config/shape"
 
 /**
  * Method for adding a new client to the application
@@ -16,13 +16,13 @@ import ClientDB from "./ClientDatabase"
  */
 const addClient = async (
 	dispatch: Dispatch<IClientReducerAction>,
-	client: IBaseClient
+	client: ClientDataStruct
 ): Promise<boolean> => {
 	await ClientDB.transaction("rw", ClientDB.clients, async () => {
 		const key = await ClientDB.clients.add({
 			name: client.name,
 		})
-		const newclient: IBaseClient = {
+		const newclient: ClientDataStruct = {
 			...client,
 			id: key,
 		}

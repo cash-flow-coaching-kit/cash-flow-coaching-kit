@@ -1,4 +1,5 @@
-import { IClientState, IBaseClient } from "../../../state/client/client-outline"
+import { IClientState } from "../../../state/client/client-outline"
+import { ClientDataStruct } from "../../../data/_config/shape"
 
 /**
  * Checks if the store contains any clients
@@ -13,12 +14,12 @@ export const hasClients = ({ state: { clients } }: IClientState): boolean => {
 /**
  * Checks if the current client is selected
  *
- * @param {IBaseClient|undefined} currentClient currently selected client
+ * @param {ClientDataStruct|undefined} currentClient currently selected client
  * @param {number} id client id to compare to the current client
  * @returns {boolean}
  */
 export const isClientSelected = (
-	currentClient: IBaseClient | undefined,
+	currentClient: ClientDataStruct | undefined,
 	id = -1
 ): boolean => {
 	return (currentClient && currentClient.id === id) || false
