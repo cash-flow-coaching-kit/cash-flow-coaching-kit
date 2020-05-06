@@ -66,6 +66,44 @@ const DTPlanningBusiness = (): ReactElement => {
 						Ensure you don’t run out of money.
 					</Typography>
 				</List>
+				<Grid container spacing={3}>
+					<Grid item xs={6}>
+						<Card variant="outlined">
+							<CardHeader title="Kirra's Native Foods" />
+							<CardMedia
+								className={styles.embed}
+								component="iframe"
+								src="https://www.youtube.com/embed/LhVKOyMeFQE"
+							/>
+							<CardActions>
+								<Button
+									color="primary"
+									href="/transcripts/Kirras-Native-foods.docx"
+								>
+									Download Transcript: Kirra's Native Foods
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
+					<Grid item xs={6}>
+						<Card variant="outlined">
+							<CardHeader title="Sanjana's Restaurant" />
+							<CardMedia
+								className={styles.embed}
+								component="iframe"
+								src="https://www.youtube.com/embed/Bxj4r3Dh1EQ"
+							/>
+							<CardActions>
+								<Button
+									color="primary"
+									href="/transcripts/Sanjanas-restaurant.docx"
+								>
+									Download Transcript: Sanjana's Restaurant
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
+				</Grid>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />

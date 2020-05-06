@@ -68,6 +68,41 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						within your business.
 					</Typography>
 				</List>
+				<Grid container spacing={3}>
+					<Grid item xs={6}>
+						<Card variant="outlined">
+							<CardHeader title="Mick's Farm" />
+							<CardMedia
+								className={styles.embed}
+								component="iframe"
+								src="https://www.youtube.com/embed/FSJsiEaRNRU"
+							/>
+							<CardActions>
+								<Button color="primary" href="/transcripts/Micks-farm.docx">
+									Download Transcript: Mick's Farm
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
+					<Grid item xs={6}>
+						<Card variant="outlined">
+							<CardHeader title="Ming's Disability Services" />
+							<CardMedia
+								className={styles.embed}
+								component="iframe"
+								src="https://www.youtube.com/embed/wXe051xOIzI"
+							/>
+							<CardActions>
+								<Button
+									color="primary"
+									href="/transcripts/Mings-disability-services.docx"
+								>
+									Download Transcript: Ming's Disability Services
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
+				</Grid>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />

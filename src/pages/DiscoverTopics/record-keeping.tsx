@@ -71,6 +71,44 @@ const DTRecordKeeping = (): ReactElement => {
 						planning rather than sifting through papers.
 					</Typography>
 				</List>
+				<Grid container spacing={3}>
+					<Grid item xs={6}>
+						<Card variant="outlined">
+							<CardHeader title="Eden's Digital Records" />
+							<CardMedia
+								className={styles.embed}
+								component="iframe"
+								src="https://www.youtube.com/embed/1caO4xN-ZwA"
+							/>
+							<CardActions>
+								<Button
+									color="primary"
+									href="/transcripts/Edens-digital-records.docx"
+								>
+									Download Transcript: Eden's Digital Records
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
+					<Grid item xs={6}>
+						<Card variant="outlined">
+							<CardHeader title="Lisa's Paper Records" />
+							<CardMedia
+								className={styles.embed}
+								component="iframe"
+								src="https://www.youtube.com/embed/q9J_sRCKTn8"
+							/>
+							<CardActions>
+								<Button
+									color="primary"
+									href="/transcripts/Lisas-Paper-records.docx"
+								>
+									Download Transcript: Lisa's Paper Records
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
+				</Grid>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />

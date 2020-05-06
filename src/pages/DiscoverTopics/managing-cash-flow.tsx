@@ -62,6 +62,44 @@ const DTManagingCashFlow = (): ReactElement => {
 						parties.
 					</Typography>
 				</List>
+				<Grid container spacing={3}>
+					<Grid item xs={6}>
+						<Card variant="outlined">
+							<CardHeader title="Yulari's Cash Flow" />
+							<CardMedia
+								className={styles.embed}
+								component="iframe"
+								src="https://www.youtube.com/embed/uPDZ6O3FFaY"
+							/>
+							<CardActions>
+								<Button
+									color="primary"
+									href="/transcripts/Yularis-cash-flow.docx"
+								>
+									Download Transcript: Yulari's Cash Flow
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
+					<Grid item xs={6}>
+						<Card variant="outlined">
+							<CardHeader title="Cameron's Cash Flow" />
+							<CardMedia
+								className={styles.embed}
+								component="iframe"
+								src="https://www.youtube.com/embed/aAUWgm3-zL4"
+							/>
+							<CardActions>
+								<Button
+									color="primary"
+									href="/transcripts/Camerons-cash-flow.docx"
+								>
+									Download Transcript: Cameron's Cash Flow
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
+				</Grid>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />

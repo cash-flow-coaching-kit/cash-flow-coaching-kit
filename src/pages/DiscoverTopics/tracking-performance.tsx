@@ -66,6 +66,44 @@ const TrackingPerformance = (): ReactElement => {
 						Reach your financial and business goals.
 					</Typography>
 				</List>
+				<Grid container spacing={3}>
+					<Grid item xs={6}>
+						<Card variant="outlined">
+							<CardHeader title="Tina's Hair &amp; Beauty" />
+							<CardMedia
+								className={styles.embed}
+								component="iframe"
+								src="https://www.youtube.com/embed/VRxQ7AkxsfY"
+							/>
+							<CardActions>
+								<Button
+									color="primary"
+									href="/transcripts/Tinas-hair-and-beauty.docx"
+								>
+									Download Transcript: Tina's Hair &amp; Beauty
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
+					<Grid item xs={6}>
+						<Card variant="outlined">
+							<CardHeader title="Anders' Retirement Plan" />
+							<CardMedia
+								className={styles.embed}
+								component="iframe"
+								src="https://www.youtube.com/embed/MPNkTF-puTQ"
+							/>
+							<CardActions>
+								<Button
+									color="primary"
+									href="/transcripts/Anders-retirement-plan.docx"
+								>
+									Download Transcript: Anders' Retirement Plan
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
+				</Grid>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />

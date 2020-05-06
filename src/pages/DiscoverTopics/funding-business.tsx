@@ -68,27 +68,37 @@ const DTFundingBusiness = (): ReactElement => {
 				<Grid container spacing={3}>
 					<Grid item xs={6}>
 						<Card variant="outlined">
-							<CardHeader title="What advisors think of the kit" />
+							<CardHeader title="Tamako's Funding" />
 							<CardMedia
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/fAe_2eyAkrU"
 							/>
 							<CardActions>
-								<Button color="primary">Download Transcript</Button>
+								<Button
+									color="primary"
+									href="/transcripts/Tamakos-funding.docx"
+								>
+									Download Transcript: Tamako's Funding
+								</Button>
 							</CardActions>
 						</Card>
 					</Grid>
 					<Grid item xs={6}>
 						<Card variant="outlined">
-							<CardHeader title="What advisors think of the kit" />
+							<CardHeader title="Charlotte's Loans" />
 							<CardMedia
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/BTwVYKfGyuk"
 							/>
 							<CardActions>
-								<Button color="primary">Download Transcript</Button>
+								<Button
+									color="primary"
+									href="/transcripts/Charlottes-loans.docx"
+								>
+									Download Transcript: Charlotte's Loans
+								</Button>
 							</CardActions>
 						</Card>
 					</Grid>
