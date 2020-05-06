@@ -47,13 +47,14 @@ export type ActionChecklistReducerActions =
 	| { type: ActionChecklistActionTypes.ChangeReviewBy; payload: Date }
 	| {
 			type: ActionChecklistActionTypes.UpdateDatabaseSync
-			payload: boolean
+			payload: {
+				data: ActionChecklistStruct[]
+				priority: ActionChecklistPriorityStruct[]
+			}
 	  }
 	| {
 			type: ActionChecklistActionTypes.AddNewActionItem
-			payload: {
-				key: PossibleActionItems
-			}
+			payload: ActionChecklistStruct
 	  }
 
 /**

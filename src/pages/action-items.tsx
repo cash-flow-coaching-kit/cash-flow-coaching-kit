@@ -50,7 +50,7 @@ const ActionChecklist = (): ReactElement => {
 				const data = checklistCollection.filter(filterByActionType(item))
 				const containerPriority = priority.filter(filterByActionType(item))
 
-				if (data.length > 0) {
+				if (data.length > 0 && containerPriority.length > 0) {
 					return (
 						<ActionContainer
 							key={constructKey(key, idx)}

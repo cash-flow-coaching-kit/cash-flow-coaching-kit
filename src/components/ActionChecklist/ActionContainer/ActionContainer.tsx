@@ -21,6 +21,7 @@ import {
 	ActionChecklistStruct,
 } from "../../../data/_config/shape"
 import findObjectIndexByValue from "../../../util/array/findObjectIndexByValue"
+import ActionChecklistUseCase from "../../../data/ActionChecklist/ChecklistLogic"
 
 /**
  * A single Action items wrapper
@@ -73,12 +74,23 @@ const ActionContainer = ({
 	 * @param {MouseEvent<HTMLButtonElement>} e
 	 * @returns void
 	 */
-	const addNewAction = (e: MouseEvent<HTMLButtonElement>): void => {
+	const addNewAction = async (
+		e: MouseEvent<HTMLButtonElement>
+	): Promise<void> => {
 		e.preventDefault()
+		const newActionItem: ActionChecklistStruct = {
+			completed: false,
+			actionContainer: identfier,
+			description: "",
+			// TODO: Fix
+			clientId: 12,
+		}
+		const dbKey = await ActionChecklistUseCase.create(newActionItem)
 		dispatch({
 			type: ActionChecklistActionTypes.AddNewActionItem,
 			payload: {
-				key: identfier,
+				id: dbKey,
+				...newActionItem,
 			},
 		})
 	}

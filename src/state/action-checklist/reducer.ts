@@ -4,6 +4,7 @@ import {
 	ActionChecklistReducerActions,
 	ActionChecklistActionTypes,
 } from "./shape"
+import findObjectIndexByValue from "../../util/array/findObjectIndexByValue"
 
 /**
  * Reducer method for the Action Checklist context
@@ -34,6 +35,33 @@ const ActionChecklistReducer: Reducer<
 			return {
 				...state,
 				reviewBy: payload,
+			}
+		}
+		case ActionChecklistActionTypes.UpdateDatabaseSync: {
+			console.log("Complete db sync")
+
+			return {
+				...state,
+				databaseSyced: true,
+				checklistCollection: action.payload.data,
+				priority: action.payload.priority,
+			}
+		}
+		case ActionChecklistActionTypes.AddNewActionItem: {
+			const { payload } = action
+
+			const copyPriority = [...state.priority]
+			const idx = findObjectIndexByValue(
+				copyPriority,
+				"actionContainer",
+				payload.actionContainer
+			)
+			copyPriority[idx].order.push(payload.id || -1)
+
+			return {
+				...state,
+				checklistCollection: [...state.checklistCollection, payload],
+				priority: [...copyPriority],
 			}
 		}
 		default: {
