@@ -6,6 +6,7 @@ import {
 import {
 	ActionChecklistStruct,
 	ActionChecklistPriorityStruct,
+	ActionChecklistId,
 } from "../../../../data/_config/shape"
 
 /**
@@ -31,6 +32,8 @@ export interface IActionItemProps {
 	draggableId: number
 	data: ActionChecklistStruct
 	dispatch: Dispatch<ActionChecklistReducerActions>
+	deleteAction(id: ActionChecklistId): void
+	lastItemInList: boolean
 }
 
 /**

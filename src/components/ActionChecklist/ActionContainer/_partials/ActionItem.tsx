@@ -1,4 +1,10 @@
-import React, { ReactElement, ChangeEvent, FocusEvent, useState } from "react"
+import React, {
+	ReactElement,
+	ChangeEvent,
+	FocusEvent,
+	useState,
+	MouseEvent,
+} from "react"
 import {
 	Grid,
 	Checkbox,
@@ -20,17 +26,21 @@ import { useActionItemStyles } from "../_config/styles"
 import { IActionItemProps } from "../_config/shape"
 import { ActionChecklistActionTypes } from "../../../../state/action-checklist/shape"
 import { BaseActionChecklistStruct } from "../../../../data/_config/shape"
+import ConfirmDialogue from "../../../ConfirmDialogue"
 
 const ActionItem = ({
 	index,
 	draggableId,
 	data,
 	dispatch,
+	deleteAction,
+	lastItemInList,
 }: IActionItemProps): ReactElement => {
 	const styles = useActionItemStyles()
 	const [cacheDescription, setCacheDescription] = useState<string>(
 		data.description
 	)
+	const [dialogueOpen, setDialogueOpen] = useState<boolean>(false)
 
 	const triggerDispatch = (newData: BaseActionChecklistStruct): void => {
 		if (data?.id) {
@@ -42,6 +52,25 @@ const ActionItem = ({
 				},
 			})
 		}
+	}
+
+	const onDialogueClose = (): void => {
+		setDialogueOpen(false)
+	}
+
+	const onDialogueConfirm = (): void => {
+		if (!lastItemInList) {
+			deleteAction(data.id || -1)
+		} else {
+			setCacheDescription("")
+			triggerDispatch({
+				...data,
+				description: "",
+				completed: false,
+				reviewBy: new Date(),
+			})
+		}
+		setDialogueOpen(false)
 	}
 
 	const onDescriptionChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -83,6 +112,11 @@ const ActionItem = ({
 		})
 	}
 
+	const handleDelete = (e: MouseEvent<HTMLButtonElement>): void => {
+		e.preventDefault()
+		setDialogueOpen(true)
+	}
+
 	return (
 		<Draggable draggableId={`${draggableId}`} index={index}>
 			{(provided): ReactElement => (
@@ -96,7 +130,6 @@ const ActionItem = ({
 						<Grid item xs={1}>
 							<Tooltip title="Mark as done">
 								<Checkbox
-									// TODO: Update state and db on change
 									checked={data.completed}
 									inputProps={{ "aria-label": "completed checkbox" }}
 									id={`action-complete--${data?.id}`}
@@ -151,10 +184,18 @@ const ActionItem = ({
 						</Grid>
 						<Grid item xs={2} className={styles.actions}>
 							<Tooltip title="Delete">
-								<IconButton>
+								<IconButton onClick={handleDelete}>
 									<DeleteIcon />
 								</IconButton>
 							</Tooltip>
+							<ConfirmDialogue
+								open={dialogueOpen}
+								onClose={onDialogueClose}
+								onCancel={onDialogueClose}
+								onConfirm={onDialogueConfirm}
+							>
+								Are you sure you want to remove this item?
+							</ConfirmDialogue>
 							<Tooltip title="Reposition">
 								<IconButton
 									className={styles.dragIcon}

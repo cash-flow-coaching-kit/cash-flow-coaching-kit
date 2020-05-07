@@ -31,11 +31,11 @@ export type PossibleActionItems =
  */
 export enum ActionChecklistActionTypes {
 	ChangeHideCompleted = "change_hide_completed",
-	ChangeReviewBy = "change_review_by",
 	UpdateDatabaseSync = "change_database_sync",
 	AddNewActionItem = "add_new_action_item",
 	UpdateActionItem = "update_action_item",
 	UpdatePriorityOrder = "update_priority_order",
+	RemoveActionItem = "remove_action_item",
 }
 
 /**
@@ -48,7 +48,6 @@ export enum ActionChecklistActionTypes {
  */
 export type ActionChecklistReducerActions =
 	| { type: ActionChecklistActionTypes.ChangeHideCompleted; payload: boolean }
-	| { type: ActionChecklistActionTypes.ChangeReviewBy; payload: Date }
 	| {
 			type: ActionChecklistActionTypes.UpdateDatabaseSync
 			payload: {
@@ -71,6 +70,13 @@ export type ActionChecklistReducerActions =
 			type: ActionChecklistActionTypes.UpdatePriorityOrder
 			payload: ActionChecklistPriorityStruct
 	  }
+	| {
+			type: ActionChecklistActionTypes.RemoveActionItem
+			payload: {
+				targetId: ActionChecklistId
+				container: PossibleActionItems
+			}
+	  }
 
 /**
  * Structure for the action checklist context
@@ -80,7 +86,6 @@ export type ActionChecklistReducerActions =
  */
 export interface IActionChecklistState {
 	hideCompleted: boolean
-	reviewBy: Date
 	databaseSyced: boolean
 	priority: ActionChecklistPriorityStruct[]
 	checklistCollection: ActionChecklistStruct[]

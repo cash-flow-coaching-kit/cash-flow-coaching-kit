@@ -139,6 +139,19 @@ const ActionContainer = ({
 		}
 	}
 
+	const deleteAction = async (id: ActionChecklistId): Promise<void> => {
+		// remove the checklist item from the db
+		await ActionChecklistUseCase.delete(id)
+		// remove the checklist item from state and priority order
+		dispatch({
+			type: ActionChecklistActionTypes.RemoveActionItem,
+			payload: {
+				targetId: id,
+				container: identfier,
+			},
+		})
+	}
+
 	/**
 	 * Checks if the latest item has content before
 	 * letting a user add more actions
@@ -147,6 +160,13 @@ const ActionContainer = ({
 	 */
 	const preventAddingNew = (): boolean => {
 		return lastInArray(data).description === ""
+	}
+
+	const lastItemInList = (): boolean => {
+		return (
+			data.length === 1 &&
+			(identfier === "cashInActions" || identfier === "cashOutActions")
+		)
 	}
 
 	const mapThroughPriorityOrder = (
@@ -166,6 +186,8 @@ const ActionContainer = ({
 					index={idx}
 					data={checklistItem}
 					dispatch={dispatch}
+					deleteAction={deleteAction}
+					lastItemInList={lastItemInList()}
 				/>
 			)
 		}

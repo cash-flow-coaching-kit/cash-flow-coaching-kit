@@ -27,12 +27,6 @@ const ActionChecklistReducer: Reducer<
 				hideCompleted: action.payload,
 			}
 		}
-		case ActionChecklistActionTypes.ChangeReviewBy: {
-			return {
-				...state,
-				reviewBy: action.payload,
-			}
-		}
 		case ActionChecklistActionTypes.UpdateDatabaseSync: {
 			return {
 				...state,
@@ -89,6 +83,25 @@ const ActionChecklistReducer: Reducer<
 			return {
 				...state,
 				priority: [...stateCopy],
+			}
+		}
+		case ActionChecklistActionTypes.RemoveActionItem: {
+			const { targetId, container } = action.payload
+			const stateCopy = { ...state }
+			stateCopy.checklistCollection = stateCopy.checklistCollection.filter(
+				(item) => item.id !== targetId
+			)
+			const priorityIndex = findObjectIndexByValue(
+				stateCopy.priority,
+				"actionContainer",
+				container
+			)
+			stateCopy.priority[priorityIndex].order = stateCopy.priority[
+				priorityIndex
+			].order.filter((item) => item !== targetId)
+
+			return {
+				...stateCopy,
 			}
 		}
 		default: {
