@@ -1,23 +1,7 @@
 import React, { ReactElement } from "react"
-import {
-	Typography,
-	Grid,
-	List,
-	Card,
-	CardHeader,
-	CardActions,
-	CardMedia,
-	Container,
-	Button,
-	ExpansionPanel,
-	ExpansionPanelSummary,
-	ExpansionPanelDetails,
-} from "@material-ui/core"
-import SectionTitle from "../../components/SectionTitle"
+import { Typography } from "@material-ui/core"
 import { PrivatePage, PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 import useDTStyles from "./_config/styles"
 
 const DTSellingClosingSuccession = (): ReactElement => {
