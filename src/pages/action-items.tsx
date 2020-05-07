@@ -56,7 +56,7 @@ const ActionChecklist = (): ReactElement => {
 							key={constructKey(key, idx)}
 							identfier={item}
 							data={data}
-							priority={containerPriority[0] || []}
+							priority={containerPriority[0]}
 						/>
 					)
 				}

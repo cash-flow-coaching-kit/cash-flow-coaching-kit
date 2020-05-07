@@ -128,6 +128,7 @@ export interface BaseActionChecklistStruct {
 	completed: boolean
 	description: string
 	actionContainer: PossibleActionItems
+	reviewBy: Date
 }
 
 /**

@@ -61,6 +61,13 @@ class ActionChecklistDatabase extends Dexie {
 			actionItems: "++id, clientId, actionContainer, completed, description",
 			priority: "++id, actionContainer, *order",
 		})
+
+		// Version 1.1
+		this.version(1.1).stores({
+			actionItems:
+				"++id, clientId, actionContainer, completed, description, reviewBy",
+			priority: "++id, actionContainer, *order",
+		})
 	}
 }
 

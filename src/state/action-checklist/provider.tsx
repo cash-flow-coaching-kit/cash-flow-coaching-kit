@@ -44,6 +44,7 @@ const createChecklistIfNeeded = async (
 			completed: false,
 			description: "",
 			actionContainer: action,
+			reviewBy: new Date(),
 		}
 
 		const id = await ActionChecklistUseCase.create(newItem)

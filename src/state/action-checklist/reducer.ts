@@ -22,19 +22,15 @@ const ActionChecklistReducer: Reducer<
 ): IActionChecklistState => {
 	switch (action.type) {
 		case ActionChecklistActionTypes.ChangeHideCompleted: {
-			const { payload } = action
-
 			return {
 				...state,
-				hideCompleted: payload,
+				hideCompleted: action.payload,
 			}
 		}
 		case ActionChecklistActionTypes.ChangeReviewBy: {
-			const { payload } = action
-
 			return {
 				...state,
-				reviewBy: payload,
+				reviewBy: action.payload,
 			}
 		}
 		case ActionChecklistActionTypes.UpdateDatabaseSync: {
@@ -54,12 +50,45 @@ const ActionChecklistReducer: Reducer<
 				"actionContainer",
 				payload.actionContainer
 			)
-			copyPriority[idx].order.push(payload.id || -1)
+
+			if (payload?.id) {
+				copyPriority[idx].order.push(payload.id)
+			}
 
 			return {
 				...state,
 				checklistCollection: [...state.checklistCollection, payload],
 				priority: [...copyPriority],
+			}
+		}
+		case ActionChecklistActionTypes.UpdateActionItem: {
+			const {
+				payload: { data, id },
+			} = action
+			const index = findObjectIndexByValue(state.checklistCollection, "id", id)
+			const stateCopy = [...state.checklistCollection]
+			stateCopy[index] = {
+				...stateCopy[index],
+				...data,
+			}
+
+			return {
+				...state,
+				checklistCollection: [...stateCopy],
+			}
+		}
+		case ActionChecklistActionTypes.UpdatePriorityOrder: {
+			const { payload } = action
+			const stateCopy = [...state.priority]
+			const index = findObjectIndexByValue(stateCopy, "id", payload.id)
+			stateCopy[index] = {
+				...stateCopy[index],
+				...payload,
+			}
+
+			return {
+				...state,
+				priority: [...stateCopy],
 			}
 		}
 		default: {

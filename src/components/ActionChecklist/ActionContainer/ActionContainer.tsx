@@ -4,9 +4,11 @@ import React, {
 	useContext,
 	useState,
 	Fragment,
+	useEffect,
 } from "react"
 import { Box } from "@material-ui/core"
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
+import { isEqual } from "lodash-es"
 import ExpandableNav from "../../ExpandableNav"
 import { IActionContainerProps } from "./_config/shape"
 import { useActionContainerStyles } from "./_config/styles"
@@ -22,6 +24,9 @@ import {
 } from "../../../data/_config/shape"
 import findObjectIndexByValue from "../../../util/array/findObjectIndexByValue"
 import ActionChecklistUseCase from "../../../data/ActionChecklist/ChecklistLogic"
+import { ClientContext } from "../../../state/client"
+import ActionPriorityUseCase from "../../../data/ActionChecklist/PriorityLogic"
+import arraySwap from "../../../util/array/arraySwap"
 
 /**
  * A single Action items wrapper
@@ -37,7 +42,31 @@ const ActionContainer = ({
 }: IActionContainerProps): ReactElement => {
 	const styles = useActionContainerStyles()
 	const { dispatch } = useContext(ActionChecklistContext)
+	const {
+		state: { currentClient },
+	} = useContext(ClientContext)
 	const [key] = useState(generateKey())
+	const [saving, setSaving] = useState<boolean>(false)
+	const [lastSaved, setLastSaved] = useState<Date>(new Date())
+
+	useEffect(() => {
+		const id = setInterval(async () => {
+			const DB = await ActionChecklistUseCase.findByContainer(identfier)
+			const PRIOR = await ActionPriorityUseCase.findByContainer(identfier)
+
+			if (!isEqual(DB, data) || !isEqual(PRIOR[0], priority)) {
+				setSaving(true)
+				await ActionChecklistUseCase.bulkUpdate(data)
+				if (priority?.id) {
+					await ActionPriorityUseCase.update(priority.id, priority)
+				}
+				setLastSaved(new Date())
+				setSaving(false)
+			}
+		}, 1500)
+
+		return (): void => clearInterval(id)
+	}, [data, identfier])
 
 	/**
 	 * Event that triggers once a item is dropped
@@ -46,26 +75,29 @@ const ActionContainer = ({
 	 * @returns void
 	 */
 	const onDragEnd = (results: DropResult): void => {
-		// TODO: Implement with a reducer action
-		// const { destination, source, draggableId } = results
-		// if (!destination) {
-		// 	return
-		// }
-		// if (
-		// 	destination.droppableId === source.droppableId &&
-		// 	destination.index === source.index
-		// ) {
-		// 	return
-		// }
-		// setData({
-		// 	...data,
-		// 	order: arraySwap<string>(
-		// 		data.order,
-		// 		source.index,
-		// 		destination.index,
-		// 		draggableId
-		// 	),
-		// })
+		const { destination, source, draggableId } = results
+		if (!destination) {
+			return
+		}
+		if (
+			destination.droppableId === source.droppableId &&
+			destination.index === source.index
+		) {
+			return
+		}
+
+		const priorityCopy = { ...priority }
+		priorityCopy.order = arraySwap<number>(
+			priorityCopy.order,
+			source.index,
+			destination.index,
+			parseInt(draggableId, 10)
+		)
+
+		dispatch({
+			type: ActionChecklistActionTypes.UpdatePriorityOrder,
+			payload: priorityCopy,
+		})
 	}
 
 	/**
@@ -78,21 +110,33 @@ const ActionContainer = ({
 		e: MouseEvent<HTMLButtonElement>
 	): Promise<void> => {
 		e.preventDefault()
-		const newActionItem: ActionChecklistStruct = {
-			completed: false,
-			actionContainer: identfier,
-			description: "",
-			// TODO: Fix
-			clientId: 12,
+		if (currentClient?.id && priority.id) {
+			// TODO: Pull into utilitiy -> ActionChecklistId
+			const newActionItem: ActionChecklistStruct = {
+				completed: false,
+				actionContainer: identfier,
+				description: "",
+				clientId: currentClient.id,
+				reviewBy: new Date(),
+			}
+			// Adds checklist item to db
+			const dbKey = await ActionChecklistUseCase.create(newActionItem)
+			// Updates db item with order
+			await ActionPriorityUseCase.update(priority.id, {
+				...priority,
+				order: [...priority.order, dbKey],
+			})
+
+			// Dispatch the state change
+			dispatch({
+				type: ActionChecklistActionTypes.AddNewActionItem,
+				payload: {
+					id: dbKey,
+					...newActionItem,
+				},
+			})
+			// TODO: End utility
 		}
-		const dbKey = await ActionChecklistUseCase.create(newActionItem)
-		dispatch({
-			type: ActionChecklistActionTypes.AddNewActionItem,
-			payload: {
-				id: dbKey,
-				...newActionItem,
-			},
-		})
 	}
 
 	/**
@@ -114,14 +158,18 @@ const ActionContainer = ({
 		if (index === -1) return <Fragment key={constructKey(key, idx)} />
 
 		const checklistItem: ActionChecklistStruct = data[index]
-		return (
-			<ActionItem
-				key={constructKey(key, idx)}
-				draggableId={checklistItem?.id || -1}
-				index={idx}
-				data={checklistItem}
-			/>
-		)
+		if (checklistItem?.id) {
+			return (
+				<ActionItem
+					key={constructKey(key, checklistItem?.id)}
+					draggableId={checklistItem?.id}
+					index={idx}
+					data={checklistItem}
+					dispatch={dispatch}
+				/>
+			)
+		}
+		return <Fragment key={constructKey(key, idx)} />
 	}
 
 	return (
@@ -140,7 +188,12 @@ const ActionContainer = ({
 							</div>
 						)}
 					</Droppable>
-					<Actions addNewAction={addNewAction} disabled={preventAddingNew()} />
+					<Actions
+						addNewAction={addNewAction}
+						disabled={preventAddingNew()}
+						saving={saving}
+						lastSaved={lastSaved}
+					/>
 				</Box>
 			</DragDropContext>
 		</ExpandableNav>

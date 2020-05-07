@@ -2,6 +2,8 @@ import { Dispatch } from "react"
 import {
 	ActionChecklistPriorityStruct,
 	ActionChecklistStruct,
+	BaseActionChecklistStruct,
+	ActionChecklistId,
 } from "../../data/_config/shape"
 
 /**
@@ -32,6 +34,8 @@ export enum ActionChecklistActionTypes {
 	ChangeReviewBy = "change_review_by",
 	UpdateDatabaseSync = "change_database_sync",
 	AddNewActionItem = "add_new_action_item",
+	UpdateActionItem = "update_action_item",
+	UpdatePriorityOrder = "update_priority_order",
 }
 
 /**
@@ -55,6 +59,17 @@ export type ActionChecklistReducerActions =
 	| {
 			type: ActionChecklistActionTypes.AddNewActionItem
 			payload: ActionChecklistStruct
+	  }
+	| {
+			type: ActionChecklistActionTypes.UpdateActionItem
+			payload: {
+				data: BaseActionChecklistStruct
+				id: ActionChecklistId
+			}
+	  }
+	| {
+			type: ActionChecklistActionTypes.UpdatePriorityOrder
+			payload: ActionChecklistPriorityStruct
 	  }
 
 /**
