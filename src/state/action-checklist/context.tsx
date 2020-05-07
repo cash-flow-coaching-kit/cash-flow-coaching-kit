@@ -5,7 +5,6 @@ import { IActionChecklistState } from "./shape"
 export const defaultActionChecklistState: IActionChecklistState = {
 	dispatch: () => null,
 	hideCompleted: false,
-	reviewBy: new Date(),
 	databaseSyced: false,
 	priority: [],
 	checklistCollection: [],
