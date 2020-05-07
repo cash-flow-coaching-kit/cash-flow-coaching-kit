@@ -23,6 +23,14 @@ class HealthCheckLogic extends ILogicLayer<
 			return this.table.where({ id, clientId }).first()
 		})
 	}
+
+	public findClientHealthChecks(
+		clientId: ClientId
+	): Promise<HealthCheckDataStruct[]> {
+		return this.database.transaction("r", this.table, () => {
+			return this.table.where("clientId").equals(clientId).toArray()
+		})
+	}
 }
 
 const HealthCheckUseCase = new HealthCheckLogic()
