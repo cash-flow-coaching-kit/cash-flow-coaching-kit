@@ -1,5 +1,8 @@
-import { MouseEvent } from "react"
-import { PossibleActionItems } from "../../../../state/action-checklist/shape"
+import { MouseEvent, Dispatch } from "react"
+import {
+	PossibleActionItems,
+	ActionChecklistReducerActions,
+} from "../../../../state/action-checklist/shape"
 import {
 	ActionChecklistStruct,
 	ActionChecklistPriorityStruct,
@@ -27,6 +30,7 @@ export interface IActionItemProps {
 	index: number
 	draggableId: number
 	data: ActionChecklistStruct
+	dispatch: Dispatch<ActionChecklistReducerActions>
 }
 
 /**
@@ -38,4 +42,6 @@ export interface IActionItemProps {
 export interface IActionsProps {
 	addNewAction(e: MouseEvent<HTMLButtonElement>): void
 	disabled: boolean
+	saving: boolean
+	lastSaved: Date
 }

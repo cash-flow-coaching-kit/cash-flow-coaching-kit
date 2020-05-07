@@ -14,6 +14,11 @@ export const useActionsStyles = makeStyles((theme) => ({
 		display: "flex",
 		justifyContent: "flex-start",
 		marginTop: theme.spacing(3),
+		alignItems: "center",
+	},
+	saveIndicator: {
+		marginLeft: theme.spacing(2),
+		userSelect: "none",
 	},
 }))
 
@@ -43,5 +48,8 @@ export const useActionItemStyles = makeStyles((theme) => ({
 		padding: "18.5px 14px",
 		lineHeight: "1.1876em",
 		textDecoration: "line-through",
+	},
+	datepicker: {
+		margin: 0,
 	},
 }))

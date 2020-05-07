@@ -1,10 +1,16 @@
 import React, { ReactElement } from "react"
 import AddIcon from "@material-ui/icons/Add"
-import { Box, Button } from "@material-ui/core"
+import { Box, Button, Typography } from "@material-ui/core"
+import { format } from "date-fns"
 import { useActionsStyles } from "../_config/styles"
 import { IActionsProps } from "../_config/shape"
 
-const Actions = ({ addNewAction, disabled }: IActionsProps): ReactElement => {
+const Actions = ({
+	addNewAction,
+	disabled,
+	saving,
+	lastSaved,
+}: IActionsProps): ReactElement => {
 	const styles = useActionsStyles()
 
 	return (
@@ -18,6 +24,13 @@ const Actions = ({ addNewAction, disabled }: IActionsProps): ReactElement => {
 			>
 				Add action
 			</Button>
+			<Typography
+				variant="overline"
+				color="textSecondary"
+				className={styles.saveIndicator}
+			>
+				{saving ? "Saving..." : `Saved at ${format(lastSaved, "H:mm:ss a")}`}
+			</Typography>
 		</Box>
 	)
 }
