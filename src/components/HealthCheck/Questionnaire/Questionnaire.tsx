@@ -52,7 +52,11 @@ const Questionnaire = ({
 			setAnswers(previousAnswers)
 			setQuestionCount(0)
 		}
+		// eslint-disable-next-line
 	}, [previousAnswers])
+	// Adding answers as a dependency will cause the quiz to
+	// not work as it resets it constantly
+	// TODO: See if there is a better way to do this
 
 	/**
 	 * Changes the selected answer for the current question

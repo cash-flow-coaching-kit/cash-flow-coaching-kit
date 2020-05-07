@@ -7,7 +7,6 @@ import { NewClientDialog } from "../../content/dialog"
 import { useCLStyles } from "./_config/styles"
 import { NoClients, ClientList, ImportClient } from "./_partials"
 import { IClientState } from "../../state/client/client-outline"
-import { hasClients } from "./_config/utilities"
 import ClientListingMachine from "./_config/machine"
 import Loading from "../Loading"
 import SectionTitle from "../SectionTitle"
@@ -20,19 +19,22 @@ import SectionTitle from "../SectionTitle"
  */
 const ClientListing = (): ReactElement => {
 	const clientStore: IClientState = useContext(ClientContext)
+	const {
+		state: { clientSynced, clients },
+	} = clientStore
 	const [state, send] = useMachine(ClientListingMachine)
 	const styles = useCLStyles()
 
 	// Change the state of the component once clients are synced
 	useEffect(() => {
-		if (clientStore.state.clientSynced) {
-			if (hasClients(clientStore)) {
+		if (clientSynced) {
+			if (clients.length > 0) {
 				send("HAS_DATA")
 			} else {
 				send("IS_EMPTY")
 			}
 		}
-	}, [clientStore.state.clientSynced])
+	}, [clientSynced, clients, send])
 
 	/**
 	 * Renders components based on the component state

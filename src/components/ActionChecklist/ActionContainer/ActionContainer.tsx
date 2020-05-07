@@ -66,7 +66,7 @@ const ActionContainer = ({
 		}, 1500)
 
 		return (): void => clearInterval(id)
-	}, [data, identfier])
+	}, [data, identfier, priority])
 
 	/**
 	 * Event that triggers once a item is dropped
