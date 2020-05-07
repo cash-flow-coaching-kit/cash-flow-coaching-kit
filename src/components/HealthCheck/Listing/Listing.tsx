@@ -85,6 +85,9 @@ const Listing = (): ReactElement => {
 				const quizToRemove = findObjectIndexByValue(clientQuizzes, "id", id)
 				const copy = [...clientQuizzes]
 				copy.splice(quizToRemove, 1)
+				if (copy.length === 0) {
+					send("IS_EMPTY")
+				}
 				setClientQuizzess([...copy])
 			}
 		} catch (e) {

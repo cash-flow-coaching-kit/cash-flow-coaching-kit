@@ -38,6 +38,10 @@ export const HCListingMachine = Machine<
 			},
 		},
 		empty: {},
-		hasItems: {},
+		hasItems: {
+			on: {
+				IS_EMPTY: "empty",
+			},
+		},
 	},
 })
