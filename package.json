@@ -40,7 +40,7 @@
 		"react-start": "BROWSER=none react-scripts start",
 		"pack": "build --dir",
 		"dist": "npm run build && build",
-		"postinstall": "electron-builder install-app-deps && git config include.path '../.gitalias'"
+		"postinstall": "electron-builder install-app-deps"
 	},
 	"browserslist": {
 		"production": [
