@@ -28,17 +28,29 @@ import {
 import findObjectIndexByValue from "../../util/array/findObjectIndexByValue"
 import { ClientContext } from "../client"
 
+type SyncResponse = [ActionChecklistStruct[], ActionChecklistPriorityStruct[]]
+
+/**
+ * Checks if a container has data and adds it into a db,
+ * if required
+ *
+ * @param {ActionChecklistStruct[]} curData
+ * @param {ActionChecklistPriorityStruct[]} curPriority
+ * @param {PossibleActionItems} action
+ * @param {ClientId} clientId
+ * @returns Promise<SyncResponse>
+ */
 const createChecklistIfNeeded = async (
 	curData: ActionChecklistStruct[],
 	curPriority: ActionChecklistPriorityStruct[],
 	action: PossibleActionItems,
 	clientId: ClientId
-): Promise<[ActionChecklistStruct[], ActionChecklistPriorityStruct[]]> => {
-	const data = [...curData]
-	const priority = [...curPriority]
-	const find = findObjectIndexByValue(data, "actionContainer", action)
+): Promise<SyncResponse> => {
+	const find = findObjectIndexByValue(curData, "actionContainer", action)
 
 	if (find === -1) {
+		const data = [...curData]
+		const priority = [...curPriority]
 		const newItem: ActionChecklistStruct = {
 			clientId,
 			completed: false,
@@ -58,23 +70,30 @@ const createChecklistIfNeeded = async (
 
 		priority.push({ ...newPriority, id: priorityId })
 		data.push({ ...newItem, id })
+
+		return [data, priority]
 	}
 
-	return [data, priority]
+	return [curData, curPriority]
 }
 
+/**
+ * Complete the database sync. This will check if there
+ * are any items in cash IN/OUT actions and if there isn't,
+ * then create and update the state
+ *
+ * @param {Dispatch<ActionChecklistReducerActions>} dispatch
+ * @param {ClientId} clientId
+ * @returns Promise<void>
+ */
 const completeSyncing = (
 	dispatch: Dispatch<ActionChecklistReducerActions>,
 	clientId: ClientId
-) => async (
-	response: [ActionChecklistStruct[], ActionChecklistPriorityStruct[]]
-): Promise<void> => {
+) => async (response: SyncResponse): Promise<void> => {
 	const [data, priority] = response
-	const newData = [...data]
-	const newPriority = [...priority]
 	const CIA = await createChecklistIfNeeded(
-		newData,
-		newPriority,
+		data,
+		priority,
 		"cashInActions",
 		clientId
 	)
@@ -116,7 +135,8 @@ const ActionChecklistProvider = (props: {
 
 	useEffect(() => {
 		if (currentClient && currentClient.id) {
-			console.log("AAAAND sync")
+			// Get all checklist and priority items and
+			// then complete the sync with that data
 			Promise.all([
 				ActionChecklistUseCase.syncWithDatabase(),
 				ActionPriorityUseCase.syncWithDatabase(),

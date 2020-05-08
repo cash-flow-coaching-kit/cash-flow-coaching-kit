@@ -7,14 +7,33 @@ import ILogicLayer from "../_config/logicLayer"
 import { PossibleActionItems } from "../../state/action-checklist/shape"
 import { findByContainer } from "./_config/utilities"
 
+/**
+ * Logic implementation for priority items for the
+ * Action Checklist databasea
+ *
+ * @class ActionChecklistPriorityLogic
+ * @extends {ILogicLayer<ActionChecklistPriorityStruct, BaseActionChecklistPriorityStruct>}
+ */
 class ActionChecklistPriorityLogic extends ILogicLayer<
 	ActionChecklistPriorityStruct,
 	BaseActionChecklistPriorityStruct
 > {
+	/**
+	 * Creates an instance of ActionChecklistPriorityLogic.
+	 *
+	 * @memberof ActionChecklistPriorityLogic
+	 */
 	constructor() {
 		super(ActionChecklistDB, ActionChecklistDB.priority)
 	}
 
+	/**
+	 * Finds all action items by a container
+	 *
+	 * @param {PossibleActionItems} container
+	 * @returns {Promise<ActionChecklistPriorityStruct[]>}
+	 * @memberof ActionChecklistPriorityLogic
+	 */
 	findByContainer(
 		container: PossibleActionItems
 	): Promise<ActionChecklistPriorityStruct[]> {
@@ -22,6 +41,7 @@ class ActionChecklistPriorityLogic extends ILogicLayer<
 	}
 }
 
+// Creates a instance of the logic class and exports the instance
 const ActionPriorityUseCase = new ActionChecklistPriorityLogic()
 
 export default ActionPriorityUseCase

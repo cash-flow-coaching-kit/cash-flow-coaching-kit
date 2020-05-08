@@ -5,6 +5,13 @@ import { format } from "date-fns"
 import { useActionsStyles } from "../_config/styles"
 import { IActionsProps } from "../_config/shape"
 
+/**
+ * Component to display all the actions for a
+ * action container
+ *
+ * @param {IActionsProps} props
+ * @returns ReactElement
+ */
 const Actions = ({
 	addNewAction,
 	disabled,

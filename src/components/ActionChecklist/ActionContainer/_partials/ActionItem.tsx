@@ -28,6 +28,12 @@ import { ActionChecklistActionTypes } from "../../../../state/action-checklist/s
 import { BaseActionChecklistStruct } from "../../../../data/_config/shape"
 import ConfirmDialogue from "../../../ConfirmDialogue"
 
+/**
+ * Component used to render a single action item
+ *
+ * @param {IActionItemProps} props
+ * @returns ReactElement
+ */
 const ActionItem = ({
 	index,
 	draggableId,
@@ -42,6 +48,12 @@ const ActionItem = ({
 	)
 	const [dialogueOpen, setDialogueOpen] = useState<boolean>(false)
 
+	/**
+	 * Triggers a update action to change the state
+	 *
+	 * @param {BaseActionChecklistStruct} newData Updated data
+	 * @returns void
+	 */
 	const triggerDispatch = (newData: BaseActionChecklistStruct): void => {
 		if (data?.id) {
 			dispatch({
@@ -54,14 +66,26 @@ const ActionItem = ({
 		}
 	}
 
+	/**
+	 * Closes the confirmation dialogue
+	 *
+	 * @returns void
+	 */
 	const onDialogueClose = (): void => {
 		setDialogueOpen(false)
 	}
 
+	/**
+	 * Triggers the delete method if the dialogue is confirmed
+	 *
+	 * @returns void
+	 */
 	const onDialogueConfirm = (): void => {
 		if (!lastItemInList) {
+			// Deletes the item from the db & state
 			deleteAction(data.id || -1)
 		} else {
+			// Reset the last item
 			setCacheDescription("")
 			triggerDispatch({
 				...data,
@@ -73,10 +97,23 @@ const ActionItem = ({
 		setDialogueOpen(false)
 	}
 
+	/**
+	 * Changes the state for the description value
+	 *
+	 * @param {ChangeEvent<HTMLInputElement>} e
+	 */
 	const onDescriptionChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		setCacheDescription(e.target.value)
 	}
 
+	/**
+	 * When focusing OFF the description field,
+	 * update the state. This prevents a delay in input
+	 *
+	 * @async
+	 * @param {FocusEvent<HTMLInputElement>} e
+	 * @returns Promise<void>
+	 */
 	const onDescriptionBlur = async (
 		e: FocusEvent<HTMLInputElement>
 	): Promise<void> => {
@@ -103,8 +140,19 @@ const ActionItem = ({
 		}
 	}
 
+	/**
+	 * Check to see if item can be completed
+	 *
+	 * @returns boolean
+	 */
 	const canComplete = (): boolean => cacheDescription !== ""
 
+	/**
+	 * Handles the change event when completing a action
+	 *
+	 * @param {ChangeEvent<HTMLInputElement>} e
+	 * @returns void
+	 */
 	const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		triggerDispatch({
 			...data,
@@ -112,6 +160,13 @@ const ActionItem = ({
 		})
 	}
 
+	/**
+	 * Method to handle the action triggered when clicking
+	 * on the delete icon
+	 *
+	 * @param {MouseEvent<HTMLButtonElement>} e
+	 * @returns void
+	 */
 	const handleDelete = (e: MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault()
 		setDialogueOpen(true)
@@ -177,7 +232,6 @@ const ActionItem = ({
 											"aria-label": "change date",
 										}}
 										className={styles.datepicker}
-										disablePast
 									/>
 								</MuiPickersUtilsProvider>
 							)}

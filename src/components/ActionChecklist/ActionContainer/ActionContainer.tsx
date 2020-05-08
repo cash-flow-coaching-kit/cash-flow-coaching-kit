@@ -50,11 +50,15 @@ const ActionContainer = ({
 	const [lastSaved, setLastSaved] = useState<Date>(new Date())
 
 	useEffect(() => {
+		// Run every 1.5s
 		const id = setInterval(async () => {
+			// Get the database data for this container
 			const DB = await ActionChecklistUseCase.findByContainer(identfier)
 			const PRIOR = await ActionPriorityUseCase.findByContainer(identfier)
 
+			// If it is out of sync with the state
 			if (!isEqual(DB, data) || !isEqual(PRIOR[0], priority)) {
+				// Bulk update the database to insync with the state
 				setSaving(true)
 				await ActionChecklistUseCase.bulkUpdate(data)
 				if (priority?.id) {
@@ -139,6 +143,13 @@ const ActionContainer = ({
 		}
 	}
 
+	/**
+	 * Deletes a action from the db and state
+	 *
+	 * @async
+	 * @param {ActionChecklistId} id ID of the checklist to delete
+	 * @returns Promise<void>
+	 */
 	const deleteAction = async (id: ActionChecklistId): Promise<void> => {
 		// remove the checklist item from the db
 		await ActionChecklistUseCase.delete(id)
@@ -162,6 +173,11 @@ const ActionContainer = ({
 		return lastInArray(data).description === ""
 	}
 
+	/**
+	 * Checks if the item is the last in the list
+	 *
+	 * @returns boolean
+	 */
 	const lastItemInList = (): boolean => {
 		return (
 			data.length === 1 &&
@@ -169,6 +185,14 @@ const ActionContainer = ({
 		)
 	}
 
+	/**
+	 * Map method to render all the action items
+	 * in priority order
+	 *
+	 * @param {ActionChecklistId} id
+	 * @param {number} idx
+	 * @returns ReactElement
+	 */
 	const mapThroughPriorityOrder = (
 		id: ActionChecklistId,
 		idx: number
