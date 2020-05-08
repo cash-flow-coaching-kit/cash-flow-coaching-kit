@@ -7,9 +7,9 @@ name: 'app'
 type: 'nodejs:12'
 
 hooks:
-    build:
+    build: |
         set -e
-        npm run build
+        yarn build
 
 # The configuration of the application when it is exposed to the web.
 web:
