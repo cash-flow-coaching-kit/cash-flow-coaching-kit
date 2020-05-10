@@ -41,6 +41,7 @@ const ActionItem = ({
 	dispatch,
 	deleteAction,
 	lastItemInList,
+	globalHide,
 }: IActionItemProps): ReactElement => {
 	const styles = useActionItemStyles()
 	const [cacheDescription, setCacheDescription] = useState<string>(
@@ -181,7 +182,13 @@ const ActionItem = ({
 					ref={provided.innerRef}
 					className="action-item"
 				>
-					<Grid container spacing={3} className={styles.gridRoot}>
+					<Grid
+						container
+						spacing={3}
+						className={`${styles.gridRoot} ${
+							globalHide && data.completed ? styles.hide : ""
+						}`}
+					>
 						<Grid item xs={1}>
 							<Tooltip title="Mark as done">
 								<Checkbox

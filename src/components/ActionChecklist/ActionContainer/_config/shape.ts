@@ -34,6 +34,7 @@ export interface IActionItemProps {
 	dispatch: Dispatch<ActionChecklistReducerActions>
 	deleteAction(id: ActionChecklistId): void
 	lastItemInList: boolean
+	globalHide: boolean
 }
 
 /**

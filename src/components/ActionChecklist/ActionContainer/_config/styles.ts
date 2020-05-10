@@ -34,6 +34,15 @@ export const useActionItemStyles = makeStyles((theme) => ({
 			paddingBottom: theme.spacing(1),
 		},
 	},
+	hide: {
+		height: "10px",
+		background: theme.palette.grey[200],
+		marginTop: theme.spacing(1),
+		marginBottom: theme.spacing(1),
+		"& > *": {
+			display: "none !important",
+		},
+	},
 	textfield: {
 		width: "100%",
 	},

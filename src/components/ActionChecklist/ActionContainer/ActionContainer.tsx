@@ -41,7 +41,7 @@ const ActionContainer = ({
 	priority,
 }: IActionContainerProps): ReactElement => {
 	const styles = useActionContainerStyles()
-	const { dispatch } = useContext(ActionChecklistContext)
+	const { dispatch, hideCompleted } = useContext(ActionChecklistContext)
 	const {
 		state: { currentClient },
 	} = useContext(ClientContext)
@@ -212,6 +212,7 @@ const ActionContainer = ({
 					dispatch={dispatch}
 					deleteAction={deleteAction}
 					lastItemInList={lastItemInList()}
+					globalHide={hideCompleted}
 				/>
 			)
 		}
