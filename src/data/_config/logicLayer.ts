@@ -1,5 +1,5 @@
 import Dexie, { IndexableType } from "dexie"
-import { DatabaseId } from "./shape"
+import { DatabaseId, ClientId } from "./shape"
 
 /**
  * Logic Layer to implement per database/table combo
@@ -142,6 +142,19 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 */
 	public update(id: I, data: B): Promise<number> {
 		return this.defaultUpdate(id, data)
+	}
+
+	/**
+	 * Finds all record that belongs to a client
+	 *
+	 * @param {ClientId} clientId
+	 * @returns {Promise<E[]>}
+	 * @memberof ILogicLayer
+	 */
+	public findByClient(clientId: ClientId): Promise<E[]> {
+		return this.database.transaction("r", this.table, () => {
+			return this.table.where({ clientId }).toArray()
+		})
 	}
 }
 

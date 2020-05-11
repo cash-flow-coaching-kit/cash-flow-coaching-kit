@@ -24,13 +24,11 @@ import {
 	ClientId,
 	ActionChecklistNotesStruct,
 } from "../../data/_config/shape"
-// import findObjectIndexByValue from "../../util/array/findObjectIndexByValue"
 import { ClientContext } from "../client"
 import {
 	newChecklistItem,
 	newPriorityItem,
 } from "../../data/ActionChecklist/_config/utilities"
-import filterByClientId from "../../util/filters/ByClientId"
 import filterByActionContainer from "../../util/filters/ByActionContainer"
 import ActionNotesUseCase from "../../data/ActionChecklist/NotesLogic"
 
@@ -57,10 +55,7 @@ const createChecklistIfNeeded = async (
 	action: PossibleActionItems,
 	clientId: ClientId
 ): Promise<SyncResponse> => {
-	// const find = findObjectIndexByValue(curData, "actionContainer", action)
-	const find = curData
-		.filter(filterByClientId(clientId))
-		.filter(filterByActionContainer(action))
+	const find = curData.filter(filterByActionContainer(action))
 
 	if (find.length === 0) {
 		const data = [...curData]
@@ -147,9 +142,9 @@ const ActionChecklistProvider = (props: {
 			// Get all checklist and priority items and
 			// then complete the sync with that data
 			Promise.all([
-				ActionChecklistUseCase.syncWithDatabase(),
-				ActionPriorityUseCase.syncWithDatabase(),
-				ActionNotesUseCase.syncWithDatabase(),
+				ActionChecklistUseCase.findByClient(currentClient.id),
+				ActionPriorityUseCase.findByClient(currentClient.id),
+				ActionNotesUseCase.findByClient(currentClient.id),
 			]).then(completeSyncing(dispatch, currentClient.id))
 		}
 	}, [currentClient])

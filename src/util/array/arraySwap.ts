@@ -13,7 +13,7 @@ const arraySwap = <T>(
 	destination: number,
 	replace: T
 ): T[] => {
-	const copy = Array.from(arr)
+	const copy = [...arr]
 	copy.splice(source, 1)
 	copy.splice(destination, 0, replace)
 

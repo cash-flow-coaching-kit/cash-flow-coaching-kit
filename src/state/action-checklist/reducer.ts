@@ -78,14 +78,11 @@ const ActionChecklistReducer: Reducer<
 			const { payload } = action
 			const stateCopy = [...state.priority]
 			const index = findObjectIndexByValue(stateCopy, "id", payload.id)
-			stateCopy[index] = {
-				...stateCopy[index],
-				...payload,
-			}
+			stateCopy[index] = payload
 
 			return {
 				...state,
-				priority: [...stateCopy],
+				priority: stateCopy,
 			}
 		}
 		case ActionChecklistActionTypes.RemoveActionItem: {
