@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
 import { Typography, Grid } from "@material-ui/core"
-import { PrivatePage, PageContainer } from "../../components/Layouts"
+import { PageContainer } from "../../components/Layouts"
 import Listing from "../../components/HealthCheck/Listing/Listing"
 import SectionTitle from "../../components/SectionTitle"
 
@@ -11,7 +11,7 @@ import SectionTitle from "../../components/SectionTitle"
  */
 const HCListing = (): ReactElement => {
 	return (
-		<PrivatePage>
+		<>
 			<PageContainer>
 				<SectionTitle>
 					Saved Health Checks{" "}
@@ -23,7 +23,7 @@ const HCListing = (): ReactElement => {
 					<Listing />
 				</Grid>
 			</PageContainer>
-		</PrivatePage>
+		</>
 	)
 }
 

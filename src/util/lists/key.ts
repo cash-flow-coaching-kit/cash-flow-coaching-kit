@@ -6,12 +6,6 @@
  * @reurns `string`
  */
 export const constructKey = (key: string, idx: number): string => {
-	if (key === "") {
-		throw new TypeError(
-			`Constructing a key requires a \`key\` with some type of value. Got -> ${key}`
-		)
-	}
-
 	return `${key}.${idx}`
 }
 

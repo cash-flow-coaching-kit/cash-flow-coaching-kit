@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from "react"
 import { Button } from "@material-ui/core"
 import { Link as RouterLink } from "react-router-dom"
-import { generateKey, constructKey } from "../../../util/key"
+import { generateKey, constructKey } from "../../../util/lists/key"
 import { INavigationRoutesProps, INavRoutes } from "../_config/shape"
 
 /**

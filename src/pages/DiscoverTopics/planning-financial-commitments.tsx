@@ -7,23 +7,16 @@ import {
 	CardHeader,
 	CardActions,
 	CardMedia,
-	Container,
 	Button,
-	ExpansionPanel,
-	ExpansionPanelSummary,
-	ExpansionPanelDetails,
 } from "@material-ui/core"
-import SectionTitle from "../../components/SectionTitle"
-import { PrivatePage, PageContainer } from "../../components/Layouts"
+import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 import useDTStyles from "./_config/styles"
 
 const DTPlanningFinanicalCommitments = (): ReactElement => {
 	const styles = useDTStyles()
 	return (
-		<PrivatePage>
+		<>
 			<PageContainer>
 				<Typography
 					variant="h5"
@@ -106,7 +99,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />
-		</PrivatePage>
+		</>
 	)
 }
 

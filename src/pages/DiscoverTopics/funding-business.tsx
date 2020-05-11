@@ -13,18 +13,18 @@ import {
 	ExpansionPanelSummary,
 	ExpansionPanelDetails,
 } from "@material-ui/core"
-import SectionTitle from "../../components/SectionTitle"
-import { PrivatePage, PageContainer } from "../../components/Layouts"
-import PageTip from "../../components/PageTip"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
+import SectionTitle from "../../components/SectionTitle"
+import { PageContainer } from "../../components/Layouts"
+import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 
 const DTFundingBusiness = (): ReactElement => {
 	const styles = useDTStyles()
 
 	return (
-		<PrivatePage>
+		<>
 			<PageContainer>
 				<Typography
 					variant="h5"
@@ -430,7 +430,7 @@ const DTFundingBusiness = (): ReactElement => {
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />
-		</PrivatePage>
+		</>
 	)
 }
 

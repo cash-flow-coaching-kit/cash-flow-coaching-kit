@@ -11,3 +11,8 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
 }
+
+.action-item {
+	width: calc(100% + 24px);
+	margin: 0 -12px;
+}

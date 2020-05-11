@@ -5,7 +5,7 @@ import {
 	QuestionOptionsRecord,
 	IQuestionStructure,
 } from "./shape"
-import findObjectIndexByValue from "../../../util/findObjectIndexByValue"
+import findObjectIndexByValue from "../../../util/array/findObjectIndexByValue"
 
 /**
  * Gets the theme for a specific answer type

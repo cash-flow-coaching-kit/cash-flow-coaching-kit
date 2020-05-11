@@ -7,7 +7,7 @@ import HCQuestionnaire from "../../../pages/HealthCheck/questionnaire"
 import DTListing from "../../../pages/DiscoverTopics/listing"
 import CFCCanvas from "../../../pages/CashFlowCanvas/canvas"
 import ChangeLevers from "../../../pages/change-levers"
-import ActionItems from "../../../pages/action-items"
+import ActionChecklist from "../../../pages/action-items"
 import CoachingKit from "../../../pages/coaching-kit"
 import DTFundingBusiness from "../../../pages/DiscoverTopics/funding-business"
 import DTManagingCashFlow from "../../../pages/DiscoverTopics/managing-cash-flow"
@@ -18,6 +18,8 @@ import DTSellingClosingSuccession from "../../../pages/DiscoverTopics/selling-cl
 import DTTrackingPerformance from "../../../pages/DiscoverTopics/tracking-performance"
 import HCListing from "../../../pages/HealthCheck/listing"
 import HCSummary from "../../../pages/HealthCheck/summary"
+import { ActionChecklistProvider } from "../../../state/action-checklist"
+import { PrivatePage } from "../../Layouts"
 
 /**
  * Private route definitions, these pages should not be available
@@ -27,7 +29,7 @@ import HCSummary from "../../../pages/HealthCheck/summary"
  */
 const PrivateRoutesWrapper = (): ReactElement => {
 	return (
-		<>
+		<PrivatePage>
 			<Route path={PrivateRoutes.CoachingKit}>
 				<CoachingKit />
 			</Route>
@@ -52,12 +54,20 @@ const PrivateRoutesWrapper = (): ReactElement => {
 			<Route path={PrivateRoutes.CFC}>
 				<CFCCanvas />
 			</Route>
-			<Route path={PrivateRoutes.ChangeLevers}>
-				<ChangeLevers />
-			</Route>
-			<Route path={PrivateRoutes.ActionChecklist}>
-				<ActionItems />
-			</Route>
+
+			{/*
+				Wrap change levers and action checklist in provider since
+				they require the state values provided by this context setup
+			*/}
+			<ActionChecklistProvider>
+				<Route path={PrivateRoutes.ChangeLevers}>
+					<ChangeLevers />
+				</Route>
+				<Route path={PrivateRoutes.ActionChecklist}>
+					<ActionChecklist />
+				</Route>
+			</ActionChecklistProvider>
+
 			<Route path={PrivateRoutes.DTFundingBusiness}>
 				<DTFundingBusiness />
 			</Route>
@@ -79,7 +89,7 @@ const PrivateRoutesWrapper = (): ReactElement => {
 			<Route path={PrivateRoutes.DTTrackingPerformance}>
 				<DTTrackingPerformance />
 			</Route>
-		</>
+		</PrivatePage>
 	)
 }
 

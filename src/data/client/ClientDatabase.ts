@@ -1,5 +1,5 @@
 import Dexie from "dexie"
-import { IBaseClient } from "../../state/client/client-outline"
+import { ClientDataStruct, ClientId } from "../_config/shape"
 
 /**
  * Client database definition
@@ -14,7 +14,7 @@ class ClientDatabase extends Dexie {
 	 * @type {Dexie.Table<IBaseClient, number>}
 	 * @memberof ClientDatabase
 	 */
-	clients!: Dexie.Table<IBaseClient, number>
+	clients!: Dexie.Table<ClientDataStruct, ClientId>
 
 	/**
 	 * Creates an instance of ClientDatabase.

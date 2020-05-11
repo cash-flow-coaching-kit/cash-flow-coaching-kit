@@ -1,0 +1,36 @@
+# .platform.app.yaml
+
+# The name of this application, which must be unique within a project.
+name: "app"
+
+# The type key specifies the language and version for your application.
+type: "nodejs:12"
+
+dependencies:
+  nodejs:
+    yarn: "*"
+
+hooks:
+  build: |
+    set -e
+    yarn build
+
+# The configuration of the application when it is exposed to the web.
+web:
+  commands:
+    # Run a no-op process that uses no CPU resources, since this is a static site.
+    start: sleep infinity
+  locations:
+    "/":
+      # The public directory of the application relative to its root.
+      root: "build"
+      passthru: true
+      index: ["index.html"]
+      scripts: false
+      allow: true
+      expires: 1m
+      rules:
+        ? \.(css|js|gif|jpe?g|png|ttf|eot|woff2?|otf|cast|mp4|json|yaml|ico|svg?|cast|mp4|json|yaml|svg?|ttf)$
+        : expires: 4w
+
+disk: 1024

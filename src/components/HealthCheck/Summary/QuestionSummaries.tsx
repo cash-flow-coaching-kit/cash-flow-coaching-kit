@@ -1,7 +1,7 @@
 import React, { useState, ReactElement } from "react"
 import { Grid, Card, CardHeader, CardActions, Button } from "@material-ui/core"
 import { Link } from "react-router-dom"
-import { generateKey, constructKey } from "../../../util/key"
+import { generateKey, constructKey } from "../../../util/lists/key"
 import { IQuestionStructure } from "../_config/shape"
 import { answerTheming } from "../_config/data"
 import { getOptionByAnswer } from "../_config/utilities"

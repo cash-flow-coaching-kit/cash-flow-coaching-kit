@@ -9,11 +9,9 @@ import {
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
 import ReplayIcon from "@material-ui/icons/Replay"
-import { PrivatePage, PageContainer } from "../../components/Layouts"
+import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
-import findHCById from "../../data/healthChecks/findHCById"
-import { IBaseHealthCheck } from "../../data/healthChecks/HealthCheckDatabase"
 import { PrivateRoutes, routeVarReplacement } from "../../util/routes/routes"
 import { ClientContext } from "../../state/client"
 import QuestionSummaries from "../../components/HealthCheck/Summary"
@@ -23,6 +21,8 @@ import {
 	SummaryTitle,
 	InvalidHC,
 } from "../../components/HealthCheck/Summary/_partials"
+import { HealthCheckDataStruct } from "../../data/_config/shape"
+import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
 
 const QUESTIONS_OFFSET = 4
 
@@ -36,7 +36,9 @@ const HCSummary = (): ReactElement => {
 		state: { currentClient },
 	} = useContext(ClientContext)
 	const { id } = useParams()
-	const [healthCheck, setHealthCheck] = useState<IBaseHealthCheck | undefined>()
+	const [healthCheck, setHealthCheck] = useState<
+		HealthCheckDataStruct | undefined
+	>()
 	const [fourQuestions, setFourQuestions] = useState<
 		QuestionOptions[] | undefined
 	>(undefined)
@@ -49,7 +51,7 @@ const HCSummary = (): ReactElement => {
 			;(async function getHC(): Promise<void> {
 				if (typeof currentClient.id !== "undefined") {
 					// Fetches the health checks for the client and sets state values
-					const hc: IBaseHealthCheck = await findHCById(
+					const hc: HealthCheckDataStruct = await HealthCheckUseCase.findByClientId(
 						parseInt(id, 10),
 						currentClient.id
 					)
@@ -62,7 +64,7 @@ const HCSummary = (): ReactElement => {
 	}, [id, currentClient])
 
 	return (
-		<PrivatePage>
+		<>
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={9}>
@@ -109,7 +111,7 @@ const HCSummary = (): ReactElement => {
 					</Grid>
 				</Grid>
 			</PageContainer>
-		</PrivatePage>
+		</>
 	)
 }
 
