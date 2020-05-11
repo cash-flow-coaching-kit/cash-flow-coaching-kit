@@ -23,6 +23,14 @@ const useDTStyles = makeStyles((theme) => ({
 	containerPurple: {
 		backgroundColor: "#cfe8fc",
 	},
+	containerWrapUp: {
+		backgroundColor: "#cfe8fc",
+		paddingBottom: theme.spacing(5),
+	},
+	containerMoreInfo: {
+		backgroundColor: "#efebe9",
+		paddingBottom: theme.spacing(5),
+	},
 	list: {
 		listStyle: "disc",
 		paddingLeft: theme.spacing(2),
