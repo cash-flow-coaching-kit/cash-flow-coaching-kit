@@ -220,6 +220,7 @@ const DTListing = (): ReactElement => {
 								to={PrivateRoutes.DTSellingClosingSuccession}
 								variant="contained"
 								color="secondary"
+								fullWidth={true}
 							>
 								Considering exiting your business?
 							</Button>
