@@ -9,6 +9,7 @@ export type ClientId = DatabaseId
 export type HealthCheckId = DatabaseId
 export type ActionChecklistId = DatabaseId
 export type ActionChecklistPriorityId = DatabaseId
+export type ActionChecklistNotesId = DatabaseId
 
 /**
  * Base structure for any database item
@@ -61,6 +62,17 @@ export interface WithHealthCheckRelationship {
  */
 export interface WithActionChecklistRelationship {
 	actionChecklistId: ActionChecklistId
+}
+
+/**
+ * The data structure has a reference to a
+ * action container
+ *
+ * @export
+ * @interface WithActionContainer
+ */
+export interface WithActionContainer {
+	actionContainer: PossibleActionItems
 }
 
 /**
@@ -124,10 +136,9 @@ export interface HealthCheckDataStruct
  * @export
  * @interface BaseActionChecklistStruct
  */
-export interface BaseActionChecklistStruct {
+export interface BaseActionChecklistStruct extends WithActionContainer {
 	completed: boolean
 	description: string
-	actionContainer: PossibleActionItems
 	reviewBy: Date
 }
 
@@ -152,8 +163,7 @@ export interface ActionChecklistStruct
  * @export
  * @interface BaseActionChecklistPriorityStruct
  */
-export interface BaseActionChecklistPriorityStruct {
-	actionContainer: PossibleActionItems
+export interface BaseActionChecklistPriorityStruct extends WithActionContainer {
 	order: ActionChecklistId[]
 }
 
@@ -169,4 +179,31 @@ export interface BaseActionChecklistPriorityStruct {
 export interface ActionChecklistPriorityStruct
 	extends BaseDatabaseStruct<ActionChecklistPriorityId>,
 		BaseActionChecklistPriorityStruct,
+		WithClientRelationship {}
+
+/**
+ * Base data structure for a action checklist notes
+ * Use this field when creating/updating the notes
+ * attached to a priority item
+ *
+ * @export
+ * @interface BaseActionChecklistNotesStruct
+ */
+export interface BaseActionChecklistNotesStruct extends WithActionContainer {
+	notes: string
+}
+
+/**
+ * Structure used when defining the action checklist notes
+ * table
+ *
+ * @export
+ * @interface ActionChecklistNotesStruct
+ * @extends {BaseDatabaseStruct<ActionChecklistNotesId>}
+ * @extends {BaseActionChecklistNotesStruct}
+ * @extends {WithClientRelationship}
+ */
+export interface ActionChecklistNotesStruct
+	extends BaseDatabaseStruct<ActionChecklistNotesId>,
+		BaseActionChecklistNotesStruct,
 		WithClientRelationship {}

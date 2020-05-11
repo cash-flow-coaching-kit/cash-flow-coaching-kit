@@ -7,6 +7,7 @@ import {
 	ActionChecklistStruct,
 	ActionChecklistPriorityStruct,
 	ActionChecklistId,
+	ClientId,
 } from "../../../../data/_config/shape"
 
 /**
@@ -19,6 +20,7 @@ export interface IActionContainerProps {
 	identfier: PossibleActionItems
 	data: ActionChecklistStruct[]
 	priority: ActionChecklistPriorityStruct
+	currentClient: ClientId
 }
 
 /**

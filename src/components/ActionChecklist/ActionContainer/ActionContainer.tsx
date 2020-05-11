@@ -24,9 +24,9 @@ import {
 } from "../../../data/_config/shape"
 import findObjectIndexByValue from "../../../util/array/findObjectIndexByValue"
 import ActionChecklistUseCase from "../../../data/ActionChecklist/ChecklistLogic"
-import { ClientContext } from "../../../state/client"
 import ActionPriorityUseCase from "../../../data/ActionChecklist/PriorityLogic"
 import arraySwap from "../../../util/array/arraySwap"
+import { newChecklistItem } from "../../../data/ActionChecklist/_config/utilities"
 
 /**
  * A single Action items wrapper
@@ -39,12 +39,10 @@ const ActionContainer = ({
 	identfier,
 	data,
 	priority,
+	currentClient,
 }: IActionContainerProps): ReactElement => {
 	const styles = useActionContainerStyles()
 	const { dispatch, hideCompleted } = useContext(ActionChecklistContext)
-	const {
-		state: { currentClient },
-	} = useContext(ClientContext)
 	const [key] = useState(generateKey())
 	const [saving, setSaving] = useState<boolean>(false)
 	const [lastSaved, setLastSaved] = useState<Date>(new Date())
@@ -53,8 +51,14 @@ const ActionContainer = ({
 		// Run every 1.5s
 		const id = setInterval(async () => {
 			// Get the database data for this container
-			const DB = await ActionChecklistUseCase.findByContainer(identfier)
-			const PRIOR = await ActionPriorityUseCase.findByContainer(identfier)
+			const DB = await ActionChecklistUseCase.findByClientAndContainer(
+				identfier,
+				currentClient
+			)
+			const PRIOR = await ActionPriorityUseCase.findByClientAndContainer(
+				identfier,
+				currentClient
+			)
 
 			// If it is out of sync with the state
 			if (!isEqual(DB, data) || !isEqual(PRIOR[0], priority)) {
@@ -114,15 +118,8 @@ const ActionContainer = ({
 		e: MouseEvent<HTMLButtonElement>
 	): Promise<void> => {
 		e.preventDefault()
-		if (currentClient?.id && priority.id) {
-			// TODO: Pull into utilitiy -> ActionChecklistId
-			const newActionItem: ActionChecklistStruct = {
-				completed: false,
-				actionContainer: identfier,
-				description: "",
-				clientId: currentClient.id,
-				reviewBy: new Date(),
-			}
+		if (currentClient && priority.id) {
+			const newActionItem = newChecklistItem(currentClient, identfier)
 			// Adds checklist item to db
 			const dbKey = await ActionChecklistUseCase.create(newActionItem)
 			// Updates db item with order
@@ -139,7 +136,6 @@ const ActionContainer = ({
 					...newActionItem,
 				},
 			})
-			// TODO: End utility
 		}
 	}
 

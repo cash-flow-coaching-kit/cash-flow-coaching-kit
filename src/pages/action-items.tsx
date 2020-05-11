@@ -1,4 +1,10 @@
-import React, { ReactElement, useContext, useState, Fragment } from "react"
+import React, {
+	ReactElement,
+	useContext,
+	useState,
+	Fragment,
+	useEffect,
+} from "react"
 import {
 	Grid,
 	List,
@@ -18,10 +24,9 @@ import { ActionChecklistContext } from "../state/action-checklist"
 import { generateKey, constructKey } from "../util/lists/key"
 import { PossibleActionItems } from "../state/action-checklist/shape"
 import { ActionItemMapping } from "../components/ActionChecklist/_config/data"
-import {
-	ActionChecklistStruct,
-	ActionChecklistPriorityStruct,
-} from "../data/_config/shape"
+import { ClientContext } from "../state/client"
+import filterByClientId from "../util/filters/ByClientId"
+import filterByActionContainer from "../util/filters/ByActionContainer"
 
 /**
  * Action Checklist page component
@@ -30,13 +35,18 @@ import {
  */
 const ActionChecklist = (): ReactElement => {
 	const { checklistCollection, priority } = useContext(ActionChecklistContext)
+	const {
+		state: { currentClient },
+	} = useContext(ClientContext)
 	const [key] = useState(generateKey())
+	// TODO: Introduce a state machine
+	const [loading, setLoading] = useState(true)
 
-	const filterByActionType = (type: PossibleActionItems) => (
-		item: ActionChecklistStruct | ActionChecklistPriorityStruct
-	): boolean => {
-		return item.actionContainer === type
-	}
+	useEffect(() => {
+		if (currentClient?.id) {
+			setLoading(false)
+		}
+	}, [currentClient])
 
 	/**
 	 * Renders all the action containers based on
@@ -47,19 +57,28 @@ const ActionChecklist = (): ReactElement => {
 	const renderActionContainers = (): ReactElement[] => {
 		return (Object.keys(ActionItemMapping) as PossibleActionItems[]).map(
 			(item, idx) => {
-				const data = checklistCollection.filter(filterByActionType(item))
-				const containerPriority = priority.filter(filterByActionType(item))
+				if (currentClient?.id) {
+					const data = checklistCollection
+						.filter(filterByClientId(currentClient.id))
+						.filter(filterByActionContainer(item))
 
-				if (data.length > 0 && containerPriority.length > 0) {
-					return (
-						<ActionContainer
-							key={constructKey(key, idx)}
-							identfier={item}
-							data={data}
-							priority={containerPriority[0]}
-						/>
-					)
+					const containerPriority = priority
+						.filter(filterByClientId(currentClient.id))
+						.filter(filterByActionContainer(item))
+
+					if (data.length > 0 && containerPriority.length > 0) {
+						return (
+							<ActionContainer
+								key={constructKey(key, idx)}
+								identfier={item}
+								data={data}
+								priority={containerPriority[0]}
+								currentClient={currentClient.id}
+							/>
+						)
+					}
 				}
+
 				return <Fragment key={constructKey(key, idx)} />
 			}
 		)
@@ -72,7 +91,7 @@ const ActionChecklist = (): ReactElement => {
 					<Grid item xs={9}>
 						<SectionTitle>Action Items</SectionTitle>
 						<ActionHeader />
-						<Box>{renderActionContainers()}</Box>
+						<Box>{!loading && renderActionContainers()}</Box>
 					</Grid>
 					<Grid item xs={3}>
 						<FourQuestions />

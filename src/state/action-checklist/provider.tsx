@@ -25,8 +25,14 @@ import {
 	ActionChecklistPriorityStruct,
 	ClientId,
 } from "../../data/_config/shape"
-import findObjectIndexByValue from "../../util/array/findObjectIndexByValue"
+// import findObjectIndexByValue from "../../util/array/findObjectIndexByValue"
 import { ClientContext } from "../client"
+import {
+	newChecklistItem,
+	newPriorityItem,
+} from "../../data/ActionChecklist/_config/utilities"
+import filterByClientId from "../../util/filters/ByClientId"
+import filterByActionContainer from "../../util/filters/ByActionContainer"
 
 type SyncResponse = [ActionChecklistStruct[], ActionChecklistPriorityStruct[]]
 
@@ -46,29 +52,24 @@ const createChecklistIfNeeded = async (
 	action: PossibleActionItems,
 	clientId: ClientId
 ): Promise<SyncResponse> => {
-	const find = findObjectIndexByValue(curData, "actionContainer", action)
+	// const find = findObjectIndexByValue(curData, "actionContainer", action)
+	const find = curData
+		.filter(filterByClientId(clientId))
+		.filter(filterByActionContainer(action))
 
-	if (find === -1) {
+	if (find.length === 0) {
 		const data = [...curData]
 		const priority = [...curPriority]
-		const newItem: ActionChecklistStruct = {
-			clientId,
-			completed: false,
-			description: "",
-			actionContainer: action,
-			reviewBy: new Date(),
-		}
+		const newItem: ActionChecklistStruct = newChecklistItem(clientId, action)
 
 		const id = await ActionChecklistUseCase.create(newItem)
-		const newPriority: ActionChecklistPriorityStruct = {
+		const newPriority: ActionChecklistPriorityStruct = newPriorityItem(
 			clientId,
-			actionContainer: action,
-			order: [id],
-		}
+			action
+		)
 
 		const priorityId = await ActionPriorityUseCase.create(newPriority)
-
-		priority.push({ ...newPriority, id: priorityId })
+		priority.push({ ...newPriority, id: priorityId, order: [id] })
 		data.push({ ...newItem, id })
 
 		return [data, priority]
@@ -134,7 +135,7 @@ const ActionChecklistProvider = (props: {
 	)
 
 	useEffect(() => {
-		if (currentClient && currentClient.id) {
+		if (currentClient?.id) {
 			// Get all checklist and priority items and
 			// then complete the sync with that data
 			Promise.all([
