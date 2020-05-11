@@ -5,6 +5,11 @@ import {
 	ActionChecklistActionTypes,
 } from "./shape"
 import findObjectIndexByValue from "../../util/array/findObjectIndexByValue"
+import {
+	ActionChecklistStruct,
+	ActionChecklistPriorityStruct,
+	ActionChecklistNotesStruct,
+} from "../../data/_config/shape"
 
 /**
  * Reducer method for the Action Checklist context
@@ -62,27 +67,33 @@ const ActionChecklistReducer: Reducer<
 			const {
 				payload: { data, id },
 			} = action
-			const index = findObjectIndexByValue(state.checklistCollection, "id", id)
-			const stateCopy = [...state.checklistCollection]
-			stateCopy[index] = {
-				...stateCopy[index],
-				...data,
-			}
+
+			const newChecklist = state.checklistCollection.reduce(
+				(checklists: ActionChecklistStruct[], current) => {
+					return checklists.concat(
+						current.id === id ? { ...current, ...data } : current
+					)
+				},
+				[]
+			)
 
 			return {
 				...state,
-				checklistCollection: [...stateCopy],
+				checklistCollection: newChecklist,
 			}
 		}
 		case ActionChecklistActionTypes.UpdatePriorityOrder: {
 			const { payload } = action
-			const stateCopy = [...state.priority]
-			const index = findObjectIndexByValue(stateCopy, "id", payload.id)
-			stateCopy[index] = payload
+			const newPriority = state.priority.reduce(
+				(collection: ActionChecklistPriorityStruct[], item) => {
+					return collection.concat(item.id === payload.id ? payload : item)
+				},
+				[]
+			)
 
 			return {
 				...state,
-				priority: stateCopy,
+				priority: newPriority,
 			}
 		}
 		case ActionChecklistActionTypes.RemoveActionItem: {
@@ -113,16 +124,18 @@ const ActionChecklistReducer: Reducer<
 		}
 		case ActionChecklistActionTypes.UpdateNotes: {
 			const { data, id } = action.payload
-			const idx = findObjectIndexByValue(state.notes, "id", id)
-			const stateCopy = [...state.notes]
-			stateCopy[idx] = {
-				...stateCopy[idx],
-				...data,
-			}
+			const newNotes = state.notes.reduce(
+				(collection: ActionChecklistNotesStruct[], current) => {
+					return collection.concat(
+						current.id === id ? { ...current, ...data } : current
+					)
+				},
+				[]
+			)
 
 			return {
 				...state,
-				notes: [...stateCopy],
+				notes: newNotes,
 			}
 		}
 		case ActionChecklistActionTypes.RemoveNote: {
@@ -135,9 +148,11 @@ const ActionChecklistReducer: Reducer<
 			}
 		}
 		default: {
-			return state
+			break
 		}
 	}
+
+	return state
 }
 
 export default ActionChecklistReducer
