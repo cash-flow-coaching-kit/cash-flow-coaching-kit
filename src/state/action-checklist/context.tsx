@@ -8,6 +8,7 @@ export const defaultActionChecklistState: IActionChecklistState = {
 	databaseSyced: false,
 	priority: [],
 	checklistCollection: [],
+	notes: [],
 }
 
 // Creates the context

@@ -62,3 +62,19 @@ export const useActionItemStyles = makeStyles((theme) => ({
 		margin: 0,
 	},
 }))
+
+export const useActionNotesStyles = makeStyles((theme) => ({
+	box: {
+		marginTop: theme.spacing(3),
+	},
+	textfield: {
+		width: "100%",
+	},
+	gridRoot: {
+		alignItems: "center",
+	},
+	gridActions: {
+		display: "flex",
+		justifyContent: "flex-end",
+	},
+}))

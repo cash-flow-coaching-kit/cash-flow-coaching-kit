@@ -12,8 +12,8 @@ import { isEqual } from "lodash-es"
 import ExpandableNav from "../../ExpandableNav"
 import { IActionContainerProps } from "./_config/shape"
 import { useActionContainerStyles } from "./_config/styles"
-import { Actions, ActionItem } from "./_partials"
-import { actionItemKeyTitleMapping } from "./_config/utilities"
+import { Actions, ActionItem, ActionNotes } from "./_partials"
+import { actionItemKeyTitleMapping, allowNotes } from "./_config/utilities"
 import { ActionChecklistContext } from "../../../state/action-checklist"
 import { ActionChecklistActionTypes } from "../../../state/action-checklist/shape"
 import lastInArray from "../../../util/array/lastInArray"
@@ -39,8 +39,10 @@ const ActionContainer = ({
 	identfier,
 	data,
 	priority,
+	notes,
 	currentClient,
 }: IActionContainerProps): ReactElement => {
+	// #region Component functionality
 	const styles = useActionContainerStyles()
 	const { dispatch, hideCompleted } = useContext(ActionChecklistContext)
 	const [key] = useState(generateKey())
@@ -71,10 +73,10 @@ const ActionContainer = ({
 				setLastSaved(new Date())
 				setSaving(false)
 			}
-		}, 1500)
+		}, 2000)
 
 		return (): void => clearInterval(id)
-	}, [data, identfier, priority])
+	}, [data, identfier, priority, currentClient])
 
 	/**
 	 * Event that triggers once a item is dropped
@@ -215,6 +217,9 @@ const ActionContainer = ({
 		return <Fragment key={constructKey(key, idx)} />
 	}
 
+	// #endregion
+
+	// #region Component Markup
 	return (
 		<ExpandableNav title={actionItemKeyTitleMapping(identfier)}>
 			<DragDropContext onDragEnd={onDragEnd}>
@@ -231,6 +236,14 @@ const ActionContainer = ({
 							</div>
 						)}
 					</Droppable>
+					{allowNotes(identfier) && (
+						<ActionNotes
+							currentClient={currentClient}
+							container={identfier}
+							note={notes}
+							dispatch={dispatch}
+						/>
+					)}
 					<Actions
 						addNewAction={addNewAction}
 						disabled={preventAddingNew()}
@@ -241,6 +254,7 @@ const ActionContainer = ({
 			</DragDropContext>
 		</ExpandableNav>
 	)
+	// #endregion
 }
 
-export default ActionContainer
+export default React.memo(ActionContainer)

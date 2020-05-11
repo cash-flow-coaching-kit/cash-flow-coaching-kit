@@ -1,5 +1,3 @@
-// TODO: PLEASE CLEAN THIS UP
-
 import React, {
 	ReactElement,
 	useReducer,
@@ -24,6 +22,7 @@ import {
 	ActionChecklistStruct,
 	ActionChecklistPriorityStruct,
 	ClientId,
+	ActionChecklistNotesStruct,
 } from "../../data/_config/shape"
 // import findObjectIndexByValue from "../../util/array/findObjectIndexByValue"
 import { ClientContext } from "../client"
@@ -33,8 +32,13 @@ import {
 } from "../../data/ActionChecklist/_config/utilities"
 import filterByClientId from "../../util/filters/ByClientId"
 import filterByActionContainer from "../../util/filters/ByActionContainer"
+import ActionNotesUseCase from "../../data/ActionChecklist/NotesLogic"
 
-type SyncResponse = [ActionChecklistStruct[], ActionChecklistPriorityStruct[]]
+type SyncResponse = [
+	ActionChecklistStruct[],
+	ActionChecklistPriorityStruct[],
+	ActionChecklistNotesStruct[]
+]
 
 /**
  * Checks if a container has data and adds it into a db,
@@ -49,6 +53,7 @@ type SyncResponse = [ActionChecklistStruct[], ActionChecklistPriorityStruct[]]
 const createChecklistIfNeeded = async (
 	curData: ActionChecklistStruct[],
 	curPriority: ActionChecklistPriorityStruct[],
+	curNotes: ActionChecklistNotesStruct[],
 	action: PossibleActionItems,
 	clientId: ClientId
 ): Promise<SyncResponse> => {
@@ -72,10 +77,10 @@ const createChecklistIfNeeded = async (
 		priority.push({ ...newPriority, id: priorityId, order: [id] })
 		data.push({ ...newItem, id })
 
-		return [data, priority]
+		return [data, priority, curNotes]
 	}
 
-	return [curData, curPriority]
+	return [curData, curPriority, curNotes]
 }
 
 /**
@@ -91,16 +96,18 @@ const completeSyncing = (
 	dispatch: Dispatch<ActionChecklistReducerActions>,
 	clientId: ClientId
 ) => async (response: SyncResponse): Promise<void> => {
-	const [data, priority] = response
+	const [data, priority, notes] = response
 	const CIA = await createChecklistIfNeeded(
 		data,
 		priority,
+		notes,
 		"cashInActions",
 		clientId
 	)
 	const COA = await createChecklistIfNeeded(
 		CIA[0],
 		CIA[1],
+		CIA[2],
 		"cashOutActions",
 		clientId
 	)
@@ -110,6 +117,7 @@ const completeSyncing = (
 		payload: {
 			data: [...COA[0]],
 			priority: [...COA[1]],
+			notes: [...COA[2]],
 		},
 	})
 }
@@ -141,6 +149,7 @@ const ActionChecklistProvider = (props: {
 			Promise.all([
 				ActionChecklistUseCase.syncWithDatabase(),
 				ActionPriorityUseCase.syncWithDatabase(),
+				ActionNotesUseCase.syncWithDatabase(),
 			]).then(completeSyncing(dispatch, currentClient.id))
 		}
 	}, [currentClient])

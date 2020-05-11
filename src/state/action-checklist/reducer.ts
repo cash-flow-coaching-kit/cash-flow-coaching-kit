@@ -33,6 +33,7 @@ const ActionChecklistReducer: Reducer<
 				databaseSyced: true,
 				checklistCollection: action.payload.data,
 				priority: action.payload.priority,
+				notes: action.payload.notes,
 			}
 		}
 		case ActionChecklistActionTypes.AddNewActionItem: {
@@ -46,7 +47,9 @@ const ActionChecklistReducer: Reducer<
 			)
 
 			if (payload?.id) {
-				copyPriority[idx].order.push(payload.id)
+				if (copyPriority[idx]) {
+					copyPriority[idx].order.push(payload.id)
+				}
 			}
 
 			return {
@@ -102,6 +105,36 @@ const ActionChecklistReducer: Reducer<
 
 			return {
 				...stateCopy,
+			}
+		}
+		case ActionChecklistActionTypes.AddNotes: {
+			const { payload } = action
+			return {
+				...state,
+				notes: [...state.notes, payload],
+			}
+		}
+		case ActionChecklistActionTypes.UpdateNotes: {
+			const { data, id } = action.payload
+			const idx = findObjectIndexByValue(state.notes, "id", id)
+			const stateCopy = [...state.notes]
+			stateCopy[idx] = {
+				...stateCopy[idx],
+				...data,
+			}
+
+			return {
+				...state,
+				notes: [...stateCopy],
+			}
+		}
+		case ActionChecklistActionTypes.RemoveNote: {
+			const { payload: id } = action
+			const filteredNotes = state.notes.filter((note) => note.id !== id)
+
+			return {
+				...state,
+				notes: filteredNotes,
 			}
 		}
 		default: {

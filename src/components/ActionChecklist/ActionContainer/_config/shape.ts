@@ -8,6 +8,7 @@ import {
 	ActionChecklistPriorityStruct,
 	ActionChecklistId,
 	ClientId,
+	ActionChecklistNotesStruct,
 } from "../../../../data/_config/shape"
 
 /**
@@ -20,6 +21,7 @@ export interface IActionContainerProps {
 	identfier: PossibleActionItems
 	data: ActionChecklistStruct[]
 	priority: ActionChecklistPriorityStruct
+	notes: ActionChecklistNotesStruct
 	currentClient: ClientId
 }
 
@@ -50,4 +52,17 @@ export interface IActionsProps {
 	disabled: boolean
 	saving: boolean
 	lastSaved: Date
+}
+
+/**
+ * Prop definition for the ActionNotes component
+ *
+ * @export
+ * @interface IActionNotes
+ */
+export interface IActionNotesProps {
+	currentClient: ClientId
+	container: PossibleActionItems
+	note: ActionChecklistNotesStruct
+	dispatch: Dispatch<ActionChecklistReducerActions>
 }

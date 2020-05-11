@@ -5,6 +5,7 @@ import {
 	ClientId,
 	ActionChecklistStruct,
 	ActionChecklistPriorityStruct,
+	ActionChecklistNotesStruct,
 } from "../../_config/shape"
 
 /**
@@ -77,4 +78,20 @@ export const newPriorityItem = (
 	clientId,
 	actionContainer: container,
 	order: [],
+})
+
+/**
+ * Creates the structure for a new notes item
+ *
+ * @param {ClientId} clientId
+ * @param {PossibleActionItems} container
+ * @returns ActionChecklistNotesStruct
+ */
+export const newNotesItem = (
+	clientId: ClientId,
+	container: PossibleActionItems
+): ActionChecklistNotesStruct => ({
+	clientId,
+	actionContainer: container,
+	notes: "",
 })

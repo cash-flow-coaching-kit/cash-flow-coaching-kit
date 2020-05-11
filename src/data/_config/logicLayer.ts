@@ -12,35 +12,13 @@ import { DatabaseId } from "./shape"
  */
 abstract class ILogicLayer<E, B, I = DatabaseId> {
 	/**
-	 * Database to target, this database should be
-	 * extending Dexie
-	 *
-	 * @protected
-	 * @type {Dexie}
-	 * @memberof ILogicLayer
-	 */
-	protected database!: Dexie
-
-	/**
-	 * Table within the defined database
-	 *
-	 * @protected
-	 * @type {Dexie.Table<E, I>}
-	 * @memberof ILogicLayer
-	 */
-	protected table!: Dexie.Table<E, I>
-
-	/**
 	 * Creates an instance of ILogicLayer.
 	 *
-	 * @param {Dexie} database
-	 * @param {Dexie.Table<E, I>} table
+	 * @param {Dexie} database Database to target, this database should be extending Dexie
+	 * @param {Dexie.Table<E, I>} table Table within the defined database
 	 * @memberof ILogicLayer
 	 */
-	constructor(database: Dexie, table: Dexie.Table<E, I>) {
-		this.database = database
-		this.table = table
-	}
+	constructor(protected database: Dexie, protected table: Dexie.Table<E, I>) {}
 
 	/**
 	 * Default create method, this is called in the public

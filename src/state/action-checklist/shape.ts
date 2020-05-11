@@ -4,6 +4,9 @@ import {
 	ActionChecklistStruct,
 	BaseActionChecklistStruct,
 	ActionChecklistId,
+	ActionChecklistNotesStruct,
+	BaseActionChecklistNotesStruct,
+	ActionChecklistNotesId,
 } from "../../data/_config/shape"
 
 /**
@@ -36,6 +39,9 @@ export enum ActionChecklistActionTypes {
 	UpdateActionItem = "update_action_item",
 	UpdatePriorityOrder = "update_priority_order",
 	RemoveActionItem = "remove_action_item",
+	AddNotes = "add_notes",
+	UpdateNotes = "update_notes",
+	RemoveNote = "remove_note",
 }
 
 /**
@@ -53,6 +59,7 @@ export type ActionChecklistReducerActions =
 			payload: {
 				data: ActionChecklistStruct[]
 				priority: ActionChecklistPriorityStruct[]
+				notes: ActionChecklistNotesStruct[]
 			}
 	  }
 	| {
@@ -77,6 +84,21 @@ export type ActionChecklistReducerActions =
 				container: PossibleActionItems
 			}
 	  }
+	| {
+			type: ActionChecklistActionTypes.AddNotes
+			payload: ActionChecklistNotesStruct
+	  }
+	| {
+			type: ActionChecklistActionTypes.UpdateNotes
+			payload: {
+				data: BaseActionChecklistNotesStruct
+				id: ActionChecklistNotesId
+			}
+	  }
+	| {
+			type: ActionChecklistActionTypes.RemoveNote
+			payload: ActionChecklistNotesId
+	  }
 
 /**
  * Structure for the action checklist context
@@ -89,5 +111,6 @@ export interface IActionChecklistState {
 	databaseSyced: boolean
 	priority: ActionChecklistPriorityStruct[]
 	checklistCollection: ActionChecklistStruct[]
+	notes: ActionChecklistNotesStruct[]
 	dispatch: Dispatch<ActionChecklistReducerActions>
 }

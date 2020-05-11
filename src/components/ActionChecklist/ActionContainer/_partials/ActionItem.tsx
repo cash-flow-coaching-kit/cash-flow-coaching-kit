@@ -189,6 +189,7 @@ const ActionItem = ({
 							globalHide && data.completed ? styles.hide : ""
 						}`}
 					>
+						{/* TODO: Split some of these into other partials */}
 						<Grid item xs={1}>
 							<Tooltip title="Mark as done">
 								<Checkbox

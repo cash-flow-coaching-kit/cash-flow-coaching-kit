@@ -14,6 +14,7 @@ import {
 	Box,
 } from "@material-ui/core"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
+import { useMachine } from "@xstate/react"
 import { PageContainer } from "../components/Layouts"
 import SectionTitle from "../components/SectionTitle"
 import FourQuestions from "../components/HealthCheck/FourQuestions"
@@ -27,6 +28,13 @@ import { ActionItemMapping } from "../components/ActionChecklist/_config/data"
 import { ClientContext } from "../state/client"
 import filterByClientId from "../util/filters/ByClientId"
 import filterByActionContainer from "../util/filters/ByActionContainer"
+import { ActionChecklistMachine } from "../data/ActionChecklist/_config/machine"
+import Loading from "../components/Loading"
+import {
+	ActionChecklistStruct,
+	ActionChecklistPriorityStruct,
+	ActionChecklistNotesStruct,
+} from "../data/_config/shape"
 
 /**
  * Action Checklist page component
@@ -34,19 +42,35 @@ import filterByActionContainer from "../util/filters/ByActionContainer"
  * @returns ReactElement
  */
 const ActionChecklist = (): ReactElement => {
-	const { checklistCollection, priority } = useContext(ActionChecklistContext)
+	const [state, send] = useMachine(ActionChecklistMachine)
+	const { checklistCollection, priority, databaseSyced, notes } = useContext(
+		ActionChecklistContext
+	)
 	const {
 		state: { currentClient },
 	} = useContext(ClientContext)
 	const [key] = useState(generateKey())
-	// TODO: Introduce a state machine
-	const [loading, setLoading] = useState(true)
+	const [clientChecklist, setClientChecklist] = useState<
+		ActionChecklistStruct[]
+	>([])
+	const [clientPriority, setClientPriority] = useState<
+		ActionChecklistPriorityStruct[]
+	>([])
+	const [clientNotes, setClientNotes] = useState<ActionChecklistNotesStruct[]>(
+		[]
+	)
 
 	useEffect(() => {
-		if (currentClient?.id) {
-			setLoading(false)
+		if (currentClient?.id && databaseSyced) {
+			setClientChecklist(
+				checklistCollection.filter(filterByClientId(currentClient.id))
+			)
+			setClientPriority(priority.filter(filterByClientId(currentClient.id)))
+			setClientNotes(notes.filter(filterByClientId(currentClient.id)))
+
+			send("HAS_CONTENT")
 		}
-	}, [currentClient])
+	}, [currentClient, databaseSyced, send, checklistCollection, priority, notes])
 
 	/**
 	 * Renders all the action containers based on
@@ -58,21 +82,18 @@ const ActionChecklist = (): ReactElement => {
 		return (Object.keys(ActionItemMapping) as PossibleActionItems[]).map(
 			(item, idx) => {
 				if (currentClient?.id) {
-					const data = checklistCollection
-						.filter(filterByClientId(currentClient.id))
-						.filter(filterByActionContainer(item))
+					const data = clientChecklist.filter(filterByActionContainer(item))
+					const prior = clientPriority.filter(filterByActionContainer(item))
+					const note = clientNotes.filter(filterByActionContainer(item))
 
-					const containerPriority = priority
-						.filter(filterByClientId(currentClient.id))
-						.filter(filterByActionContainer(item))
-
-					if (data.length > 0 && containerPriority.length > 0) {
+					if (data.length > 0 && prior.length > 0) {
 						return (
 							<ActionContainer
 								key={constructKey(key, idx)}
 								identfier={item}
 								data={data}
-								priority={containerPriority[0]}
+								priority={prior[0]}
+								notes={note[0] || null}
 								currentClient={currentClient.id}
 							/>
 						)
@@ -84,6 +105,16 @@ const ActionChecklist = (): ReactElement => {
 		)
 	}
 
+	const renderActionChecklist = (): ReactElement => {
+		switch (state.value) {
+			case "content":
+				return <>{renderActionContainers()}</>
+			case "loading":
+			default:
+				return <Loading />
+		}
+	}
+
 	return (
 		<>
 			<PageContainer>
@@ -91,7 +122,7 @@ const ActionChecklist = (): ReactElement => {
 					<Grid item xs={9}>
 						<SectionTitle>Action Items</SectionTitle>
 						<ActionHeader />
-						<Box>{!loading && renderActionContainers()}</Box>
+						<Box>{renderActionChecklist()}</Box>
 					</Grid>
 					<Grid item xs={3}>
 						<FourQuestions />
