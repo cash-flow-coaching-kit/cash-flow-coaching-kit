@@ -11,7 +11,7 @@ import {
 	Box,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import { generateKey, constructKey } from "../../../util/key"
+import { generateKey, constructKey } from "../../../util/lists/key"
 import { fourQuestionsContent } from "../_config/data"
 import useFourQsStyles from "./_config/styles"
 import { IFourQuestionsProps } from "./_config/shape"

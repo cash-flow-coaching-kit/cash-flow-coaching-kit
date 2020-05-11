@@ -1,6 +1,8 @@
 import React, { ReactElement } from "react"
+import { useLocation, RouteProps } from "react-router-dom"
 import { PrimaryNavbar, SecondaryNavbar } from "../../Navbar"
 import { IPrivatePage } from "./_config/shape"
+import checkIfPublic from "../../../util/routes/checkIfPublic"
 
 /**
  * Private page layout, renders the navigation and the children provided to it.
@@ -9,12 +11,18 @@ import { IPrivatePage } from "./_config/shape"
  * @returns {ReactElement}
  */
 const PrivatePage = ({ children }: IPrivatePage): ReactElement => {
+	const location: RouteProps["location"] = useLocation()
+
 	return (
 		<>
-			<PrimaryNavbar />
-			<SecondaryNavbar />
+			{checkIfPublic(location) && (
+				<>
+					<PrimaryNavbar />
+					<SecondaryNavbar />
 
-			<div className="private-page">{children}</div>
+					<div className="private-page">{children}</div>
+				</>
+			)}
 		</>
 	)
 }

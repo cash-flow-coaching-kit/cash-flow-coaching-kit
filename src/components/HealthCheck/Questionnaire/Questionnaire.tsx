@@ -12,14 +12,14 @@ import { useHistory } from "react-router-dom"
 import { useQuestionnaireStyles } from "./_config/styles"
 import { questions } from "../_config/data"
 import { IQuestionStructure, QuestionOptions } from "../_config/shape"
-import { constructKey, generateKey } from "../../../util/key"
+import { constructKey, generateKey } from "../../../util/lists/key"
 import { ClientContext } from "../../../state/client"
-import addHealthCheck from "../../../data/healthChecks/addHC"
 import { routeVarReplacement, PrivateRoutes } from "../../../util/routes/routes"
 import { OptionTile } from "./_partials"
 import NoClientError from "../../NoClientError"
 import { IQuestionnaireProps } from "./_config/shape"
-import updateHC from "../../../data/healthChecks/updateHC"
+import HealthCheckUseCase from "../../../data/healthChecks/HealthCheckLogic"
+import { newTimestamp } from "../../../util/dates"
 
 /**
  * Questionnaire component for the Health checks
@@ -52,7 +52,11 @@ const Questionnaire = ({
 			setAnswers(previousAnswers)
 			setQuestionCount(0)
 		}
+		// eslint-disable-next-line
 	}, [previousAnswers])
+	// Adding answers as a dependency will cause the quiz to
+	// not work as it resets it constantly
+	// TODO: See if there is a better way to do this
 
 	/**
 	 * Changes the selected answer for the current question
@@ -109,15 +113,14 @@ const Questionnaire = ({
 
 		try {
 			if (typeof dbID === "undefined") {
-				const dbKey = await addHealthCheck({
+				const dbKey = await HealthCheckUseCase.create({
 					clientId: currentClient.id,
 					answers,
+					createdAt: newTimestamp(),
 				})
 				redirectToSummary(dbKey)
 			} else {
-				await updateHC(dbID, {
-					answers,
-				})
+				await HealthCheckUseCase.update(dbID, { answers })
 				redirectToSummary(dbID)
 			}
 		} catch (e) {

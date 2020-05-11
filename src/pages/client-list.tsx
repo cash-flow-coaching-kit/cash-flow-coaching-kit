@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
 import { Typography, Grid, makeStyles } from "@material-ui/core"
-import { PrivatePage, PageContainer } from "../components/Layouts"
+import { PageContainer } from "../components/Layouts"
 import PageTip from "../components/PageTip"
 import ClientListing from "../components/ClientListing"
 import SectionTitle from "../components/SectionTitle"
@@ -21,7 +21,7 @@ const ClientList = (): ReactElement => {
 	const styles = useCLStyles()
 
 	return (
-		<PrivatePage>
+		<>
 			<PageContainer>
 				<Typography variant="h5" align="center" className={styles.tagline}>
 					Manage your client list and prepare for your coaching conversation
@@ -37,7 +37,7 @@ const ClientList = (): ReactElement => {
 			</PageContainer>
 
 			<PageTip tip="ClientListTips" />
-		</PrivatePage>
+		</>
 	)
 }
 

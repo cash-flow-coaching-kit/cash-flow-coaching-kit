@@ -1,9 +1,9 @@
 import { Dispatch } from "react"
-import ClientDB from "./ClientDatabase"
 import {
 	IClientReducerAction,
 	ClientActionTypes,
 } from "../../state/client/client-outline"
+import ClientUseCase from "./ClientLogic"
 
 /**
  * Syncs the client state with the db
@@ -15,25 +15,23 @@ import {
 const syncClientsWithDb = async (
 	dispatch: Dispatch<IClientReducerAction>
 ): Promise<void> => {
-	await ClientDB.transaction("r", ClientDB.clients, async () => {
-		const clients = await ClientDB.clients.toArray()
+	const clients = await ClientUseCase.syncWithDatabase()
 
+	dispatch({
+		type: ClientActionTypes.BulkAdd,
+		payload: clients,
+	})
+
+	if (clients.length > 0) {
 		dispatch({
-			type: ClientActionTypes.BulkAdd,
-			payload: clients,
+			type: ClientActionTypes.ChangeCurrentClient,
+			payload: clients[0],
 		})
+	}
 
-		if (clients.length > 0) {
-			dispatch({
-				type: ClientActionTypes.ChangeCurrentClient,
-				payload: clients[0],
-			})
-		}
-
-		dispatch({
-			type: ClientActionTypes.UpdateClientSynced,
-			payload: true,
-		})
+	dispatch({
+		type: ClientActionTypes.UpdateClientSynced,
+		payload: true,
 	})
 }
 

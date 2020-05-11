@@ -10,7 +10,7 @@ import {
 	CardMedia,
 	Button,
 } from "@material-ui/core"
-import { PrivatePage, PageContainer } from "../../components/Layouts"
+import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import SectionTitle from "../../components/SectionTitle"
 import { PrivateRoutes } from "../../util/routes/routes"
@@ -20,7 +20,7 @@ const DTListing = (): ReactElement => {
 	const styles = useDTStyles()
 
 	return (
-		<PrivatePage>
+		<>
 			<PageContainer>
 				<Typography variant="h5" align="center" className={styles.tagline}>
 					Build knowledge on key areas of your business
@@ -217,7 +217,7 @@ const DTListing = (): ReactElement => {
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />
-		</PrivatePage>
+		</>
 	)
 }
 
