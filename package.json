@@ -41,8 +41,8 @@
 		"start": "nf start -p 3000",
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
-		"test:unit": "react-scripts test --env=node",
-		"test:coverage": "react-scripts test --env=node --watchAll=false --coverage",
+		"test:unit": "react-scripts test --env=jsdom",
+		"test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
 		"eject": "react-scripts eject",
 		"electron": "electron .",
 		"electron-start": "node src/start-react",
@@ -94,7 +94,8 @@
 		"commitlint.config.js",
 		"src/start-react.js",
 		"src/start.js",
-		"**/*.test.ts"
+		"**/*.test.ts",
+		"src/setupTests.ts"
 	],
 	"husky": {
 		"hooks": {
@@ -126,6 +127,7 @@
 			"!src/**/style.ts",
 			"!src/**/styles.ts",
 			"!src/**/machine.ts"
-		]
+		],
+		"extraGlobals": ["window"]
 	}
 }
