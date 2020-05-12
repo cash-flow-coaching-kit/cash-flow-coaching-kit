@@ -45,7 +45,7 @@ const ClientReducer: Reducer<IClientState, IClientReducerAction> = (
 			return { ...newstate }
 		}
 		default: {
-			throw new Error(`Unsupported action type: ${JSON.stringify(action)}`)
+			return state
 		}
 	}
 }

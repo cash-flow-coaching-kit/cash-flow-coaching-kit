@@ -134,8 +134,11 @@ const ActionContainer = ({
 			dispatch({
 				type: ActionChecklistActionTypes.AddNewActionItem,
 				payload: {
-					id: dbKey,
-					...newActionItem,
+					checklist: {
+						id: dbKey,
+						...newActionItem,
+					},
+					priority: priority.id,
 				},
 			})
 		}
@@ -149,16 +152,18 @@ const ActionContainer = ({
 	 * @returns Promise<void>
 	 */
 	const deleteAction = async (id: ActionChecklistId): Promise<void> => {
-		// remove the checklist item from the db
-		await ActionChecklistUseCase.delete(id)
-		// remove the checklist item from state and priority order
-		dispatch({
-			type: ActionChecklistActionTypes.RemoveActionItem,
-			payload: {
-				targetId: id,
-				container: identfier,
-			},
-		})
+		if (priority.id) {
+			// remove the checklist item from the db
+			await ActionChecklistUseCase.delete(id)
+			// remove the checklist item from state and priority order
+			dispatch({
+				type: ActionChecklistActionTypes.RemoveActionItem,
+				payload: {
+					targetId: id,
+					priorityId: priority.id,
+				},
+			})
+		}
 	}
 
 	/**
