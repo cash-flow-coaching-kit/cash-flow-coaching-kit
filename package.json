@@ -42,6 +42,7 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"test:unit": "react-scripts test --env=node",
+		"test:coverage": "react-scripts test --env=node --watchAll=false --coverage",
 		"eject": "react-scripts eject",
 		"electron": "electron .",
 		"electron-start": "node src/start-react",
@@ -113,5 +114,16 @@
 		"directories": {
 			"buildResources": "public"
 		}
+	},
+	"jest": {
+		"collectCoverageFrom": [
+      "src/**/*.{js,ts}",
+			"!**/node_modules/**",
+			"!src/serviceWorker.ts",
+			"!src/start-react.js",
+			"!src/start.js",
+			"!src/**/style.ts",
+			"!src/**/machine.ts"
+    ]
 	}
 }
