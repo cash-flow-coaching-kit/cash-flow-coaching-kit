@@ -1,39 +1,40 @@
 {
-  "root": true,
-  "extends": [
+	"root": true,
+	"extends": [
 		"airbnb-typescript",
 		"plugin:@typescript-eslint/recommended",
 		"prettier",
 		"prettier/@typescript-eslint",
 		"prettier/react"
 	],
-  "env": {
+	"env": {
 		"browser": true,
 		"es6": true
-  },
-  "parserOptions": {
+	},
+	"parserOptions": {
 		"ecmaVersion": 2018,
 		"sourceType": "module",
 		"ecmaFeatures": {
 			"jsx": true
 		},
 		"project": "./tsconfig.json"
-  },
-  "plugins": [
+	},
+	"plugins": [
 		"@typescript-eslint/eslint-plugin",
 		"react",
 		"prettier",
-		"import"
-  ],
-  "rules": {
+		"import",
+		"fp"
+	],
+	"rules": {
 		"no-irregular-whitespace": "warn",
 		"no-trailing-spaces": "warn",
 		"arrow-parens": ["error", "always"],
 		"react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [".js", ".jsx", ".tsx"]
-      }
+			1,
+			{
+				"extensions": [".js", ".jsx", ".tsx"]
+			}
 		],
 		"prefer-spread": "error",
 		"prefer-template": "error",
@@ -44,12 +45,32 @@
 		"valid-typeof": "off",
 		"@typescript-eslint/interface-name-prefix": [2, "always"],
 		"import/no-cycle": [0, "never"],
-		"import/no-unresolved": "error"
+		"import/no-unresolved": "error",
+
+		// Functional programming errors
+		"fp/no-arguments": "error",
+		"fp/no-class": "off",
+		"fp/no-delete": "error",
+		"fp/no-events": "error",
+		"fp/no-get-set": "error",
+		"fp/no-let": "error",
+		"fp/no-loops": "error",
+		"fp/no-mutating-assign": "error",
+		"fp/no-mutating-methods": "error",
+		"fp/no-mutation": "error",
+		"fp/no-nil": "off",
+		"fp/no-proxy": "error",
+		"fp/no-rest-parameters": "error",
+		"fp/no-this": "off",
+		"fp/no-throw": "error",
+		"fp/no-unused-expression": "off",
+		"fp/no-valueof-field": "error",
+		"no-var": "error"
 	},
 	"settings": {
 		"import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
-    },
+			"@typescript-eslint/parser": [".ts", ".tsx"]
+		},
 		"import/resolver": {
 			"typescript": {}
 		},
@@ -57,14 +78,14 @@
 			"version": "detect"
 		}
 	},
-	"overrides": [
-    {
-      "files": ["*.d.ts", "*.ts", "*.tsx"],
-      "rules": {
-				"@typescript-eslint/no-unused-vars": [2, { "args": "none" }],
-				"no-unused-vars": "off",
-				"@typescript-eslint/interface-name-prefix": [0, "never"]
-      }
-    }
-  ]
+	"overrides": [{
+		"files": ["*.d.ts", "*.ts", "*.tsx"],
+		"rules": {
+			"@typescript-eslint/no-unused-vars": [2, {
+				"args": "none"
+			}],
+			"no-unused-vars": "off",
+			"@typescript-eslint/interface-name-prefix": [0, "never"]
+		}
+	}]
 }

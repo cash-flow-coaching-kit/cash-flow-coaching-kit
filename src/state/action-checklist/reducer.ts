@@ -4,7 +4,17 @@ import {
 	ActionChecklistReducerActions,
 	ActionChecklistActionTypes,
 } from "./shape"
-import findObjectIndexByValue from "../../util/array/findObjectIndexByValue"
+import {
+	changeHideCompleted,
+	updateDatabaseSync,
+	addNewActionItem,
+	updateActionItem,
+	updatePriorityOrder,
+	removeActionItem,
+	addNote,
+	updateNote,
+	removeNote,
+} from "./actions"
 
 /**
  * Reducer method for the Action Checklist context
@@ -22,120 +32,31 @@ const ActionChecklistReducer: Reducer<
 ): IActionChecklistState => {
 	switch (action.type) {
 		case ActionChecklistActionTypes.ChangeHideCompleted: {
-			return {
-				...state,
-				hideCompleted: action.payload,
-			}
+			return changeHideCompleted(state, action.payload)
 		}
 		case ActionChecklistActionTypes.UpdateDatabaseSync: {
-			return {
-				...state,
-				databaseSyced: true,
-				checklistCollection: action.payload.data,
-				priority: action.payload.priority,
-				notes: action.payload.notes,
-			}
+			return updateDatabaseSync(state, action.payload)
 		}
 		case ActionChecklistActionTypes.AddNewActionItem: {
-			const { payload } = action
-
-			const copyPriority = [...state.priority]
-			const idx = findObjectIndexByValue(
-				copyPriority,
-				"actionContainer",
-				payload.actionContainer
-			)
-
-			if (payload?.id) {
-				if (copyPriority[idx]) {
-					copyPriority[idx].order.push(payload.id)
-				}
-			}
-
-			return {
-				...state,
-				checklistCollection: [...state.checklistCollection, payload],
-				priority: [...copyPriority],
-			}
+			return addNewActionItem(state, action.payload)
 		}
 		case ActionChecklistActionTypes.UpdateActionItem: {
-			const {
-				payload: { data, id },
-			} = action
-			const index = findObjectIndexByValue(state.checklistCollection, "id", id)
-			const stateCopy = [...state.checklistCollection]
-			stateCopy[index] = {
-				...stateCopy[index],
-				...data,
-			}
-
-			return {
-				...state,
-				checklistCollection: [...stateCopy],
-			}
+			return updateActionItem(state, action.payload)
 		}
 		case ActionChecklistActionTypes.UpdatePriorityOrder: {
-			const { payload } = action
-			const stateCopy = [...state.priority]
-			const index = findObjectIndexByValue(stateCopy, "id", payload.id)
-			stateCopy[index] = {
-				...stateCopy[index],
-				...payload,
-			}
-
-			return {
-				...state,
-				priority: [...stateCopy],
-			}
+			return updatePriorityOrder(state, action.payload)
 		}
 		case ActionChecklistActionTypes.RemoveActionItem: {
-			const { targetId, container } = action.payload
-			const stateCopy = { ...state }
-			stateCopy.checklistCollection = stateCopy.checklistCollection.filter(
-				(item) => item.id !== targetId
-			)
-			const priorityIndex = findObjectIndexByValue(
-				stateCopy.priority,
-				"actionContainer",
-				container
-			)
-			stateCopy.priority[priorityIndex].order = stateCopy.priority[
-				priorityIndex
-			].order.filter((item) => item !== targetId)
-
-			return {
-				...stateCopy,
-			}
+			return removeActionItem(state, action.payload)
 		}
 		case ActionChecklistActionTypes.AddNotes: {
-			const { payload } = action
-			return {
-				...state,
-				notes: [...state.notes, payload],
-			}
+			return addNote(state, action.payload)
 		}
 		case ActionChecklistActionTypes.UpdateNotes: {
-			const { data, id } = action.payload
-			const idx = findObjectIndexByValue(state.notes, "id", id)
-			const stateCopy = [...state.notes]
-			stateCopy[idx] = {
-				...stateCopy[idx],
-				...data,
-			}
-
-			return {
-				...state,
-				notes: [...stateCopy],
-			}
+			return updateNote(state, action.payload)
 		}
 		case ActionChecklistActionTypes.RemoveNote: {
-			const { payload: id } = action
-			const filteredNotes = state.notes.filter((note) => note.id !== id)
-
-			return {
-				...state,
-				notes: filteredNotes,
-			}
+			return removeNote(state, action.payload)
 		}
 		default: {
 			return state

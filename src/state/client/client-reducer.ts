@@ -5,6 +5,13 @@ import {
 	IClientReducerAction,
 	ClientActionTypes,
 } from "./client-outline"
+import {
+	addClient,
+	bulkAdd,
+	changeCurrentClient,
+	updateClientSynced,
+	removeClient,
+} from "./actions"
 
 /**
  * Reducer used for the client state
@@ -19,33 +26,22 @@ const ClientReducer: Reducer<IClientState, IClientReducerAction> = (
 ): IClientState => {
 	switch (action.type) {
 		case ClientActionTypes.AddClient: {
-			const newstate = { ...state }
-			newstate.state.clients = [...state.state.clients, action.payload]
-			return { ...newstate }
+			return addClient(state, action.payload)
 		}
 		case ClientActionTypes.RemoveClient: {
-			return state
+			return removeClient(state, action.payload)
 		}
 		case ClientActionTypes.BulkAdd: {
-			const { payload } = action
-			const newstate = { ...state }
-			newstate.state.clients = [...payload]
-			return { ...newstate }
+			return bulkAdd(state, action.payload)
 		}
 		case ClientActionTypes.ChangeCurrentClient: {
-			const newstate = { ...state }
-			newstate.state.currentClient = action.payload
-			return {
-				...newstate,
-			}
+			return changeCurrentClient(state, action.payload)
 		}
 		case ClientActionTypes.UpdateClientSynced: {
-			const newstate = { ...state }
-			newstate.state.clientSynced = action.payload
-			return { ...newstate }
+			return updateClientSynced(state, action.payload)
 		}
 		default: {
-			throw new Error(`Unsupported action type: ${JSON.stringify(action)}`)
+			return state
 		}
 	}
 }

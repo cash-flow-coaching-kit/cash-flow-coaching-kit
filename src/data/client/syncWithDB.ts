@@ -22,10 +22,10 @@ const syncClientsWithDb = async (
 		payload: clients,
 	})
 
-	if (clients.length > 0) {
+	if (clients[0]?.id) {
 		dispatch({
 			type: ClientActionTypes.ChangeCurrentClient,
-			payload: clients[0],
+			payload: clients[0].id,
 		})
 	}
 

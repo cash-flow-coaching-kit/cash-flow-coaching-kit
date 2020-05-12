@@ -99,6 +99,15 @@ class ActionChecklistDatabase extends Dexie {
 			priority: "++id, [actionContainer+clientId], *order",
 			notes: "++id, actionContainer, notes, clientId",
 		})
+
+		// Version 1.4
+		// Add compound index for [actionContainer+clientId]
+		this.version(1.4).stores({
+			actionItems:
+				"++id, [actionContainer+clientId], clientId, completed, description, reviewBy",
+			priority: "++id, [actionContainer+clientId], clientId, *order",
+			notes: "++id, actionContainer, notes, clientId",
+		})
 	}
 }
 

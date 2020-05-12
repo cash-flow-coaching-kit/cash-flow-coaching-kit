@@ -7,6 +7,7 @@ import {
 	ActionChecklistNotesStruct,
 	BaseActionChecklistNotesStruct,
 	ActionChecklistNotesId,
+	ActionChecklistPriorityId,
 } from "../../data/_config/shape"
 
 /**
@@ -45,6 +46,62 @@ export enum ActionChecklistActionTypes {
 }
 
 /**
+ * Data structure used when running the `UpdateDatabaseSync` action
+ *
+ * @export
+ * @interface IUpdateDatabaseSyncPayload
+ */
+export interface IUpdateDatabaseSyncPayload {
+	data: ActionChecklistStruct[]
+	priority: ActionChecklistPriorityStruct[]
+	notes: ActionChecklistNotesStruct[]
+}
+
+/**
+ * Data structure used when running the `AddNewActionItem` action
+ *
+ * @export
+ * @interface IAddNewActionItemPayload
+ */
+export interface IAddNewActionItemPayload {
+	checklist: ActionChecklistStruct
+	priority: ActionChecklistPriorityId
+}
+
+/**
+ * Data structure used when running the `UpdateActionItem` action
+ *
+ * @export
+ * @interface IUpdateActionItemPayload
+ */
+export interface IUpdateActionItemPayload {
+	data: BaseActionChecklistStruct
+	id: ActionChecklistId
+}
+
+/**
+ * Data structure used when running the `RemoveActionItem` action
+ *
+ * @export
+ * @interface IRemoveActionItemPayload
+ */
+export interface IRemoveActionItemPayload {
+	targetId: ActionChecklistId
+	priorityId: ActionChecklistPriorityId
+}
+
+/**
+ * Data structure used when running the `UpdateNotes` action
+ *
+ * @export
+ * @interface IUpdateNotesPayload
+ */
+export interface IUpdateNotesPayload {
+	data: BaseActionChecklistNotesStruct
+	id: ActionChecklistNotesId
+}
+
+/**
  * Defines the type:payload type pairing
  * aka; what the structure of the payload should be
  * given a certain type
@@ -56,22 +113,15 @@ export type ActionChecklistReducerActions =
 	| { type: ActionChecklistActionTypes.ChangeHideCompleted; payload: boolean }
 	| {
 			type: ActionChecklistActionTypes.UpdateDatabaseSync
-			payload: {
-				data: ActionChecklistStruct[]
-				priority: ActionChecklistPriorityStruct[]
-				notes: ActionChecklistNotesStruct[]
-			}
+			payload: IUpdateDatabaseSyncPayload
 	  }
 	| {
 			type: ActionChecklistActionTypes.AddNewActionItem
-			payload: ActionChecklistStruct
+			payload: IAddNewActionItemPayload
 	  }
 	| {
 			type: ActionChecklistActionTypes.UpdateActionItem
-			payload: {
-				data: BaseActionChecklistStruct
-				id: ActionChecklistId
-			}
+			payload: IUpdateActionItemPayload
 	  }
 	| {
 			type: ActionChecklistActionTypes.UpdatePriorityOrder
@@ -79,10 +129,7 @@ export type ActionChecklistReducerActions =
 	  }
 	| {
 			type: ActionChecklistActionTypes.RemoveActionItem
-			payload: {
-				targetId: ActionChecklistId
-				container: PossibleActionItems
-			}
+			payload: IRemoveActionItemPayload
 	  }
 	| {
 			type: ActionChecklistActionTypes.AddNotes
@@ -90,10 +137,7 @@ export type ActionChecklistReducerActions =
 	  }
 	| {
 			type: ActionChecklistActionTypes.UpdateNotes
-			payload: {
-				data: BaseActionChecklistNotesStruct
-				id: ActionChecklistNotesId
-			}
+			payload: IUpdateNotesPayload
 	  }
 	| {
 			type: ActionChecklistActionTypes.RemoveNote
