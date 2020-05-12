@@ -1,5 +1,5 @@
 import { Dispatch } from "react"
-import { ClientDataStruct } from "../../data/_config/shape"
+import { ClientDataStruct, ClientId } from "../../data/_config/shape"
 
 /**
  * Actions that can be performed for state changes
@@ -25,9 +25,9 @@ export enum ClientActionTypes {
  */
 export type IClientReducerAction =
 	| { type: ClientActionTypes.AddClient; payload: ClientDataStruct }
-	| { type: ClientActionTypes.RemoveClient; payload: number }
+	| { type: ClientActionTypes.RemoveClient; payload: ClientId }
 	| { type: ClientActionTypes.BulkAdd; payload: ClientDataStruct[] }
-	| { type: ClientActionTypes.ChangeCurrentClient; payload: ClientDataStruct }
+	| { type: ClientActionTypes.ChangeCurrentClient; payload: ClientId }
 	| { type: ClientActionTypes.UpdateClientSynced; payload: boolean }
 
 /**
