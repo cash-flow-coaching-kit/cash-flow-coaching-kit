@@ -61,7 +61,7 @@
 		"fp/no-nil": "off",
 		"fp/no-proxy": "error",
 		"fp/no-rest-parameters": "error",
-		"fp/no-this": "error",
+		"fp/no-this": "off",
 		"fp/no-throw": "error",
 		"fp/no-unused-expression": "off",
 		"fp/no-valueof-field": "error",
