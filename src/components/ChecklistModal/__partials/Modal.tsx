@@ -20,7 +20,10 @@ import {
 	ActionChecklistPriorityStruct,
 	ActionChecklistPriorityId,
 } from "../../../data/_config/shape"
-import { newChecklistItem } from "../../../data/ActionChecklist/_config/utilities"
+import {
+	newChecklistItem,
+	newPriorityItem,
+} from "../../../data/ActionChecklist/_config/utilities"
 import { ClientContext } from "../../../state/client"
 import { ActionChecklistContext } from "../../../state/action-checklist"
 import ActionChecklistUseCase from "../../../data/ActionChecklist/ChecklistLogic"
@@ -63,12 +66,18 @@ export default function Modal({
 				container,
 				id
 			)
-			/*
-			FIXME:
-				if there isn't a priority, it first needs to be created
-				the id can then be passed on to the rest of the function
-			*/
-			setPriority(prior[0])
+
+			if (prior.length > 0) {
+				setPriority(prior[0])
+			} else {
+				// If a priority item could not be find, create a new item
+				const newPriority = newPriorityItem(id, container)
+				const pID = await ActionPriorityUseCase.create(newPriority)
+				setPriority({
+					...newPriority,
+					id: pID,
+				})
+			}
 		}
 
 		if (currentClient?.id) {
