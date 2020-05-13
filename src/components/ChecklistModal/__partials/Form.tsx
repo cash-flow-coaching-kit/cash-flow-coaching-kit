@@ -1,15 +1,29 @@
 import React, { ReactElement, useState, MouseEvent } from "react"
 import { useFormik } from "formik"
-import { Box, Button, Grid, TextField, IconButton } from "@material-ui/core"
+import {
+	Box,
+	Button,
+	Grid,
+	TextField,
+	IconButton,
+	Snackbar,
+} from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
 import DeleteIcon from "@material-ui/icons/Delete"
-
+import Alert from "@material-ui/lab/Alert"
 import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
 } from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns"
-import { FormProps, FormValues, FormItem } from "../__config/shape"
+import CloseIcon from "@material-ui/icons/Close"
+
+import {
+	FormProps,
+	FormValues,
+	FormItem,
+	FormSnackbar,
+} from "../__config/shape"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import { createNewFormItem } from "../__config/utilities"
 import { useFormStyles } from "../__config/styles"
@@ -23,7 +37,32 @@ import { useFormStyles } from "../__config/styles"
  */
 export default function Form({ onFormSubmission }: FormProps): ReactElement {
 	const [key] = useState(generateKey())
+	const [snackbar, setSnackbar] = useState<FormSnackbar>({
+		open: false,
+		msg: "",
+	})
 	const style = useFormStyles()
+
+	// #region Snackbar methods
+	function handleClose(event?: React.SyntheticEvent, reason?: string): void {
+		if (reason === "clickaway") {
+			return
+		}
+
+		setSnackbar({ ...snackbar, open: false })
+	}
+
+	function showSnackbar(
+		msg: FormSnackbar["msg"],
+		severity: FormSnackbar["severity"]
+	): void {
+		setSnackbar({
+			open: true,
+			msg,
+			severity,
+		})
+	}
+	// #endregion
 
 	// #region Formik definition
 	const initialValues: FormValues = {
@@ -32,14 +71,24 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 
 	const form = useFormik({
 		initialValues,
-		validate: (values: FormValues) => {
-			// TODO: Do some validation
-		},
 		onSubmit: async (values: FormValues) => {
-			const success = await onFormSubmission(values)
+			// Filter out empty items before submission
+			const validItems = values.items.filter((item) => item.description !== "")
+
+			if (validItems.length === 0) {
+				showSnackbar("At least 1 action item is required", "error")
+				return
+			}
+
+			const newValues: FormValues = { ...values, items: validItems }
+
+			// Call the parent onFormSubmission method
+			const success = await onFormSubmission(newValues)
+
+			// If it is successful, reset the form and show snackbar
 			if (success) {
 				form.resetForm()
-				// TODO: Show a success message
+				showSnackbar("Action items have been added", "success")
 			}
 		},
 	})
@@ -184,6 +233,27 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 
 	return (
 		<>
+			{/* Message snackbar */}
+			<Snackbar
+				open={snackbar.open}
+				autoHideDuration={2000}
+				anchorOrigin={{ vertical: "top", horizontal: "center" }}
+				onClose={handleClose}
+			>
+				<Alert
+					severity={snackbar.severity || "info"}
+					variant="filled"
+					action={
+						<IconButton size="small" aria-label="close" color="inherit">
+							<CloseIcon fontSize="small" />
+						</IconButton>
+					}
+					onClose={handleClose}
+				>
+					{snackbar.msg}
+				</Alert>
+			</Snackbar>
+
 			<form
 				noValidate
 				autoComplete="off"
