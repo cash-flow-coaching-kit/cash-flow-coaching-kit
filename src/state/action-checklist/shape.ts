@@ -43,6 +43,7 @@ export enum ActionChecklistActionTypes {
 	AddNotes = "add_notes",
 	UpdateNotes = "update_notes",
 	RemoveNote = "remove_note",
+	BulkAddActionItems = "bulk_add_action_items",
 }
 
 /**
@@ -101,6 +102,11 @@ export interface IUpdateNotesPayload {
 	id: ActionChecklistNotesId
 }
 
+export interface IBulkAddActionItemsPayload {
+	items: ActionChecklistStruct[]
+	priorityId: ActionChecklistPriorityId
+}
+
 /**
  * Defines the type:payload type pairing
  * aka; what the structure of the payload should be
@@ -142,6 +148,10 @@ export type ActionChecklistReducerActions =
 	| {
 			type: ActionChecklistActionTypes.RemoveNote
 			payload: ActionChecklistNotesId
+	  }
+	| {
+			type: ActionChecklistActionTypes.BulkAddActionItems
+			payload: IBulkAddActionItemsPayload
 	  }
 
 /**
