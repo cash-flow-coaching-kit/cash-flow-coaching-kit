@@ -56,5 +56,5 @@ export interface FormValues {
  * @interface FormProps
  */
 export interface FormProps {
-	onFormSubmission(values: FormValues): boolean
+	onFormSubmission(values: FormValues): Promise<boolean>
 }

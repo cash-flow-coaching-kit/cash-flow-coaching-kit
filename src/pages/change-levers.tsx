@@ -7,7 +7,7 @@ const ChangeLevers = (): ReactElement => {
 		<>
 			<h1>ChangeLevers</h1>
 			<ChecklistModal
-				container="cashInActions"
+				container="managing"
 				title="Pricing Lever"
 				subtitle="Change prices"
 			>

@@ -32,9 +32,15 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 
 	const form = useFormik({
 		initialValues,
-		onSubmit(values: FormValues) {
-			const success = onFormSubmission(values)
-			console.log(success)
+		validate: (values: FormValues) => {
+			// TODO: Do some validation
+		},
+		onSubmit: async (values: FormValues) => {
+			const success = await onFormSubmission(values)
+			if (success) {
+				form.resetForm()
+				// TODO: Show a success message
+			}
 		},
 	})
 
