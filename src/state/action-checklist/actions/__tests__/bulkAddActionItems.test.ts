@@ -2,6 +2,7 @@ import { IActionChecklistState, IBulkAddActionItemsPayload, ActionChecklistActio
 import { newPriorityItem, newChecklistItem } from "../../../../data/ActionChecklist/_config/utilities"
 import bulkAddActionItem from "../bulkAddActionItems"
 import { ActionChecklistReducer } from "../.."
+import filterById from "../../../../util/filters/ById"
 
 describe("Change the state when adding a bulk of action items", () => {
   let state: IActionChecklistState
@@ -44,6 +45,23 @@ describe("Change the state when adding a bulk of action items", () => {
     expect(newState.priority[1].order.length).toBe(5)
     expect(newState.priority[1].order).toEqual([2, 3, 6, 7, 8])
     expect(newState.priority[0].order).toEqual(state.priority[0].order)
+  })
+
+  it("should create a priority order if there isn't one", function() {
+    payload.priorityId = 13
+    const newState = bulkAddActionItem(state, payload)
+
+    expect(newState.priority.length).toBe(4)
+    expect(newState.priority.find(filterById(13))).not.toBeUndefined()
+    expect(newState.priority[3].order).toEqual([6, 7, 8])
+  })
+
+  it("should ignore undefined ids in the order", function() {
+    payload.items[0].id = undefined
+    const newState = bulkAddActionItem(state, payload)
+
+    expect(newState.priority[1].order.length).toBe(4)
+    expect(newState.priority[1].order).toEqual([2, 3, 7, 8])
   })
 
   it("should not mutate the arguements", function() {
