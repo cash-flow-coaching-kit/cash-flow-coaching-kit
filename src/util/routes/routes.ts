@@ -47,10 +47,9 @@ export const routeVarReplacement = (
 	route: PrivateRoutes | PublicRoutes,
 	replacements: [string, string][]
 ): string => {
-	let r = `${route}`
-	replacements.forEach(([search, rep]) => {
-		r = r.replace(search, rep)
-	})
+	const r = replacements.reduce((s, rep) => {
+		return s.replace(rep[0], rep[1])
+	}, route.toString())
 
 	return r
 }

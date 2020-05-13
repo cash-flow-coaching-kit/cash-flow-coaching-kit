@@ -10,7 +10,7 @@ import { PublicRoutes } from "./routes"
 const checkIfPublic = (location: RouteProps["location"]): boolean => {
 	if (location) {
 		return (
-			(Object.values(PublicRoutes) as string[]).indexOf(location.pathname) ===
+			(Object.values(PublicRoutes) as string[]).indexOf(location.pathname) !==
 			-1
 		)
 	}

@@ -31,10 +31,12 @@ const addClient = async (
 		payload: newclient,
 	})
 
-	dispatch({
-		type: ClientActionTypes.ChangeCurrentClient,
-		payload: newclient,
-	})
+	if (newclient.id) {
+		dispatch({
+			type: ClientActionTypes.ChangeCurrentClient,
+			payload: newclient.id,
+		})
+	}
 
 	return true
 }

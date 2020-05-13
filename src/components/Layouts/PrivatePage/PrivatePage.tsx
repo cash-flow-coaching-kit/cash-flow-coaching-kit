@@ -15,7 +15,7 @@ const PrivatePage = ({ children }: IPrivatePage): ReactElement => {
 
 	return (
 		<>
-			{checkIfPublic(location) && (
+			{!checkIfPublic(location) && (
 				<>
 					<PrimaryNavbar />
 					<SecondaryNavbar />

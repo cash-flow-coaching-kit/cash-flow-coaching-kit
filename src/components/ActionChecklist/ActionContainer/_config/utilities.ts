@@ -18,7 +18,7 @@ export const actionItemKeyTitleMapping = (key: PossibleActionItems): string => {
  *
  * @returns PossibleActionItems[]
  */
-const staticIdentifier = (): PossibleActionItems[] => [
+export const staticIdentifier = (): PossibleActionItems[] => [
 	"cashInActions",
 	"cashOutActions",
 ]

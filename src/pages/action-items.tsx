@@ -26,15 +26,9 @@ import { generateKey, constructKey } from "../util/lists/key"
 import { PossibleActionItems } from "../state/action-checklist/shape"
 import { ActionItemMapping } from "../components/ActionChecklist/_config/data"
 import { ClientContext } from "../state/client"
-import filterByClientId from "../util/filters/ByClientId"
 import filterByActionContainer from "../util/filters/ByActionContainer"
 import { ActionChecklistMachine } from "../data/ActionChecklist/_config/machine"
 import Loading from "../components/Loading"
-import {
-	ActionChecklistStruct,
-	ActionChecklistPriorityStruct,
-	ActionChecklistNotesStruct,
-} from "../data/_config/shape"
 
 /**
  * Action Checklist page component
@@ -50,27 +44,12 @@ const ActionChecklist = (): ReactElement => {
 		state: { currentClient },
 	} = useContext(ClientContext)
 	const [key] = useState(generateKey())
-	const [clientChecklist, setClientChecklist] = useState<
-		ActionChecklistStruct[]
-	>([])
-	const [clientPriority, setClientPriority] = useState<
-		ActionChecklistPriorityStruct[]
-	>([])
-	const [clientNotes, setClientNotes] = useState<ActionChecklistNotesStruct[]>(
-		[]
-	)
 
 	useEffect(() => {
 		if (currentClient?.id && databaseSyced) {
-			setClientChecklist(
-				checklistCollection.filter(filterByClientId(currentClient.id))
-			)
-			setClientPriority(priority.filter(filterByClientId(currentClient.id)))
-			setClientNotes(notes.filter(filterByClientId(currentClient.id)))
-
 			send("HAS_CONTENT")
 		}
-	}, [currentClient, databaseSyced, send, checklistCollection, priority, notes])
+	}, [currentClient, databaseSyced, send])
 
 	/**
 	 * Renders all the action containers based on
@@ -82,9 +61,9 @@ const ActionChecklist = (): ReactElement => {
 		return (Object.keys(ActionItemMapping) as PossibleActionItems[]).map(
 			(item, idx) => {
 				if (currentClient?.id) {
-					const data = clientChecklist.filter(filterByActionContainer(item))
-					const prior = clientPriority.filter(filterByActionContainer(item))
-					const note = clientNotes.filter(filterByActionContainer(item))
+					const data = checklistCollection.filter(filterByActionContainer(item))
+					const prior = priority.filter(filterByActionContainer(item))
+					const note = notes.filter(filterByActionContainer(item))
 
 					if (data.length > 0 && prior.length > 0) {
 						return (

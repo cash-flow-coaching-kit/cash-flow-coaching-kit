@@ -38,10 +38,12 @@ const ClientList = ({
 	 * @returns void
 	 */
 	const handleChange = (client: ClientDataStruct): void => {
-		dispatch({
-			type: ClientActionTypes.ChangeCurrentClient,
-			payload: client,
-		})
+		if (client?.id) {
+			dispatch({
+				type: ClientActionTypes.ChangeCurrentClient,
+				payload: client.id,
+			})
+		}
 	}
 
 	return (
