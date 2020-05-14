@@ -170,6 +170,19 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 			return this.table.bulkAdd<true>(items, { allKeys: true })
 		})
 	}
+
+	/**
+	 * Method to get an item from the database used an ID
+	 *
+	 * @param {I} id
+	 * @returns {(Promise<E|undefined>)}
+	 * @memberof ILogicLayer
+	 */
+	public findById(id: I): Promise<E | undefined> {
+		return this.database.transaction("rw", this.table.name, () => {
+			return this.table.get(id)
+		})
+	}
 }
 
 export default ILogicLayer
