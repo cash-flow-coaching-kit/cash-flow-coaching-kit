@@ -1,5 +1,4 @@
 import { ReactNode } from "react"
-import { AlertProps } from "@material-ui/lab/Alert"
 import { PossibleActionItems } from "../../../state/action-checklist/shape"
 
 // Alias for the title type
@@ -58,16 +57,4 @@ export interface FormValues {
  */
 export interface FormProps {
 	onFormSubmission(values: FormValues): Promise<boolean>
-}
-
-/**
- * Interface used for the form snackbar component
- *
- * @export
- * @interface FormSnackbar
- */
-export interface FormSnackbar {
-	open: boolean
-	msg: string
-	severity?: AlertProps["severity"]
 }
