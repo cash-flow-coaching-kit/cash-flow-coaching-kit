@@ -6,7 +6,7 @@ import {
 import ActionChecklistDB from "./ActionChecklistDatabase"
 import ILogicLayer from "../_config/logicLayer"
 import { PossibleActionItems } from "../../state/action-checklist/shape"
-import { findByContainer, findByClientAndContainer } from "./_config/utilities"
+import { findByClientAndContainer } from "./_config/utilities"
 
 /**
  * Logic implementation for priority items for the
@@ -26,19 +26,6 @@ class ActionChecklistPriorityLogic extends ILogicLayer<
 	 */
 	constructor() {
 		super(ActionChecklistDB, ActionChecklistDB.priority)
-	}
-
-	/**
-	 * Finds all action priority by a container
-	 *
-	 * @param {PossibleActionItems} container
-	 * @returns {Promise<ActionChecklistPriorityStruct[]>}
-	 * @memberof ActionChecklistPriorityLogic
-	 */
-	findByContainer(
-		container: PossibleActionItems
-	): Promise<ActionChecklistPriorityStruct[]> {
-		return findByContainer(container, this.database, this.table)
 	}
 
 	/**
