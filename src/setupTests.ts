@@ -16,3 +16,7 @@ Object.defineProperty(global.window, "crypto", {
 		getRandomValues: jest.fn((x) => x.length.toString()),
 	},
 })
+
+global.console = {
+	warn: jest.fn(),
+}

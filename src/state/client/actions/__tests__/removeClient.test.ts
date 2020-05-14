@@ -52,6 +52,19 @@ describe("Change state when removing a client", () => {
     expect(newState.state.currentClient).toBeUndefined()
   })
 
+  it("should choose the first item if the current client doesn't have a id", function() {
+    delete state.state.currentClient!.id
+
+    const newState = removeClient(state, payload)
+    expect(newState.state.currentClient).toMatchObject(state.state.clients[0])
+  })
+
+  it("should keep the current client if not being removed", function() {
+    state.state.currentClient = state.state.clients[0]
+    const newState = removeClient(state, payload)
+    expect(newState.state.currentClient).toMatchObject(state.state.clients[0])
+  })
+
   it("should not mutate the arguements", function() {
     const newState = removeClient(state, payload)
     expect(state).toEqual(state)

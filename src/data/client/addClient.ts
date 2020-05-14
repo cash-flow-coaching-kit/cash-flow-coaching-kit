@@ -31,12 +31,12 @@ const addClient = async (
 		payload: newclient,
 	})
 
-	if (newclient.id) {
-		dispatch({
-			type: ClientActionTypes.ChangeCurrentClient,
-			payload: newclient.id,
-		})
-	}
+	dispatch({
+		type: ClientActionTypes.ChangeCurrentClient,
+		// Defined on line 26
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		payload: newclient.id!,
+	})
 
 	return true
 }

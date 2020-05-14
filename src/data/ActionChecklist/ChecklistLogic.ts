@@ -2,11 +2,12 @@ import {
 	ActionChecklistStruct,
 	BaseActionChecklistStruct,
 	ClientId,
+	ActionChecklistId,
 } from "../_config/shape"
 import ActionChecklistDB from "./ActionChecklistDatabase"
 import ILogicLayer from "../_config/logicLayer"
 import { PossibleActionItems } from "../../state/action-checklist/shape"
-import { findByContainer, findByClientAndContainer } from "./_config/utilities"
+import { findByClientAndContainer } from "./_config/utilities"
 
 /**
  * Logic implementation for Action Items for the
@@ -29,30 +30,13 @@ class ActionChecklistLogic extends ILogicLayer<
 	}
 
 	/**
-	 * Finds all action items by a container
-	 *
-	 * @param {PossibleActionItems} container
-	 * @returns {Promise<ActionChecklistStruct[]>}
-	 * @memberof ActionChecklistLogic
-	 */
-	findByContainer(
-		container: PossibleActionItems
-	): Promise<ActionChecklistStruct[]> {
-		return findByContainer<ActionChecklistStruct>(
-			container,
-			this.database,
-			this.table
-		)
-	}
-
-	/**
 	 * Adds functionality for processing bulk updates
 	 *
 	 * @param {ActionChecklistStruct[]} items
-	 * @returns {Promise<number>}
+	 * @returns {Promise<ActionChecklistId>} Last updated item id
 	 * @memberof ActionChecklistLogic
 	 */
-	bulkUpdate(items: ActionChecklistStruct[]): Promise<number> {
+	bulkUpdate(items: ActionChecklistStruct[]): Promise<ActionChecklistId> {
 		return this.database.transaction("rw", this.table, () => {
 			return this.table.bulkPut(items)
 		})
