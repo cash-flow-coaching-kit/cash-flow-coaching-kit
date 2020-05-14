@@ -5,6 +5,7 @@ import { useTaskBuilderStyles } from "./__config/styles"
 import { Form } from "./__partials"
 import { TaskbuilderProps } from "./__config/shape"
 import { ClientContext } from "../../state/client"
+import IfElseLoading from "../IfElseLoading"
 
 /**
  * Taskbuilder component used on Discover topics pages
@@ -36,9 +37,10 @@ export default function Taskbuilder({
 				</Typography>
 
 				{/* FORM */}
-				{currentClient?.id && (
-					<Form container={container} client={currentClient.id} />
-				)}
+				<IfElseLoading if={typeof currentClient?.id !== "undefined"}>
+					{/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+					<Form container={container} client={currentClient?.id!} />
+				</IfElseLoading>
 			</Box>
 		</ExpandableNav>
 	)
