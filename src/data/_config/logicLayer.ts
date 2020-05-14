@@ -32,7 +32,7 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	protected defaultCreate(data: E): Promise<I> {
-		return this.database.transaction("rw", this.table, () => {
+		return this.database.transaction("rw", this.table.name, () => {
 			return this.table.add({
 				...data,
 			})
@@ -50,7 +50,7 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	protected defaultSync(): Promise<E[]> {
-		return this.database.transaction("r", this.table, () => {
+		return this.database.transaction("r", this.table.name, () => {
 			return this.table.toArray()
 		})
 	}
@@ -68,7 +68,7 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	protected defaultDelete<T extends IndexableType>(id: T): Promise<number> {
-		return this.database.transaction("rw", this.table, () => {
+		return this.database.transaction("rw", this.table.name, () => {
 			return this.table.where("id").equals(id).delete()
 		})
 	}
@@ -86,7 +86,7 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	protected defaultUpdate(id: I, data: B): Promise<number> {
-		return this.database.transaction("rw", this.table, () => {
+		return this.database.transaction("rw", this.table.name, () => {
 			return this.table.update(id, data)
 		})
 	}
@@ -152,8 +152,22 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	public findByClient(clientId: ClientId): Promise<E[]> {
-		return this.database.transaction("r", this.table, () => {
+		return this.database.transaction("r", this.table.name, () => {
 			return this.table.where({ clientId }).toArray()
+		})
+	}
+
+	/**
+	 * Method to bulk add items to the database. Returns an array
+	 * of database ids
+	 *
+	 * @param {E[]} items
+	 * @returns {Promise<I[]>}
+	 * @memberof ILogicLayer
+	 */
+	public bulkAdd(items: E[]): Promise<I[]> {
+		return this.database.transaction("rw", this.table.name, () => {
+			return this.table.bulkAdd<true>(items, { allKeys: true })
 		})
 	}
 }

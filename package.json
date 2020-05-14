@@ -9,6 +9,7 @@
 		"@loadable/component": "^5.12.0",
 		"@material-ui/core": "^4.9.11",
 		"@material-ui/icons": "^4.9.1",
+		"@material-ui/lab": "^4.0.0-alpha.53",
 		"@material-ui/pickers": "^3.2.10",
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.3.2",
@@ -23,7 +24,7 @@
 		"@types/react-router-dom": "^5.1.4",
 		"@xstate/react": "^0.8.1",
 		"date-fns": "^2.12.0",
-		"dexie": "^2.0.4",
+		"dexie": "^3.0.1",
 		"electron": "^8.2.3",
 		"formik": "^2.1.4",
 		"lodash-es": "^4.17.15",
@@ -128,6 +129,8 @@
 			"!src/**/styles.ts",
 			"!src/**/machine.ts"
 		],
-		"extraGlobals": ["window"]
+		"extraGlobals": [
+			"window"
+		]
 	}
 }

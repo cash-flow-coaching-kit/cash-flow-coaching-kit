@@ -37,7 +37,7 @@ class HealthCheckDatabase extends Dexie {
 	 */
 	private applyMigrations(): void {
 		// Version 1
-		this.version(1).stores({
+		this.version(2).stores({
 			healthChecks: "++id, clientId, *answers, createdAt",
 		})
 	}

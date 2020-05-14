@@ -51,13 +51,17 @@ const HCSummary = (): ReactElement => {
 			;(async function getHC(): Promise<void> {
 				if (typeof currentClient.id !== "undefined") {
 					// Fetches the health checks for the client and sets state values
-					const hc: HealthCheckDataStruct = await HealthCheckUseCase.findByClientId(
+					const hc:
+						| HealthCheckDataStruct
+						| undefined = await HealthCheckUseCase.findByClientId(
 						parseInt(id, 10),
 						currentClient.id
 					)
-					setHealthCheck(hc)
-					setFourQuestions(hc.answers.slice(0, QUESTIONS_OFFSET))
-					setTileAnswers(hc.answers.slice(QUESTIONS_OFFSET))
+					if (hc) {
+						setHealthCheck(hc)
+						setFourQuestions(hc.answers.slice(0, QUESTIONS_OFFSET))
+						setTileAnswers(hc.answers.slice(QUESTIONS_OFFSET))
+					}
 				}
 			})()
 		}
