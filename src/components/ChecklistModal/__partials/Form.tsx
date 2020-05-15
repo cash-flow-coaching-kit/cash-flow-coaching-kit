@@ -77,6 +77,8 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 			if (success) {
 				form.resetForm()
 				showSnackbar("Action items have been added", "success")
+			} else {
+				showSnackbar("Something went wrong, please try again", "warning")
 			}
 		},
 	})

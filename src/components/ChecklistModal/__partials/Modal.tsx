@@ -23,10 +23,10 @@ import {
 import {
 	newChecklistItem,
 	newPriorityItem,
+	bulkAddChecklists,
 } from "../../../data/ActionChecklist/_config/utilities"
 import { ClientContext } from "../../../state/client"
 import { ActionChecklistContext } from "../../../state/action-checklist"
-import ActionChecklistUseCase from "../../../data/ActionChecklist/ChecklistLogic"
 import { ActionChecklistActionTypes } from "../../../state/action-checklist/shape"
 import ActionPriorityUseCase from "../../../data/ActionChecklist/PriorityLogic"
 
@@ -109,35 +109,24 @@ export default function Modal({
 						...collection,
 						{
 							...newChecklistItem(clientId, container),
-							description: current.description,
-							reviewBy: current.reviewBy,
+							...current,
 						},
 					]
 				},
 				[]
 			)
 
-			// bulkAdd all the items into the DB
-			const ids = await ActionChecklistUseCase.bulkAdd(items)
+			const [newItems, success] = await bulkAddChecklists(items, priorityId)
 
-			// update the priority order in the database
-			const newOrder = priority.order.concat(ids)
-			await ActionPriorityUseCase.update(priorityId, {
-				...priority,
-				order: newOrder,
-			})
-
-			// inject the ids into the items
-			const completedItems = items.map((item, idx) => ({
-				...item,
-				id: ids[idx],
-			}))
+			if (!success) {
+				return false
+			}
 
 			// dispatch the bulk add reducer method
 			dispatch({
 				type: ActionChecklistActionTypes.BulkAddActionItems,
 				payload: {
-					items: completedItems,
+					items: newItems,
 					priorityId,
 				},
 			})

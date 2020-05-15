@@ -1,4 +1,12 @@
-import React, { ReactElement, useState } from "react"
+import React, {
+	ReactElement,
+	useState,
+	useEffect,
+	ChangeEvent,
+	useCallback,
+	FormEvent,
+	useContext,
+} from "react"
 import {
 	Button,
 	Box,
@@ -10,10 +18,33 @@ import {
 import AddIcon from "@material-ui/icons/Add"
 
 import { FormProps } from "../__config/shape"
-import { checklistOptions } from "../__config/utilities"
+import {
+	checklistOptions,
+	createNameField,
+	determineChecked,
+	inChecklists,
+	constructSelectedItems,
+} from "../__config/utilities"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import { useFormStyles } from "../__config/styles"
 import IfElseLoading from "../../IfElseLoading"
+import {
+	ActionChecklistStruct,
+	ActionChecklistNotesStruct,
+	ActionChecklistPriorityId,
+	ActionChecklistNotesId,
+} from "../../../data/_config/shape"
+import arrayFillWith from "../../../util/array/arrayFillWith"
+import ActionNotesUseCase from "../../../data/ActionChecklist/NotesLogic"
+import {
+	newNotesItem,
+	newPriorityItem,
+	bulkAddChecklists,
+} from "../../../data/ActionChecklist/_config/utilities"
+import ActionPriorityUseCase from "../../../data/ActionChecklist/PriorityLogic"
+import { ActionChecklistContext } from "../../../state/action-checklist"
+import { ActionChecklistActionTypes } from "../../../state/action-checklist/shape"
+import filterByActionContainer from "../../../util/filters/ByActionContainer"
 
 /**
  * Form used to add predefined checklist items
@@ -23,18 +54,107 @@ import IfElseLoading from "../../IfElseLoading"
  * @returns {ReactElement}
  */
 export default function Form({ container, client }: FormProps): ReactElement {
-	const [fetched, setFetched] = useState(true)
-	const [key] = useState(generateKey())
-
 	const styles = useFormStyles()
-	const options = checklistOptions(container)
 
-	/*
-		TODO: Should get possible values in the database and update
-		the state of the form
-	*/
+	// #region State management
+	const [fetched, setFetched] = useState(false)
+	const [key] = useState(generateKey())
+	const { dispatch, notes, databaseSyced, checklistCollection } = useContext(
+		ActionChecklistContext
+	)
 
-	// #region Render checklist items
+	// -- Database Data
+	const [checklists, setChecklists] = useState<ActionChecklistStruct[]>()
+	const [priorityId, setPriorityId] = useState<ActionChecklistPriorityId>()
+	const [noteId, setNoteId] = useState<ActionChecklistNotesId>()
+
+	// -- Form Data
+	const [options] = useState(checklistOptions(container))
+	const [formChecklists, setFormChecklists] = useState(
+		arrayFillWith<boolean>(options.length, false)
+	)
+	const [noteText, setNoteText] = useState<string>("")
+	// #endregion
+
+	// #region Data fetching
+	/**
+	 * Pulls in the correct note data or adds an item to the database
+	 * for this client/container
+	 *
+	 * @useCallback
+	 * @async
+	 * @dependencies [notes, container, client]
+	 */
+	const syncNoteData = useCallback(async () => {
+		const addToState = (data: ActionChecklistNotesStruct): void => {
+			dispatch({
+				type: ActionChecklistActionTypes.AddNotes,
+				payload: data,
+			})
+		}
+
+		// Fetch the data from the db
+		const noteData = notes.filter(filterByActionContainer(container))[0]
+
+		if (noteData?.id) {
+			setNoteText(noteData.notes)
+			setNoteId(noteData.id)
+		} else {
+			const newNote = newNotesItem(client, container)
+			const nId = await ActionNotesUseCase.create(newNote)
+			addToState({ ...newNote, id: nId })
+			setNoteId(nId)
+		}
+	}, [notes, container, client, dispatch])
+
+	/**
+	 * Method to fetch the data used to pre-populate the form
+	 *
+	 * @useCallback
+	 * @async
+	 * @dependencies [container, client, options]
+	 */
+	const fetchExistingData = useCallback(async () => {
+		// -- Note Data
+		if (typeof noteId === "undefined") {
+			await syncNoteData()
+		}
+
+		// -- Checklist Data
+		const data = checklistCollection.filter(filterByActionContainer(container))
+		setChecklists(data)
+		setFormChecklists(determineChecked(options, data))
+
+		setFetched(true)
+	}, [container, options, syncNoteData, noteId, checklistCollection])
+
+	/**
+	 * Call the fetch function when component loads
+	 *
+	 * @useEffect
+	 * @dependencies [fetchExistingData]
+	 */
+	useEffect(() => {
+		if (databaseSyced) {
+			fetchExistingData()
+		}
+	}, [fetchExistingData, databaseSyced])
+	// #endregion
+
+	// #region Checklist functionality
+	/**
+	 * Handles the event when using the checkboxes
+	 *
+	 * @param {boolean} checked
+	 * @param {number} idx
+	 */
+	function handleCheckbox(checked: boolean, idx: number): void {
+		const newState = formChecklists.reduce((acc: boolean[], cur, i) => {
+			return acc.concat(i === idx ? checked : cur)
+		}, [])
+		setFormChecklists(newState)
+	}
+
 	/**
 	 * Used with a `.map` method, this renders all the checklist
 	 * items for the current container group
@@ -48,14 +168,101 @@ export default function Form({ container, client }: FormProps): ReactElement {
 			<FormControlLabel
 				label={option}
 				key={constructKey(key, idx)}
-				control={<Checkbox name={option} />}
+				control={
+					<Checkbox
+						name={option}
+						onChange={(e: ChangeEvent<HTMLInputElement>): void => {
+							handleCheckbox(e.target.checked, idx)
+						}}
+					/>
+				}
+				name={createNameField(option)}
+				checked={formChecklists[idx]}
+				disabled={inChecklists(option, checklists || [])}
 			/>
 		)
 	}
 	// #endregion
 
+	// #region Note functionality
+	/**
+	 * Handles the state change for the notes textfield
+	 *
+	 * @param {ChangeEvent<HTMLInputElement>} e
+	 */
+	function handleNoteChange(e: ChangeEvent<HTMLInputElement>): void {
+		setNoteText(e.target.value)
+	}
+	// #endregion
+
+	// #region Form submission functionality
+	/**
+	 * Creates a priority item if required and returns the id
+	 * or returns the saved id
+	 *
+	 * @returns {Promise<ActionChecklistPriorityId>}
+	 */
+	async function preSubmitCheck(): Promise<ActionChecklistPriorityId> {
+		if (typeof priorityId === "undefined") {
+			const id = await ActionPriorityUseCase.create(
+				newPriorityItem(client, container)
+			)
+			setPriorityId(id)
+			return id
+		}
+
+		return priorityId
+	}
+
+	/**
+	 * Functionality that runs on the form submission
+	 *
+	 * @param {FormEvent<HTMLFormElement>} e
+	 * @returns {Promise<void>}
+	 */
+	async function onSubmission(e: FormEvent<HTMLFormElement>): Promise<void> {
+		e.preventDefault()
+		const pID = await preSubmitCheck()
+		const items = options.reduce(
+			constructSelectedItems(formChecklists, client, container),
+			[]
+		)
+
+		const [newItems, success] = await bulkAddChecklists(items, pID)
+
+		if (!success || typeof noteId === "undefined") {
+			// TODO: Show bad snackbar
+			console.log("This did not worked")
+			return
+		}
+
+		const note = notes.filter(filterByActionContainer(container))
+		const updatedNote = { ...note[0], notes: noteText }
+		await ActionNotesUseCase.put(updatedNote)
+
+		dispatch({
+			type: ActionChecklistActionTypes.BulkAddActionItems,
+			payload: {
+				items: newItems,
+				priorityId: pID,
+			},
+		})
+
+		dispatch({
+			type: ActionChecklistActionTypes.UpdateNotes,
+			payload: {
+				data: updatedNote,
+				id: noteId,
+			},
+		})
+
+		// TODO: Show good snackbar
+		console.log("This worked")
+	}
+	// #endregion
+
 	return (
-		<form autoComplete="off" noValidate>
+		<form autoComplete="off" noValidate onSubmit={onSubmission}>
 			<IfElseLoading if={fetched}>
 				{options.map(mapChecklistItems)}
 				<Divider className={styles.divider} />
@@ -65,6 +272,8 @@ export default function Form({ container, client }: FormProps): ReactElement {
 					variant="outlined"
 					className={styles.fill}
 					label="Notes"
+					value={noteText}
+					onChange={handleNoteChange}
 				/>
 			</IfElseLoading>
 
@@ -75,6 +284,7 @@ export default function Form({ container, client }: FormProps): ReactElement {
 					variant="contained"
 					startIcon={<AddIcon />}
 					className={styles.fill}
+					type="submit"
 				>
 					Add to action checklist
 				</Button>

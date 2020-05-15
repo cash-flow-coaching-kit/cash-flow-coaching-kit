@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { PossibleActionItems } from "../../../state/action-checklist/shape"
+import { BaseActionChecklistStruct } from "../../../data/_config/shape"
 
 // Alias for the title type
 // - used to allow easy override if this needs to change
@@ -35,8 +36,8 @@ export interface ModalProps extends ChecklistModalProps {
 
 // Type defition for a single Form item data
 export type FormItem = {
-	description: string
-	reviewBy: Date
+	description: BaseActionChecklistStruct["description"]
+	reviewBy: BaseActionChecklistStruct["reviewBy"]
 }
 
 /**
