@@ -8,13 +8,19 @@ import {
 	CardActions,
 	CardMedia,
 	Button,
+	ExpansionPanel,
+	ExpansionPanelSummary,
+	ExpansionPanelDetails,
 } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import SectionTitle from "../../components/SectionTitle"
 
 const DTRecordKeeping = (): ReactElement => {
 	const styles = useDTStyles()
+
 	return (
 		<>
 			<PageContainer>
@@ -102,6 +108,156 @@ const DTRecordKeeping = (): ReactElement => {
 						</Card>
 					</Grid>
 				</Grid>
+				<SectionTitle className={styles.SectionTitle}>
+					QUICKSNAPS - How do you stay on top of your record keeping?
+				</SectionTitle>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Typography variant="h5">Records you can rely on</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									To ensure you can make informed financial decisions, you must
+									be able to rely upon your financial records.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li" className={styles.list}>
+										Can you make informed decisions from the information you
+										have?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Is the information accurate and complete?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Your cash flow budget is based on your planned Cash In and
+										Cash Out and allows you to allocate funds for specific
+										purposes that are known in advance.
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Typography variant="h5">
+							An accounting system to make your business more efficient
+						</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									An accounting system often provides an opportunity to
+									streamline reporting and allows you to make faster and better
+									decisions.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li" className={styles.list}>
+										Do you have an accounting system that suits your needs?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Are you using all of the available features of your
+										accounting system to help you maintain accurate and complete
+										records and make more informed decisions?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Could a different system streamline the different tasks and
+										functions within your business?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Could you automate some of your accounting and reporting?
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Typography variant="h5">Help with record keeping</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									Some accounting packages, an accountant or a bookkeeper may
+									assist with record keeping.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li" className={styles.list}>
+										Do you have enough time to keep your books and records up to
+										date or do you require the specialist skills of an
+										accountant or a bookkeeper?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Could you outsource some of the accounting functions to free
+										up your time to spend in other areas, such as obtaining or
+										engaging in new work?
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Typography variant="h5">
+							Records to meet financial commitments
+						</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									Collecting the right records for your financial commitments
+									and obligations is essential to meet your obligations. What
+									records you need and the time you need to keep them for is an
+									important consideration.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li" className={styles.list}>
+										Does your record keeping meet the regulatory requirements?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Are your records sufficient to allow the business to meet
+										its regulatory obligations in a timely manner?
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />

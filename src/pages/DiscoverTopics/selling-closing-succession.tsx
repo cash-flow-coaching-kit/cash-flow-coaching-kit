@@ -10,7 +10,7 @@ import {
 	ExpansionPanelDetails,
 } from "@material-ui/core"
 import SectionTitle from "../../components/SectionTitle"
-import { PrivatePage, PageContainer } from "../../components/Layouts"
+import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import useDTStyles from "./_config/styles"
@@ -19,7 +19,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 	const styles = useDTStyles()
 
 	return (
-		<PrivatePage>
+		<>
 			<PageContainer>
 				<Typography
 					variant="h5"
@@ -509,7 +509,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />
-		</PrivatePage>
+		</>
 	)
 }
 
