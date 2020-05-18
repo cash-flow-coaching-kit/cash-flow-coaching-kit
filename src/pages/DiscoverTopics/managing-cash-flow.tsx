@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react"
+import { Link as RouterLink } from "react-router-dom"
 import {
 	Typography,
 	Grid,
@@ -11,12 +12,15 @@ import {
 	ExpansionPanel,
 	ExpansionPanelSummary,
 	ExpansionPanelDetails,
+	Container,
 } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import VerticalSplitIcon from "@material-ui/icons/VerticalSplit"
 import SectionTitle from "../../components/SectionTitle"
+import { PrivateRoutes } from "../../util/routes/routes"
 
 const DTManagingCashFlow = (): ReactElement => {
 	const styles = useDTStyles()
@@ -267,6 +271,145 @@ const DTManagingCashFlow = (): ReactElement => {
 						</Grid>
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
+				<SectionTitle className={styles.SectionTitle}>
+					Seven tips for maximising cash flow
+				</SectionTitle>
+				<Grid container spacing={3}>
+					<Grid item xs={12} sm={6} md={4}>
+						<Typography component="h3" variant="h5">
+							Pricing
+						</Typography>
+						<Typography component="p">
+							Setting the right price for your products and services will help
+							you to maximise profits. An increase in price, that does not
+							impact customer demand, will have a positive impact on your cash
+							flow.
+						</Typography>
+					</Grid>
+
+					<Grid item xs={12} sm={6} md={4}>
+						<Typography component="h3" variant="h5">
+							Volume
+						</Typography>
+						<Typography component="p">
+							Increasing the range or number of products and services,
+							discounting to attract new customers, or selling into new markets
+							can increase the volume of your sales to generate greater income.
+						</Typography>
+					</Grid>
+
+					<Grid item xs={12} sm={6} md={4}>
+						<Typography component="h3" variant="h5">
+							Debtors
+						</Typography>
+						<Typography component="p">
+							Collecting payments from your customers as quickly as possible
+							will allow you to use the cash within your business. Establish
+							clear credit policies and carry out credit checks before setting
+							up accounts. Carefully consider the account terms you offer your
+							customers and maintain regular communication to ensure they comply
+							with these terms. Consider discounts for early payment.
+						</Typography>
+					</Grid>
+
+					<Grid item xs={12} sm={6} md={4}>
+						<Typography component="h3" variant="h5">
+							Assets
+						</Typography>
+						<Typography component="p">
+							Under-utilised or unnecessary assets tie up cash that could be put
+							to better use in your business. Consider whether leasing some
+							assets is a better option. Sell assets you no longer need.
+						</Typography>
+					</Grid>
+
+					<Grid item xs={12} sm={6} md={4}>
+						<Typography component="h3" variant="h5">
+							Expenses
+						</Typography>
+						<Typography component="p">
+							Think about where you are spending money. Identify which costs are
+							necessary for you to generate your income and which are not.
+							Consider whether there are some expenses that can be reduced to
+							improve your cash flow. Take advantage of credit arrangements and
+							discounts where possible.
+						</Typography>
+					</Grid>
+
+					<Grid item xs={12} sm={6} md={4}>
+						<Typography component="h3" variant="h5">
+							Inventory
+						</Typography>
+						<Typography component="p">
+							Maintaining the right levels of the right inventory plays an
+							important part in managing your cash flow. Forecast your
+							customers’ needs and buy and ship inventory as close to the time
+							of sale as possible. Identify, discount and/or return slow moving
+							stock to free up cash and shelf-space.
+						</Typography>
+					</Grid>
+
+					<Grid item xs={12} sm={6} md={4}>
+						<Typography component="h3" variant="h5">
+							Staffing
+						</Typography>
+						<Typography component="p">
+							Staff costs are significant expenses for many businesses. In
+							addition to the weekly payroll, there are costs associated with
+							hiring, training and rewarding staff. Choosing the right staff for
+							your business and reducing staff turnover can assist in managing
+							these costs. Rostering the right number of staff to cover demand
+							is vital to producing your income and preventing unnecessary
+							costs.
+						</Typography>
+					</Grid>
+					<Grid item xs={12} sm={6} md={8}>
+						<Typography component="h3" variant="h5">
+							Looking for more ideas to increase your cash flow?
+						</Typography>
+						<Button
+							variant="contained"
+							size="large"
+							className={styles.button}
+							component={RouterLink}
+							to={PrivateRoutes.ChangeLevers}
+						>
+							Change Levers
+						</Button>
+						<Typography component="p">
+							Explore the Change Levers tool to get suggestions on a range of
+							actions that focus on improving the cash flow of your business.
+						</Typography>
+					</Grid>
+				</Grid>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerActivity}
+				>
+					<SectionTitle className={styles.SectionTitle}>
+						Cash Flow Canvas
+					</SectionTitle>
+					<Typography variant="body1">
+						The Cash Flow Coaching Kit is designed to help you effectively
+						manage your cash flow. Use the Cash Flow Canvas to get a clear
+						picture of your cash flow, compare your cash flow across multiple
+						periods, and test the improvements that potential changes could have
+						in your business. Click “Show Me How” at any time to get help using
+						the tool.
+					</Typography>
+					<Button
+						variant="contained"
+						color="secondary"
+						size="large"
+						className={styles.button}
+						startIcon={<VerticalSplitIcon />}
+						component={RouterLink}
+						to={PrivateRoutes.CFC}
+					>
+						Cash flow canvas
+					</Button>
+				</Container>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />

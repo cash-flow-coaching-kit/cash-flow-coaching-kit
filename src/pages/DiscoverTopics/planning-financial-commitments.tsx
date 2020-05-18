@@ -11,12 +11,14 @@ import {
 	ExpansionPanel,
 	ExpansionPanelSummary,
 	ExpansionPanelDetails,
+	Container,
 } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import SectionTitle from "../../components/SectionTitle"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 
 const DTPlanningFinanicalCommitments = (): ReactElement => {
 	const styles = useDTStyles()
@@ -289,6 +291,30 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						</Grid>
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerActivity}
+				>
+					<SectionTitle className={styles.SectionTitle}>
+						Know your commitments activity
+					</SectionTitle>
+					<Typography variant="body1">
+						This activity will guide you in identifying all of your regular
+						financial commitments, where they fall in the year, and how to
+						prepare for them ahead of time.
+					</Typography>
+					<Button
+						variant="contained"
+						color="secondary"
+						size="large"
+						className={styles.button}
+						startIcon={<PictureAsPdf />}
+						href="/pdf/KnowYourCommitments-Activity.pdf"
+					>
+						Identify and map your commitments
+					</Button>
+				</Container>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />

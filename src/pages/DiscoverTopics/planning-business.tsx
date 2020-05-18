@@ -11,12 +11,14 @@ import {
 	ExpansionPanel,
 	ExpansionPanelSummary,
 	ExpansionPanelDetails,
+	Container,
 } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import SectionTitle from "../../components/SectionTitle"
+import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 
 const DTPlanningBusiness = (): ReactElement => {
 	const styles = useDTStyles()
@@ -273,6 +275,30 @@ const DTPlanningBusiness = (): ReactElement => {
 						</Grid>
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerActivity}
+				>
+					<SectionTitle className={styles.SectionTitle}>
+						Writing a business plan
+					</SectionTitle>
+					<Typography variant="body1">
+						Writing a business plan can be easier than you think - keep it
+						simple to start with and build on it over time. To set your business
+						up for success, review your business plan regularly.
+					</Typography>
+					<Button
+						variant="contained"
+						color="secondary"
+						size="large"
+						className={styles.button}
+						startIcon={<PictureAsPdf />}
+						href="/pdf/BusinessPan-Activity.pdf"
+					>
+						Build your own business plan
+					</Button>
+				</Container>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />
