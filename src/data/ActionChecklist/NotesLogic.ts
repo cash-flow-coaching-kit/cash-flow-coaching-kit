@@ -3,6 +3,7 @@ import ActionChecklistDB from "./ActionChecklistDatabase"
 import {
 	ActionChecklistNotesStruct,
 	BaseActionChecklistNotesStruct,
+	ActionChecklistNotesId,
 } from "../_config/shape"
 
 /**
@@ -23,6 +24,19 @@ class ActionChecklistNotesLogic extends ILogicLayer<
 	 */
 	constructor() {
 		super(ActionChecklistDB, ActionChecklistDB.notes)
+	}
+
+	/**
+	 * Default put functionality for the notes table
+	 *
+	 * @param {ActionChecklistNotesStruct} data
+	 * @returns {Promise<ActionChecklistNotesId>}
+	 * @memberof ActionChecklistNotesLogic
+	 */
+	put(data: ActionChecklistNotesStruct): Promise<ActionChecklistNotesId> {
+		return this.database.transaction("rw", this.table.name, () => {
+			return this.table.put(data)
+		})
 	}
 }
 

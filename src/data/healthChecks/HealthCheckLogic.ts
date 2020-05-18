@@ -37,8 +37,8 @@ class HealthCheckLogic extends ILogicLayer<
 	public findByClientId(
 		id: HealthCheckId,
 		clientId: ClientId
-	): Promise<HealthCheckDataStruct> {
-		return this.database.transaction("r", this.table, () => {
+	): Promise<HealthCheckDataStruct | undefined> {
+		return this.database.transaction("r", this.table.name, () => {
 			return this.table.where({ id, clientId }).first()
 		})
 	}
@@ -53,7 +53,7 @@ class HealthCheckLogic extends ILogicLayer<
 	public findClientHealthChecks(
 		clientId: ClientId
 	): Promise<HealthCheckDataStruct[]> {
-		return this.database.transaction("r", this.table, () => {
+		return this.database.transaction("r", this.table.name, () => {
 			return this.table.where("clientId").equals(clientId).toArray()
 		})
 	}

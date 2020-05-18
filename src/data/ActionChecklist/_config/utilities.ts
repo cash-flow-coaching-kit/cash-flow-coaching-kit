@@ -6,25 +6,10 @@ import {
 	ActionChecklistStruct,
 	ActionChecklistPriorityStruct,
 	ActionChecklistNotesStruct,
+	ActionChecklistPriorityId,
 } from "../../_config/shape"
-
-/**
- * Finds a item by the `actionContainer` key
- *
- * @param {PossibleActionItems} container Container to query for
- * @param {Dexie} db Database instance that extends Dexie
- * @param {Dexie.Table<T, DatabaseId>} table Table within the provided database
- * @returns Promise<T[]>
- */
-export const findByContainer = <T>(
-	container: PossibleActionItems,
-	db: Dexie,
-	table: Dexie.Table<T, DatabaseId>
-): Promise<T[]> => {
-	return db.transaction("r", table, () => {
-		return table.where("actionContainer").equals(container).toArray()
-	})
-}
+import ActionChecklistUseCase from "../ChecklistLogic"
+import ActionPriorityUseCase from "../PriorityLogic"
 
 /**
  * Finds a item by the `actionContainer` and `clientId` key
@@ -95,3 +80,36 @@ export const newNotesItem = (
 	actionContainer: container,
 	notes: "",
 })
+
+/**
+ * Bulk adds items to the database and updates the related priority order
+ *
+ * returns the items with their db ids & a success boolean
+ *
+ * @export
+ * @param {ActionChecklistStruct[]} items
+ * @param {ActionChecklistPriorityId} priorityId
+ * @returns {Promise<[ActionChecklistStruct[], boolean]>}
+ */
+export async function bulkAddChecklists(
+	items: ActionChecklistStruct[],
+	priorityId: ActionChecklistPriorityId
+): Promise<[ActionChecklistStruct[], boolean]> {
+	const priority = await ActionPriorityUseCase.findById(priorityId)
+	if (!priority) return [items, false]
+
+	const ids = await ActionChecklistUseCase.bulkAdd(items)
+
+	const newOrder = priority?.order.concat(ids)
+	await ActionPriorityUseCase.update(priorityId, {
+		...priority,
+		order: newOrder,
+	})
+
+	const completedItems = items.map((item, idx) => ({
+		...item,
+		id: ids[idx],
+	}))
+
+	return [completedItems, true]
+}

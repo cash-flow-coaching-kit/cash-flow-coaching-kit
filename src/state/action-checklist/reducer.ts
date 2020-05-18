@@ -15,6 +15,7 @@ import {
 	updateNote,
 	removeNote,
 } from "./actions"
+import bulkAddActionItem from "./actions/bulkAddActionItems"
 
 /**
  * Reducer method for the Action Checklist context
@@ -57,6 +58,9 @@ const ActionChecklistReducer: Reducer<
 		}
 		case ActionChecklistActionTypes.RemoveNote: {
 			return removeNote(state, action.payload)
+		}
+		case ActionChecklistActionTypes.BulkAddActionItems: {
+			return bulkAddActionItem(state, action.payload)
 		}
 		default: {
 			return state

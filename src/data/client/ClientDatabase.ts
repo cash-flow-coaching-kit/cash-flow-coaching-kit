@@ -41,7 +41,7 @@ class ClientDatabase extends Dexie {
 			clients: "++id,name",
 		})
 
-		this.version(1.2).stores({
+		this.version(2).stores({
 			clients: "++id, name, createdAt",
 		})
 	}
