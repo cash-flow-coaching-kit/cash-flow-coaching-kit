@@ -70,6 +70,7 @@ const TrackingPerformance = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Tina's Hair &amp; Beauty" />
 							<CardMedia
+								title="Tina's Hair &amp; Beauty"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/VRxQ7AkxsfY"
@@ -88,6 +89,7 @@ const TrackingPerformance = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Anders' Retirement Plan" />
 							<CardMedia
+								title="Anders' Retirement Plan"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/MPNkTF-puTQ"

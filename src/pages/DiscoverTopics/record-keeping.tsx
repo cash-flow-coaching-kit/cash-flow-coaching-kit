@@ -77,6 +77,7 @@ const DTRecordKeeping = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Eden's Digital Records" />
 							<CardMedia
+								title="Eden's Digital Records"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/1caO4xN-ZwA"
@@ -95,6 +96,7 @@ const DTRecordKeeping = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Lisa's Paper Records" />
 							<CardMedia
+								title="Lisa's Paper Records"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/q9J_sRCKTn8"

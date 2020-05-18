@@ -69,6 +69,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Yulari's Cash Flow" />
 							<CardMedia
+								title="Yulari's Cash Flow"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/uPDZ6O3FFaY"
@@ -87,6 +88,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Cameron's Cash Flow" />
 							<CardMedia
+								title="Cameron's Cash Flow"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/aAUWgm3-zL4"

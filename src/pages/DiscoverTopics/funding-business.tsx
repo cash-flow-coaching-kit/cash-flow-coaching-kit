@@ -70,6 +70,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Tamako's Funding" />
 							<CardMedia
+								title="Tamako's Funding"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/fAe_2eyAkrU"
@@ -88,6 +89,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Charlotte's Loans" />
 							<CardMedia
+								title="Charlotte's Loans"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/BTwVYKfGyuk"

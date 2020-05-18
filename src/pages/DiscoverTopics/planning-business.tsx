@@ -77,6 +77,7 @@ const DTPlanningBusiness = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Kirra's Native Foods" />
 									<CardMedia
+										title="Kirra's Native Foods"
 										className={styles.embed}
 										component="iframe"
 										src="https://www.youtube.com/embed/LhVKOyMeFQE"
@@ -95,6 +96,7 @@ const DTPlanningBusiness = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Sanjana's Restaurant" />
 									<CardMedia
+										title="Sanjana's Restaurant"
 										className={styles.embed}
 										component="iframe"
 										src="https://www.youtube.com/embed/Bxj4r3Dh1EQ"

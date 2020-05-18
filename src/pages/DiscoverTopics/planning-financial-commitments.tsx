@@ -74,6 +74,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Mick's Farm" />
 							<CardMedia
+								title="Mick's Farm"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/FSJsiEaRNRU"
@@ -89,6 +90,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Ming's Disability Services" />
 							<CardMedia
+								title="Ming's Disability Services"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/wXe051xOIzI"
