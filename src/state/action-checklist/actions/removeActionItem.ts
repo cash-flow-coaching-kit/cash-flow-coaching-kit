@@ -25,10 +25,13 @@ const removeActionItem = (
 		(collection: ActionChecklistPriorityStruct[], item) => {
 			if (item.id === priorityId) {
 				const newOrder = item.order.filter(filterByEquals(targetId, true))
-				return collection.concat({
-					...item,
-					order: newOrder,
-				})
+				if (newOrder.length > 0) {
+					return collection.concat({
+						...item,
+						order: newOrder,
+					})
+				}
+				return collection
 			}
 
 			return collection.concat(item)

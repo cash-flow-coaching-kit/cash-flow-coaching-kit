@@ -2,6 +2,7 @@ import { IRemoveActionItemPayload, IActionChecklistState, ActionChecklistActionT
 import { newPriorityItem, newChecklistItem } from "../../../../data/ActionChecklist/_config/utilities";
 import removeActionItem from "../removeActionItem";
 import { ActionChecklistReducer } from "../..";
+import filterById from "../../../../util/filters/ById";
 
 describe("Change the state when removing a action item", () => {
   let state: IActionChecklistState;
@@ -16,6 +17,7 @@ describe("Change the state when removing a action item", () => {
         {...newPriorityItem(10, "cashOutActions"), order: [1, 2, 5], id: 1},
         {...newPriorityItem(12, "cashOutActions"), order: [1, 5, 10], id: 2},
         {...newPriorityItem(10, "funding"), order: [1, 5, 10], id: 3},
+        {...newPriorityItem(10, "managing"), order: [5], id: 4},
       ],
       checklistCollection: [
         {...newChecklistItem(12, "cashOutActions"), id: 3},
@@ -39,9 +41,16 @@ describe("Change the state when removing a action item", () => {
 
   it("should remove the id from priority", function() {
     const newState = removeActionItem(state, payload)
-    expect(newState.priority.length).toBe(3)
+    expect(newState.priority.length).toBe(4)
     expect(newState.priority[1].order).toEqual([1, 10])
     expect(newState.priority[0]).toMatchObject(state.priority[0])
+  })
+
+  it("should remove the priority item if there is no order", function() {
+    payload.priorityId = 4
+    const newState = removeActionItem(state, payload)
+    expect(newState.priority).toHaveLength(3)
+    expect(newState.priority.find(filterById(4))).toBeUndefined()
   })
 
   it("should not mutate the arguements", function() {
