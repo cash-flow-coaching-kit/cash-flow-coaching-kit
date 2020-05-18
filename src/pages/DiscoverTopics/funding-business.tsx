@@ -25,7 +25,7 @@ const DTFundingBusiness = (): ReactElement => {
 
 	return (
 		<>
-			<PageContainer>
+			<PageContainer role="main">
 				<Typography
 					variant="h5"
 					component="h1"

@@ -22,7 +22,7 @@ const DTListing = (): ReactElement => {
 
 	return (
 		<>
-			<PageContainer>
+			<PageContainer role="main">
 				<Typography variant="h5" align="center" className={styles.tagline}>
 					Build knowledge on key areas of your business
 				</Typography>

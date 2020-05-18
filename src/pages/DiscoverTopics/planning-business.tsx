@@ -25,7 +25,7 @@ const DTPlanningBusiness = (): ReactElement => {
 	const styles = useDTStyles()
 	return (
 		<>
-			<PageContainer>
+			<PageContainer role="main">
 				<Grid container spacing={2}>
 					<Grid item xs={9}>
 						<Typography
