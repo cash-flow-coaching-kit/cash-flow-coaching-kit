@@ -219,7 +219,7 @@ const DTListing = (): ReactElement => {
 								component={RouterLink}
 								to={PrivateRoutes.DTSellingClosingSuccession}
 								variant="contained"
-								color="secondary"
+								color="primary"
 								fullWidth={true}
 							>
 								Considering exiting your business?

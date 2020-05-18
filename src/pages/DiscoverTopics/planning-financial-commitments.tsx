@@ -306,7 +306,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 					</Typography>
 					<Button
 						variant="contained"
-						color="secondary"
+						color="primary"
 						size="large"
 						className={styles.button}
 						startIcon={<PictureAsPdf />}

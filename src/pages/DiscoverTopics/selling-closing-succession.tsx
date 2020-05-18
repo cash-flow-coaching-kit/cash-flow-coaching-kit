@@ -449,7 +449,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 					</Typography>
 				</Container>
 				<Container className={styles.containerMoreInfo}>
-					<SectionTitle className={styles.SectionTitle} color="secondary">
+					<SectionTitle className={styles.SectionTitle}>
 						More information
 					</SectionTitle>
 					<Typography component="p">
