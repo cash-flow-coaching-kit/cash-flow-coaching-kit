@@ -47,11 +47,13 @@ const ActionContainer = ({
 	const { dispatch, hideCompleted } = useContext(ActionChecklistContext)
 	const [key] = useState(generateKey())
 	const [saving, setSaving] = useState<boolean>(false)
+	const [shouldSave, setShouldSave] = useState<boolean>(true)
 	const [lastSaved, setLastSaved] = useState<Date>(new Date())
 
 	useEffect(() => {
 		// Run every 1.5s
 		const id = setInterval(async () => {
+			if (!shouldSave) return
 			// Get the database data for this container
 			const DB = await ActionChecklistUseCase.findByClientAndContainer(
 				identfier,
@@ -76,7 +78,7 @@ const ActionContainer = ({
 		}, 2000)
 
 		return (): void => clearInterval(id)
-	}, [data, identfier, priority, currentClient])
+	}, [data, identfier, priority, currentClient, shouldSave])
 
 	/**
 	 * Event that triggers once a item is dropped
@@ -86,19 +88,17 @@ const ActionContainer = ({
 	 */
 	const onDragEnd = (results: DropResult): void => {
 		const { destination, source, draggableId } = results
-		if (!destination) {
-			return
-		}
+
 		if (
-			destination.droppableId === source.droppableId &&
-			destination.index === source.index
+			!destination ||
+			(destination.droppableId === source.droppableId &&
+				destination.index === source.index)
 		) {
 			return
 		}
 
-		const priorityCopy = { ...priority }
-		priorityCopy.order = arraySwap<number>(
-			priorityCopy.order,
+		const order = arraySwap<number>(
+			priority.order,
 			source.index,
 			destination.index,
 			parseInt(draggableId, 10)
@@ -106,7 +106,10 @@ const ActionContainer = ({
 
 		dispatch({
 			type: ActionChecklistActionTypes.UpdatePriorityOrder,
-			payload: priorityCopy,
+			payload: {
+				...priority,
+				order,
+			},
 		})
 	}
 
@@ -153,8 +156,14 @@ const ActionContainer = ({
 	 */
 	const deleteAction = async (id: ActionChecklistId): Promise<void> => {
 		if (priority.id) {
+			setShouldSave(false)
 			// remove the checklist item from the db
 			await ActionChecklistUseCase.delete(id)
+			// remove the priority item from the db if it is removing the last item
+			// in the order
+			if (priority.order.length === 1) {
+				await ActionPriorityUseCase.delete(priority.id)
+			}
 			// remove the checklist item from state and priority order
 			dispatch({
 				type: ActionChecklistActionTypes.RemoveActionItem,
@@ -163,6 +172,8 @@ const ActionContainer = ({
 					priorityId: priority.id,
 				},
 			})
+
+			setShouldSave(true)
 		}
 	}
 
@@ -184,7 +195,10 @@ const ActionContainer = ({
 	const lastItemInList = (): boolean => {
 		return (
 			data.length === 1 &&
-			(identfier === "cashInActions" || identfier === "cashOutActions")
+			(identfier === "cashInActions" ||
+				identfier === "cashOutActions" ||
+				typeof notes === "undefined" ||
+				notes?.notes === "")
 		)
 	}
 

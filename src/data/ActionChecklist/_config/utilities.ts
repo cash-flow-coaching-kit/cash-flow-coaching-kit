@@ -6,7 +6,10 @@ import {
 	ActionChecklistStruct,
 	ActionChecklistPriorityStruct,
 	ActionChecklistNotesStruct,
+	ActionChecklistPriorityId,
 } from "../../_config/shape"
+import ActionChecklistUseCase from "../ChecklistLogic"
+import ActionPriorityUseCase from "../PriorityLogic"
 
 /**
  * Finds a item by the `actionContainer` and `clientId` key
@@ -77,3 +80,36 @@ export const newNotesItem = (
 	actionContainer: container,
 	notes: "",
 })
+
+/**
+ * Bulk adds items to the database and updates the related priority order
+ *
+ * returns the items with their db ids & a success boolean
+ *
+ * @export
+ * @param {ActionChecklistStruct[]} items
+ * @param {ActionChecklistPriorityId} priorityId
+ * @returns {Promise<[ActionChecklistStruct[], boolean]>}
+ */
+export async function bulkAddChecklists(
+	items: ActionChecklistStruct[],
+	priorityId: ActionChecklistPriorityId
+): Promise<[ActionChecklistStruct[], boolean]> {
+	const priority = await ActionPriorityUseCase.findById(priorityId)
+	if (!priority) return [items, false]
+
+	const ids = await ActionChecklistUseCase.bulkAdd(items)
+
+	const newOrder = priority?.order.concat(ids)
+	await ActionPriorityUseCase.update(priorityId, {
+		...priority,
+		order: newOrder,
+	})
+
+	const completedItems = items.map((item, idx) => ({
+		...item,
+		id: ids[idx],
+	}))
+
+	return [completedItems, true]
+}

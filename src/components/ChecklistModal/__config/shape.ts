@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
-import { AlertProps } from "@material-ui/lab/Alert"
 import { PossibleActionItems } from "../../../state/action-checklist/shape"
+import { BaseActionChecklistStruct } from "../../../data/_config/shape"
 
 // Alias for the title type
 // - used to allow easy override if this needs to change
@@ -36,8 +36,8 @@ export interface ModalProps extends ChecklistModalProps {
 
 // Type defition for a single Form item data
 export type FormItem = {
-	description: string
-	reviewBy: Date
+	description: BaseActionChecklistStruct["description"]
+	reviewBy: BaseActionChecklistStruct["reviewBy"]
 }
 
 /**
@@ -58,16 +58,4 @@ export interface FormValues {
  */
 export interface FormProps {
 	onFormSubmission(values: FormValues): Promise<boolean>
-}
-
-/**
- * Interface used for the form snackbar component
- *
- * @export
- * @interface FormSnackbar
- */
-export interface FormSnackbar {
-	open: boolean
-	msg: string
-	severity?: AlertProps["severity"]
 }

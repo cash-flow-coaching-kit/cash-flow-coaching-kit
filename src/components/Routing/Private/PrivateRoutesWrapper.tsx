@@ -66,29 +66,29 @@ const PrivateRoutesWrapper = (): ReactElement => {
 				<Route path={PrivateRoutes.ActionChecklist}>
 					<ActionChecklist />
 				</Route>
-			</ActionChecklistProvider>
 
-			<Route path={PrivateRoutes.DTFundingBusiness}>
-				<DTFundingBusiness />
-			</Route>
-			<Route path={PrivateRoutes.DTManagingCashFlow}>
-				<DTManagingCashFlow />
-			</Route>
-			<Route path={PrivateRoutes.DTPlanningBusiness}>
-				<DTPlanningBusiness />
-			</Route>
-			<Route path={PrivateRoutes.DTPlanningFinanicalCommitments}>
-				<DTPlanningFinanicalCommitments />
-			</Route>
-			<Route path={PrivateRoutes.DTRecordKeeping}>
-				<DTRecordKeeping />
-			</Route>
-			<Route path={PrivateRoutes.DTSellingClosingSuccession}>
-				<DTSellingClosingSuccession />
-			</Route>
-			<Route path={PrivateRoutes.DTTrackingPerformance}>
-				<DTTrackingPerformance />
-			</Route>
+				<Route path={PrivateRoutes.DTFundingBusiness}>
+					<DTFundingBusiness />
+				</Route>
+				<Route path={PrivateRoutes.DTManagingCashFlow}>
+					<DTManagingCashFlow />
+				</Route>
+				<Route path={PrivateRoutes.DTPlanningBusiness}>
+					<DTPlanningBusiness />
+				</Route>
+				<Route path={PrivateRoutes.DTPlanningFinanicalCommitments}>
+					<DTPlanningFinanicalCommitments />
+				</Route>
+				<Route path={PrivateRoutes.DTRecordKeeping}>
+					<DTRecordKeeping />
+				</Route>
+				<Route path={PrivateRoutes.DTSellingClosingSuccession}>
+					<DTSellingClosingSuccession />
+				</Route>
+				<Route path={PrivateRoutes.DTTrackingPerformance}>
+					<DTTrackingPerformance />
+				</Route>
+			</ActionChecklistProvider>
 		</PrivatePage>
 	)
 }

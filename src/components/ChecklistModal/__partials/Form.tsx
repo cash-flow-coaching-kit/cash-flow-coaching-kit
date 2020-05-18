@@ -1,32 +1,20 @@
 import React, { ReactElement, useState, MouseEvent } from "react"
 import { useFormik } from "formik"
-import {
-	Box,
-	Button,
-	Grid,
-	TextField,
-	IconButton,
-	Snackbar,
-} from "@material-ui/core"
+import { Box, Button, Grid, TextField, IconButton } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
 import DeleteIcon from "@material-ui/icons/Delete"
-import Alert from "@material-ui/lab/Alert"
 import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
 } from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns"
-import CloseIcon from "@material-ui/icons/Close"
 
-import {
-	FormProps,
-	FormValues,
-	FormItem,
-	FormSnackbar,
-} from "../__config/shape"
+import { FormProps, FormValues, FormItem } from "../__config/shape"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import { createNewFormItem } from "../__config/utilities"
 import { useFormStyles } from "../__config/styles"
+import SnackbarMsg from "../../SnackbarMsg"
+import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
 
 /**
  * Form component for the `ChecklistModal` component
@@ -37,7 +25,7 @@ import { useFormStyles } from "../__config/styles"
  */
 export default function Form({ onFormSubmission }: FormProps): ReactElement {
 	const [key] = useState(generateKey())
-	const [snackbar, setSnackbar] = useState<FormSnackbar>({
+	const [snackbar, setSnackbar] = useState<SnackbarMsgData>({
 		open: false,
 		msg: "",
 	})
@@ -53,8 +41,8 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 	}
 
 	function showSnackbar(
-		msg: FormSnackbar["msg"],
-		severity: FormSnackbar["severity"]
+		msg: SnackbarMsgData["msg"],
+		severity: SnackbarMsgData["severity"]
 	): void {
 		setSnackbar({
 			open: true,
@@ -89,6 +77,8 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 			if (success) {
 				form.resetForm()
 				showSnackbar("Action items have been added", "success")
+			} else {
+				showSnackbar("Something went wrong, please try again", "warning")
 			}
 		},
 	})
@@ -234,25 +224,12 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 	return (
 		<>
 			{/* Message snackbar */}
-			<Snackbar
+			<SnackbarMsg
 				open={snackbar.open}
-				autoHideDuration={2000}
-				anchorOrigin={{ vertical: "top", horizontal: "center" }}
+				severity={snackbar.severity}
 				onClose={handleClose}
-			>
-				<Alert
-					severity={snackbar.severity || "info"}
-					variant="filled"
-					action={
-						<IconButton size="small" aria-label="close" color="inherit">
-							<CloseIcon fontSize="small" />
-						</IconButton>
-					}
-					onClose={handleClose}
-				>
-					{snackbar.msg}
-				</Alert>
-			</Snackbar>
+				msg={snackbar.msg}
+			/>
 
 			<form
 				noValidate
