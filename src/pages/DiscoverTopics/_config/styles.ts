@@ -20,11 +20,12 @@ const useDTStyles = makeStyles((theme) => ({
 	button: {
 		margin: theme.spacing(1),
 	},
-	containerPurple: {
-		backgroundColor: "#cfe8fc",
+	containerActivity: {
+		backgroundColor: "#e1bee7",
+		paddingBottom: theme.spacing(5),
 	},
 	containerWrapUp: {
-		backgroundColor: "#cfe8fc",
+		backgroundColor: "#e1bee7",
 		paddingBottom: theme.spacing(5),
 	},
 	containerMoreInfo: {
@@ -33,7 +34,8 @@ const useDTStyles = makeStyles((theme) => ({
 	},
 	list: {
 		listStyle: "disc",
-		paddingLeft: theme.spacing(2),
+		paddingLeft: theme.spacing(1),
+		marginLeft: theme.spacing(2),
 	},
 }))
 

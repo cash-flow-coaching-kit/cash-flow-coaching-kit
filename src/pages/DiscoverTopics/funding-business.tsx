@@ -362,7 +362,7 @@ const DTFundingBusiness = (): ReactElement => {
 				<Container
 					maxWidth="lg"
 					component="div"
-					className={styles.containerPurple}
+					className={styles.containerActivity}
 				>
 					<SectionTitle className={styles.SectionTitle}>
 						Funding activity
@@ -380,6 +380,7 @@ const DTFundingBusiness = (): ReactElement => {
 						size="large"
 						className={styles.button}
 						startIcon={<PictureAsPdf />}
+						href="/pdf/Funding-Activity.pdf"
 					>
 						Download your own
 						<br />
