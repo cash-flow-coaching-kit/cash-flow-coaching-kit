@@ -113,7 +113,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Debt Funding
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Money provided by an external party such as a bank that requires
 							repayment
 						</Typography>
@@ -144,7 +144,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Equity Funding
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Money sourced internally or from others, often for a stake of the
 							business.
 						</Typography>
@@ -176,7 +176,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Grant Funding
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Money granted for specific business purposes.
 						</Typography>
 						<List>
@@ -195,7 +195,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Crowdfunding
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Money raised for a business by a group or community of supporters
 							who contribute to a capital pool of funding.
 						</Typography>
@@ -369,7 +369,7 @@ const DTFundingBusiness = (): ReactElement => {
 					<SectionTitle className={styles.SectionTitle}>
 						Funding activity
 					</SectionTitle>
-					<Typography variant="body1">
+					<Typography variant="body1" component="p">
 						This activity is designed to help you make an informed decision when
 						it comes to funding your business. The activity will focus on
 						determining the purpose for your funding, ensuring you receive
@@ -391,7 +391,7 @@ const DTFundingBusiness = (): ReactElement => {
 				</Container>
 				<Container component="div">
 					<SectionTitle className={styles.SectionTitle}>Wrap up</SectionTitle>
-					<Typography variant="body1">
+					<Typography variant="body1" component="p">
 						Getting into debt or taking on more debt is a big decision and can
 						have wide spread impacts for your business. For this reason, it is
 						advisable to speak with an accountant or financial advisor to
@@ -399,18 +399,22 @@ const DTFundingBusiness = (): ReactElement => {
 						your needs, particularly those that are not offered by a bank such
 						as government grants and/or crowdfunding.
 					</Typography>
-					<Typography variant="body1">
+					<Typography variant="body1" component="p">
 						If you already have loans or credit you might like to speak to your
 						bank to discuss your current banking arrangements and revisit
 						whether they are suitable for your current business operations and
 						any short-term funding requirements.
 					</Typography>
 				</Container>
-				<Container component="div">
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerMoreInfo}
+				>
 					<SectionTitle className={styles.SectionTitle}>
 						More information
 					</SectionTitle>
-					<Typography variant="body1">
+					<Typography variant="body1" component="p">
 						You might like to visit these links for more information
 					</Typography>
 					<Button

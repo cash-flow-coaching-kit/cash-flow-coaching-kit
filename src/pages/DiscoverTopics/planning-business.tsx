@@ -297,7 +297,7 @@ const DTPlanningBusiness = (): ReactElement => {
 					<SectionTitle className={styles.SectionTitle}>
 						Writing a business plan
 					</SectionTitle>
-					<Typography variant="body1">
+					<Typography variant="body1" component="p">
 						Writing a business plan can be easier than you think - keep it
 						simple to start with and build on it over time. To set your business
 						up for success, review your business plan regularly.
@@ -312,6 +312,18 @@ const DTPlanningBusiness = (): ReactElement => {
 					>
 						Build your own business plan
 					</Button>
+				</Container>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerMoreInfo}
+				>
+					<SectionTitle className={styles.SectionTitle}>
+						More information
+					</SectionTitle>
+					<Typography variant="body1" component="p">
+						You might like to visit these links for more information
+					</Typography>
 				</Container>
 			</PageContainer>
 

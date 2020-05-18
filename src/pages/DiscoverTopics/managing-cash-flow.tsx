@@ -281,7 +281,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Pricing
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Setting the right price for your products and services will help
 							you to maximise profits. An increase in price, that does not
 							impact customer demand, will have a positive impact on your cash
@@ -293,7 +293,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Volume
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Increasing the range or number of products and services,
 							discounting to attract new customers, or selling into new markets
 							can increase the volume of your sales to generate greater income.
@@ -304,7 +304,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Debtors
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Collecting payments from your customers as quickly as possible
 							will allow you to use the cash within your business. Establish
 							clear credit policies and carry out credit checks before setting
@@ -318,7 +318,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Assets
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Under-utilised or unnecessary assets tie up cash that could be put
 							to better use in your business. Consider whether leasing some
 							assets is a better option. Sell assets you no longer need.
@@ -329,7 +329,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Expenses
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Think about where you are spending money. Identify which costs are
 							necessary for you to generate your income and which are not.
 							Consider whether there are some expenses that can be reduced to
@@ -342,7 +342,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Inventory
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Maintaining the right levels of the right inventory plays an
 							important part in managing your cash flow. Forecast your
 							customers’ needs and buy and ship inventory as close to the time
@@ -355,7 +355,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Staffing
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Staff costs are significant expenses for many businesses. In
 							addition to the weekly payroll, there are costs associated with
 							hiring, training and rewarding staff. Choosing the right staff for
@@ -378,7 +378,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						>
 							Change Levers
 						</Button>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Explore the Change Levers tool to get suggestions on a range of
 							actions that focus on improving the cash flow of your business.
 						</Typography>
@@ -392,7 +392,7 @@ const DTManagingCashFlow = (): ReactElement => {
 					<SectionTitle className={styles.SectionTitle}>
 						Cash Flow Canvas
 					</SectionTitle>
-					<Typography variant="body1">
+					<Typography variant="body1" component="p">
 						The Cash Flow Coaching Kit is designed to help you effectively
 						manage your cash flow. Use the Cash Flow Canvas to get a clear
 						picture of your cash flow, compare your cash flow across multiple

@@ -12,6 +12,7 @@ import {
 	ExpansionPanelSummary,
 	ExpansionPanelDetails,
 	Container,
+	Divider,
 } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
@@ -270,7 +271,7 @@ const DTRecordKeeping = (): ReactElement => {
 					<SectionTitle className={styles.SectionTitle}>
 						Record keeping activity
 					</SectionTitle>
-					<Typography variant="body1">
+					<Typography variant="body1" component="p">
 						This activity can help you determine your specific record keeping
 						needs, and guide you towards a solution that is matched to your
 						business.
@@ -284,14 +285,14 @@ const DTRecordKeeping = (): ReactElement => {
 					>
 						Download record keeping activity
 					</Button>
-					<hr></hr>
+					<Divider />
 					<SectionTitle className={styles.SectionTitle}>ATO App</SectionTitle>
-					<Typography component="p">
+					<Typography variant="body1" component="p">
 						If you are a sole-trader with simple business affairs the ATO App
 						provides free and basic record keeping tools that are quick and easy
 						to use.
 					</Typography>
-					<Typography component="p">
+					<Typography variant="body1" component="p">
 						Download the ATO app and setup a logbook to keep records of your
 						business travel expenses.
 					</Typography>
@@ -302,7 +303,7 @@ const DTRecordKeeping = (): ReactElement => {
 					className={styles.containerWrapUp}
 				>
 					<SectionTitle>Wrap up</SectionTitle>
-					<Typography component="p">
+					<Typography variant="body1" component="p">
 						Good record keeping gives you accurate and complete information you
 						can rely on to make informed decisions in your business. Digital
 						record keeping systems put time back in your day by automating much
@@ -310,7 +311,7 @@ const DTRecordKeeping = (): ReactElement => {
 						reports that can provide valuable insights to your business
 						performance.
 					</Typography>
-					<Typography component="p">
+					<Typography variant="body1" component="p">
 						If you have a business advisor, consider using the same record
 						keeping platform that they use, to ensure your records are
 						compatible and easily shared.
