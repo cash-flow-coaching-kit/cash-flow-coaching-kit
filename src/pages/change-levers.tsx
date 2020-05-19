@@ -1,29 +1,77 @@
 import React, { ReactElement } from "react"
-import { Typography } from "@material-ui/core"
-import ChecklistModal from "../components/ChecklistModal"
+import {
+	Typography,
+	Grid,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	Box,
+	makeStyles,
+} from "@material-ui/core"
+import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
+import { PageContainer } from "../components/Layouts"
+import FourQuestions from "../components/HealthCheck/FourQuestions"
+import ExpandableNav from "../components/ExpandableNav"
+import PageTip from "../components/PageTip"
+import SectionTitle from "../components/SectionTitle"
+import {
+	PricingLever,
+	VolumeLever,
+	DebtorsLever,
+	AssetLever,
+	ExpensesLever,
+	InventoryLever,
+	StaffingLever,
+} from "../content/ChangeLevers"
 
 const ChangeLevers = (): ReactElement => {
+	const styles = makeStyles((theme) => ({
+		pushDown: {
+			marginBottom: theme.spacing(4),
+		},
+	}))()
+
 	return (
 		<>
-			<h1>ChangeLevers</h1>
-			<ChecklistModal
-				container="cashInActions"
-				title="Pricing Lever"
-				subtitle="Change prices"
-			>
-				<Typography variant="h6">Things to consider</Typography>
-				<ul>
-					<Typography component="li">
-						How much margin do you need to cover your expenses?
-					</Typography>
-					<Typography component="li">
-						How much could you increase prices without losing business?
-					</Typography>
-					<Typography component="li">
-						Could you implement small regular price increases? E.g. CPI
-					</Typography>
-				</ul>
-			</ChecklistModal>
+			<PageContainer>
+				<Grid container spacing={3}>
+					<Grid item xs={9}>
+						<Typography variant="h5" align="center" className={styles.pushDown}>
+							Explore practical ideas and actions to improve your cash flow
+						</Typography>
+						<SectionTitle>Improve Cash IN position</SectionTitle>
+						<Box className={styles.pushDown}>
+							<PricingLever />
+							<VolumeLever />
+							<DebtorsLever />
+						</Box>
+
+						<SectionTitle>Reduce Cash OUT position</SectionTitle>
+						<Box>
+							<AssetLever />
+							<ExpensesLever />
+							<InventoryLever />
+							<StaffingLever />
+						</Box>
+					</Grid>
+					<Grid item xs={3}>
+						<FourQuestions />
+						<ExpandableNav>
+							<List component="nav" disablePadding>
+								<ListItem button>
+									<ListItemIcon>
+										<PictureAsPdfIcon />
+									</ListItemIcon>
+									<ListItemText>Change Levers PDF</ListItemText>
+								</ListItem>
+							</List>
+						</ExpandableNav>
+					</Grid>
+				</Grid>
+			</PageContainer>
+
+			<PageTip tip="ChangeLevers" />
 		</>
 	)
 }

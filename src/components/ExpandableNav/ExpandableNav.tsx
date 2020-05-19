@@ -20,14 +20,27 @@ import useExpandableNavStyles from "./_config/styles"
  */
 const ExpandableNav = ({
 	title = "Control Panel",
+	subHeading,
+	defaultExpanded = true,
 	children,
 }: IExpandableNavProps): ReactElement => {
 	const styles = useExpandableNavStyles()
 
 	return (
-		<ExpansionPanel defaultExpanded>
-			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+		<ExpansionPanel
+			defaultExpanded={defaultExpanded}
+			TransitionProps={{ unmountOnExit: true }}
+		>
+			<ExpansionPanelSummary
+				expandIcon={<ExpandMoreIcon />}
+				className={styles.summary}
+			>
 				<Typography variant="h6">{title}</Typography>
+				{subHeading && (
+					<Typography className={styles.subHeading} variant="h6">
+						{subHeading}
+					</Typography>
+				)}
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails className={styles.details}>
 				{children}
