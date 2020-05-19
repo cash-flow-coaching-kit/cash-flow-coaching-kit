@@ -7,6 +7,8 @@ import { ReactNode } from "react"
  * @interface IExpandableNavProps
  */
 export interface IExpandableNavProps {
-	title?: string
 	children: ReactNode
+	title?: string
+	subHeading?: string
+	defaultExpanded?: boolean
 }
