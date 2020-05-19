@@ -15,7 +15,6 @@ import {
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
-import SectionTitle from "../../components/SectionTitle"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
@@ -26,16 +25,11 @@ const DTFundingBusiness = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography
-					variant="h5"
-					component="h1"
-					align="center"
-					className={styles.tagline}
-				>
+				<Typography component="h1" align="center" className={styles.tagline}>
 					Funding your business
 				</Typography>
 
-				<Typography variant="body1" component="p">
+				<Typography variant="body1" component="p" gutterBottom>
 					Finding the right funding option is important to the long term success
 					of your business. Understanding the various types of funding can help
 					you select the best option for your business when starting up,
@@ -105,9 +99,9 @@ const DTFundingBusiness = (): ReactElement => {
 						</Card>
 					</Grid>
 				</Grid>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
 					The four main types of funding
-				</SectionTitle>
+				</Typography>
 				<Grid container spacing={3}>
 					<Grid item xs={6}>
 						<Typography component="h3" variant="h5">
@@ -213,9 +207,9 @@ const DTFundingBusiness = (): ReactElement => {
 						</List>
 					</Grid>
 				</Grid>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
 					QUICKSNAPS - What to look for when funding your business.
-				</SectionTitle>
+				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -366,9 +360,9 @@ const DTFundingBusiness = (): ReactElement => {
 					component="div"
 					className={styles.containerActivity}
 				>
-					<SectionTitle className={styles.SectionTitle}>
+					<Typography component="h2" className={styles.SectionTitle}>
 						Funding activity
-					</SectionTitle>
+					</Typography>
 					<Typography variant="body1" component="p">
 						This activity is designed to help you make an informed decision when
 						it comes to funding your business. The activity will focus on
@@ -389,8 +383,14 @@ const DTFundingBusiness = (): ReactElement => {
 						Funding activity template
 					</Button>
 				</Container>
-				<Container component="div">
-					<SectionTitle className={styles.SectionTitle}>Wrap up</SectionTitle>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerWrapUp}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						Wrap up
+					</Typography>
 					<Typography variant="body1" component="p">
 						Getting into debt or taking on more debt is a big decision and can
 						have wide spread impacts for your business. For this reason, it is
@@ -411,9 +411,9 @@ const DTFundingBusiness = (): ReactElement => {
 					component="div"
 					className={styles.containerMoreInfo}
 				>
-					<SectionTitle className={styles.SectionTitle}>
+					<Typography component="h2" className={styles.SectionTitle}>
 						More information
-					</SectionTitle>
+					</Typography>
 					<Typography variant="body1" component="p">
 						You might like to visit these links for more information
 					</Typography>

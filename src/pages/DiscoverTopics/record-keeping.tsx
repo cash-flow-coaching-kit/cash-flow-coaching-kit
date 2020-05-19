@@ -18,7 +18,6 @@ import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import SectionTitle from "../../components/SectionTitle"
 import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 
 const DTRecordKeeping = (): ReactElement => {
@@ -27,15 +26,10 @@ const DTRecordKeeping = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography
-					variant="h5"
-					component="h1"
-					align="center"
-					className={styles.tagline}
-				>
+				<Typography component="h1" align="center" className={styles.tagline}>
 					Record keeping
 				</Typography>
-				<Typography variant="body1" component="p">
+				<Typography variant="body1" component="p" gutterBottom>
 					As well as being a legal requirement, keeping accurate, up-to-date
 					business records help you make fast, informed, and reliable business
 					decisions. It’s important to find a record keeping system that suits
@@ -113,9 +107,9 @@ const DTRecordKeeping = (): ReactElement => {
 						</Card>
 					</Grid>
 				</Grid>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					QUICKSNAPS - How do you stay on top of your record keeping?
-				</SectionTitle>
+				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -268,9 +262,9 @@ const DTRecordKeeping = (): ReactElement => {
 					component="div"
 					className={styles.containerActivity}
 				>
-					<SectionTitle className={styles.SectionTitle}>
+					<Typography component="h2" className={styles.SectionTitle}>
 						Record keeping activity
-					</SectionTitle>
+					</Typography>
 					<Typography variant="body1" component="p">
 						This activity can help you determine your specific record keeping
 						needs, and guide you towards a solution that is matched to your
@@ -286,7 +280,9 @@ const DTRecordKeeping = (): ReactElement => {
 						Download record keeping activity
 					</Button>
 					<Divider />
-					<SectionTitle className={styles.SectionTitle}>ATO App</SectionTitle>
+					<Typography component="h2" className={styles.SectionTitle}>
+						ATO App
+					</Typography>
 					<Typography variant="body1" component="p">
 						If you are a sole-trader with simple business affairs the ATO App
 						provides free and basic record keeping tools that are quick and easy
@@ -302,8 +298,10 @@ const DTRecordKeeping = (): ReactElement => {
 					component="div"
 					className={styles.containerWrapUp}
 				>
-					<SectionTitle>Wrap up</SectionTitle>
-					<Typography variant="body1" component="p">
+					<Typography component="h2" className={styles.SectionTitle}>
+						Wrap up
+					</Typography>
+					<Typography variant="body1" component="p" gutterBottom>
 						Good record keeping gives you accurate and complete information you
 						can rely on to make informed decisions in your business. Digital
 						record keeping systems put time back in your day by automating much

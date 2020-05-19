@@ -9,7 +9,6 @@ import {
 	ExpansionPanelSummary,
 	ExpansionPanelDetails,
 } from "@material-ui/core"
-import SectionTitle from "../../components/SectionTitle"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
@@ -21,15 +20,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography
-					variant="h5"
-					component="h1"
-					align="center"
-					className={styles.tagline}
-				>
+				<Typography component="h1" align="center" className={styles.tagline}>
 					Selling, closing and succession planning
 				</Typography>
-				<Typography variant="body1" component="p">
+				<Typography variant="body1" component="p" gutterBottom>
 					Most business owners will reach a time when they consider exiting
 					their business. There are many reasons you may want to exit your
 					business, including financial concerns, challenges around managing the
@@ -41,9 +35,9 @@ const DTSellingClosingSuccession = (): ReactElement => {
 					your business advisor, accountant and/or solicitor, to understand your
 					options and obligations.
 				</Typography>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					QUICKSNAPS - Deciding how to exit your business.
-				</SectionTitle>
+				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -231,9 +225,9 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						</Grid>
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					Nine considerations when selling your business
-				</SectionTitle>
+				</Typography>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={6} md={4}>
 						<Typography component="h3" variant="h5">
@@ -346,9 +340,9 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						</Typography>
 					</Grid>
 				</Grid>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					Six considerations when closing your business
-				</SectionTitle>
+				</Typography>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={6} md={4}>
 						<Typography component="h3" variant="h5">
@@ -439,8 +433,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						</Typography>
 					</Grid>
 				</Grid>
-				<Container className={styles.containerWrapUp}>
-					<SectionTitle className={styles.SectionTitle}>Wrap Up</SectionTitle>
+				<Container component="div" className={styles.containerWrapUp}>
+					<Typography component="h2" className={styles.SectionTitle}>
+						Wrap Up
+					</Typography>
 					<Typography component="p">
 						Exiting your business can be a complex and emotional time. Don't
 						forget to look after yourself. Seek professional advice from you
@@ -448,10 +444,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						successfully navigate this process.
 					</Typography>
 				</Container>
-				<Container className={styles.containerMoreInfo}>
-					<SectionTitle className={styles.SectionTitle}>
+				<Container component="div" className={styles.containerMoreInfo}>
+					<Typography component="h2" className={styles.SectionTitle}>
 						More information
-					</SectionTitle>
+					</Typography>
 					<Typography component="p">
 						You might like to visit these links for more information
 					</Typography>

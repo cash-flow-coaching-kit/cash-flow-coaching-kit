@@ -16,7 +16,6 @@ import {
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
-import SectionTitle from "../../components/SectionTitle"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 
@@ -26,15 +25,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography
-					variant="h5"
-					component="h1"
-					align="center"
-					className={styles.tagline}
-				>
+				<Typography component="h1" align="center" className={styles.tagline}>
 					Planning your regular financial commitments
 				</Typography>
-				<Typography variant="body1" component="p">
+				<Typography variant="body1" component="p" gutterBottom>
 					There are many operating costs when managing your business. Some are
 					more obvious, such as phone bills, rent, or equipment. However, there
 					are a number of less obvious costs, including licences you may need to
@@ -106,9 +100,9 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						</Card>
 					</Grid>
 				</Grid>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					QUICKSNAPS - How to plan for your regular financial commitments.
-				</SectionTitle>
+				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -298,9 +292,9 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 					component="div"
 					className={styles.containerActivity}
 				>
-					<SectionTitle className={styles.SectionTitle}>
+					<Typography component="h2" className={styles.SectionTitle}>
 						Know your commitments activity
-					</SectionTitle>
+					</Typography>
 					<Typography variant="body1">
 						This activity will guide you in identifying all of your regular
 						financial commitments, where they fall in the year, and how to
@@ -316,6 +310,33 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 					>
 						Identify and map your commitments
 					</Button>
+				</Container>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerWrapUp}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						Wrap up
+					</Typography>
+					<Typography variant="body1" component="p" gutterBottom>
+						Wrapup content 1
+					</Typography>
+					<Typography variant="body1" component="p">
+						Wrapup content 2
+					</Typography>
+				</Container>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerMoreInfo}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						More information
+					</Typography>
+					<Typography variant="body1" component="p">
+						You might like to visit these links for more information
+					</Typography>
 				</Container>
 			</PageContainer>
 

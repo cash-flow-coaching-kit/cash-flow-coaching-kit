@@ -19,7 +19,6 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import VerticalSplitIcon from "@material-ui/icons/VerticalSplit"
-import SectionTitle from "../../components/SectionTitle"
 import { PrivateRoutes } from "../../util/routes/routes"
 
 const DTManagingCashFlow = (): ReactElement => {
@@ -28,15 +27,10 @@ const DTManagingCashFlow = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography
-					variant="h5"
-					component="h1"
-					align="center"
-					className={styles.tagline}
-				>
+				<Typography component="h1" align="center" className={styles.tagline}>
 					Managing your cash flow
 				</Typography>
-				<Typography variant="body1" component="p">
+				<Typography variant="body1" component="p" gutterBottom>
 					People often understand the cash part of cash flow, but not the flow
 					part. Put simply, cash will move in and out of your business at
 					different times, which can create different periods of cash
@@ -104,9 +98,9 @@ const DTManagingCashFlow = (): ReactElement => {
 						</Card>
 					</Grid>
 				</Grid>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					QUICKSNAPS - Want to know the secrets of successful cash flow?
-				</SectionTitle>
+				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -273,9 +267,9 @@ const DTManagingCashFlow = (): ReactElement => {
 						</Grid>
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					Seven tips for maximising cash flow
-				</SectionTitle>
+				</Typography>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={6} md={4}>
 						<Typography component="h3" variant="h5">
@@ -389,9 +383,9 @@ const DTManagingCashFlow = (): ReactElement => {
 					component="div"
 					className={styles.containerActivity}
 				>
-					<SectionTitle className={styles.SectionTitle}>
+					<Typography component="h2" className={styles.SectionTitle}>
 						Cash Flow Canvas
-					</SectionTitle>
+					</Typography>
 					<Typography variant="body1" component="p">
 						The Cash Flow Coaching Kit is designed to help you effectively
 						manage your cash flow. Use the Cash Flow Canvas to get a clear
@@ -411,6 +405,33 @@ const DTManagingCashFlow = (): ReactElement => {
 					>
 						Cash flow canvas
 					</Button>
+				</Container>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerWrapUp}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						Wrap up
+					</Typography>
+					<Typography variant="body1" component="p" gutterBottom>
+						Wrapup content 1
+					</Typography>
+					<Typography variant="body1" component="p">
+						Wrapup content 2
+					</Typography>
+				</Container>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerMoreInfo}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						More information
+					</Typography>
+					<Typography variant="body1" component="p">
+						You might like to visit these links for more information
+					</Typography>
 				</Container>
 			</PageContainer>
 

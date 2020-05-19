@@ -17,7 +17,6 @@ import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import SectionTitle from "../../components/SectionTitle"
 import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 import Taskbuilder from "../../components/Taskbuilder"
 
@@ -29,14 +28,13 @@ const DTPlanningBusiness = (): ReactElement => {
 				<Grid container spacing={2}>
 					<Grid item xs={9}>
 						<Typography
-							variant="h5"
 							component="h1"
 							align="center"
 							className={styles.tagline}
 						>
 							Planning your business
 						</Typography>
-						<Typography variant="body1" component="p">
+						<Typography variant="body1" component="p" gutterBottom>
 							Planning your business is crucial to being successful. When you
 							have a well researched business plan, you are able to accurately
 							forecast and analyse your business. This helps you to be
@@ -118,9 +116,9 @@ const DTPlanningBusiness = (): ReactElement => {
 						{/* TODO: Add additional control panel */}
 					</Grid>
 				</Grid>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
 					QUICKSNAPS - Deciding how to exit your business.
-				</SectionTitle>
+				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -294,9 +292,13 @@ const DTPlanningBusiness = (): ReactElement => {
 					component="div"
 					className={styles.containerActivity}
 				>
-					<SectionTitle className={styles.SectionTitle}>
+					<Typography
+						variant="h4"
+						component="h2"
+						className={styles.SectionTitle}
+					>
 						Writing a business plan
-					</SectionTitle>
+					</Typography>
 					<Typography variant="body1" component="p">
 						Writing a business plan can be easier than you think - keep it
 						simple to start with and build on it over time. To set your business
@@ -316,11 +318,31 @@ const DTPlanningBusiness = (): ReactElement => {
 				<Container
 					maxWidth="lg"
 					component="div"
+					className={styles.containerWrapUp}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						Wrap up
+					</Typography>
+					<Typography variant="body1" component="p" gutterBottom>
+						Wrap up When you review your business plan, look for ways to improve
+						your cash flow and financial performance. You can use the canvas
+						tool and change lever cards to help you consider what changes you
+						can make in your business and the impact they may have on your cash
+						flow.
+					</Typography>
+					<Typography variant="body1" component="p">
+						You may want to discuss your business plan with a professional
+						advisor.
+					</Typography>
+				</Container>
+				<Container
+					maxWidth="lg"
+					component="div"
 					className={styles.containerMoreInfo}
 				>
-					<SectionTitle className={styles.SectionTitle}>
+					<Typography component="h2" className={styles.SectionTitle}>
 						More information
-					</SectionTitle>
+					</Typography>
 					<Typography variant="body1" component="p">
 						You might like to visit these links for more information
 					</Typography>

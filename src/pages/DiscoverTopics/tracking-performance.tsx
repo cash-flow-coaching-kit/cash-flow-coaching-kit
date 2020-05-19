@@ -11,12 +11,12 @@ import {
 	ExpansionPanel,
 	ExpansionPanelSummary,
 	ExpansionPanelDetails,
+	Container,
 } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import SectionTitle from "../../components/SectionTitle"
 
 const TrackingPerformance = (): ReactElement => {
 	const styles = useDTStyles()
@@ -24,15 +24,10 @@ const TrackingPerformance = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography
-					variant="h5"
-					component="h1"
-					align="center"
-					className={styles.tagline}
-				>
+				<Typography component="h1" align="center" className={styles.tagline}>
 					Tracking your performance
 				</Typography>
-				<Typography variant="body1" component="p">
+				<Typography variant="body1" component="p" gutterBottom>
 					It is vital for every business to track performance over time, to
 					monitor and address cash flow issues before it’s too late. Tracking
 					accurately reveals how you are performing against your plan and allows
@@ -105,9 +100,9 @@ const TrackingPerformance = (): ReactElement => {
 						</Card>
 					</Grid>
 				</Grid>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					QUICKSNAPS - How to best track your business performance.
-				</SectionTitle>
+				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -241,6 +236,33 @@ const TrackingPerformance = (): ReactElement => {
 						</Grid>
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerWrapUp}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						Wrap up
+					</Typography>
+					<Typography variant="body1" component="p" gutterBottom>
+						Wrapup content 1
+					</Typography>
+					<Typography variant="body1" component="p">
+						Wrapup content 2
+					</Typography>
+				</Container>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerMoreInfo}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						More information
+					</Typography>
+					<Typography variant="body1" component="p">
+						You might like to visit these links for more information
+					</Typography>
+				</Container>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />
