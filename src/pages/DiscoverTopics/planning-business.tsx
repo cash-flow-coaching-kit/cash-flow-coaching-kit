@@ -26,7 +26,7 @@ const DTPlanningBusiness = (): ReactElement => {
 		<>
 			<PageContainer role="main">
 				<Grid container spacing={2}>
-					<Grid item xs={9}>
+					<Grid item sm={9}>
 						<Typography
 							component="h1"
 							align="center"
@@ -71,7 +71,7 @@ const DTPlanningBusiness = (): ReactElement => {
 							</Typography>
 						</List>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<Card variant="outlined">
 									<CardHeader title="Kirra's Native Foods" />
 									<CardMedia
@@ -90,7 +90,7 @@ const DTPlanningBusiness = (): ReactElement => {
 									</CardActions>
 								</Card>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<Card variant="outlined">
 									<CardHeader title="Sanjana's Restaurant" />
 									<CardMedia
@@ -111,7 +111,7 @@ const DTPlanningBusiness = (): ReactElement => {
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item sm={3}>
 						<Taskbuilder container="planningBusiness" />
 						{/* TODO: Add additional control panel */}
 					</Grid>
@@ -122,14 +122,14 @@ const DTPlanningBusiness = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="forecast-demand-content"
+						id="forecast-demand-header"
 					>
 						<Typography variant="h5">Forecast demand</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<Typography variant="h6">Why?</Typography>
 								<Typography>
 									Forecasting the demand for your product or service will help
@@ -150,7 +150,7 @@ const DTPlanningBusiness = (): ReactElement => {
 									</Typography>
 								</List>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										What do you sell?
@@ -190,14 +190,14 @@ const DTPlanningBusiness = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="right-price-content"
+						id="right-price-header"
 					>
 						<Typography variant="h5">Setting the right price</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<Typography variant="h6">Why?</Typography>
 								<Typography>
 									Setting the right price for your product or service will
@@ -209,7 +209,7 @@ const DTPlanningBusiness = (): ReactElement => {
 									loss.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										How much profit do you need to make to meet the needs of the
@@ -251,14 +251,14 @@ const DTPlanningBusiness = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="capital-content"
+						id="capital-header"
 					>
 						<Typography variant="h5">Capital to start up or grow</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<Typography variant="h6">Why?</Typography>
 								<Typography>
 									Securing the right amount of capital to start your business or
@@ -268,7 +268,7 @@ const DTPlanningBusiness = (): ReactElement => {
 									business.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										How much do you need to have in reserve while your business

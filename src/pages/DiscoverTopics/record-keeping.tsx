@@ -68,7 +68,7 @@ const DTRecordKeeping = (): ReactElement => {
 					</Typography>
 				</List>
 				<Grid container spacing={3}>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Card variant="outlined">
 							<CardHeader title="Eden's Digital Records" />
 							<CardMedia
@@ -87,7 +87,7 @@ const DTRecordKeeping = (): ReactElement => {
 							</CardActions>
 						</Card>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Card variant="outlined">
 							<CardHeader title="Lisa's Paper Records" />
 							<CardMedia
@@ -116,18 +116,22 @@ const DTRecordKeeping = (): ReactElement => {
 						aria-controls="records-rely-on-content"
 						id="records-rely-on"
 					>
-						<Typography variant="h5">Records you can rely on</Typography>
+						<Typography variant="h5" component="h3">
+							Records you can rely on
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									To ensure you can make informed financial decisions, you must
 									be able to rely upon your financial records.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Can you make informed decisions from the information you
@@ -152,21 +156,23 @@ const DTRecordKeeping = (): ReactElement => {
 						aria-controls="accounting-system-content"
 						id="accounting-system-header"
 					>
-						<Typography variant="h5">
+						<Typography variant="h5" component="h3">
 							An accounting system to make your business more efficient
 						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									An accounting system often provides an opportunity to
 									streamline reporting and allows you to make faster and better
 									decisions.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Do you have an accounting system that suits your needs?
@@ -194,18 +200,22 @@ const DTRecordKeeping = (): ReactElement => {
 						aria-controls="help-record-keeping-content"
 						id="help-record-keeping-header"
 					>
-						<Typography variant="h5">Help with record keeping</Typography>
+						<Typography variant="h5" component="h3">
+							Help with record keeping
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Some accounting packages, an accountant or a bookkeeper may
 									assist with record keeping.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Do you have enough time to keep your books and records up to
@@ -228,14 +238,16 @@ const DTRecordKeeping = (): ReactElement => {
 						aria-controls="financial-commistments-content"
 						id="financial-commistments-header"
 					>
-						<Typography variant="h5">
+						<Typography variant="h5" component="h3">
 							Records to meet financial commitments
 						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Collecting the right records for your financial commitments
 									and obligations is essential to meet your obligations. What
@@ -243,7 +255,7 @@ const DTRecordKeeping = (): ReactElement => {
 									important consideration.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Does your record keeping meet the regulatory requirements?

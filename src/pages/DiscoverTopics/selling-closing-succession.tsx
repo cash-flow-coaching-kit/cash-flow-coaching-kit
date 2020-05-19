@@ -41,21 +41,25 @@ const DTSellingClosingSuccession = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="purpose-exiting-content"
+						id="purpose-exiting-header"
 					>
-						<Typography variant="h5">Purpose for exiting</Typography>
+						<Typography variant="h5" component="h3">
+							Purpose for exiting
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									When deciding to exit your business, it is important to
 									consider the underlying reason for this decision.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Have you reached your business goal?
@@ -93,21 +97,25 @@ const DTSellingClosingSuccession = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="family-objectives-support-content"
+						id="family-objectives-support-header"
 					>
-						<Typography variant="h5">Family objectives and support</Typography>
+						<Typography variant="h5" component="h3">
+							Family objectives and support
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Where your business is a family business, consider family
 									objectives when deciding to exit your business.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Have you discussed your decision with your family? Consider
@@ -141,15 +149,19 @@ const DTSellingClosingSuccession = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="options-exit-content"
+						id="options-exit-header"
 					>
-						<Typography variant="h5">Options to exit</Typography>
+						<Typography variant="h5" component="h3">
+							Options to exit
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Once you have decided to exit your business, your next
 									important decision is how you will exit your business. There
@@ -157,7 +169,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 									or closing your business down.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Consider if your business is profitable? If your business is
@@ -184,22 +196,26 @@ const DTSellingClosingSuccession = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="preparing-exit-content"
+						id="preparing-exit-header"
 					>
-						<Typography variant="h5">Preparing for exit</Typography>
+						<Typography variant="h5" component="h3">
+							Preparing for exit
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Planning for a business exit is crucial. Planning enables you
 									to make informed decisions, positions you to take advantage of
 									opportunities and supports a clean and efficient exit.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Is your record keeping up to date?
@@ -233,7 +249,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Prepare early
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Early preparation is important to get your business in sale-ready.
 							You will be able to respond quickly to changes and opportunities
 							in the market.
@@ -243,7 +259,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Value your business
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Set an appropriate sales price, based on what your business is
 							worth now and its potential. Your business advisor or accountant
 							can help you determine the appropriate value.
@@ -253,7 +269,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Your role in the business
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							If you are the primary person driving the success of your
 							business, consider how value will be retained after you exit. You
 							could consider bringing in a CEO or manager prior to the sale to
@@ -265,7 +281,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Who will buy your business?
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							You need a willing buyer. Consider your potential buyers and
 							whether the market conditions are in your favour. Consider your
 							sales strategy. Will you use a business broker, formal
@@ -277,7 +293,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							What are you selling?
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Are you selling the assets of the business (for example, equipment
 							or machinery), or your ownership entitlement in the business (for
 							example shares in a private company). Seek advice from your
@@ -289,7 +305,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Document the sale in a legal contract
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Once you have secured a buyer, draft a robust sale contract to
 							reflect your negotiations and intentions. Consider seeking help
 							from a qualified legal professional.
@@ -299,7 +315,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Your tax and legal obligations
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							There are a number of tax and legal matters to consider:
 						</Typography>
 						<List>
@@ -323,7 +339,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Proceeds from sale
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Seek advice from your accountant about managing the sales
 							proceeds, including establishing the right entity structures,
 							wealth management strategies and estate planning processes.
@@ -333,7 +349,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Maintain business records
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Retain records in accordance with the Privacy Act and other
 							relevant legislation and regulation. Your advisor can help you
 							decide on the best approach for your circumstances.
@@ -348,7 +364,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Advise employees
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							You must provide written notice to your employees and pay any
 							outstanding employee entitlements such as wages and accrued leave.
 							You will need to settle any employee obligations such as
@@ -359,7 +375,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Advise suppliers and customers
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Let your suppliers and customers know that you will be closing
 							operations. Finalise any outstanding business contracts such as
 							property leases, and any outstanding business transactions such as
@@ -370,7 +386,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Dispose of the business assets
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Your business is likely to have assets such as equipment,
 							machinery or vehicles that will need to be sold or transferred.
 							Discuss the tax implication of the sale of these assets with your
@@ -381,7 +397,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Your tax and legal obligations
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							There are a number of tax and legal matters that need to be
 							considered:
 						</Typography>
@@ -405,7 +421,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Legally close your business
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							The process to legally close your business will depend on the
 							structure of your business. For example, closing a private company
 							is guided by the company’s constitution. A company officially
@@ -419,14 +435,14 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Maintain business records
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							You are legally required to keep business records including
 							financial records, customer records and employee records,
 							generally for a minimum of 5 years. Where the business is a
 							private company, ASIC also requires certain meeting minutes to be
 							documented and retained.
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Retain records in accordance with the Privacy Act and other
 							relevant legislation and regulation. Your advisor can help you
 							decide on the best approach for your circumstances.
@@ -437,7 +453,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						Wrap Up
 					</Typography>
-					<Typography component="p">
+					<Typography variant="body1" component="p">
 						Exiting your business can be a complex and emotional time. Don't
 						forget to look after yourself. Seek professional advice from you
 						business advisor, accountant and/or solicitor to help you
@@ -448,7 +464,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						More information
 					</Typography>
-					<Typography component="p">
+					<Typography variant="body1" component="p" gutterBottom>
 						You might like to visit these links for more information
 					</Typography>
 					<Grid container spacing={3}>

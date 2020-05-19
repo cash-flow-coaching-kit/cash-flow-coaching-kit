@@ -60,7 +60,7 @@ const DTFundingBusiness = (): ReactElement => {
 				</List>
 
 				<Grid container spacing={3}>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Card variant="outlined">
 							<CardHeader title="Tamako's Funding" />
 							<CardMedia
@@ -79,7 +79,7 @@ const DTFundingBusiness = (): ReactElement => {
 							</CardActions>
 						</Card>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Card variant="outlined">
 							<CardHeader title="Charlotte's Loans" />
 							<CardMedia
@@ -99,11 +99,11 @@ const DTFundingBusiness = (): ReactElement => {
 						</Card>
 					</Grid>
 				</Grid>
-				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					The four main types of funding
 				</Typography>
 				<Grid container spacing={3}>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
 							Debt Funding
 						</Typography>
@@ -134,7 +134,7 @@ const DTFundingBusiness = (): ReactElement => {
 							</Typography>
 						</List>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
 							Equity Funding
 						</Typography>
@@ -166,7 +166,7 @@ const DTFundingBusiness = (): ReactElement => {
 							</Typography>
 						</List>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
 							Grant Funding
 						</Typography>
@@ -185,7 +185,7 @@ const DTFundingBusiness = (): ReactElement => {
 							</Typography>
 						</List>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
 							Crowdfunding
 						</Typography>
@@ -207,28 +207,32 @@ const DTFundingBusiness = (): ReactElement => {
 						</List>
 					</Grid>
 				</Grid>
-				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					QUICKSNAPS - What to look for when funding your business.
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="pupose-funding-content"
+						id="pupose-funding-header"
 					>
-						<Typography variant="h5">Purpose of Funding</Typography>
+						<Typography variant="h5" component="h3">
+							Purpose of Funding
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Understanding the purpose of funding and the best use of it
 									can allow you to make better decisions and ensure you are
 									correctly identifying the need.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Depending on where you are in your business lifecycle, will
@@ -250,15 +254,19 @@ const DTFundingBusiness = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="enough-funding-content"
+						id="enough-funding-header"
 					>
-						<Typography variant="h5">Having Enough Funding</Typography>
+						<Typography variant="h5" component="h3">
+							Having Enough Funding
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Ensuring you have enough funding to meet financial commitments
 									is essential in respect to your cash flow. Alternate avenues
@@ -266,7 +274,7 @@ const DTFundingBusiness = (): ReactElement => {
 									quicksnap.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Debt is not necessarily a bad thing – it can help start or
@@ -285,21 +293,25 @@ const DTFundingBusiness = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="funding-opportunities-content"
+						id="funding-opportunities-header"
 					>
-						<Typography variant="h5">Funding opportunities</Typography>
+						<Typography variant="h5" component="h3">
+							Funding opportunities
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Looking at new avenues for funding could allow growth or
 									increased cash flow now.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										What are the different funding opportunities for your
@@ -321,21 +333,25 @@ const DTFundingBusiness = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="right-terms-content"
+						id="right-terms-header"
 					>
-						<Typography variant="h5">Right terms</Typography>
+						<Typography variant="h5" component="h3">
+							Right terms
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Understanding the terms in which you need to pay debts can
 									have a dramatic impact on your cash flow.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Do you have enough free cash flow to meet repayments or will

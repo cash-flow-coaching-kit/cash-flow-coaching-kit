@@ -64,7 +64,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 					</Typography>
 				</List>
 				<Grid container spacing={3}>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Card variant="outlined">
 							<CardHeader title="Mick's Farm" />
 							<CardMedia
@@ -80,7 +80,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 							</CardActions>
 						</Card>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Card variant="outlined">
 							<CardHeader title="Ming's Disability Services" />
 							<CardMedia
@@ -106,17 +106,19 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="business-activities-content"
+						id="business-activities-header"
 					>
-						<Typography variant="h5">
+						<Typography variant="h5" component="h3">
 							Business activities that trigger commitments
 						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									At times, certain business activities, such as employing a new
 									staff member, can have a dramatic impact on your financial
@@ -124,7 +126,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 									can allow you to make better decisions.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Selling goods or services; GST applies
@@ -148,15 +150,19 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="important-dates-content"
+						id="important-dates-header"
 					>
-						<Typography variant="h5">Important dates</Typography>
+						<Typography variant="h5" component="h3">
+							Important dates
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Many financial commitments are cyclical. It’s important to
 									know your payment cycles and dates. Keeping a record of your
@@ -170,7 +176,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 									works for you.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										1 July – start of financial year
@@ -217,22 +223,26 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="put-aside-content"
+						id="put-aside-header"
 					>
-						<Typography variant="h5">How much to put aside</Typography>
+						<Typography variant="h5" component="h3">
+							How much to put aside
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Expenses such as GST, superannuation and PAYG Income Tax are
 									often forgotten about until BAS time. Understanding how much
 									to put aside can assist in budgeting for these expenses.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										A good practice is to put your commitments, such as GST,
@@ -250,17 +260,19 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="implications-content"
+						id="implications-header"
 					>
-						<Typography variant="h5">
+						<Typography variant="h5" component="h3">
 							Implications of not meeting your obligations
 						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Failing to meet your financial obligations can have a huge
 									impact on your business and also the debt you owe.
@@ -269,7 +281,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 									you can take if you are facing cash flow issues.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Late payment penalties and general interest charges

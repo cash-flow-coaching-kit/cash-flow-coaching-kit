@@ -59,7 +59,7 @@ const DTManagingCashFlow = (): ReactElement => {
 					</Typography>
 				</List>
 				<Grid container spacing={3}>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Card variant="outlined">
 							<CardHeader title="Yulari's Cash Flow" />
 							<CardMedia
@@ -78,7 +78,7 @@ const DTManagingCashFlow = (): ReactElement => {
 							</CardActions>
 						</Card>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Card variant="outlined">
 							<CardHeader title="Cameron's Cash Flow" />
 							<CardMedia
@@ -104,24 +104,26 @@ const DTManagingCashFlow = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="timing-cashflow-content"
+						id="timing-cashflow-header"
 					>
-						<Typography variant="h5">
+						<Typography variant="h5" component="h3">
 							The timing of cash flow and the impact on your bank balance
 						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									It is important to plan for cash coming in and going out, so
 									that you can manage the payments you need to make when you
 									have not necessarily recouped the funds you are owed.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										The following are examples where you may need to spend cash
@@ -143,17 +145,19 @@ const DTManagingCashFlow = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="profit-cashflow-content"
+						id="profit-cashflow-header"
 					>
-						<Typography variant="h5">
+						<Typography variant="h5" component="h3">
 							Profit and cash flow are different
 						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Profit is not the same as your cash flow. Cash flow
 									considerations are based on time and allow you to pay your
@@ -161,7 +165,7 @@ const DTManagingCashFlow = (): ReactElement => {
 									spend and may over or under estimate your cash on hand.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Your profit and loss statement might show a profit but
@@ -184,15 +188,19 @@ const DTManagingCashFlow = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="cash-not-yours-content"
+						id="cash-not-yours-header"
 					>
-						<Typography variant="h5">Cash that is not yours</Typography>
+						<Typography variant="h5" component="h3">
+							Cash that is not yours
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Just because cash is sitting in your bank account, doesn't
 									necessarily mean it is all yours. Understanding what amounts
@@ -200,7 +208,7 @@ const DTManagingCashFlow = (): ReactElement => {
 									decisions, and budget for upcoming expenses.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Supplier commitments and overheads such as insurance or rent
@@ -234,15 +242,19 @@ const DTManagingCashFlow = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="working-capital-content"
+						id="working-capital-header"
 					>
-						<Typography variant="h5">Working capital</Typography>
+						<Typography variant="h5" component="h3">
+							Working capital
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Understanding your working capital and how much you have on
 									hand may allow you to make better decisions in respect to
@@ -250,7 +262,7 @@ const DTManagingCashFlow = (): ReactElement => {
 									expenditures.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										You want your customers to pay you in a shorter timeframe
