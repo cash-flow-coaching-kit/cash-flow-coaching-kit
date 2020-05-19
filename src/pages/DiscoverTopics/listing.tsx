@@ -8,6 +8,7 @@ import {
 	CardActions,
 	CardContent,
 	CardMedia,
+	Container,
 	Button,
 } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
@@ -21,7 +22,7 @@ const DTListing = (): ReactElement => {
 
 	return (
 		<>
-			<PageContainer>
+			<PageContainer role="main">
 				<Typography variant="h5" align="center" className={styles.tagline}>
 					Build knowledge on key areas of your business
 				</Typography>
@@ -61,7 +62,7 @@ const DTListing = (): ReactElement => {
 							manage cash flow.
 						</Typography>
 						<Grid container spacing={2}>
-							<Grid item xs={4}>
+							<Grid item xs={12} sm={6} md={4}>
 								<Card>
 									<CardMedia
 										component="img"
@@ -86,7 +87,7 @@ const DTListing = (): ReactElement => {
 									</CardActions>
 								</Card>
 							</Grid>
-							<Grid item xs={4}>
+							<Grid item xs={12} sm={6} md={4}>
 								<Card>
 									<CardMedia
 										component="img"
@@ -111,7 +112,7 @@ const DTListing = (): ReactElement => {
 									</CardActions>
 								</Card>
 							</Grid>
-							<Grid item xs={4}>
+							<Grid item xs={12} sm={6} md={4}>
 								<Card>
 									<CardMedia
 										component="img"
@@ -136,7 +137,7 @@ const DTListing = (): ReactElement => {
 									</CardActions>
 								</Card>
 							</Grid>
-							<Grid item xs={4}>
+							<Grid item xs={12} sm={6} md={4}>
 								<Card>
 									<CardMedia
 										component="img"
@@ -161,7 +162,7 @@ const DTListing = (): ReactElement => {
 									</CardActions>
 								</Card>
 							</Grid>
-							<Grid item xs={4}>
+							<Grid item xs={12} sm={6} md={4}>
 								<Card>
 									<CardMedia
 										component="img"
@@ -185,8 +186,8 @@ const DTListing = (): ReactElement => {
 										</Button>
 									</CardActions>
 								</Card>
-							</Grid>{" "}
-							<Grid item xs={4}>
+							</Grid>
+							<Grid item xs={12} sm={6} md={4}>
 								<Card>
 									<CardMedia
 										component="img"
@@ -212,6 +213,18 @@ const DTListing = (): ReactElement => {
 								</Card>
 							</Grid>
 						</Grid>
+						<Container component="div" className={styles.container}>
+							<Button
+								size="large"
+								component={RouterLink}
+								to={PrivateRoutes.DTSellingClosingSuccession}
+								variant="contained"
+								color="primary"
+								fullWidth={true}
+							>
+								Considering exiting your business?
+							</Button>
+						</Container>
 					</Grid>
 				</Grid>
 			</PageContainer>

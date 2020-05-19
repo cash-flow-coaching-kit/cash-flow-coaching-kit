@@ -8,25 +8,28 @@ import {
 	CardActions,
 	CardMedia,
 	Button,
+	ExpansionPanel,
+	ExpansionPanelSummary,
+	ExpansionPanelDetails,
+	Container,
+	Divider,
 } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 
 const DTRecordKeeping = (): ReactElement => {
 	const styles = useDTStyles()
+
 	return (
 		<>
-			<PageContainer>
-				<Typography
-					variant="h5"
-					component="h1"
-					align="center"
-					className={styles.tagline}
-				>
+			<PageContainer role="main">
+				<Typography component="h1" align="center" className={styles.tagline}>
 					Record keeping
 				</Typography>
-				<Typography variant="body1" component="p">
+				<Typography variant="body1" component="p" gutterBottom>
 					As well as being a legal requirement, keeping accurate, up-to-date
 					business records help you make fast, informed, and reliable business
 					decisions. It’s important to find a record keeping system that suits
@@ -69,6 +72,7 @@ const DTRecordKeeping = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Eden's Digital Records" />
 							<CardMedia
+								title="Eden's Digital Records"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/1caO4xN-ZwA"
@@ -87,6 +91,7 @@ const DTRecordKeeping = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Lisa's Paper Records" />
 							<CardMedia
+								title="Lisa's Paper Records"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/q9J_sRCKTn8"
@@ -102,6 +107,214 @@ const DTRecordKeeping = (): ReactElement => {
 						</Card>
 					</Grid>
 				</Grid>
+				<Typography component="h2" className={styles.SectionTitle}>
+					QUICKSNAPS - How do you stay on top of your record keeping?
+				</Typography>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="records-rely-on-content"
+						id="records-rely-on"
+					>
+						<Typography variant="h5">Records you can rely on</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									To ensure you can make informed financial decisions, you must
+									be able to rely upon your financial records.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li" className={styles.list}>
+										Can you make informed decisions from the information you
+										have?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Is the information accurate and complete?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Your cash flow budget is based on your planned Cash In and
+										Cash Out and allows you to allocate funds for specific
+										purposes that are known in advance.
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="accounting-system-content"
+						id="accounting-system-header"
+					>
+						<Typography variant="h5">
+							An accounting system to make your business more efficient
+						</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									An accounting system often provides an opportunity to
+									streamline reporting and allows you to make faster and better
+									decisions.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li" className={styles.list}>
+										Do you have an accounting system that suits your needs?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Are you using all of the available features of your
+										accounting system to help you maintain accurate and complete
+										records and make more informed decisions?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Could a different system streamline the different tasks and
+										functions within your business?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Could you automate some of your accounting and reporting?
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="help-record-keeping-content"
+						id="help-record-keeping-header"
+					>
+						<Typography variant="h5">Help with record keeping</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									Some accounting packages, an accountant or a bookkeeper may
+									assist with record keeping.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li" className={styles.list}>
+										Do you have enough time to keep your books and records up to
+										date or do you require the specialist skills of an
+										accountant or a bookkeeper?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Could you outsource some of the accounting functions to free
+										up your time to spend in other areas, such as obtaining or
+										engaging in new work?
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="financial-commistments-content"
+						id="financial-commistments-header"
+					>
+						<Typography variant="h5">
+							Records to meet financial commitments
+						</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container spacing={3}>
+							<Grid item xs={6}>
+								<Typography variant="h6">Why?</Typography>
+								<Typography>
+									Collecting the right records for your financial commitments
+									and obligations is essential to meet your obligations. What
+									records you need and the time you need to keep them for is an
+									important consideration.
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<List>
+									<Typography component="li" className={styles.list}>
+										Does your record keeping meet the regulatory requirements?
+									</Typography>
+									<Typography component="li" className={styles.list}>
+										Are your records sufficient to allow the business to meet
+										its regulatory obligations in a timely manner?
+									</Typography>
+								</List>
+							</Grid>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerActivity}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						Record keeping activity
+					</Typography>
+					<Typography variant="body1" component="p">
+						This activity can help you determine your specific record keeping
+						needs, and guide you towards a solution that is matched to your
+						business.
+					</Typography>
+					<Button
+						variant="contained"
+						color="primary"
+						size="large"
+						className={styles.button}
+						startIcon={<PictureAsPdf />}
+					>
+						Download record keeping activity
+					</Button>
+					<Divider />
+					<Typography component="h2" className={styles.SectionTitle}>
+						ATO App
+					</Typography>
+					<Typography variant="body1" component="p">
+						If you are a sole-trader with simple business affairs the ATO App
+						provides free and basic record keeping tools that are quick and easy
+						to use.
+					</Typography>
+					<Typography variant="body1" component="p">
+						Download the ATO app and setup a logbook to keep records of your
+						business travel expenses.
+					</Typography>
+				</Container>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerWrapUp}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						Wrap up
+					</Typography>
+					<Typography variant="body1" component="p" gutterBottom>
+						Good record keeping gives you accurate and complete information you
+						can rely on to make informed decisions in your business. Digital
+						record keeping systems put time back in your day by automating much
+						of your record keeping and business reporting. They also compile
+						reports that can provide valuable insights to your business
+						performance.
+					</Typography>
+					<Typography variant="body1" component="p">
+						If you have a business advisor, consider using the same record
+						keeping platform that they use, to ensure your records are
+						compatible and easily shared.
+					</Typography>
+				</Container>
 			</PageContainer>
 
 			<PageTip tip="DiscoverTopicsTips" />

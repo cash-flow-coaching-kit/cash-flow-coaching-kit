@@ -15,7 +15,6 @@ import {
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
-import SectionTitle from "../../components/SectionTitle"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
@@ -25,17 +24,12 @@ const DTFundingBusiness = (): ReactElement => {
 
 	return (
 		<>
-			<PageContainer>
-				<Typography
-					variant="h5"
-					component="h1"
-					align="center"
-					className={styles.tagline}
-				>
+			<PageContainer role="main">
+				<Typography component="h1" align="center" className={styles.tagline}>
 					Funding your business
 				</Typography>
 
-				<Typography variant="body1" component="p">
+				<Typography variant="body1" component="p" gutterBottom>
 					Finding the right funding option is important to the long term success
 					of your business. Understanding the various types of funding can help
 					you select the best option for your business when starting up,
@@ -70,6 +64,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Tamako's Funding" />
 							<CardMedia
+								title="Tamako's Funding"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/fAe_2eyAkrU"
@@ -88,6 +83,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Card variant="outlined">
 							<CardHeader title="Charlotte's Loans" />
 							<CardMedia
+								title="Charlotte's Loans"
 								className={styles.embed}
 								component="iframe"
 								src="https://www.youtube.com/embed/BTwVYKfGyuk"
@@ -103,15 +99,15 @@ const DTFundingBusiness = (): ReactElement => {
 						</Card>
 					</Grid>
 				</Grid>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
 					The four main types of funding
-				</SectionTitle>
+				</Typography>
 				<Grid container spacing={3}>
 					<Grid item xs={6}>
 						<Typography component="h3" variant="h5">
 							Debt Funding
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Money provided by an external party such as a bank that requires
 							repayment
 						</Typography>
@@ -142,7 +138,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Equity Funding
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Money sourced internally or from others, often for a stake of the
 							business.
 						</Typography>
@@ -174,7 +170,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Grant Funding
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Money granted for specific business purposes.
 						</Typography>
 						<List>
@@ -193,7 +189,7 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography component="h3" variant="h5">
 							Crowdfunding
 						</Typography>
-						<Typography component="p">
+						<Typography variant="body1" component="p">
 							Money raised for a business by a group or community of supporters
 							who contribute to a capital pool of funding.
 						</Typography>
@@ -211,9 +207,9 @@ const DTFundingBusiness = (): ReactElement => {
 						</List>
 					</Grid>
 				</Grid>
-				<SectionTitle className={styles.SectionTitle}>
+				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
 					QUICKSNAPS - What to look for when funding your business.
-				</SectionTitle>
+				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -362,12 +358,12 @@ const DTFundingBusiness = (): ReactElement => {
 				<Container
 					maxWidth="lg"
 					component="div"
-					className={styles.containerPurple}
+					className={styles.containerActivity}
 				>
-					<SectionTitle className={styles.SectionTitle}>
+					<Typography component="h2" className={styles.SectionTitle}>
 						Funding activity
-					</SectionTitle>
-					<Typography variant="body1">
+					</Typography>
+					<Typography variant="body1" component="p">
 						This activity is designed to help you make an informed decision when
 						it comes to funding your business. The activity will focus on
 						determining the purpose for your funding, ensuring you receive
@@ -376,19 +372,26 @@ const DTFundingBusiness = (): ReactElement => {
 					</Typography>
 					<Button
 						variant="contained"
-						color="secondary"
+						color="primary"
 						size="large"
 						className={styles.button}
 						startIcon={<PictureAsPdf />}
+						href="/pdf/Funding-Activity.pdf"
 					>
 						Download your own
 						<br />
 						Funding activity template
 					</Button>
 				</Container>
-				<Container component="div">
-					<SectionTitle className={styles.SectionTitle}>Wrap up</SectionTitle>
-					<Typography variant="body1">
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerWrapUp}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						Wrap up
+					</Typography>
+					<Typography variant="body1" component="p">
 						Getting into debt or taking on more debt is a big decision and can
 						have wide spread impacts for your business. For this reason, it is
 						advisable to speak with an accountant or financial advisor to
@@ -396,18 +399,22 @@ const DTFundingBusiness = (): ReactElement => {
 						your needs, particularly those that are not offered by a bank such
 						as government grants and/or crowdfunding.
 					</Typography>
-					<Typography variant="body1">
+					<Typography variant="body1" component="p">
 						If you already have loans or credit you might like to speak to your
 						bank to discuss your current banking arrangements and revisit
 						whether they are suitable for your current business operations and
 						any short-term funding requirements.
 					</Typography>
 				</Container>
-				<Container component="div">
-					<SectionTitle className={styles.SectionTitle}>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerMoreInfo}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
 						More information
-					</SectionTitle>
-					<Typography variant="body1">
+					</Typography>
+					<Typography variant="body1" component="p">
 						You might like to visit these links for more information
 					</Typography>
 					<Button

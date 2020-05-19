@@ -1,6 +1,6 @@
 "https://{default}/":
-    type: upstream
-    upstream: "app:http"
+  type: upstream
+  upstream: "app:http"
 "https://www.{default}/":
-    type: redirect
-    to: "https://{default}/"
+  type: redirect
+  to: "https://{default}/"
