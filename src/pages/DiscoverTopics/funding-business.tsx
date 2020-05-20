@@ -29,13 +29,22 @@ const DTFundingBusiness = (): ReactElement => {
 					Funding your business
 				</Typography>
 
-				<Typography variant="body1" component="p" gutterBottom>
+				<Typography
+					variant="body1"
+					component="p"
+					className={styles.contentText}
+					gutterBottom
+				>
 					Finding the right funding option is important to the long term success
 					of your business. Understanding the various types of funding can help
 					you select the best option for your business when starting up,
 					expanding, or going through a time of limited cash flow.
 				</Typography>
-				<Typography variant="body1" component="p">
+				<Typography
+					variant="body1"
+					component="p"
+					className={styles.contentText}
+				>
 					<strong>Funding your business can help you:</strong>
 				</Typography>
 				<List>
@@ -60,7 +69,7 @@ const DTFundingBusiness = (): ReactElement => {
 				</List>
 
 				<Grid container spacing={3}>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Card variant="outlined">
 							<CardHeader title="Tamako's Funding" />
 							<CardMedia
@@ -79,7 +88,7 @@ const DTFundingBusiness = (): ReactElement => {
 							</CardActions>
 						</Card>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Card variant="outlined">
 							<CardHeader title="Charlotte's Loans" />
 							<CardMedia
@@ -99,15 +108,19 @@ const DTFundingBusiness = (): ReactElement => {
 						</Card>
 					</Grid>
 				</Grid>
-				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					The four main types of funding
 				</Typography>
 				<Grid container spacing={3}>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
 							Debt Funding
 						</Typography>
-						<Typography variant="body1" component="p">
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+						>
 							Money provided by an external party such as a bank that requires
 							repayment
 						</Typography>
@@ -134,11 +147,15 @@ const DTFundingBusiness = (): ReactElement => {
 							</Typography>
 						</List>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
 							Equity Funding
 						</Typography>
-						<Typography variant="body1" component="p">
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+						>
 							Money sourced internally or from others, often for a stake of the
 							business.
 						</Typography>
@@ -166,11 +183,15 @@ const DTFundingBusiness = (): ReactElement => {
 							</Typography>
 						</List>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
 							Grant Funding
 						</Typography>
-						<Typography variant="body1" component="p">
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+						>
 							Money granted for specific business purposes.
 						</Typography>
 						<List>
@@ -185,11 +206,15 @@ const DTFundingBusiness = (): ReactElement => {
 							</Typography>
 						</List>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
 							Crowdfunding
 						</Typography>
-						<Typography variant="body1" component="p">
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+						>
 							Money raised for a business by a group or community of supporters
 							who contribute to a capital pool of funding.
 						</Typography>
@@ -207,28 +232,32 @@ const DTFundingBusiness = (): ReactElement => {
 						</List>
 					</Grid>
 				</Grid>
-				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
+				<Typography component="h2" className={styles.SectionTitle}>
 					QUICKSNAPS - What to look for when funding your business.
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="pupose-funding-content"
+						id="pupose-funding-header"
 					>
-						<Typography variant="h5">Purpose of Funding</Typography>
+						<Typography variant="h5" component="h3">
+							Purpose of Funding
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Understanding the purpose of funding and the best use of it
 									can allow you to make better decisions and ensure you are
 									correctly identifying the need.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Depending on where you are in your business lifecycle, will
@@ -250,15 +279,19 @@ const DTFundingBusiness = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="enough-funding-content"
+						id="enough-funding-header"
 					>
-						<Typography variant="h5">Having Enough Funding</Typography>
+						<Typography variant="h5" component="h3">
+							Having Enough Funding
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Ensuring you have enough funding to meet financial commitments
 									is essential in respect to your cash flow. Alternate avenues
@@ -266,7 +299,7 @@ const DTFundingBusiness = (): ReactElement => {
 									quicksnap.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Debt is not necessarily a bad thing – it can help start or
@@ -285,21 +318,25 @@ const DTFundingBusiness = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="funding-opportunities-content"
+						id="funding-opportunities-header"
 					>
-						<Typography variant="h5">Funding opportunities</Typography>
+						<Typography variant="h5" component="h3">
+							Funding opportunities
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Looking at new avenues for funding could allow growth or
 									increased cash flow now.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										What are the different funding opportunities for your
@@ -321,21 +358,25 @@ const DTFundingBusiness = (): ReactElement => {
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
+						aria-controls="right-terms-content"
+						id="right-terms-header"
 					>
-						<Typography variant="h5">Right terms</Typography>
+						<Typography variant="h5" component="h3">
+							Right terms
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
-							<Grid item xs={6}>
-								<Typography variant="h6">Why?</Typography>
+							<Grid item sm={6}>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Understanding the terms in which you need to pay debts can
 									have a dramatic impact on your cash flow.
 								</Typography>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item sm={6}>
 								<List>
 									<Typography component="li" className={styles.list}>
 										Do you have enough free cash flow to meet repayments or will
@@ -363,7 +404,11 @@ const DTFundingBusiness = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						Funding activity
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
 						This activity is designed to help you make an informed decision when
 						it comes to funding your business. The activity will focus on
 						determining the purpose for your funding, ensuring you receive
@@ -374,7 +419,6 @@ const DTFundingBusiness = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						className={styles.button}
 						startIcon={<PictureAsPdf />}
 						href="/pdf/Funding-Activity.pdf"
 					>
@@ -391,7 +435,11 @@ const DTFundingBusiness = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						Wrap up
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
 						Getting into debt or taking on more debt is a big decision and can
 						have wide spread impacts for your business. For this reason, it is
 						advisable to speak with an accountant or financial advisor to
@@ -399,7 +447,11 @@ const DTFundingBusiness = (): ReactElement => {
 						your needs, particularly those that are not offered by a bank such
 						as government grants and/or crowdfunding.
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
 						If you already have loans or credit you might like to speak to your
 						bank to discuss your current banking arrangements and revisit
 						whether they are suitable for your current business operations and
@@ -414,25 +466,41 @@ const DTFundingBusiness = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						More information
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
 						You might like to visit these links for more information
 					</Typography>
-					<Button
-						variant="contained"
-						size="large"
-						className={styles.button}
-						href="https://www.business.qld.gov.au/starting-business/costs-finance-banking/funding-business"
-					>
-						Funding your buisiness
-					</Button>
-					<Button
-						variant="contained"
-						size="large"
-						className={styles.button}
-						href="https://www.business.gov.au/Finance/Seeking-finance/Reasons-and-options-for-seeking-finance"
-					>
-						Reasons for seeking finance
-					</Button>
+					<Grid container spacing={3}>
+						<Grid item sm={6}>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								href="https://www.business.qld.gov.au/starting-business/costs-finance-banking/funding-business"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Funding your buisiness
+							</Button>
+						</Grid>
+						<Grid item sm={6}>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								href="https://www.business.gov.au/Finance/Seeking-finance/Reasons-and-options-for-seeking-finance"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Reasons for seeking finance
+							</Button>
+						</Grid>
+					</Grid>
 				</Container>
 			</PageContainer>
 
