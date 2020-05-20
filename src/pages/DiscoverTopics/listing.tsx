@@ -13,7 +13,6 @@ import {
 } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
-import SectionTitle from "../../components/SectionTitle"
 import { PrivateRoutes } from "../../util/routes/routes"
 import useDTStyles from "./_config/styles"
 
