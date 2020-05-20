@@ -23,41 +23,61 @@ const DTListing = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography variant="h5" align="center" className={styles.tagline}>
+				<Typography component="h1" align="center" className={styles.tagline}>
 					Build knowledge on key areas of your business
 				</Typography>
 				<Grid container spacing={3}>
-					<Grid item xs={3}>
-						<SectionTitle>1. The Four Key Questions</SectionTitle>
-						<Typography variant="body1">
+					<Grid item md={3}>
+						<Typography component="h2" className={styles.SectionTitle}>
+							1. The Four Key Questions
+						</Typography>
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+						>
 							There are four simple questions that determine the cash flow
 							health of your business. No matter how big a business is or what
 							stage it is at, answering these Four Key Questions are the
 							foundation to set you up to succeed.
 						</Typography>
 						<List>
-							<Typography component="li">
-								<Typography variant="h5">Profit</Typography>
+							<Typography component="li" gutterBottom>
+								<Typography variant="h5" component="h3" gutterBottom>
+									Profit
+								</Typography>
 								Am I trading profitably?
 							</Typography>
-							<Typography component="li">
-								<Typography variant="h5">Provisioning</Typography>
+							<Typography component="li" gutterBottom>
+								<Typography variant="h5" component="h3" gutterBottom>
+									Provisioning
+								</Typography>
 								Have I put enough aside to meet my regular financial
 								commitments?
 							</Typography>
-							<Typography component="li">
-								<Typography variant="h5">Liquidity</Typography>
+							<Typography component="li" gutterBottom>
+								<Typography variant="h5" component="h3" gutterBottom>
+									Liquidity
+								</Typography>
 								Does my business have enough to spend on myself and pay others?
 							</Typography>
-							<Typography component="li">
-								<Typography variant="h5">Meeting Goals</Typography>
+							<Typography component="li" gutterBottom>
+								<Typography variant="h5" component="h3" gutterBottom>
+									Meeting Goals
+								</Typography>
 								Is my business improving its financial position?
 							</Typography>
 						</List>
 					</Grid>
-					<Grid item xs={9}>
-						<SectionTitle>2. Cash Flow Topics</SectionTitle>
-						<Typography variant="body1">
+					<Grid item md={9}>
+						<Typography component="h2" className={styles.SectionTitle}>
+							2. Cash Flow Topics
+						</Typography>
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+						>
 							There are six knowledge topics to help businesses effectively
 							manage cash flow.
 						</Typography>
@@ -220,7 +240,7 @@ const DTListing = (): ReactElement => {
 								to={PrivateRoutes.DTSellingClosingSuccession}
 								variant="contained"
 								color="primary"
-								fullWidth={true}
+								fullWidth
 							>
 								Considering exiting your business?
 							</Button>

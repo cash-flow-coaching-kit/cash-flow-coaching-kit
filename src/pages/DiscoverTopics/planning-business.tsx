@@ -34,7 +34,12 @@ const DTPlanningBusiness = (): ReactElement => {
 						>
 							Planning your business
 						</Typography>
-						<Typography variant="body1" component="p" gutterBottom>
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+							gutterBottom
+						>
 							Planning your business is crucial to being successful. When you
 							have a well researched business plan, you are able to accurately
 							forecast and analyse your business. This helps you to be
@@ -42,7 +47,11 @@ const DTPlanningBusiness = (): ReactElement => {
 							find opportunities to grow your business, and ensure you don't run
 							out of money.
 						</Typography>
-						<Typography variant="body1" component="p">
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+						>
 							<strong>A business plan can help you:</strong>
 						</Typography>
 						<List>
@@ -299,7 +308,11 @@ const DTPlanningBusiness = (): ReactElement => {
 					>
 						Writing a business plan
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
 						Writing a business plan can be easier than you think - keep it
 						simple to start with and build on it over time. To set your business
 						up for success, review your business plan regularly.
@@ -308,9 +321,8 @@ const DTPlanningBusiness = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						className={styles.button}
 						startIcon={<PictureAsPdf />}
-						href="/pdf/BusinessPan-Activity.pdf"
+						href="/pdf/BusinessPlan-Activity.pdf"
 					>
 						Build your own business plan
 					</Button>
@@ -323,14 +335,22 @@ const DTPlanningBusiness = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						Wrap up
 					</Typography>
-					<Typography variant="body1" component="p" gutterBottom>
-						Wrap up When you review your business plan, look for ways to improve
-						your cash flow and financial performance. You can use the canvas
-						tool and change lever cards to help you consider what changes you
-						can make in your business and the impact they may have on your cash
-						flow.
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+						gutterBottom
+					>
+						When you review your business plan, look for ways to improve your
+						cash flow and financial performance. You can use the canvas tool and
+						change lever cards to help you consider what changes you can make in
+						your business and the impact they may have on your cash flow.
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
 						You may want to discuss your business plan with a professional
 						advisor.
 					</Typography>
@@ -343,9 +363,72 @@ const DTPlanningBusiness = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						More information
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
 						You might like to visit these links for more information
 					</Typography>
+					<Grid container spacing={3}>
+						<Grid item sm={6} md={3}>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="Plan for success"
+								href="https://www.business.gov.au/New-to-business-essentials/Plan-for-success"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Plan for success
+							</Button>
+						</Grid>
+
+						<Grid item sm={6} md={3}>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="How to develop your business plan"
+								href="https://www.business.gov.au/planning/business-plans/how-to-develop-your-business-plan"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								How to develop your business plan
+							</Button>
+						</Grid>
+						<Grid item sm={6} md={3}>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="Starting your business checklist"
+								href="https://www.business.gov.au/planning/templates-and-tools/checklists/starting-your-business-checklist"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Starting your business checklist
+							</Button>
+						</Grid>
+						<Grid item sm={6} md={3}>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="Licenses or permits you may require"
+								href="https://ablis.business.gov.au/pages/home.aspx"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Licenses or permits you may require
+							</Button>
+						</Grid>
+					</Grid>
 				</Container>
 			</PageContainer>
 

@@ -29,7 +29,12 @@ const DTRecordKeeping = (): ReactElement => {
 				<Typography component="h1" align="center" className={styles.tagline}>
 					Record keeping
 				</Typography>
-				<Typography variant="body1" component="p" gutterBottom>
+				<Typography
+					variant="body1"
+					component="p"
+					className={styles.contentText}
+					gutterBottom
+				>
 					As well as being a legal requirement, keeping accurate, up-to-date
 					business records help you make fast, informed, and reliable business
 					decisions. It’s important to find a record keeping system that suits
@@ -37,7 +42,11 @@ const DTRecordKeeping = (): ReactElement => {
 					aspects of your record keeping, saving you time and money in the long
 					run.
 				</Typography>
-				<Typography variant="body1" component="p">
+				<Typography
+					variant="body1"
+					component="p"
+					className={styles.contentText}
+				>
 					<strong>Accurate record keeping can help you:</strong>
 				</Typography>
 				<List>
@@ -277,7 +286,12 @@ const DTRecordKeeping = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						Record keeping activity
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+						gutterBottom
+					>
 						This activity can help you determine your specific record keeping
 						needs, and guide you towards a solution that is matched to your
 						business.
@@ -286,24 +300,40 @@ const DTRecordKeeping = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						className={styles.button}
 						startIcon={<PictureAsPdf />}
 					>
 						Download record keeping activity
 					</Button>
-					<Divider />
 					<Typography component="h2" className={styles.SectionTitle}>
 						ATO App
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+						gutterBottom
+					>
 						If you are a sole-trader with simple business affairs the ATO App
 						provides free and basic record keeping tools that are quick and easy
 						to use.
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+						gutterBottom
+					>
 						Download the ATO app and setup a logbook to keep records of your
 						business travel expenses.
 					</Typography>
+					<Button
+						variant="contained"
+						color="primary"
+						size="large"
+						href="https://www.ato.gov.au/General/Online-services/ATO-app/"
+					>
+						ATO app
+					</Button>
 				</Container>
 				<Container
 					maxWidth="lg"
@@ -313,7 +343,12 @@ const DTRecordKeeping = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						Wrap up
 					</Typography>
-					<Typography variant="body1" component="p" gutterBottom>
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+						gutterBottom
+					>
 						Good record keeping gives you accurate and complete information you
 						can rely on to make informed decisions in your business. Digital
 						record keeping systems put time back in your day by automating much
@@ -321,11 +356,89 @@ const DTRecordKeeping = (): ReactElement => {
 						reports that can provide valuable insights to your business
 						performance.
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
 						If you have a business advisor, consider using the same record
 						keeping platform that they use, to ensure your records are
 						compatible and easily shared.
 					</Typography>
+				</Container>
+				<Container
+					maxWidth="lg"
+					component="div"
+					className={styles.containerMoreInfo}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						More information
+					</Typography>
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
+						You might like to visit these links for more information
+					</Typography>
+					<Grid container spacing={3}>
+						<Grid item sm={6} md={3}>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="what books and records should you keep"
+								href="https://asic.gov.au/for-business/your-business/small-business/compliance-for-small-business/small-business-what-books-and-records-should-my-company-keep/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								what books &amp; records should you keep
+							</Button>
+						</Grid>
+						<Grid item sm={6} md={3}>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="record keeping for small business"
+								href="https://www.ato.gov.au/General/Other-languages/In-detail/Information-in-other-languages/Record-keeping-for-small-businesses/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								record keeping for small business
+							</Button>
+						</Grid>
+						<Grid item sm={6} md={3}>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="key webinar topics for small business"
+								href="https://www.ato.gov.au/Business/Starting-your-own-business/Small-business-webinars-and-workshops/Small-business-webinars/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								key webinar topics for small business
+							</Button>
+						</Grid>
+						<Grid item sm={6} md={3}>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="records required by law"
+								href="https://www.ato.gov.au/Business/Record-keeping-for-business/Detailed-business-record-keeping-requirements/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								records required by law
+							</Button>
+						</Grid>
+					</Grid>
 				</Container>
 			</PageContainer>
 

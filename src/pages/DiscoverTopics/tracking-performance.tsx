@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react"
+import { Link as RouterLink } from "react-router-dom"
 import {
 	Typography,
 	Grid,
@@ -17,6 +18,8 @@ import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import VerticalSplitIcon from "@material-ui/icons/VerticalSplit"
+import { PrivateRoutes } from "../../util/routes/routes"
 
 const TrackingPerformance = (): ReactElement => {
 	const styles = useDTStyles()
@@ -27,14 +30,23 @@ const TrackingPerformance = (): ReactElement => {
 				<Typography component="h1" align="center" className={styles.tagline}>
 					Tracking your performance
 				</Typography>
-				<Typography variant="body1" component="p" gutterBottom>
+				<Typography
+					variant="body1"
+					component="p"
+					className={styles.contentText}
+					gutterBottom
+				>
 					It is vital for every business to track performance over time, to
 					monitor and address cash flow issues before it’s too late. Tracking
 					accurately reveals how you are performing against your plan and allows
 					you to revisit your budget with a clear path to improve your cash
 					flow.
 				</Typography>
-				<Typography variant="body1" component="p">
+				<Typography
+					variant="body1"
+					component="p"
+					className={styles.contentText}
+				>
 					<strong>Tracking your performance can help you:</strong>
 				</Typography>
 				<List>
@@ -119,7 +131,11 @@ const TrackingPerformance = (): ReactElement => {
 								<Typography variant="h6" component="h4">
 									Why?
 								</Typography>
-								<Typography>
+								<Typography
+									variant="body1"
+									component="p"
+									className={styles.contentText}
+								>
 									Understanding your regular financial commitments is essential
 									for budgeting. Appreciating when they occur, how much they are
 									likely to be and who they are owed to is a great place to
@@ -164,7 +180,11 @@ const TrackingPerformance = (): ReactElement => {
 								<Typography variant="h6" component="h4">
 									Why?
 								</Typography>
-								<Typography>
+								<Typography
+									variant="body1"
+									component="p"
+									className={styles.contentText}
+								>
 									Obtaining a clearer picture of your cash flow and business
 									will allow you to make better decisions. Knowing exactly what
 									to look for will vary, but asking yourself these Quicksnap
@@ -219,7 +239,11 @@ const TrackingPerformance = (): ReactElement => {
 								<Typography variant="h6" component="h4">
 									Why?
 								</Typography>
-								<Typography>
+								<Typography
+									variant="body1"
+									component="p"
+									className={styles.contentText}
+								>
 									Your past performance is not a reliable assurance of future
 									success. However, it may assist you in forecasting and
 									budgeting, allowing you to make informed decisions that
@@ -249,16 +273,53 @@ const TrackingPerformance = (): ReactElement => {
 				<Container
 					maxWidth="lg"
 					component="div"
+					className={styles.containerActivity}
+				>
+					<Typography component="h2" className={styles.SectionTitle}>
+						Track Canvas activity
+					</Typography>
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+						gutterBottom
+					>
+						This is your opportunity to use the Track Canvas to track your
+						business performance. You may wish to revisit your business plan,
+						choose a goal and track your progress towards it. The Track Canvas
+						helps you determine how you are tracking. Click “Show Me How” at any
+						time to get help using the tool.
+					</Typography>
+					<Button
+						variant="contained"
+						color="primary"
+						size="large"
+						startIcon={<VerticalSplitIcon />}
+						component={RouterLink}
+						to={PrivateRoutes.CFC}
+					>
+						Cash flow canvas
+					</Button>
+				</Container>
+				<Container
+					maxWidth="lg"
+					component="div"
 					className={styles.containerWrapUp}
 				>
 					<Typography component="h2" className={styles.SectionTitle}>
 						Wrap up
 					</Typography>
-					<Typography variant="body1" component="p" gutterBottom>
-						Wrapup content 1
-					</Typography>
-					<Typography variant="body1" component="p">
-						Wrapup content 2
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
+						If you have a business advisor, consider asking for assistance in
+						interpreting and responding to information revealed through tracking
+						your performance. An advisor may be able to help you take advantage
+						of opportunities in your industry, make changes within your
+						business, or understand whether your business is performing well or
+						not.
 					</Typography>
 				</Container>
 				<Container
@@ -269,9 +330,85 @@ const TrackingPerformance = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						More information
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
 						You might like to visit these links for more information
 					</Typography>
+					<Grid container spacing={3}>
+						<Grid item sm={6} md>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								href="https://www.business.qld.gov.au/running-business/protecting-business/risk-management/surviving-downturn/assess-performance"
+								title="assess business performance"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								assess business performance
+							</Button>
+						</Grid>
+						<Grid item sm={6} md>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								href="https://www.business.qld.gov.au/running-business/finances-cash-flow/managing-money/monitoring-performance"
+								title="monitoring your financial performance"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								monitoring your financial performance
+							</Button>
+						</Grid>
+						<Grid item sm={6} md>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								href="https://www.business.qld.gov.au/starting-business/planning/market-customer-research/benchmarking"
+								title="benchmarking your business"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								benchmarking your business
+							</Button>
+						</Grid>
+						<Grid item sm={6} md>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								href="https://www.business.vic.gov.au/money-profit-and-accounting/financial-processes-and-procedures/check-your-financial-health"
+								title="check the financial health of your business"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								check the financial health of your business
+							</Button>
+						</Grid>
+						<Grid item sm={6} md>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								href="https://www.business.qld.gov.au/running-business/growing-business/tips-improving"
+								title="improving business performance"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								improving business performance
+							</Button>
+						</Grid>
+					</Grid>
 				</Container>
 			</PageContainer>
 

@@ -28,7 +28,12 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 				<Typography component="h1" align="center" className={styles.tagline}>
 					Planning your regular financial commitments
 				</Typography>
-				<Typography variant="body1" component="p" gutterBottom>
+				<Typography
+					variant="body1"
+					component="p"
+					className={styles.contentText}
+					gutterBottom
+				>
 					There are many operating costs when managing your business. Some are
 					more obvious, such as phone bills, rent, or equipment. However, there
 					are a number of less obvious costs, including licences you may need to
@@ -36,7 +41,11 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 					your business activity statements. Knowing and planning for all of
 					your commitments can help you to avoid unnecessary cash flow stress.
 				</Typography>
-				<Typography variant="body1" component="p">
+				<Typography
+					variant="body1"
+					component="p"
+					className={styles.contentText}
+				>
 					<strong>
 						Planning your regular financial commitments can help you:
 					</strong>
@@ -307,7 +316,12 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						Know your commitments activity
 					</Typography>
-					<Typography variant="body1">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+						gutterBottom
+					>
 						This activity will guide you in identifying all of your regular
 						financial commitments, where they fall in the year, and how to
 						prepare for them ahead of time.
@@ -316,7 +330,6 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						className={styles.button}
 						startIcon={<PictureAsPdf />}
 						href="/pdf/KnowYourCommitments-Activity.pdf"
 					>
@@ -331,11 +344,24 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						Wrap up
 					</Typography>
-					<Typography variant="body1" component="p" gutterBottom>
-						Wrapup content 1
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+						gutterBottom
+					>
+						If you have a business advisor, they may be able to help you spread
+						your commitments across the year.
 					</Typography>
-					<Typography variant="body1" component="p">
-						Wrapup content 2
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
+						It is important to separate your personal and business bank
+						accounts. Be sure to investigate a number of financial institutions
+						to find the best option for you and your business - many banks offer
+						fee-free accounts.
 					</Typography>
 				</Container>
 				<Container
@@ -346,9 +372,89 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 					<Typography component="h2" className={styles.SectionTitle}>
 						More information
 					</Typography>
-					<Typography variant="body1" component="p">
+					<Typography
+						variant="body1"
+						component="p"
+						className={styles.contentText}
+					>
 						You might like to visit these links for more information
 					</Typography>
+					<Grid container spacing={3}>
+						<Grid item xs={12} sm>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="taxation and your employees"
+								href="https://www.business.gov.au/People/Pay-and-conditions/Employees-pay-leave-and-entitlements"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								taxation and your employees
+							</Button>
+						</Grid>
+
+						<Grid item xs={12} sm>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="due dates by month"
+								href="https://www.ato.gov.au/Business/Reports-and-returns/Due-dates-for-lodging-and-paying/Due-dates-by-month/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								due dates by month
+							</Button>
+						</Grid>
+
+						<Grid item xs={12} sm>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="due dates by topic"
+								href="https://www.ato.gov.au/Business/Reports-and-returns/Due-dates-for-lodging-and-paying/Due-dates-by-topic/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								due dates by topic
+							</Button>
+						</Grid>
+
+						<Grid item xs={12} sm>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="ato app"
+								href="https://www.ato.gov.au/General/Online-services/ATO-app/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								ato app
+							</Button>
+						</Grid>
+
+						<Grid item xs={12} sm>
+							<Button
+								variant="contained"
+								fullWidth
+								size="large"
+								className={styles.button}
+								title="ato business key dates"
+								href="https://www.ato.gov.au/Newsroom/smallbusiness/Key-dates"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								ato business key dates
+							</Button>
+						</Grid>
+					</Grid>
 				</Container>
 			</PageContainer>
 
