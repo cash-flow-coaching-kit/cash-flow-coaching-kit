@@ -391,7 +391,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								taxation and your employees
+								Taxation and your employees
 							</Button>
 						</Grid>
 
@@ -406,7 +406,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								due dates by month
+								Due dates by month
 							</Button>
 						</Grid>
 
@@ -421,7 +421,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								due dates by topic
+								Due dates by topic
 							</Button>
 						</Grid>
 
@@ -436,7 +436,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								ato app
+								ATO App
 							</Button>
 						</Grid>
 
@@ -451,7 +451,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								ato business key dates
+								ATO business key dates
 							</Button>
 						</Grid>
 					</Grid>

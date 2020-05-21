@@ -349,7 +349,7 @@ const TrackingPerformance = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								assess business performance
+								Assess business performance
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -363,7 +363,7 @@ const TrackingPerformance = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								monitoring your financial performance
+								Monitoring your financial performance
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -377,7 +377,7 @@ const TrackingPerformance = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								benchmarking your business
+								Benchmarking your business
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -391,7 +391,7 @@ const TrackingPerformance = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								check the financial health of your business
+								Check the financial health of your business
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -405,7 +405,7 @@ const TrackingPerformance = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								improving business performance
+								Improving business performance
 							</Button>
 						</Grid>
 					</Grid>

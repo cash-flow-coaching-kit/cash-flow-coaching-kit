@@ -392,7 +392,7 @@ const DTRecordKeeping = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								what books &amp; records should you keep
+								What books &amp; records should you keep
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -406,7 +406,7 @@ const DTRecordKeeping = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								record keeping for small business
+								Record keeping for small business
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -420,7 +420,7 @@ const DTRecordKeeping = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								key webinar topics for small business
+								Key webinar topics for small business
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -434,7 +434,7 @@ const DTRecordKeeping = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								records required by law
+								Records required by law
 							</Button>
 						</Grid>
 					</Grid>
