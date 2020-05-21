@@ -116,7 +116,7 @@ const DTRecordKeeping = (): ReactElement => {
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>
-					QUICKSNAPS - How do you stay on top of your record keeping?
+					Quicksnaps - How do you stay on top of your record keeping?
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary

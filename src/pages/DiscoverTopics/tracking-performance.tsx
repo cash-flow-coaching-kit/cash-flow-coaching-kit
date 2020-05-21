@@ -113,7 +113,7 @@ const TrackingPerformance = (): ReactElement => {
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>
-					QUICKSNAPS - How to best track your business performance.
+					Quicksnaps - How to best track your business performance.
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary

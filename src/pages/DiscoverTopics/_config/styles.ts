@@ -24,6 +24,7 @@ const useDTStyles = makeStyles((theme) => ({
 		margin: theme.spacing(2, 0, 2, 0),
 		textAlign: "center",
 		backgroundColor: "#ffffff",
+		textTransform: "none",
 	},
 	containerActivity: {
 		backgroundColor: "#e1bee7",

@@ -126,7 +126,7 @@ const DTPlanningBusiness = (): ReactElement => {
 					</Grid>
 				</Grid>
 				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
-					QUICKSNAPS - Deciding how to exit your business.
+					Quicksnaps - Deciding how to exit your business.
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary

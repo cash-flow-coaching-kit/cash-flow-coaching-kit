@@ -108,7 +108,7 @@ const DTManagingCashFlow = (): ReactElement => {
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>
-					QUICKSNAPS - Want to know the secrets of successful cash flow?
+					Quicksnaps - Want to know the secrets of successful cash flow?
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary

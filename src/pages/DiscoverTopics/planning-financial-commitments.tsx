@@ -110,7 +110,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>
-					QUICKSNAPS - How to plan for your regular financial commitments.
+					Quicksnaps - How to plan for your regular financial commitments.
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
