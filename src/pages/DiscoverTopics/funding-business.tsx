@@ -233,7 +233,7 @@ const DTFundingBusiness = (): ReactElement => {
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>
-					QUICKSNAPS - What to look for when funding your business.
+					Quicksnaps - What to look for when funding your business.
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary

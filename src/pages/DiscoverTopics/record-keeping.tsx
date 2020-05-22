@@ -12,7 +12,6 @@ import {
 	ExpansionPanelSummary,
 	ExpansionPanelDetails,
 	Container,
-	Divider,
 } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
@@ -117,7 +116,7 @@ const DTRecordKeeping = (): ReactElement => {
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>
-					QUICKSNAPS - How do you stay on top of your record keeping?
+					Quicksnaps - How do you stay on top of your record keeping?
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
@@ -393,7 +392,7 @@ const DTRecordKeeping = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								what books &amp; records should you keep
+								What books &amp; records should you keep
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -407,7 +406,7 @@ const DTRecordKeeping = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								record keeping for small business
+								Record keeping for small business
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -421,7 +420,7 @@ const DTRecordKeeping = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								key webinar topics for small business
+								Key webinar topics for small business
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -435,7 +434,7 @@ const DTRecordKeeping = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								records required by law
+								Records required by law
 							</Button>
 						</Grid>
 					</Grid>

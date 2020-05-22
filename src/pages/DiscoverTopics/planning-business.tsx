@@ -92,7 +92,7 @@ const DTPlanningBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Kirras-Native-foods.docx"
+											href="/transcripts/Kirras-native-foods.docx"
 										>
 											Download Transcript: Kirra's Native Foods
 										</Button>
@@ -126,7 +126,7 @@ const DTPlanningBusiness = (): ReactElement => {
 					</Grid>
 				</Grid>
 				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
-					QUICKSNAPS - Deciding how to exit your business.
+					Quicksnaps - Deciding how to exit your business.
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary

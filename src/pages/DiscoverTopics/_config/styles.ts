@@ -24,18 +24,19 @@ const useDTStyles = makeStyles((theme) => ({
 		margin: theme.spacing(2, 0, 2, 0),
 		textAlign: "center",
 		backgroundColor: "#ffffff",
+		textTransform: "none",
 	},
 	containerActivity: {
-		backgroundColor: "#e1bee7",
+		backgroundColor: "#ce93d8",
 		paddingBottom: theme.spacing(3),
 		marginTop: theme.spacing(5),
 	},
 	containerWrapUp: {
-		backgroundColor: "#f3e5f5",
+		backgroundColor: "#e1bee7",
 		paddingBottom: theme.spacing(3),
 	},
 	containerMoreInfo: {
-		backgroundColor: "#efebe9",
+		backgroundColor: "#f3e5f5",
 		paddingBottom: theme.spacing(3),
 	},
 	list: {

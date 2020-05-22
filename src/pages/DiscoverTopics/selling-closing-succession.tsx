@@ -45,7 +45,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 					options and obligations.
 				</Typography>
 				<Typography component="h2" className={styles.SectionTitle}>
-					QUICKSNAPS - Deciding how to exit your business.
+					Quicksnaps - Deciding how to exit your business.
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
