@@ -58,15 +58,6 @@ const DTListing = (): ReactElement => {
 												Planning Your business
 											</Typography>
 										</CardContent>
-										<CardActions>
-											<Button
-												size="small"
-												component={RouterLink}
-												to={PrivateRoutes.DTPlanningBusiness}
-											>
-												Learn More
-											</Button>
-										</CardActions>
 									</CardActionArea>
 								</Card>
 							</Grid>
@@ -88,15 +79,6 @@ const DTListing = (): ReactElement => {
 												Record Keeping
 											</Typography>
 										</CardContent>
-										<CardActions>
-											<Button
-												size="small"
-												component={RouterLink}
-												to={PrivateRoutes.DTRecordKeeping}
-											>
-												Learn More
-											</Button>
-										</CardActions>
 									</CardActionArea>
 								</Card>
 							</Grid>
@@ -118,15 +100,6 @@ const DTListing = (): ReactElement => {
 												Funding your business
 											</Typography>
 										</CardContent>
-										<CardActions>
-											<Button
-												size="small"
-												component={RouterLink}
-												to={PrivateRoutes.DTFundingBusiness}
-											>
-												Learn More
-											</Button>
-										</CardActions>
 									</CardActionArea>
 								</Card>
 							</Grid>
@@ -148,15 +121,6 @@ const DTListing = (): ReactElement => {
 												Managing your cash flow
 											</Typography>
 										</CardContent>
-										<CardActions>
-											<Button
-												size="small"
-												component={RouterLink}
-												to={PrivateRoutes.DTManagingCashFlow}
-											>
-												Learn More
-											</Button>
-										</CardActions>
 									</CardActionArea>
 								</Card>
 							</Grid>
@@ -178,15 +142,6 @@ const DTListing = (): ReactElement => {
 												Planning your regular Financial commitments
 											</Typography>
 										</CardContent>
-										<CardActions>
-											<Button
-												size="small"
-												component={RouterLink}
-												to={PrivateRoutes.DTPlanningFinanicalCommitments}
-											>
-												Learn More
-											</Button>
-										</CardActions>
 									</CardActionArea>
 								</Card>
 							</Grid>
@@ -208,15 +163,6 @@ const DTListing = (): ReactElement => {
 												Tracking your performance
 											</Typography>
 										</CardContent>
-										<CardActions>
-											<Button
-												size="small"
-												component={RouterLink}
-												to={PrivateRoutes.DTTrackingPerformance}
-											>
-												Learn More
-											</Button>
-										</CardActions>
 									</CardActionArea>
 								</Card>
 							</Grid>
