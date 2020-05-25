@@ -1,5 +1,4 @@
-export type MathHOF = (n: number) => number
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * A reducer method to sum an array of numbers
  *

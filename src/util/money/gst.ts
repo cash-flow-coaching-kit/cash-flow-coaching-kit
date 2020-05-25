@@ -18,7 +18,7 @@ function calculateGST(x: number): number {
  */
 function removeGST(x: number): number {
 	const gst = calculateGST(x)
-	return pipe<number, number, any[]>(minusBy(gst), Math.round)(x)
+	return pipe<number, number, [MathHOF, MathHOF]>(minusBy(gst), Math.round)(x)
 }
 
 export { calculateGST, removeGST }
