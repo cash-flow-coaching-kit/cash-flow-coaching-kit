@@ -10,6 +10,7 @@ export type HealthCheckId = DatabaseId
 export type ActionChecklistId = DatabaseId
 export type ActionChecklistPriorityId = DatabaseId
 export type ActionChecklistNotesId = DatabaseId
+export type CFCId = DatabaseId
 
 /**
  * Base structure for any database item
@@ -207,3 +208,85 @@ export interface ActionChecklistNotesStruct
 	extends BaseDatabaseStruct<ActionChecklistNotesId>,
 		BaseActionChecklistNotesStruct,
 		WithClientRelationship {}
+
+/**
+ * The available canvas types for a CFC
+ *
+ * @type CanvasType
+ * @export
+ */
+export type CanvasType = "review" | "forecast" | "plan" | "track"
+
+/**
+ * The available canvas timeframes
+ *
+ * @type CFCTimeFrame
+ * @export
+ */
+export type CFCTimeFrame =
+	| "weekly"
+	| "fortnightly"
+	| "monthly"
+	| "quaterly"
+	| "biannually"
+	| "yearly"
+	| "other"
+
+/**
+ * Data structure for a single Cash flow item
+ *
+ * @interface CashFlow
+ * @export
+ */
+export interface CashFlow {
+	id: number
+	description: number
+	amount: number
+	gstApplicable: boolean
+}
+
+/**
+ * Base data structure for a CFC
+ * Use this field when creating/updating a canvas
+ *
+ * @export
+ * @interface BaseCFCStruct
+ */
+export interface BaseCFCStruct {
+	canvasTitle: string
+	canvasType: CanvasType
+	canvasTimeFrame: CFCTimeFrame
+	canvasStartDate: Date
+	canvasEndDate: Date
+	gstOnSales: number
+	gstOnPurchases: number
+	openingBalance: number
+	paygWithholding: number
+	superAmount: number
+	incomeTax: number
+	cashToOwner: number
+	cashToBank: number
+	stock: number
+	creditors: number
+	debtors: number
+	assets: number
+	loans: number
+	cashInItems: CashFlow[]
+	cashOutItems: CashFlow[]
+}
+
+/**
+ * Structure used when defining the CFC table
+ *
+ * @export
+ * @interface CFCStruct
+ * @extends {BaseDatabaseStruct<CFCId>}
+ * @extends {BaseCFCStruct}
+ * @extends {WithClientRelationship}
+ * @extends {WithTimestamps}
+ */
+export interface CFCStruct
+	extends BaseDatabaseStruct<CFCId>,
+		BaseCFCStruct,
+		WithClientRelationship,
+		WithTimestamps {}
