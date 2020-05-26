@@ -3,6 +3,8 @@ import filterByActionContainer from "../ByActionContainer"
 import filterByClientId from "../ByClientId"
 import filterByEquals from "../ByEquals"
 import filterById from "../ById"
+import { CashFlow } from "../../../data/_config/shape"
+import GSTApplicable from "../ByGSTApplicable"
 
 describe("filtering methods", () => {
   let obj = [
@@ -39,5 +41,27 @@ describe("filtering methods", () => {
   test("Reject - Filter by id", function() {
     const filtered = [{...obj[1]}]
     expect(obj.filter(filterById(5, true))).toEqual(filtered)
+  })
+
+  test("Filter by GST Applicable", function() {
+    const arr: CashFlow[] = [
+      {id: 1, description: "", amount: 0, gstApplicable: true},
+      {id: 1, description: "", amount: 0, gstApplicable: false},
+      {id: 1, description: "", amount: 0, gstApplicable: true},
+      {id: 1, description: "", amount: 0, gstApplicable: true},
+    ]
+
+    expect(arr.filter(GSTApplicable())).toHaveLength(3)
+  })
+
+  test("Reject - Filter by GST Applicable", function() {
+    const arr: CashFlow[] = [
+      {id: 1, description: "", amount: 0, gstApplicable: true},
+      {id: 1, description: "", amount: 0, gstApplicable: false},
+      {id: 1, description: "", amount: 0, gstApplicable: true},
+      {id: 1, description: "", amount: 0, gstApplicable: true},
+    ]
+
+    expect(arr.filter(GSTApplicable(true))).toHaveLength(1)
   })
 })

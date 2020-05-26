@@ -14,3 +14,11 @@ type MapHOF<C = any, R = any[]> = (current: C, index: number) => R
 
 // Type definition for a `.filter` method
 type FilterHOF<C = any> = (current: C, index: number) => boolean
+
+type MathHOF = (n: number) => number
+
+type NumToStrHOF = (n: number) => string
+
+type StrToStrHOF = (s: string) => string
+
+type StrToNumHOF = (s: string) => number

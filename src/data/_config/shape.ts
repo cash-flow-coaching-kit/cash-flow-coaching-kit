@@ -240,7 +240,7 @@ export type CFCTimeFrame =
  */
 export interface CashFlow {
 	id: number
-	description: number
+	description: string
 	amount: number
 	gstApplicable: boolean
 }
