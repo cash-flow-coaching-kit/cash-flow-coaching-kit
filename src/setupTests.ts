@@ -19,4 +19,5 @@ Object.defineProperty(global.window, "crypto", {
 
 global.console = {
 	warn: jest.fn(),
+	log: global.console.log,
 }
