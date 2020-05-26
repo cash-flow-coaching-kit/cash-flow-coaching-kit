@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from "react"
 import { useFormik } from "formik"
-import { Typography } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import { BaseCFCStruct } from "../../data/_config/shape"
 import {
 	initialValues,
@@ -9,8 +9,9 @@ import {
 } from "../../components/Forms/CFC"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
-import MoneyInput from "../../components/MoneyInput"
 import useCalculated from "../../state/CFC/useCalculated"
+import { OpeningBalance } from "../../components/CFC"
+import FourQuestions from "../../components/HealthCheck/FourQuestions"
 
 const CFCCanvas = (): ReactElement => {
 	const { values, handleChange } = useFormik<BaseCFCStruct>({
@@ -28,13 +29,14 @@ const CFCCanvas = (): ReactElement => {
 	return (
 		<>
 			<PageContainer>
-				<h1>CFCCanvas</h1>
-				<MoneyInput
-					variant="outlined"
-					name="openingBalance"
-					onChange={handleChange}
-				/>
-				<Typography>{calculated.totalNetAssets}</Typography>
+				<Grid container spacing={3}>
+					<Grid item sm={9}>
+						<OpeningBalance onChange={handleChange} />
+					</Grid>
+					<Grid item sm={3}>
+						<FourQuestions />
+					</Grid>
+				</Grid>
 			</PageContainer>
 			<PageTip tip="CFCanvasTip" />
 		</>
