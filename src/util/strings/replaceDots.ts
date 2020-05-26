@@ -6,5 +6,5 @@
  * @returns {string}
  */
 export default function replaceDots(s: string): string {
-	return s.replace(/[^0-9]/gm, "")
+	return s.replace(/\./gm, "")
 }
