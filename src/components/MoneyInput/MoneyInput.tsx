@@ -22,6 +22,11 @@ export default function MoneyInput(
 			InputProps={{
 				startAdornment: <InputAdornment position="start">$</InputAdornment>,
 				endAdornment: <InputAdornment position="end">.00</InputAdornment>,
+				inputProps: {
+					min: 0,
+					max: 999999999,
+					step: 1,
+				},
 			}}
 			label="Amount"
 			placeholder="0"

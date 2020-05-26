@@ -50,7 +50,7 @@ function divideBy(val: number): MathHOF {
  * @param fns
  */
 const pipe = <Input extends any, Output extends any, Fns extends any[]>(
-	// eslint-disable-next-line fp/no-rest-parameters
+	// eslint-disable-next-line
 	...fns: Fns
 ) => (x: Input): Output => fns.reduce((v, f) => f(v), x)
 
