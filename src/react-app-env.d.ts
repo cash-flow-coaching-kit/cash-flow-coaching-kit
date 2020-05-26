@@ -22,3 +22,5 @@ type NumToStrHOF = (n: number) => string
 type StrToStrHOF = (s: string) => string
 
 type StrToNumHOF = (s: string) => number
+
+type InputChange = ChangeEvent<HTMLInputElement>
