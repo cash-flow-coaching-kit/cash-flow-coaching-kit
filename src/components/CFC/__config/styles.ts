@@ -9,5 +9,18 @@ const useInputWrapper = makeStyles((theme) => ({
 	},
 }))
 
+const useCustomTitleStyles = makeStyles((theme) => ({
+	checkboxRoot: {
+		display: "flex",
+		alignItems: "center",
+	},
+	textField: {
+		marginTop: theme.spacing(1),
+	},
+	divider: {
+		marginTop: theme.spacing(2),
+	},
+}))
+
 // eslint-disable-next-line import/prefer-default-export
-export { useInputWrapper }
+export { useInputWrapper, useCustomTitleStyles }

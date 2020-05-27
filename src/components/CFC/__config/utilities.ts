@@ -1,7 +1,10 @@
 /* eslint-disable import/prefer-default-export */
+import { format } from "date-fns"
 import { SelectFieldOptions } from "../../SelectField/SelectField"
 import { CanvasType, CFCTimeFrame } from "../../../data/_config/shape"
 import upperFirst from "../../../util/strings/upperCaseFirst"
+import { pipe } from "../../../util/reduce/math"
+import concatStr from "../../../util/strings/concatStr"
 
 type Opts = SelectFieldOptions
 
@@ -53,4 +56,28 @@ export function canvasTimeFrameOptions(): Opts {
 		"other",
 	]
 	return x.reduce(reduceToOptions, [])
+}
+
+/**
+ * Generates the automated title for the canvas
+ *
+ * @export
+ * @param {CanvasType} type
+ * @param {CFCTimeFrame} timeframe
+ * @param {Date} startDate
+ * @param {Date} endDate
+ * @returns {string}
+ */
+export function generateTitle(
+	type: CanvasType,
+	timeframe: CFCTimeFrame,
+	startDate: Date,
+	endDate: Date
+): string {
+	return pipe(
+		concatStr(upperFirst(`${timeframe} `)),
+		concatStr(format(startDate, "dd/MM/yyyy")),
+		concatStr(" to "),
+		concatStr(format(endDate, "dd/MM/yyyy"))
+	)(upperFirst(`${type} `))
 }
