@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as OpeningBalance } from "./OpeningBalance"
+export { default as CashSurplus } from "./CashSurplus"
+export { default as AvailableToSpend } from "./AvailableToSpend"
