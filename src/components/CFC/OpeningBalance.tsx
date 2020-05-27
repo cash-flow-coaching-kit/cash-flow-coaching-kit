@@ -2,10 +2,7 @@ import React, { ReactElement } from "react"
 import { Box } from "@material-ui/core"
 import DescriptiveMoneyInput from "../DescriptiveMoneyInput"
 import { useInputWrapper } from "./__config/styles"
-
-type OBProps = {
-	onChange: InputChange
-}
+import { ControlProps } from "./__config/shape"
 
 /**
  * Component for the opening balance field used in the CFC form
@@ -14,7 +11,10 @@ type OBProps = {
  * @param {OBProps} { onChange }
  * @returns {ReactElement}
  */
-export default function OpeningBalance({ onChange }: OBProps): ReactElement {
+export default function OpeningBalance({
+	onChange,
+	value,
+}: ControlProps<number>): ReactElement {
 	const wrapperCls = useInputWrapper()
 
 	return (
@@ -25,6 +25,7 @@ export default function OpeningBalance({ onChange }: OBProps): ReactElement {
 				variant="outlined"
 				name="openingBalance"
 				onChange={onChange}
+				value={value}
 			/>
 		</Box>
 	)
