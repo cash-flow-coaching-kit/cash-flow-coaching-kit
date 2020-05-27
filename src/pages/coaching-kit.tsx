@@ -7,7 +7,6 @@ import {
 	CardActions,
 	CardContent,
 	CardMedia,
-	Container,
 	Button,
 	Divider,
 	ExpansionPanel,
@@ -21,6 +20,7 @@ import {
 import { PageContainer } from "../components/Layouts"
 import { PrivateRoutes } from "../util/routes/routes"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import PageTip from "../components/PageTip"
 
 const CoachingKit = (): ReactElement => {
 	const useCKStyles = makeStyles((theme) => ({
@@ -64,95 +64,85 @@ const CoachingKit = (): ReactElement => {
 			justifyContent: "center",
 			alignItems: "center",
 			alignContent: "center",
+			margin: theme.spacing(2, 0),
 		},
 
 		contentText: {
 			margin: theme.spacing(1, 0),
-		},
-		containerIntro: {
-			backgroundColor: "#f5f5f5",
-		},
-		paddedCell: {
-			margin: theme.spacing(0, 2),
 		},
 	}))
 	const styles = useCKStyles()
 
 	return (
 		<>
-			<PageContainer role="main" className={styles.containerIntro}>
-				<Container>
-					<Typography
-						component="h1"
-						align="center"
-						className={styles.MainHeading}
-					>
-						Work through the coaching kit phases to help you answer the Four Key
-						Questions for your business
-					</Typography>
+			<PageContainer role="main">
+				<Typography
+					component="h1"
+					align="center"
+					className={styles.MainHeading}
+				>
+					Work through the coaching kit phases to help you answer the Four Key
+					Questions for your business
+				</Typography>
 
-					<ExpansionPanel>
-						<ExpansionPanelSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="four-questions-content"
-							id="four-questions-header"
-						>
-							<Typography variant="h6" component="h2">
-								What are the <em> Four Key Questions</em>
-							</Typography>
-						</ExpansionPanelSummary>
-						<ExpansionPanelDetails>
-							<Grid container>
-								<Grid item>
-									<Typography
-										variant="body1"
-										component="p"
-										className={styles.contentText}
-									>
-										These questions will help you understand your business cash
-										flow and identify areas that you can improve.
-									</Typography>
-									<Typography
-										variant="body1"
-										component="p"
-										className={styles.contentText}
-									>
-										They are important because they set the foundation for
-										strong cash flow management by focusing on four critical
-										factors - profit, provisioning, liquidity and meeting goals.
-									</Typography>
-									<List>
-										<ListItem className={styles.contentText}>
-											1. Am I trading profitably?
-										</ListItem>
-										<Divider />
-										<ListItem className={styles.contentText}>
-											2. Have I put enough aside to meet my regular financial
-											commitments?
-										</ListItem>
-										<Divider />
-										<ListItem className={styles.contentText}>
-											3. Does my business have enough to spend on myself and pay
-											others?
-										</ListItem>
-										<Divider />
-										<ListItem className={styles.contentText}>
-											4. Is my business improving its financial position?
-										</ListItem>
-									</List>
-								</Grid>
+				<ExpansionPanel>
+					<ExpansionPanelSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="four-questions-content"
+						id="four-questions-header"
+					>
+						<Typography variant="h6" component="h2">
+							What are the <em> Four Key Questions</em>
+						</Typography>
+					</ExpansionPanelSummary>
+					<ExpansionPanelDetails>
+						<Grid container>
+							<Grid item>
+								<Typography
+									variant="body1"
+									component="p"
+									className={styles.contentText}
+								>
+									These questions will help you understand your business cash
+									flow and identify areas that you can improve.
+								</Typography>
+								<Typography
+									variant="body1"
+									component="p"
+									className={styles.contentText}
+								>
+									They are important because they set the foundation for strong
+									cash flow management by focusing on four critical factors -
+									profit, provisioning, liquidity and meeting goals.
+								</Typography>
+								<List>
+									<ListItem className={styles.contentText}>
+										1. Am I trading profitably?
+									</ListItem>
+									<Divider />
+									<ListItem className={styles.contentText}>
+										2. Have I put enough aside to meet my regular financial
+										commitments?
+									</ListItem>
+									<Divider />
+									<ListItem className={styles.contentText}>
+										3. Does my business have enough to spend on myself and pay
+										others?
+									</ListItem>
+									<Divider />
+									<ListItem className={styles.contentText}>
+										4. Is my business improving its financial position?
+									</ListItem>
+								</List>
 							</Grid>
-						</ExpansionPanelDetails>
-					</ExpansionPanel>
-				</Container>
+						</Grid>
+					</ExpansionPanelDetails>
+				</ExpansionPanel>
 
 				<Grid container spacing={3}>
 					<Grid item sm={4}>
 						<Grid container spacing={3} direction="column">
-							<Grid
-								item
-								className={(styles.paddedCell, styles.alignJustifyContent)}
-							>
+							<Grid item className={styles.alignJustifyContent}>
 								<Avatar className={styles.purple}>1</Avatar>
 								<Typography
 									component="h2"
@@ -389,6 +379,7 @@ const CoachingKit = (): ReactElement => {
 						</Grid>
 					</Grid>
 				</Grid>
+				<PageTip tip="CoachingKitTips" />
 			</PageContainer>
 		</>
 	)
