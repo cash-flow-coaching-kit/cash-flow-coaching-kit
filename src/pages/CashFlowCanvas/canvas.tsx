@@ -16,6 +16,7 @@ import {
 	AvailableToSpend,
 } from "../../components/CFC"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
+import Spacer from "../../components/Spacer/Spacer"
 
 const CFCCanvas = (): ReactElement => {
 	const { values, handleChange } = useFormik<BaseCFCStruct>({
@@ -36,7 +37,9 @@ const CFCCanvas = (): ReactElement => {
 				<Grid container spacing={3}>
 					<Grid item sm={9}>
 						<OpeningBalance onChange={handleChange} />
+						<Spacer />
 						<CashSurplus value={`${calculated.cashSurplus}`} />
+						<Spacer />
 						<AvailableToSpend value={`${calculated.availableToSpend}`} />
 					</Grid>
 					<Grid item sm={3}>
