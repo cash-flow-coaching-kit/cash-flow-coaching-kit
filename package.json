@@ -40,6 +40,7 @@
 	},
 	"scripts": {
 		"start": "nf start -p 3000",
+		"start:web": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"test:unit": "react-scripts test --env=jsdom",

@@ -258,14 +258,11 @@ export interface BaseCFCStruct {
 	canvasTimeFrame: CFCTimeFrame
 	canvasStartDate: Date
 	canvasEndDate: Date
-	gstOnSales: number
-	gstOnPurchases: number
 	openingBalance: number
 	paygWithholding: number
 	superAmount: number
 	incomeTax: number
 	cashToOwner: number
-	cashToBank: number
 	stock: number
 	creditors: number
 	debtors: number
