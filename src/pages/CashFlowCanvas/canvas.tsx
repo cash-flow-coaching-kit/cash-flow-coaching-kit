@@ -10,7 +10,11 @@ import {
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useCalculated from "../../state/CFC/useCalculated"
-import { OpeningBalance } from "../../components/CFC"
+import {
+	OpeningBalance,
+	CashSurplus,
+	AvailableToSpend,
+} from "../../components/CFC"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 
 const CFCCanvas = (): ReactElement => {
@@ -32,6 +36,8 @@ const CFCCanvas = (): ReactElement => {
 				<Grid container spacing={3}>
 					<Grid item sm={9}>
 						<OpeningBalance onChange={handleChange} />
+						<CashSurplus value={`${calculated.cashSurplus}`} />
+						<AvailableToSpend value={`${calculated.availableToSpend}`} />
 					</Grid>
 					<Grid item sm={3}>
 						<FourQuestions />
