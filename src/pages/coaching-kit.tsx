@@ -66,7 +66,6 @@ const CoachingKit = (): ReactElement => {
 			alignContent: "center",
 			margin: theme.spacing(2, 0),
 		},
-
 		contentText: {
 			margin: theme.spacing(1, 0),
 		},
@@ -164,9 +163,8 @@ const CoachingKit = (): ReactElement => {
 								<Card>
 									<CardMedia
 										component="img"
-										alt="Health check"
-										height="140"
-										image="https://www.fillmurray.com/200/140"
+										height="155"
+										image="/images/healthCheck_thumb.png"
 										title="Health check"
 									/>
 									<CardContent>
@@ -200,8 +198,8 @@ const CoachingKit = (): ReactElement => {
 									<CardMedia
 										component="img"
 										alt="Discover topics"
-										height="140"
-										image="https://www.fillmurray.com/150/140"
+										height="155"
+										image="/images/discoverTopics_thumb.png"
 										title="Discover topics"
 									/>
 									<CardContent>
@@ -256,8 +254,8 @@ const CoachingKit = (): ReactElement => {
 									<CardMedia
 										component="img"
 										alt="Cash flow canvas"
-										height="140"
-										image="https://www.fillmurray.com/250/140"
+										height="155"
+										image="/images/cashFlowCanvas_thumb.png"
 										title="Cash flow canvas"
 									/>
 									<CardContent>
@@ -291,8 +289,8 @@ const CoachingKit = (): ReactElement => {
 									<CardMedia
 										component="img"
 										alt="Change levers"
-										height="140"
-										image="https://www.fillmurray.com/330/220"
+										height="155"
+										image="/images/changeLevers_thumb.png"
 										title="Change levers"
 									/>
 									<CardContent>
@@ -347,8 +345,8 @@ const CoachingKit = (): ReactElement => {
 									<CardMedia
 										component="img"
 										alt="Action checklist"
-										height="140"
-										image="https://www.fillmurray.com/300/180"
+										height="155"
+										image="/images/actionChecklist_thumb.png"
 										title="Action checklist"
 									/>
 									<CardContent>
