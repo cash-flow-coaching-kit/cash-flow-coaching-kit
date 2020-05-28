@@ -13,6 +13,7 @@ interface ComputedPanelsProps {
 	description: string
 	value: string
 	mini?: boolean
+	wrapped?: boolean
 }
 
 /**
@@ -31,12 +32,16 @@ export default function ComputedPanels({
 	description,
 	value,
 	mini = false,
+	wrapped = true,
 }: ComputedPanelsProps): ReactElement {
 	const wrapperCls = useInputWrapper()
 	const dmiCls = useStyles({ stacked: false, mini })
 
 	return (
-		<Box className={`${wrapperCls.wrapper} ${dmiCls.root}`} alignItems="center">
+		<Box
+			className={`${wrapped ? wrapperCls.wrapper : ""} ${dmiCls.root}`}
+			alignItems="center"
+		>
 			<Box className={dmiCls.type}>
 				<Typography variant="h6">{title}</Typography>
 				<Typography>{description}</Typography>
