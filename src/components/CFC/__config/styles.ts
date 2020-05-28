@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core"
+import orange from "@material-ui/core/colors/orange"
 
 const useInputWrapper = makeStyles((theme) => ({
 	wrapper: {
@@ -6,6 +7,11 @@ const useInputWrapper = makeStyles((theme) => ({
 		borderRadius: theme.shape.borderRadius,
 		padding: theme.spacing(2),
 		boxShadow: theme.shadows[1],
+	},
+	highlight: {
+		borderTopWidth: "5px",
+		borderTopStyle: "solid",
+		borderTopColor: orange[500],
 	},
 }))
 

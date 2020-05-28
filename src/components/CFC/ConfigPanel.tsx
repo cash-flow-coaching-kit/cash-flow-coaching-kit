@@ -14,6 +14,11 @@ import { PanelProps, CustomTitleProps } from "./__config/shape"
  */
 interface ConfigPanelProps extends PanelProps, CustomTitleProps {}
 
+/**
+ * Wraps the config panel form in memo to ensure it only
+ * re-render when required
+ *
+ */
 const Panel = memo(function Panel({
 	canvasTimeframeValue,
 	canvasTypeValue,

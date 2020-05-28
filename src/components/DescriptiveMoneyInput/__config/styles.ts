@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core"
 type InputProps = {
 	stacked: boolean
 	mini: boolean
+	fullHeight?: boolean
 }
 type StyleRtn = {}
 
@@ -10,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
 	root: (props: InputProps): StyleRtn => ({
 		flexDirection: props.stacked ? "column" : "row",
 		display: "flex",
+		height: props.fullHeight ? "100%" : "auto",
 	}),
 	type: (props: InputProps): StyleRtn => ({
 		flexGrow: 2,

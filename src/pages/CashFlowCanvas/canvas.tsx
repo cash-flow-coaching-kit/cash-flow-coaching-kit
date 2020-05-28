@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useState } from "react"
 import { useFormik } from "formik"
 import { Grid } from "@material-ui/core"
+import { defer } from "lodash-es"
 import { BaseCFCStruct } from "../../data/_config/shape"
 import {
 	initialValues,
@@ -10,10 +11,21 @@ import {
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useCalculated from "../../state/CFC/useCalculated"
-import { ConfigPanel, OpeningBalance, CanvasTitle } from "../../components/CFC"
+import {
+	ConfigPanel,
+	OpeningBalance,
+	CanvasTitle,
+	CashSurplus,
+	AvailableToSpend,
+	CashBalance,
+	IncomeTax,
+	FallingBehind,
+} from "../../components/CFC"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import { syncEndDate } from "../../util/dates"
 import Spacer from "../../components/Spacer/Spacer"
+import ExpandableNav from "../../components/ExpandableNav"
+import EmployeeExpenses from "../../components/CFC/EmployeeExpenses"
 
 const CFCCanvas = (): ReactElement => {
 	const form = useFormik<BaseCFCStruct>({
@@ -50,12 +62,14 @@ const CFCCanvas = (): ReactElement => {
 	}
 
 	useEffect(() => {
-		changeCalculated(form.values)
+		defer(() => {
+			changeCalculated(form.values)
+		})
 	}, [form.values, changeCalculated])
 
 	return (
 		<>
-			<PageContainer>
+			<PageContainer maxWidth="lg">
 				<Grid container spacing={3}>
 					<Grid item sm={9}>
 						<CanvasTitle
@@ -82,6 +96,50 @@ const CFCCanvas = (): ReactElement => {
 						<Spacer />
 						<OpeningBalance
 							value={form.values.openingBalance}
+							onChange={form.handleChange}
+						/>
+						<Spacer />
+						<ExpandableNav
+							title="Cash IN"
+							subHeading="Cash received, or revenue, including GST (if applicable). This may be for services or sales. See Change Levers for ideas on how to improve your Cash IN."
+						>
+							Cash In
+						</ExpandableNav>
+						<ExpandableNav
+							title="Cash OUT"
+							subHeading="All expenses, including GST (if applicable). See Change Levers for ideas on how to reduce your Cash OUT."
+						>
+							Cash Out
+						</ExpandableNav>
+						<Spacer />
+						<EmployeeExpenses
+							payg={form.values.paygWithholding}
+							super={form.values.superAmount}
+							onChange={form.handleChange}
+						/>
+						<Spacer />
+						<CashSurplus value={`${calculated.cashSurplus}`} />
+						<Spacer />
+						<AvailableToSpend value={`${calculated.availableToSpend}`} />
+						<Spacer />
+						<IncomeTax
+							value={form.values.incomeTax}
+							onChange={form.handleChange}
+						/>
+						<Spacer />
+						<CashBalance
+							cashToOwner={form.values.cashToOwner}
+							onChange={form.handleChange}
+							closingBalance={calculated.closingBalance}
+						/>
+						<Spacer />
+						<FallingBehind
+							stock={form.values.stock}
+							creditors={form.values.creditors}
+							debtors={form.values.debtors}
+							assets={form.values.assets}
+							loans={form.values.loans}
+							totalNetAssets={calculated.totalNetAssets}
 							onChange={form.handleChange}
 						/>
 					</Grid>

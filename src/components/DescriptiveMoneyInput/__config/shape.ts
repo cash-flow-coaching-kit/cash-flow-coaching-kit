@@ -11,4 +11,5 @@ export interface DescriptiveMoneyInputProps extends OutlinedTextFieldProps {
 	description: string
 	stacked?: boolean
 	mini?: boolean
+	fullHeight?: boolean
 }
