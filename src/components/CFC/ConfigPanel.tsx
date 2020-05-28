@@ -1,29 +1,48 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, memo } from "react"
 import { Box, Grid } from "@material-ui/core"
 import { useInputWrapper } from "./__config/styles"
-import { CanvasType, CFCTimeFrame } from "../../data/_config/shape"
-import { DateRangeProps } from "../DateRange/__config/shape"
 import CanvasTypeSelect from "./CanvasType"
 import CanvasTimeFrameSelect from "./CanvasTimeFrame"
 import DateRange from "../DateRange"
 import UseCustomTitle from "./UseCustomTitle"
+import { PanelProps, CustomTitleProps } from "./__config/shape"
 
 /**
  * Prop definition for the ConfigPanel component
  *
  * @interface ConfigPanelProps
  */
-interface ConfigPanelProps {
-	canvasTypeValue: CanvasType
-	canvasTimeframeValue: CFCTimeFrame
-	startDate: Date
-	endDate: Date
-	onChange: InputChange
-	onDateChange: DateRangeProps["onChange"]
-	customTitle: string
-	changeCheck: InputChange
-	useCustomTitle: boolean
-}
+interface ConfigPanelProps extends PanelProps, CustomTitleProps {}
+
+const Panel = memo(function Panel({
+	canvasTimeframeValue,
+	canvasTypeValue,
+	startDate,
+	endDate,
+	onChange,
+	onDateChange,
+}: PanelProps) {
+	return (
+		<Grid container spacing={2}>
+			<Grid item sm={3}>
+				<CanvasTypeSelect value={canvasTypeValue} onChange={onChange} />
+			</Grid>
+			<Grid item sm={3}>
+				<CanvasTimeFrameSelect
+					value={canvasTimeframeValue}
+					onChange={onChange}
+				/>
+			</Grid>
+			<Grid item sm={6}>
+				<DateRange
+					startDate={startDate}
+					endDate={endDate}
+					onChange={onDateChange}
+				/>
+			</Grid>
+		</Grid>
+	)
+})
 
 /**
  * Config panel component found at the top of the CFC form
@@ -42,7 +61,7 @@ interface ConfigPanelProps {
  * }
  * @returns {ReactElement}
  */
-export default function ConfigPanel({
+function ConfigPanel({
 	canvasTimeframeValue,
 	canvasTypeValue,
 	startDate,
@@ -57,24 +76,14 @@ export default function ConfigPanel({
 
 	return (
 		<Box className={`${wrapperCls.wrapper}`}>
-			<Grid container spacing={2}>
-				<Grid item sm={3}>
-					<CanvasTypeSelect value={canvasTypeValue} onChange={onChange} />
-				</Grid>
-				<Grid item sm={3}>
-					<CanvasTimeFrameSelect
-						value={canvasTimeframeValue}
-						onChange={onChange}
-					/>
-				</Grid>
-				<Grid item sm={6}>
-					<DateRange
-						startDate={startDate}
-						endDate={endDate}
-						onChange={onDateChange}
-					/>
-				</Grid>
-			</Grid>
+			<Panel
+				canvasTypeValue={canvasTypeValue}
+				canvasTimeframeValue={canvasTimeframeValue}
+				startDate={startDate}
+				endDate={endDate}
+				onDateChange={onDateChange}
+				onChange={onChange}
+			/>
 			<UseCustomTitle
 				title={customTitle}
 				onChange={onChange}
@@ -84,3 +93,5 @@ export default function ConfigPanel({
 		</Box>
 	)
 }
+
+export default memo(ConfigPanel)

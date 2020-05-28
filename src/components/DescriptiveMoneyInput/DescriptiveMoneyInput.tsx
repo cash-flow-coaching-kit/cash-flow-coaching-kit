@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react"
 import { Box, Typography } from "@material-ui/core"
 import MoneyInput from "../MoneyInput"
-import useDMIStyles from "./__config/styles"
 import { DescriptiveMoneyInputProps } from "./__config/shape"
+import useStyles from "./__config/styles"
 
 /**
  * Component that shows a money input with a title and description.
@@ -33,7 +33,7 @@ export default function DescriptiveMoneyInput({
 	// eslint-disable-next-line
 	...textfieldProps
 }: DescriptiveMoneyInputProps): ReactElement {
-	const styles = useDMIStyles({ stacked, mini })()
+	const styles = useStyles({ stacked, mini })
 
 	return (
 		<Box className={styles.root}>

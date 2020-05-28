@@ -1,9 +1,24 @@
-import React, { ReactElement, useState, useEffect } from "react"
+import React, { ReactElement, useState, useEffect, memo } from "react"
 import { MuiPickersUtilsProvider } from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns"
 import { Typography, makeStyles, Box } from "@material-ui/core"
 import { DateRangeProps, OpenState } from "./__config/shape"
 import { SinglePicker } from "./__partials"
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+	},
+	separator: {
+		paddingRight: theme.spacing(1),
+		paddingLeft: theme.spacing(1),
+		color: theme.palette.grey[500],
+		textTransform: "uppercase",
+		fontSize: theme.typography.fontSize,
+	},
+}))
 
 /**
  * Date range selector
@@ -16,26 +31,13 @@ import { SinglePicker } from "./__partials"
  * }
  * @returns {ReactElement}
  */
-export default function DateRange({
+const DateRange = memo(function DateRange({
 	startDate,
 	endDate,
 	onChange,
 }: DateRangeProps): ReactElement {
 	const [open, setOpen] = useState<OpenState>({ start: false, end: false })
-	const classes = makeStyles((theme) => ({
-		root: {
-			display: "flex",
-			flexDirection: "row",
-			alignItems: "center",
-		},
-		separator: {
-			paddingRight: theme.spacing(1),
-			paddingLeft: theme.spacing(1),
-			color: theme.palette.grey[500],
-			textTransform: "uppercase",
-			fontSize: theme.typography.fontSize,
-		},
-	}))()
+	const classes = useStyles()
 
 	/**
 	 * Change the open state of the datepicker modal
@@ -116,4 +118,6 @@ export default function DateRange({
 			</Box>
 		</MuiPickersUtilsProvider>
 	)
-}
+})
+
+export default DateRange

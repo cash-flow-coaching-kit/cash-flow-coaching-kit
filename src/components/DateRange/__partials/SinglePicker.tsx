@@ -1,9 +1,17 @@
-import React, { ReactElement, cloneElement } from "react"
-import { useStyles as useDayStyles } from "@material-ui/pickers/views/Calendar/Day"
+import React, { ReactElement, cloneElement, memo } from "react"
 import { makeStyles } from "@material-ui/core"
 import { isSameDay } from "date-fns"
 import { KeyboardDatePicker } from "@material-ui/pickers"
+import { useStyles as useDayStyles } from "@material-ui/pickers/views/Calendar/Day"
 import { SinglePickerProps } from "../__config/shape"
+
+const useStyles = makeStyles((theme) => ({
+	dateHighlight: {
+		borderWidth: `1px`,
+		borderColor: theme.palette.primary.main,
+		borderStyle: "dashed",
+	},
+}))
 
 /**
  * A single Date picker field used in the Range picker
@@ -22,7 +30,7 @@ import { SinglePickerProps } from "../__config/shape"
  * }
  * @returns {ReactElement}
  */
-export default function SinglePicker({
+function SinglePicker({
 	value,
 	onChange,
 	open,
@@ -34,13 +42,7 @@ export default function SinglePicker({
 	minDate = new Date(1900, 1, 1),
 }: SinglePickerProps): ReactElement {
 	const curStyles = useDayStyles()
-	const customCls = makeStyles((theme) => ({
-		dateHighlight: {
-			borderWidth: `1px`,
-			borderColor: theme.palette.primary.main,
-			borderStyle: "dashed",
-		},
-	}))()
+	const customCls = useStyles()
 
 	/**
 	 * Renders the day components based on the current date selected
@@ -81,3 +83,5 @@ export default function SinglePicker({
 		/>
 	)
 }
+
+export default memo(SinglePicker)
