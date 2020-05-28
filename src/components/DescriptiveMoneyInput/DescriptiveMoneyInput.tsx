@@ -30,10 +30,11 @@ export default function DescriptiveMoneyInput({
 	description,
 	stacked = false,
 	mini = false,
+	fullHeight = false,
 	// eslint-disable-next-line
 	...textfieldProps
 }: DescriptiveMoneyInputProps): ReactElement {
-	const styles = useStyles({ stacked, mini })
+	const styles = useStyles({ stacked, mini, fullHeight })
 
 	return (
 		<Box className={styles.root}>
