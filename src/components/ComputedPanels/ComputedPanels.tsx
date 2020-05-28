@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react"
 import { Box, Typography } from "@material-ui/core"
 import { useInputWrapper } from "../CFC/__config/styles"
-import useDMIStyles from "../DescriptiveMoneyInput/__config/styles"
+import useStyles from "../DescriptiveMoneyInput/__config/styles"
 
 /**
  * Prop definition for the ComputedPanels component
@@ -33,7 +33,7 @@ export default function ComputedPanels({
 	mini = false,
 }: ComputedPanelsProps): ReactElement {
 	const wrapperCls = useInputWrapper()
-	const dmiCls = useDMIStyles({ stacked: false, mini })()
+	const dmiCls = useStyles({ stacked: false, mini })
 
 	return (
 		<Box className={`${wrapperCls.wrapper} ${dmiCls.root}`} alignItems="center">

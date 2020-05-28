@@ -1,3 +1,7 @@
 export { default as OpeningBalance } from "./OpeningBalance"
 export { default as CashSurplus } from "./CashSurplus"
 export { default as AvailableToSpend } from "./AvailableToSpend"
+export { default as CanvasTypeSelect } from "./CanvasType"
+export { default as CanvasTimeFrameSelect } from "./CanvasTimeFrame"
+export { default as ConfigPanel } from "./ConfigPanel"
+export { default as CanvasTitle } from "./CanvasTitle"
