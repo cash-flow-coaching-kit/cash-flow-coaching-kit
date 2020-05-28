@@ -20,12 +20,19 @@ import {
 	CashBalance,
 	IncomeTax,
 	FallingBehind,
+	RepeaterForm,
 } from "../../components/CFC"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import { syncEndDate } from "../../util/dates"
 import Spacer from "../../components/Spacer/Spacer"
 import ExpandableNav from "../../components/ExpandableNav"
 import EmployeeExpenses from "../../components/CFC/EmployeeExpenses"
+import {
+	calcCashFlowGST,
+	calcTotalCashOut,
+	calcCashFlowTotal,
+} from "../../state/CFC/accumulators"
+import createCashFlowItem from "../../state/CFC/createCashFlow"
 
 const CFCCanvas = (): ReactElement => {
 	const form = useFormik<BaseCFCStruct>({
@@ -58,6 +65,13 @@ const CFCCanvas = (): ReactElement => {
 			// This checks if the start date is ahead of the end date
 			// if it is, it will set the end date to the start date
 			form.setFieldValue("canvasEndDate", v as Date)
+		}
+	}
+
+	function addCashFlowItem(key: keyof BaseCFCStruct): void {
+		if (key === "cashInItems" || key === "cashOutItems") {
+			const items = form.values[key]
+			form.setFieldValue(key, items.concat(createCashFlowItem()))
 		}
 	}
 
@@ -103,13 +117,31 @@ const CFCCanvas = (): ReactElement => {
 							title="Cash IN"
 							subHeading="Cash received, or revenue, including GST (if applicable). This may be for services or sales. See Change Levers for ideas on how to improve your Cash IN."
 						>
-							Cash In
+							<RepeaterForm
+								name="cashInItems"
+								values={form.values.cashInItems}
+								onChange={form.handleChange}
+								total={calcCashFlowTotal(form.values.cashInItems)}
+								gst={calcCashFlowGST(form.values.cashInItems)}
+								addItem={(): void => {
+									addCashFlowItem("cashInItems")
+								}}
+							/>
 						</ExpandableNav>
 						<ExpandableNav
 							title="Cash OUT"
 							subHeading="All expenses, including GST (if applicable). See Change Levers for ideas on how to reduce your Cash OUT."
 						>
-							Cash Out
+							<RepeaterForm
+								name="cashOutItems"
+								values={form.values.cashOutItems}
+								onChange={form.handleChange}
+								total={calcTotalCashOut(form.values)}
+								gst={calcCashFlowGST(form.values.cashOutItems)}
+								addItem={(): void => {
+									addCashFlowItem("cashOutItems")
+								}}
+							/>
 						</ExpandableNav>
 						<Spacer />
 						<EmployeeExpenses
