@@ -18,7 +18,7 @@ import {
 	ListItem,
 } from "@material-ui/core"
 import { PageContainer } from "../components/Layouts"
-import { PrivateRoutes } from "../util/routes/routes"
+import { PrivateRoutes, routeVarReplacement } from "../util/routes/routes"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import PageTip from "../components/PageTip"
 
@@ -186,7 +186,9 @@ const CoachingKit = (): ReactElement => {
 											size="small"
 											color="primary"
 											component={RouterLink}
-											to={PrivateRoutes.HealthCheckQuiz}
+											to={routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
+												[":id?", ""],
+											])}
 										>
 											Read More
 										</Button>
