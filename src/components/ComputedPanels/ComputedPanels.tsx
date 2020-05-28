@@ -10,7 +10,7 @@ import useStyles from "../DescriptiveMoneyInput/__config/styles"
  */
 interface ComputedPanelsProps {
 	title: string
-	description: string
+	description?: string
 	value: string
 	mini?: boolean
 	wrapped?: boolean
@@ -44,7 +44,7 @@ export default function ComputedPanels({
 		>
 			<Box className={dmiCls.type}>
 				<Typography variant="h6">{title}</Typography>
-				<Typography>{description}</Typography>
+				{description && <Typography>{description}</Typography>}
 			</Box>
 			<Typography variant="h6">{value}</Typography>
 		</Box>
