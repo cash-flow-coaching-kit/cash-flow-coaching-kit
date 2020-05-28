@@ -88,7 +88,10 @@ export function calcCashFlowTotal(values: CashFlow[]): number {
 export function calcCashSurplus(values: BaseCFCStruct): number {
 	return (
 		calcCashFlowTotal(values.cashInItems) -
-		calcCashFlowTotal(values.cashOutItems)
+		pipe(
+			add(values.paygWithholding),
+			add(values.superAmount)
+		)(calcCashFlowTotal(values.cashOutItems))
 	)
 }
 
