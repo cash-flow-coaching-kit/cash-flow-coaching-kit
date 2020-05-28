@@ -3,6 +3,15 @@ import { ComputedProps } from "./__config/shape"
 import ComputedPanels from "../ComputedPanels"
 import { addDollarSign } from "../../util/money/formatting"
 
+/**
+ * Component used to display the Available to Spend value
+ *
+ * @export
+ * @param {ComputedProps} {
+ * 	value,
+ * }
+ * @returns {ReactElement}
+ */
 export default function AvailableToSpend({
 	value,
 }: ComputedProps): ReactElement {
