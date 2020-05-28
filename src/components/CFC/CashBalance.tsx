@@ -5,12 +5,28 @@ import { ClosingBalance, CashToOwner } from "."
 import { addDollarSign } from "../../util/money/formatting"
 import Spacer from "../Spacer/Spacer"
 
+/**
+ * Prop definition for the CashBalance component
+ *
+ * @interface CashBalanceProps
+ */
 interface CashBalanceProps {
 	cashToOwner: number
 	closingBalance: number
 	onChange: InputChange
 }
 
+/**
+ * Component for the "Your Cash Balance" panel
+ *
+ * @export
+ * @param {CashBalanceProps} {
+ * 	cashToOwner,
+ * 	closingBalance,
+ * 	onChange,
+ * }
+ * @returns {ReactElement}
+ */
 export default function CashBalance({
 	cashToOwner,
 	closingBalance,

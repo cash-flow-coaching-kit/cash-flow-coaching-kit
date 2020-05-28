@@ -5,12 +5,28 @@ import Spacer from "../Spacer/Spacer"
 import Super from "./Super"
 import { useInputWrapper } from "./__config/styles"
 
+/**
+ * Prop definition for the EmployeeExpenses component
+ *
+ * @interface EmployeeExpensesProps
+ */
 interface EmployeeExpensesProps {
 	payg: number
 	super: number
 	onChange: InputChange
 }
 
+/**
+ * Panel to display the employee expenses fields
+ *
+ * @export
+ * @param {EmployeeExpensesProps} {
+ * 	payg,
+ * 	super: superAmount,
+ * 	onChange,
+ * }
+ * @returns {ReactElement}
+ */
 export default function EmployeeExpenses({
 	payg,
 	super: superAmount,

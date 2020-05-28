@@ -2,6 +2,13 @@ import React, { ReactElement } from "react"
 import { ComputedProps } from "./__config/shape"
 import ComputedPanels from "../ComputedPanels"
 
+/**
+ * Computed panel for the Closing Balance value
+ *
+ * @export
+ * @param {ComputedProps} { value }
+ * @returns {ReactElement}
+ */
 export default function ClosingBalance({ value }: ComputedProps): ReactElement {
 	return (
 		<ComputedPanels

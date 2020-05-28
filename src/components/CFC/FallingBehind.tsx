@@ -5,6 +5,11 @@ import { Debtors, Creditors, Assets, Loans, Stock } from "."
 import ComputedPanels from "../ComputedPanels"
 import { addDollarSign } from "../../util/money/formatting"
 
+/**
+ * Prop definition for the FallingBehind component
+ *
+ * @interface FallingBehindProps
+ */
 interface FallingBehindProps {
 	stock: number
 	creditors: number
@@ -30,6 +35,22 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
+/**
+ * Component to wrap all the inputs in the Falling Behind section of the CFC
+ * form
+ *
+ * @export
+ * @param {FallingBehindProps} {
+ * 	stock,
+ * 	creditors,
+ * 	debtors,
+ * 	assets,
+ * 	loans,
+ * 	totalNetAssets,
+ * 	onChange,
+ * }
+ * @returns {ReactElement}
+ */
 export default function FallingBehind({
 	stock,
 	creditors,

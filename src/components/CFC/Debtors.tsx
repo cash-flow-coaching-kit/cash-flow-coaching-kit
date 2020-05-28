@@ -2,6 +2,16 @@ import React, { ReactElement } from "react"
 import { ControlProps } from "./__config/shape"
 import DescriptiveMoneyInput from "../DescriptiveMoneyInput"
 
+/**
+ * Input field for the Debtors value
+ *
+ * @export
+ * @param {ControlProps<number>} {
+ * 	value,
+ * 	onChange,
+ * }
+ * @returns {ReactElement}
+ */
 export default function Debtors({
 	value,
 	onChange,

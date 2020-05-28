@@ -4,6 +4,16 @@ import DescriptiveMoneyInput from "../DescriptiveMoneyInput"
 import { ControlProps } from "./__config/shape"
 import { useInputWrapper } from "./__config/styles"
 
+/**
+ * Input field for the Income tax value
+ *
+ * @export
+ * @param {ControlProps<number>} {
+ * 	value,
+ * 	onChange,
+ * }
+ * @returns {ReactElement}
+ */
 export default function IncomeTax({
 	value,
 	onChange,
