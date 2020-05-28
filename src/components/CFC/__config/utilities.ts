@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { format } from "date-fns"
+import { GridSize } from "@material-ui/core"
 import { SelectFieldOptions } from "../../SelectField/SelectField"
 import { CanvasType, CFCTimeFrame } from "../../../data/_config/shape"
 import upperFirst from "../../../util/strings/upperCaseFirst"
@@ -80,4 +81,24 @@ export function generateTitle(
 		concatStr(" to "),
 		concatStr(format(endDate, "dd/MM/yyyy"))
 	)(upperFirst(`${type} `))
+}
+
+export const DescriptionSize = 5
+export const AmountSize = 3
+export const ApplyGSTSize = 2
+export const ActionsSize = 2
+
+/**
+ * Gets the labels and grid sizes for the form header component
+ *
+ * @export
+ * @returns {[string, GridSize][]}
+ */
+export function getFormHeaders(): [string, GridSize][] {
+	return [
+		["Description", DescriptionSize],
+		["Amount", AmountSize],
+		["Apply GST", ApplyGSTSize],
+		["Actions", ActionsSize],
+	]
 }
