@@ -39,7 +39,7 @@ function SinglePicker({
 	label,
 	compareDay,
 	id,
-	minDate = new Date(1900, 1, 1),
+	minDate,
 }: SinglePickerProps): ReactElement {
 	const curStyles = useDayStyles()
 	const customCls = useStyles()

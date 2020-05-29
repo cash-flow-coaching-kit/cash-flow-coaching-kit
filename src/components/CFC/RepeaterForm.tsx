@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react"
-import { Typography, Divider, Box } from "@material-ui/core"
+import React, { ReactElement, memo } from "react"
+import { Divider, Box } from "@material-ui/core"
 import Spacer from "../Spacer/Spacer"
 import ComputedPanels from "../ComputedPanels"
 import { addDollarSign } from "../../util/money/formatting"
@@ -9,7 +9,7 @@ import { useRepeaterStyles as useStyles } from "./__config/styles"
 import FormActions from "./FormActions"
 import FormItem from "./FormItem"
 
-export default function RepeaterForm({
+export default memo(function RepeaterForm({
 	name,
 	values,
 	onChange,
@@ -53,4 +53,4 @@ export default function RepeaterForm({
 			</Box>
 		</>
 	)
-}
+})

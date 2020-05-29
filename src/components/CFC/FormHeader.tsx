@@ -1,6 +1,11 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, memo } from "react"
 import { Grid, Typography, makeStyles, Divider } from "@material-ui/core"
-import { getFormHeaders } from "./__config/utilities"
+import {
+	DescriptionSize,
+	AmountSize,
+	ApplyGSTSize,
+	ActionsSize,
+} from "./__config/utilities"
 import Spacer from "../Spacer/Spacer"
 
 const useStyles = makeStyles((theme) => ({
@@ -17,20 +22,27 @@ const useStyles = makeStyles((theme) => ({
  * @export
  * @returns {ReactElement}
  */
-export default function FormHeader(): ReactElement {
+export default memo(function FormHeader(): ReactElement {
 	const cls = useStyles()
 
 	return (
 		<>
 			<Grid container spacing={2}>
-				{getFormHeaders().map(([label, size]) => (
-					<Grid item sm={size} key={label}>
-						<Typography className={cls.label}>{label}</Typography>
-					</Grid>
-				))}
+				<Grid item sm={DescriptionSize}>
+					<Typography className={cls.label}>Description</Typography>
+				</Grid>
+				<Grid item sm={AmountSize}>
+					<Typography className={cls.label}>Amount</Typography>
+				</Grid>
+				<Grid item sm={ApplyGSTSize}>
+					<Typography className={cls.label}>Apply GST</Typography>
+				</Grid>
+				<Grid item sm={ActionsSize}>
+					<Typography className={cls.label}>Actions</Typography>
+				</Grid>
 			</Grid>
 			<Divider />
 			<Spacer />
 		</>
 	)
-}
+})

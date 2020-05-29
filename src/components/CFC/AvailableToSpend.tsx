@@ -12,7 +12,7 @@ import { addDollarSign } from "../../util/money/formatting"
  * }
  * @returns {ReactElement}
  */
-export default function AvailableToSpend({
+export default React.memo(function AvailableToSpend({
 	value,
 }: ComputedProps): ReactElement {
 	return (
@@ -22,4 +22,4 @@ export default function AvailableToSpend({
 			value={addDollarSign(value)}
 		/>
 	)
-}
+})

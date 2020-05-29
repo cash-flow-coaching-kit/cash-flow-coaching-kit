@@ -25,7 +25,7 @@ import useStyles from "./__config/styles"
  * }
  * @returns {ReactElement}
  */
-export default function DescriptiveMoneyInput({
+export default React.memo(function DescriptiveMoneyInput({
 	title,
 	description,
 	stacked = false,
@@ -49,4 +49,4 @@ export default function DescriptiveMoneyInput({
 			/>
 		</Box>
 	)
-}
+})

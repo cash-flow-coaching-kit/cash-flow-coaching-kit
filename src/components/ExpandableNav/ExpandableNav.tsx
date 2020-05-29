@@ -49,4 +49,4 @@ const ExpandableNav = ({
 	)
 }
 
-export default ExpandableNav
+export default React.memo(ExpandableNav)

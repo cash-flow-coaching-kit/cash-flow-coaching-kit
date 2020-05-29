@@ -14,7 +14,7 @@ import { canvasTimeFrameOptions } from "./__config/utilities"
  * }
  * @returns {ReactElement}
  */
-export default function CanvasTimeFrameSelect({
+export default React.memo(function CanvasTimeFrameSelect({
 	onChange,
 	value,
 }: ControlProps<CFCTimeFrame>): ReactElement {
@@ -27,4 +27,4 @@ export default function CanvasTimeFrameSelect({
 			options={canvasTimeFrameOptions()}
 		/>
 	)
-}
+})

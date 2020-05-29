@@ -17,7 +17,7 @@ interface FormItemProps {
 	index: number
 }
 
-export default function FormItem({
+export default React.memo(function FormItem({
 	name,
 	value,
 	onChange,
@@ -56,4 +56,4 @@ export default function FormItem({
 			</Grid>
 		</Grid>
 	)
-}
+})

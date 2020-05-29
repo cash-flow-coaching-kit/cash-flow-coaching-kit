@@ -27,7 +27,7 @@ interface ComputedPanelsProps {
  * }
  * @returns {ReactElement}
  */
-export default function ComputedPanels({
+export default React.memo(function ComputedPanels({
 	title,
 	description,
 	value,
@@ -49,4 +49,4 @@ export default function ComputedPanels({
 			<Typography variant="h6">{value}</Typography>
 		</Box>
 	)
-}
+})

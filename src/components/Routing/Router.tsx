@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useContext } from "react"
-import { HashRouter as Router, Switch } from "react-router-dom"
+import { HashRouter as Router, Switch, Route } from "react-router-dom"
 import PublicRoutesWrapper from "./Public"
 import PrivateRoutesWrapper from "./Private"
 import syncClientsWithDb from "../../data/client/syncWithDB"

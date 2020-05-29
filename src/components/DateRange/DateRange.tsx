@@ -1,4 +1,10 @@
-import React, { ReactElement, useState, useEffect, memo } from "react"
+import React, {
+	ReactElement,
+	useState,
+	useEffect,
+	memo,
+	useCallback,
+} from "react"
 import { MuiPickersUtilsProvider } from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns"
 import { Typography, makeStyles, Box } from "@material-ui/core"
@@ -52,16 +58,19 @@ const DateRange = memo(function DateRange({
 		})
 	}
 
+	const openStart = useCallback(() => onOpen("start"), [])
+	const openEnd = useCallback(() => onOpen("end"), [])
+
 	/**
 	 * Closes the datepickers
 	 *
 	 */
-	function onClose(): void {
+	const onClose = useCallback((): void => {
 		setOpen({
 			start: false,
 			end: false,
 		})
-	}
+	}, [])
 
 	/**
 	 * Triggers the passed in onChange method
@@ -69,15 +78,18 @@ const DateRange = memo(function DateRange({
 	 * @param {(Date | null)} date
 	 * @param {keyof OpenState} key
 	 */
-	function onDateChange(date: Date | null, key: keyof OpenState): void {
-		if (date) {
-			if (key === "start") {
-				onChange("canvasStartDate", date)
-			} else {
-				onChange("canvasEndDate", date)
+	const onDateChange = useCallback(
+		(date: Date | null, key: keyof OpenState): void => {
+			if (date) {
+				if (key === "start") {
+					onChange("canvasStartDate", date)
+				} else {
+					onChange("canvasEndDate", date)
+				}
 			}
-		}
-	}
+		},
+		[onChange]
+	)
 
 	// When the start date is edited and the panel is still open
 	// Change to the end date panel
@@ -95,7 +107,7 @@ const DateRange = memo(function DateRange({
 					value={startDate}
 					onChange={onDateChange}
 					open={open.start}
-					onOpen={(): void => onOpen("start")}
+					onOpen={openStart}
 					onClose={onClose}
 					label="Start Date"
 					compareDay={endDate}
@@ -108,7 +120,7 @@ const DateRange = memo(function DateRange({
 					value={endDate}
 					onChange={onDateChange}
 					open={open.end}
-					onOpen={(): void => onOpen("end")}
+					onOpen={openEnd}
 					onClose={onClose}
 					label="End Date"
 					compareDay={startDate}

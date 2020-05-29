@@ -27,6 +27,7 @@ export default function FormActions({
 	return (
 		<Box style={{ display: "flex" }} justifyContent="flex-end">
 			<Button
+				disableRipple
 				variant="outlined"
 				color="primary"
 				startIcon={<AddIcon />}

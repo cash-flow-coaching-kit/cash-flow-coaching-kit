@@ -87,18 +87,3 @@ export const DescriptionSize = 5
 export const AmountSize = 3
 export const ApplyGSTSize = 2
 export const ActionsSize = 2
-
-/**
- * Gets the labels and grid sizes for the form header component
- *
- * @export
- * @returns {[string, GridSize][]}
- */
-export function getFormHeaders(): [string, GridSize][] {
-	return [
-		["Description", DescriptionSize],
-		["Amount", AmountSize],
-		["Apply GST", ApplyGSTSize],
-		["Actions", ActionsSize],
-	]
-}
