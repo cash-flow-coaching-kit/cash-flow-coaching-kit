@@ -43,4 +43,5 @@ export interface RepeaterFormProps {
 	gst: number
 	total: number
 	addItem: () => void
+	removeItem: (id: CashFlow["id"]) => void
 }

@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useCallback, useMemo } from "react"
 import { useFormik } from "formik"
 import { Box } from "@material-ui/core"
-import { BaseCFCStruct } from "../../../data/_config/shape"
+import { BaseCFCStruct, CashFlow } from "../../../data/_config/shape"
 import { initialValues, onSubmit, calculateInitial } from "."
 import {
 	ConfigPanel,
@@ -24,8 +24,9 @@ import {
 } from "../../../state/CFC/accumulators"
 import createCashFlowItem from "../../../state/CFC/createCashFlow"
 import { useInputWrapper } from "../../CFC/__config/styles"
+import removeCashflowItem from "./removeCashFlowItem"
 
-const CanvasForm = (): ReactElement => {
+export default function CanvasForm(): ReactElement {
 	const cls = useInputWrapper()
 
 	const { setFieldValue, handleChange, values } = useFormik<BaseCFCStruct>({
@@ -89,24 +90,21 @@ const CanvasForm = (): ReactElement => {
 	}
 
 	const addCashFlowItem = useCallback(
-		(key: keyof BaseCFCStruct): void => {
-			if (key === "cashInItems" || key === "cashOutItems") {
-				const items = values[key]
-				setFieldValue(key, items.concat(createCashFlowItem()))
-			}
+		(key: "cashInItems" | "cashOutItems") => (): void => {
+			const items = values[key]
+			setFieldValue(key, items.concat(createCashFlowItem()))
 		},
 		[setFieldValue, values]
 	)
 
 	const inputChange = useCallback(handleChange, [])
 
-	const addCashIn = useCallback((): void => {
-		addCashFlowItem("cashInItems")
-	}, [addCashFlowItem])
-
-	const addCashOut = useCallback((): void => {
-		addCashFlowItem("cashOutItems")
-	}, [addCashFlowItem])
+	const removeItem = useCallback(
+		(key: "cashInItems" | "cashOutItems") => (id: CashFlow["id"]): void => {
+			setFieldValue(key, removeCashflowItem(id, values[key]))
+		},
+		[values, setFieldValue]
+	)
 
 	return (
 		<>
@@ -141,7 +139,8 @@ const CanvasForm = (): ReactElement => {
 					onChange={inputChange}
 					total={cashInTotal}
 					gst={cashInGST}
-					addItem={addCashIn}
+					addItem={addCashFlowItem("cashInItems")}
+					removeItem={removeItem("cashInItems")}
 				/>
 			</Box>
 			<Spacer />
@@ -152,7 +151,8 @@ const CanvasForm = (): ReactElement => {
 					onChange={inputChange}
 					total={cashOutTotal}
 					gst={cashOutGST}
-					addItem={addCashOut}
+					addItem={addCashFlowItem("cashOutItems")}
+					removeItem={removeItem("cashOutItems")}
 				/>
 			</Box>
 			<Spacer />
@@ -186,5 +186,3 @@ const CanvasForm = (): ReactElement => {
 		</>
 	)
 }
-
-export default CanvasForm

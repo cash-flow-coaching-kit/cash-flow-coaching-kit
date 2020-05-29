@@ -1,4 +1,4 @@
-import React, { ReactElement, memo } from "react"
+import React, { ReactElement, memo, useCallback, MouseEvent } from "react"
 import { Divider, Box } from "@material-ui/core"
 import Spacer from "../Spacer/Spacer"
 import ComputedPanels from "../ComputedPanels"
@@ -8,6 +8,7 @@ import { RepeaterFormProps } from "./__config/shape"
 import { useRepeaterStyles as useStyles } from "./__config/styles"
 import FormActions from "./FormActions"
 import FormItem from "./FormItem"
+import { CashFlow } from "../../data/_config/shape"
 
 export default memo(function RepeaterForm({
 	name,
@@ -16,8 +17,17 @@ export default memo(function RepeaterForm({
 	total,
 	gst,
 	addItem,
+	removeItem,
 }: RepeaterFormProps): ReactElement {
 	const cls = useStyles()
+
+	const removeFormItem = useCallback(
+		(id: CashFlow["id"]) => (e: MouseEvent<HTMLButtonElement>): void => {
+			e.preventDefault()
+			removeItem(id)
+		},
+		[removeItem]
+	)
 
 	return (
 		<>
@@ -30,6 +40,7 @@ export default memo(function RepeaterForm({
 						onChange={onChange}
 						index={idx}
 						key={item.id}
+						removeItem={removeFormItem(item.id)}
 					/>
 				))}
 				<Spacer />

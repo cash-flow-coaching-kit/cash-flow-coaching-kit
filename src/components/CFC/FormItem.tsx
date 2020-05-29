@@ -1,5 +1,12 @@
-import React, { ReactElement } from "react"
-import { Grid, TextField, Checkbox } from "@material-ui/core"
+import React, { ReactElement, MouseEvent } from "react"
+import {
+	Grid,
+	TextField,
+	Checkbox,
+	Tooltip,
+	IconButton,
+} from "@material-ui/core"
+import GroupWorkIcon from "@material-ui/icons/GroupWork"
 import { RepeaterFormProps } from "./__config/shape"
 import { CashFlow } from "../../data/_config/shape"
 import {
@@ -9,11 +16,13 @@ import {
 	ApplyGSTSize,
 } from "./__config/utilities"
 import MoneyInput from "../MoneyInput"
+import IconDeleteButton from "../IconDeleteButton"
 
 interface FormItemProps {
 	name: RepeaterFormProps["name"]
 	value: CashFlow
 	onChange: InputChange
+	removeItem: (e: MouseEvent<HTMLButtonElement>) => void
 	index: number
 }
 
@@ -22,6 +31,7 @@ export default React.memo(function FormItem({
 	value,
 	onChange,
 	index,
+	removeItem,
 }: FormItemProps): ReactElement {
 	return (
 		<Grid container spacing={2} alignItems="center">
@@ -52,7 +62,12 @@ export default React.memo(function FormItem({
 				/>
 			</Grid>
 			<Grid item sm={ActionsSize}>
-				Actions
+				<IconDeleteButton onClick={removeItem} />
+				<Tooltip title="Group data">
+					<IconButton>
+						<GroupWorkIcon />
+					</IconButton>
+				</Tooltip>
 			</Grid>
 		</Grid>
 	)
