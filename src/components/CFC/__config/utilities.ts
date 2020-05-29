@@ -1,6 +1,4 @@
-/* eslint-disable import/prefer-default-export */
 import { format } from "date-fns"
-import { GridSize } from "@material-ui/core"
 import { SelectFieldOptions } from "../../SelectField/SelectField"
 import { CanvasType, CFCTimeFrame } from "../../../data/_config/shape"
 import upperFirst from "../../../util/strings/upperCaseFirst"
