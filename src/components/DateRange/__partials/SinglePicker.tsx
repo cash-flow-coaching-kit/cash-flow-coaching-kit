@@ -66,13 +66,17 @@ function SinglePicker({
 		}
 	}
 
+	function onDateChange(date: Date | null): void {
+		onChange(date, id)
+	}
+
 	return (
 		<KeyboardDatePicker
 			value={value}
 			disableToolbar
 			variant="inline"
 			inputVariant="outlined"
-			onChange={(date): void => onChange(date, id)}
+			onChange={onDateChange}
 			minDate={minDate}
 			open={open}
 			format="dd/MM/yyyy"
