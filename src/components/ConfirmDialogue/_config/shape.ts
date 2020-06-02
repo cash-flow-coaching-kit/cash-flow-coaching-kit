@@ -1,9 +1,9 @@
-import { ReactNode } from "react"
+import { ReactNode, MouseEvent } from "react"
 
 export interface ConfirmDialogueProps {
 	open: boolean
 	onClose(): void
-	onConfirm(): void
+	onConfirm(e: MouseEvent<HTMLButtonElement>): void
 	onCancel(): void
 	title?: string
 	confirmText?: string

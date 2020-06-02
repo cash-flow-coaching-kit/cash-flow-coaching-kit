@@ -1,4 +1,4 @@
-import React, { ReactElement, MouseEvent } from "react"
+import React, { ReactElement, MouseEvent, useState } from "react"
 import {
 	Grid,
 	TextField,
@@ -17,6 +17,7 @@ import {
 } from "./__config/utilities"
 import MoneyInput from "../MoneyInput"
 import IconDeleteButton from "../IconDeleteButton"
+import ConfirmDialogue from "../ConfirmDialogue"
 
 interface FormItemProps {
 	name: RepeaterFormProps["name"]
@@ -33,6 +34,19 @@ export default React.memo(function FormItem({
 	index,
 	removeItem,
 }: FormItemProps): ReactElement {
+	const [dialogOpen, setDialogOpen] = useState<boolean>(false)
+	const onDialogClose = (): void => {
+		setDialogOpen(false)
+	}
+	const onDialogConfirm = (e: MouseEvent<HTMLButtonElement>): void => {
+		removeItem(e)
+		setDialogOpen(false)
+	}
+	const triggerDialog = (e: MouseEvent<HTMLButtonElement>): void => {
+		e.preventDefault()
+		setDialogOpen(true)
+	}
+
 	return (
 		<Grid container spacing={2} alignItems="center">
 			<Grid item sm={DescriptionSize}>
@@ -62,7 +76,15 @@ export default React.memo(function FormItem({
 				/>
 			</Grid>
 			<Grid item sm={ActionsSize}>
-				<IconDeleteButton onClick={removeItem} />
+				<IconDeleteButton onClick={triggerDialog} />
+				<ConfirmDialogue
+					open={dialogOpen}
+					onClose={onDialogClose}
+					onCancel={onDialogClose}
+					onConfirm={onDialogConfirm}
+				>
+					Are you sure you want to remove this item?
+				</ConfirmDialogue>
 				<Tooltip title="Group data">
 					<IconButton>
 						<GroupWorkIcon />
