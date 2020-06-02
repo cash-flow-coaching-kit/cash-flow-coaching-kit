@@ -6,7 +6,7 @@ import React, {
 	useEffect,
 } from "react"
 import { useFormik } from "formik"
-import { Box, Button, Divider } from "@material-ui/core"
+import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { useParams } from "react-router-dom"
 import { isEqual } from "lodash-es"
 import { useMachine } from "@xstate/react"
@@ -286,6 +286,15 @@ export default function CanvasForm({
 				<OpeningBalance value={openingBalance} onChange={inputChange} />
 				<Spacer />
 				<Box className={cls.wrapper}>
+					<Typography variant="h6">Cash IN</Typography>
+					<Typography>
+						Cash received, or revenue, including GST (if applicable). This may
+						be for services or sales. See Change Levers for ideas on how to
+						improve your Cash IN.
+					</Typography>
+					<Spacer />
+					<Divider />
+					<Spacer space={3} />
 					<RepeaterForm
 						name="cashInItems"
 						values={cashInItems}
@@ -298,6 +307,14 @@ export default function CanvasForm({
 				</Box>
 				<Spacer />
 				<Box className={cls.wrapper}>
+					<Typography variant="h6">Cash OUT</Typography>
+					<Typography>
+						All expenses, including GST (if applicable). See Change Levers for
+						ideas on how to reduce your Cash OUT.
+					</Typography>
+					<Spacer />
+					<Divider />
+					<Spacer space={3} />
 					<RepeaterForm
 						name="cashOutItems"
 						values={cashOutItems}

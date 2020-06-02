@@ -30,8 +30,8 @@ const useCustomTitleStyles = makeStyles((theme) => ({
 
 const useRepeaterStyles = makeStyles((theme) => ({
 	body: {
-		paddingRight: theme.spacing(2),
-		paddingLeft: theme.spacing(2),
+		paddingRight: theme.spacing(0),
+		paddingLeft: theme.spacing(0),
 	},
 }))
 
