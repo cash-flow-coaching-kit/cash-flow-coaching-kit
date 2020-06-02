@@ -1,6 +1,11 @@
 import { format } from "date-fns"
 import { SelectFieldOptions } from "../../SelectField/SelectField"
-import { CanvasType, CFCTimeFrame } from "../../../data/_config/shape"
+import {
+	CanvasType,
+	CFCTimeFrame,
+	CFCStruct,
+	BaseCFCStruct,
+} from "../../../data/_config/shape"
 import upperFirst from "../../../util/strings/upperCaseFirst"
 import { pipe } from "../../../util/reduce/math"
 import concatStr from "../../../util/strings/concatStr"
@@ -79,6 +84,26 @@ export function generateTitle(
 		concatStr(" to "),
 		concatStr(format(endDate, "dd/MM/yyyy"))
 	)(upperFirst(`${type} `))
+}
+
+/**
+ * Gets the display title for a canvas
+ *
+ * @export
+ * @param {(CFCStruct | BaseCFCStruct)} values
+ * @returns {string}
+ */
+export function canvasDisplayTitle(values: CFCStruct | BaseCFCStruct): string {
+	if (values.canvasTitle === "") {
+		return generateTitle(
+			values.canvasType,
+			values.canvasTimeFrame,
+			values.canvasStartDate,
+			values.canvasEndDate
+		)
+	}
+
+	return values.canvasTitle
 }
 
 export const DescriptionSize = 5
