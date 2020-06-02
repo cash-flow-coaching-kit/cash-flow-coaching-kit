@@ -1,6 +1,14 @@
 import { CashFlow } from "../../../data/_config/shape"
 import filterById from "../../../util/filters/ById"
 
+/**
+ * Removes to resets a cash flow item
+ *
+ * @export
+ * @param {CashFlow["id"]} id
+ * @param {CashFlow[]} values
+ * @returns {CashFlow[]}
+ */
 export default function removeCashflowItem(
 	id: CashFlow["id"],
 	values: CashFlow[]

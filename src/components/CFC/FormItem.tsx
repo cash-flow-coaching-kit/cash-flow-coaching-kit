@@ -19,6 +19,11 @@ import MoneyInput from "../MoneyInput"
 import IconDeleteButton from "../IconDeleteButton"
 import ConfirmDialogue from "../ConfirmDialogue"
 
+/**
+ * Prop definition for the form item component
+ *
+ * @interface FormItemProps
+ */
 interface FormItemProps {
 	name: RepeaterFormProps["name"]
 	value: CashFlow
@@ -27,6 +32,19 @@ interface FormItemProps {
 	index: number
 }
 
+/**
+ * A single form item in the repeater form
+ *
+ * @export
+ * @param {FormItemProps} {
+ * 	name,
+ * 	value,
+ * 	onChange,
+ * 	index,
+ * 	removeItem,
+ * }
+ * @returns {ReactElement}
+ */
 export default React.memo(function FormItem({
 	name,
 	value,

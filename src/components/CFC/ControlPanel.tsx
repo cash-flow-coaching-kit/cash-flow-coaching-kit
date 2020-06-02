@@ -10,6 +10,12 @@ import CompareArrowsIcon from "@material-ui/icons/CompareArrows"
 import ExpandableNav from "../ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
 
+/**
+ * Canvas page control panel component
+ *
+ * @export
+ * @returns {ReactElement}
+ */
 export default function ControlPanel(): ReactElement {
 	const history = useHistory()
 	const location = useLocation()

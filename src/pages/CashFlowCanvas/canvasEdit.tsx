@@ -24,10 +24,17 @@ type QueryParams = {
 	endDate?: string
 }
 
+/**
+ * Edit a exisiting CFC
+ *
+ * @export
+ * @returns {ReactElement}
+ */
 export default function CanvasEdit(): ReactElement {
 	const location = useLocation()
 	const v: QueryParams = qs.parse(location.search, { ignoreQueryPrefix: true })
 
+	// Construct the initial data based on the query string values
 	const initial: BaseCFCStruct = {
 		...initialValues,
 		canvasTitle: v.title || initialValues.canvasTitle,
@@ -41,7 +48,12 @@ export default function CanvasEdit(): ReactElement {
 			: initialValues.canvasEndDate,
 	}
 
-	const useCustom = (): boolean => {
+	/**
+	 * Checks if the form is using a custom title or not
+	 *
+	 * @returns {boolean}
+	 */
+	function useCustom(): boolean {
 		const use = v.useCustom
 		if (typeof use === "undefined") {
 			if (typeof v.title === "undefined" && v.title === "") {

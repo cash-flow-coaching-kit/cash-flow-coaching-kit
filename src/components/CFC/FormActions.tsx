@@ -19,6 +19,7 @@ interface FormActionsProps {
  * @export
  * @param {FormActionsProps} {
  * 	addItem,
+ * 	addDisabled
  * }
  * @returns {ReactElement}
  */

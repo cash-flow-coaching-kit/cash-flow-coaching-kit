@@ -12,6 +12,12 @@ import Spacer from "../../Spacer/Spacer"
 import { routeVarReplacement, PrivateRoutes } from "../../../util/routes/routes"
 import useCurrentClient from "../../../state/client/useCurrentClient"
 
+/**
+ * Create canvas form.
+ *
+ * @export
+ * @returns {ReactElement}
+ */
 export default function CreateCanvasForm(): ReactElement {
 	const [useCustomTitle, setUseCustomTitle] = useState(false)
 	const history = useHistory()
@@ -24,6 +30,7 @@ export default function CreateCanvasForm(): ReactElement {
 		onSubmit: async (formValues: BaseCFCStruct) => {
 			if (currentClient?.id) {
 				const id = await onCreate(formValues, currentClient.id)
+				// Creates some url search parameters to pass onto the edit page
 				const n = new URLSearchParams()
 				n.append("title", formValues.canvasTitle)
 				n.append("useCustom", useCustomTitle ? "1" : "0")
@@ -32,6 +39,7 @@ export default function CreateCanvasForm(): ReactElement {
 				n.append("startDate", getTime(formValues.canvasStartDate).toString())
 				n.append("endDate", getTime(formValues.canvasEndDate).toString())
 
+				// Redirects the user to the edit page
 				// eslint-disable-next-line
 				history.push(
 					`${routeVarReplacement(PrivateRoutes.CFCEdit, [

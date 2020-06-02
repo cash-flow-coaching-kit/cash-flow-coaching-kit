@@ -6,7 +6,13 @@ import CreateCanvasForm from "../../components/Forms/CFC/CanvasCreate"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ControlPanel from "../../components/CFC/ControlPanel"
 
-const CFCCanvas = (): ReactElement => {
+/**
+ * Create a CFC page
+ *
+ * @export
+ * @returns {ReactElement}
+ */
+export default function CFCCanvas(): ReactElement {
 	return (
 		<>
 			<PageContainer maxWidth="lg">
@@ -24,5 +30,3 @@ const CFCCanvas = (): ReactElement => {
 		</>
 	)
 }
-
-export default CFCCanvas

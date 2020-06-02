@@ -3,6 +3,12 @@ import { Typography } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { PrivateRoutes } from "../../util/routes/routes"
 
+/**
+ * Component to show when no data can be found for a given canvas
+ *
+ * @export
+ * @returns {ReactElement}
+ */
 export default function DataNotFound(): ReactElement {
 	return (
 		<>

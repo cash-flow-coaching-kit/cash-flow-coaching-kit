@@ -10,6 +10,21 @@ import FormActions from "./FormActions"
 import FormItem from "./FormItem"
 import { CashFlow } from "../../data/_config/shape"
 
+/**
+ * Repeater form using for Cash Flow items
+ *
+ * @export
+ * @param {RepeaterFormProps} {
+ * 	name,
+ * 	values,
+ * 	onChange,
+ * 	total,
+ * 	gst,
+ * 	addItem,
+ * 	removeItem,
+ * }
+ * @returns {ReactElement}
+ */
 export default memo(function RepeaterForm({
 	name,
 	values,
@@ -21,6 +36,12 @@ export default memo(function RepeaterForm({
 }: RepeaterFormProps): ReactElement {
 	const cls = useStyles()
 
+	/**
+	 * Method to remove a item from the form
+	 *
+	 * @param {CashFlow["id"]} id
+	 * @returns {void}
+	 */
 	const removeFormItem = useCallback(
 		(id: CashFlow["id"]) => (e: MouseEvent<HTMLButtonElement>): void => {
 			e.preventDefault()
@@ -29,6 +50,11 @@ export default memo(function RepeaterForm({
 		[removeItem]
 	)
 
+	/**
+	 * Checks if the add new button should be disabled
+	 *
+	 * @returns {boolean}
+	 */
 	const isAddDisabled = useCallback(() => {
 		return values.findIndex((item) => item.description === "") !== -1
 	}, [values])
