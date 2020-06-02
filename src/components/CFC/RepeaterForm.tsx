@@ -29,6 +29,10 @@ export default memo(function RepeaterForm({
 		[removeItem]
 	)
 
+	const isAddDisabled = useCallback(() => {
+		return values.findIndex((item) => item.description === "") !== -1
+	}, [values])
+
 	return (
 		<>
 			<Box className={cls.body}>
@@ -44,7 +48,7 @@ export default memo(function RepeaterForm({
 					/>
 				))}
 				<Spacer />
-				<FormActions addItem={addItem} />
+				<FormActions addItem={addItem} addDisabled={isAddDisabled()} />
 			</Box>
 			<Spacer />
 			<Divider />

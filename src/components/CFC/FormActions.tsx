@@ -9,6 +9,7 @@ import AddIcon from "@material-ui/icons/Add"
  */
 interface FormActionsProps {
 	addItem: () => void
+	addDisabled: boolean
 }
 
 /**
@@ -23,11 +24,11 @@ interface FormActionsProps {
  */
 export default function FormActions({
 	addItem,
+	addDisabled,
 }: FormActionsProps): ReactElement {
 	return (
 		<Box style={{ display: "flex" }} justifyContent="flex-end">
 			<Button
-				disableRipple
 				variant="outlined"
 				color="primary"
 				startIcon={<AddIcon />}
@@ -35,6 +36,7 @@ export default function FormActions({
 					e.preventDefault()
 					addItem()
 				}}
+				disabled={addDisabled}
 			>
 				Add new
 			</Button>
