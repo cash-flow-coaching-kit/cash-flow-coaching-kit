@@ -56,7 +56,7 @@ export default function CanvasEdit(): ReactElement {
 	function useCustom(): boolean {
 		const use = v.useCustom
 		if (typeof use === "undefined") {
-			if (typeof v.title === "undefined" && v.title === "") {
+			if (typeof v.title === "undefined" || v.title === "") {
 				return false
 				// eslint-disable-next-line no-else-return
 			} else {
