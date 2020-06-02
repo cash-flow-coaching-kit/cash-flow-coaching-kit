@@ -1,6 +1,6 @@
 import React, { ReactElement, useState, useCallback } from "react"
 import { useFormik } from "formik"
-import { Button } from "@material-ui/core"
+import { Button, Box } from "@material-ui/core"
 import { getTime } from "date-fns"
 import { useHistory } from "react-router-dom"
 import { BaseCFCStruct } from "../../../data/_config/shape"
@@ -11,6 +11,7 @@ import onCreate from "./onCreate"
 import Spacer from "../../Spacer/Spacer"
 import { routeVarReplacement, PrivateRoutes } from "../../../util/routes/routes"
 import useCurrentClient from "../../../state/client/useCurrentClient"
+import useStyles from "./__config/styles"
 
 /**
  * Create canvas form.
@@ -19,6 +20,8 @@ import useCurrentClient from "../../../state/client/useCurrentClient"
  * @returns {ReactElement}
  */
 export default function CreateCanvasForm(): ReactElement {
+	const styles = useStyles()
+
 	const [useCustomTitle, setUseCustomTitle] = useState(false)
 	const history = useHistory()
 	const [currentClient] = useCurrentClient()
@@ -109,9 +112,11 @@ export default function CreateCanvasForm(): ReactElement {
 					useCustomTitle={useCustomTitle}
 				/>
 				<Spacer />
-				<Button color="primary" variant="contained" type="submit">
-					Create Canvas
-				</Button>
+				<Box className={styles.box}>
+					<Button color="primary" variant="contained" type="submit">
+						Create Canvas
+					</Button>
+				</Box>
 			</form>
 		</>
 	)
