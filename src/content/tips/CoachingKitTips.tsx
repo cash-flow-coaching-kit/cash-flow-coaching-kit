@@ -2,27 +2,23 @@ import React, { ReactElement } from "react"
 import { Typography, List } from "@material-ui/core"
 import useSharedTipStyling from "./style"
 
-const DiscoverTopicsTips = (): ReactElement => {
+const CoachingKitTips = (): ReactElement => {
 	const styles = useSharedTipStyling()
 	return (
 		<>
 			<List className={styles.list}>
 				<Typography component="li">
-					<strong>Health Check</strong> results guide the coaching conversation
+					Provide an overview of the kit for your client
 				</Typography>
 				<Typography component="li">
-					<strong>Discover Topics</strong> build knowledge of key financial
-					concepts
+					Discuss the three phases – Discover, Apply, Plan &amp; Action
 				</Typography>
 				<Typography component="li">
-					<strong>Quicksnaps</strong> provide a summary of the knowledge topic
-					and questions to consider
+					Use the Four Key Questions to set the focus for your coaching
+					conversation
 				</Typography>
 				<Typography component="li">
-					Topic activities can help small business apply their learning
-				</Typography>
-				<Typography component="li">
-					Use professional expertise to contextualise the conversation
+					Identify useful tools for each phase
 				</Typography>
 			</List>
 			<Typography variant="h6" component="h3">
@@ -30,11 +26,12 @@ const DiscoverTopicsTips = (): ReactElement => {
 			</Typography>
 			<List className={styles.list}>
 				<Typography component="li">
-					Prepare a <strong>Cash Flow Canvas</strong>
+					Start with the Health Check to assess cash flow knowledge and focus
+					areas for the conversation
 				</Typography>
 			</List>
 		</>
 	)
 }
 
-export default DiscoverTopicsTips
+export default CoachingKitTips
