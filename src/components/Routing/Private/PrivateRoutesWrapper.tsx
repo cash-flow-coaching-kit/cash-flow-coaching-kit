@@ -20,6 +20,7 @@ import HCListing from "../../../pages/HealthCheck/listing"
 import HCSummary from "../../../pages/HealthCheck/summary"
 import { ActionChecklistProvider } from "../../../state/action-checklist"
 import { PrivatePage } from "../../Layouts"
+import CanvasEdit from "../../../pages/CashFlowCanvas/canvasEdit"
 
 /**
  * Private route definitions, these pages should not be available
@@ -51,8 +52,11 @@ const PrivateRoutesWrapper = (): ReactElement => {
 			<Route path={PrivateRoutes.DiscoverTopics}>
 				<DTListing />
 			</Route>
-			<Route path={PrivateRoutes.CFC}>
+			<Route path={PrivateRoutes.CFC} exact>
 				<CFCCanvas />
+			</Route>
+			<Route path={PrivateRoutes.CFCEdit}>
+				<CanvasEdit />
 			</Route>
 
 			{/*
