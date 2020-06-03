@@ -14,3 +14,17 @@ export interface CompareSelectorProps {
 	allCanvases: CFCStruct[]
 	changeSelected: (idx: number, id: CFCId) => void
 }
+
+/**
+ * Prop definition for the TableHeader component
+ *
+ * @export
+ * @interface TableHeaderProps
+ */
+export interface TableHeaderProps {
+	selectedCanvases: CanvasTuple
+}
+
+export interface CompareTableProps {
+	selectedCanvases: CanvasTuple
+}

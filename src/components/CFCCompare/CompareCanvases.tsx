@@ -81,7 +81,8 @@ export default function CompareCanvases(): ReactElement {
 						<Spacer />
 						<Divider />
 						<Spacer />
-						<CompareTable />
+						{/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+						<CompareTable selectedCanvases={selectedCanvases!} />
 					</>
 				)
 			case "loading":

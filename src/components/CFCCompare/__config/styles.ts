@@ -8,6 +8,15 @@ const useStyles = makeStyles((theme) => ({
 	compareTooltip: {
 		marginLeft: theme.spacing(1),
 	},
+	cell1: {
+		width: "20%",
+	},
+	cellCanvas: {
+		width: "25%",
+	},
+	cellDifference: {
+		width: "15%",
+	},
 }))
 
 export default useStyles
