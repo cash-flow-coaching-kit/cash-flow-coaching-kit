@@ -1,4 +1,4 @@
-import { CFCStruct } from "../../../data/_config/shape"
+import { CFCStruct, CFCId } from "../../../data/_config/shape"
 
 // Tuple type for the selected canvases
 export type CanvasTuple = [CFCStruct, CFCStruct]
@@ -12,4 +12,5 @@ export type CanvasTuple = [CFCStruct, CFCStruct]
 export interface CompareSelectorProps {
 	selectedCanvases: CanvasTuple
 	allCanvases: CFCStruct[]
+	changeSelected: (idx: number, id: CFCId) => void
 }

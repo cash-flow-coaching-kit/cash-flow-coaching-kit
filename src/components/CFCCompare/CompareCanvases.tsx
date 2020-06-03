@@ -8,8 +8,8 @@ import fetchMachine from "../Forms/CFC/__config/machine"
 import NoCanvases from "../CFC/NoCanvases"
 import Loading from "../Loading"
 import useCurrentClient from "../../state/client/useCurrentClient"
-import { CFCStruct } from "../../data/_config/shape"
-import { getCanvasData } from "./__config/utilities"
+import { CFCStruct, CFCId } from "../../data/_config/shape"
+import { getCanvasData, changeSelected } from "./__config/utilities"
 import NotEnoughCanvases from "./NotEnoughCanvases"
 import { CanvasTuple } from "./__config/shape"
 
@@ -44,6 +44,21 @@ export default function CompareCanvases(): ReactElement {
 	}, [clientSynced, fetchCanvasData])
 	// #endregion
 
+	// #region Changing Selected Canvas
+	/**
+	 * Change the currently selected canvas to compare
+	 *
+	 * @param {number} idx
+	 * @param {CFCId} id
+	 */
+	function changeSelectedCanvas(idx: number, id: CFCId): void {
+		if (!selectedCanvases) return
+
+		const newSelected = changeSelected(canvases, selectedCanvases, idx, id)
+		setSelectedCanvases(newSelected)
+	}
+	// #endregion
+
 	// #region Component rendering
 	/**
 	 * Renders the component based on the current state of the state machine
@@ -58,8 +73,10 @@ export default function CompareCanvases(): ReactElement {
 				return (
 					<>
 						<CompareSelector
+							// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 							selectedCanvases={selectedCanvases!}
 							allCanvases={canvases}
+							changeSelected={changeSelectedCanvas}
 						/>
 						<Spacer />
 						<Divider />
