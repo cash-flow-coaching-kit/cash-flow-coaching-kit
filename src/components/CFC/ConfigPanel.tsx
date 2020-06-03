@@ -12,7 +12,9 @@ import { PanelProps, CustomTitleProps } from "./__config/shape"
  *
  * @interface ConfigPanelProps
  */
-interface ConfigPanelProps extends PanelProps, CustomTitleProps {}
+interface ConfigPanelProps extends PanelProps, CustomTitleProps {
+	wrapped?: boolean
+}
 
 /**
  * Wraps the config panel form in memo to ensure it only
@@ -76,11 +78,12 @@ function ConfigPanel({
 	customTitle,
 	changeCheck,
 	useCustomTitle,
+	wrapped = true,
 }: ConfigPanelProps): ReactElement {
 	const wrapperCls = useInputWrapper()
 
 	return (
-		<Box className={`${wrapperCls.wrapper}`}>
+		<Box className={`${wrapped ? wrapperCls.wrapper : ""}`}>
 			<Panel
 				canvasTypeValue={canvasTypeValue}
 				canvasTimeframeValue={canvasTimeframeValue}

@@ -273,6 +273,20 @@ export interface BaseCFCStruct {
 }
 
 /**
+ * Data slice used for the primary panel data
+ *
+ * @export
+ * @interface CFCPanelSlice
+ */
+export interface CFCPanelSlice {
+	canvasTitle: BaseCFCStruct["canvasTitle"]
+	canvasType: BaseCFCStruct["canvasType"]
+	canvasTimeFrame: BaseCFCStruct["canvasTimeFrame"]
+	canvasStartDate: BaseCFCStruct["canvasStartDate"]
+	canvasEndDate: BaseCFCStruct["canvasEndDate"]
+}
+
+/**
  * Structure used when defining the CFC table
  *
  * @export

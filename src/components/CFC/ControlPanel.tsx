@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
-import FileCopyIcon from "@material-ui/icons/FileCopy"
 import AddIcon from "@material-ui/icons/Add"
 import PublishIcon from "@material-ui/icons/Publish"
 import { useHistory, useLocation } from "react-router-dom"
@@ -9,6 +8,7 @@ import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered"
 import CompareArrowsIcon from "@material-ui/icons/CompareArrows"
 import ExpandableNav from "../ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
+import CopyCanvasTrigger from "./CopyCanvasTrigger"
 
 /**
  * Canvas page control panel component
@@ -34,12 +34,7 @@ export default function ControlPanel(): ReactElement {
 			<List component="nav" disablePadding>
 				{!isNewPage() && (
 					<>
-						<ListItem button>
-							<ListItemIcon>
-								<FileCopyIcon />
-							</ListItemIcon>
-							<ListItemText>Copy Canvas</ListItemText>
-						</ListItem>
+						<CopyCanvasTrigger />
 						<ListItem button onClick={goTo(PrivateRoutes.CFC)}>
 							<ListItemIcon>
 								<AddIcon />
