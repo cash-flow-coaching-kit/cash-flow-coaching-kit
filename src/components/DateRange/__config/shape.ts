@@ -1,4 +1,5 @@
-import { BaseCFCStruct } from "../../../data/_config/shape"
+import { CanvasDateKeys } from "../../Forms/CFC/changeDate"
+
 /**
  * Prop definition for a single date picker in the range picker
  *
@@ -26,7 +27,7 @@ export interface SinglePickerProps {
 export interface DateRangeProps {
 	startDate: Date
 	endDate: Date
-	onChange: (k: keyof BaseCFCStruct, v: Date) => void
+	onChange: (k: CanvasDateKeys, v: Date) => void
 }
 
 // States available for the date range

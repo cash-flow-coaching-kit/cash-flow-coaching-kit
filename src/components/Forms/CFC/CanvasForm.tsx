@@ -23,7 +23,6 @@ import {
 	FallingBehind,
 	RepeaterForm,
 } from "../../CFC"
-import { syncEndDate } from "../../../util/dates"
 import Spacer from "../../Spacer/Spacer"
 import EmployeeExpenses from "../../CFC/EmployeeExpenses"
 import {
@@ -44,6 +43,7 @@ import DataNotFound from "../../CFC/DataNotFound"
 import useStyles from "./__config/styles"
 import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
 import SnackbarMsg from "../../SnackbarMsg"
+import changeDate, { CanvasDateKeys } from "./changeDate"
 
 /**
  * Form used to edit a CFC
@@ -180,7 +180,7 @@ export default function CanvasForm({
 			if (!isEqual(previousValues, values)) {
 				handleFormSave()
 			}
-		}, 1500)
+		}, 1000)
 
 		return (): void => clearInterval(id)
 	}, [previousValues, values, handleFormSave])
@@ -205,21 +205,14 @@ export default function CanvasForm({
 	 * @param {K} k
 	 * @param {BaseCFCStruct[K]} v
 	 */
-	function changeDateValue<K extends keyof BaseCFCStruct>(
-		k: K,
-		v: BaseCFCStruct[K]
-	): void {
-		// Sets the field value
-		setFieldValue(k, v, false)
+	function changeDateValue(k: CanvasDateKeys, v: Date): void {
+		const { canvasStartDate: start, canvasEndDate: end } = changeDate<
+			BaseCFCStruct
+		>(k, v, values)
 
-		if (
-			k === "canvasStartDate" &&
-			syncEndDate(v as Date, values.canvasEndDate)
-		) {
-			// This checks if the start date is ahead of the end date
-			// if it is, it will set the end date to the start date
-			setFieldValue("canvasEndDate", v as Date, false)
-		}
+		// Sets the field value
+		setFieldValue("canvasStartDate", start, false)
+		setFieldValue("canvasEndDate", end, false)
 	}
 
 	const inputChange = useCallback(handleChange, [])
