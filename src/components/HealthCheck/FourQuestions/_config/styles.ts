@@ -6,11 +6,17 @@ const useFourQsStyles = makeStyles((theme) => ({
 		width: "100%",
 		padding: 0,
 	},
+	box: {
+		paddingRight: theme.spacing(2),
+		paddingLeft: theme.spacing(2),
+	},
 	listItem: {
 		padding: `${theme.spacing(1)}px 0`,
+		borderTop: `1px solid ${theme.palette.divider}`,
 	},
 	listItemFirst: {
 		paddingTop: 0,
+		border: "none",
 	},
 	listItemText: {
 		margin: 0,

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, memo } from "react"
 import {
 	TextField,
 	InputAdornment,
@@ -12,7 +12,7 @@ import {
  * @param {TextFieldProps} props
  * @returns {ReactElement}
  */
-export default function MoneyInput(
+export default memo(function MoneyInput(
 	props: OutlinedTextFieldProps
 ): ReactElement {
 	return (
@@ -34,4 +34,4 @@ export default function MoneyInput(
 			{...props}
 		/>
 	)
-}
+})

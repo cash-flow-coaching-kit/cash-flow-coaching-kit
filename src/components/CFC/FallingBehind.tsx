@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
  * }
  * @returns {ReactElement}
  */
-export default function FallingBehind({
+export default React.memo(function FallingBehind({
 	stock,
 	creditors,
 	debtors,
@@ -66,6 +66,7 @@ export default function FallingBehind({
 		<ExpandableNav
 			title="Is your business getting ahead or falling behind"
 			subHeading="Complete these fields to record your net asset position."
+			defaultExpanded={false}
 		>
 			<Box className={cls.box}>
 				<Grid container spacing={2}>
@@ -95,4 +96,4 @@ export default function FallingBehind({
 			</Box>
 		</ExpandableNav>
 	)
-}
+})

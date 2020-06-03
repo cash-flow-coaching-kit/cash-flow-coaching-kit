@@ -1,4 +1,9 @@
-import { CanvasType, CFCTimeFrame } from "../../../data/_config/shape"
+import {
+	CanvasType,
+	CFCTimeFrame,
+	BaseCFCStruct,
+	CashFlow,
+} from "../../../data/_config/shape"
 import { DateRangeProps } from "../../DateRange/__config/shape"
 
 export type ComputedProps = {
@@ -30,3 +35,13 @@ export interface CustomTitleProps extends BaseProps {
 }
 
 // #endregion
+
+export interface RepeaterFormProps {
+	name: keyof BaseCFCStruct
+	values: CashFlow[]
+	onChange: InputChange
+	gst: number
+	total: number
+	addItem: () => void
+	removeItem: (id: CashFlow["id"]) => void
+}

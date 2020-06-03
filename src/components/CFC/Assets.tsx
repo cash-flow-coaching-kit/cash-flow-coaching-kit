@@ -12,7 +12,7 @@ import DescriptiveMoneyInput from "../DescriptiveMoneyInput"
  * }
  * @returns {ReactElement}
  */
-export default function Assets({
+export default React.memo(function Assets({
 	value,
 	onChange,
 }: ControlProps<number>): ReactElement {
@@ -29,4 +29,4 @@ export default function Assets({
 			description="The value of your business assets at the close of the period."
 		/>
 	)
-}
+})

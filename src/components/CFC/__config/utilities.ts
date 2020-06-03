@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { format } from "date-fns"
 import { SelectFieldOptions } from "../../SelectField/SelectField"
 import { CanvasType, CFCTimeFrame } from "../../../data/_config/shape"
@@ -81,3 +80,8 @@ export function generateTitle(
 		concatStr(format(endDate, "dd/MM/yyyy"))
 	)(upperFirst(`${type} `))
 }
+
+export const DescriptionSize = 5
+export const AmountSize = 3
+export const ApplyGSTSize = 2
+export const ActionsSize = 2

@@ -28,5 +28,12 @@ const useCustomTitleStyles = makeStyles((theme) => ({
 	},
 }))
 
+const useRepeaterStyles = makeStyles((theme) => ({
+	body: {
+		paddingRight: theme.spacing(0),
+		paddingLeft: theme.spacing(0),
+	},
+}))
+
 // eslint-disable-next-line import/prefer-default-export
-export { useInputWrapper, useCustomTitleStyles }
+export { useInputWrapper, useCustomTitleStyles, useRepeaterStyles }

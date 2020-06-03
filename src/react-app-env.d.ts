@@ -24,3 +24,5 @@ type StrToStrHOF = (s: string) => string
 type StrToNumHOF = (s: string) => number
 
 type InputChange = ChangeEvent<HTMLInputElement>
+
+type MouseButtonEvent = MouseEvent<HTMLButtonElement>

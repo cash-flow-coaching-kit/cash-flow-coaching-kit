@@ -31,7 +31,7 @@ interface SelectFieldProps {
  * }
  * @returns {ReactElement}
  */
-export default function SelectField({
+export default React.memo(function SelectField({
 	name,
 	label,
 	value,
@@ -57,4 +57,4 @@ export default function SelectField({
 			</Select>
 		</FormControl>
 	)
-}
+})

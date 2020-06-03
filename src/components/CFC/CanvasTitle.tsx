@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
  * }
  * @returns {ReactElement}
  */
-export default function CanvasTitle({
+export default React.memo(function CanvasTitle({
 	type,
 	timeframe,
 	startDate,
@@ -77,4 +77,4 @@ export default function CanvasTitle({
 			</Typography>
 		</>
 	)
-}
+})

@@ -39,7 +39,7 @@ function SinglePicker({
 	label,
 	compareDay,
 	id,
-	minDate = new Date(1900, 1, 1),
+	minDate,
 }: SinglePickerProps): ReactElement {
 	const curStyles = useDayStyles()
 	const customCls = useStyles()
@@ -66,13 +66,17 @@ function SinglePicker({
 		}
 	}
 
+	function onDateChange(date: Date | null): void {
+		onChange(date, id)
+	}
+
 	return (
 		<KeyboardDatePicker
 			value={value}
 			disableToolbar
 			variant="inline"
 			inputVariant="outlined"
-			onChange={(date): void => onChange(date, id)}
+			onChange={onDateChange}
 			minDate={minDate}
 			open={open}
 			format="dd/MM/yyyy"

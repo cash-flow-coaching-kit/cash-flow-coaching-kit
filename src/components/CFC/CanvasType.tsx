@@ -14,7 +14,7 @@ import { canvasTypeOptions } from "./__config/utilities"
  * }
  * @returns {ReactElement}
  */
-export default function CanvasTypeSelect({
+export default React.memo(function CanvasTypeSelect({
 	onChange,
 	value,
 }: ControlProps<CanvasType>): ReactElement {
@@ -27,4 +27,4 @@ export default function CanvasTypeSelect({
 			options={canvasTypeOptions()}
 		/>
 	)
-}
+})

@@ -1,4 +1,5 @@
 import { BaseCFCStruct } from "../../../data/_config/shape"
+import createCashFlowItem from "../../../state/CFC/createCashFlow"
 
 const initialValues: BaseCFCStruct = {
 	canvasTitle: "",
@@ -16,8 +17,8 @@ const initialValues: BaseCFCStruct = {
 	debtors: 0,
 	assets: 0,
 	loans: 0,
-	cashInItems: [],
-	cashOutItems: [],
+	cashInItems: [createCashFlowItem()],
+	cashOutItems: [createCashFlowItem()],
 }
 
 export default initialValues
