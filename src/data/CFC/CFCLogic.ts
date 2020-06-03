@@ -1,5 +1,5 @@
 import ILogicLayer from "../_config/logicLayer"
-import { CFCStruct, BaseCFCStruct } from "../_config/shape"
+import { CFCStruct, BaseCFCStruct, ClientId } from "../_config/shape"
 import CFCDB from "./CFCDatabase"
 
 /**
@@ -16,6 +16,19 @@ class CFCLogic extends ILogicLayer<CFCStruct, BaseCFCStruct> {
 	 */
 	constructor() {
 		super(CFCDB, CFCDB.canvases)
+	}
+
+	/**
+	 * Counts the number of records for a given client
+	 *
+	 * @param {ClientId} clientId
+	 * @returns {Promise<number>}
+	 * @memberof CFCLogic
+	 */
+	countClientRecords(clientId: ClientId): Promise<number> {
+		return this.database.transaction("r", this.table.name, () => {
+			return this.table.where({ clientId }).count()
+		})
 	}
 }
 

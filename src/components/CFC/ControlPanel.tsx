@@ -5,10 +5,10 @@ import AddIcon from "@material-ui/icons/Add"
 import PublishIcon from "@material-ui/icons/Publish"
 import { useHistory, useLocation } from "react-router-dom"
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered"
-import CompareArrowsIcon from "@material-ui/icons/CompareArrows"
 import ExpandableNav from "../ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
 import CopyCanvasTrigger from "./CopyCanvasTrigger"
+import { ControlCompareLink } from "../CFCCompare"
 
 /**
  * Canvas page control panel component
@@ -59,14 +59,7 @@ export default function ControlPanel(): ReactElement {
 					</ListItemIcon>
 					<ListItemText>List of Canvases</ListItemText>
 				</ListItem>
-				{!isCompare() && (
-					<ListItem button onClick={goTo(PrivateRoutes.CFCCompare)}>
-						<ListItemIcon>
-							<CompareArrowsIcon />
-						</ListItemIcon>
-						<ListItemText>Compare Canvases</ListItemText>
-					</ListItem>
-				)}
+				{!isCompare() && !isNewPage() && <ControlCompareLink />}
 				{!isNewPage() && (
 					<ListItem button>
 						<ListItemIcon>
