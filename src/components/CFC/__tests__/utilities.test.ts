@@ -1,6 +1,7 @@
-import { reduceToOptions, canvasTypeOptions, canvasTimeFrameOptions, generateTitle } from "../__config/utilities"
+import { reduceToOptions, canvasTypeOptions, canvasTimeFrameOptions, generateTitle, canvasDisplayTitle } from "../__config/utilities"
 import { CFCTimeFrame, CanvasType } from "../../../data/_config/shape"
 import { toDate } from "date-fns"
+import { initialValues } from "../../Forms/CFC"
 
 describe("Unit tests for the CFC utility methods", () => {
   test("Reduce to options", function() {
@@ -33,5 +34,22 @@ describe("Unit tests for the CFC utility methods", () => {
     const expected = "Plan Quaterly 01/07/2020 to 01/08/2020"
 
     expect(generateTitle(type, timeFrame, start, end)).toEqual(expected)
+  })
+
+  test("canvasDisplayTitle", function() {
+    let data = {
+      ...initialValues,
+      canvasStartDate: toDate(new Date(2020, 6, 1)),
+      canvasEndDate: toDate(new Date(2020, 7, 1)),
+    }
+    const expected = "Review Quaterly 01/07/2020 to 01/08/2020"
+
+    expect(canvasDisplayTitle(data)).toBe(expected)
+
+    data = {
+      ...data,
+      canvasTitle: "Hello world"
+    }
+    expect(canvasDisplayTitle(data)).toEqual("Hello world")
   })
 })
