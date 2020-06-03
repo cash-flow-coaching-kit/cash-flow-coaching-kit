@@ -57,7 +57,7 @@ const Homepage = (): ReactElement => {
 					Helping businesses survive and grow.
 				</Typography>
 				<Grid container spacing={3} className={styles.grid}>
-					<Grid item xs={6}>
+					<Grid item xs={12} md={6}>
 						<Card variant="outlined">
 							<CardHeader title="Take a tour of the kit" />
 							<CardMedia
@@ -70,7 +70,7 @@ const Homepage = (): ReactElement => {
 							</CardActions>
 						</Card>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item xs={12} md={6}>
 						<Card variant="outlined">
 							<CardHeader title="What advisors think of the kit" />
 							<CardMedia
