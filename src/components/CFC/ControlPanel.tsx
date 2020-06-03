@@ -36,14 +36,7 @@ export default function ControlPanel(): ReactElement {
 	return (
 		<ExpandableNav>
 			<List component="nav" disablePadding>
-				{!isNewPage() && !isCompare() && (
-					<ListItem button>
-						<ListItemIcon>
-							<FileCopyIcon />
-						</ListItemIcon>
-						<ListItemText>Copy Canvas</ListItemText>
-					</ListItem>
-				)}
+				{!isNewPage() && !isCompare() && <CopyCanvasTrigger />}
 				{(!isNewPage() || isCompare()) && (
 					<ListItem button onClick={goTo(PrivateRoutes.CFC)}>
 						<ListItemIcon>
