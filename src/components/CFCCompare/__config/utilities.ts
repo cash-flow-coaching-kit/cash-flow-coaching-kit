@@ -1,5 +1,7 @@
 import { CFCStruct, ClientId } from "../../../data/_config/shape"
 import CFCUseCase from "../../../data/CFC/CFCLogic"
+import { SelectFieldOptions } from "../../SelectField/SelectField"
+import { canvasDisplayTitle } from "../../CFC/__config/utilities"
 
 type Client = ClientId | undefined
 
@@ -9,11 +11,22 @@ type Client = ClientId | undefined
  * @param {Client} client
  * @returns {Promise<CFCStruct[]>}
  */
-async function getCanvasData(client: Client): Promise<CFCStruct[]> {
+export async function getCanvasData(client: Client): Promise<CFCStruct[]> {
 	if (!client) return []
 	const data = await CFCUseCase.findByClient(client)
 	return data
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export { getCanvasData }
+/**
+ * Reduces a CFC object into options for the select field
+ *
+ * @returns {ReducerHOF<SelectFieldOptions, CFCStruct>}
+ */
+export function reduceToOptions(): ReducerHOF<SelectFieldOptions, CFCStruct> {
+	return (acc, cur): SelectFieldOptions => {
+		return acc.concat({
+			value: cur.id || -1,
+			label: canvasDisplayTitle(cur),
+		})
+	}
+}

@@ -11,8 +11,7 @@ import useCurrentClient from "../../state/client/useCurrentClient"
 import { CFCStruct } from "../../data/_config/shape"
 import { getCanvasData } from "./__config/utilities"
 import NotEnoughCanvases from "./NotEnoughCanvases"
-
-type CanvasTuple = [CFCStruct, CFCStruct]
+import { CanvasTuple } from "./__config/shape"
 
 /**
  * Component wrapper to display all the data in the compare table
@@ -32,10 +31,10 @@ export default function CompareCanvases(): ReactElement {
 	const fetchCanvasData = useCallback(async () => {
 		const data = await getCanvasData(currentClient?.id)
 		setCanvases(data)
-		changeState(data.length < 2 ? "REJECT" : "RESOLVE")
 		if (data.length >= 2) {
 			setSelectedCanvases([data[0], data[1]])
 		}
+		changeState(data.length < 2 ? "REJECT" : "RESOLVE")
 	}, [currentClient, changeState])
 
 	useEffect(() => {
@@ -58,7 +57,10 @@ export default function CompareCanvases(): ReactElement {
 			case "success":
 				return (
 					<>
-						<CompareSelector />
+						<CompareSelector
+							selectedCanvases={selectedCanvases!}
+							allCanvases={canvases}
+						/>
 						<Spacer />
 						<Divider />
 						<Spacer />
