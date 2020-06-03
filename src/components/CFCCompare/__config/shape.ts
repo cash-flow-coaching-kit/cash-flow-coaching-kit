@@ -32,4 +32,6 @@ export interface CompareTableProps {
 export interface CanvasItemRowProps {
 	values: [number, number]
 	label?: string
+	bold?: boolean
+	border?: boolean
 }

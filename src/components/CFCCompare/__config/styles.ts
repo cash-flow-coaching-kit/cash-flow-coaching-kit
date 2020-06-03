@@ -17,6 +17,14 @@ const useStyles = makeStyles((theme) => ({
 	cellDifference: {
 		width: "15%",
 	},
+	tableRow: {
+		"&:hover": {
+			background: theme.palette.grey[100],
+		},
+	},
+	noBorderBottom: {
+		borderBottom: "none",
+	},
 }))
 
 export default useStyles

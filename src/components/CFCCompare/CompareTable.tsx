@@ -8,6 +8,7 @@ import { calcCashFlowTotal } from "../../state/CFC/accumulators"
 import { CashFlow } from "../../data/_config/shape"
 import arrayFillWith from "../../util/array/arrayFillWith"
 import { newTimestamp } from "../../util/dates"
+import useStyles from "./__config/styles"
 
 /**
  * The component used to display the data in a table format
@@ -21,6 +22,8 @@ import { newTimestamp } from "../../util/dates"
 export default function CompareTable({
 	selectedCanvases,
 }: CompareTableProps): ReactElement {
+	const cls = useStyles()
+
 	const leftCalculated = useMemo(() => {
 		return calculateInitial(selectedCanvases[0])
 	}, [selectedCanvases])
@@ -46,6 +49,7 @@ export default function CompareTable({
 			<CanvasItemRow
 				key={val1[idx]?.id || val2[idx]?.id || newTimestamp()}
 				values={[val1[idx]?.amount || 0, val2[idx]?.amount || 0]}
+				border={idx >= len - 1}
 			/>
 		))
 	}
@@ -56,13 +60,16 @@ export default function CompareTable({
 				<TableHeader selectedCanvases={selectedCanvases} />
 				<TableBody>
 					<CanvasItemRow
+						bold
 						label="Opening Balance"
 						values={[
 							selectedCanvases[0].openingBalance,
 							selectedCanvases[1].openingBalance,
 						]}
 					/>
-					<TableCell colSpan={5}>Cash IN</TableCell>
+					<TableCell colSpan={5} variant="head" className={cls.noBorderBottom}>
+						Cash IN
+					</TableCell>
 					{renderRepeaterFields(
 						selectedCanvases[0].cashInItems,
 						selectedCanvases[1].cashInItems
@@ -72,13 +79,16 @@ export default function CompareTable({
 						values={[leftCalculated.gstOnSales, rightCalculated.gstOnSales]}
 					/>
 					<CanvasItemRow
+						bold
 						label="Total (exec GST)"
 						values={[
 							calcCashFlowTotal(selectedCanvases[0].cashInItems),
 							calcCashFlowTotal(selectedCanvases[1].cashInItems),
 						]}
 					/>
-					<TableCell colSpan={5}>Cash OUT</TableCell>
+					<TableCell colSpan={5} variant="head" className={cls.noBorderBottom}>
+						Cash OUT
+					</TableCell>
 					{renderRepeaterFields(
 						selectedCanvases[0].cashOutItems,
 						selectedCanvases[1].cashOutItems
@@ -91,6 +101,7 @@ export default function CompareTable({
 						]}
 					/>
 					<CanvasItemRow
+						bold
 						label="Total (exec GST)"
 						values={[
 							calcCashFlowTotal(selectedCanvases[0].cashOutItems),
@@ -98,6 +109,7 @@ export default function CompareTable({
 						]}
 					/>
 					<CanvasItemRow
+						bold
 						label="Cash Surplus"
 						values={[leftCalculated.cashSurplus, rightCalculated.cashSurplus]}
 					/>
@@ -109,6 +121,7 @@ export default function CompareTable({
 						]}
 					/>
 					<CanvasItemRow
+						bold
 						label="Available to spend"
 						values={[
 							leftCalculated.availableToSpend,
@@ -123,6 +136,7 @@ export default function CompareTable({
 						]}
 					/>
 					<CanvasItemRow
+						bold
 						label="Closing balance"
 						values={[
 							leftCalculated.closingBalance,
@@ -153,6 +167,7 @@ export default function CompareTable({
 						values={[selectedCanvases[0].loans, selectedCanvases[1].loans]}
 					/>
 					<CanvasItemRow
+						bold
 						label="Net Position"
 						values={[
 							leftCalculated.totalNetAssets,
