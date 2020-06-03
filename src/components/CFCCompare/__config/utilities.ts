@@ -5,6 +5,8 @@ import { SelectFieldOptions } from "../../SelectField/SelectField"
 import { canvasDisplayTitle } from "../../CFC/__config/utilities"
 import { CanvasTuple } from "./shape"
 import filterById from "../../../util/filters/ById"
+import { toTwoDecimal } from "../../../util/money/formatting"
+import concatStr from "../../../util/strings/concatStr"
 
 type Client = ClientId | undefined
 
@@ -65,4 +67,18 @@ export function changeSelected(
 		return [newItem, selected[0]]
 	}
 	return [selected[0], newItem]
+}
+
+/**
+ * Calculated the percentage difference of two fields
+ *
+ * @export
+ * @param {number} val1
+ * @param {number} val2
+ * @returns {string}
+ */
+export function calculateDifferencePer(val1: number, val2: number): string {
+	if (val1 === 0) return "0%"
+	const diff = ((val1 - val2) / val1) * 100
+	return concatStr("%")(toTwoDecimal(`${diff}`))
 }

@@ -28,3 +28,8 @@ export interface TableHeaderProps {
 export interface CompareTableProps {
 	selectedCanvases: CanvasTuple
 }
+
+export interface CanvasItemRowProps {
+	values: [number, number]
+	label?: string
+}
