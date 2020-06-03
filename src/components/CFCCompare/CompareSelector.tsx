@@ -5,6 +5,7 @@ import { CompareSelectorProps } from "./__config/shape"
 import SelectField from "../SelectField"
 import { reduceToOptions } from "./__config/utilities"
 import useStyles from "./__config/styles"
+import TimeframeOutOfSync from "./TimeframeOutOfSync"
 
 const tipContent =
 	"The canvas with the earlier date will always move to the ‘left-side’ of the comparison"
@@ -69,6 +70,11 @@ export default function CompareSelector({
 					options={selectOptions}
 				/>
 			</Grid>
+			{leftSelected.canvasTimeFrame !== rightSelected.canvasTimeFrame && (
+				<Grid item sm={12}>
+					<TimeframeOutOfSync />
+				</Grid>
+			)}
 		</Grid>
 	)
 }
