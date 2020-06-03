@@ -20,7 +20,9 @@ const fetchMachine = Machine<null, Schema, Events>({
 			},
 		},
 		success: {
-			type: "final",
+			on: {
+				REJECT: "failure",
+			},
 		},
 		failure: {
 			on: {
