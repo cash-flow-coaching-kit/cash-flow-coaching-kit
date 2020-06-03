@@ -10,6 +10,9 @@ import Loading from "../Loading"
 import useCurrentClient from "../../state/client/useCurrentClient"
 import { CFCStruct } from "../../data/_config/shape"
 import { getCanvasData } from "./__config/utilities"
+import NotEnoughCanvases from "./NotEnoughCanvases"
+
+type CanvasTuple = [CFCStruct, CFCStruct]
 
 /**
  * Component wrapper to display all the data in the compare table
@@ -22,13 +25,17 @@ export default function CompareCanvases(): ReactElement {
 	const [stateMachine, changeState] = useMachine(fetchMachine)
 	const [currentClient, clientSynced] = useCurrentClient()
 	const [canvases, setCanvases] = useState<CFCStruct[]>([])
+	const [selectedCanvases, setSelectedCanvases] = useState<CanvasTuple>()
 	// #endregion
 
 	// #region Data Fetching
 	const fetchCanvasData = useCallback(async () => {
 		const data = await getCanvasData(currentClient?.id)
 		setCanvases(data)
-		changeState(data.length === 0 ? "REJECT" : "RESOLVE")
+		changeState(data.length < 2 ? "REJECT" : "RESOLVE")
+		if (data.length >= 2) {
+			setSelectedCanvases([data[0], data[1]])
+		}
 	}, [currentClient, changeState])
 
 	useEffect(() => {
@@ -47,7 +54,7 @@ export default function CompareCanvases(): ReactElement {
 	function renderForStateMachine(): ReactElement {
 		switch (stateMachine.value) {
 			case "failure":
-				return <NoCanvases />
+				return canvases.length === 1 ? <NotEnoughCanvases /> : <NoCanvases />
 			case "success":
 				return (
 					<>
