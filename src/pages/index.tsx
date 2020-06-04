@@ -39,6 +39,11 @@ const useHomepageStyles = makeStyles((theme) => ({
 		padding: theme.spacing(5),
 		marginTop: theme.spacing(2),
 	},
+	containerGrey: {
+		backgroundColor: "#f5f5f5",
+		padding: theme.spacing(2),
+		marginTop: theme.spacing(3),
+	},
 	contentText: {
 		margin: theme.spacing(2, 0),
 	},
@@ -52,28 +57,33 @@ const useHomepageStyles = makeStyles((theme) => ({
 		margin: theme.spacing(2, 0),
 	},
 	purple: {
-		color: theme.palette.getContrastText("#8e24aa"),
-		backgroundColor: "#8e24aa",
+		color: theme.palette.getContrastText("#9c27b0"),
+		backgroundColor: "#9c27b0",
 		width: theme.spacing(7),
 		height: theme.spacing(7),
 		marginTop: theme.spacing(2),
 		fontSize: "1.8rem",
 	},
 	green: {
-		color: theme.palette.getContrastText("#2e7d32"),
-		backgroundColor: "#2e7d32",
+		color: theme.palette.getContrastText("#43a047"),
+		backgroundColor: "#43a047",
 		width: theme.spacing(7),
 		height: theme.spacing(7),
 		marginTop: theme.spacing(2),
 		fontSize: "1.8rem",
 	},
 	blue: {
-		color: theme.palette.getContrastText("#2d75c9"),
-		backgroundColor: "#2d75c9",
+		color: theme.palette.getContrastText("#0091ea"),
+		backgroundColor: "#0091ea",
 		width: theme.spacing(7),
 		height: theme.spacing(7),
 		marginTop: theme.spacing(2),
 		fontSize: "1.8rem",
+	},
+	MainHeading: {
+		paddingTop: theme.spacing(2),
+		paddingBottom: theme.spacing(2),
+		fontSize: "2.2rem",
 	},
 	SectionTitle: {
 		paddingTop: theme.spacing(1),
@@ -96,68 +106,82 @@ const Homepage = (): ReactElement => {
 		<>
 			<PublicNavbar hasClients={hasClients} />
 			<Container className={styles.container}>
-				<Typography align="center" variant="h2">
+				<Typography
+					align="center"
+					component="h1"
+					className={styles.MainHeading}
+				>
 					CASH FLOW COACHING KIT
 				</Typography>
 				<Typography align="center" variant="h5">
 					Helping businesses survive and grow.
 				</Typography>
-				<Grid container spacing={3}>
-					<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
-						<Avatar className={styles.purple}>1</Avatar>
-						<Typography
-							component="h2"
-							variant="h5"
-							className={styles.SectionTitle}
-						>
-							Discover
-						</Typography>
-						<Typography
-							variant="body1"
-							component="p"
-							className={styles.contentText}
-						>
-							Do you want to learn about cash flow fundamentals and topics to
-							get a competitive advantage?
-						</Typography>
+			</Container>
+			<Container
+				maxWidth={false}
+				component="div"
+				className={styles.containerGrey}
+			>
+				<Container component="div" maxWidth="lg">
+					<Grid container spacing={3}>
+						<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
+							<Avatar className={styles.purple}>1</Avatar>
+							<Typography
+								component="h2"
+								variant="h5"
+								className={styles.SectionTitle}
+							>
+								Discover
+							</Typography>
+							<Typography
+								variant="body1"
+								component="p"
+								className={styles.contentText}
+							>
+								Do you want to learn about cash flow fundamentals and topics to
+								get a competitive advantage?
+							</Typography>
+						</Grid>
+						<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
+							<Avatar className={styles.green}>2</Avatar>
+							<Typography
+								component="h2"
+								variant="h5"
+								className={styles.SectionTitle}
+							>
+								Apply
+							</Typography>
+							<Typography
+								variant="body1"
+								component="p"
+								className={styles.contentText}
+							>
+								Do you want to understand your current cash flow and explore
+								ways to help improve it?
+							</Typography>
+						</Grid>
+						<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
+							<Avatar className={styles.blue}>3</Avatar>
+							<Typography
+								component="h2"
+								variant="h5"
+								className={styles.SectionTitle}
+							>
+								Plan &amp; Action
+							</Typography>
+							<Typography
+								variant="body1"
+								component="p"
+								className={styles.contentText}
+							>
+								Do you want to create your personalised action plan to keep
+								yourself accountable and monitor your progress?
+							</Typography>
+						</Grid>
 					</Grid>
-					<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
-						<Avatar className={styles.green}>2</Avatar>
-						<Typography
-							component="h2"
-							variant="h5"
-							className={styles.SectionTitle}
-						>
-							Apply
-						</Typography>
-						<Typography
-							variant="body1"
-							component="p"
-							className={styles.contentText}
-						>
-							Do you want to understand your current cash flow and explore ways
-							to help improve it?
-						</Typography>
-					</Grid>
-					<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
-						<Avatar className={styles.blue}>3</Avatar>
-						<Typography
-							component="h2"
-							variant="h5"
-							className={styles.SectionTitle}
-						>
-							Plan &amp; Action
-						</Typography>
-						<Typography
-							variant="body1"
-							component="p"
-							className={styles.contentText}
-						>
-							Do you want to create your personalised action plan to keep
-							yourself accountable and monitor your progress?
-						</Typography>
-					</Grid>
-				</Grid>
+				</Container>
+			</Container>
+			<Container>
 				<Box className={styles.buttonBox}>
 					{hasClients ? (
 						<Button
