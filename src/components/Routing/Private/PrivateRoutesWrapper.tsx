@@ -23,6 +23,7 @@ import { PrivatePage } from "../../Layouts"
 import CanvasEdit from "../../../pages/CashFlowCanvas/canvasEdit"
 import CFCListing from "../../../pages/CashFlowCanvas/listing"
 import CFCCompare from "../../../pages/CashFlowCanvas/compare"
+import CFCProvider from "../../../state/CFC/provider"
 
 /**
  * Private route definitions, these pages should not be available
@@ -54,18 +55,21 @@ const PrivateRoutesWrapper = (): ReactElement => {
 			<Route path={PrivateRoutes.DiscoverTopics}>
 				<DTListing />
 			</Route>
-			<Route path={PrivateRoutes.CFC} exact>
-				<CFCCanvas />
-			</Route>
-			<Route path={PrivateRoutes.CFCEdit}>
-				<CanvasEdit />
-			</Route>
-			<Route path={PrivateRoutes.CFCListing}>
-				<CFCListing />
-			</Route>
-			<Route path={PrivateRoutes.CFCCompare}>
-				<CFCCompare />
-			</Route>
+
+			<CFCProvider>
+				<Route path={PrivateRoutes.CFC} exact>
+					<CFCCanvas />
+				</Route>
+				<Route path={PrivateRoutes.CFCEdit}>
+					<CanvasEdit />
+				</Route>
+				<Route path={PrivateRoutes.CFCListing}>
+					<CFCListing />
+				</Route>
+				<Route path={PrivateRoutes.CFCCompare}>
+					<CFCCompare />
+				</Route>
+			</CFCProvider>
 
 			{/*
 				Wrap change levers and action checklist in provider since
