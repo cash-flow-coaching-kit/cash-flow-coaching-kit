@@ -36,6 +36,15 @@ describe("Unit tests for the CFC utility methods", () => {
     expect(generateTitle(type, timeFrame, start, end)).toEqual(expected)
   })
 
+  test("generateTitle - invalid dates", function() {
+    const timeFrame: CFCTimeFrame = "quaterly"
+    const type: CanvasType = "plan"
+
+    const expected = "Please provide a valid date"
+
+    expect(generateTitle(type, timeFrame, undefined, undefined)).toEqual(expected)
+  })
+
   test("canvasDisplayTitle", function() {
     let data = {
       ...initialValues,

@@ -1,4 +1,4 @@
-import { format } from "date-fns"
+import { format, isValid } from "date-fns"
 import { SelectFieldOptions } from "../../SelectField/SelectField"
 import {
 	CanvasType,
@@ -78,6 +78,10 @@ export function generateTitle(
 	startDate: Date,
 	endDate: Date
 ): string {
+	if (!isValid(startDate) || !isValid(endDate)) {
+		return "Please provide a valid date"
+	}
+
 	return pipe(
 		concatStr(upperFirst(`${timeframe} `)),
 		concatStr(format(startDate, "dd/MM/yyyy")),

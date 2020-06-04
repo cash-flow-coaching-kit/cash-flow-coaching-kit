@@ -1,4 +1,4 @@
-import React, { ReactElement, memo } from "react"
+import React, { ReactElement, memo, useEffect } from "react"
 import { Box, Grid } from "@material-ui/core"
 import { useInputWrapper } from "./__config/styles"
 import CanvasTypeSelect from "./CanvasType"
@@ -29,6 +29,8 @@ const Panel = memo(function Panel({
 	onChange,
 	onDateChange,
 }: PanelProps) {
+	useEffect(() => {}, [canvasTypeValue, canvasTimeframeValue])
+
 	return (
 		<Grid container spacing={2}>
 			<Grid item sm={3}>
