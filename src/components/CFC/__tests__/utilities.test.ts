@@ -1,5 +1,5 @@
-import { reduceToOptions, canvasTypeOptions, canvasTimeFrameOptions, generateTitle, canvasDisplayTitle } from "../__config/utilities"
-import { CFCTimeFrame, CanvasType } from "../../../data/_config/shape"
+import { reduceToOptions, canvasTypeOptions, canvasTimeFrameOptions, generateTitle, canvasDisplayTitle, identifyIfDuplicate } from "../__config/utilities"
+import { CFCTimeFrame, CanvasType, CFCStruct, CFCPanelSlice } from "../../../data/_config/shape"
 import { toDate } from "date-fns"
 import { initialValues } from "../../Forms/CFC"
 
@@ -60,5 +60,48 @@ describe("Unit tests for the CFC utility methods", () => {
       canvasTitle: "Hello world"
     }
     expect(canvasDisplayTitle(data)).toEqual("Hello world")
+  })
+
+  test("Duplication check", function() {
+    let start = new Date(2020, 6, 1)
+    let end = new Date(2020, 6, 2)
+    let dupStart = new Date(2020, 5, 1)
+    let dupEnd = new Date(2020, 5, 2)
+    let dupTitle = "HAHAHAHAHAHA"
+
+    let item: CFCStruct = {...initialValues, clientId: 1, canvasStartDate: start, canvasEndDate: end}
+    let slice: CFCPanelSlice = {
+      canvasEndDate: item.canvasEndDate,
+      canvasStartDate: item.canvasStartDate,
+      canvasTitle: item.canvasTitle,
+      canvasTimeFrame: item.canvasTimeFrame,
+      canvasType: item.canvasType
+    }
+
+    expect(identifyIfDuplicate([], slice)).toBeFalsy()
+
+    let dups: CFCStruct[] = [
+      {...initialValues, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+      {...initialValues, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+      {...initialValues, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+    ]
+
+    expect(identifyIfDuplicate(dups, slice)).toBeFalsy()
+
+    dups = [
+      ...dups,
+      item
+    ]
+
+    expect(identifyIfDuplicate(dups, slice)).toEqual(item)
+
+    dups = [
+      {...initialValues, clientId: 1, canvasStartDate: start, canvasEndDate: end, canvasTitle: dupTitle},
+      ...dups,
+      item
+    ]
+
+    expect(identifyIfDuplicate(dups, {...slice, canvasTitle: dupTitle})).toEqual(dups[0])
+    expect(identifyIfDuplicate(dups, {...slice, canvasTitle: "LOLOLOLOL"})).toBeFalsy()
   })
 })

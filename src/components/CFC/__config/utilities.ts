@@ -1,10 +1,11 @@
-import { format, isValid } from "date-fns"
+import { format, isValid, isSameDay } from "date-fns"
 import { SelectFieldOptions } from "../../SelectField/SelectField"
 import {
 	CanvasType,
 	CFCTimeFrame,
 	CFCStruct,
 	BaseCFCStruct,
+	CFCPanelSlice,
 } from "../../../data/_config/shape"
 import upperFirst from "../../../util/strings/upperCaseFirst"
 import { pipe } from "../../../util/reduce/math"
@@ -114,3 +115,35 @@ export const DescriptionSize = 5
 export const AmountSize = 3
 export const ApplyGSTSize = 2
 export const ActionsSize = 2
+
+/**
+ * Checks if the current config setup is a duplicate of another canvas.
+ *
+ * It either returns the cavnas that is being duplicated or false if it isn't a
+ * duplicate
+ *
+ * @export
+ * @param {CFCStruct} dups
+ * @param {CFCPanelSlice} values
+ * @param {BaseCFCStruct["canvasTitle"]} title
+ * @returns {(boolean | CFCStruct)}
+ */
+export function identifyIfDuplicate(
+	dups: CFCStruct[],
+	values: CFCPanelSlice
+): false | CFCStruct {
+	if (dups.length === 0) return false
+	const { canvasTitle, canvasEndDate, canvasStartDate } = values
+
+	const filtered = dups.filter((item) => {
+		if (canvasTitle === "") {
+			return (
+				isSameDay(item.canvasStartDate, canvasStartDate) &&
+				isSameDay(item.canvasEndDate, canvasEndDate)
+			)
+		}
+
+		return item.canvasTitle === canvasTitle
+	})
+	return filtered.length < 1 ? false : filtered[0]
+}
