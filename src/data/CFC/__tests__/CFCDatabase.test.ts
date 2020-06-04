@@ -1,7 +1,7 @@
 import CFCDB from "../CFCDatabase"
 import Dexie from "dexie"
 import CFCUseCase from "../CFCLogic"
-import { ClientId } from "../../_config/shape"
+import { ClientId, CFCStruct } from "../../_config/shape"
 import { initialValues } from "../../../components/Forms/CFC"
 
 describe("Unit tests for CFC database", () => {
@@ -33,5 +33,19 @@ describe("Unit tests for CFC database", () => {
     await CFCUseCase.create(item)
     count = await CFCUseCase.countClientRecords(clientId)
     expect(count).toBe(1)
+  })
+
+  test("finding possible matches", async function() {
+    let items: CFCStruct[] = [
+      {...initialValues, clientId},
+      {...initialValues, clientId},
+      {...initialValues, clientId, canvasType: "plan", canvasTimeFrame: "quaterly"},
+    ]
+    await CFCUseCase.bulkAdd(items)
+    let possible = await CFCUseCase.findPossibleDuplicates("review", "quaterly", clientId)
+    expect(possible).toHaveLength(2)
+
+    possible = await CFCUseCase.findPossibleDuplicates("plan", "quaterly", clientId)
+    expect(possible).toHaveLength(1)
   })
 })
