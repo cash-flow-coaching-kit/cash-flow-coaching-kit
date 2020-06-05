@@ -15,9 +15,9 @@ export const constructKey = (key: string, idx: number): string => {
  * @returns `string`
  */
 export const generateKey = (): string => {
-	const arr = new Uint32Array(1)
-	window.crypto.getRandomValues(arr)
+	// const arr = new Uint32Array(1)
+	// window.crypto.getRandomValues(arr)
 
-	return `${arr[0]}`
-	// `${new Date().getTime()}`
+	// return `${arr[0]}`
+	return `${new Date().getTime()}`
 }
