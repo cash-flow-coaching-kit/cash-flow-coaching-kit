@@ -1,6 +1,6 @@
 import React, { ReactElement, useState, useCallback, useEffect } from "react"
 import CompareArrowsIcon from "@material-ui/icons/CompareArrows"
-import { useHistory } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import { PrivateRoutes } from "../../util/routes/routes"
 import useCurrentClient from "../../state/client/useCurrentClient"
@@ -9,6 +9,7 @@ import CFCUseCase from "../../data/CFC/CFCLogic"
 export default function ControlCompareLink(): ReactElement {
 	const history = useHistory()
 	const [count, setCount] = useState(0)
+	const { id } = useParams()
 	const [currentClient, clientSynced] = useCurrentClient()
 	const getCount = useCallback(async () => {
 		if (currentClient?.id) {
@@ -21,7 +22,7 @@ export default function ControlCompareLink(): ReactElement {
 		if (clientSynced) {
 			getCount()
 		}
-	}, [clientSynced, getCount])
+	}, [clientSynced, getCount, id])
 
 	const goTo = (route: PrivateRoutes) => (): void => {
 		// eslint-disable-next-line
