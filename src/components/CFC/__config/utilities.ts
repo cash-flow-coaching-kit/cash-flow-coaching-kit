@@ -6,10 +6,12 @@ import {
 	CFCStruct,
 	BaseCFCStruct,
 	CFCPanelSlice,
+	CFCId,
 } from "../../../data/_config/shape"
 import upperFirst from "../../../util/strings/upperCaseFirst"
 import { pipe } from "../../../util/reduce/math"
 import concatStr from "../../../util/strings/concatStr"
+import filterById from "../../../util/filters/ById"
 
 type Opts = SelectFieldOptions
 
@@ -130,7 +132,8 @@ export const ActionsSize = 2
  */
 export function identifyIfDuplicate(
 	dups: CFCStruct[],
-	values: CFCPanelSlice
+	values: CFCPanelSlice,
+	canvasId?: CFCId
 ): false | CFCStruct {
 	if (dups.length === 0) return false
 	const { canvasTitle, canvasEndDate, canvasStartDate } = values
@@ -145,5 +148,13 @@ export function identifyIfDuplicate(
 
 		return item.canvasTitle === canvasTitle
 	})
-	return filtered.length < 1 ? false : filtered[0]
+
+	if (!canvasId) {
+		return filtered.length < 1 ? false : filtered[0]
+	}
+
+	if (filtered.length < 1) return false
+
+	const withoutCurrentCanvas = filtered.filter(filterById(canvasId, true))
+	return withoutCurrentCanvas.length < 1 ? false : withoutCurrentCanvas[0]
 }

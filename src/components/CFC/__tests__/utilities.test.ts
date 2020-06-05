@@ -69,7 +69,7 @@ describe("Unit tests for the CFC utility methods", () => {
     let dupEnd = new Date(2020, 5, 2)
     let dupTitle = "HAHAHAHAHAHA"
 
-    let item: CFCStruct = {...initialValues, clientId: 1, canvasStartDate: start, canvasEndDate: end}
+    let item: CFCStruct = {...initialValues, id: 5, clientId: 1, canvasStartDate: start, canvasEndDate: end}
     let slice: CFCPanelSlice = {
       canvasEndDate: item.canvasEndDate,
       canvasStartDate: item.canvasStartDate,
@@ -78,14 +78,16 @@ describe("Unit tests for the CFC utility methods", () => {
       canvasType: item.canvasType
     }
 
+    // Empty Array check
     expect(identifyIfDuplicate([], slice)).toBeFalsy()
 
     let dups: CFCStruct[] = [
-      {...initialValues, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
-      {...initialValues, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
-      {...initialValues, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+      {...initialValues, id: 1, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+      {...initialValues, id: 2, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+      {...initialValues, id: 3, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
     ]
 
+    // There are no duplicates
     expect(identifyIfDuplicate(dups, slice)).toBeFalsy()
 
     dups = [
@@ -93,6 +95,7 @@ describe("Unit tests for the CFC utility methods", () => {
       item
     ]
 
+    // Introduce a duplicate
     expect(identifyIfDuplicate(dups, slice)).toEqual(item)
 
     dups = [
@@ -101,7 +104,28 @@ describe("Unit tests for the CFC utility methods", () => {
       item
     ]
 
+    // Custom title canvas duplication checks
     expect(identifyIfDuplicate(dups, {...slice, canvasTitle: dupTitle})).toEqual(dups[0])
     expect(identifyIfDuplicate(dups, {...slice, canvasTitle: "LOLOLOLOL"})).toBeFalsy()
+
+    // Check duplications for the same id
+    dups = [
+      {...initialValues, id: 1, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+      {...initialValues, id: 2, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+      {...initialValues, id: 3, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+      item
+    ]
+
+    expect(identifyIfDuplicate(dups, slice, 5)).toBeFalsy()
+    expect(identifyIfDuplicate(dups, slice, 20)).toEqual(item)
+
+    // Checks for dups with a canvas id with a empty filtered array
+    dups = [
+      {...initialValues, id: 1, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+      {...initialValues, id: 2, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+      {...initialValues, id: 3, clientId: 1, canvasStartDate: dupStart, canvasEndDate: dupEnd},
+    ]
+
+    expect(identifyIfDuplicate(dups, slice, 5)).toBeFalsy()
   })
 })
