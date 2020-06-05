@@ -7,11 +7,13 @@ import {
 	BaseCFCStruct,
 	CFCPanelSlice,
 	CFCId,
+	ClientId,
 } from "../../../data/_config/shape"
 import upperFirst from "../../../util/strings/upperCaseFirst"
 import { pipe } from "../../../util/reduce/math"
 import concatStr from "../../../util/strings/concatStr"
 import filterById from "../../../util/filters/ById"
+import CFCUseCase from "../../../data/CFC/CFCLogic"
 
 type Opts = SelectFieldOptions
 
@@ -118,6 +120,8 @@ export const AmountSize = 3
 export const ApplyGSTSize = 2
 export const ActionsSize = 2
 
+type DupResponse = false | CFCStruct
+
 /**
  * Checks if the current config setup is a duplicate of another canvas.
  *
@@ -134,7 +138,7 @@ export function identifyIfDuplicate(
 	dups: CFCStruct[],
 	values: CFCPanelSlice,
 	canvasId?: CFCId
-): false | CFCStruct {
+): DupResponse {
 	if (dups.length === 0) return false
 	const { canvasTitle, canvasEndDate, canvasStartDate } = values
 
@@ -157,4 +161,27 @@ export function identifyIfDuplicate(
 
 	const withoutCurrentCanvas = filtered.filter(filterById(canvasId, true))
 	return withoutCurrentCanvas.length < 1 ? false : withoutCurrentCanvas[0]
+}
+
+/**
+ * Fetches from the database and does the duplication filter
+ *
+ * @export
+ * @param {CFCPanelSlice} slice
+ * @param {ClientId} client
+ * @param {CFCId} [canvasId]
+ * @returns {Promise<DupResponse>}
+ */
+export async function performDupFind(
+	slice: CFCPanelSlice,
+	client: ClientId,
+	canvasId?: CFCId
+): Promise<DupResponse> {
+	const dups = await CFCUseCase.findPossibleDuplicates(
+		slice.canvasType,
+		slice.canvasTimeFrame,
+		client
+	)
+
+	return identifyIfDuplicate(dups, slice, canvasId)
 }

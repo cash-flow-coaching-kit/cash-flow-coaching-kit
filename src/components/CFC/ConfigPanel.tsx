@@ -3,11 +3,13 @@ import React, {
 	memo,
 	useEffect,
 	useCallback,
+	useContext,
 	useState,
 } from "react"
-import { Box, Grid } from "@material-ui/core"
+import { Box, Grid, Typography } from "@material-ui/core"
+import { useParams } from "react-router-dom"
 import Alert from "@material-ui/lab/Alert"
-import { Link } from "react-router-dom"
+import { isValid } from "date-fns"
 import { useInputWrapper } from "./__config/styles"
 import CanvasTypeSelect from "./CanvasType"
 import CanvasTimeFrameSelect from "./CanvasTimeFrame"
@@ -15,11 +17,10 @@ import DateRange from "../DateRange"
 import UseCustomTitle from "./UseCustomTitle"
 import { PanelProps, CustomTitleProps } from "./__config/shape"
 import useCurrentClient from "../../state/client/useCurrentClient"
-import CFCUseCase from "../../data/CFC/CFCLogic"
-import { identifyIfDuplicate } from "./__config/utilities"
-import { CFCStruct } from "../../data/_config/shape"
-import { routeVarReplacement, PrivateRoutes } from "../../util/routes/routes"
-import Spacer from "../Spacer"
+import { performDupFind } from "./__config/utilities"
+import CFCContext from "../../state/CFC/context"
+import { CFCActionTypes } from "../../state/CFC/shape"
+import { newTimestamp } from "../../util/dates"
 
 /**
  * Prop definition for the ConfigPanel component
@@ -29,6 +30,14 @@ import Spacer from "../Spacer"
 interface ConfigPanelProps extends PanelProps, CustomTitleProps {
 	wrapped?: boolean
 }
+
+const PanelErrors = (errors: string[]): ReactElement => (
+	<Alert severity="error">
+		{errors.map((e, idx) => (
+			<Typography key={`error--${newTimestamp()}`}>{e}</Typography>
+		))}
+	</Alert>
+)
 
 /**
  * Wraps the config panel form in memo to ensure it only
@@ -45,23 +54,25 @@ const Panel = memo(function Panel({
 	customTitle,
 }: PanelProps) {
 	const [currentClient, clientSynced] = useCurrentClient()
-	const [dupError, setDupError] = useState<false | CFCStruct>(false)
+	const { id } = useParams()
+	const { dispatch } = useContext(CFCContext)
 	const fetchPossibleDups = useCallback(async () => {
 		if (currentClient?.id) {
-			const dups = await CFCUseCase.findPossibleDuplicates(
-				canvasTypeValue,
-				canvasTimeframeValue,
-				currentClient?.id
+			const dup = await performDupFind(
+				{
+					canvasEndDate: endDate,
+					canvasStartDate: startDate,
+					canvasTitle: customTitle,
+					canvasTimeFrame: canvasTimeframeValue,
+					canvasType: canvasTypeValue,
+				},
+				currentClient.id,
+				id ? parseInt(id, 10) : undefined
 			)
-			const dup = identifyIfDuplicate(dups, {
-				canvasEndDate: endDate,
-				canvasStartDate: startDate,
-				canvasTitle: customTitle,
-				canvasTimeFrame: canvasTimeframeValue,
-				canvasType: canvasTypeValue,
+			dispatch({
+				type: CFCActionTypes.ChangeDuplicateError,
+				payload: dup !== false,
 			})
-
-			setDupError(dup)
 		}
 	}, [
 		canvasTypeValue,
@@ -70,13 +81,22 @@ const Panel = memo(function Panel({
 		endDate,
 		startDate,
 		customTitle,
+		id,
+		dispatch,
 	])
 
 	useEffect(() => {
 		if (clientSynced) {
 			fetchPossibleDups()
 		}
-	}, [fetchPossibleDups, clientSynced])
+	}, [fetchPossibleDups, clientSynced, id])
+
+	useEffect(() => {
+		dispatch({
+			type: CFCActionTypes.ChangeInvalidDateError,
+			payload: !isValid(startDate) || !isValid(endDate),
+		})
+	}, [startDate, endDate])
 
 	return (
 		<>
@@ -98,22 +118,6 @@ const Panel = memo(function Panel({
 					/>
 				</Grid>
 			</Grid>
-			{dupError && (
-				<>
-					<Spacer />
-					<Alert severity="error">
-						This appears to be a duplicate canvas title. This title is being
-						used by{" "}
-						<Link
-							to={routeVarReplacement(PrivateRoutes.CFCEdit, [
-								[":id", `${dupError.id || 0}`],
-							])}
-						>
-							this canvas
-						</Link>
-					</Alert>
-				</>
-			)}
 		</>
 	)
 })
@@ -148,6 +152,12 @@ function ConfigPanel({
 	wrapped = true,
 }: ConfigPanelProps): ReactElement {
 	const wrapperCls = useInputWrapper()
+	const [errors, setErrors] = useState<string[]>([])
+	const { duplicateError, invalidDateError } = useContext(CFCContext)
+
+	useEffect(() => {
+		const errs = []
+	}, [duplicateError, invalidDateError])
 
 	return (
 		<Box className={`${wrapped ? wrapperCls.wrapper : ""}`}>
@@ -160,6 +170,7 @@ function ConfigPanel({
 				onChange={onChange}
 				customTitle={customTitle}
 			/>
+			{duplicateError && PanelErrors([])}
 			<UseCustomTitle
 				title={customTitle}
 				onChange={onChange}
