@@ -1,3 +1,4 @@
+import { uniq } from "lodash-es"
 import { IActionChecklistState, IAddNewActionItemPayload } from "../shape"
 import { ActionChecklistPriorityStruct } from "../../../data/_config/shape"
 
@@ -19,7 +20,7 @@ const addNewActionItem = (
 		(collection: ActionChecklistPriorityStruct[], item) => {
 			return collection.concat(
 				item.id === pID
-					? { ...item, order: [...item.order, checklist?.id || -1] }
+					? { ...item, order: uniq([...item.order, checklist?.id || -1]) }
 					: item
 			)
 		},
