@@ -30,7 +30,7 @@ const PrivatePage = ({ children }: IPrivatePage): ReactElement => {
 				}
 			}
 		}
-	}, [clientSynced, currentClient, location])
+	}, [clientSynced, currentClient, location, history])
 
 	return (
 		<>
