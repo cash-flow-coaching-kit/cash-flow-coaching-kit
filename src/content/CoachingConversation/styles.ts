@@ -13,6 +13,10 @@ const useStyles = makeStyles((theme) => ({
 			paddingLeft: theme.spacing(3),
 		},
 	},
+	embed: {
+		minHeight: "300px",
+		border: "none",
+	},
 }))
 
 export default useStyles
