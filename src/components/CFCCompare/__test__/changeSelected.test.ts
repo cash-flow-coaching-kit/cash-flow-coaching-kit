@@ -38,14 +38,14 @@ describe("Unit tests when changing the selected items", () => {
     selected = [items[0], items[1]]
   })
 
-  test("should replace the first item and keep the second", function() {
+  test("item2 will be on the left side, item3 will be on the right side", function() {
     const newSelected = changeSelected(items, selected, 0, 3)
 
-    expect(newSelected[0]).toEqual(item3)
-    expect(newSelected[1]).toEqual(item2)
+    expect(newSelected[0]).toEqual(item2)
+    expect(newSelected[1]).toEqual(item3)
   })
 
-  test("should replace the second item and keep the first", function() {
+  test("item3N -> left side, item1 -> right side", function() {
     const item3N = {
       ...item3,
       canvasStartDate: new Date(2020, 7, 1),
@@ -58,8 +58,8 @@ describe("Unit tests when changing the selected items", () => {
     ]
 
     const newSelected = changeSelected(items, selected, 1, 3)
-    expect(newSelected[0]).toEqual(item1)
-    expect(newSelected[1]).toEqual(item3N)
+    expect(newSelected[0]).toEqual(item3N)
+    expect(newSelected[1]).toEqual(item1)
   })
 
   test("should return initial if id item can't be found", function() {
@@ -67,10 +67,10 @@ describe("Unit tests when changing the selected items", () => {
     expect(newSelected).toEqual(selected)
   })
 
-  test("should priorities earlier date to be on the left", function() {
+  test("should priorities later date to be on the left", function() {
     let newSelected = changeSelected(items, selected, 1, 3)
-    expect(newSelected[0]).toEqual(item3)
-    expect(newSelected[1]).toEqual(item1)
+    expect(newSelected[0]).toEqual(item1)
+    expect(newSelected[1]).toEqual(item3)
 
     const item3N = {
       ...item3,
@@ -84,7 +84,7 @@ describe("Unit tests when changing the selected items", () => {
     ]
 
     newSelected = changeSelected(items, selected, 0, 3)
-    expect(newSelected[0]).toEqual(item2)
-    expect(newSelected[1]).toEqual(item3N)
+    expect(newSelected[0]).toEqual(item3N)
+    expect(newSelected[1]).toEqual(item2)
   })
 })

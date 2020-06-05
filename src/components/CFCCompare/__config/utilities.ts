@@ -1,4 +1,4 @@
-import { isBefore } from "date-fns"
+import { isAfter } from "date-fns"
 import { CFCStruct, ClientId, CFCId } from "../../../data/_config/shape"
 import CFCUseCase from "../../../data/CFC/CFCLogic"
 import { SelectFieldOptions } from "../../SelectField/SelectField"
@@ -61,13 +61,13 @@ export function changeSelected(
 	if (!newItem) return selected
 
 	if (idx === 0) {
-		if (isBefore(selected[1].canvasStartDate, newItem.canvasStartDate)) {
+		if (isAfter(selected[1].canvasStartDate, newItem.canvasStartDate)) {
 			return [selected[1], newItem]
 		}
 		return [newItem, selected[1]]
 	}
 
-	if (isBefore(newItem.canvasStartDate, selected[0].canvasStartDate)) {
+	if (isAfter(newItem.canvasStartDate, selected[0].canvasStartDate)) {
 		return [newItem, selected[0]]
 	}
 	return [selected[0], newItem]
@@ -82,8 +82,8 @@ export function changeSelected(
  * @returns {string}
  */
 export function calculateDifferencePer(val1: number, val2: number): string {
-	if (val1 === 0) return "0%"
-	const diff = ((val1 - val2) / val1) * 100
+	if (val2 === 0) return "N/A"
+	const diff = ((val1 - val2) / val2) * 100
 
 	return pipe(toTwoDecimal, removeTrailingZeros, concatStr("%"))(`${diff}`)
 }
