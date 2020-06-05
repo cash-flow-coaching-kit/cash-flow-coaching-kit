@@ -4,6 +4,7 @@ import React, {
 	useCallback,
 	useMemo,
 	useEffect,
+	useContext,
 } from "react"
 import { useFormik } from "formik"
 import { Box, Button, Divider, Typography } from "@material-ui/core"
@@ -44,6 +45,7 @@ import useStyles from "./__config/styles"
 import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
 import SnackbarMsg from "../../SnackbarMsg"
 import changeDate, { CanvasDateKeys } from "./changeDate"
+import CFCContext from "../../../state/CFC/context"
 
 /**
  * Form used to edit a CFC
@@ -67,6 +69,7 @@ export default function CanvasForm({
 	const { id: canvasId } = useParams()
 	const [currentClient] = useCurrentClient()
 	const [stateMachine, updateMachine] = useMachine(fetchMachine)
+	const { duplicateError, invalidDateError } = useContext(CFCContext)
 
 	const { setFieldValue, handleChange, values, setValues } = useFormik<
 		BaseCFCStruct
@@ -107,6 +110,12 @@ export default function CanvasForm({
 	const cashOutGST = useMemo(() => calcCashFlowGST(cashOutItems), [
 		cashOutItems,
 	])
+
+	useEffect(() => {
+		if (!useCustomTitle) {
+			setFieldValue("canvasTitle", "")
+		}
+	}, [useCustomTitle, setFieldValue])
 	// #endregion
 
 	// #region Fetch data on load
@@ -169,6 +178,14 @@ export default function CanvasForm({
 	// #endregion
 
 	// #region Save canvas data
+	const disableSaving = useCallback((): boolean => {
+		return (
+			invalidDateError ||
+			duplicateError ||
+			(useCustomTitle && canvasTitle === "")
+		)
+	}, [invalidDateError, duplicateError, useCustomTitle, canvasTitle])
+
 	const handleFormSave = useCallback(async () => {
 		await CFCUseCase.update(parseInt(canvasId, 10), values)
 		setPreviousValues(values)
@@ -177,13 +194,14 @@ export default function CanvasForm({
 
 	useEffect(() => {
 		const id = setInterval(async () => {
-			if (!isEqual(previousValues, values)) {
+			if (!isEqual(previousValues, values) && !disableSaving()) {
+				console.log("Save")
 				handleFormSave()
 			}
 		}, 1000)
 
 		return (): void => clearInterval(id)
-	}, [previousValues, values, handleFormSave])
+	}, [previousValues, values, handleFormSave, disableSaving])
 
 	/**
 	 * Manually triggers a Canvas save
@@ -356,6 +374,7 @@ export default function CanvasForm({
 						color="primary"
 						onClick={handleManualSave}
 						className={styles.saveButton}
+						disabled={disableSaving()}
 					>
 						Save canvas
 					</Button>

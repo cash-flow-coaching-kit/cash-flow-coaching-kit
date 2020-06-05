@@ -1,6 +1,7 @@
 import React, { ReactElement, useCallback, useEffect, useState } from "react"
 import { Divider } from "@material-ui/core"
 import { useMachine } from "@xstate/react"
+import { isAfter } from "date-fns"
 import CompareSelector from "./CompareSelector"
 import Spacer from "../Spacer"
 import CompareTable from "./CompareTable"
@@ -32,7 +33,13 @@ export default function CompareCanvases(): ReactElement {
 		const data = await getCanvasData(currentClient?.id)
 		setCanvases(data)
 		if (data.length >= 2) {
-			setSelectedCanvases([data[0], data[1]])
+			const item1 = data[0]
+			const item2 = data[1]
+			setSelectedCanvases(
+				isAfter(item1.canvasStartDate, item2.canvasStartDate)
+					? [item1, item2]
+					: [item2, item1]
+			)
 		}
 		changeState(data.length < 2 ? "REJECT" : "RESOLVE")
 	}, [currentClient, changeState])

@@ -143,7 +143,7 @@ export function identifyIfDuplicate(
 	const { canvasTitle, canvasEndDate, canvasStartDate } = values
 
 	const filtered = dups.filter((item) => {
-		if (canvasTitle === "") {
+		if (canvasTitle === "" && item.canvasTitle === "") {
 			return (
 				isSameDay(item.canvasStartDate, canvasStartDate) &&
 				isSameDay(item.canvasEndDate, canvasEndDate)
@@ -177,6 +177,7 @@ export async function performDupFind(
 	client: ClientId,
 	canvasId?: CFCId
 ): Promise<DupResponse> {
+	console.log("canvasId", canvasId)
 	const dups = await CFCUseCase.findPossibleDuplicates(
 		slice.canvasType,
 		slice.canvasTimeFrame,

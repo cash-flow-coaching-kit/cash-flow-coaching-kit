@@ -4,9 +4,8 @@ import React, {
 	useEffect,
 	useCallback,
 	useContext,
-	useState,
 } from "react"
-import { Box, Grid, Typography } from "@material-ui/core"
+import { Box, Grid } from "@material-ui/core"
 import { useParams } from "react-router-dom"
 import Alert from "@material-ui/lab/Alert"
 import { isValid } from "date-fns"
@@ -20,7 +19,7 @@ import useCurrentClient from "../../state/client/useCurrentClient"
 import { performDupFind } from "./__config/utilities"
 import CFCContext from "../../state/CFC/context"
 import { CFCActionTypes } from "../../state/CFC/shape"
-import { newTimestamp } from "../../util/dates"
+import Spacer from "../Spacer"
 
 /**
  * Prop definition for the ConfigPanel component
@@ -31,11 +30,11 @@ interface ConfigPanelProps extends PanelProps, CustomTitleProps {
 	wrapped?: boolean
 }
 
-const PanelErrors = (errors: string[]): ReactElement => (
+// Duplicate canvas error message
+export const DuplicateCanvasError = (): ReactElement => (
 	<Alert severity="error">
-		{errors.map((e, idx) => (
-			<Typography key={`error--${newTimestamp()}`}>{e}</Typography>
-		))}
+		A canvas with this title has already been created. Make sure that
+		you&apos;re canvas title is unique
 	</Alert>
 )
 
@@ -87,16 +86,18 @@ const Panel = memo(function Panel({
 
 	useEffect(() => {
 		if (clientSynced) {
+			console.log("Fetch possible dups")
 			fetchPossibleDups()
 		}
 	}, [fetchPossibleDups, clientSynced, id])
 
+	// Checks if the start and end date is valid
 	useEffect(() => {
 		dispatch({
 			type: CFCActionTypes.ChangeInvalidDateError,
 			payload: !isValid(startDate) || !isValid(endDate),
 		})
-	}, [startDate, endDate])
+	}, [startDate, endDate, dispatch])
 
 	return (
 		<>
@@ -152,12 +153,7 @@ function ConfigPanel({
 	wrapped = true,
 }: ConfigPanelProps): ReactElement {
 	const wrapperCls = useInputWrapper()
-	const [errors, setErrors] = useState<string[]>([])
-	const { duplicateError, invalidDateError } = useContext(CFCContext)
-
-	useEffect(() => {
-		const errs = []
-	}, [duplicateError, invalidDateError])
+	const { duplicateError } = useContext(CFCContext)
 
 	return (
 		<Box className={`${wrapped ? wrapperCls.wrapper : ""}`}>
@@ -170,7 +166,12 @@ function ConfigPanel({
 				onChange={onChange}
 				customTitle={customTitle}
 			/>
-			{duplicateError && PanelErrors([])}
+			{duplicateError && (
+				<>
+					<Spacer />
+					<DuplicateCanvasError />
+				</>
+			)}
 			<UseCustomTitle
 				title={customTitle}
 				onChange={onChange}
