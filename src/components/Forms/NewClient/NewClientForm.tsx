@@ -1,12 +1,12 @@
 import React, { ReactElement, useContext } from "react"
 import { TextField, Button, Box } from "@material-ui/core"
 import { useFormik } from "formik"
-import { useLocation, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import addClient from "../../../data/client/addClient"
 import { ClientContext } from "../../../state/client"
 import useClientFormStyles from "./_config/styles"
 import { INCFormValues, INCFormErrors } from "./_config/shape"
-import { PublicRoutes, PrivateRoutes } from "../../../util/routes/routes"
+import { PrivateRoutes } from "../../../util/routes/routes"
 
 interface NewClientFormProps {
 	closeDialog: (cb: () => void) => void
@@ -23,7 +23,6 @@ const NewClientForm = ({ closeDialog }: NewClientFormProps): ReactElement => {
 	const initialValues: INCFormValues = {
 		businessName: "",
 	}
-	const location = useLocation()
 	const history = useHistory()
 
 	// Defines the Formik form
@@ -34,6 +33,7 @@ const NewClientForm = ({ closeDialog }: NewClientFormProps): ReactElement => {
 
 			// Minor validation
 			if (values.businessName === "") {
+				// eslint-disable-next-line
 				errors.businessName = "Please enter a business name"
 			}
 
