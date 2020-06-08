@@ -54,7 +54,12 @@ export function checklistOptions(container: PossibleActionItems): string[] {
 			"Know what can go wrong when I don’t meet obligations.",
 			"Complete the financial commitments activity.",
 		],
-		tracking: [],
+		tracking: [
+			"Set out a plan to review regularly.",
+			"Learn what to look for in my cash flow.",
+			"Watch my performance to measure my success.",
+			"Complete the performance tracking activity.",
+		],
 		transition: [],
 	}
 
