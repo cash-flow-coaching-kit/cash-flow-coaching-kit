@@ -47,7 +47,13 @@ export function checklistOptions(container: PossibleActionItems): string[] {
 			"Set out my working capital.",
 			"Use the Cash Flow Canvas.",
 		],
-		planningCommitments: [],
+		planningCommitments: [
+			"Understand which business actions trigger payments.",
+			"Be aware of important dates.",
+			"Calculate how much to put aside.",
+			"Know what can go wrong when I don’t meet obligations.",
+			"Complete the financial commitments activity.",
+		],
 		tracking: [],
 		transition: [],
 	}
