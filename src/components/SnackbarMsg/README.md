@@ -15,7 +15,7 @@ const FormComponent = () => {
 		msg: SnackbarMsgData["msg"],
 		severity: SnackbarMsgData["severity"]
 	) {
-		setSnackbar({ ...snackbar, msg, severity })
+		setSnackbar({ ...snackbar, msg, severity, open: true })
 	}
 
 	function handleClose(event?: React.SyntheticEvent, reason?: string): void {
