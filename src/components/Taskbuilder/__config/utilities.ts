@@ -60,7 +60,12 @@ export function checklistOptions(container: PossibleActionItems): string[] {
 			"Watch my performance to measure my success.",
 			"Complete the performance tracking activity.",
 		],
-		transition: [],
+		transition: [
+			"Articulate my purpose for exiting.",
+			"Consider my family objectives and support when exiting.",
+			"Explore options to exit.",
+			"Prepare my exit.",
+		],
 	}
 
 	return options[container]
