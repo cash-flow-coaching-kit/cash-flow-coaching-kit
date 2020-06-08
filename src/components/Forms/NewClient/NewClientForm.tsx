@@ -1,22 +1,30 @@
 import React, { ReactElement, useContext } from "react"
 import { TextField, Button, Box } from "@material-ui/core"
 import { useFormik } from "formik"
+import { useLocation, useHistory } from "react-router-dom"
 import addClient from "../../../data/client/addClient"
 import { ClientContext } from "../../../state/client"
 import useClientFormStyles from "./_config/styles"
 import { INCFormValues, INCFormErrors } from "./_config/shape"
+import { PublicRoutes, PrivateRoutes } from "../../../util/routes/routes"
+
+interface NewClientFormProps {
+	closeDialog: (cb: () => void) => void
+}
 
 /**
  * Form used to register a new client. Uses Formik
  *
  * @returns ReactElement
  */
-const NewClientForm = (): ReactElement => {
+const NewClientForm = ({ closeDialog }: NewClientFormProps): ReactElement => {
 	const { dispatch } = useContext(ClientContext)
 	const styles = useClientFormStyles()
 	const initialValues: INCFormValues = {
 		businessName: "",
 	}
+	const location = useLocation()
+	const history = useHistory()
 
 	// Defines the Formik form
 	const form = useFormik({
@@ -40,6 +48,12 @@ const NewClientForm = (): ReactElement => {
 
 			// resets the form
 			form.resetForm()
+			closeDialog((): void => {
+				if (location.pathname === PublicRoutes.Home) {
+					// eslint-disable-next-line
+					history.push(PrivateRoutes.CoachingKit)
+				}
+			})
 		},
 	})
 

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect, useContext } from "react"
+import React, { ReactElement, useContext } from "react"
 import { Link as RouterLink } from "react-router-dom"
 import {
 	Typography,
@@ -95,16 +95,13 @@ const Homepage = (): ReactElement => {
 	const {
 		state: { clients },
 	} = useContext(ClientContext)
-	const [hasClients, setHasClients] = useState<boolean>(false)
 	const styles = useHomepageStyles()
 
-	useEffect(() => {
-		setHasClients(clients.length > 0)
-	}, [clients])
+	const hasClients = (): boolean => clients.length > 0
 
 	return (
 		<>
-			<PublicNavbar hasClients={hasClients} />
+			<PublicNavbar hasClients={hasClients()} />
 			<Box role="main">
 				<Container className={styles.container}>
 					<Typography
@@ -184,7 +181,7 @@ const Homepage = (): ReactElement => {
 				</Container>
 				<Container>
 					<Box className={styles.buttonBox}>
-						{hasClients ? (
+						{hasClients() ? (
 							<Button
 								color="primary"
 								variant="contained"
