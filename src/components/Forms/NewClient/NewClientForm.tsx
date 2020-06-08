@@ -49,10 +49,8 @@ const NewClientForm = ({ closeDialog }: NewClientFormProps): ReactElement => {
 			// resets the form
 			form.resetForm()
 			closeDialog((): void => {
-				if (location.pathname === PublicRoutes.Home) {
-					// eslint-disable-next-line
-					history.push(PrivateRoutes.CoachingKit)
-				}
+				// eslint-disable-next-line
+				history.push(PrivateRoutes.CoachingKit)
 			})
 		},
 	})
