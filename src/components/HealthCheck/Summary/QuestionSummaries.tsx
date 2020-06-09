@@ -26,7 +26,7 @@ const QuestionSummaries = ({
 	return (
 		<Grid
 			container
-			spacing={3}
+			spacing={2}
 			alignItems="stretch"
 			className={styles.gridRoot}
 		>
@@ -40,7 +40,9 @@ const QuestionSummaries = ({
 					return (
 						<Grid
 							item
-							xs={4}
+							xs={12}
+							sm={6}
+							md={4}
 							key={constructKey(key, idx)}
 							className={styles.gridItem}
 						>

@@ -71,7 +71,7 @@ const HCSummary = (): ReactElement => {
 		<>
 			<PageContainer>
 				<Grid container spacing={3}>
-					<Grid item xs={9}>
+					<Grid item xs={12} md={8} lg={9}>
 						{healthCheck && tileAnswers ? (
 							<>
 								<SummaryTitle createdAt={healthCheck.createdAt} />
@@ -84,7 +84,7 @@ const HCSummary = (): ReactElement => {
 							<InvalidHC />
 						)}
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item xs={12} md={4} lg={3}>
 						<FourQuestions answers={fourQuestions || []} />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
