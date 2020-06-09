@@ -108,6 +108,8 @@ const Listing = (): ReactElement => {
 
 	return (
 		<Card>
+			{renderQuizData()}
+			<Divider />
 			<CardContent className={styles.actions}>
 				<Button
 					startIcon={<AddIcon />}
@@ -122,8 +124,6 @@ const Listing = (): ReactElement => {
 					Start a new Health Check
 				</Button>
 			</CardContent>
-			<Divider />
-			{renderQuizData()}
 		</Card>
 	)
 }

@@ -1,21 +1,19 @@
-import React, { ReactElement, useState, MouseEvent } from "react"
+import React, { ReactElement, MouseEvent, useCallback } from "react"
 import {
 	List,
 	ListItem,
 	ListItemText,
 	ListItemSecondaryAction,
-	IconButton,
-	Tooltip,
 } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { format } from "date-fns"
-import DeleteIcon from "@material-ui/icons/Delete"
-import { constructKey, generateKey } from "../../../../util/lists/key"
 import {
 	routeVarReplacement,
 	PrivateRoutes,
 } from "../../../../util/routes/routes"
 import { IQuizListProps } from "../_config/shape"
+import IconDeleteButtonwDialog from "../../../IconDeleteButton/IconDeleteButtonwDialog"
+import { HealthCheckId } from "../../../../data/_config/shape"
 
 /**
  * Renders a list of completed health checks
@@ -28,14 +26,20 @@ const QuizList = ({
 	clientQuizzes,
 	removeHealthCheck,
 }: IQuizListProps): ReactElement => {
-	const [key] = useState(generateKey())
+	const removeItem = useCallback(
+		(id: HealthCheckId) => (e: MouseEvent<HTMLButtonElement>): void => {
+			e.preventDefault()
+			removeHealthCheck(id)
+		},
+		[]
+	)
 
 	return (
 		<List>
 			{clientQuizzes.map(
-				(quiz, idx): ReactElement => (
+				(quiz): ReactElement => (
 					<ListItem
-						key={constructKey(key, idx)}
+						key={quiz.id}
 						button
 						component={Link}
 						to={routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
@@ -51,16 +55,7 @@ const QuizList = ({
 							}
 						/>
 						<ListItemSecondaryAction>
-							<Tooltip title="Delete">
-								<IconButton
-									onClick={(e: MouseEvent<HTMLButtonElement>): void => {
-										e.preventDefault()
-										removeHealthCheck(quiz.id || -1)
-									}}
-								>
-									<DeleteIcon />
-								</IconButton>
-							</Tooltip>
+							<IconDeleteButtonwDialog onClick={removeItem(quiz.id || -1)} />
 						</ListItemSecondaryAction>
 					</ListItem>
 				)

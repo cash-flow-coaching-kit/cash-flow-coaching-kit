@@ -19,7 +19,7 @@ const HCListing = (): ReactElement => {
 						View a previous Health Check by selecting from the list below.
 					</Typography>
 				</SectionTitle>
-				<Grid item xs={6}>
+				<Grid item sm={6}>
 					<Listing />
 				</Grid>
 			</PageContainer>
