@@ -5,7 +5,6 @@ import qs from "qs"
 import { toDate } from "date-fns"
 import { PageContainer } from "../../components/Layouts"
 import CanvasForm from "../../components/Forms/CFC/CanvasForm"
-import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import PageTip from "../../components/PageTip"
 import {
 	BaseCFCStruct,
