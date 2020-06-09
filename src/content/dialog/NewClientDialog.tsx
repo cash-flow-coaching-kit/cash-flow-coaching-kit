@@ -43,6 +43,7 @@ interface INewClientDialogProps
  */
 const NewClientDialog = ({
 	triggerText,
+	// eslint-disable-next-line
 	...props
 }: INewClientDialogProps): ReactElement => {
 	const [open, setOpen] = useState<boolean>(false)
@@ -66,6 +67,11 @@ const NewClientDialog = ({
 		setOpen(false)
 	}
 
+	const onFormCloseTrigger = (cb: () => void): void => {
+		handleClose()
+		cb()
+	}
+
 	return (
 		<>
 			<Button
@@ -87,7 +93,7 @@ const NewClientDialog = ({
 			>
 				<DialogTitle id="new-client-dialog-title">Add a client</DialogTitle>
 				<DialogContent>
-					<NewClientForm />
+					<NewClientForm closeDialog={onFormCloseTrigger} />
 				</DialogContent>
 				<DialogContent className={styles.content}>
 					<DialogContentText>
@@ -97,9 +103,6 @@ const NewClientDialog = ({
 					<DialogContentText>
 						Please refer to the Terms & Conditions of use and our Data usage and
 						privacy statement.
-						<br />
-						If you have any questions about the kit, please contact
-						cashflowcoachingkit@ato.gov.au
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
