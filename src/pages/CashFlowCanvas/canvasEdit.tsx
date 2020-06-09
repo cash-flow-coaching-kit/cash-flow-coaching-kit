@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useContext } from "react"
 import { Grid } from "@material-ui/core"
 import { useLocation } from "react-router-dom"
 import qs from "qs"
@@ -14,6 +14,8 @@ import {
 } from "../../data/_config/shape"
 import { initialValues } from "../../components/Forms/CFC"
 import ControlPanel from "../../components/CFC/ControlPanel"
+import CFCContext from "../../state/CFC/context"
+import { CFCFourQuestions } from "../../components/CFC"
 
 type QueryParams = {
 	title?: string
@@ -33,6 +35,7 @@ type QueryParams = {
 export default function CanvasEdit(): ReactElement {
 	const location = useLocation()
 	const v: QueryParams = qs.parse(location.search, { ignoreQueryPrefix: true })
+	const { questionValues } = useContext(CFCContext)
 
 	// Construct the initial data based on the query string values
 	const initial: BaseCFCStruct = {
@@ -75,7 +78,7 @@ export default function CanvasEdit(): ReactElement {
 						<CanvasForm initialValues={initial} customTitle={useCustom()} />
 					</Grid>
 					<Grid item sm={3}>
-						<FourQuestions />
+						<CFCFourQuestions values={questionValues} />
 						<ControlPanel />
 					</Grid>
 				</Grid>
