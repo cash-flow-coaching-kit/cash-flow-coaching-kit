@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useCallback } from "react"
 import { AppBar, Box, Toolbar, Button } from "@material-ui/core"
 import { useSharedNavStyles } from "../_config/style"
 import { NavigationRoutes } from "../_partials"
@@ -12,15 +12,22 @@ import { routes } from "./_config/data"
 const SecondaryNavbar = (): ReactElement => {
 	const sharedStyle = useSharedNavStyles()
 
+	const triggerTour = useCallback(() => {
+		const elem = document.getElementById("start-a-tour")
+		if (elem) {
+			elem.click()
+		}
+	}, [])
+
 	return (
 		<div className={sharedStyle.root}>
 			<AppBar position="static">
 				<Toolbar>
-					{/* TODO: Extract into a custom component to all for dynamic population based on the page */}
 					<Button
 						className={sharedStyle.button}
 						color="inherit"
 						variant="outlined"
+						onClick={triggerTour}
 					>
 						Show me how
 					</Button>
