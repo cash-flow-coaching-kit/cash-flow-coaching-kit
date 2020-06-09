@@ -47,6 +47,11 @@ import SnackbarMsg from "../../SnackbarMsg"
 import changeDate, { CanvasDateKeys } from "./changeDate"
 import CFCContext from "../../../state/CFC/context"
 import { CFCActionTypes } from "../../../state/CFC/shape"
+import {
+	calcQuestionOne,
+	calcQuestionTwo,
+	calcQuestionThree,
+} from "../../CFC/__config/utilities"
 
 /**
  * Form used to edit a CFC
@@ -122,18 +127,25 @@ export default function CanvasForm({
 		dispatch({
 			type: CFCActionTypes.ChangeQuestionValues,
 			payload: {
-				one: calculated.cashSurplus,
-				two:
-					calculated.gstOnSales -
-					calculated.gstOnPurchases +
-					paygWithholding +
-					superAmount +
-					incomeTax,
-				three: openingBalance + calculated.cashSurplus - incomeTax,
+				one: calcQuestionOne(calculated),
+				two: calcQuestionTwo(
+					calculated,
+					paygWithholding,
+					superAmount,
+					incomeTax
+				),
+				three: calcQuestionThree(openingBalance, calculated, incomeTax),
 				four: undefined,
 			},
 		})
-	}, [calculated, paygWithholding, superAmount, incomeTax, openingBalance])
+	}, [
+		calculated,
+		paygWithholding,
+		superAmount,
+		incomeTax,
+		openingBalance,
+		dispatch,
+	])
 	// #endregion
 
 	// #region Fetch data on load

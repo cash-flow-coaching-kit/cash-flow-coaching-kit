@@ -10,10 +10,11 @@ import {
 	ClientId,
 } from "../../../data/_config/shape"
 import upperFirst from "../../../util/strings/upperCaseFirst"
-import { pipe } from "../../../util/reduce/math"
+import { pipe, minusBy, add } from "../../../util/reduce/math"
 import concatStr from "../../../util/strings/concatStr"
 import filterById from "../../../util/filters/ById"
 import CFCUseCase from "../../../data/CFC/CFCLogic"
+import { CalculatedValues } from "../../../state/CFC/useCalculated"
 
 type Opts = SelectFieldOptions
 
@@ -185,4 +186,71 @@ export async function performDupFind(
 	)
 
 	return identifyIfDuplicate(dups, slice, canvasId)
+}
+
+/**
+ * Calculates the value for Question 1 of 4
+ *
+ * @export
+ * @param {CalculatedValues} calculated
+ * @returns {number}
+ */
+export function calcQuestionOne(calculated: CalculatedValues): number {
+	return calculated.cashSurplus
+}
+
+/**
+ * Calculates the value for Question 2 of 4
+ *
+ * @export
+ * @param {CalculatedValues} calculated
+ * @param {number} payg
+ * @param {number} superAmount
+ * @param {number} incomeTax
+ * @returns {number}
+ */
+export function calcQuestionTwo(
+	calculated: CalculatedValues,
+	payg: number,
+	superAmount: number,
+	incomeTax: number
+): number {
+	return pipe(
+		minusBy(calculated.gstOnPurchases),
+		add(payg),
+		add(superAmount),
+		add(incomeTax)
+	)(calculated.gstOnSales)
+}
+
+/**
+ * Calculates the value for Question 3 of 4
+ *
+ * @export
+ * @param {number} openingBalance
+ * @param {CalculatedValues} calculated
+ * @param {number} incomeTax
+ * @returns {number}
+ */
+export function calcQuestionThree(
+	openingBalance: number,
+	calculated: CalculatedValues,
+	incomeTax: number
+): number {
+	return pipe(add(calculated.cashSurplus), minusBy(incomeTax))(openingBalance)
+}
+
+/**
+ * Calculates the value for Question 4 of 4
+ *
+ * @export
+ * @param {CalculatedValues} left
+ * @param {CalculatedValues} right
+ * @returns {number}
+ */
+export function calcQuestionFour(
+	left: CalculatedValues,
+	right: CalculatedValues
+): number {
+	return left.totalNetAssets - right.totalNetAssets
 }

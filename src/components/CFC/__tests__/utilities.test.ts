@@ -1,7 +1,8 @@
-import { reduceToOptions, canvasTypeOptions, canvasTimeFrameOptions, generateTitle, canvasDisplayTitle, identifyIfDuplicate } from "../__config/utilities"
+import { reduceToOptions, canvasTypeOptions, canvasTimeFrameOptions, generateTitle, canvasDisplayTitle, identifyIfDuplicate, calcQuestionOne, calcQuestionTwo, calcQuestionThree, calcQuestionFour } from "../__config/utilities"
 import { CFCTimeFrame, CanvasType, CFCStruct, CFCPanelSlice } from "../../../data/_config/shape"
 import { toDate } from "date-fns"
 import { initialValues } from "../../Forms/CFC"
+import { CalculatedValues } from "../../../state/CFC/useCalculated"
 
 describe("Unit tests for the CFC utility methods", () => {
   test("Reduce to options", function() {
@@ -127,5 +128,32 @@ describe("Unit tests for the CFC utility methods", () => {
     ]
 
     expect(identifyIfDuplicate(dups, slice, 5)).toBeFalsy()
+  })
+
+  test("Can calculate the value for the 4 different questions", function() {
+    const calculated: CalculatedValues = {
+      gstOnSales: 100,
+      gstOnPurchases: 30,
+      closingBalance: 600,
+      totalNetAssets: 530,
+      cashSurplus: 200,
+      availableToSpend: 84
+    }
+    const rightCalculated = {
+      ...calculated,
+      totalNetAssets: 203
+    }
+    const payg = 53
+    const incomeTax = 40
+    const openingBalance = 781
+    const superAmount = 34
+
+    expect(calcQuestionOne(calculated)).toBe(200)
+
+    expect(calcQuestionTwo(calculated, payg, superAmount, incomeTax)).toBe(197)
+
+    expect(calcQuestionThree(openingBalance, calculated, incomeTax)).toBe(941)
+
+    expect(calcQuestionFour(calculated, rightCalculated)).toBe(327)
   })
 })
