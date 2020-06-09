@@ -32,7 +32,7 @@ export default function CFCFourQuestions({
 
 	function getValueText(idx: number): string {
 		const vals = Object.values(values)
-		if (vals[idx]) {
+		if (typeof vals[idx] !== "undefined") {
 			return addDollarSign(`${vals[idx]}`)
 		}
 		return idx === 3
