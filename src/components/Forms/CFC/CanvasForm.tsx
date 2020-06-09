@@ -4,6 +4,7 @@ import React, {
 	useCallback,
 	useMemo,
 	useEffect,
+	useContext,
 } from "react"
 import { useFormik } from "formik"
 import { Box, Button, Divider, Typography } from "@material-ui/core"
@@ -44,6 +45,8 @@ import useStyles from "./__config/styles"
 import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
 import SnackbarMsg from "../../SnackbarMsg"
 import changeDate, { CanvasDateKeys } from "./changeDate"
+import CFCContext from "../../../state/CFC/context"
+import { CFCActionTypes } from "../../../state/CFC/shape"
 
 /**
  * Form used to edit a CFC
@@ -67,6 +70,7 @@ export default function CanvasForm({
 	const { id: canvasId } = useParams()
 	const [currentClient] = useCurrentClient()
 	const [stateMachine, updateMachine] = useMachine(fetchMachine)
+	const { dispatch } = useContext(CFCContext)
 
 	const { setFieldValue, handleChange, values, setValues } = useFormik<
 		BaseCFCStruct
@@ -107,6 +111,23 @@ export default function CanvasForm({
 	const cashOutGST = useMemo(() => calcCashFlowGST(cashOutItems), [
 		cashOutItems,
 	])
+
+	useEffect(() => {
+		dispatch({
+			type: CFCActionTypes.ChangeQuestionValues,
+			payload: {
+				one: calculated.cashSurplus,
+				two:
+					calculated.gstOnSales -
+					calculated.gstOnPurchases +
+					paygWithholding +
+					superAmount +
+					incomeTax,
+				three: openingBalance + calculated.cashSurplus - incomeTax,
+				four: undefined,
+			},
+		})
+	}, [calculated, paygWithholding, superAmount, incomeTax, openingBalance])
 	// #endregion
 
 	// #region Fetch data on load
