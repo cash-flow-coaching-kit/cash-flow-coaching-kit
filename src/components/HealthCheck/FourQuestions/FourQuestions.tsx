@@ -1,10 +1,18 @@
 import React, { ReactElement } from "react"
-import { List, ListItem, ListItemText, Box } from "@material-ui/core"
-import { fourQuestionsContent } from "../_config/data"
+import {
+	List,
+	ListItem,
+	ListItemText,
+	Box,
+	ListItemIcon,
+} from "@material-ui/core"
+import { fourQuestionsContent, answerTheming } from "../_config/data"
 import useFourQsStyles from "./_config/styles"
 import { IFourQuestionsProps } from "./_config/shape"
 import { answerText } from "./_config/utilities"
 import ExpandableNav from "../../ExpandableNav"
+import { getOptionByAnswer } from "../_config/utilities"
+import { QuestionOptions } from "../_config/shape"
 
 /**
  * Component to render the Four key questions with optional
@@ -15,6 +23,25 @@ import ExpandableNav from "../../ExpandableNav"
  */
 const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 	const styles = useFourQsStyles()
+
+	/**
+	 * Renders the answer related icon next to the question
+	 *
+	 * @param {QuestionOptions} answer
+	 * @returns {ReactElement}
+	 */
+	const getIcon = (answer: QuestionOptions): ReactElement => {
+		const opt = getOptionByAnswer(answer, answerTheming)
+		if (opt) {
+			return (
+				<ListItemIcon>
+					<opt.Icon style={{ color: opt.color }} />
+				</ListItemIcon>
+			)
+		}
+
+		return <></>
+	}
 
 	return (
 		<ExpandableNav title="Four key questions">
@@ -29,6 +56,7 @@ const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 										idx === 0 ? styles.listItemFirst : ""
 									}`}
 								>
+									{answers?.[idx] && getIcon(answers[idx])}
 									<ListItemText className={styles.listItemText}>
 										{`${idx + 1}. ${content}`}
 										{answerText(idx, answers)}
