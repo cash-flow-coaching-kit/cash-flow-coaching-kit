@@ -13,4 +13,18 @@ export const useSharedNavStyles = makeStyles(() => ({
 	button: {
 		textTransform: "capitalize",
 	},
+	logoBox: {
+		display: "flex",
+		justifyContent: "center",
+		flexGrow: 3,
+	},
+	small: {
+		flexGrow: 1,
+	},
+	publicLogo: {
+		justifyContent: "flex-start",
+		"& h6": {
+			color: "white",
+		},
+	},
 }))

@@ -1,9 +1,18 @@
 import React, { ReactElement } from "react"
-import { Typography, Grid, makeStyles } from "@material-ui/core"
+import { Typography, Grid, makeStyles, Box } from "@material-ui/core"
 import { PageContainer } from "../components/Layouts"
 import PageTip from "../components/PageTip"
 import ClientListing from "../components/ClientListing"
 import SectionTitle from "../components/SectionTitle"
+import {
+	Prepare,
+	Coaching,
+	CFC,
+	HealthCheck,
+	DiscoverTopics,
+	ChangeLevers,
+	ActionChecklist,
+} from "../content/CoachingConversation"
 
 // Client list styling
 const useCLStyles = makeStyles((theme) => ({
@@ -27,11 +36,20 @@ const ClientList = (): ReactElement => {
 					Manage your client list and prepare for your coaching conversation
 				</Typography>
 				<Grid container spacing={3}>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<ClientListing />
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item sm={6}>
 						<SectionTitle>Coaching Conversation</SectionTitle>
+						<Box>
+							<Prepare />
+							<Coaching />
+							<HealthCheck />
+							<DiscoverTopics />
+							<CFC />
+							<ChangeLevers />
+							<ActionChecklist />
+						</Box>
 					</Grid>
 				</Grid>
 			</PageContainer>

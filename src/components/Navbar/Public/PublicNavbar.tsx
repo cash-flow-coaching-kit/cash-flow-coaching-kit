@@ -5,6 +5,8 @@ import { useSharedNavStyles } from "../_config/style"
 import { NavigationRoutes } from "../_partials"
 import { routes } from "./_config/data"
 import { IPublicNavbarProps } from "./_config/shape"
+import { PublicRoutes } from "../../../util/routes/routes"
+import Logo from "../../Logo"
 
 /**
  * Renders the primary navigation
@@ -18,6 +20,9 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 		<div className={sharedStyle.root}>
 			<AppBar position="static">
 				<Toolbar>
+					<Box className={`${sharedStyle.logoBox} ${sharedStyle.publicLogo}`}>
+						<Logo to={PublicRoutes.Home} />
+					</Box>
 					<Box className={sharedStyle.box}>
 						{/* Show the client list button if the user has clients */}
 						{hasClients ? (
