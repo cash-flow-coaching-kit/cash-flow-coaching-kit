@@ -8,7 +8,7 @@ import useStyles from "./__config/styles"
 import TimeframeOutOfSync from "./TimeframeOutOfSync"
 
 const tipContent =
-	"The canvas with the earlier date will always move to the ‘left-side’ of the comparison"
+	"The canvas with the later date will always move to the ‘left-side’ of the comparison"
 
 /**
  * Selector to choose between different canvases

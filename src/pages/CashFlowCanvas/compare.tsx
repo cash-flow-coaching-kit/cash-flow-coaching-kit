@@ -1,12 +1,15 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useContext } from "react"
 import { Grid } from "@material-ui/core"
 import { PageContainer } from "../../components/Layouts"
 import SectionTitle from "../../components/SectionTitle"
 import CompareCanvases from "../../components/CFCCompare"
-import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ControlPanel from "../../components/CFC/ControlPanel"
+import CFCContext from "../../state/CFC/context"
+import { CFCFourQuestions } from "../../components/CFC"
 
 export default function CFCCompare(): ReactElement {
+	const { questionValues } = useContext(CFCContext)
+
 	return (
 		<PageContainer>
 			<SectionTitle>Compare canvas fields</SectionTitle>
@@ -15,8 +18,7 @@ export default function CFCCompare(): ReactElement {
 					<CompareCanvases />
 				</Grid>
 				<Grid item sm={3}>
-					<FourQuestions />
-					{/* TODO: Modify to show the correct items */}
+					<CFCFourQuestions values={questionValues} />
 					<ControlPanel />
 				</Grid>
 			</Grid>

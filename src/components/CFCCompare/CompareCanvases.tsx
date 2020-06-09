@@ -1,4 +1,10 @@
-import React, { ReactElement, useCallback, useEffect, useState } from "react"
+import React, {
+	ReactElement,
+	useCallback,
+	useEffect,
+	useState,
+	useContext,
+} from "react"
 import { Divider } from "@material-ui/core"
 import { useMachine } from "@xstate/react"
 import { isAfter } from "date-fns"
@@ -13,6 +19,15 @@ import { CFCStruct, CFCId } from "../../data/_config/shape"
 import { getCanvasData, changeSelected } from "./__config/utilities"
 import NotEnoughCanvases from "./NotEnoughCanvases"
 import { CanvasTuple } from "./__config/shape"
+import CFCContext from "../../state/CFC/context"
+import { calculateInitial } from "../Forms/CFC"
+import { CFCActionTypes } from "../../state/CFC/shape"
+import {
+	calcQuestionFour,
+	calcQuestionOne,
+	calcQuestionTwo,
+	calcQuestionThree,
+} from "../CFC/__config/utilities"
 
 /**
  * Component wrapper to display all the data in the compare table
@@ -22,10 +37,40 @@ import { CanvasTuple } from "./__config/shape"
  */
 export default function CompareCanvases(): ReactElement {
 	// #region State Management
+	const { dispatch } = useContext(CFCContext)
 	const [stateMachine, changeState] = useMachine(fetchMachine)
 	const [currentClient, clientSynced] = useCurrentClient()
 	const [canvases, setCanvases] = useState<CFCStruct[]>([])
 	const [selectedCanvases, setSelectedCanvases] = useState<CanvasTuple>()
+
+	useEffect(() => {
+		const left = selectedCanvases?.[0]
+		const right = selectedCanvases?.[1]
+
+		if (left && right) {
+			const leftCalc = calculateInitial(left)
+			const rightCalc = calculateInitial(right)
+
+			dispatch({
+				type: CFCActionTypes.ChangeQuestionValues,
+				payload: {
+					one: calcQuestionOne(leftCalc),
+					two: calcQuestionTwo(
+						leftCalc,
+						left.paygWithholding,
+						left.superAmount,
+						left.incomeTax
+					),
+					three: calcQuestionThree(
+						left.openingBalance,
+						leftCalc,
+						left.incomeTax
+					),
+					four: calcQuestionFour(leftCalc, rightCalc),
+				},
+			})
+		}
+	}, [selectedCanvases, dispatch])
 	// #endregion
 
 	// #region Data Fetching
