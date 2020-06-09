@@ -17,7 +17,10 @@ const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 	const styles = useFourQsStyles()
 
 	return (
-		<ExpandableNav title="Four key questions">
+		<ExpandableNav
+			title="Four key questions"
+			reactourLabel="four-questions-nav"
+		>
 			<Box className={styles.box}>
 				<List className={styles.list}>
 					{fourQuestionsContent.map(
