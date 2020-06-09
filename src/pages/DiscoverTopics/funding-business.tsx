@@ -18,6 +18,7 @@ import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
+import Taskbuilder from "../../components/Taskbuilder"
 
 const DTFundingBusiness = (): ReactElement => {
 	const styles = useDTStyles()
@@ -25,87 +26,99 @@ const DTFundingBusiness = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography component="h1" align="center" className={styles.tagline}>
-					Funding your business
-				</Typography>
+				<Grid container spacing={2}>
+					<Grid item sm={9}>
+						<Typography
+							component="h1"
+							align="center"
+							className={styles.tagline}
+						>
+							Funding your business
+						</Typography>
 
-				<Typography
-					variant="body1"
-					component="p"
-					className={styles.contentText}
-					gutterBottom
-				>
-					Finding the right funding option is important to the long term success
-					of your business. Understanding the various types of funding can help
-					you select the best option for your business when starting up,
-					expanding, or going through a time of limited cash flow.
-				</Typography>
-				<Typography
-					variant="body1"
-					component="p"
-					className={styles.contentText}
-				>
-					<strong>Funding your business can help you:</strong>
-				</Typography>
-				<List>
-					<Typography component="li" className={styles.list}>
-						Understand how to fund your business.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Release pressure on cash flow and personal finances.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Keep the doors open.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Meet business goals.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Grow your business.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Provide for personal financial goals.
-					</Typography>
-				</List>
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+							gutterBottom
+						>
+							Finding the right funding option is important to the long term
+							success of your business. Understanding the various types of
+							funding can help you select the best option for your business when
+							starting up, expanding, or going through a time of limited cash
+							flow.
+						</Typography>
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+						>
+							<strong>Funding your business can help you:</strong>
+						</Typography>
+						<List>
+							<Typography component="li" className={styles.list}>
+								Understand how to fund your business.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Release pressure on cash flow and personal finances.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Keep the doors open.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Meet business goals.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Grow your business.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Provide for personal financial goals.
+							</Typography>
+						</List>
 
-				<Grid container spacing={3}>
-					<Grid item sm={6}>
-						<Card variant="outlined">
-							<CardHeader title="Tamako's Funding" />
-							<CardMedia
-								title="Tamako's Funding"
-								className={styles.embed}
-								component="iframe"
-								src="https://www.youtube.com/embed/fAe_2eyAkrU"
-							/>
-							<CardActions>
-								<Button
-									color="primary"
-									href="/transcripts/Tamakos-funding.docx"
-								>
-									Download Transcript: Tamako's Funding
-								</Button>
-							</CardActions>
-						</Card>
+						<Grid container spacing={3}>
+							<Grid item sm={6}>
+								<Card variant="outlined">
+									<CardHeader title="Tamako's Funding" />
+									<CardMedia
+										title="Tamako's Funding"
+										className={styles.embed}
+										component="iframe"
+										src="https://www.youtube.com/embed/fAe_2eyAkrU"
+									/>
+									<CardActions>
+										<Button
+											color="primary"
+											href="/transcripts/Tamakos-funding.docx"
+										>
+											Download Transcript: Tamako's Funding
+										</Button>
+									</CardActions>
+								</Card>
+							</Grid>
+							<Grid item sm={6}>
+								<Card variant="outlined">
+									<CardHeader title="Charlotte's Loans" />
+									<CardMedia
+										title="Charlotte's Loans"
+										className={styles.embed}
+										component="iframe"
+										src="https://www.youtube.com/embed/BTwVYKfGyuk"
+									/>
+									<CardActions>
+										<Button
+											color="primary"
+											href="/transcripts/Charlottes-loans.docx"
+										>
+											Download Transcript: Charlotte's Loans
+										</Button>
+									</CardActions>
+								</Card>
+							</Grid>
+						</Grid>
 					</Grid>
-					<Grid item sm={6}>
-						<Card variant="outlined">
-							<CardHeader title="Charlotte's Loans" />
-							<CardMedia
-								title="Charlotte's Loans"
-								className={styles.embed}
-								component="iframe"
-								src="https://www.youtube.com/embed/BTwVYKfGyuk"
-							/>
-							<CardActions>
-								<Button
-									color="primary"
-									href="/transcripts/Charlottes-loans.docx"
-								>
-									Download Transcript: Charlotte's Loans
-								</Button>
-							</CardActions>
-						</Card>
+					<Grid item sm={3}>
+						<Taskbuilder container="funding" />
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>

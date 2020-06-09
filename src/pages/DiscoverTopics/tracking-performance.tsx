@@ -14,12 +14,13 @@ import {
 	ExpansionPanelDetails,
 	Container,
 } from "@material-ui/core"
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import VerticalSplitIcon from "@material-ui/icons/VerticalSplit"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import VerticalSplitIcon from "@material-ui/icons/VerticalSplit"
 import { PrivateRoutes } from "../../util/routes/routes"
+import Taskbuilder from "../../components/Taskbuilder"
 
 const TrackingPerformance = (): ReactElement => {
 	const styles = useDTStyles()
@@ -27,89 +28,101 @@ const TrackingPerformance = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography component="h1" align="center" className={styles.tagline}>
-					Tracking your performance
-				</Typography>
-				<Typography
-					variant="body1"
-					component="p"
-					className={styles.contentText}
-					gutterBottom
-				>
-					It is vital for every business to track performance over time, to
-					monitor and address cash flow issues before it’s too late. Tracking
-					accurately reveals how you are performing against your plan and allows
-					you to revisit your budget with a clear path to improve your cash
-					flow.
-				</Typography>
-				<Typography
-					variant="body1"
-					component="p"
-					className={styles.contentText}
-				>
-					<strong>Tracking your performance can help you:</strong>
-				</Typography>
-				<List>
-					<Typography component="li" className={styles.list}>
-						Operate profitably and continue to generate a positive cash flow.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Make changes to improve cash flow in a timely manner.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Make informed decisions.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Gather and analyse comprehensive information to prepare reports.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Review past performance and make plans to improve your business.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Use reliable financial details to track your business.
-					</Typography>
-					<Typography component="li" className={styles.list}>
-						Reach your financial and business goals.
-					</Typography>
-				</List>
-				<Grid container spacing={3}>
-					<Grid item sm={6}>
-						<Card variant="outlined">
-							<CardHeader title="Tina's Hair &amp; Beauty" />
-							<CardMedia
-								title="Tina's Hair &amp; Beauty"
-								className={styles.embed}
-								component="iframe"
-								src="https://www.youtube.com/embed/VRxQ7AkxsfY"
-							/>
-							<CardActions>
-								<Button
-									color="primary"
-									href="/transcripts/Tinas-hair-and-beauty.docx"
-								>
-									Download Transcript: Tina's Hair &amp; Beauty
-								</Button>
-							</CardActions>
-						</Card>
+				<Grid container spacing={2}>
+					<Grid item sm={9}>
+						<Typography
+							component="h1"
+							align="center"
+							className={styles.tagline}
+						>
+							Tracking your performance
+						</Typography>
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+							gutterBottom
+						>
+							It is vital for every business to track performance over time, to
+							monitor and address cash flow issues before it’s too late.
+							Tracking accurately reveals how you are performing against your
+							plan and allows you to revisit your budget with a clear path to
+							improve your cash flow.
+						</Typography>
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+						>
+							<strong>Tracking your performance can help you:</strong>
+						</Typography>
+						<List>
+							<Typography component="li" className={styles.list}>
+								Operate profitably and continue to generate a positive cash
+								flow.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Make changes to improve cash flow in a timely manner.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Make informed decisions.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Gather and analyse comprehensive information to prepare reports.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Review past performance and make plans to improve your business.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Use reliable financial details to track your business.
+							</Typography>
+							<Typography component="li" className={styles.list}>
+								Reach your financial and business goals.
+							</Typography>
+						</List>
+						<Grid container spacing={3}>
+							<Grid item sm={6}>
+								<Card variant="outlined">
+									<CardHeader title="Tina's Hair &amp; Beauty" />
+									<CardMedia
+										title="Tina's Hair &amp; Beauty"
+										className={styles.embed}
+										component="iframe"
+										src="https://www.youtube.com/embed/VRxQ7AkxsfY"
+									/>
+									<CardActions>
+										<Button
+											color="primary"
+											href="/transcripts/Tinas-hair-and-beauty.docx"
+										>
+											Download Transcript: Tina's Hair &amp; Beauty
+										</Button>
+									</CardActions>
+								</Card>
+							</Grid>
+							<Grid item sm={6}>
+								<Card variant="outlined">
+									<CardHeader title="Anders' Retirement Plan" />
+									<CardMedia
+										title="Anders' Retirement Plan"
+										className={styles.embed}
+										component="iframe"
+										src="https://www.youtube.com/embed/MPNkTF-puTQ"
+									/>
+									<CardActions>
+										<Button
+											color="primary"
+											href="/transcripts/Anders-retirement-plan.docx"
+										>
+											Download Transcript: Anders' Retirement Plan
+										</Button>
+									</CardActions>
+								</Card>
+							</Grid>
+						</Grid>
 					</Grid>
-					<Grid item sm={6}>
-						<Card variant="outlined">
-							<CardHeader title="Anders' Retirement Plan" />
-							<CardMedia
-								title="Anders' Retirement Plan"
-								className={styles.embed}
-								component="iframe"
-								src="https://www.youtube.com/embed/MPNkTF-puTQ"
-							/>
-							<CardActions>
-								<Button
-									color="primary"
-									href="/transcripts/Anders-retirement-plan.docx"
-								>
-									Download Transcript: Anders' Retirement Plan
-								</Button>
-							</CardActions>
-						</Card>
+					<Grid item sm={3}>
+						<Taskbuilder container="tracking" />
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>
