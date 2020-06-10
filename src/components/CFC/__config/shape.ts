@@ -17,6 +17,7 @@ export type ControlProps<T> = {
 
 // #region Config Panel props
 export interface BaseProps {
+	customTitle: string
 	onChange: InputChange
 }
 
@@ -29,7 +30,6 @@ export interface PanelProps extends BaseProps {
 }
 
 export interface CustomTitleProps extends BaseProps {
-	customTitle: string
 	changeCheck: InputChange
 	useCustomTitle: boolean
 }

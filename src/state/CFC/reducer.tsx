@@ -2,6 +2,7 @@ import { Reducer } from "react"
 import { ICFCState, CFCReducerActions, CFCActionTypes } from "./shape"
 import setDuplicateError from "./actions/setDuplicateError"
 import setInvalidDateError from "./actions/setInvalidDateError"
+import setQuestionValues from "./actions/setQuestionValues"
 
 type ICFCReducer = Reducer<ICFCState, CFCReducerActions>
 
@@ -21,6 +22,8 @@ const CFCReducer: ICFCReducer = (
 			return setDuplicateError(state, action.payload)
 		case CFCActionTypes.ChangeInvalidDateError:
 			return setInvalidDateError(state, action.payload)
+		case CFCActionTypes.ChangeQuestionValues:
+			return setQuestionValues(state, action.payload)
 		default:
 			return state
 	}

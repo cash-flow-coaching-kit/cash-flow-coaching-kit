@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		display: "flex",
 		flexDirection: "row",
-		alignItems: "center",
+		alignItems: "flex-start",
 	},
 	separator: {
 		paddingRight: theme.spacing(1),
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.grey[500],
 		textTransform: "uppercase",
 		fontSize: theme.typography.fontSize,
+		lineHeight: "56px",
 	},
 }))
 

@@ -11,6 +11,7 @@ import { useMachine } from "@xstate/react"
 import { useHistory, useParams } from "react-router-dom"
 import { useFormik } from "formik"
 import { omit } from "lodash-es"
+import { isValid } from "date-fns"
 import fetchMachine from "../../components/Forms/CFC/__config/machine"
 import useCurrentClient from "../../state/client/useCurrentClient"
 import { CFCStruct, CFCPanelSlice, CanvasType } from "../../data/_config/shape"
@@ -27,6 +28,8 @@ import inPlanOrForecast from "../../components/Forms/CFC/inPlanOrForecast"
 import { calcClosingBalance } from "../../state/CFC/accumulators"
 import createURLParams from "../../components/Forms/CFC/createURLParams"
 import { routeVarReplacement, PrivateRoutes } from "../../util/routes/routes"
+import { performDupFind } from "../../components/CFC/__config/utilities"
+import { DuplicateCanvasError } from "../../components/CFC/ConfigPanel"
 
 /**
  * Prop definition for the CopyCanvasDialog component
@@ -55,6 +58,7 @@ export default function CopyCanvasDialog({
 	const { id } = useParams()
 	const [currentClient] = useCurrentClient()
 	const [canvasData, setCanvasData] = useState<CFCStruct>()
+	const [isDuplicate, setIsDuplicate] = useState(false)
 	// #endregion
 
 	// #region Formik
@@ -96,13 +100,14 @@ export default function CopyCanvasDialog({
 						? calcClosingBalance(canvasData)
 						: canvasData.openingBalance,
 					createdAt: newTimestamp(),
+					canvasTitle: useCustomTitle ? formValues.canvasTitle : "",
 				}
 				// remove the id & clientid field form data
 				const cleaned = omit(data, ["id"])
 				// create the new canvas
 				const newCanvasId = await CFCUseCase.create(cleaned)
 				// redirect to the edit page for the new canvas
-				const query = createURLParams(data, useCustomTitle)
+				const query = createURLParams(cleaned, useCustomTitle)
 				// eslint-disable-next-line
 				history.push(
 					`${routeVarReplacement(PrivateRoutes.CFCEdit, [
@@ -114,6 +119,12 @@ export default function CopyCanvasDialog({
 			}
 		},
 	})
+
+	useEffect(() => {
+		if (!useCustomTitle) {
+			setFieldValue("canvasTitle", "")
+		}
+	}, [useCustomTitle, setFieldValue])
 	// #endregion
 
 	// #region Data Fetching
@@ -137,6 +148,9 @@ export default function CopyCanvasDialog({
 				canvasEndDate: data.canvasEndDate,
 			})
 
+			const isDup = await performDupFind(data, currentClient.id)
+			setIsDuplicate(isDup !== false)
+
 			// check if the canvas is using a custom title
 			if (data.canvasTitle !== "") {
 				setUseCustomTitle(true)
@@ -155,6 +169,26 @@ export default function CopyCanvasDialog({
 	// #endregion
 
 	// #region Form Change Events
+	const checkDuplicate = useCallback(async () => {
+		if (currentClient?.id) {
+			const isDup = await performDupFind(values, currentClient.id)
+			setIsDuplicate(isDup !== false)
+		}
+	}, [values, currentClient])
+
+	useEffect(() => {
+		checkDuplicate()
+	}, [checkDuplicate])
+
+	function disableSave(): boolean {
+		return (
+			!isValid(values.canvasStartDate) ||
+			!isValid(values.canvasEndDate) ||
+			isDuplicate ||
+			(useCustomTitle && values.canvasTitle === "")
+		)
+	}
+
 	/**
 	 * A custom change handler for the datepicker
 	 *
@@ -210,6 +244,12 @@ export default function CopyCanvasDialog({
 							useCustomTitle={useCustomTitle}
 							wrapped={false}
 						/>
+						{isDuplicate && (
+							<>
+								<Spacer />
+								<DuplicateCanvasError />
+							</>
+						)}
 						<Spacer space={4} />
 						<Typography component="em">
 							Copying will copy your values over to the new canvas
@@ -244,7 +284,7 @@ export default function CopyCanvasDialog({
 						type="submit"
 						variant="contained"
 						color="primary"
-						disabled={stateMachine.value !== "success"}
+						disabled={stateMachine.value !== "success" || disableSave()}
 					>
 						Copy
 					</Button>
