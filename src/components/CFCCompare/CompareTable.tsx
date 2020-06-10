@@ -56,7 +56,7 @@ export default function CompareTable({
 
 	return (
 		<TableContainer>
-			<Table>
+			<Table className={cls.table}>
 				<TableHeader selectedCanvases={selectedCanvases} />
 				<TableBody>
 					<CanvasItemRow
