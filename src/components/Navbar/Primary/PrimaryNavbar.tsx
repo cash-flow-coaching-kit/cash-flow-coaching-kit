@@ -1,20 +1,13 @@
-import React, { ReactElement, useContext } from "react"
-import {
-	AppBar,
-	Box,
-	Toolbar,
-	Button,
-	Typography,
-	Grid,
-} from "@material-ui/core"
+import React, { ReactElement } from "react"
+import { AppBar, Toolbar, Button, Typography, Grid } from "@material-ui/core"
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 import { useSharedNavStyles } from "../_config/style"
 import { NavigationRoutes } from "../_partials"
-import { ClientContext } from "../../../state/client"
 import usePrimaryStyles from "./_config/styles"
 import { routes } from "./_config/data"
 import Logo from "../../Logo"
 import { PrivateRoutes } from "../../../util/routes/routes"
+import useCurrentClient from "../../../state/client/useCurrentClient"
 
 /**
  * Renders the primary navigation
@@ -24,9 +17,7 @@ import { PrivateRoutes } from "../../../util/routes/routes"
 const PrimaryNavbar = (): ReactElement => {
 	const sharedStyle = useSharedNavStyles()
 	const styles = usePrimaryStyles()
-	const {
-		state: { currentClient },
-	} = useContext(ClientContext)
+	const [currentClient] = useCurrentClient()
 
 	return (
 		<div className={sharedStyle.root}>
@@ -34,7 +25,7 @@ const PrimaryNavbar = (): ReactElement => {
 				<Toolbar>
 					<Grid container spacing={2}>
 						{currentClient ? (
-							<Grid item sm={4} className="">
+							<Grid item md={2} lg={4} className={styles.clientGridItem}>
 								<Typography className={styles.clientCaption} variant="caption">
 									Client
 								</Typography>
@@ -43,9 +34,9 @@ const PrimaryNavbar = (): ReactElement => {
 								</Typography>
 							</Grid>
 						) : (
-							<Grid item sm={4} />
+							<Grid item sm={2} md={4} />
 						)}
-						<Grid item sm={4} className={`${sharedStyle.logoBox}`}>
+						<Grid item md={6} lg={4} className={`${sharedStyle.logoBox}`}>
 							<Logo to={PrivateRoutes.CoachingKit} />
 						</Grid>
 						<Grid
