@@ -1,8 +1,25 @@
 import React, { ReactElement } from "react"
 import { useLocation, RouteProps } from "react-router-dom"
+import { makeStyles, Box } from "@material-ui/core"
 import { PrimaryNavbar, SecondaryNavbar } from "../../Navbar"
 import { IPrivatePage } from "./_config/shape"
 import checkIfPublic from "../../../util/routes/checkIfPublic"
+import MobileNavbar from "../../Navbar/Mobile"
+
+const useStyles = makeStyles((theme) => ({
+	desktop: {
+		display: "none",
+		[theme.breakpoints.up("md")]: {
+			display: "block",
+		},
+	},
+	mobile: {
+		display: "block",
+		[theme.breakpoints.up("md")]: {
+			display: "none",
+		},
+	},
+}))
 
 /**
  * Private page layout, renders the navigation and the children provided to it.
@@ -12,13 +29,19 @@ import checkIfPublic from "../../../util/routes/checkIfPublic"
  */
 const PrivatePage = ({ children }: IPrivatePage): ReactElement => {
 	const location: RouteProps["location"] = useLocation()
+	const styles = useStyles()
 
 	return (
 		<>
 			{!checkIfPublic(location) && (
 				<>
-					<PrimaryNavbar />
-					<SecondaryNavbar />
+					<Box className={styles.desktop}>
+						<PrimaryNavbar />
+						<SecondaryNavbar />
+					</Box>
+					<Box className={styles.mobile}>
+						<MobileNavbar />
+					</Box>
 
 					<div className="private-page">{children}</div>
 				</>
