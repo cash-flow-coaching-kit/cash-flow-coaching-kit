@@ -34,7 +34,7 @@ const PrimaryNavbar = (): ReactElement => {
 								</Typography>
 							</Grid>
 						) : (
-							<Grid item sm={2} md={4} />
+							<Grid item md={2} lg={4} />
 						)}
 						<Grid item md={6} lg={4} className={`${sharedStyle.logoBox}`}>
 							<Logo to={PrivateRoutes.CoachingKit} />
