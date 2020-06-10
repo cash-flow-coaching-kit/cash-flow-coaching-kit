@@ -33,6 +33,18 @@ const useRepeaterStyles = makeStyles((theme) => ({
 		paddingRight: theme.spacing(0),
 		paddingLeft: theme.spacing(0),
 	},
+	form: {
+		overflow: "hidden",
+		[theme.breakpoints.down("sm")]: {
+			overflowX: "scroll",
+		},
+	},
+	formInner: {
+		[theme.breakpoints.down("sm")]: {
+			minWidth: theme.breakpoints.values.md,
+			paddingBottom: theme.spacing(1),
+		},
+	},
 }))
 
 // eslint-disable-next-line import/prefer-default-export

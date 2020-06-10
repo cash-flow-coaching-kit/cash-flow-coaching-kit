@@ -70,22 +70,22 @@ export default React.memo(function FallingBehind({
 		>
 			<Box className={cls.box}>
 				<Grid container spacing={2}>
-					<Grid item sm={6}>
+					<Grid item xs={12} sm={6}>
 						<Debtors value={debtors} onChange={onChange} />
 					</Grid>
-					<Grid item sm={6}>
+					<Grid item xs={12} sm={6}>
 						<Creditors value={creditors} onChange={onChange} />
 					</Grid>
-					<Grid item sm={6}>
+					<Grid item xs={12} sm={6}>
 						<Assets value={assets} onChange={onChange} />
 					</Grid>
-					<Grid item sm={6}>
+					<Grid item xs={12} sm={6}>
 						<Loans value={loans} onChange={onChange} />
 					</Grid>
-					<Grid item sm={6}>
+					<Grid item xs={12} sm={6}>
 						<Stock value={stock} onChange={onChange} />
 					</Grid>
-					<Grid item sm={6} className={cls.total}>
+					<Grid item xs={12} sm={6} className={cls.total}>
 						<ComputedPanels
 							title="Total net assets"
 							value={addDollarSign(`${totalNetAssets}`)}

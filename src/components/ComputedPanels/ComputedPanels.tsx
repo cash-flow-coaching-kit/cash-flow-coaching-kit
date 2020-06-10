@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react"
-import { Box, Typography } from "@material-ui/core"
+import { Box, Typography, makeStyles } from "@material-ui/core"
 import { useInputWrapper } from "../CFC/__config/styles"
 import useStyles from "../DescriptiveMoneyInput/__config/styles"
 
@@ -15,6 +15,14 @@ interface ComputedPanelsProps {
 	mini?: boolean
 	wrapped?: boolean
 }
+
+const useComputedStyles = makeStyles((theme) => ({
+	root: {
+		[theme.breakpoints.up("md")]: {
+			alignItems: "center",
+		},
+	},
+}))
 
 /**
  * Displays a title, description and a computed value
@@ -36,11 +44,13 @@ export default React.memo(function ComputedPanels({
 }: ComputedPanelsProps): ReactElement {
 	const wrapperCls = useInputWrapper()
 	const dmiCls = useStyles({ stacked: false, mini })
+	const computedCls = useComputedStyles()
 
 	return (
 		<Box
-			className={`${wrapped ? wrapperCls.wrapper : ""} ${dmiCls.root}`}
-			alignItems="center"
+			className={`${wrapped ? wrapperCls.wrapper : ""} ${dmiCls.root} ${
+				computedCls.root
+			}`}
 		>
 			<Box className={dmiCls.type}>
 				<Typography variant="h6">{title}</Typography>

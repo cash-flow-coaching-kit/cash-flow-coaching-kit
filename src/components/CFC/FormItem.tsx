@@ -67,7 +67,7 @@ export default React.memo(function FormItem({
 
 	return (
 		<Grid container spacing={2} alignItems="center">
-			<Grid item sm={DescriptionSize}>
+			<Grid item xs={DescriptionSize}>
 				<TextField
 					variant="outlined"
 					name={`${name}[${index}].description`}
@@ -77,7 +77,7 @@ export default React.memo(function FormItem({
 					fullWidth
 				/>
 			</Grid>
-			<Grid item sm={AmountSize}>
+			<Grid item xs={AmountSize}>
 				<MoneyInput
 					value={value.amount}
 					onChange={onChange}
@@ -85,7 +85,7 @@ export default React.memo(function FormItem({
 					variant="outlined"
 				/>
 			</Grid>
-			<Grid item sm={ApplyGSTSize}>
+			<Grid item xs={ApplyGSTSize}>
 				<Checkbox
 					checked={value.gstApplicable}
 					onChange={onChange}
@@ -93,7 +93,7 @@ export default React.memo(function FormItem({
 					inputProps={{ "aria-label": "Apply GST" }}
 				/>
 			</Grid>
-			<Grid item sm={ActionsSize}>
+			<Grid item xs={ActionsSize}>
 				<IconDeleteButton onClick={triggerDialog} />
 				<ConfirmDialogue
 					open={dialogOpen}

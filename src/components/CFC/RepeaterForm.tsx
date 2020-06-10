@@ -62,17 +62,21 @@ export default memo(function RepeaterForm({
 	return (
 		<>
 			<Box className={cls.body}>
-				<FormHeader />
-				{values.map((item, idx) => (
-					<FormItem
-						name={name}
-						value={item}
-						onChange={onChange}
-						index={idx}
-						key={item.id}
-						removeItem={removeFormItem(item.id)}
-					/>
-				))}
+				<Box className={cls.form}>
+					<Box className={cls.formInner}>
+						<FormHeader />
+						{values.map((item, idx) => (
+							<FormItem
+								name={name}
+								value={item}
+								onChange={onChange}
+								index={idx}
+								key={item.id}
+								removeItem={removeFormItem(item.id)}
+							/>
+						))}
+					</Box>
+				</Box>
 				<Spacer />
 				<FormActions addItem={addItem} addDisabled={isAddDisabled()} />
 			</Box>

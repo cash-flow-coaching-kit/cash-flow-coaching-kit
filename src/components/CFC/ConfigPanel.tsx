@@ -102,16 +102,16 @@ const Panel = memo(function Panel({
 	return (
 		<>
 			<Grid container spacing={2}>
-				<Grid item sm={3}>
+				<Grid item xs={12} md={3}>
 					<CanvasTypeSelect value={canvasTypeValue} onChange={onChange} />
 				</Grid>
-				<Grid item sm={3}>
+				<Grid item xs={12} md={3}>
 					<CanvasTimeFrameSelect
 						value={canvasTimeframeValue}
 						onChange={onChange}
 					/>
 				</Grid>
-				<Grid item sm={6}>
+				<Grid item xs={12} md={6}>
 					<DateRange
 						startDate={startDate}
 						endDate={endDate}
