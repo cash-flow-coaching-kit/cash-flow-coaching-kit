@@ -7,7 +7,7 @@ import ChecklistModal from "../../components/ChecklistModal"
 // #region Reduce cost of stock or materials list content
 function ReduceStockListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Can you source your products from cheaper suppliers without compromising
 				on quality?
@@ -20,7 +20,7 @@ function ReduceStockListContent(): ReactElement {
 // #region Improve terms with suppliers list content
 function ImproveTermsListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Can you negotiate extended payment terms?
 			</Typography>
@@ -35,7 +35,7 @@ function ImproveTermsListContent(): ReactElement {
 // #region Clear obsolete or slow moving stock list content
 function ClearStockListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">Are your stock levels too high?</Typography>
 			<Typography component="li">Is there stock that isn’t selling?</Typography>
 			<Typography component="li">
@@ -49,7 +49,7 @@ function ClearStockListContent(): ReactElement {
 // #region Improve ordering process list content
 function OrderingProcessListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">Can you automate purchase orders?</Typography>
 			<Typography component="li">
 				Can you reduce the lead time between placing and receiving an order?
@@ -72,14 +72,14 @@ export default function InventoryLever(): ReactElement {
 			defaultExpanded={false}
 		>
 			{/* Reduce cost of stock or materials */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} md={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Reduce cost of stock or materials
 					</Typography>
 					<ReduceStockListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} md={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Inventory Lever"
@@ -92,14 +92,14 @@ export default function InventoryLever(): ReactElement {
 			</Grid>
 
 			{/* Improve terms with suppliers */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} md={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Improve terms with suppliers
 					</Typography>
 					<ImproveTermsListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} md={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Inventory Lever"
@@ -112,14 +112,14 @@ export default function InventoryLever(): ReactElement {
 			</Grid>
 
 			{/* Clear obsolete or slow moving stock */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} md={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Clear obsolete or slow moving stock
 					</Typography>
 					<ClearStockListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} md={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Inventory Lever"
@@ -132,14 +132,14 @@ export default function InventoryLever(): ReactElement {
 			</Grid>
 
 			{/* Improve ordering process */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} md={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Improve ordering process
 					</Typography>
 					<OrderingProcessListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} md={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Inventory Lever"

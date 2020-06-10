@@ -7,7 +7,7 @@ import ChecklistModal from "../../components/ChecklistModal"
 // #region Invoice earlier
 function InvoiceEarlierListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">Can you raise progress bills?</Typography>
 			<Typography component="li">
 				Can you invoice an amount in advance of completing the service or
@@ -25,7 +25,7 @@ function InvoiceEarlierListContent(): ReactElement {
 // #region Follow up
 function FollowUpListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Can you give your customers a call?
 			</Typography>
@@ -43,7 +43,7 @@ function FollowUpListContent(): ReactElement {
 // #region Reduce terms
 function ReduceTermsListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Should you require some of your customers to pay you sooner than others?
 			</Typography>
@@ -56,7 +56,7 @@ function ReduceTermsListContent(): ReactElement {
 // #region Early payment discount
 function EarlyPaymentListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Can you afford to offer an early payment discount?
 			</Typography>
@@ -77,14 +77,14 @@ export default function DebtorsLever(): ReactElement {
 			defaultExpanded={false}
 		>
 			{/* Invoice earlier */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} md={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Invoice earlier
 					</Typography>
 					<InvoiceEarlierListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} md={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Debtors Lever"
@@ -97,14 +97,14 @@ export default function DebtorsLever(): ReactElement {
 			</Grid>
 
 			{/* Follow up */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} md={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Follow up
 					</Typography>
 					<FollowUpListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} md={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Debtors Lever"
@@ -117,14 +117,14 @@ export default function DebtorsLever(): ReactElement {
 			</Grid>
 
 			{/* Reduce terms */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} md={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Reduce terms
 					</Typography>
 					<ReduceTermsListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} md={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Debtors Lever"
@@ -137,14 +137,14 @@ export default function DebtorsLever(): ReactElement {
 			</Grid>
 
 			{/* Early payment discount */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} md={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Early payment discount
 					</Typography>
 					<EarlyPaymentListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} md={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Debtors Lever"
