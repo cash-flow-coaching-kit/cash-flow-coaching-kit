@@ -1,11 +1,5 @@
 import React, { ReactElement } from "react"
-import {
-	List,
-	ListItem,
-	ListItemText,
-	Box,
-	ListItemIcon,
-} from "@material-ui/core"
+import { List, ListItem, ListItemText, Box } from "@material-ui/core"
 import { fourQuestionsContent, answerTheming } from "../_config/data"
 import useFourQsStyles from "./_config/styles"
 import { IFourQuestionsProps } from "./_config/shape"
@@ -33,11 +27,7 @@ const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 	const getIcon = (answer: QuestionOptions): ReactElement => {
 		const opt = getOptionByAnswer(answer, answerTheming)
 		if (opt) {
-			return (
-				<ListItemIcon>
-					<opt.Icon style={{ color: opt.color }} />
-				</ListItemIcon>
-			)
+			return <opt.Icon style={{ color: opt.color }} />
 		}
 
 		return <></>
@@ -56,10 +46,12 @@ const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 										idx === 0 ? styles.listItemFirst : ""
 									}`}
 								>
-									{answers?.[idx] && getIcon(answers[idx])}
 									<ListItemText className={styles.listItemText}>
 										{`${idx + 1}. ${content}`}
-										{answerText(idx, answers)}
+										<Box className={styles.answerIconRoot}>
+											{answers?.[idx] && getIcon(answers[idx])}
+											{answerText(idx, answers)}
+										</Box>
 									</ListItemText>
 								</ListItem>
 							</Box>
