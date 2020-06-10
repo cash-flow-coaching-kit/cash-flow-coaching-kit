@@ -31,7 +31,7 @@ const QuizList = ({
 			e.preventDefault()
 			removeHealthCheck(id)
 		},
-		[]
+		[removeHealthCheck]
 	)
 
 	return (
