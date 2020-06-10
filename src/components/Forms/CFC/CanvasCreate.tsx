@@ -1,4 +1,10 @@
-import React, { ReactElement, useState, useCallback } from "react"
+import React, {
+	ReactElement,
+	useState,
+	useCallback,
+	useContext,
+	useEffect,
+} from "react"
 import { useFormik } from "formik"
 import { Button, Box } from "@material-ui/core"
 import { useHistory } from "react-router-dom"
@@ -12,6 +18,7 @@ import useCurrentClient from "../../../state/client/useCurrentClient"
 import useStyles from "./__config/styles"
 import createURLParams from "./createURLParams"
 import changeDate, { CanvasDateKeys } from "./changeDate"
+import CFCContext from "../../../state/CFC/context"
 
 /**
  * Create canvas form.
@@ -25,6 +32,7 @@ export default function CreateCanvasForm(): ReactElement {
 	const [useCustomTitle, setUseCustomTitle] = useState(false)
 	const history = useHistory()
 	const [currentClient] = useCurrentClient()
+	const { duplicateError, invalidDateError } = useContext(CFCContext)
 
 	const { setFieldValue, handleChange, values, handleSubmit } = useFormik<
 		BaseCFCStruct
@@ -46,6 +54,12 @@ export default function CreateCanvasForm(): ReactElement {
 			}
 		},
 	})
+
+	useEffect(() => {
+		if (!useCustomTitle) {
+			setFieldValue("canvasTitle", "")
+		}
+	}, [useCustomTitle, setFieldValue])
 
 	const {
 		canvasTitle,
@@ -74,6 +88,14 @@ export default function CreateCanvasForm(): ReactElement {
 
 	const inputChange = useCallback(handleChange, [])
 
+	function disabledCreate(): boolean {
+		return (
+			invalidDateError ||
+			duplicateError ||
+			(useCustomTitle && canvasTitle === "")
+		)
+	}
+
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
@@ -100,7 +122,12 @@ export default function CreateCanvasForm(): ReactElement {
 				/>
 				<Spacer />
 				<Box className={styles.box}>
-					<Button color="primary" variant="contained" type="submit">
+					<Button
+						color="primary"
+						variant="contained"
+						type="submit"
+						disabled={disabledCreate()}
+					>
 						Create Canvas
 					</Button>
 				</Box>

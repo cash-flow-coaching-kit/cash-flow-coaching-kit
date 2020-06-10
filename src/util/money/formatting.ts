@@ -62,6 +62,25 @@ export function addDollarSign(val: string): string {
 }
 
 /**
+ * Removed trailing zeros and dots
+ *
+ * ## Example
+ *
+ * * 100.00 -> 100
+ * * 100.0 -> 100
+ * * 10. -> 10
+ * * 6.00000000 -> 6
+ *
+ * @export
+ * @param {string} val
+ * @returns {string}
+ */
+export function removeTrailingZeros(val: string): string {
+	const re = new RegExp(/\.(0+)?$/, "g")
+	return val.replace(re, "")
+}
+
+/**
  * Takes a number value and formats it to be a dollar value
  *
  * @param {number} num
