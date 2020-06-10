@@ -72,7 +72,7 @@ const CFCListing = (): ReactElement => {
 			</SectionTitle>
 
 			<Grid container spacing={2}>
-				<Grid item sm={6}>
+				<Grid item xs={12} md={6}>
 					<Card>{renderBasedOnState()}</Card>
 				</Grid>
 			</Grid>
