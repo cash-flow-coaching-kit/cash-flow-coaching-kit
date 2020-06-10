@@ -5,7 +5,6 @@ import {
 	ListItemText,
 	ListItemSecondaryAction,
 } from "@material-ui/core"
-import { Link } from "react-router-dom"
 import { format } from "date-fns"
 import {
 	routeVarReplacement,
@@ -14,6 +13,7 @@ import {
 import { IQuizListProps } from "../_config/shape"
 import IconDeleteButtonwDialog from "../../../IconDeleteButton/IconDeleteButtonwDialog"
 import { HealthCheckId } from "../../../../data/_config/shape"
+import ViewIconButton from "../../../ViewIconButton"
 
 /**
  * Renders a list of completed health checks
@@ -38,14 +38,7 @@ const QuizList = ({
 		<List>
 			{clientQuizzes.map(
 				(quiz): ReactElement => (
-					<ListItem
-						key={quiz.id}
-						button
-						component={Link}
-						to={routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
-							[":id", `${quiz.id}`],
-						])}
-					>
+					<ListItem key={quiz.id} className="list-item-padded">
 						<ListItemText
 							primary="Completed Health Check"
 							secondary={
@@ -55,6 +48,11 @@ const QuizList = ({
 							}
 						/>
 						<ListItemSecondaryAction>
+							<ViewIconButton
+								goTo={routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
+									[":id", `${quiz.id}`],
+								])}
+							/>
 							<IconDeleteButtonwDialog onClick={removeItem(quiz.id || -1)} />
 						</ListItemSecondaryAction>
 					</ListItem>
