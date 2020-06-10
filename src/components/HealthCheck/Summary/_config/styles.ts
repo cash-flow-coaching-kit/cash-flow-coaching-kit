@@ -12,6 +12,9 @@ export const useSummaryStyles = makeStyles((theme) => ({
 	cardRoot: {
 		display: "flex",
 		flexDirection: "column",
+		"& > a": {
+			height: "100%",
+		},
 	},
 	cardHeader: {
 		flexGrow: 2,
