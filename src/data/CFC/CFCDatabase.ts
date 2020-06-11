@@ -64,6 +64,35 @@ class CFCDatabase extends Dexie {
         *cashOutItems
       `,
 		})
+
+		this.version(1.1).stores({
+			canvases: `
+        ++id,
+        clientId,
+        createdAt,
+        canvasTitle,
+        canvasType,
+        canvasTimeFrame,
+        canvasStartDate,
+        canvasEndDate,
+        gstOnSales,
+        gstOnPurchases,
+        openingBalance,
+        paygWithholding,
+        superAmount,
+        incomeTax,
+        cashToOwner,
+        cashToBank,
+        stock,
+        creditors,
+        debtors,
+        assets,
+        loans,
+        *cashInItems,
+				*cashOutItems,
+				[canvasType+canvasTimeFrame+clientId]
+      `,
+		})
 	}
 }
 

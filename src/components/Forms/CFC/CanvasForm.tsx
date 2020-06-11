@@ -75,7 +75,12 @@ export default function CanvasForm({
 	const { id: canvasId } = useParams()
 	const [currentClient] = useCurrentClient()
 	const [stateMachine, updateMachine] = useMachine(fetchMachine)
-	const { duplicateError, invalidDateError, dispatch } = useContext(CFCContext)
+	const {
+		duplicateError,
+		invalidDateError,
+		dispatch,
+		copyCanvasActive,
+	} = useContext(CFCContext)
 
 	const { setFieldValue, handleChange, values, setValues } = useFormik<
 		BaseCFCStruct
@@ -225,7 +230,6 @@ export default function CanvasForm({
 	useEffect(() => {
 		const id = setInterval(async () => {
 			if (!isEqual(previousValues, values) && !disableSaving()) {
-				console.log("Save")
 				handleFormSave()
 			}
 		}, 1000)
@@ -321,6 +325,7 @@ export default function CanvasForm({
 					setUseCustomTitle(e.target.checked)
 				}}
 				useCustomTitle={useCustomTitle}
+				showDuplicateError={!copyCanvasActive}
 			/>
 			<IfElseLoading if={stateMachine.value !== "loading"}>
 				<Spacer />

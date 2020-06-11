@@ -19,6 +19,7 @@ export type ControlProps<T> = {
 export interface BaseProps {
 	customTitle: string
 	onChange: InputChange
+	useCustomTitle: boolean
 }
 
 export interface PanelProps extends BaseProps {
@@ -31,7 +32,6 @@ export interface PanelProps extends BaseProps {
 
 export interface CustomTitleProps extends BaseProps {
 	changeCheck: InputChange
-	useCustomTitle: boolean
 }
 
 // #endregion
