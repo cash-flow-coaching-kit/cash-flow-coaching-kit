@@ -1,4 +1,4 @@
-import { reduceToOptions, canvasTypeOptions, canvasTimeFrameOptions, generateTitle, canvasDisplayTitle, identifyIfDuplicate, calcQuestionOne, calcQuestionTwo, calcQuestionThree, calcQuestionFour } from "../__config/utilities"
+import { reduceToOptions, canvasTypeOptions, canvasTimeFrameOptions, generateTitle, canvasDisplayTitle, identifyIfDuplicate, calcQuestionOne, calcQuestionTwo, calcQuestionThree, calcQuestionFour, performDupFind } from "../__config/utilities"
 import { CFCTimeFrame, CanvasType, CFCStruct, CFCPanelSlice } from "../../../data/_config/shape"
 import { toDate } from "date-fns"
 import { initialValues } from "../../Forms/CFC"
@@ -63,7 +63,7 @@ describe("Unit tests for the CFC utility methods", () => {
     expect(canvasDisplayTitle(data)).toEqual("Hello world")
   })
 
-  test("Duplication check", function() {
+  test("Duplication check", async function() {
     let start = new Date(2020, 6, 1)
     let end = new Date(2020, 6, 2)
     let dupStart = new Date(2020, 5, 1)
@@ -90,6 +90,8 @@ describe("Unit tests for the CFC utility methods", () => {
 
     // There are no duplicates
     expect(identifyIfDuplicate(dups, slice)).toBeFalsy()
+    let res = await performDupFind(slice, 1)
+    expect(res).toBeFalsy()
 
     dups = [
       ...dups,
