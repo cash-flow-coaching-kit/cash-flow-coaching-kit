@@ -4,13 +4,19 @@ import { useLocation } from "react-router-dom"
 import { defer } from "lodash-es"
 import { useSharedNavStyles } from "../Navbar/_config/style"
 
+type ShowMeHowProps = {
+	triggerCallback?: () => void
+}
+
 /**
  * Show me how button
  *
  * @export
  * @returns {ReactElement}
  */
-export default function ShowMeHow(): ReactElement {
+export default function ShowMeHow({
+	triggerCallback,
+}: ShowMeHowProps): ReactElement {
 	const sharedStyle = useSharedNavStyles()
 	const location = useLocation()
 	const [show, setShow] = useState(false)
@@ -29,6 +35,9 @@ export default function ShowMeHow(): ReactElement {
 		const elem = document.getElementById("start-a-tour")
 		if (elem) {
 			elem.click()
+			if (typeof triggerCallback !== "undefined") {
+				triggerCallback()
+			}
 		}
 	}, [])
 
