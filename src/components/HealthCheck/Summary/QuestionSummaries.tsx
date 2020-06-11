@@ -1,12 +1,5 @@
 import React, { useState, ReactElement } from "react"
-import {
-	Grid,
-	Card,
-	CardHeader,
-	CardActions,
-	Button,
-	CardActionArea,
-} from "@material-ui/core"
+import { Grid, Card, CardHeader, CardActionArea } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import { IQuestionStructure } from "../_config/shape"
