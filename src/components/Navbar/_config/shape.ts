@@ -19,7 +19,14 @@ export interface INavRoutes {
 	route: PrivateRoutes | PublicRoutes | string
 	title: string
 	Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>
+	children?: INavRoutes[]
+	subMenuTitle?: string
 }
+
+export type ExtendsButton = StandardProps<
+	ButtonProps<typeof Link, LinkProps>,
+	ButtonClassKey
+>
 
 /**
  * Navigation Routes component props, extends the default <Button> props
@@ -28,7 +35,6 @@ export interface INavRoutes {
  * @see https://github.com/mui-org/material-ui/issues/15827#issuecomment-506807829
  * @extends {StandardProps<ButtonProps<typeof Link, LinkProps>, ButtonClassKey>}
  */
-export interface INavigationRoutesProps
-	extends StandardProps<ButtonProps<typeof Link, LinkProps>, ButtonClassKey> {
+export interface INavigationRoutesProps extends ExtendsButton {
 	routes: INavRoutes[]
 }

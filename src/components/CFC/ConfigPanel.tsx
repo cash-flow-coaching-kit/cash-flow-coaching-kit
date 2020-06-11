@@ -157,6 +157,12 @@ function ConfigPanel({
 
 	return (
 		<Box className={`${wrapped ? wrapperCls.wrapper : ""}`}>
+			<UseCustomTitle
+				title={customTitle}
+				onChange={onChange}
+				useCustom={useCustomTitle}
+				changeCheck={changeCheck}
+			/>
 			<Panel
 				canvasTypeValue={canvasTypeValue}
 				canvasTimeframeValue={canvasTimeframeValue}
@@ -172,12 +178,6 @@ function ConfigPanel({
 					<DuplicateCanvasError />
 				</>
 			)}
-			<UseCustomTitle
-				title={customTitle}
-				onChange={onChange}
-				useCustom={useCustomTitle}
-				changeCheck={changeCheck}
-			/>
 		</Box>
 	)
 }

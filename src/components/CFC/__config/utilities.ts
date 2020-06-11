@@ -178,7 +178,6 @@ export async function performDupFind(
 	client: ClientId,
 	canvasId?: CFCId
 ): Promise<DupResponse> {
-	console.log("canvasId", canvasId)
 	const dups = await CFCUseCase.findPossibleDuplicates(
 		slice.canvasType,
 		slice.canvasTimeFrame,

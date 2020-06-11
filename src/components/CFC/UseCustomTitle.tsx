@@ -48,7 +48,6 @@ export default function UseCustomTitle({
 
 	return (
 		<Box>
-			<Divider className={cls.divider} />
 			<Box className={cls.checkboxRoot}>
 				<FormControlLabel
 					control={
@@ -75,6 +74,7 @@ export default function UseCustomTitle({
 					className={cls.textField}
 				/>
 			)}
+			<Divider className={cls.divider} />
 		</Box>
 	)
 }
