@@ -23,7 +23,7 @@ interface UseCustomTitleProps {
 }
 
 const tipContent =
-	"By default, the canvas title will be made up of the four fields above. However, to make idenfiying canvases easier, you are able to assign a custom title to the canvas."
+	"To make idenfiying canvases easier, you are able to assign a custom title to the canvas. However, you can disable this and the canvas title will be made up of the four fields below"
 
 /**
  * Component that allows a user to opt into a custom canvas title
