@@ -8,6 +8,8 @@ import {
 	ListItemText,
 	Box,
 	makeStyles,
+	ThemeProvider,
+	createMuiTheme,
 } from "@material-ui/core"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
 import { PageContainer } from "../components/Layouts"
@@ -24,6 +26,9 @@ import {
 	InventoryLever,
 	StaffingLever,
 } from "../content/ChangeLevers"
+import applyTheme from "../theme/mui/applyTheme"
+
+const pageTheme = createMuiTheme(applyTheme)
 
 const ChangeLevers = (): ReactElement => {
 	const styles = makeStyles((theme) => ({
@@ -33,7 +38,7 @@ const ChangeLevers = (): ReactElement => {
 	}))()
 
 	return (
-		<>
+		<ThemeProvider theme={pageTheme}>
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={9}>
@@ -78,7 +83,7 @@ const ChangeLevers = (): ReactElement => {
 			</PageContainer>
 
 			<PageTip tip="ChangeLevers" />
-		</>
+		</ThemeProvider>
 	)
 }
 
