@@ -1,12 +1,5 @@
 import React, { ReactElement, useCallback, useState, useEffect } from "react"
-import {
-	Typography,
-	Grid,
-	Card,
-	CardContent,
-	createMuiTheme,
-	ThemeProvider,
-} from "@material-ui/core"
+import { Typography, Grid, Card, CardContent } from "@material-ui/core"
 import { useMachine } from "@xstate/react"
 import { PageContainer } from "../../components/Layouts"
 import SectionTitle from "../../components/SectionTitle"
@@ -18,9 +11,6 @@ import CanvasList from "../../components/CFC/CanvasList"
 import Loading from "../../components/Loading"
 import NoCanvases from "../../components/CFC/NoCanvases"
 import filterById from "../../util/filters/ById"
-import applyTheme from "../../theme/mui/applyTheme"
-
-const pageTheme = createMuiTheme(applyTheme)
 
 const CFCListing = (): ReactElement => {
 	const [stateMachine, changeState] = useMachine(fetchMachine)
@@ -73,7 +63,7 @@ const CFCListing = (): ReactElement => {
 	}
 
 	return (
-		<ThemeProvider theme={pageTheme}>
+		<>
 			<PageContainer>
 				<SectionTitle>
 					Previously saved canvases{" "}
@@ -88,7 +78,7 @@ const CFCListing = (): ReactElement => {
 					</Grid>
 				</Grid>
 			</PageContainer>
-		</ThemeProvider>
+		</>
 	)
 }
 

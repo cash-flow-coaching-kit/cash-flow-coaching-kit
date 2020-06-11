@@ -1,32 +1,60 @@
 import { Theme, createMuiTheme } from "@material-ui/core"
-import applyTheme from "../../theme/mui/applyTheme"
-import { PrivateRoutes } from "./routes"
+import {
+	applyTheme,
+	defaultTheme,
+	discoverTheme,
+	planActionTheme,
+	settingsTheme,
+} from "../../theme/mui/themes"
+import { PrivateRoutes, routeVarReplacement } from "./routes"
 
-const defaultTheme = createMuiTheme({
-	palette: {
-		primary: {
-			main: "#ff0",
-		},
-	},
-})
 const applyThemeRoutes: string[] = [
 	PrivateRoutes.CFC,
 	PrivateRoutes.CFCCompare,
-	PrivateRoutes.CFCEdit,
+	routeVarReplacement(PrivateRoutes.CFCEdit, [[":id", ""]]),
 	PrivateRoutes.CFCListing,
 	PrivateRoutes.ChangeLevers,
 ]
-const discoverThemeRoutes: string[] = []
-const planActionThemeRoutes: string[] = []
-const settingsThemeRoutes: string[] = []
+const discoverThemeRoutes: string[] = [
+	PrivateRoutes.ClientList,
+	PrivateRoutes.DiscoverTopics,
+	PrivateRoutes.DTTrackingPerformance,
+	PrivateRoutes.DTSellingClosingSuccession,
+	PrivateRoutes.DTRecordKeeping,
+	PrivateRoutes.DTPlanningFinanicalCommitments,
+	PrivateRoutes.DTPlanningBusiness,
+	PrivateRoutes.DTManagingCashFlow,
+	PrivateRoutes.DTFundingBusiness,
+	PrivateRoutes.HealthCheckList,
+	routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [[":id?", ""]]),
+	routeVarReplacement(PrivateRoutes.HealthCheckSummary, [[":id", ""]]),
+]
+const planActionThemeRoutes: string[] = [PrivateRoutes.ActionChecklist]
+const settingsThemeRoutes: string[] = [
+	PrivateRoutes.SessionFiles,
+	PrivateRoutes.CoachingKit,
+]
 
 function determineTheme(pathname: string): Theme {
-	if (applyThemeRoutes.indexOf(pathname) !== -1) {
+	const path = `${pathname.replace(/[\d]+?$/g, "")}`
+
+	if (applyThemeRoutes.indexOf(path) !== -1) {
 		return createMuiTheme(applyTheme)
 	}
 
-	console.log("Return default")
-	return createMuiTheme()
+	if (discoverThemeRoutes.indexOf(path) !== -1) {
+		return createMuiTheme(discoverTheme)
+	}
+
+	if (planActionThemeRoutes.indexOf(path) !== -1) {
+		return createMuiTheme(planActionTheme)
+	}
+
+	if (settingsThemeRoutes.indexOf(path) !== -1) {
+		return createMuiTheme(settingsTheme)
+	}
+
+	return createMuiTheme(defaultTheme)
 }
 
 export default determineTheme

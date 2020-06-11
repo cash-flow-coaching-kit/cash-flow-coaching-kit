@@ -1,5 +1,5 @@
 import React, { ReactElement, useContext } from "react"
-import { Grid, createMuiTheme, ThemeProvider } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import { useLocation } from "react-router-dom"
 import qs from "qs"
 import { toDate } from "date-fns"
@@ -15,9 +15,6 @@ import { initialValues } from "../../components/Forms/CFC"
 import ControlPanel from "../../components/CFC/ControlPanel"
 import CFCContext from "../../state/CFC/context"
 import { CFCFourQuestions } from "../../components/CFC"
-import applyTheme from "../../theme/mui/applyTheme"
-
-const pageTheme = createMuiTheme(applyTheme)
 
 type QueryParams = {
 	title?: string
@@ -73,7 +70,7 @@ export default function CanvasEdit(): ReactElement {
 	}
 
 	return (
-		<ThemeProvider theme={pageTheme}>
+		<>
 			<PageContainer maxWidth="lg">
 				<Grid container spacing={3}>
 					<Grid item sm={9}>
@@ -86,6 +83,6 @@ export default function CanvasEdit(): ReactElement {
 				</Grid>
 			</PageContainer>
 			<PageTip tip="CFCanvasTip" />
-		</ThemeProvider>
+		</>
 	)
 }

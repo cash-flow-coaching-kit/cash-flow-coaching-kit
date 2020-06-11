@@ -67,9 +67,9 @@ const PrivatePage = ({ children }: IPrivatePage): ReactElement => {
 						<Box className={styles.mobile}>
 							<MobileNavbar />
 						</Box>
-					</ThemeProvider>
 
-					<div className="private-page">{children}</div>
+						<div className="private-page">{children}</div>
+					</ThemeProvider>
 				</>
 			)}
 		</>
