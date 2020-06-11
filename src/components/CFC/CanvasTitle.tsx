@@ -60,7 +60,7 @@ export default React.memo(function CanvasTitle({
 	function AddTitle(): ReactElement {
 		return (
 			<Typography variant="h5" className={`${cls.title} ${cls.noTitle}`}>
-				Add a title
+				Add a title below
 			</Typography>
 		)
 	}

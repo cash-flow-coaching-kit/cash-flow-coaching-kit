@@ -22,7 +22,7 @@ import changeDate, { CanvasDateKeys } from "./changeDate"
 export default function CreateCanvasForm(): ReactElement {
 	const styles = useStyles()
 
-	const [useCustomTitle, setUseCustomTitle] = useState(false)
+	const [useCustomTitle, setUseCustomTitle] = useState(true)
 	const history = useHistory()
 	const [currentClient] = useCurrentClient()
 
