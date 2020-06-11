@@ -5,6 +5,12 @@ export const defaultCFCState: ICFCState = {
 	dispatch: () => null,
 	duplicateError: false,
 	invalidDateError: false,
+	questionValues: {
+		one: 0,
+		two: 0,
+		three: 0,
+		four: undefined,
+	},
 }
 
 const CFCContext = createContext(defaultCFCState)

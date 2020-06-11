@@ -3,7 +3,9 @@ import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core"
 
 type SelectValue = string | number
 
-export type SelectFieldOptions = { value: SelectValue; label: string }[]
+export type SelectFieldOpt = { value: SelectValue; label: string }
+
+export type SelectFieldOptions = SelectFieldOpt[]
 
 /**
  * Prop definition for the SelectField component

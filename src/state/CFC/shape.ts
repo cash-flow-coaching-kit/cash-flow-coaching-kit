@@ -1,5 +1,12 @@
 import { Dispatch } from "react"
 
+type QuestionValues = {
+	one: number
+	two: number
+	three: number
+	four: number | undefined
+}
+
 /**
  * State structure of the CFC Context
  *
@@ -9,6 +16,7 @@ import { Dispatch } from "react"
 export interface ICFCState {
 	duplicateError: boolean
 	invalidDateError: boolean
+	questionValues: QuestionValues
 	dispatch: Dispatch<CFCReducerActions>
 }
 
@@ -21,6 +29,7 @@ export interface ICFCState {
 export enum CFCActionTypes {
 	ChangeDuplicateError = "change_duplicate_error",
 	ChangeInvalidDateError = "change_invalid_date_error",
+	ChangeQuestionValues = "change_question_values",
 }
 
 /**
@@ -39,4 +48,8 @@ export type CFCReducerActions =
 	| {
 			type: CFCActionTypes.ChangeInvalidDateError
 			payload: ICFCState["invalidDateError"]
+	  }
+	| {
+			type: CFCActionTypes.ChangeQuestionValues
+			payload: ICFCState["questionValues"]
 	  }

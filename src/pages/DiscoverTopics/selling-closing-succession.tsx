@@ -9,10 +9,11 @@ import {
 	ExpansionPanelSummary,
 	ExpansionPanelDetails,
 } from "@material-ui/core"
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import useDTStyles from "./_config/styles"
+import Taskbuilder from "../../components/Taskbuilder"
 
 const DTSellingClosingSuccession = (): ReactElement => {
 	const styles = useDTStyles()
@@ -20,236 +21,249 @@ const DTSellingClosingSuccession = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography component="h1" align="center" className={styles.tagline}>
-					Selling, closing and succession planning
-				</Typography>
-				<Typography
-					variant="body1"
-					component="p"
-					className={styles.contentText}
-					gutterBottom
-				>
-					Most business owners will reach a time when they consider exiting
-					their business. There are many reasons you may want to exit your
-					business, including financial concerns, challenges around managing the
-					business or personal reasons such as retirement.
-				</Typography>
-				<Typography
-					variant="body1"
-					component="p"
-					className={styles.contentText}
-				>
-					Exiting your business can be a complex and emotional time. You can
-					successfully navigate this process by seeking professional advice from
-					your business advisor, accountant and/or solicitor, to understand your
-					options and obligations.
-				</Typography>
-				<Typography component="h2" className={styles.SectionTitle}>
-					Quicksnaps - Deciding how to exit your business.
-				</Typography>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
-						expandIcon={<ExpandMoreIcon />}
-						aria-controls="purpose-exiting-content"
-						id="purpose-exiting-header"
-					>
-						<Typography variant="h5" component="h3">
-							Purpose for exiting
+				<Grid container spacing={2}>
+					<Grid item sm={9}>
+						<Typography
+							component="h1"
+							align="center"
+							className={styles.tagline}
+						>
+							Selling, closing and succession planning
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
-						<Grid container spacing={3}>
-							<Grid item sm={6}>
-								<Typography variant="h6" component="h4">
-									Why?
-								</Typography>
-								<Typography>
-									When deciding to exit your business, it is important to
-									consider the underlying reason for this decision.
-								</Typography>
-							</Grid>
-							<Grid item sm={6}>
-								<List>
-									<Typography component="li" className={styles.list}>
-										Have you reached your business goal?
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										Is the decision to exit right for you at this time? Consider
-										whether the decision to exit is a 'business' decision or a
-										'personal' decision. Many small businesses are a very
-										personal matter for owners.
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										If you are considering exiting for business reasons, it can
-										be useful to seek professional advice from your business
-										advisor, accountant and/or solicitor. They can provide
-										support options for you to consider before exiting your
-										business, especially if you are having difficulties running
-										the business, keeping on top of business obligations, or
-										managing financial pressures.
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										If you are considering exiting for personal reasons, it can
-										be useful to seek advice from your family, friends or
-										trusted confidants.
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										Have you considered what you will do if you exit your
-										business? You may be looking to retire, start a new business
-										or go into employment.
-									</Typography>
-								</List>
-							</Grid>
-						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
-						expandIcon={<ExpandMoreIcon />}
-						aria-controls="family-objectives-support-content"
-						id="family-objectives-support-header"
-					>
-						<Typography variant="h5" component="h3">
-							Family objectives and support
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+							gutterBottom
+						>
+							Most business owners will reach a time when they consider exiting
+							their business. There are many reasons you may want to exit your
+							business, including financial concerns, challenges around managing
+							the business or personal reasons such as retirement.
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
-						<Grid container spacing={3}>
-							<Grid item sm={6}>
-								<Typography variant="h6" component="h4">
-									Why?
-								</Typography>
-								<Typography>
-									Where your business is a family business, consider family
-									objectives when deciding to exit your business.
-								</Typography>
-							</Grid>
-							<Grid item sm={6}>
-								<List>
-									<Typography component="li" className={styles.list}>
-										Have you discussed your decision with your family? Consider
-										involving your professional advisor/s in these discussion to
-										support the family to understand the implications of any
-										business exit.
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										Will a family member take over the business (family
-										succession plan)? If so, do they currently have the skills
-										and experience to do this?
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										Will you remain involved in the business? For example there
-										may be a period of transition while other members of the
-										family step into your role.
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										Where the business is sold, have you considered if/how sale
-										proceeds would be distributed between family members?
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										Are all key family members supportive of the decisions being
-										made?
-									</Typography>
-								</List>
-							</Grid>
-						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
-						expandIcon={<ExpandMoreIcon />}
-						aria-controls="options-exit-content"
-						id="options-exit-header"
-					>
-						<Typography variant="h5" component="h3">
-							Options to exit
+						<Typography
+							variant="body1"
+							component="p"
+							className={styles.contentText}
+						>
+							Exiting your business can be a complex and emotional time. You can
+							successfully navigate this process by seeking professional advice
+							from your business advisor, accountant and/or solicitor, to
+							understand your options and obligations.
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
-						<Grid container spacing={3}>
-							<Grid item sm={6}>
-								<Typography variant="h6" component="h4">
-									Why?
-								</Typography>
-								<Typography>
-									Once you have decided to exit your business, your next
-									important decision is how you will exit your business. There
-									are several options, the most common are selling your business
-									or closing your business down.
-								</Typography>
-							</Grid>
-							<Grid item sm={6}>
-								<List>
-									<Typography component="li" className={styles.list}>
-										Consider if your business is profitable? If your business is
-										not currently profitable, or is unlikely to be profitable in
-										the near future, closing your business may be the best
-										course of action.
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										If you were to sell and exit your business, would your
-										business still have value? For example, it may be
-										challenging to sell your business if you are a sole trader
-										and your business value is based predominantly on you and
-										your networks.
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										If applicable, do you have a family succession plan for the
-										business?
-									</Typography>
-								</List>
-							</Grid>
-						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
-						expandIcon={<ExpandMoreIcon />}
-						aria-controls="preparing-exit-content"
-						id="preparing-exit-header"
-					>
-						<Typography variant="h5" component="h3">
-							Preparing for exit
+						<Typography component="h2" className={styles.SectionTitle}>
+							Quicksnaps - Deciding how to exit your business.
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
-						<Grid container spacing={3}>
-							<Grid item sm={6}>
-								<Typography variant="h6" component="h4">
-									Why?
+						<ExpansionPanel>
+							<ExpansionPanelSummary
+								expandIcon={<ExpandMoreIcon />}
+								aria-controls="purpose-exiting-content"
+								id="purpose-exiting-header"
+							>
+								<Typography variant="h5" component="h3">
+									Purpose for exiting
 								</Typography>
-								<Typography>
-									Planning for a business exit is crucial. Planning enables you
-									to make informed decisions, positions you to take advantage of
-									opportunities and supports a clean and efficient exit.
+							</ExpansionPanelSummary>
+							<ExpansionPanelDetails>
+								<Grid container spacing={3}>
+									<Grid item sm={6}>
+										<Typography variant="h6" component="h4">
+											Why?
+										</Typography>
+										<Typography>
+											When deciding to exit your business, it is important to
+											consider the underlying reason for this decision.
+										</Typography>
+									</Grid>
+									<Grid item sm={6}>
+										<List>
+											<Typography component="li" className={styles.list}>
+												Have you reached your business goal?
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												Is the decision to exit right for you at this time?
+												Consider whether the decision to exit is a 'business'
+												decision or a 'personal' decision. Many small businesses
+												are a very personal matter for owners.
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												If you are considering exiting for business reasons, it
+												can be useful to seek professional advice from your
+												business advisor, accountant and/or solicitor. They can
+												provide support options for you to consider before
+												exiting your business, especially if you are having
+												difficulties running the business, keeping on top of
+												business obligations, or managing financial pressures.
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												If you are considering exiting for personal reasons, it
+												can be useful to seek advice from your family, friends
+												or trusted confidants.
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												Have you considered what you will do if you exit your
+												business? You may be looking to retire, start a new
+												business or go into employment.
+											</Typography>
+										</List>
+									</Grid>
+								</Grid>
+							</ExpansionPanelDetails>
+						</ExpansionPanel>
+						<ExpansionPanel>
+							<ExpansionPanelSummary
+								expandIcon={<ExpandMoreIcon />}
+								aria-controls="family-objectives-support-content"
+								id="family-objectives-support-header"
+							>
+								<Typography variant="h5" component="h3">
+									Family objectives and support
 								</Typography>
-							</Grid>
-							<Grid item sm={6}>
-								<List>
-									<Typography component="li" className={styles.list}>
-										Is your record keeping up to date?
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										Have you separated your personal affairs from any affairs of
-										the business?
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										Do you have any outstanding financial obligations that need
-										to be settled?
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										Are there any legal or operational risks that need to be
-										managed?
-									</Typography>
-									<Typography component="li" className={styles.list}>
-										Are you continuing to meet the ongoing financial commitments
-										of the business?
-									</Typography>
-								</List>
-							</Grid>
-						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
+							</ExpansionPanelSummary>
+							<ExpansionPanelDetails>
+								<Grid container spacing={3}>
+									<Grid item sm={6}>
+										<Typography variant="h6" component="h4">
+											Why?
+										</Typography>
+										<Typography>
+											Where your business is a family business, consider family
+											objectives when deciding to exit your business.
+										</Typography>
+									</Grid>
+									<Grid item sm={6}>
+										<List>
+											<Typography component="li" className={styles.list}>
+												Have you discussed your decision with your family?
+												Consider involving your professional advisor/s in these
+												discussion to support the family to understand the
+												implications of any business exit.
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												Will a family member take over the business (family
+												succession plan)? If so, do they currently have the
+												skills and experience to do this?
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												Will you remain involved in the business? For example
+												there may be a period of transition while other members
+												of the family step into your role.
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												Where the business is sold, have you considered if/how
+												sale proceeds would be distributed between family
+												members?
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												Are all key family members supportive of the decisions
+												being made?
+											</Typography>
+										</List>
+									</Grid>
+								</Grid>
+							</ExpansionPanelDetails>
+						</ExpansionPanel>
+						<ExpansionPanel>
+							<ExpansionPanelSummary
+								expandIcon={<ExpandMoreIcon />}
+								aria-controls="options-exit-content"
+								id="options-exit-header"
+							>
+								<Typography variant="h5" component="h3">
+									Options to exit
+								</Typography>
+							</ExpansionPanelSummary>
+							<ExpansionPanelDetails>
+								<Grid container spacing={3}>
+									<Grid item sm={6}>
+										<Typography variant="h6" component="h4">
+											Why?
+										</Typography>
+										<Typography>
+											Once you have decided to exit your business, your next
+											important decision is how you will exit your business.
+											There are several options, the most common are selling
+											your business or closing your business down.
+										</Typography>
+									</Grid>
+									<Grid item sm={6}>
+										<List>
+											<Typography component="li" className={styles.list}>
+												Consider if your business is profitable? If your
+												business is not currently profitable, or is unlikely to
+												be profitable in the near future, closing your business
+												may be the best course of action.
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												If you were to sell and exit your business, would your
+												business still have value? For example, it may be
+												challenging to sell your business if you are a sole
+												trader and your business value is based predominantly on
+												you and your networks.
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												If applicable, do you have a family succession plan for
+												the business?
+											</Typography>
+										</List>
+									</Grid>
+								</Grid>
+							</ExpansionPanelDetails>
+						</ExpansionPanel>
+						<ExpansionPanel>
+							<ExpansionPanelSummary
+								expandIcon={<ExpandMoreIcon />}
+								aria-controls="preparing-exit-content"
+								id="preparing-exit-header"
+							>
+								<Typography variant="h5" component="h3">
+									Preparing for exit
+								</Typography>
+							</ExpansionPanelSummary>
+							<ExpansionPanelDetails>
+								<Grid container spacing={3}>
+									<Grid item sm={6}>
+										<Typography variant="h6" component="h4">
+											Why?
+										</Typography>
+										<Typography>
+											Planning for a business exit is crucial. Planning enables
+											you to make informed decisions, positions you to take
+											advantage of opportunities and supports a clean and
+											efficient exit.
+										</Typography>
+									</Grid>
+									<Grid item sm={6}>
+										<List>
+											<Typography component="li" className={styles.list}>
+												Is your record keeping up to date?
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												Have you separated your personal affairs from any
+												affairs of the business?
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												Do you have any outstanding financial obligations that
+												need to be settled?
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												Are there any legal or operational risks that need to be
+												managed?
+											</Typography>
+											<Typography component="li" className={styles.list}>
+												Are you continuing to meet the ongoing financial
+												commitments of the business?
+											</Typography>
+										</List>
+									</Grid>
+								</Grid>
+							</ExpansionPanelDetails>
+						</ExpansionPanel>
+					</Grid>
+					<Grid item sm={3}>
+						<Taskbuilder container="transition" />
+					</Grid>
+				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>
 					Nine considerations when selling your business
 				</Typography>
