@@ -39,7 +39,7 @@ export default function ShowMeHow({
 				triggerCallback()
 			}
 		}
-	}, [])
+	}, [triggerCallback])
 
 	return show ? (
 		<Button
