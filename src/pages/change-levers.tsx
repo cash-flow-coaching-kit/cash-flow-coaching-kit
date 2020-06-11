@@ -59,7 +59,13 @@ const ChangeLevers = (): ReactElement => {
 						<FourQuestions />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
-								<ListItem button>
+								<ListItem
+									component="a"
+									href="/pdf/Change levers.pdf"
+									target="_blank"
+									rel="noopener noreferrer"
+									style={{ color: "inherit" }}
+								>
 									<ListItemIcon>
 										<PictureAsPdfIcon />
 									</ListItemIcon>
