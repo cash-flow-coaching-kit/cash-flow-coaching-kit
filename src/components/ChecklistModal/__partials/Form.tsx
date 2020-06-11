@@ -15,6 +15,7 @@ import { createNewFormItem } from "../__config/utilities"
 import { useFormStyles } from "../__config/styles"
 import SnackbarMsg from "../../SnackbarMsg"
 import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
+import IconDeleteButtonwDialog from "../../IconDeleteButton/IconDeleteButtonwDialog"
 
 /**
  * Form component for the `ChecklistModal` component
@@ -212,9 +213,7 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 				</Grid>
 				{/* Item actions */}
 				<Grid item xs={3} md={1} className={style.itemAction}>
-					<IconButton onClick={(e): void => removeItem(e, idx)}>
-						<DeleteIcon />
-					</IconButton>
+					<IconDeleteButtonwDialog onClick={(e): void => removeItem(e, idx)} />
 				</Grid>
 			</Grid>
 		)

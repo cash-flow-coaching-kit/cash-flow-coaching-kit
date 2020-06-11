@@ -7,8 +7,6 @@ import {
 	DialogActions,
 	Button,
 } from "@material-ui/core"
-import CheckIcon from "@material-ui/icons/Check"
-import CloseIcon from "@material-ui/icons/Close"
 
 import { ModalProps, FormValues } from "../__config/shape"
 import ConditionalChildren from "../../ConditionalChildren"
@@ -152,18 +150,15 @@ export default function Modal({
 
 			{/* Dialog Actions */}
 			<DialogActions className={styles.actions}>
+				<Button onClick={onClose}>Cancel</Button>
 				<Button
 					color="primary"
 					variant="contained"
-					startIcon={<CheckIcon />}
 					type="submit"
 					form="checklist-bulk-add"
 					disabled={submitting}
 				>
 					Confirm
-				</Button>
-				<Button startIcon={<CloseIcon />} onClick={onClose}>
-					Cancel
 				</Button>
 			</DialogActions>
 		</Dialog>
