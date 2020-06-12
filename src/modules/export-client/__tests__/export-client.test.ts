@@ -39,7 +39,7 @@ const exportClientConstants: Contants = {
   checklistContainer: ["cashInActions", "funding"]
 }
 
-async function prefillDatabase(): Promise<void> {
+export async function prefillDatabase(): Promise<void> {
   const {answers, checklistContainer} = exportClientConstants
 
   //#region Filling client database
@@ -95,7 +95,7 @@ async function prefillDatabase(): Promise<void> {
   //#endregion
 }
 
-async function clearDatabases(): Promise<void> {
+export async function clearDatabases(): Promise<void> {
   // Client Database
   await ClientDB.clients.clear()
 
@@ -111,7 +111,7 @@ async function clearDatabases(): Promise<void> {
   await CFCDB.canvases.clear()
 }
 
-async function closeDatabases(): Promise<void> {
+export async function closeDatabases(): Promise<void> {
   ClientDB.close()
   HealthCheckDB.close()
   ActionChecklistDB.close()
