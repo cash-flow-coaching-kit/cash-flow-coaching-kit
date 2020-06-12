@@ -10,16 +10,7 @@ import ActionChecklistDB from "../../data/ActionChecklist/ActionChecklistDatabas
 import CFCDB from "../../data/CFC/CFCDatabase"
 import saveBlob from "../save-blob"
 import ClientUseCase from "../../data/client/ClientLogic"
-
-export type JSONDataResult = DexieExportJsonStructure | []
-
-export type DatabaseNames =
-	| "ClientDatabase"
-	| "HealthCheckDatabase"
-	| "ActionChecklistDatabase"
-	| "CFCDatabase"
-
-export type ExportClientResult = Record<DatabaseNames, JSONDataResult>
+import { JSONDataResult, ExportClientResult } from "../__config/shape"
 
 /**
  * Filters out records based on the client and returns a method that is used
@@ -70,7 +61,7 @@ export async function getDataAsJSON(
 	// Convert the blob to raw text
 	const text = await readFile(blob)
 	// return an empty array if the text is invalid
-	if (!text || typeof text !== "string") return []
+	if (!text || typeof text !== "string") return null
 
 	// Parse and return the data
 	const json: DexieExportJsonStructure = JSON.parse(text)
