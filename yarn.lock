@@ -4542,7 +4542,14 @@ detect-port-alt@1.1.6:
     address "^1.0.1"
     debug "^2.6.0"
 
-dexie@^3.0.1:
+dexie-export-import@^1.0.0-rc.2:
+  version "1.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/dexie-export-import/-/dexie-export-import-1.0.0-rc.2.tgz#65267ecae6fe78c4122687fd978341010c6f367a"
+  integrity sha512-TRQ/I5oh2IyAWaRMSZ6vOsympgBANuryd/bKQGeXDf26stKHGkD3NoEmBgNnCBSWA1kcUeZkQurDNjJPoGVS2g==
+  dependencies:
+    dexie "^3.0.0-alpha.5 || ^2.0.4"
+
+"dexie@^3.0.0-alpha.5 || ^2.0.4", dexie@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/dexie/-/dexie-3.0.1.tgz#faafeb94be0d5e18b25d700546a2c05725511cfc"
   integrity sha512-/s4KzlaerQnCad/uY1ZNdFckTrbdMVhLlziYQzz62Ff9Ick1lHGomvTXNfwh4ApEZATyXRyVk5F6/y8UU84B0w==

@@ -26,3 +26,16 @@ type StrToNumHOF = (s: string) => number
 type InputChange = ChangeEvent<HTMLInputElement>
 
 type MouseButtonEvent = MouseEvent<HTMLButtonElement>
+
+// #region Extend Dexie interface
+// declare module 'dexie' {
+//   // Extend methods on db
+//   interface Dexie {
+//     export(options?: ExportOptions): Promise<Blob>;
+//     import(blob: Blob, options?: ImportOptions): Promise<void>;
+//   }
+//   interface DexieConstructor {
+//     import(blob: Blob, options?: StaticImportOptions): Promise<Dexie>;
+//   }
+// }
+//#endregion
