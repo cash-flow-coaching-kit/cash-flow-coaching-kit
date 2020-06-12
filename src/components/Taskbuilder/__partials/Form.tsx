@@ -228,11 +228,19 @@ export default function Form({ container, client }: FormProps): ReactElement {
 	 */
 	async function preSubmitCheck(): Promise<ActionChecklistPriorityId> {
 		if (typeof priorityId === "undefined") {
-			const id = await ActionPriorityUseCase.create(
-				newPriorityItem(client, container)
+			const d = await ActionPriorityUseCase.findByClientAndContainer(
+				container,
+				client
 			)
-			setPriorityId(id)
-			return id
+			if (d.length === 0) {
+				const id = await ActionPriorityUseCase.create(
+					newPriorityItem(client, container)
+				)
+				setPriorityId(id)
+				return id
+			}
+			setPriorityId(d[0].id || -1)
+			return d[0].id || -1
 		}
 
 		return priorityId
@@ -251,8 +259,20 @@ export default function Form({ container, client }: FormProps): ReactElement {
 			constructSelectedItems(formChecklists, client, container),
 			[]
 		)
+		const nItems = items.map((i) => {
+			const hasExistsing = checklists?.filter(
+				(c) => c.description === i.description
+			)
+			if (hasExistsing && hasExistsing.length > 0) {
+				return {
+					...i,
+					id: hasExistsing[0].id || -1,
+				}
+			}
+			return i
+		})
 
-		const [newItems, success] = await bulkAddChecklists(items, pID)
+		const [newItems, success] = await bulkAddChecklists(nItems, pID)
 
 		if (!success || typeof noteId === "undefined") {
 			showSnackbar(
