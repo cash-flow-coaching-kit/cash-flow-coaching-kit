@@ -10,8 +10,16 @@ export type ReadFilePromiseResult = Promise<
  */
 export default function readFile(blob: Blob): ReadFilePromiseResult {
 	return new Promise((resolve, reject) => {
+		if (!blob) {
+			reject(new Error("Reading a file requires a valid file to be passed"))
+		}
+
 		const fr = new FileReader()
-		fr.onerror = reject
+		// eslint-disable-next-line
+		fr.onerror = (event) => {
+			reject(event)
+		}
+		// eslint-disable-next-line
 		fr.onloadend = () => {
 			resolve(fr.result)
 		}

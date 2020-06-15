@@ -5,6 +5,9 @@ import { importInto } from "dexie-export-import"
 import { ExportClientResult, DatabaseNames } from "../__config/shape"
 import readFile from "../../util/readFile"
 import ClientDB from "../../data/client/ClientDatabase"
+import HealthCheckDB from "../../data/healthChecks/HealthCheckDatabase"
+import ActionChecklistDB from "../../data/ActionChecklist/ActionChecklistDatabase"
+import CFCDB from "../../data/CFC/CFCDatabase"
 
 /**
  * Reads a blob into text
@@ -28,7 +31,8 @@ export async function loadBlobAsJSON(
 		const json: ExportClientResult = JSON.parse(file)
 		return json
 	} catch (e) {
-		return e
+		// eslint-disable-next-line
+		throw new Error(e.message)
 	}
 }
 
@@ -59,8 +63,10 @@ export function validateJSONData(data: any): boolean {
 	// Ensures each key data uses the dexie format
 	// eslint-disable-next-line
 	for (let i = 0; i < keys.length; i++) {
-		if (!data[keys[i]].formatName || data[keys[i]].formatName !== "dexie") {
-			return false
+		if (data[keys[i]] !== null) {
+			if (!data[keys[i]].formatName || data[keys[i]].formatName !== "dexie") {
+				return false
+			}
 		}
 	}
 
@@ -70,7 +76,7 @@ export function validateJSONData(data: any): boolean {
 export async function importToDatabase(
 	db: Dexie,
 	data: DexieExportJsonStructure
-): Promise<Error | true> {
+): Promise<Error | boolean> {
 	const blob = new Blob([JSON.stringify(data)])
 	try {
 		await importInto(db, blob)
@@ -80,7 +86,9 @@ export async function importToDatabase(
 	}
 }
 
-export default async function ImportClient(blob: Blob): Promise<void> {
+export default async function ImportClient(
+	blob: Blob
+): Promise<(boolean | Error)[]> {
 	try {
 		const json = await loadBlobAsJSON(blob)
 
@@ -96,10 +104,24 @@ export default async function ImportClient(blob: Blob): Promise<void> {
 			)
 		}
 
-		if (json.ClientDatabase !== null) {
-			await importToDatabase(ClientDB, json.ClientDatabase)
-		}
+		const promises = [
+			json.ClientDatabase
+				? importToDatabase(ClientDB, json.ClientDatabase)
+				: Promise.resolve(false),
+			json.HealthCheckDatabase
+				? importToDatabase(HealthCheckDB, json.HealthCheckDatabase)
+				: Promise.resolve(false),
+			json.ActionChecklistDatabase
+				? importToDatabase(ActionChecklistDB, json.ActionChecklistDatabase)
+				: Promise.resolve(false),
+			json.CFCDatabase
+				? importToDatabase(CFCDB, json.CFCDatabase)
+				: Promise.resolve(false),
+		]
+
+		return Promise.all(promises)
 	} catch (e) {
-		console.error(e)
+		// eslint-disable-next-line
+		throw new Error(e.message)
 	}
 }

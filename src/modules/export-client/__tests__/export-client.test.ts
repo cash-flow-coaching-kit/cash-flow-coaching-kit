@@ -28,7 +28,7 @@ type Contants = {
   checklistContainer: PossibleActionItems[]
 }
 
-const exportClientConstants: Contants = {
+export const exportClientConstants: Contants = {
   clientId: 1,
   answers: ["positive", "negative"],
   healthCheckCount: 3,
