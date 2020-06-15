@@ -102,13 +102,13 @@ export default function StaffingLever(): ReactElement {
 		>
 			{/* Change staff mix */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Change staff mix
 					</Typography>
 					<StaffMixListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Staffing Lever"
@@ -122,13 +122,13 @@ export default function StaffingLever(): ReactElement {
 
 			{/* Increase utilisation */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Increase utilisation
 					</Typography>
 					<IncreaseUtilisationListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Staffing Lever"
@@ -142,13 +142,13 @@ export default function StaffingLever(): ReactElement {
 
 			{/* Match staffing levels to demand */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Match staffing levels to demand
 					</Typography>
 					<MatchStaffingLevelsListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Staffing Lever"
@@ -162,13 +162,13 @@ export default function StaffingLever(): ReactElement {
 
 			{/* Reduce turnover */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Reduce turnover
 					</Typography>
 					<ReduceTurnoverListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Staffing Lever"
@@ -182,13 +182,13 @@ export default function StaffingLever(): ReactElement {
 
 			{/* Employing staff */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Employing staff
 					</Typography>
 					<EmployingStaffListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Staffing Lever"

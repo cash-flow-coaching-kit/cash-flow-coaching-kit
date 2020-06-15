@@ -73,13 +73,13 @@ export default function InventoryLever(): ReactElement {
 		>
 			{/* Reduce cost of stock or materials */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Reduce cost of stock or materials
 					</Typography>
 					<ReduceStockListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Inventory Lever"
@@ -93,13 +93,13 @@ export default function InventoryLever(): ReactElement {
 
 			{/* Improve terms with suppliers */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Improve terms with suppliers
 					</Typography>
 					<ImproveTermsListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Inventory Lever"
@@ -113,13 +113,13 @@ export default function InventoryLever(): ReactElement {
 
 			{/* Clear obsolete or slow moving stock */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Clear obsolete or slow moving stock
 					</Typography>
 					<ClearStockListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Inventory Lever"
@@ -133,13 +133,13 @@ export default function InventoryLever(): ReactElement {
 
 			{/* Improve ordering process */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Improve ordering process
 					</Typography>
 					<OrderingProcessListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Inventory Lever"

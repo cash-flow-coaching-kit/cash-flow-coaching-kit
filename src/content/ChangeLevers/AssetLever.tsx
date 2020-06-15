@@ -51,13 +51,13 @@ export default function AssetLever(): ReactElement {
 		>
 			{/* Sell Assets */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Sell underutilised assets
 					</Typography>
 					<SellAssetsListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Assets Lever"
@@ -71,13 +71,13 @@ export default function AssetLever(): ReactElement {
 
 			{/* Refinance */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Refinance
 					</Typography>
 					<RefinanceListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Assets Lever"
@@ -91,13 +91,13 @@ export default function AssetLever(): ReactElement {
 
 			{/* Sell and lease back */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Sell and lease back
 					</Typography>
 					<SellLeaseListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Assets Lever"

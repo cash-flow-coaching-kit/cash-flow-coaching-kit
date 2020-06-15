@@ -49,13 +49,13 @@ export default function ExpensesLever(): ReactElement {
 		>
 			{/* Reduce discretionary spending */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Reduce discretionary spending
 					</Typography>
 					<ReduceSpendingListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Expenses Lever"
@@ -69,13 +69,13 @@ export default function ExpensesLever(): ReactElement {
 
 			{/* Reduce overheads */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Reduce overheads
 					</Typography>
 					<ReduceOverheadsListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Expenses Lever"

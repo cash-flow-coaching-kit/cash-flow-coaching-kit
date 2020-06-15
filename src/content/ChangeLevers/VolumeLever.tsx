@@ -74,13 +74,13 @@ export default function VolumeLever(): ReactElement {
 		>
 			{/* Increase customers */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Increase your number of potential customers
 					</Typography>
 					<IncreaseCustomersListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Volume Lever"
@@ -94,13 +94,13 @@ export default function VolumeLever(): ReactElement {
 
 			{/* Increase products */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Increase your products or services
 					</Typography>
 					<IncreaseProductsListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Volume Lever"
@@ -114,13 +114,13 @@ export default function VolumeLever(): ReactElement {
 
 			{/* Sell into */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Sell into new market or territory
 					</Typography>
 					<SellIntoListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Volume Lever"
@@ -134,13 +134,13 @@ export default function VolumeLever(): ReactElement {
 
 			{/* Improve sale process */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Improve sale process
 					</Typography>
 					<ImproveListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Volume Lever"

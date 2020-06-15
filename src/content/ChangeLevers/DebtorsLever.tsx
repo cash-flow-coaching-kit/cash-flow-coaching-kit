@@ -78,13 +78,13 @@ export default function DebtorsLever(): ReactElement {
 		>
 			{/* Invoice earlier */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Invoice earlier
 					</Typography>
 					<InvoiceEarlierListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Debtors Lever"
@@ -98,13 +98,13 @@ export default function DebtorsLever(): ReactElement {
 
 			{/* Follow up */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Follow up
 					</Typography>
 					<FollowUpListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Debtors Lever"
@@ -118,13 +118,13 @@ export default function DebtorsLever(): ReactElement {
 
 			{/* Reduce terms */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Reduce terms
 					</Typography>
 					<ReduceTermsListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Debtors Lever"
@@ -138,13 +138,13 @@ export default function DebtorsLever(): ReactElement {
 
 			{/* Early payment discount */}
 			<Grid container spacing={2} className={styles.details}>
-				<Grid item xs={12} md={8}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Early payment discount
 					</Typography>
 					<EarlyPaymentListContent />
 				</Grid>
-				<Grid item xs={12} md={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Debtors Lever"
