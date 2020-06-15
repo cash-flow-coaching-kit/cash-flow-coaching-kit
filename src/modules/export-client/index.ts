@@ -118,6 +118,9 @@ export default async function ExportClient(
 	})
 
 	// Downloads the file
-	saveBlob(blob, `${dbClient.name}--exported-data.json`)
+	saveBlob(
+		blob,
+		`${dbClient.name.replace(/ /g, "-").toLowerCase()}--exported-data.json`
+	)
 	return true
 }
