@@ -26,3 +26,7 @@ code {
 	width: calc(100% - 32px) !important;
 	margin: 16px !important;
 }
+
+.list-item-padded {
+	padding-right: calc(48px * 2) !important;
+}

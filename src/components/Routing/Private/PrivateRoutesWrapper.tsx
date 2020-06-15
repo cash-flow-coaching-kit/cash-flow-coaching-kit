@@ -22,6 +22,7 @@ import { ActionChecklistProvider } from "../../../state/action-checklist"
 import { PrivatePage } from "../../Layouts"
 import CanvasEdit from "../../../pages/CashFlowCanvas/canvasEdit"
 import CFCListing from "../../../pages/CashFlowCanvas/listing"
+import CFCCompare from "../../../pages/CashFlowCanvas/compare"
 import CFCProvider from "../../../state/CFC/provider"
 
 /**
@@ -64,6 +65,9 @@ const PrivateRoutesWrapper = (): ReactElement => {
 				</Route>
 				<Route path={PrivateRoutes.CFCListing}>
 					<CFCListing />
+				</Route>
+				<Route path={PrivateRoutes.CFCCompare}>
+					<CFCCompare />
 				</Route>
 			</CFCProvider>
 

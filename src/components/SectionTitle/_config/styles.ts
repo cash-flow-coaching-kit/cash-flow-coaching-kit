@@ -5,6 +5,9 @@ const useSTStyles = makeStyles((theme) => ({
 	title: {
 		fontWeight: 500,
 		marginBottom: theme.spacing(2),
+		[theme.breakpoints.down("sm")]: {
+			fontSize: theme.typography.h5.fontSize,
+		},
 	},
 }))
 

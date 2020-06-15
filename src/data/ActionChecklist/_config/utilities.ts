@@ -1,4 +1,5 @@
 import Dexie from "dexie"
+import { uniq } from "lodash-es"
 import { PossibleActionItems } from "../../../state/action-checklist/shape"
 import {
 	DatabaseId,
@@ -98,12 +99,13 @@ export async function bulkAddChecklists(
 	const priority = await ActionPriorityUseCase.findById(priorityId)
 	if (!priority) return [items, false]
 
-	const ids = await ActionChecklistUseCase.bulkAdd(items)
+	const ids = await ActionChecklistUseCase.bulkPut(items)
 
 	const newOrder = priority?.order.concat(ids)
+	console.log(uniq(newOrder))
 	await ActionPriorityUseCase.update(priorityId, {
 		...priority,
-		order: newOrder,
+		order: uniq(newOrder),
 	})
 
 	const completedItems = items.map((item, idx) => ({

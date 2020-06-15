@@ -1,14 +1,20 @@
-import { format } from "date-fns"
+import { format, isValid, isSameDay } from "date-fns"
 import { SelectFieldOptions } from "../../SelectField/SelectField"
 import {
 	CanvasType,
 	CFCTimeFrame,
 	CFCStruct,
 	BaseCFCStruct,
+	CFCPanelSlice,
+	CFCId,
+	ClientId,
 } from "../../../data/_config/shape"
 import upperFirst from "../../../util/strings/upperCaseFirst"
-import { pipe } from "../../../util/reduce/math"
+import { pipe, minusBy, add } from "../../../util/reduce/math"
 import concatStr from "../../../util/strings/concatStr"
+import filterById from "../../../util/filters/ById"
+import CFCUseCase from "../../../data/CFC/CFCLogic"
+import { CalculatedValues } from "../../../state/CFC/useCalculated"
 
 type Opts = SelectFieldOptions
 
@@ -78,6 +84,10 @@ export function generateTitle(
 	startDate: Date,
 	endDate: Date
 ): string {
+	if (!isValid(startDate) || !isValid(endDate)) {
+		return "Please provide a valid date"
+	}
+
 	return pipe(
 		concatStr(upperFirst(`${timeframe} `)),
 		concatStr(format(startDate, "dd/MM/yyyy")),
@@ -110,3 +120,136 @@ export const DescriptionSize = 5
 export const AmountSize = 3
 export const ApplyGSTSize = 2
 export const ActionsSize = 2
+
+type DupResponse = false | CFCStruct
+
+/**
+ * Checks if the current config setup is a duplicate of another canvas.
+ *
+ * It either returns the cavnas that is being duplicated or false if it isn't a
+ * duplicate
+ *
+ * @export
+ * @param {CFCStruct} dups
+ * @param {CFCPanelSlice} values
+ * @param {BaseCFCStruct["canvasTitle"]} title
+ * @returns {(boolean | CFCStruct)}
+ */
+export function identifyIfDuplicate(
+	dups: CFCStruct[],
+	values: CFCPanelSlice,
+	canvasId?: CFCId
+): DupResponse {
+	if (dups.length === 0) return false
+	const { canvasTitle, canvasEndDate, canvasStartDate } = values
+
+	const filtered = dups.filter((item) => {
+		if (canvasTitle === "" && item.canvasTitle === "") {
+			return (
+				isSameDay(item.canvasStartDate, canvasStartDate) &&
+				isSameDay(item.canvasEndDate, canvasEndDate)
+			)
+		}
+
+		return item.canvasTitle === canvasTitle
+	})
+
+	if (!canvasId) {
+		return filtered.length < 1 ? false : filtered[0]
+	}
+
+	if (filtered.length < 1) return false
+
+	const withoutCurrentCanvas = filtered.filter(filterById(canvasId, true))
+	return withoutCurrentCanvas.length < 1 ? false : withoutCurrentCanvas[0]
+}
+
+/**
+ * Fetches from the database and does the duplication filter
+ *
+ * @export
+ * @param {CFCPanelSlice} slice
+ * @param {ClientId} client
+ * @param {CFCId} [canvasId]
+ * @returns {Promise<DupResponse>}
+ */
+export async function performDupFind(
+	slice: CFCPanelSlice,
+	client: ClientId,
+	canvasId?: CFCId
+): Promise<DupResponse> {
+	const dups = await CFCUseCase.findPossibleDuplicates(
+		slice.canvasType,
+		slice.canvasTimeFrame,
+		client
+	)
+
+	return identifyIfDuplicate(dups, slice, canvasId)
+}
+
+/**
+ * Calculates the value for Question 1 of 4
+ *
+ * @export
+ * @param {CalculatedValues} calculated
+ * @returns {number}
+ */
+export function calcQuestionOne(calculated: CalculatedValues): number {
+	return calculated.cashSurplus
+}
+
+/**
+ * Calculates the value for Question 2 of 4
+ *
+ * @export
+ * @param {CalculatedValues} calculated
+ * @param {number} payg
+ * @param {number} superAmount
+ * @param {number} incomeTax
+ * @returns {number}
+ */
+export function calcQuestionTwo(
+	calculated: CalculatedValues,
+	payg: number,
+	superAmount: number,
+	incomeTax: number
+): number {
+	return pipe(
+		minusBy(calculated.gstOnPurchases),
+		add(payg),
+		add(superAmount),
+		add(incomeTax)
+	)(calculated.gstOnSales)
+}
+
+/**
+ * Calculates the value for Question 3 of 4
+ *
+ * @export
+ * @param {number} openingBalance
+ * @param {CalculatedValues} calculated
+ * @param {number} incomeTax
+ * @returns {number}
+ */
+export function calcQuestionThree(
+	openingBalance: number,
+	calculated: CalculatedValues,
+	incomeTax: number
+): number {
+	return pipe(add(calculated.cashSurplus), minusBy(incomeTax))(openingBalance)
+}
+
+/**
+ * Calculates the value for Question 4 of 4
+ *
+ * @export
+ * @param {CalculatedValues} left
+ * @param {CalculatedValues} right
+ * @returns {number}
+ */
+export function calcQuestionFour(
+	left: CalculatedValues,
+	right: CalculatedValues
+): number {
+	return left.totalNetAssets - right.totalNetAssets
+}

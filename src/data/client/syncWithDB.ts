@@ -4,6 +4,11 @@ import {
 	ClientActionTypes,
 } from "../../state/client/client-outline"
 import ClientUseCase from "./ClientLogic"
+import {
+	getStorageClient,
+	emptyClientValue,
+} from "../../util/localStorage/client"
+import filterById from "../../util/filters/ById"
 
 /**
  * Syncs the client state with the db
@@ -22,11 +27,23 @@ const syncClientsWithDb = async (
 		payload: clients,
 	})
 
-	if (clients[0]?.id) {
-		dispatch({
-			type: ClientActionTypes.ChangeCurrentClient,
-			payload: clients[0].id,
-		})
+	const currentStorageClient = getStorageClient()
+
+	if (!currentStorageClient || currentStorageClient === emptyClientValue) {
+		if (clients[0]?.id) {
+			dispatch({
+				type: ClientActionTypes.ChangeCurrentClient,
+				payload: clients[0].id,
+			})
+		}
+	} else {
+		const filtered = clients.filter(filterById(currentStorageClient))
+		if (filtered[0]?.id) {
+			dispatch({
+				type: ClientActionTypes.ChangeCurrentClient,
+				payload: filtered[0].id,
+			})
+		}
 	}
 
 	dispatch({

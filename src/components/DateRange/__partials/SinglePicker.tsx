@@ -84,6 +84,7 @@ function SinglePicker({
 			onClose={onClose}
 			label={label}
 			renderDay={renderDay(compareDay)}
+			fullWidth
 		/>
 	)
 }
