@@ -9,3 +9,5 @@ export type DatabaseNames =
 	| "CFCDatabase"
 
 export type ExportClientResult = Record<DatabaseNames, JSONDataResult>
+
+export type ImportResponse = (boolean | Error)[]

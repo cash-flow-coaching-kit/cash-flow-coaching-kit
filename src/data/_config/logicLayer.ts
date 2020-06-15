@@ -189,6 +189,10 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 			return this.table.get(id)
 		})
 	}
+
+	public last(): Promise<E | undefined> {
+		return this.table.toCollection().last()
+	}
 }
 
 export default ILogicLayer

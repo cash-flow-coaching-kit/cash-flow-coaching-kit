@@ -6,7 +6,7 @@ import ActionChecklistDB from "../../../data/ActionChecklist/ActionChecklistData
 import CFCDB from "../../../data/CFC/CFCDatabase"
 import ClientUseCase from "../../../data/client/ClientLogic"
 import { ClientId } from "../../../data/_config/shape"
-import ImportClient, { loadBlobAsJSON, validateJSONData } from ".."
+import ImportClient, { loadBlobAsJSON, validateJSONData, overwriteClientIds } from ".."
 import HealthCheckUseCase from "../../../data/healthChecks/HealthCheckLogic"
 import ActionChecklistUseCase from "../../../data/ActionChecklist/ChecklistLogic"
 import ActionPriorityUseCase from "../../../data/ActionChecklist/PriorityLogic"
@@ -192,6 +192,8 @@ describe("Unit tests for importing client data", () => {
       catch (e) {
         expect(e.message).toEqual("Reading a file requires a valid file to be passed")
       }
+
+      await clean_after_import()
     })
 
     test("Passing a blob with invalid keys", async function() {
@@ -200,6 +202,8 @@ describe("Unit tests for importing client data", () => {
       catch (e) {
         expect(e.message).toEqual("Imported data doesn't follow the correct structure. Ensure you have selected the correct export file")
       }
+
+      await clean_after_import()
     })
 
     test("Should return an array of false items", async function() {
@@ -211,6 +215,8 @@ describe("Unit tests for importing client data", () => {
       })])
       const res = await ImportClient(b)
       expect(res).toEqual([false, false, false, false])
+
+      await clean_after_import()
     })
 
     test("Should reject an invalid object", async function() {
@@ -224,6 +230,8 @@ describe("Unit tests for importing client data", () => {
       catch (e) {
         expect(e.message).toEqual("Imported data doesn't follow the correct structure. Ensure you have selected the correct export file")
       }
+
+      await clean_after_import()
     })
 
     test("Pass invalid structure to Dexie import", async function() {
@@ -240,5 +248,20 @@ describe("Unit tests for importing client data", () => {
 
       await clean_after_import()
     })
+  })
+
+  it("should replace the client id if not overwriting", async function() {
+    await prefillDatabase()
+
+    const last = await ClientUseCase.last()
+    const lastId = last.id + 10
+
+    const json = await loadBlobAsJSON(blob)
+    const newJSON = await overwriteClientIds(json)
+
+    expect(newJSON.ClientDatabase?.data.data[0].rows[0].id).toEqual(lastId)
+    expect(newJSON.CFCDatabase?.data.data[0].rows[0].clientId).toEqual(lastId)
+
+    await clean_after_import()
   })
 })

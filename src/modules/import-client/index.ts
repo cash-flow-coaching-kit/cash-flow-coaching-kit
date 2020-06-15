@@ -1,13 +1,18 @@
 import Dexie from "dexie"
-import { isEqual } from "lodash-es"
+import { isEqual, set } from "lodash-es"
 import { DexieExportJsonStructure } from "dexie-export-import/dist/json-structure"
 import { importInto } from "dexie-export-import"
-import { ExportClientResult, DatabaseNames } from "../__config/shape"
+import {
+	ExportClientResult,
+	DatabaseNames,
+	ImportResponse,
+} from "../__config/shape"
 import readFile from "../../util/readFile"
 import ClientDB from "../../data/client/ClientDatabase"
 import HealthCheckDB from "../../data/healthChecks/HealthCheckDatabase"
 import ActionChecklistDB from "../../data/ActionChecklist/ActionChecklistDatabase"
 import CFCDB from "../../data/CFC/CFCDatabase"
+import ClientUseCase from "../../data/client/ClientLogic"
 
 /**
  * Reads a blob into text
@@ -75,20 +80,76 @@ export function validateJSONData(data: any): boolean {
 
 export async function importToDatabase(
 	db: Dexie,
-	data: DexieExportJsonStructure
+	data: DexieExportJsonStructure,
+	overwrite: boolean
 ): Promise<Error | boolean> {
 	const blob = new Blob([JSON.stringify(data)])
 	try {
-		await importInto(db, blob)
+		await importInto(db, blob, {
+			overwriteValues: overwrite,
+		})
 		return true
 	} catch (e) {
 		return e
 	}
 }
 
+/**
+ * Estimates a new client id and replaces the client ids in the imported json
+ * data
+ *
+ * @export
+ * @param {ExportClientResult} json
+ * @returns {Promise<ExportClientResult>}
+ */
+export async function overwriteClientIds(
+	json: ExportClientResult
+): Promise<ExportClientResult> {
+	// Estimates a new client id based on the last client record
+	const lastClient = await ClientUseCase.last()
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	const newId = lastClient!.id! + 10
+
+	// Ser the client database client record
+	set(json, "ClientDatabase.data.data[0].rows[0].id", newId)
+	const objectPaths: DatabaseNames[] = [
+		"HealthCheckDatabase",
+		"ActionChecklistDatabase",
+		"CFCDatabase",
+	]
+
+	// Goes through the other keys and replaces the key for each of the client
+	// ids with the estimated id
+	objectPaths.forEach((key) => {
+		if (json[key] !== null) {
+			const dataArr = json[key]?.data.data
+			if (dataArr) {
+				dataArr.forEach((data, dIdx) => {
+					const { rows } = data
+					if (rows) {
+						rows.forEach((row, rIdx) => {
+							set(
+								json,
+								`${key}.data.data[${dIdx}].rows[${rIdx}].clientId`,
+								newId
+							)
+							// Remove the record id to avoid key duplications
+							// eslint-disable-next-line
+							delete row.id
+						})
+					}
+				})
+			}
+		}
+	})
+
+	return json
+}
+
 export default async function ImportClient(
-	blob: Blob
-): Promise<(boolean | Error)[]> {
+	blob: Blob,
+	overwrite = true
+): Promise<ImportResponse> {
 	try {
 		const json = await loadBlobAsJSON(blob)
 
@@ -104,18 +165,24 @@ export default async function ImportClient(
 			)
 		}
 
+		const data = !overwrite ? await overwriteClientIds(json) : json
+
 		const promises = [
-			json.ClientDatabase
-				? importToDatabase(ClientDB, json.ClientDatabase)
+			data.ClientDatabase
+				? importToDatabase(ClientDB, data.ClientDatabase, overwrite)
 				: Promise.resolve(false),
-			json.HealthCheckDatabase
-				? importToDatabase(HealthCheckDB, json.HealthCheckDatabase)
+			data.HealthCheckDatabase
+				? importToDatabase(HealthCheckDB, data.HealthCheckDatabase, overwrite)
 				: Promise.resolve(false),
-			json.ActionChecklistDatabase
-				? importToDatabase(ActionChecklistDB, json.ActionChecklistDatabase)
+			data.ActionChecklistDatabase
+				? importToDatabase(
+						ActionChecklistDB,
+						data.ActionChecklistDatabase,
+						overwrite
+				  )
 				: Promise.resolve(false),
-			json.CFCDatabase
-				? importToDatabase(CFCDB, json.CFCDatabase)
+			data.CFCDatabase
+				? importToDatabase(CFCDB, data.CFCDatabase, overwrite)
 				: Promise.resolve(false),
 		]
 
