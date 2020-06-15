@@ -3,7 +3,6 @@ import { Grid, Typography } from "@material-ui/core"
 import ExpandableNav from "../../components/ExpandableNav"
 import ChecklistModal from "../../components/ChecklistModal"
 import useChangeLeversStyles from "./styles"
-import Spacer from "../../components/Spacer"
 
 // #region Change Prices list content
 function ChangePricesListContent(): ReactElement {
