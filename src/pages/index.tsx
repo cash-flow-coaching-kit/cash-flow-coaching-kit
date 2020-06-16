@@ -195,8 +195,8 @@ const Homepage = (): ReactElement => {
 							<NewClientDialog triggerText="Get Started" />
 						)}
 					</Box>
-					<Grid container spacing={3} className={styles.grid}>
-						<Grid item xs={12} md={6}>
+					<Grid container spacing={3} className={styles.grid} justify="center">
+						{/* <Grid item xs={12} md={6}>
 							<Card variant="outlined">
 								<CardHeader title="Take a tour of the kit" />
 								<CardMedia
@@ -214,7 +214,7 @@ const Homepage = (): ReactElement => {
 									</Button>
 								</CardActions>
 							</Card>
-						</Grid>
+						</Grid> */}
 						<Grid item xs={12} md={6}>
 							<Card variant="outlined">
 								<CardHeader title="What advisors think of the kit" />
