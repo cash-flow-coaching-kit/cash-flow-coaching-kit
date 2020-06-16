@@ -49,7 +49,7 @@ const ClientList = ({
 	return (
 		<List>
 			{clients.map((client, idx) => (
-				<ListItem key={constructKey(key, idx)}>
+				<ListItem key={constructKey(key, idx)} className="list-item-padded">
 					<ListItemIcon>
 						<Tooltip title="Manage client">
 							<Radio
@@ -63,7 +63,7 @@ const ClientList = ({
 							/>
 						</Tooltip>
 					</ListItemIcon>
-					<ListItemText primary={client.name} />
+					<ListItemText className="truncate" primary={client.name} />
 					<ListItemSecondaryAction>
 						<Tooltip title="Export data">
 							<IconButton>
