@@ -185,9 +185,7 @@ const Questionnaire = ({
 												}
 											}}
 										>
-											{isFinalQuestion()
-												? "Submit questionnaire"
-												: "Next question"}
+											{isFinalQuestion() ? "View results" : "Next question"}
 										</Button>
 									</Box>
 								</StepContent>
