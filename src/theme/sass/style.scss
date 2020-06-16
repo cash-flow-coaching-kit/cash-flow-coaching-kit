@@ -22,11 +22,10 @@ code {
 }
 
 .truncate {
-	flex: 1;
-
 	> *:first-child {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		display: block;
 	}
 }

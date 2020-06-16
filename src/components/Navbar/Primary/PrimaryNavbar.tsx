@@ -29,8 +29,11 @@ const PrimaryNavbar = (): ReactElement => {
 								<Typography className={styles.clientCaption} variant="caption">
 									Client
 								</Typography>
-								<Typography className={styles.clientName} variant="h6">
-									{currentClient.name}
+								<Typography
+									className={`${styles.clientName} truncate`}
+									variant="h6"
+								>
+									<span>{currentClient.name}</span>
 								</Typography>
 							</Grid>
 						) : (
