@@ -8,6 +8,10 @@ import { INavRoutes } from "../../_config/shape"
 // Nav routes definition for the Secondary navigation
 export const routes: INavRoutes[] = [
 	{
+		route: PrivateRoutes.CoachingKit,
+		title: "Get Started",
+	},
+	{
 		route: routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [[":id?", ""]]),
 		title: "Health Check",
 	},

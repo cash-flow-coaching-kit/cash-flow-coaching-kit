@@ -16,7 +16,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu"
 import { useHistory } from "react-router-dom"
 import Logo from "../../Logo"
-import { PrivateRoutes } from "../../../util/routes/routes"
+import { PublicRoutes } from "../../../util/routes/routes"
 import { routes as secondaryRoutes } from "../Secondary/_config/data"
 import { routes as primaryRoutes } from "../Primary/_config/data"
 import { INavRoutes } from "../_config/shape"
@@ -113,7 +113,7 @@ export default function MobileNavbar(): ReactElement {
 						<MenuIcon />
 					</IconButton>
 					<Box className={cls.logo}>
-						<Logo to={PrivateRoutes.CoachingKit} />
+						<Logo to={PublicRoutes.Home} />
 					</Box>
 					<Divider orientation="vertical" flexItem className={cls.divider} />
 					<Box className={cls.clientBox}>
