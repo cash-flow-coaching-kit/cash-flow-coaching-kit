@@ -17,9 +17,9 @@ import {
 	List,
 	ListItem,
 } from "@material-ui/core"
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { PageContainer } from "../components/Layouts"
 import { PrivateRoutes, routeVarReplacement } from "../util/routes/routes"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import PageTip from "../components/PageTip"
 
 const CoachingKit = (): ReactElement => {
@@ -91,7 +91,7 @@ const CoachingKit = (): ReactElement => {
 						id="four-questions-header"
 					>
 						<Typography variant="h6" component="h2">
-							What are the <em> Four Key Questions</em>
+							What are the <em> Four Key Questions</em>?
 						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
