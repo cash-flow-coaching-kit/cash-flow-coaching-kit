@@ -86,6 +86,7 @@ const DateRange = memo(function DateRange({
 					onChange("canvasStartDate", date)
 				} else {
 					onChange("canvasEndDate", date)
+					onClose()
 				}
 			}
 		},

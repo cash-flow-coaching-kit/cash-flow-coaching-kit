@@ -28,6 +28,7 @@ export default function Form({
 }: FormProps): ReactElement {
 	const [key] = useState(generateKey())
 	const style = useFormStyles()
+	const [datepickerOpen, setDatepickerOpen] = useState<number>()
 
 	// #region Formik definition
 	const initialValues: FormValues = {
@@ -94,6 +95,7 @@ export default function Form({
 		)
 
 		updateItemsState(newItems)
+		setDatepickerOpen(undefined)
 	}
 	// #endregion
 
@@ -185,6 +187,9 @@ export default function Form({
 								"aria-label": "change date",
 							}}
 							className={style.input}
+							open={datepickerOpen === idx}
+							onOpen={(): void => setDatepickerOpen(idx)}
+							onClose={(): void => setDatepickerOpen(undefined)}
 						/>
 					</MuiPickersUtilsProvider>
 				</Grid>
