@@ -1,13 +1,20 @@
 import { ThemeOptions, createMuiTheme } from "@material-ui/core"
+import {
+	green,
+	deepOrange,
+	lightBlue,
+	purple,
+	indigo,
+} from "@material-ui/core/colors"
 
 export const defaultTheme: ThemeOptions = {
 	...createMuiTheme(),
 	palette: {
 		primary: {
-			main: "#3f51b5",
+			main: indigo["500"],
 		},
 		secondary: {
-			main: "#7986cb",
+			main: indigo["300"],
 		},
 	},
 }
@@ -16,10 +23,10 @@ export const applyTheme: ThemeOptions = {
 	...defaultTheme,
 	palette: {
 		primary: {
-			main: "#43A047",
+			main: green["600"],
 		},
 		secondary: {
-			main: "#a5d6a7",
+			main: green["200"],
 		},
 	},
 }
@@ -28,10 +35,10 @@ export const discoverTheme: ThemeOptions = {
 	...defaultTheme,
 	palette: {
 		primary: {
-			main: "#9c27b0",
+			main: purple["500"],
 		},
 		secondary: {
-			main: "#ce93d8",
+			main: purple["200"],
 		},
 	},
 }
@@ -40,10 +47,10 @@ export const planActionTheme: ThemeOptions = {
 	...defaultTheme,
 	palette: {
 		primary: {
-			main: "#0091ea",
+			main: lightBlue.A700,
 		},
 		secondary: {
-			main: "#81d4f4",
+			main: lightBlue["200"],
 		},
 	},
 }
@@ -52,10 +59,10 @@ export const settingsTheme: ThemeOptions = {
 	...defaultTheme,
 	palette: {
 		primary: {
-			main: "#ff3d00",
+			main: deepOrange.A400,
 		},
 		secondary: {
-			main: "#ce93d8",
+			main: deepOrange["300"],
 		},
 	},
 }
