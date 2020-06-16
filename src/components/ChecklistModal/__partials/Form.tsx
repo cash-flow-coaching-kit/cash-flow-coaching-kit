@@ -13,8 +13,6 @@ import { FormProps, FormValues, FormItem } from "../__config/shape"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import { createNewFormItem } from "../__config/utilities"
 import { useFormStyles } from "../__config/styles"
-import SnackbarMsg from "../../SnackbarMsg"
-import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
 
 /**
  * Form component for the `ChecklistModal` component
@@ -23,34 +21,13 @@ import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
  * @param {FormProps} { onFormSubmission }
  * @returns {ReactElement}
  */
-export default function Form({ onFormSubmission }: FormProps): ReactElement {
+export default function Form({
+	onFormSubmission,
+	closeModal,
+	showSnackbar,
+}: FormProps): ReactElement {
 	const [key] = useState(generateKey())
-	const [snackbar, setSnackbar] = useState<SnackbarMsgData>({
-		open: false,
-		msg: "",
-	})
 	const style = useFormStyles()
-
-	// #region Snackbar methods
-	function handleClose(event?: React.SyntheticEvent, reason?: string): void {
-		if (reason === "clickaway") {
-			return
-		}
-
-		setSnackbar({ ...snackbar, open: false })
-	}
-
-	function showSnackbar(
-		msg: SnackbarMsgData["msg"],
-		severity: SnackbarMsgData["severity"]
-	): void {
-		setSnackbar({
-			open: true,
-			msg,
-			severity,
-		})
-	}
-	// #endregion
 
 	// #region Formik definition
 	const initialValues: FormValues = {
@@ -77,6 +54,7 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 			if (success) {
 				form.resetForm()
 				showSnackbar("Action items have been added", "success")
+				closeModal()
 			} else {
 				showSnackbar("Something went wrong, please try again", "warning")
 			}
@@ -223,14 +201,6 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 
 	return (
 		<>
-			{/* Message snackbar */}
-			<SnackbarMsg
-				open={snackbar.open}
-				severity={snackbar.severity}
-				onClose={handleClose}
-				msg={snackbar.msg}
-			/>
-
 			<form
 				noValidate
 				autoComplete="off"

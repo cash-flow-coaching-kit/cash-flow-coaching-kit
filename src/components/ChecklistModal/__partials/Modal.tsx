@@ -51,6 +51,7 @@ export default function Modal({
 	subtitle,
 	children,
 	container,
+	showSnackbar,
 }: ModalProps): ReactElement {
 	const styles = useModalStyles()
 	const [submitting, setSubmitting] = useState<boolean>(false)
@@ -146,7 +147,11 @@ export default function Modal({
 			{/* Dialog Content */}
 			<DialogContent>
 				<Typography variant="h5">{subtitle}</Typography>
-				<Form onFormSubmission={onFormSubmission} />
+				<Form
+					onFormSubmission={onFormSubmission}
+					closeModal={onClose}
+					showSnackbar={showSnackbar}
+				/>
 				<ConditionalChildren node={children} />
 			</DialogContent>
 
