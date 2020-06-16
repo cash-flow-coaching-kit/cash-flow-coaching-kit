@@ -93,6 +93,8 @@ const DTPlanningBusiness = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Kirras-native-foods.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Kirra's Native Foods
 										</Button>
@@ -112,6 +114,8 @@ const DTPlanningBusiness = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Sanjanas-restaurant.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Sanjana's Restaurant
 										</Button>
@@ -323,6 +327,8 @@ const DTPlanningBusiness = (): ReactElement => {
 						size="large"
 						startIcon={<PictureAsPdf />}
 						href="/pdf/BusinessPlan-Activity.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						Build your own business plan
 					</Button>

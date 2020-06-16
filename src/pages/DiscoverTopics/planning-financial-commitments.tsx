@@ -92,7 +92,12 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 										src="https://www.youtube.com/embed/FSJsiEaRNRU"
 									/>
 									<CardActions>
-										<Button color="primary" href="/transcripts/Micks-farm.docx">
+										<Button
+											color="primary"
+											href="/transcripts/Micks-farm.docx"
+											target="_blank"
+											rel="noopener noreferrer"
+										>
 											Download Transcript: Mick's Farm
 										</Button>
 									</CardActions>
@@ -111,6 +116,8 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Mings-disability-services.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Ming's Disability Services
 										</Button>
@@ -346,6 +353,8 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						size="large"
 						startIcon={<PictureAsPdf />}
 						href="/pdf/KnowYourCommitments-Activity.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						Identify and map your commitments
 					</Button>

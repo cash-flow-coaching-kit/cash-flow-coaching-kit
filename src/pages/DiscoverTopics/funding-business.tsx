@@ -90,6 +90,8 @@ const DTFundingBusiness = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Tamakos-funding.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Tamako's Funding
 										</Button>
@@ -109,6 +111,8 @@ const DTFundingBusiness = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Charlottes-loans.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Charlotte's Loans
 										</Button>
@@ -434,6 +438,8 @@ const DTFundingBusiness = (): ReactElement => {
 						size="large"
 						startIcon={<PictureAsPdf />}
 						href="/pdf/Funding-Activity.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						Download your own
 						<br />

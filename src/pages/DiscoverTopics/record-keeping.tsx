@@ -96,6 +96,8 @@ const DTRecordKeeping = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Edens-digital-records.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Eden's Digital Records
 										</Button>
@@ -115,6 +117,8 @@ const DTRecordKeeping = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Lisas-Paper-records.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Lisa's Paper Records
 										</Button>
@@ -312,6 +316,9 @@ const DTRecordKeeping = (): ReactElement => {
 						color="primary"
 						size="large"
 						startIcon={<PictureAsPdf />}
+						href="/pdf/RecordKeeping-Activity.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						Download record keeping activity
 					</Button>
