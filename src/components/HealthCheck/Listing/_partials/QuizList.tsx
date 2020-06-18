@@ -1,21 +1,19 @@
-import React, { ReactElement, useState, MouseEvent } from "react"
+import React, { ReactElement, MouseEvent, useCallback } from "react"
 import {
 	List,
 	ListItem,
 	ListItemText,
 	ListItemSecondaryAction,
-	IconButton,
-	Tooltip,
 } from "@material-ui/core"
-import { Link } from "react-router-dom"
 import { format } from "date-fns"
-import DeleteIcon from "@material-ui/icons/Delete"
-import { constructKey, generateKey } from "../../../../util/lists/key"
 import {
 	routeVarReplacement,
 	PrivateRoutes,
 } from "../../../../util/routes/routes"
 import { IQuizListProps } from "../_config/shape"
+import IconDeleteButtonwDialog from "../../../IconDeleteButton/IconDeleteButtonwDialog"
+import { HealthCheckId } from "../../../../data/_config/shape"
+import ViewIconButton from "../../../ViewIconButton"
 
 /**
  * Renders a list of completed health checks
@@ -28,20 +26,19 @@ const QuizList = ({
 	clientQuizzes,
 	removeHealthCheck,
 }: IQuizListProps): ReactElement => {
-	const [key] = useState(generateKey())
+	const removeItem = useCallback(
+		(id: HealthCheckId) => (e: MouseEvent<HTMLButtonElement>): void => {
+			e.preventDefault()
+			removeHealthCheck(id)
+		},
+		[removeHealthCheck]
+	)
 
 	return (
 		<List>
 			{clientQuizzes.map(
-				(quiz, idx): ReactElement => (
-					<ListItem
-						key={constructKey(key, idx)}
-						button
-						component={Link}
-						to={routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
-							[":id", `${quiz.id}`],
-						])}
-					>
+				(quiz): ReactElement => (
+					<ListItem key={quiz.id} className="list-item-padded">
 						<ListItemText
 							primary="Completed Health Check"
 							secondary={
@@ -51,16 +48,12 @@ const QuizList = ({
 							}
 						/>
 						<ListItemSecondaryAction>
-							<Tooltip title="Delete">
-								<IconButton
-									onClick={(e: MouseEvent<HTMLButtonElement>): void => {
-										e.preventDefault()
-										removeHealthCheck(quiz.id || "")
-									}}
-								>
-									<DeleteIcon />
-								</IconButton>
-							</Tooltip>
+							<ViewIconButton
+								goTo={routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
+									[":id", `${quiz.id}`],
+								])}
+							/>
+							<IconDeleteButtonwDialog onClick={removeItem(quiz.id || "")} />
 						</ListItemSecondaryAction>
 					</ListItem>
 				)

@@ -1,11 +1,13 @@
-import React, {
-	useState,
-	ReactElement,
-	useEffect,
-	MouseEvent,
-	useContext,
-} from "react"
-import { Box, Typography, Grid, Button } from "@material-ui/core"
+import React, { useState, ReactElement, useEffect, MouseEvent } from "react"
+import {
+	Box,
+	Grid,
+	Button,
+	Stepper,
+	Step,
+	StepLabel,
+	StepContent,
+} from "@material-ui/core"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import { useHistory } from "react-router-dom"
@@ -13,13 +15,13 @@ import { useQuestionnaireStyles } from "./_config/styles"
 import { questions } from "../_config/data"
 import { IQuestionStructure, QuestionOptions } from "../_config/shape"
 import { constructKey, generateKey } from "../../../util/lists/key"
-import { ClientContext } from "../../../state/client"
 import { routeVarReplacement, PrivateRoutes } from "../../../util/routes/routes"
 import { OptionTile } from "./_partials"
 import NoClientError from "../../NoClientError"
 import { IQuestionnaireProps } from "./_config/shape"
 import HealthCheckUseCase from "../../../data/healthChecks/HealthCheckLogic"
 import { newTimestamp } from "../../../util/dates"
+import useCurrentClient from "../../../state/client/useCurrentClient"
 
 /**
  * Questionnaire component for the Health checks
@@ -31,9 +33,7 @@ const Questionnaire = ({
 	previousAnswers = [],
 	dbID,
 }: IQuestionnaireProps): ReactElement => {
-	const {
-		state: { currentClient },
-	} = useContext(ClientContext)
+	const [currentClient] = useCurrentClient()
 	const styles = useQuestionnaireStyles()
 	const [answers, setAnswers] = useState<QuestionOptions[]>(previousAnswers)
 	const [questionCount, setQuestionCount] = useState<number>(0)
@@ -42,6 +42,7 @@ const Questionnaire = ({
 	)
 	const [key] = useState(generateKey())
 	const history = useHistory()
+	const stepLabels: string[] = questions.map((q) => q.question)
 
 	useEffect(() => {
 		setCurrentQuestion(questions[questionCount])
@@ -100,10 +101,7 @@ const Questionnaire = ({
 	 * @returns Promise<void>
 	 */
 	const handleSubmit = async (): Promise<void> => {
-		if (
-			typeof currentClient === "undefined" ||
-			typeof currentClient.id === "undefined"
-		) {
+		if (!currentClient?.id) {
 			// eslint-disable-next-line no-alert
 			alert(
 				"A client needs to be selected, please add or select a client before submitting"
@@ -131,60 +129,73 @@ const Questionnaire = ({
 
 	return (
 		<Box>
-			<Typography variant="subtitle1" className={styles.subtitle}>
-				Question {questionCount + 1}
-			</Typography>
-			<Typography variant="h4" className={styles.title}>
-				{currentQuestion.question}
-			</Typography>
-
 			<NoClientError />
 
-			<Grid container spacing={2}>
-				{(Object.keys(currentQuestion.options) as QuestionOptions[]).map(
-					(option: QuestionOptions, idx: number): ReactElement => (
-						<Grid item xs={4} key={constructKey(key, idx)}>
-							<OptionTile
-								optionKey={option}
-								option={currentQuestion.options[option]}
-								changeAnswer={changeAnswer}
-								currentAnswer={answers[questionCount] || false}
-							/>
-						</Grid>
-					)
+			<Stepper
+				activeStep={questionCount}
+				orientation="vertical"
+				style={{ paddingLeft: 0, paddingRight: 0 }}
+			>
+				{stepLabels.map(
+					(label): ReactElement => {
+						return (
+							<Step key={label}>
+								<StepLabel>{label}</StepLabel>
+								<StepContent>
+									<Grid container spacing={2}>
+										{(Object.keys(
+											currentQuestion.options
+										) as QuestionOptions[]).map(
+											(option: QuestionOptions, idx: number): ReactElement => (
+												<Grid item xs={12} sm={4} key={constructKey(key, idx)}>
+													<OptionTile
+														optionKey={option}
+														option={currentQuestion.options[option]}
+														changeAnswer={changeAnswer}
+														currentAnswer={answers[questionCount] || false}
+													/>
+												</Grid>
+											)
+										)}
+									</Grid>
+									<Box className={styles.actions}>
+										<Button
+											startIcon={<ChevronLeftIcon />}
+											variant="outlined"
+											color="primary"
+											disabled={questionCount === 0}
+											onClick={(e: MouseEvent<HTMLButtonElement>): void => {
+												e.preventDefault()
+												setQuestionCount(questionCount - 1)
+											}}
+										>
+											Previous question
+										</Button>
+										<Button
+											endIcon={<ChevronRightIcon />}
+											variant="contained"
+											color="primary"
+											disabled={typeof answers[questionCount] === "undefined"}
+											onClick={(e: MouseEvent<HTMLButtonElement>): void => {
+												e.preventDefault()
+												if (!isFinalQuestion()) {
+													setQuestionCount(questionCount + 1)
+												} else {
+													handleSubmit()
+												}
+											}}
+										>
+											{isFinalQuestion()
+												? "Submit questionnaire"
+												: "Next question"}
+										</Button>
+									</Box>
+								</StepContent>
+							</Step>
+						)
+					}
 				)}
-			</Grid>
-
-			<Box className={styles.actions}>
-				<Button
-					startIcon={<ChevronLeftIcon />}
-					variant="outlined"
-					color="primary"
-					disabled={questionCount === 0}
-					onClick={(e: MouseEvent<HTMLButtonElement>): void => {
-						e.preventDefault()
-						setQuestionCount(questionCount - 1)
-					}}
-				>
-					Previous question
-				</Button>
-				<Button
-					endIcon={<ChevronRightIcon />}
-					variant="contained"
-					color="primary"
-					disabled={typeof answers[questionCount] === "undefined"}
-					onClick={(e: MouseEvent<HTMLButtonElement>): void => {
-						e.preventDefault()
-						if (!isFinalQuestion()) {
-							setQuestionCount(questionCount + 1)
-						} else {
-							handleSubmit()
-						}
-					}}
-				>
-					{isFinalQuestion() ? "Submit questionnaire" : "Next question"}
-				</Button>
-			</Box>
+			</Stepper>
 		</Box>
 	)
 }

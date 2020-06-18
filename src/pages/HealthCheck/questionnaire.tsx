@@ -54,7 +54,7 @@ const HCQuestionnaire = (): ReactElement => {
 		<>
 			<PageContainer>
 				<Grid container spacing={3}>
-					<Grid item xs={9}>
+					<Grid item xs={12} md={9}>
 						<Typography variant="h5" align="center">
 							Ten easy questions to learn more about the health of your business
 						</Typography>
@@ -67,7 +67,7 @@ const HCQuestionnaire = (): ReactElement => {
 							/>
 						)}
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item xs={12} md={3}>
 						<FourQuestions />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
