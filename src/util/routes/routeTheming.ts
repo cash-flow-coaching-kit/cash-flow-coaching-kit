@@ -30,10 +30,7 @@ const discoverThemeRoutes: string[] = [
 	routeVarReplacement(PrivateRoutes.HealthCheckSummary, [[":id", ""]]),
 ]
 const planActionThemeRoutes: string[] = [PrivateRoutes.ActionChecklist]
-const settingsThemeRoutes: string[] = [
-	PrivateRoutes.SessionFiles,
-	PrivateRoutes.CoachingKit,
-]
+const settingsThemeRoutes: string[] = [PrivateRoutes.SessionFiles]
 
 function determineTheme(pathname: string): Theme {
 	const path = `${pathname.replace(/[\d]+?$/g, "")}`
