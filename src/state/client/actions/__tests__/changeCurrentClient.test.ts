@@ -3,6 +3,7 @@ import { ClientDataStruct, ClientId } from "../../../../data/_config/shape"
 import bulkAdd from "../bulkAdd"
 import { ClientReducer } from "../.."
 import changeCurrentClient from "../changeCurrentClient"
+import { getStorageClient, emptyClientValue } from "../../../../util/localStorage/client"
 
 describe("Change the state when adding a client", () => {
   let state: IClientState
@@ -29,7 +30,13 @@ describe("Change the state when adding a client", () => {
   it("adds all the clients into state", function() {
     const newState = changeCurrentClient(state, payload)
     expect(newState.state.currentClient).not.toBeUndefined()
+    expect(getStorageClient()).toBe(1)
     expect(newState.state.currentClient).toMatchObject(client)
+  })
+
+  it("sets the current client to -1", function() {
+    const newState = changeCurrentClient(state, 69)
+    expect(getStorageClient()).toBe(emptyClientValue)
   })
 
   it("should not mutate the arguements", function() {

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react"
+import React, { ReactElement, useState, Fragment } from "react"
 import {
 	AppBar,
 	Toolbar,
@@ -47,6 +47,12 @@ const useStyles = makeStyles((theme) => ({
 			width: "100%",
 		},
 	},
+	childList: {
+		marginLeft: theme.spacing(3),
+		marginBottom: theme.spacing(1),
+		paddingTop: 0,
+		borderBottom: `1px solid ${theme.palette.divider}`,
+	},
 }))
 
 /**
@@ -72,14 +78,26 @@ export default function MobileNavbar(): ReactElement {
 
 	const renderRoutes = (route: INavRoutes): ReactElement => {
 		return (
-			<ListItem button key={route.route} onClick={goTo(route.route)}>
-				{route.Icon && (
-					<ListItemIcon>
-						<route.Icon />
-					</ListItemIcon>
+			<Fragment key={route.route}>
+				<ListItem button onClick={goTo(route.route)}>
+					{route.Icon && (
+						<ListItemIcon>
+							<route.Icon />
+						</ListItemIcon>
+					)}
+					<ListItemText primary={route.title} />
+				</ListItem>
+
+				{route.children ? (
+					<>
+						<List className={cls.childList}>
+							{route.children.map(renderRoutes)}
+						</List>
+					</>
+				) : (
+					<></>
 				)}
-				<ListItemText primary={route.title} />
-			</ListItem>
+			</Fragment>
 		)
 	}
 

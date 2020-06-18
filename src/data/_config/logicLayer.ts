@@ -171,6 +171,12 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 		})
 	}
 
+	public bulkPut(items: E[]): Promise<I[]> {
+		return this.database.transaction("rw", this.table.name, () => {
+			return this.table.bulkPut<true>(items, { allKeys: true })
+		})
+	}
+
 	/**
 	 * Method to get an item from the database used an ID
 	 *

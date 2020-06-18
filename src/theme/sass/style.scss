@@ -28,3 +28,7 @@ code {
 	white-space: nowrap;
 	border-width: 0;
 }
+
+.list-item-padded {
+	padding-right: calc(48px * 2) !important;
+}

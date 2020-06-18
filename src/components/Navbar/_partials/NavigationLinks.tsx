@@ -107,6 +107,7 @@ const NavigationRoutes = ({
 								childRoutes={route.children}
 								// eslint-disable-next-line react/jsx-props-no-spreading
 								{...buttonProps}
+								key={constructKey(key, idx)}
 							/>
 						)
 					}
