@@ -5,10 +5,10 @@ import AddIcon from "@material-ui/icons/Add"
 import PublishIcon from "@material-ui/icons/Publish"
 import { useHistory, useLocation } from "react-router-dom"
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered"
-import CompareArrowsIcon from "@material-ui/icons/CompareArrows"
 import ExpandableNav from "../ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
 import CopyCanvasTrigger from "./CopyCanvasTrigger"
+import { ControlCompareLink } from "../CFCCompare"
 
 /**
  * Canvas page control panel component
@@ -29,25 +29,29 @@ export default function ControlPanel(): ReactElement {
 		return location.pathname === PrivateRoutes.CFC
 	}
 
+	const isCompare = (): boolean => {
+		return location.pathname === PrivateRoutes.CFCCompare
+	}
+
 	return (
 		<ExpandableNav>
 			<List component="nav" disablePadding>
-				{!isNewPage() && (
-					<>
-						<CopyCanvasTrigger />
-						<ListItem button onClick={goTo(PrivateRoutes.CFC)}>
-							<ListItemIcon>
-								<AddIcon />
-							</ListItemIcon>
-							<ListItemText>Create new Canvas</ListItemText>
-						</ListItem>
-						<ListItem button>
-							<ListItemIcon>
-								<PublishIcon />
-							</ListItemIcon>
-							<ListItemText>Import data</ListItemText>
-						</ListItem>
-					</>
+				{!isNewPage() && !isCompare() && <CopyCanvasTrigger />}
+				{(!isNewPage() || isCompare()) && (
+					<ListItem button onClick={goTo(PrivateRoutes.CFC)}>
+						<ListItemIcon>
+							<AddIcon />
+						</ListItemIcon>
+						<ListItemText>Create new Canvas</ListItemText>
+					</ListItem>
+				)}
+				{!isNewPage() && !isCompare() && (
+					<ListItem button>
+						<ListItemIcon>
+							<PublishIcon />
+						</ListItemIcon>
+						<ListItemText>Import data</ListItemText>
+					</ListItem>
 				)}
 				<ListItem button onClick={goTo(PrivateRoutes.CFCListing)}>
 					<ListItemIcon>
@@ -55,12 +59,7 @@ export default function ControlPanel(): ReactElement {
 					</ListItemIcon>
 					<ListItemText>List of Canvases</ListItemText>
 				</ListItem>
-				<ListItem button onClick={goTo(PrivateRoutes.CFCCompare)}>
-					<ListItemIcon>
-						<CompareArrowsIcon />
-					</ListItemIcon>
-					<ListItemText>Compare Canvases</ListItemText>
-				</ListItem>
+				{!isCompare() && !isNewPage() && <ControlCompareLink />}
 				{!isNewPage() && (
 					<ListItem button>
 						<ListItemIcon>

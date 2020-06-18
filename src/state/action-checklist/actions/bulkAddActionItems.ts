@@ -1,3 +1,4 @@
+import { uniq } from "lodash-es"
 import {
 	IActionChecklistState,
 	IBulkAddActionItemsPayload,
@@ -39,7 +40,7 @@ const appendOrCreatePriority = (
 					current.id === priorityId
 						? {
 								...current,
-								order: [...current.order, ...order],
+								order: uniq([...current.order, ...order]),
 						  }
 						: current
 				)
@@ -50,7 +51,7 @@ const appendOrCreatePriority = (
 	return priorities.concat({
 		...newPriorityItem(client, container),
 		id: priorityId,
-		order,
+		order: uniq(order),
 	})
 }
 

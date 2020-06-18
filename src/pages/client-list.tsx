@@ -36,10 +36,10 @@ const ClientList = (): ReactElement => {
 					Manage your client list and prepare for your coaching conversation
 				</Typography>
 				<Grid container spacing={3}>
-					<Grid item sm={6}>
+					<Grid item xs={12} md={6}>
 						<ClientListing />
 					</Grid>
-					<Grid item sm={6}>
+					<Grid item xs={12} md={6}>
 						<SectionTitle>Coaching Conversation</SectionTitle>
 						<Box>
 							<Prepare />

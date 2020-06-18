@@ -24,7 +24,7 @@ const useCustomTitleStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(1),
 	},
 	divider: {
-		marginTop: theme.spacing(2),
+		margin: `${theme.spacing(2)}px 0`,
 	},
 }))
 

@@ -45,6 +45,9 @@ import ActionPriorityUseCase from "../../../data/ActionChecklist/PriorityLogic"
 import { ActionChecklistContext } from "../../../state/action-checklist"
 import { ActionChecklistActionTypes } from "../../../state/action-checklist/shape"
 import filterByActionContainer from "../../../util/filters/ByActionContainer"
+import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
+import SnackbarMsg from "../../SnackbarMsg"
+import { actionItemKeyTitleMapping } from "../../ActionChecklist/ActionContainer/_config/utilities"
 
 /**
  * Form used to add predefined checklist items
@@ -62,6 +65,10 @@ export default function Form({ container, client }: FormProps): ReactElement {
 	const { dispatch, notes, databaseSyced, checklistCollection } = useContext(
 		ActionChecklistContext
 	)
+	const [snackbar, setSnackbar] = useState<SnackbarMsgData>({
+		open: false,
+		msg: "",
+	})
 
 	// -- Database Data
 	const [checklists, setChecklists] = useState<ActionChecklistStruct[]>()
@@ -195,6 +202,23 @@ export default function Form({ container, client }: FormProps): ReactElement {
 	}
 	// #endregion
 
+	// #region Snackbar functionality
+	function showSnackbar(
+		msg: SnackbarMsgData["msg"],
+		severity: SnackbarMsgData["severity"]
+	): void {
+		setSnackbar({ ...snackbar, msg, severity, open: true })
+	}
+
+	function closeSnackbar(event?: React.SyntheticEvent, reason?: string): void {
+		if (reason === "clickaway") {
+			return
+		}
+
+		setSnackbar({ ...snackbar, open: false })
+	}
+	// #endregion
+
 	// #region Form submission functionality
 	/**
 	 * Creates a priority item if required and returns the id
@@ -204,11 +228,19 @@ export default function Form({ container, client }: FormProps): ReactElement {
 	 */
 	async function preSubmitCheck(): Promise<ActionChecklistPriorityId> {
 		if (typeof priorityId === "undefined") {
-			const id = await ActionPriorityUseCase.create(
-				newPriorityItem(client, container)
+			const d = await ActionPriorityUseCase.findByClientAndContainer(
+				container,
+				client
 			)
-			setPriorityId(id)
-			return id
+			if (d.length === 0) {
+				const id = await ActionPriorityUseCase.create(
+					newPriorityItem(client, container)
+				)
+				setPriorityId(id)
+				return id
+			}
+			setPriorityId(d[0].id || -1)
+			return d[0].id || -1
 		}
 
 		return priorityId
@@ -227,12 +259,26 @@ export default function Form({ container, client }: FormProps): ReactElement {
 			constructSelectedItems(formChecklists, client, container),
 			[]
 		)
+		const nItems = items.map((i) => {
+			const hasExistsing = checklists?.filter(
+				(c) => c.description === i.description
+			)
+			if (hasExistsing && hasExistsing.length > 0) {
+				return {
+					...i,
+					id: hasExistsing[0].id || -1,
+				}
+			}
+			return i
+		})
 
-		const [newItems, success] = await bulkAddChecklists(items, pID)
+		const [newItems, success] = await bulkAddChecklists(nItems, pID)
 
 		if (!success || typeof noteId === "undefined") {
-			// TODO: Show bad snackbar
-			console.log("This did not worked")
+			showSnackbar(
+				"Something went wrong. Check the data and try again",
+				"error"
+			)
 			return
 		}
 
@@ -256,13 +302,23 @@ export default function Form({ container, client }: FormProps): ReactElement {
 			},
 		})
 
-		// TODO: Show good snackbar
-		console.log("This worked")
+		showSnackbar(
+			`Items we addded to the ${actionItemKeyTitleMapping(
+				container
+			)} checklist`,
+			"success"
+		)
 	}
 	// #endregion
 
 	return (
 		<form autoComplete="off" noValidate onSubmit={onSubmission}>
+			<SnackbarMsg
+				open={snackbar.open}
+				msg={snackbar.msg}
+				severity={snackbar.severity}
+				onClose={closeSnackbar}
+			/>
 			<IfElseLoading if={fetched}>
 				{options.map(mapChecklistItems)}
 				<Divider className={styles.divider} />

@@ -21,6 +21,14 @@ const useFourQsStyles = makeStyles((theme) => ({
 	listItemText: {
 		margin: 0,
 	},
+	answerIconRoot: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		"& p": {
+			marginLeft: theme.spacing(1),
+		},
+	},
 }))
 
 export default useFourQsStyles

@@ -1,3 +1,4 @@
+import { uniq } from "lodash-es"
 import { IActionChecklistState, IRemoveActionItemPayload } from "../shape"
 import filterById from "../../../util/filters/ById"
 import { ActionChecklistPriorityStruct } from "../../../data/_config/shape"
@@ -28,7 +29,7 @@ const removeActionItem = (
 				if (newOrder.length > 0) {
 					return collection.concat({
 						...item,
-						order: newOrder,
+						order: uniq(newOrder),
 					})
 				}
 				return collection

@@ -57,17 +57,17 @@ const ClientListing = (): ReactElement => {
 		<Box>
 			<SectionTitle>Client List</SectionTitle>
 			<Card>
-				<CardContent>
+				{renderWithMachine()}
+				<Divider />
+				<CardContent className={styles.actions}>
+					<ImportClient />
 					<NewClientDialog
 						triggerText="Add new client"
 						startIcon={<AddIcon />}
 						className={styles.button}
 						size="medium"
 					/>
-					<ImportClient />
 				</CardContent>
-				<Divider />
-				{renderWithMachine()}
 			</Card>
 		</Box>
 	)

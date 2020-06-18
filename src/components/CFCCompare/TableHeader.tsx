@@ -1,0 +1,36 @@
+import React, { ReactElement } from "react"
+import { TableHead, TableRow, TableCell } from "@material-ui/core"
+import { TableHeaderProps } from "./__config/shape"
+import { canvasDisplayTitle } from "../CFC/__config/utilities"
+import useStyles from "./__config/styles"
+
+/**
+ * Component used as the table header
+ *
+ * @export
+ * @param {TableHeaderProps} {
+ * 	selectedCanvases: [left, right],
+ * }
+ * @returns {ReactElement}
+ */
+export default React.memo(function TableHeader({
+	selectedCanvases: [left, right],
+}: TableHeaderProps): ReactElement {
+	const cls = useStyles()
+
+	return (
+		<TableHead>
+			<TableRow>
+				<TableCell className={cls.cell1} />
+				<TableCell className={cls.cellCanvas}>
+					{canvasDisplayTitle(left)}
+				</TableCell>
+				<TableCell className={cls.cellCanvas}>
+					{canvasDisplayTitle(right)}
+				</TableCell>
+				<TableCell className={cls.cellDifference}>$ Difference</TableCell>
+				<TableCell className={cls.cellDifference}>% Difference</TableCell>
+			</TableRow>
+		</TableHead>
+	)
+})

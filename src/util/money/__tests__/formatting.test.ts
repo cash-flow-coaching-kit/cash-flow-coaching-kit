@@ -1,4 +1,4 @@
-import { toFixed, toTwoDecimal, appendWith, addDollarSign, formatMoney, toString } from "../formatting"
+import { toFixed, toTwoDecimal, appendWith, addDollarSign, formatMoney, toString, removeTrailingZeros } from "../formatting"
 
 describe("Unit tests for the formatting utilities", () => {
   test("toFixed", function() {
@@ -32,5 +32,12 @@ describe("Unit tests for the formatting utilities", () => {
 
   test("toString", function() {
     expect(toString(100)).toEqual("100")
+  })
+
+  test("removing trailing zeros", function() {
+    expect(removeTrailingZeros(`100.00`)).toEqual("100")
+    expect(removeTrailingZeros(`100.0`)).toEqual("100")
+    expect(removeTrailingZeros(`100.`)).toEqual("100")
+    expect(removeTrailingZeros(`100.000000000`)).toEqual("100")
   })
 })
