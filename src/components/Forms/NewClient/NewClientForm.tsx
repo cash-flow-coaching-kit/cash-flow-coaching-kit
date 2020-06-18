@@ -2,6 +2,7 @@ import React, { ReactElement, useContext } from "react"
 import { TextField, Button, Box } from "@material-ui/core"
 import { useFormik } from "formik"
 import { useHistory } from "react-router-dom"
+import { nanoid } from "nanoid"
 import addClient from "../../../data/client/addClient"
 import { ClientContext } from "../../../state/client"
 import useClientFormStyles from "./_config/styles"
@@ -42,7 +43,7 @@ const NewClientForm = ({ closeDialog }: NewClientFormProps): ReactElement => {
 		onSubmit: async (values) => {
 			// Adds a client to the db + state
 			await addClient(dispatch, {
-				id: 1,
+				id: nanoid(),
 				name: values.businessName,
 			})
 

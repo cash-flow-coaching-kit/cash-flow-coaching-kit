@@ -29,7 +29,7 @@ export default function ExportClientButton({
 	const [processing, setProcessing] = useState(false)
 
 	const exportClient = useCallback(async () => {
-		if (client !== -1) {
+		if (client !== "") {
 			try {
 				setProcessing(true)
 				await ExportClient(client)

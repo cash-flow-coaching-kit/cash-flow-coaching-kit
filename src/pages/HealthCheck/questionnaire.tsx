@@ -38,7 +38,7 @@ const HCQuestionnaire = (): ReactElement => {
 			;(async function fetchHC(): Promise<void> {
 				if (id && typeof currentClient.id !== "undefined") {
 					const hc = await HealthCheckUseCase.findByClientId(
-						parseInt(id, 10),
+						id,
 						currentClient.id
 					)
 					setAnswers(hc ? hc.answers : [])
@@ -63,7 +63,7 @@ const HCQuestionnaire = (): ReactElement => {
 						) : (
 							<Questionnaire
 								previousAnswers={answers}
-								dbID={typeof id !== "undefined" ? parseInt(id, 10) : undefined}
+								dbID={typeof id !== "undefined" ? id : undefined}
 							/>
 						)}
 					</Grid>

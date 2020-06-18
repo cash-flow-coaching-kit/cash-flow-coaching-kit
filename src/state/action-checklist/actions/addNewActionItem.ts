@@ -20,7 +20,7 @@ const addNewActionItem = (
 		(collection: ActionChecklistPriorityStruct[], item) => {
 			return collection.concat(
 				item.id === pID
-					? { ...item, order: uniq([...item.order, checklist?.id || -1]) }
+					? { ...item, order: uniq([...item.order, checklist?.id || ""]) }
 					: item
 			)
 		},

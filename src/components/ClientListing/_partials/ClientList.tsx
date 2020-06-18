@@ -89,7 +89,7 @@ const ClientList = ({
 						<ListItemText primary={client.name} />
 						<ListItemSecondaryAction>
 							<ExportClientButton
-								client={client.id || -1}
+								client={client.id || ""}
 								showSnackbar={showSnackbar}
 							/>
 							<Tooltip title="Delete">

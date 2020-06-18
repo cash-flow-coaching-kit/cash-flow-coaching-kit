@@ -2,6 +2,7 @@ import Dexie from "dexie"
 import { isEqual, set } from "lodash-es"
 import { DexieExportJsonStructure } from "dexie-export-import/dist/json-structure"
 import { importInto } from "dexie-export-import"
+import { nanoid } from "nanoid"
 import {
 	ExportClientResult,
 	DatabaseNames,
@@ -12,7 +13,8 @@ import ClientDB from "../../data/client/ClientDatabase"
 import HealthCheckDB from "../../data/healthChecks/HealthCheckDatabase"
 import ActionChecklistDB from "../../data/ActionChecklist/ActionChecklistDatabase"
 import CFCDB from "../../data/CFC/CFCDatabase"
-import ClientUseCase from "../../data/client/ClientLogic"
+import { PossibleActionItems } from "../../state/action-checklist/shape"
+import { DatabaseId } from "../../data/_config/shape"
 
 /**
  * Reads a blob into text
@@ -80,13 +82,12 @@ export function validateJSONData(data: any): boolean {
 
 export async function importToDatabase(
 	db: Dexie,
-	data: DexieExportJsonStructure,
-	overwrite: boolean
+	data: DexieExportJsonStructure
 ): Promise<Error | boolean> {
 	const blob = new Blob([JSON.stringify(data)])
 	try {
 		await importInto(db, blob, {
-			overwriteValues: overwrite,
+			overwriteValues: true,
 		})
 		return true
 	} catch (e) {
@@ -105,18 +106,28 @@ export async function importToDatabase(
 export async function overwriteClientIds(
 	json: ExportClientResult
 ): Promise<ExportClientResult> {
-	// Estimates a new client id based on the last client record
-	const lastClient = await ClientUseCase.last()
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const newId = lastClient!.id! + 10
+	// Get a new id for the client
+	const newId = nanoid()
 
 	// Ser the client database client record
 	set(json, "ClientDatabase.data.data[0].rows[0].id", newId)
+
 	const objectPaths: DatabaseNames[] = [
 		"HealthCheckDatabase",
 		"ActionChecklistDatabase",
 		"CFCDatabase",
 	]
+	const newPriorityIds: Record<PossibleActionItems, DatabaseId[]> = {
+		cashInActions: [],
+		cashOutActions: [],
+		planningBusiness: [],
+		planningCommitments: [],
+		funding: [],
+		recordKeeping: [],
+		managing: [],
+		tracking: [],
+		transition: [],
+	}
 
 	// Goes through the other keys and replaces the key for each of the client
 	// ids with the estimated id
@@ -128,6 +139,7 @@ export async function overwriteClientIds(
 					const { rows } = data
 					if (rows) {
 						rows.forEach((row, rIdx) => {
+							const id = nanoid()
 							set(
 								json,
 								`${key}.data.data[${dIdx}].rows[${rIdx}].clientId`,
@@ -135,7 +147,31 @@ export async function overwriteClientIds(
 							)
 							// Remove the record id to avoid key duplications
 							// eslint-disable-next-line
-							delete row.id
+							set(json, `${key}.data.data[${dIdx}].rows[${rIdx}].id`, id)
+
+							// Replace the priority order with the new action item ids
+							if (
+								data.tableName === "actionItems" ||
+								data.tableName === "priority"
+							) {
+								const container: PossibleActionItems | undefined =
+									json[key]?.data.data[dIdx].rows[rIdx].actionContainer ||
+									undefined
+								if (container) {
+									if (data.tableName === "actionItems") {
+										// eslint-disable-next-line
+										newPriorityIds[container].push(id)
+									}
+
+									if (data.tableName === "priority") {
+										set(
+											json,
+											`${key}.data.data[${dIdx}].rows[${rIdx}].order`,
+											newPriorityIds[container]
+										)
+									}
+								}
+							}
 						})
 					}
 				})
@@ -169,20 +205,16 @@ export default async function ImportClient(
 
 		const promises = [
 			data.ClientDatabase
-				? importToDatabase(ClientDB, data.ClientDatabase, overwrite)
+				? importToDatabase(ClientDB, data.ClientDatabase)
 				: Promise.resolve(false),
 			data.HealthCheckDatabase
-				? importToDatabase(HealthCheckDB, data.HealthCheckDatabase, overwrite)
+				? importToDatabase(HealthCheckDB, data.HealthCheckDatabase)
 				: Promise.resolve(false),
 			data.ActionChecklistDatabase
-				? importToDatabase(
-						ActionChecklistDB,
-						data.ActionChecklistDatabase,
-						overwrite
-				  )
+				? importToDatabase(ActionChecklistDB, data.ActionChecklistDatabase)
 				: Promise.resolve(false),
 			data.CFCDatabase
-				? importToDatabase(CFCDB, data.CFCDatabase, overwrite)
+				? importToDatabase(CFCDB, data.CFCDatabase)
 				: Promise.resolve(false),
 		]
 

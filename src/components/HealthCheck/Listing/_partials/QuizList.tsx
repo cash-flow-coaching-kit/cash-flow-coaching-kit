@@ -55,7 +55,7 @@ const QuizList = ({
 								<IconButton
 									onClick={(e: MouseEvent<HTMLButtonElement>): void => {
 										e.preventDefault()
-										removeHealthCheck(quiz.id || -1)
+										removeHealthCheck(quiz.id || "")
 									}}
 								>
 									<DeleteIcon />

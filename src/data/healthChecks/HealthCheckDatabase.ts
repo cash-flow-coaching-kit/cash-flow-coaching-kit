@@ -26,6 +26,8 @@ class HealthCheckDatabase extends Dexie {
 		this.applyMigrations()
 
 		this.healthChecks = this.table("healthChecks")
+
+		this.replaceIdsWithStrings()
 	}
 
 	/**
@@ -39,6 +41,20 @@ class HealthCheckDatabase extends Dexie {
 		// Version 1
 		this.version(2).stores({
 			healthChecks: "++id, clientId, *answers, createdAt",
+		})
+		this.version(2.2).stores({
+			healthChecks: "++id, clientId, *answers, createdAt, [id+clientId]",
+		})
+	}
+
+	private replaceIdsWithStrings(): void {
+		this.healthChecks.toCollection().modify((healthCheck) => {
+			if (typeof healthCheck.id === "number") {
+				healthCheck.id = `${healthCheck.id}`
+			}
+			if (typeof healthCheck.clientId === "number") {
+				healthCheck.clientId = `${healthCheck.clientId}`
+			}
 		})
 	}
 }

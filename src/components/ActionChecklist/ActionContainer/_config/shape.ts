@@ -33,7 +33,7 @@ export interface IActionContainerProps {
  */
 export interface IActionItemProps {
 	index: number
-	draggableId: number
+	draggableId: string
 	data: ActionChecklistStruct
 	dispatch: Dispatch<ActionChecklistReducerActions>
 	deleteAction(id: ActionChecklistId): void
