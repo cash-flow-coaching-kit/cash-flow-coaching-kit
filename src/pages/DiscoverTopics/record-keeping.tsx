@@ -408,12 +408,12 @@ const DTRecordKeeping = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="what books and records should you keep"
+								title="what books and records should my company keep"
 								href="https://asic.gov.au/for-business/your-business/small-business/compliance-for-small-business/small-business-what-books-and-records-should-my-company-keep/"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								What books &amp; records should you keep
+								What books &amp; records should my company keep
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
