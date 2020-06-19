@@ -13,7 +13,7 @@ export const routes: INavRoutes[] = [
 	},
 	{
 		route: PrivateRoutes.SessionFiles,
-		title: "Session files",
+		title: "Downloads",
 		Icon: DescriptionIcon,
 	},
 ]
