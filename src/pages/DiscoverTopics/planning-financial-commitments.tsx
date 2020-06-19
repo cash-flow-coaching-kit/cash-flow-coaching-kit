@@ -282,6 +282,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 										Put aside money into a separate account for personal income
 										tax
 									</Typography>
+									<Typography component="li" className={styles.list}>
+										You can use the PAYG withholding calculator to work out how
+										much to put aside
+									</Typography>
 								</List>
 							</Grid>
 						</Grid>
