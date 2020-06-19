@@ -74,6 +74,8 @@ export default function CFC(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/Cash Flow Canvas coaching tips.docx"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
 							Download Transcript
 						</Button>

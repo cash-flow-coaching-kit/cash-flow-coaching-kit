@@ -349,6 +349,8 @@ const DTRecordKeeping = (): ReactElement => {
 						color="primary"
 						size="large"
 						href="https://www.ato.gov.au/General/Online-services/ATO-app/"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						ATO app
 					</Button>

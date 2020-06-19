@@ -209,6 +209,7 @@ const Homepage = (): ReactElement => {
 									<Button
 										color="primary"
 										href="/transcripts/Take-a-tour-of-the-kit.docx"
+										target="_blank" rel="noopener noreferrer"
 									>
 										Download Transcript
 									</Button>
@@ -228,6 +229,8 @@ const Homepage = (): ReactElement => {
 									<Button
 										color="primary"
 										href="/transcripts/What-advisors-think-of-the-kit.docx"
+										target="_blank"
+										rel="noopener noreferrer"
 									>
 										Download Transcript
 									</Button>
