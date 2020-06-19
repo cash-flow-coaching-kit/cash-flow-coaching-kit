@@ -7,7 +7,6 @@ import {
 	CardActions,
 	CardContent,
 	CardMedia,
-	Button,
 	Divider,
 	ExpansionPanel,
 	ExpansionPanelSummary,

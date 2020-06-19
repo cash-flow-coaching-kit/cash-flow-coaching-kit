@@ -90,7 +90,7 @@ const DateRange = memo(function DateRange({
 				}
 			}
 		},
-		[onChange]
+		[onChange, onClose]
 	)
 
 	// When the start date is edited and the panel is still open
