@@ -503,7 +503,7 @@ const DTFundingBusiness = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Funding your buisiness
+								Funding your business
 							</Button>
 						</Grid>
 						<Grid item sm={6}>
