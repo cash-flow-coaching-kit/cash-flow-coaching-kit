@@ -335,9 +335,7 @@ export default function Form({ container, client }: FormProps): ReactElement {
 		})
 
 		showSnackbar(
-			`Items we addded to the ${actionItemKeyTitleMapping(
-				container
-			)} checklist`,
+			`Items we added to the ${actionItemKeyTitleMapping(container)} checklist`,
 			"success"
 		)
 	}
