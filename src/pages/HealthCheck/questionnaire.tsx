@@ -10,7 +10,6 @@ import {
 import { Link } from "react-router-dom"
 import ListIcon from "@material-ui/icons/List"
 import { PageContainer } from "../../components/Layouts"
-import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import PageTip from "../../components/PageTip"
 import ExpandableNav from "../../components/ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
@@ -33,7 +32,6 @@ const HCQuestionnaire = (): ReactElement => {
 						<Questionnaire />
 					</Grid>
 					<Grid item xs={12} md={3}>
-						<FourQuestions />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
 								<ListItem
