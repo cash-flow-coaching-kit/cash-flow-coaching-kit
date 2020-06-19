@@ -253,9 +253,6 @@ const DTPlanningBusiness = (): ReactElement => {
 									<Typography component="li" className={styles.list}>
 										How much of a buffer do you need to include in pricing?
 									</Typography>
-									<Typography component="li" className={styles.list}>
-										How much do you need to start your business?
-									</Typography>
 								</List>
 							</Grid>
 						</Grid>
@@ -283,6 +280,9 @@ const DTPlanningBusiness = (): ReactElement => {
 							</Grid>
 							<Grid item sm={6}>
 								<List>
+									<Typography component="li" className={styles.list}>
+										How much do you need to start your business?
+									</Typography>
 									<Typography component="li" className={styles.list}>
 										How much do you need to have in reserve while your business
 										ramps up?
