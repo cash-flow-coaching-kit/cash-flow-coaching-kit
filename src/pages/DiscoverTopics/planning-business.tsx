@@ -349,8 +349,8 @@ const DTPlanningBusiness = (): ReactElement => {
 					>
 						When you review your business plan, look for ways to improve your
 						cash flow and financial performance. You can use the canvas tool and
-						change lever cards to help you consider what changes you can make in
-						your business and the impact they may have on your cash flow.
+						change levers to help you consider what changes you can make in your
+						business and the impact they may have on your cash flow.
 					</Typography>
 					<Typography
 						variant="body1"
