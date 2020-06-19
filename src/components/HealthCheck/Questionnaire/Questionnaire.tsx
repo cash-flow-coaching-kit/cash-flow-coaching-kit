@@ -18,7 +18,6 @@ import { constructKey, generateKey } from "../../../util/lists/key"
 import { routeVarReplacement, PrivateRoutes } from "../../../util/routes/routes"
 import { OptionTile } from "./_partials"
 import NoClientError from "../../NoClientError"
-import { IQuestionnaireProps } from "./_config/shape"
 import HealthCheckUseCase from "../../../data/healthChecks/HealthCheckLogic"
 import { newTimestamp } from "../../../util/dates"
 import useCurrentClient from "../../../state/client/useCurrentClient"
@@ -29,13 +28,10 @@ import useCurrentClient from "../../../state/client/useCurrentClient"
  *
  * @returns ReactElement
  */
-const Questionnaire = ({
-	previousAnswers = [],
-	dbID,
-}: IQuestionnaireProps): ReactElement => {
+const Questionnaire = (): ReactElement => {
 	const [currentClient] = useCurrentClient()
 	const styles = useQuestionnaireStyles()
-	const [answers, setAnswers] = useState<QuestionOptions[]>(previousAnswers)
+	const [answers, setAnswers] = useState<QuestionOptions[]>([])
 	const [questionCount, setQuestionCount] = useState<number>(0)
 	const [currentQuestion, setCurrentQuestion] = useState<IQuestionStructure>(
 		questions[questionCount]
@@ -47,17 +43,6 @@ const Questionnaire = ({
 	useEffect(() => {
 		setCurrentQuestion(questions[questionCount])
 	}, [questionCount])
-
-	useEffect(() => {
-		if (previousAnswers !== answers) {
-			setAnswers(previousAnswers)
-			setQuestionCount(0)
-		}
-		// eslint-disable-next-line
-	}, [previousAnswers])
-	// Adding answers as a dependency will cause the quiz to
-	// not work as it resets it constantly
-	// TODO: See if there is a better way to do this
 
 	/**
 	 * Changes the selected answer for the current question
@@ -110,17 +95,12 @@ const Questionnaire = ({
 		}
 
 		try {
-			if (typeof dbID === "undefined") {
-				const dbKey = await HealthCheckUseCase.create({
-					clientId: currentClient.id,
-					answers,
-					createdAt: newTimestamp(),
-				})
-				redirectToSummary(dbKey)
-			} else {
-				await HealthCheckUseCase.update(dbID, { answers })
-				redirectToSummary(dbID)
-			}
+			const dbKey = await HealthCheckUseCase.create({
+				clientId: currentClient.id,
+				answers,
+				createdAt: newTimestamp(),
+			})
+			redirectToSummary(dbKey)
 		} catch (e) {
 			// TODO: Proper error checking
 			console.error(e.stack || e)

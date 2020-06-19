@@ -10,11 +10,10 @@ import {
 	makeStyles,
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
-import ReplayIcon from "@material-ui/icons/Replay"
 import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
-import { PrivateRoutes, routeVarReplacement } from "../../util/routes/routes"
+import { PrivateRoutes } from "../../util/routes/routes"
 import QuestionSummaries from "../../components/HealthCheck/Summary"
 import { QuestionOptions } from "../../components/HealthCheck/_config/shape"
 import { questions } from "../../components/HealthCheck/_config/data"
@@ -29,14 +28,6 @@ import useCurrentClient from "../../state/client/useCurrentClient"
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
 		marginTop: theme.spacing(3),
-		"& > div:last-child": {
-			marginTop: theme.spacing(1),
-			[theme.breakpoints.up("sm")]: {
-				display: "flex",
-				justifyContent: "flex-end",
-				marginTop: 0,
-			},
-		},
 	},
 }))
 
@@ -82,12 +73,6 @@ const HCSummary = (): ReactElement => {
 		}
 	}, [id, currentClient])
 
-	const retakeLink = (): string => {
-		return routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
-			[":id?", `${healthCheck?.id || ""}`],
-		])
-	}
-
 	return (
 		<>
 			<PageContainer>
@@ -106,15 +91,6 @@ const HCSummary = (): ReactElement => {
 									justify="space-between"
 									className={styles.summaryActions}
 								>
-									<Grid item xs={12} sm={6}>
-										<Button
-											variant="outlined"
-											component={Link}
-											to={retakeLink()}
-										>
-											Re-take Health Check
-										</Button>
-									</Grid>
 									<Grid item xs={12} sm={6}>
 										<Button
 											color="primary"
@@ -144,12 +120,6 @@ const HCSummary = (): ReactElement => {
 										<ListIcon />
 									</ListItemIcon>
 									<ListItemText>List of Health Checks</ListItemText>
-								</ListItem>
-								<ListItem button component={Link} to={retakeLink()}>
-									<ListItemIcon>
-										<ReplayIcon />
-									</ListItemIcon>
-									<ListItemText>Re-take Health Check</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>
