@@ -1,5 +1,5 @@
 import Dexie, { IndexableType } from "dexie"
-import { nanoid } from "nanoid"
+import { v4 as uuidv4 } from "uuid"
 import { DatabaseId, ClientId } from "./shape"
 import hasProperty from "../../util/object/hasProperty"
 
@@ -36,7 +36,7 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	protected defaultCreate(data: E): Promise<I> {
 		return this.database.transaction("rw", this.table.name, () => {
 			return this.table.add({
-				id: nanoid(),
+				id: uuidv4(),
 				...data,
 			})
 		})
@@ -170,7 +170,7 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 */
 	public bulkAdd(items: E[]): Promise<I[]> {
 		const addItems: E[] = items.reduce((acc: E[], cur: E) => {
-			return acc.concat({ ...cur, id: nanoid() })
+			return acc.concat({ ...cur, id: uuidv4() })
 		}, [])
 
 		return this.database.transaction("rw", this.table.name, () => {
@@ -180,7 +180,7 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 
 	public bulkPut(items: E[]): Promise<I[]> {
 		const putItems: E[] = items.reduce((acc: E[], cur: E) => {
-			return acc.concat(hasProperty(cur, "id") ? cur : { ...cur, id: nanoid() })
+			return acc.concat(hasProperty(cur, "id") ? cur : { ...cur, id: uuidv4() })
 		}, [])
 
 		return this.database.transaction("rw", this.table.name, () => {

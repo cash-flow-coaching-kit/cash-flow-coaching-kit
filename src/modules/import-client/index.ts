@@ -2,7 +2,7 @@ import Dexie from "dexie"
 import { isEqual, set } from "lodash-es"
 import { DexieExportJsonStructure } from "dexie-export-import/dist/json-structure"
 import { importInto } from "dexie-export-import"
-import { nanoid } from "nanoid"
+import { v4 as uuidv4 } from "uuid"
 import {
 	ExportClientResult,
 	DatabaseNames,
@@ -107,7 +107,7 @@ export async function overwriteClientIds(
 	json: ExportClientResult
 ): Promise<ExportClientResult> {
 	// Get a new id for the client
-	const newId = nanoid()
+	const newId = uuidv4()
 
 	// Ser the client database client record
 	set(json, "ClientDatabase.data.data[0].rows[0].id", newId)
@@ -139,7 +139,7 @@ export async function overwriteClientIds(
 					const { rows } = data
 					if (rows) {
 						rows.forEach((row, rIdx) => {
-							const id = nanoid()
+							const id = uuidv4()
 							set(
 								json,
 								`${key}.data.data[${dIdx}].rows[${rIdx}].clientId`,
