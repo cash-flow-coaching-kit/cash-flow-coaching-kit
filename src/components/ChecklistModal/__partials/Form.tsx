@@ -15,6 +15,7 @@ import { createNewFormItem } from "../__config/utilities"
 import { useFormStyles } from "../__config/styles"
 import SnackbarMsg from "../../SnackbarMsg"
 import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
+import IconDeleteButtonwDialog from "../../IconDeleteButton/IconDeleteButtonwDialog"
 
 /**
  * Form component for the `ChecklistModal` component
@@ -179,7 +180,7 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 				className={style.inputWrapper}
 			>
 				{/* Textfield */}
-				<Grid item xs={8}>
+				<Grid item xs={12} md={8}>
 					<TextField
 						name={`items[${idx}].description`}
 						label="Customise your action"
@@ -190,7 +191,7 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 					/>
 				</Grid>
 				{/* Datepicker */}
-				<Grid item xs={3}>
+				<Grid item xs={9} md={3}>
 					<MuiPickersUtilsProvider utils={DateFnsUtils}>
 						<KeyboardDatePicker
 							disableToolbar
@@ -211,10 +212,8 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 					</MuiPickersUtilsProvider>
 				</Grid>
 				{/* Item actions */}
-				<Grid item xs={1} className={style.itemAction}>
-					<IconButton onClick={(e): void => removeItem(e, idx)}>
-						<DeleteIcon />
-					</IconButton>
+				<Grid item xs={3} md={1} className={style.itemAction}>
+					<IconDeleteButtonwDialog onClick={(e): void => removeItem(e, idx)} />
 				</Grid>
 			</Grid>
 		)

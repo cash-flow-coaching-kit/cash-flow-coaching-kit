@@ -17,6 +17,16 @@ code {
 	margin: 0 -12px;
 }
 
+.change-levers-ul {
+	margin-bottom: 0;
+}
+
+// Yes - I hate myself for using !important
+.MuiDialog-paperFullWidth {
+	width: calc(100% - 32px) !important;
+	margin: 16px !important;
+}
+
 .list-item-padded {
 	padding-right: calc(48px * 2) !important;
 }

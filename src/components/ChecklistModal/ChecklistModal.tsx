@@ -28,7 +28,7 @@ export default function ChecklistModal({
 		<Box>
 			<Button
 				variant="outlined"
-				size="large"
+				size="medium"
 				color="primary"
 				startIcon={<AddIcon />}
 				onClick={(): void => setModalState(true)}
