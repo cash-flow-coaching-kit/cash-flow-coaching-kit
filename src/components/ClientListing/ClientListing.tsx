@@ -1,7 +1,17 @@
 import React, { useContext, ReactElement, useEffect } from "react"
-import { Box, Card, Divider, CardContent } from "@material-ui/core"
+import {
+	Box,
+	Card,
+	Divider,
+	CardContent,
+	Button,
+	List,
+	ListItem,
+	ListItemText,
+} from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
 import { useMachine } from "@xstate/react"
+import GetAppIcon from "@material-ui/icons/GetApp"
 import { ClientContext } from "../../state/client"
 import { NewClientDialog } from "../../content/dialog"
 import { useCLStyles } from "./_config/styles"
@@ -10,6 +20,7 @@ import { IClientState } from "../../state/client/client-outline"
 import ClientListingMachine from "./_config/machine"
 import Loading from "../Loading"
 import SectionTitle from "../SectionTitle"
+import Spacer from "../Spacer"
 
 /**
  * Component to render the whole Client Listing component
@@ -20,7 +31,7 @@ import SectionTitle from "../SectionTitle"
 const ClientListing = (): ReactElement => {
 	const clientStore: IClientState = useContext(ClientContext)
 	const {
-		state: { clientSynced, clients },
+		state: { clientSynced, clients, currentClient },
 	} = clientStore
 	const [state, send] = useMachine(ClientListingMachine)
 	const styles = useCLStyles()
@@ -41,10 +52,32 @@ const ClientListing = (): ReactElement => {
 	 *
 	 * @returns ReactElement
 	 */
-	const renderWithMachine = (): ReactElement => {
+	const renderWithMachine = (type: "list" | "current"): ReactElement => {
 		switch (state.value) {
 			case "data":
-				return <ClientList store={clientStore} />
+				if (type === "list") {
+					return <ClientList store={clientStore} />
+				}
+
+				if (type === "current") {
+					return (
+						<>
+							<List>
+								<ListItem>
+									<ListItemText inset>{currentClient?.name}</ListItemText>
+								</ListItem>
+							</List>
+							<Divider />
+							<CardContent className={styles.actions}>
+								<Button variant="outlined" startIcon={<GetAppIcon />}>
+									Export data
+								</Button>
+							</CardContent>
+						</>
+					)
+				}
+
+				return <></>
 			case "empty":
 				return <NoClients />
 			case "loading":
@@ -55,9 +88,12 @@ const ClientListing = (): ReactElement => {
 
 	return (
 		<Box>
+			<SectionTitle>Current Client</SectionTitle>
+			<Card>{renderWithMachine("current")}</Card>
+			<Spacer space={4} />
 			<SectionTitle>Client List</SectionTitle>
 			<Card>
-				{renderWithMachine()}
+				{renderWithMachine("list")}
 				<Divider />
 				<CardContent className={styles.actions}>
 					<ImportClient />

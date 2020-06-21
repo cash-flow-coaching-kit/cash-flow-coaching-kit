@@ -10,7 +10,6 @@ import {
 	Tooltip,
 } from "@material-ui/core"
 import DeleteIcon from "@material-ui/icons/Delete"
-import PublishIcon from "@material-ui/icons/Publish"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import { ClientActionTypes } from "../../../state/client/client-outline"
 import { IClientListProps } from "../_config/shape"
@@ -65,11 +64,6 @@ const ClientList = ({
 					</ListItemIcon>
 					<ListItemText primary={client.name} />
 					<ListItemSecondaryAction>
-						<Tooltip title="Export data">
-							<IconButton>
-								<PublishIcon />
-							</IconButton>
-						</Tooltip>
 						<Tooltip title="Delete">
 							<IconButton>
 								<DeleteIcon />
