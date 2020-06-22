@@ -64,7 +64,7 @@ const ClientListing = (): ReactElement => {
 						<>
 							<List>
 								<ListItem>
-									<ListItemText inset>{currentClient?.name}</ListItemText>
+									<ListItemText>{currentClient?.name}</ListItemText>
 								</ListItem>
 							</List>
 							<Divider />
