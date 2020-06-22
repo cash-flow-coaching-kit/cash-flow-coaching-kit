@@ -38,57 +38,55 @@ const Arrow = (): ReactElement => {
 	)
 }
 
+const useCKStyles = makeStyles((theme) => ({
+	MainHeading: {
+		paddingTop: theme.spacing(5),
+		paddingBottom: theme.spacing(2),
+		fontSize: "1.8rem",
+	},
+	SectionTitle: {
+		paddingTop: theme.spacing(1),
+		fontSize: "1.8rem",
+	},
+	purple: {
+		color: theme.palette.getContrastText("#9c27b0"),
+		backgroundColor: "#9c27b0",
+		width: theme.spacing(7),
+		height: theme.spacing(7),
+		marginTop: theme.spacing(2),
+		fontSize: "1.8rem",
+	},
+	green: {
+		color: theme.palette.getContrastText("#43a047"),
+		backgroundColor: "#43a047",
+		width: theme.spacing(7),
+		height: theme.spacing(7),
+		marginTop: theme.spacing(2),
+		fontSize: "1.8rem",
+	},
+	blue: {
+		color: theme.palette.getContrastText("#0091ea"),
+		backgroundColor: "#0091ea",
+		width: theme.spacing(7),
+		height: theme.spacing(7),
+		marginTop: theme.spacing(2),
+		fontSize: "1.8rem",
+	},
+	alignJustifyContent: {
+		display: "flex",
+		flexDirection: "column",
+		flexWrap: "nowrap",
+		justifyContent: "center",
+		alignItems: "center",
+		alignContent: "center",
+		margin: theme.spacing(2, 0),
+	},
+	contentText: {
+		margin: theme.spacing(1, 0),
+	},
+}))
+
 const CoachingKit = (): ReactElement => {
-	const useCKStyles = makeStyles((theme) => ({
-		MainHeading: {
-			paddingTop: theme.spacing(5),
-			paddingBottom: theme.spacing(2),
-			fontSize: "1.8rem",
-		},
-		SectionTitle: {
-			paddingTop: theme.spacing(1),
-			fontSize: "1.8rem",
-		},
-		purple: {
-			color: theme.palette.getContrastText("#9c27b0"),
-			backgroundColor: "#9c27b0",
-			width: theme.spacing(7),
-			height: theme.spacing(7),
-			marginTop: theme.spacing(2),
-			fontSize: "1.8rem",
-		},
-		green: {
-			color: theme.palette.getContrastText("#43a047"),
-			backgroundColor: "#43a047",
-			width: theme.spacing(7),
-			height: theme.spacing(7),
-			marginTop: theme.spacing(2),
-			fontSize: "1.8rem",
-		},
-		blue: {
-			color: theme.palette.getContrastText("#0091ea"),
-			backgroundColor: "#0091ea",
-			width: theme.spacing(7),
-			height: theme.spacing(7),
-			marginTop: theme.spacing(2),
-			fontSize: "1.8rem",
-		},
-		alignJustifyContent: {
-			display: "flex",
-			flexDirection: "column",
-			flexWrap: "nowrap",
-			justifyContent: "center",
-			alignItems: "center",
-			alignContent: "center",
-			margin: theme.spacing(2, 0),
-		},
-		contentText: {
-			margin: theme.spacing(1, 0),
-		},
-		cardActions: {
-			justifyContent: "flex-end",
-		},
-	}))
 	const styles = useCKStyles()
 
 	return (

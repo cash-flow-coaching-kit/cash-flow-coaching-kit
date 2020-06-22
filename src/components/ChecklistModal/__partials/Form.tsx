@@ -1,18 +1,17 @@
 import React, { ReactElement, useState, MouseEvent } from "react"
 import { useFormik } from "formik"
-import { Box, Button, Grid, TextField, IconButton } from "@material-ui/core"
+import { Box, Button, Grid, TextField } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
-import DeleteIcon from "@material-ui/icons/Delete"
 import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
 } from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns"
-
 import { FormProps, FormValues, FormItem } from "../__config/shape"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import { createNewFormItem } from "../__config/utilities"
 import { useFormStyles } from "../__config/styles"
+import IconDeleteButtonwDialog from "../../IconDeleteButton/IconDeleteButtonwDialog"
 
 /**
  * Form component for the `ChecklistModal` component
@@ -159,7 +158,7 @@ export default function Form({
 				className={style.inputWrapper}
 			>
 				{/* Textfield */}
-				<Grid item xs={8}>
+				<Grid item xs={12} md={8}>
 					<TextField
 						name={`items[${idx}].description`}
 						label="Customise your action"
@@ -170,7 +169,7 @@ export default function Form({
 					/>
 				</Grid>
 				{/* Datepicker */}
-				<Grid item xs={3}>
+				<Grid item xs={9} md={3}>
 					<MuiPickersUtilsProvider utils={DateFnsUtils}>
 						<KeyboardDatePicker
 							disableToolbar
@@ -194,10 +193,8 @@ export default function Form({
 					</MuiPickersUtilsProvider>
 				</Grid>
 				{/* Item actions */}
-				<Grid item xs={1} className={style.itemAction}>
-					<IconButton onClick={(e): void => removeItem(e, idx)}>
-						<DeleteIcon />
-					</IconButton>
+				<Grid item xs={3} md={1} className={style.itemAction}>
+					<IconDeleteButtonwDialog onClick={(e): void => removeItem(e, idx)} />
 				</Grid>
 			</Grid>
 		)
