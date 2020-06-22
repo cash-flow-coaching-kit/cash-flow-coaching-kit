@@ -11,7 +11,7 @@ const initialValues: BaseCFCStruct = {
 	openingBalance: 0,
 	paygWithholding: 0,
 	superAmount: 0,
-	incomeTax: 0,
+	incomeTax: 25,
 	cashToOwner: 0,
 	stock: 0,
 	creditors: 0,

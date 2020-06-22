@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { BaseCFCStruct, CashFlow } from "../../data/_config/shape"
 import GSTApplicable from "../../util/filters/ByGSTApplicable"
 import { sum, pipe, add, minusBy, numOrZero } from "../../util/reduce/math"
@@ -144,4 +145,20 @@ export function calcTotalNetAssets(values: BaseCFCStruct): number {
 			minusBy(values.loans)
 		)(calcClosingBalance(values))
 	)
+}
+
+/**
+ * Calculates the income/company tax based on the form incomeTax percentage
+ *
+ * @export
+ * @param {BaseCFCStruct} values
+ * @returns {number}
+ */
+export function calcIncomeTaxPer(values: BaseCFCStruct): number {
+	const num = parseInt(`${values.incomeTax}`, 10)
+	if (isNaN(num) || num === 0) {
+		return 0
+	}
+
+	return Math.round(calcCashSurplus(values) * (num / 100))
 }

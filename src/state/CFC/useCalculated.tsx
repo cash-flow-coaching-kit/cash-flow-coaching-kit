@@ -18,6 +18,7 @@ export interface CalculatedValues {
 	totalNetAssets: number
 	cashSurplus: number
 	availableToSpend: number
+	incomeTaxPercentage: number
 }
 
 /**

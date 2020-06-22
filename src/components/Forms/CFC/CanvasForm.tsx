@@ -386,7 +386,11 @@ export default function CanvasForm({
 				<Spacer />
 				<CashSurplus value={`${calculated.cashSurplus}`} />
 				<Spacer />
-				<IncomeTax value={incomeTax} onChange={inputChange} />
+				<IncomeTax
+					value={incomeTax}
+					onChange={inputChange}
+					calculated={calculated.incomeTaxPercentage}
+				/>
 				<Spacer />
 				<AvailableToSpend value={`${calculated.availableToSpend}`} />
 				<Spacer />

@@ -14,7 +14,7 @@
 	},
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true,
-		"source.addMissingImports": true
+		"source.addMissingImports": false
 	},
 	"eslint.validate": [
 		"typescript",
