@@ -1,4 +1,4 @@
-import { sum, minusBy, divideBy, pipe, MathHOF, add } from "../math"
+import { sum, minusBy, divideBy, pipe, add, numOrZero } from "../math"
 
 describe("Unit tests for math functions", () => {
   test("Summing some numbers", function() {
@@ -48,5 +48,16 @@ describe("Unit tests for math functions", () => {
     )(10)
 
     expect(value).toBe(5)
+  })
+
+  test("num or zero", function() {
+    expect(numOrZero(10)).toBe(10)
+    expect(numOrZero(0)).toBe(0)
+    expect(numOrZero("")).toBe(0)
+    expect(numOrZero("10")).toBe(0)
+    expect(numOrZero(true)).toBe(0)
+    expect(numOrZero(false)).toBe(0)
+    expect(numOrZero(NaN)).toBe(0)
+    expect(numOrZero(undefined)).toBe(0)
   })
 })
