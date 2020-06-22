@@ -9,6 +9,7 @@ import {
 	Tooltip,
 } from "@material-ui/core"
 import InfoIcon from "@material-ui/icons/Info"
+import orange from "@material-ui/core/colors/orange"
 import useFourQsStyles from "../HealthCheck/FourQuestions/_config/styles"
 import ExpandableNav from "../ExpandableNav"
 import { fourQuestionsContent } from "../HealthCheck/_config/data"
@@ -34,6 +35,18 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: "center",
 		"& svg": {
 			marginLeft: theme.spacing(1),
+		},
+	},
+	questionTwo: {
+		position: "relative",
+		"&:before": {
+			content: "''",
+			width: "5px",
+			background: orange[500],
+			height: "100%",
+			position: "absolute",
+			top: "0px",
+			left: `-${theme.spacing(2)}px`,
 		},
 	},
 }))
@@ -65,7 +78,7 @@ export default function CFCFourQuestions({
 									component="div"
 									className={`${styles.listItem} ${
 										idx === 0 ? styles.listItemFirst : ""
-									}`}
+									} ${idx === 1 ? cls.questionTwo : ""}`}
 								>
 									<ListItemText className={styles.listItemText}>
 										{`${idx + 1}. ${content}`}
