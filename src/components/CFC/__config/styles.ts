@@ -21,7 +21,7 @@ const useCustomTitleStyles = makeStyles((theme) => ({
 		alignItems: "center",
 	},
 	textField: {
-		marginTop: theme.spacing(1),
+		marginBottom: theme.spacing(1),
 	},
 	divider: {
 		margin: `${theme.spacing(2)}px 0`,

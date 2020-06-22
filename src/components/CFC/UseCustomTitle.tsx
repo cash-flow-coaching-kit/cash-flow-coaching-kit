@@ -48,6 +48,17 @@ export default function UseCustomTitle({
 
 	return (
 		<Box>
+			{useCustom && (
+				<TextField
+					name="canvasTitle"
+					label="Custom canvas title"
+					variant="outlined"
+					value={title}
+					onChange={onChange}
+					fullWidth
+					className={cls.textField}
+				/>
+			)}
 			<Box className={cls.checkboxRoot}>
 				<FormControlLabel
 					control={
@@ -63,17 +74,6 @@ export default function UseCustomTitle({
 					<InfoIcon color="primary" />
 				</Tooltip>
 			</Box>
-			{useCustom && (
-				<TextField
-					name="canvasTitle"
-					label="Custom canvas title"
-					variant="outlined"
-					value={title}
-					onChange={onChange}
-					fullWidth
-					className={cls.textField}
-				/>
-			)}
 			<Divider className={cls.divider} />
 		</Box>
 	)
