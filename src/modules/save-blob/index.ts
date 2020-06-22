@@ -7,6 +7,11 @@
  * @param {string} filename
  */
 export default function saveBlob(blob: Blob, filename: string): void {
+	if (navigator.msSaveBlob) {
+		navigator.msSaveBlob(blob, filename)
+		return
+	}
+
 	// Convert your blob into a Blob URL (a special url that points to an object in the browser's memory)
 	const blobUrl = URL.createObjectURL(blob)
 

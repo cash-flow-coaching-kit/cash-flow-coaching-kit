@@ -42,7 +42,7 @@ class HealthCheckDatabase extends Dexie {
 		this.version(2).stores({
 			healthChecks: "++id, clientId, *answers, createdAt",
 		})
-		this.version(2.2).stores({
+		this.version(2.4).stores({
 			healthChecks: "++id, clientId, *answers, createdAt, [id+clientId]",
 		})
 	}
