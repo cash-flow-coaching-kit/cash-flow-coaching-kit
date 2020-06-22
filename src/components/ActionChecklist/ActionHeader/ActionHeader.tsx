@@ -1,5 +1,5 @@
 import React, { ReactElement, useContext } from "react"
-import { AppBar, Toolbar, FormControlLabel, Checkbox } from "@material-ui/core"
+import { FormControlLabel, Checkbox, Box } from "@material-ui/core"
 import useActionHeaderStyles from "./_config/style"
 import { ActionChecklistContext } from "../../../state/action-checklist"
 import { ActionChecklistActionTypes } from "../../../state/action-checklist/shape"
@@ -30,20 +30,18 @@ const ActionHeader = (): ReactElement => {
 	}
 
 	return (
-		<AppBar position="static" color="default" className={styles.appbar}>
-			<Toolbar>
-				<FormControlLabel
-					control={
-						<Checkbox
-							checked={hideCompleted}
-							onChange={handleHideChange}
-							name="hide-items"
-						/>
-					}
-					label="Hide completed item"
-				/>
-			</Toolbar>
-		</AppBar>
+		<Box className={styles.root}>
+			<FormControlLabel
+				control={
+					<Checkbox
+						checked={hideCompleted}
+						onChange={handleHideChange}
+						name="hide-items"
+					/>
+				}
+				label="Hide completed item"
+			/>
+		</Box>
 	)
 }
 
