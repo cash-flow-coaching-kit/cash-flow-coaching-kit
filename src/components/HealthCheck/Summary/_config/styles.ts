@@ -17,11 +17,18 @@ export const useSummaryStyles = makeStyles((theme) => ({
 			height: "100%",
 		},
 	},
+	areaRoot: {
+		display: "flex",
+		flexDirection: "column",
+	},
 	cardHeader: {
 		flexGrow: 2,
 		alignItems: "flex-start",
 		[theme.breakpoints.down("md")]: {
 			flexDirection: "column",
 		},
+	},
+	cardActions: {
+		alignSelf: "flex-end",
 	},
 }))

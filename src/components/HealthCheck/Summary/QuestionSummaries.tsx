@@ -1,6 +1,15 @@
 import React, { useState, ReactElement } from "react"
-import { Grid, Card, CardHeader, CardActionArea } from "@material-ui/core"
+import {
+	Grid,
+	Card,
+	CardHeader,
+	CardActionArea,
+	CardActions,
+	useTheme,
+	Avatar,
+} from "@material-ui/core"
 import { Link } from "react-router-dom"
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import { IQuestionStructure } from "../_config/shape"
 import { answerTheming } from "../_config/data"
@@ -23,6 +32,7 @@ const QuestionSummaries = ({
 }: IQuestionSummaries): ReactElement => {
 	const [key] = useState(generateKey())
 	const styles = useSummaryStyles()
+	const theme = useTheme()
 
 	return (
 		<Grid
@@ -51,6 +61,7 @@ const QuestionSummaries = ({
 								<CardActionArea
 									component={Link}
 									to={q.learnMore || PrivateRoutes.CoachingKit}
+									className={styles.areaRoot}
 								>
 									<CardHeader
 										title={q.question}
@@ -64,6 +75,16 @@ const QuestionSummaries = ({
 										}}
 										className={styles.cardHeader}
 									/>
+									<CardActions className={styles.cardActions}>
+										<Avatar
+											style={{
+												backgroundColor: theme.palette.primary.main,
+												boxShadow: theme.shadows["3"],
+											}}
+										>
+											<ArrowForwardIcon />
+										</Avatar>
+									</CardActions>
 								</CardActionArea>
 							</Card>
 						</Grid>
