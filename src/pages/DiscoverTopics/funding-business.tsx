@@ -1,3 +1,4 @@
+import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import React, { ReactElement } from "react"
 import {
 	Typography,
@@ -14,7 +15,6 @@ import {
 	ExpansionPanelDetails,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
@@ -436,14 +436,12 @@ const DTFundingBusiness = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						startIcon={<PictureAsPdf />}
+						endIcon={<ExitToAppIcon />}
 						href="/pdf/Funding-Activity.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						Download your own
-						<br />
-						Funding activity template
+						Download activity
 					</Button>
 				</Container>
 				<Container

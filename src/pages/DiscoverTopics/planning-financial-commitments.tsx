@@ -14,7 +14,7 @@ import {
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
+import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
@@ -355,12 +355,12 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						startIcon={<PictureAsPdf />}
+						endIcon={<ExitToAppIcon />}
 						href="/pdf/KnowYourCommitments-Activity.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						Identify and map your commitments
+						Download activity
 					</Button>
 				</Container>
 				<Container

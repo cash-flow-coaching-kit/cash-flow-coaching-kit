@@ -1,3 +1,4 @@
+import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import React, { ReactElement } from "react"
 import {
 	Typography,
@@ -14,7 +15,6 @@ import {
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
@@ -315,12 +315,12 @@ const DTRecordKeeping = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						startIcon={<PictureAsPdf />}
+						endIcon={<ExitToAppIcon />}
 						href="/pdf/RecordKeeping-Activity.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						Download record keeping activity
+						Download activity
 					</Button>
 					<Typography component="h2" className={styles.SectionTitle}>
 						ATO App

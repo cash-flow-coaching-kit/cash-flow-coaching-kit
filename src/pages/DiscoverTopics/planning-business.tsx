@@ -14,7 +14,7 @@ import {
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
+import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
@@ -325,12 +325,12 @@ const DTPlanningBusiness = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						startIcon={<PictureAsPdf />}
+						endIcon={<ExitToAppIcon />}
 						href="/pdf/BusinessPlan-Activity.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						Build your own business plan
+						Download activity
 					</Button>
 				</Container>
 				<Container
