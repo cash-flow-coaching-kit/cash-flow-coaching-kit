@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react"
+import React, { ReactElement, useEffect, useState, useContext } from "react"
 import { useParams, Link } from "react-router-dom"
 import {
 	Grid,
@@ -10,10 +10,11 @@ import {
 	makeStyles,
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
+import AddIcon from "@material-ui/icons/Add"
 import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
-import { PrivateRoutes } from "../../util/routes/routes"
+import { PrivateRoutes, routeVarReplacement } from "../../util/routes/routes"
 import QuestionSummaries from "../../components/HealthCheck/Summary"
 import { QuestionOptions } from "../../components/HealthCheck/_config/shape"
 import { questions } from "../../components/HealthCheck/_config/data"
@@ -24,6 +25,8 @@ import {
 import { HealthCheckDataStruct } from "../../data/_config/shape"
 import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
 import useCurrentClient from "../../state/client/useCurrentClient"
+import { ClientContext } from "../../state/client"
+import { ClientActionTypes } from "../../state/client/client-outline"
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
@@ -40,6 +43,7 @@ const QUESTIONS_OFFSET = 4
  */
 const HCSummary = (): ReactElement => {
 	const [currentClient] = useCurrentClient()
+	const { dispatch } = useContext(ClientContext)
 	const { id } = useParams()
 	const [healthCheck, setHealthCheck] = useState<
 		HealthCheckDataStruct | undefined
@@ -54,6 +58,10 @@ const HCSummary = (): ReactElement => {
 
 	useEffect(() => {
 		if (id && currentClient) {
+			dispatch({
+				type: ClientActionTypes.UpdateLastViewedHC,
+				payload: id,
+			})
 			;(async function getHC(): Promise<void> {
 				if (typeof currentClient.id !== "undefined") {
 					// Fetches the health checks for the client and sets state values
@@ -111,6 +119,18 @@ const HCSummary = (): ReactElement => {
 						<FourQuestions answers={fourQuestions || []} />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
+								<ListItem
+									button
+									component={Link}
+									to={routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
+										[":id?", ""],
+									])}
+								>
+									<ListItemIcon>
+										<AddIcon />
+									</ListItemIcon>
+									<ListItemText>Start a new Health Check</ListItemText>
+								</ListItem>
 								<ListItem
 									button
 									component={Link}
