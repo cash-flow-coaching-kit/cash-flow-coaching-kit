@@ -22,6 +22,10 @@ code {
 }
 
 .truncate {
+	&.list-item {
+		flex: 1 1 100% !important;
+	}
+
 	> *:first-child {
 		white-space: nowrap;
 		overflow: hidden;

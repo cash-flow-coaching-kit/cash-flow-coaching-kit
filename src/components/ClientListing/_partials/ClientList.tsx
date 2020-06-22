@@ -63,7 +63,7 @@ const ClientList = ({
 							/>
 						</Tooltip>
 					</ListItemIcon>
-					<ListItemText className="truncate" primary={client.name} />
+					<ListItemText className="truncate list-item" primary={client.name} />
 					<ListItemSecondaryAction>
 						<Tooltip title="Export data">
 							<IconButton>
