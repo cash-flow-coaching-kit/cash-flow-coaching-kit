@@ -9,9 +9,13 @@ const useInputWrapper = makeStyles((theme) => ({
 		boxShadow: theme.shadows[1],
 	},
 	highlight: {
-		borderTopWidth: "5px",
-		borderTopStyle: "solid",
-		borderTopColor: orange[500],
+		borderTop: `5px solid ${orange[500]}`,
+	},
+	highlightLeft: {
+		borderLeft: `5px solid ${orange[500]}`,
+	},
+	plain: {
+		boxShadow: "none",
 	},
 }))
 

@@ -1,3 +1,4 @@
+import { ReactElement } from "react"
 import {
 	CanvasType,
 	CFCTimeFrame,
@@ -44,4 +45,5 @@ export interface RepeaterFormProps {
 	total: number
 	addItem: () => void
 	removeItem: (id: CashFlow["id"]) => void
+	beforeTotalChild?: () => ReactElement
 }

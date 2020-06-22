@@ -373,14 +373,16 @@ export default function CanvasForm({
 						gst={cashOutGST}
 						addItem={addCashFlowItem("cashOutItems")}
 						removeItem={removeItem("cashOutItems")}
+						beforeTotalChild={(): ReactElement => (
+							<EmployeeExpenses
+								payg={paygWithholding}
+								super={superAmount}
+								onChange={inputChange}
+							/>
+						)}
 					/>
 				</Box>
 				<Spacer />
-				<EmployeeExpenses
-					payg={paygWithholding}
-					super={superAmount}
-					onChange={inputChange}
-				/>
 				<Spacer />
 				<CashSurplus value={`${calculated.cashSurplus}`} />
 				<Spacer />

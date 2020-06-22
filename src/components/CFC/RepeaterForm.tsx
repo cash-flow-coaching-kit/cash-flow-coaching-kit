@@ -33,6 +33,7 @@ export default memo(function RepeaterForm({
 	gst,
 	addItem,
 	removeItem,
+	beforeTotalChild,
 }: RepeaterFormProps): ReactElement {
 	const cls = useStyles()
 
@@ -80,6 +81,14 @@ export default memo(function RepeaterForm({
 				<Spacer />
 				<FormActions addItem={addItem} addDisabled={isAddDisabled()} />
 			</Box>
+			{typeof beforeTotalChild !== "undefined" && (
+				<>
+					<Spacer />
+					<Divider />
+					<Spacer />
+					{beforeTotalChild()}
+				</>
+			)}
 			<Spacer />
 			<Divider />
 			<Spacer />
