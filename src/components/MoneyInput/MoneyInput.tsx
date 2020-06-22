@@ -1,4 +1,4 @@
-import React, { ReactElement, memo, ChangeEvent, useState } from "react"
+import React, { ReactElement, memo, ChangeEvent, useState, useRef } from "react"
 import {
 	TextField,
 	InputAdornment,
@@ -19,6 +19,7 @@ export default memo(function MoneyInput({
 	...props
 }: OutlinedTextFieldProps): ReactElement {
 	const [useMimic, setUseMimic] = useState(true)
+	const input = useRef<HTMLInputElement>()
 
 	/**
 	 * Does some input value checks before firing the onChange method
@@ -44,6 +45,9 @@ export default memo(function MoneyInput({
 
 	function onFocus(): void {
 		setUseMimic(false)
+		if (value === 0 && input.current) {
+			input.current.select()
+		}
 	}
 
 	function formatNumber(n: string): string {
@@ -61,6 +65,7 @@ export default memo(function MoneyInput({
 					min: 0,
 					max: 999999999,
 					step: 1,
+					ref: input,
 				},
 			}}
 			label="Amount"
