@@ -2,7 +2,7 @@ import React, { ReactElement, memo, useCallback, MouseEvent } from "react"
 import { Divider, Box } from "@material-ui/core"
 import Spacer from "../Spacer/Spacer"
 import ComputedPanels from "../ComputedPanels"
-import { addDollarSign } from "../../util/money/formatting"
+import { addDollarSign, formatNumber } from "../../util/money/formatting"
 import FormHeader from "./FormHeader"
 import { RepeaterFormProps } from "./__config/shape"
 import { useRepeaterStyles as useStyles } from "./__config/styles"
@@ -96,13 +96,13 @@ export default memo(function RepeaterForm({
 				<ComputedPanels
 					title="Total (exc GST)"
 					wrapped={false}
-					value={addDollarSign(`${total}`)}
+					value={addDollarSign(formatNumber(`${total}`))}
 				/>
 				<ComputedPanels
 					title="GST"
 					mini
 					wrapped={false}
-					value={addDollarSign(`${gst}`)}
+					value={addDollarSign(formatNumber(`${gst}`))}
 				/>
 			</Box>
 		</>

@@ -116,8 +116,8 @@ export default function CompareTable({
 					<CanvasItemRow
 						label="Income/Company Tax"
 						values={[
-							selectedCanvases[0].incomeTax,
-							selectedCanvases[1].incomeTax,
+							leftCalculated.incomeTaxPercentage,
+							rightCalculated.incomeTaxPercentage,
 						]}
 					/>
 					<CanvasItemRow

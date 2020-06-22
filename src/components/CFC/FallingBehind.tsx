@@ -3,7 +3,7 @@ import { Box, makeStyles, Grid } from "@material-ui/core"
 import ExpandableNav from "../ExpandableNav"
 import { Debtors, Creditors, Assets, Loans, Stock } from "."
 import ComputedPanels from "../ComputedPanels"
-import { addDollarSign } from "../../util/money/formatting"
+import { addDollarSign, formatNumber } from "../../util/money/formatting"
 
 /**
  * Prop definition for the FallingBehind component
@@ -88,7 +88,7 @@ export default React.memo(function FallingBehind({
 					<Grid item xs={12} sm={6} className={cls.total}>
 						<ComputedPanels
 							title="Total net assets"
-							value={addDollarSign(`${totalNetAssets}`)}
+							value={addDollarSign(formatNumber(`${totalNetAssets}`))}
 							wrapped={false}
 						/>
 					</Grid>

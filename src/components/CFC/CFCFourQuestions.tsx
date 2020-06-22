@@ -14,7 +14,7 @@ import useFourQsStyles from "../HealthCheck/FourQuestions/_config/styles"
 import ExpandableNav from "../ExpandableNav"
 import { fourQuestionsContent } from "../HealthCheck/_config/data"
 import { ICFCState } from "../../state/CFC/shape"
-import { addDollarSign } from "../../util/money/formatting"
+import { addDollarSign, formatNumber } from "../../util/money/formatting"
 
 type CFC4QsProps = {
 	values: ICFCState["questionValues"]
@@ -60,7 +60,7 @@ export default function CFCFourQuestions({
 	function getValueText(idx: number): string {
 		const vals = Object.values(values)
 		if (typeof vals[idx] !== "undefined") {
-			return addDollarSign(`${vals[idx]}`)
+			return addDollarSign(formatNumber(`${vals[idx]}`))
 		}
 		return idx === 3
 			? "Compare two canvasses for different dates to find out."

@@ -4,6 +4,7 @@ import {
 	InputAdornment,
 	OutlinedTextFieldProps,
 } from "@material-ui/core"
+import { formatNumber } from "../../util/money/formatting"
 
 /**
  * Abstraction for a textfield used to input money
@@ -48,11 +49,6 @@ export default memo(function MoneyInput({
 		if (value === 0 && input.current) {
 			input.current.select()
 		}
-	}
-
-	function formatNumber(n: string): string {
-		// format number 1000000 to 1,234,567
-		return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 	}
 
 	return (

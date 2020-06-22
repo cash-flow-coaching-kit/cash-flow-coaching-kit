@@ -9,7 +9,7 @@ import {
 import { ControlProps } from "./__config/shape"
 import { useInputWrapper } from "./__config/styles"
 import useStyles from "../DescriptiveMoneyInput/__config/styles"
-import { addDollarSign } from "../../util/money/formatting"
+import { addDollarSign, formatNumber } from "../../util/money/formatting"
 
 type IncomeTaxProps = {
 	calculated: number
@@ -73,7 +73,7 @@ export default React.memo(function IncomeTax({
 			</Box>
 			<Typography variant="h6">
 				{/* eslint-disable-next-line no-restricted-globals */}
-				{addDollarSign(`${isNaN(calculated) ? 0 : calculated}`)}
+				{addDollarSign(formatNumber(`${isNaN(calculated) ? 0 : calculated}`))}
 			</Typography>
 		</Box>
 	)
