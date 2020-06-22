@@ -189,6 +189,19 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 			return this.table.get(id)
 		})
 	}
+
+	/**
+	 * Deletes the data for a specific client
+	 *
+	 * @param {ClientId} clientId
+	 * @returns {Promise<number>}
+	 * @memberof ILogicLayer
+	 */
+	public deleteByClient(clientId: ClientId): Promise<number> {
+		return this.database.transaction("rw", this.table.name, () => {
+			return this.table.where("clientId").equals(clientId).delete()
+		})
+	}
 }
 
 export default ILogicLayer
