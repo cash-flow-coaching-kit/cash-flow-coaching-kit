@@ -80,7 +80,7 @@ export default function CompareTable({
 					/>
 					<CanvasItemRow
 						bold
-						label="Total (exec GST)"
+						label="Total (exc GST)"
 						values={[
 							calcCashFlowTotal(selectedCanvases[0].cashInItems),
 							calcCashFlowTotal(selectedCanvases[1].cashInItems),
@@ -102,7 +102,7 @@ export default function CompareTable({
 					/>
 					<CanvasItemRow
 						bold
-						label="Total (exec GST)"
+						label="Total (exc GST)"
 						values={[
 							calcCashFlowTotal(selectedCanvases[0].cashOutItems),
 							calcCashFlowTotal(selectedCanvases[1].cashOutItems),
