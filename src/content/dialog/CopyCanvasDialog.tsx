@@ -10,7 +10,7 @@ import {
 import { useMachine } from "@xstate/react"
 import { useHistory, useParams } from "react-router-dom"
 import { useFormik } from "formik"
-import { omit } from "lodash-es"
+import { omit, values } from "lodash-es"
 import { isValid } from "date-fns"
 import fetchMachine from "../../components/Forms/CFC/__config/machine"
 import useCurrentClient from "../../state/client/useCurrentClient"
@@ -211,6 +211,10 @@ export default function CopyCanvasDialog({
 		setFieldValue("canvasStartDate", canvasStartDate, false)
 		setFieldValue("canvasEndDate", canvasEndDate, false)
 	}
+
+	useEffect(() => {
+		changeDateValue("canvasStartDate", values.canvasStartDate)
+	}, [values.canvasTimeFrame, values.canvasStartDate])
 	// #endregion
 
 	// #region Component rendering
