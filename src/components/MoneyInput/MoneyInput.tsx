@@ -1,4 +1,4 @@
-import React, { ReactElement, memo, ChangeEvent } from "react"
+import React, { ReactElement, memo, ChangeEvent, useState } from "react"
 import {
 	TextField,
 	InputAdornment,
@@ -14,9 +14,12 @@ import {
  */
 export default memo(function MoneyInput({
 	onChange,
+	value,
 	// eslint-disable-next-line
 	...props
 }: OutlinedTextFieldProps): ReactElement {
+	const [useMimic, setUseMimic] = useState(true)
+
 	/**
 	 * Does some input value checks before firing the onChange method
 	 *
@@ -24,6 +27,8 @@ export default memo(function MoneyInput({
 	 */
 	function onChangePreCheck(e: ChangeEvent<HTMLInputElement>): void {
 		const inputVal: string = e.target.value === "" ? "0" : e.target.value
+		if (inputVal.match(/\D/g)) return
+
 		const val = parseInt(inputVal, 10)
 		// eslint-disable-next-line no-restricted-globals
 		if (isNaN(val) || val > 999999999) return
@@ -33,9 +38,21 @@ export default memo(function MoneyInput({
 		}
 	}
 
+	function onBlur(): void {
+		setUseMimic(true)
+	}
+
+	function onFocus(): void {
+		setUseMimic(false)
+	}
+
+	function formatNumber(n: string): string {
+		// format number 1000000 to 1,234,567
+		return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	}
+
 	return (
 		<TextField
-			type="number"
 			fullWidth
 			InputProps={{
 				startAdornment: <InputAdornment position="start">$</InputAdornment>,
@@ -49,6 +66,9 @@ export default memo(function MoneyInput({
 			label="Amount"
 			placeholder="0"
 			onChange={onChangePreCheck}
+			onBlur={onBlur}
+			onFocus={onFocus}
+			value={useMimic ? formatNumber(`${value}`) : value}
 			// eslint-disable-next-line react/jsx-props-no-spreading
 			{...props}
 		/>
