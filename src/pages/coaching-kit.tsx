@@ -84,6 +84,9 @@ const useCKStyles = makeStyles((theme) => ({
 	contentText: {
 		margin: theme.spacing(1, 0),
 	},
+	cardActions: {
+		justifyContent: "flex-end",
+	},
 }))
 
 const CoachingKit = (): ReactElement => {
