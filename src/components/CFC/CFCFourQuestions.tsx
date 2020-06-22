@@ -6,7 +6,9 @@ import {
 	ListItemText,
 	Typography,
 	makeStyles,
+	Tooltip,
 } from "@material-ui/core"
+import InfoIcon from "@material-ui/icons/Info"
 import useFourQsStyles from "../HealthCheck/FourQuestions/_config/styles"
 import ExpandableNav from "../ExpandableNav"
 import { fourQuestionsContent } from "../HealthCheck/_config/data"
@@ -17,10 +19,22 @@ type CFC4QsProps = {
 	values: ICFCState["questionValues"]
 }
 
+const tooltipContent = [
+	"Total Cash In (exc GST) – Total Cash Out (exc GST).",
+	"GST on Sales – GST on Purchases + PAYG Withholding + Super + Income Tax or Company Tax.",
+	"Opening Balance + Cash Surplus (exc GST) – Income Tax or Company Tax.",
+	"Total net assets (later period, eg. Forecast) – Total net assets (earlier period, eg. Review).",
+]
+
 const useStyles = makeStyles((theme) => ({
 	valueText: {
 		fontWeight: theme.typography.fontWeightMedium,
 		marginTop: "4px",
+		display: "flex",
+		alignItems: "center",
+		"& svg": {
+			marginLeft: theme.spacing(1),
+		},
 	},
 }))
 
@@ -57,6 +71,9 @@ export default function CFCFourQuestions({
 										{`${idx + 1}. ${content}`}
 										<Typography className={cls.valueText}>
 											{getValueText(idx)}
+											<Tooltip title={tooltipContent[idx]}>
+												<InfoIcon color="primary" />
+											</Tooltip>
 										</Typography>
 									</ListItemText>
 								</ListItem>
