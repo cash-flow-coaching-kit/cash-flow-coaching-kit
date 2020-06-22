@@ -85,7 +85,7 @@ export default memo(function RepeaterForm({
 			<Spacer />
 			<Box className={cls.body}>
 				<ComputedPanels
-					title="Total (exec GST)"
+					title="Total (exc GST)"
 					wrapped={false}
 					value={addDollarSign(`${total}`)}
 				/>
