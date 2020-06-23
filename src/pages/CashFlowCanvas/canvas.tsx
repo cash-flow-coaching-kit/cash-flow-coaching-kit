@@ -7,19 +7,19 @@ import CreateCanvasForm from "../../components/Forms/CFC/CanvasCreate"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ControlPanel from "../../components/CFC/ControlPanel"
 import PageTour from "../../components/PageTour"
+import {
+	CFC4QsTourContent,
+	CFCCreateCanvas,
+} from "../../components/CFC/__config/constants"
 
 const steps: ReactourStep[] = [
 	{
-		selector: "[data-reactour='create-a-canvas']",
-		content: "Test content 1",
-	},
-	{
 		selector: "[data-reactour='four-questions-nav']",
-		content: "Test content 2",
+		content: CFC4QsTourContent,
 	},
 	{
-		selector: "[data-reactour='canvas-control-panel']",
-		content: "Test content 3",
+		selector: "[data-reactour='create-a-canvas']",
+		content: CFCCreateCanvas,
 	},
 ]
 

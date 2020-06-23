@@ -6,6 +6,7 @@ import React, {
 	useEffect,
 	useContext,
 } from "react"
+import { ReactourStep } from "reactour"
 import { useFormik } from "formik"
 import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { useParams } from "react-router-dom"
@@ -52,6 +53,11 @@ import {
 	calcQuestionTwo,
 	calcQuestionThree,
 } from "../../CFC/__config/utilities"
+import {
+	CFC4QsTourContent,
+	CFCCreateCanvas,
+} from "../../CFC/__config/constants"
+import PageTour from "../../PageTour"
 
 /**
  * Form used to edit a CFC
@@ -301,77 +307,81 @@ export default function CanvasForm({
 
 	return (
 		<>
-			<CanvasTitle
-				type={canvasType}
-				timeframe={canvasTimeFrame}
-				startDate={canvasStartDate}
-				endDate={canvasEndDate}
-				customTitle={canvasTitle}
-				useCustomTitle={useCustomTitle}
-			/>
-			<ConfigPanel
-				canvasTypeValue={canvasType}
-				canvasTimeframeValue={canvasTimeFrame}
-				onChange={inputChange}
-				startDate={canvasStartDate}
-				endDate={canvasEndDate}
-				onDateChange={changeDateValue}
-				customTitle={canvasTitle}
-				changeCheck={(e: InputChange): void => {
-					setUseCustomTitle(e.target.checked)
-				}}
-				useCustomTitle={useCustomTitle}
-			/>
+			<div data-reactour="create-a-canvas">
+				<CanvasTitle
+					type={canvasType}
+					timeframe={canvasTimeFrame}
+					startDate={canvasStartDate}
+					endDate={canvasEndDate}
+					customTitle={canvasTitle}
+					useCustomTitle={useCustomTitle}
+				/>
+				<ConfigPanel
+					canvasTypeValue={canvasType}
+					canvasTimeframeValue={canvasTimeFrame}
+					onChange={inputChange}
+					startDate={canvasStartDate}
+					endDate={canvasEndDate}
+					onDateChange={changeDateValue}
+					customTitle={canvasTitle}
+					changeCheck={(e: InputChange): void => {
+						setUseCustomTitle(e.target.checked)
+					}}
+					useCustomTitle={useCustomTitle}
+				/>
+			</div>
 			<IfElseLoading if={stateMachine.value !== "loading"}>
 				<Spacer />
-				<OpeningBalance value={openingBalance} onChange={inputChange} />
-				<Spacer />
-				<Box className={cls.wrapper}>
-					<Typography variant="h6">Cash IN</Typography>
-					<Typography>
-						Cash received, or revenue, including GST (if applicable). This may
-						be for services or sales. See Change Levers for ideas on how to
-						improve your Cash IN.
-					</Typography>
+				<div data-reactour="cfc-filling-out-the-canvas">
+					<OpeningBalance value={openingBalance} onChange={inputChange} />
 					<Spacer />
-					<Divider />
-					<Spacer space={3} />
-					<RepeaterForm
-						name="cashInItems"
-						values={cashInItems}
-						onChange={inputChange}
-						total={cashInTotal}
-						gst={cashInGST}
-						addItem={addCashFlowItem("cashInItems")}
-						removeItem={removeItem("cashInItems")}
-					/>
-				</Box>
-				<Spacer />
-				<Box className={cls.wrapper}>
-					<Typography variant="h6">Cash OUT</Typography>
-					<Typography>
-						All expenses, including GST (if applicable). See Change Levers for
-						ideas on how to reduce your Cash OUT.
-					</Typography>
+					<Box className={cls.wrapper}>
+						<Typography variant="h6">Cash IN</Typography>
+						<Typography>
+							Cash received, or revenue, including GST (if applicable). This may
+							be for services or sales. See Change Levers for ideas on how to
+							improve your Cash IN.
+						</Typography>
+						<Spacer />
+						<Divider />
+						<Spacer space={3} />
+						<RepeaterForm
+							name="cashInItems"
+							values={cashInItems}
+							onChange={inputChange}
+							total={cashInTotal}
+							gst={cashInGST}
+							addItem={addCashFlowItem("cashInItems")}
+							removeItem={removeItem("cashInItems")}
+						/>
+					</Box>
 					<Spacer />
-					<Divider />
-					<Spacer space={3} />
-					<RepeaterForm
-						name="cashOutItems"
-						values={cashOutItems}
+					<Box className={cls.wrapper}>
+						<Typography variant="h6">Cash OUT</Typography>
+						<Typography>
+							All expenses, including GST (if applicable). See Change Levers for
+							ideas on how to reduce your Cash OUT.
+						</Typography>
+						<Spacer />
+						<Divider />
+						<Spacer space={3} />
+						<RepeaterForm
+							name="cashOutItems"
+							values={cashOutItems}
+							onChange={inputChange}
+							total={cashOutTotal}
+							gst={cashOutGST}
+							addItem={addCashFlowItem("cashOutItems")}
+							removeItem={removeItem("cashOutItems")}
+						/>
+					</Box>
+					<Spacer />
+					<EmployeeExpenses
+						payg={paygWithholding}
+						super={superAmount}
 						onChange={inputChange}
-						total={cashOutTotal}
-						gst={cashOutGST}
-						addItem={addCashFlowItem("cashOutItems")}
-						removeItem={removeItem("cashOutItems")}
 					/>
-				</Box>
-				<Spacer />
-				<EmployeeExpenses
-					payg={paygWithholding}
-					super={superAmount}
-					onChange={inputChange}
-				/>
+				</div>
 				<Spacer />
 				<CashSurplus value={`${calculated.cashSurplus}`} />
 				<Spacer />
@@ -379,21 +389,23 @@ export default function CanvasForm({
 				<Spacer />
 				<IncomeTax value={incomeTax} onChange={inputChange} />
 				<Spacer />
-				<CashBalance
-					cashToOwner={cashToOwner}
-					onChange={inputChange}
-					closingBalance={calculated.closingBalance}
-				/>
-				<Spacer />
-				<FallingBehind
-					stock={stock}
-					creditors={creditors}
-					debtors={debtors}
-					assets={assets}
-					loans={loans}
-					totalNetAssets={calculated.totalNetAssets}
-					onChange={inputChange}
-				/>
+				<div data-reactour="cfc-your-position">
+					<CashBalance
+						cashToOwner={cashToOwner}
+						onChange={inputChange}
+						closingBalance={calculated.closingBalance}
+					/>
+					<Spacer />
+					<FallingBehind
+						stock={stock}
+						creditors={creditors}
+						debtors={debtors}
+						assets={assets}
+						loans={loans}
+						totalNetAssets={calculated.totalNetAssets}
+						onChange={inputChange}
+					/>
+				</div>
 				<Spacer space={4} />
 				<Divider />
 				<Spacer />
