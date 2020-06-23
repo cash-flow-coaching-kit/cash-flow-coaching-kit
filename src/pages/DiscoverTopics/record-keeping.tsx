@@ -19,6 +19,7 @@ import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
+import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 
 const DTRecordKeeping = (): ReactElement => {
 	const styles = useDTStyles()
@@ -125,6 +126,7 @@ const DTRecordKeeping = (): ReactElement => {
 					</Grid>
 					<Grid item sm={3}>
 						<Taskbuilder container="recordKeeping" />
+						<QuicksnapsPanel filename="Record keeping - Quicksnaps.pdf" />
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>

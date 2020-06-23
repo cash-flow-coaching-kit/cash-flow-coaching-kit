@@ -19,6 +19,7 @@ import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
+import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 
 const DTPlanningBusiness = (): ReactElement => {
 	const styles = useDTStyles()
@@ -122,7 +123,7 @@ const DTPlanningBusiness = (): ReactElement => {
 					</Grid>
 					<Grid item sm={3}>
 						<Taskbuilder container="planningBusiness" />
-						{/* TODO: Add additional control panel */}
+						<QuicksnapsPanel filename="Planning your business - Quicksnaps.pdf" />
 					</Grid>
 				</Grid>
 				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
