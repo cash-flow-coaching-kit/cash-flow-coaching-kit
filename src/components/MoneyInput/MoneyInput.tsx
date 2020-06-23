@@ -29,6 +29,13 @@ export default memo(function MoneyInput({
 	 */
 	function onChangePreCheck(e: ChangeEvent<HTMLInputElement>): void {
 		const inputVal: string = e.target.value === "" ? "0" : e.target.value
+		if (
+			`${inputVal}`.startsWith("00") ||
+			(`${value}`.startsWith("0") && `${inputVal}`.length > 1)
+		) {
+			return
+		}
+
 		if (inputVal.match(/\D/g)) return
 
 		const val = parseInt(inputVal, 10)
