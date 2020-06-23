@@ -1,4 +1,11 @@
-import React, { ReactElement, useState, useContext, useEffect } from "react"
+import React, {
+	ReactElement,
+	useState,
+	useContext,
+	useEffect,
+	useRef,
+	MouseEvent,
+} from "react"
 import {
 	Dialog,
 	DialogTitle,
@@ -58,6 +65,7 @@ export default function Modal({
 		state: { currentClient },
 	} = useContext(ClientContext)
 	const { dispatch } = useContext(ActionChecklistContext)
+	const submitBtn = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
 		const fetchLinkedPriority = async (id: ClientId): Promise<void> => {
@@ -134,6 +142,11 @@ export default function Modal({
 			return true
 		}
 
+		console.log({
+			currentClient,
+			priority,
+		})
+
 		return false
 	}
 	// #endregion
@@ -149,6 +162,7 @@ export default function Modal({
 					onFormSubmission={onFormSubmission}
 					closeModal={onClose}
 					showSnackbar={showSnackbar}
+					ref={submitBtn}
 				/>
 				<ConditionalChildren node={children} />
 			</DialogContent>
@@ -162,6 +176,12 @@ export default function Modal({
 					type="submit"
 					form="checklist-bulk-add"
 					disabled={submitting}
+					onClick={(e: MouseEvent<HTMLButtonElement>): void => {
+						if (submitBtn.current) {
+							e.preventDefault()
+							submitBtn.current.click()
+						}
+					}}
 				>
 					Confirm
 				</Button>
