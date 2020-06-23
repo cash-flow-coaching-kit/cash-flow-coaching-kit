@@ -1,10 +1,9 @@
 import React, { ReactElement, useContext } from "react"
-import { TextField, Button, Box } from "@material-ui/core"
+import { TextField } from "@material-ui/core"
 import { useFormik } from "formik"
 import { useHistory } from "react-router-dom"
 import addClient from "../../../data/client/addClient"
 import { ClientContext } from "../../../state/client"
-import useClientFormStyles from "./_config/styles"
 import { INCFormValues, INCFormErrors } from "./_config/shape"
 import { PrivateRoutes } from "../../../util/routes/routes"
 
@@ -19,7 +18,6 @@ interface NewClientFormProps {
  */
 const NewClientForm = ({ closeDialog }: NewClientFormProps): ReactElement => {
 	const { dispatch } = useContext(ClientContext)
-	const styles = useClientFormStyles()
 	const initialValues: INCFormValues = {
 		businessName: "",
 	}
@@ -70,13 +68,18 @@ const NewClientForm = ({ closeDialog }: NewClientFormProps): ReactElement => {
 	}
 
 	return (
-		<form noValidate autoComplete="off" onSubmit={form.handleSubmit}>
+		<form
+			noValidate
+			autoComplete="off"
+			onSubmit={form.handleSubmit}
+			id="add-new-business-form"
+		>
 			<TextField
 				id="businessName"
 				name="businessName"
 				label="Business name"
 				variant="outlined"
-				className={styles.input}
+				fullWidth
 				onChange={form.handleChange}
 				value={form.values.businessName}
 				error={hasError(form.errors, "businessName")}
@@ -87,16 +90,6 @@ const NewClientForm = ({ closeDialog }: NewClientFormProps): ReactElement => {
 				}
 				autoFocus
 			/>
-			<Box>
-				<Button
-					type="submit"
-					variant="contained"
-					color="primary"
-					disabled={form.isSubmitting}
-				>
-					Add business
-				</Button>
-			</Box>
 		</form>
 	)
 }

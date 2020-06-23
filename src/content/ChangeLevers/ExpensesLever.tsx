@@ -43,8 +43,8 @@ export default function ExpensesLever(): ReactElement {
 	const styles = useChangeLeversStyles()
 	return (
 		<ExpandableNav
-			title="Expenses Lever"
-			subHeading="Reduce cash outflows"
+			title="Expenses"
+			subHeading="Reduce costs"
 			defaultExpanded={false}
 		>
 			{/* Reduce discretionary spending */}

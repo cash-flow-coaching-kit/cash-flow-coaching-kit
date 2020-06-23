@@ -14,16 +14,14 @@ const ChangeLeversTips = (): ReactElement => {
 		<>
 			<List className={styles.list}>
 				<Typography component="li">
-					Explore the levers to identify possible changes that can be made to
-					the business
+					Explore the actions to identify possible changes to make.
 				</Typography>
 				<Typography component="li">
-					Click the Add to action checklist button to add relevant levers to the
-					Action Checklist
+					Once decided, click the &apos;Add to action checklist button&apos;
 				</Typography>
 				<Typography component="li">Add extra detail if required</Typography>
 				<Typography component="li">
-					Use the levers with the canvas to identify key actions
+					Use the action with the canvas to plan them
 				</Typography>
 			</List>
 			<Typography variant="h6">Next Steps</Typography>
@@ -32,7 +30,7 @@ const ChangeLeversTips = (): ReactElement => {
 					Visit the Action Checklist to see the results
 				</Typography>
 				<Typography component="li">
-					Apply new levers regularly to keep improving
+					Apply new actions regularly to keep improving
 				</Typography>
 			</List>
 		</>

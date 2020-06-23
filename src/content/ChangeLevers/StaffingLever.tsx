@@ -96,8 +96,8 @@ export default function StaffingLever(): ReactElement {
 	const styles = useChangeLeversStyles()
 	return (
 		<ExpandableNav
-			title="Staffing Lever"
-			subHeading="Employ the right people with the right skills in your business"
+			title="Staffing"
+			subHeading="Employ the right staff"
 			defaultExpanded={false}
 		>
 			{/* Change staff mix */}

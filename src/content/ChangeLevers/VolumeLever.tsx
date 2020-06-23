@@ -68,8 +68,8 @@ export default function VolumeLever(): ReactElement {
 	const styles = useChangeLeversStyles()
 	return (
 		<ExpandableNav
-			title="Volume Lever"
-			subHeading="Increase volume of sales transactions"
+			title="Volume"
+			subHeading="Increase sales transactions"
 			defaultExpanded={false}
 		>
 			{/* Increase customers */}

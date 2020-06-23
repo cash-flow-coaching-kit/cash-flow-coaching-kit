@@ -12,6 +12,8 @@ import {
 	ListItemText,
 	ListItemIcon,
 	Box,
+	Typography,
+	Divider,
 } from "@material-ui/core"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
 import { useMachine } from "@xstate/react"
@@ -29,6 +31,7 @@ import { ClientContext } from "../state/client"
 import filterByActionContainer from "../util/filters/ByActionContainer"
 import { ActionChecklistMachine } from "../data/ActionChecklist/_config/machine"
 import Loading from "../components/Loading"
+import Spacer from "../components/Spacer"
 
 /**
  * Action Checklist page component
@@ -100,6 +103,19 @@ const ActionChecklist = (): ReactElement => {
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
 						<SectionTitle>Action Items</SectionTitle>
+						<Box className="content-area">
+							<Typography>
+								Your checklist has all your actions you selected in previous
+								parts of the cash flow kit. It is categorised by cash flow in
+								and out actions.
+							</Typography>
+							<Typography>
+								Use the checklist to track, prioritise and review your actions.
+							</Typography>
+						</Box>
+						<Spacer />
+						<Divider />
+						<Spacer />
 						<ActionHeader />
 						<Box>{renderActionChecklist()}</Box>
 					</Grid>

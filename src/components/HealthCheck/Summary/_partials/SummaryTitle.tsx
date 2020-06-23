@@ -11,10 +11,16 @@ import { ISummaryTitleProps } from "../_config/shape"
  */
 const SummaryTitle = ({ createdAt }: ISummaryTitleProps): ReactElement => {
 	return (
-		<Typography variant="h5" align="center">
-			Your health check results{" "}
-			{createdAt ? `on the ${format(createdAt, "do 'of' MMMM yyyy")}` : false}
-		</Typography>
+		<>
+			<Typography variant="h5" align="center">
+				Your results{" "}
+				{createdAt ? `on the ${format(createdAt, "do 'of' MMMM yyyy")}` : false}
+			</Typography>
+			<Typography align="center">
+				Learn more about topics covered in the health check to improve your
+				business.
+			</Typography>
+		</>
 	)
 }
 

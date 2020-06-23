@@ -6,6 +6,8 @@ import {
 	ListItem,
 	ListItemIcon,
 	ListItemText,
+	Box,
+	Divider,
 } from "@material-ui/core"
 import { Link, useParams } from "react-router-dom"
 import ListIcon from "@material-ui/icons/List"
@@ -19,6 +21,8 @@ import { QuestionOptions } from "../../components/HealthCheck/_config/shape"
 import Loading from "../../components/Loading"
 import { ClientContext } from "../../state/client"
 import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
+import Spacer from "../../components/Spacer"
+import SectionTitle from "../../components/SectionTitle"
 
 /**
  * Health check questionnaire page
@@ -55,9 +59,34 @@ const HCQuestionnaire = (): ReactElement => {
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
-						<Typography variant="h5" align="center">
-							Ten easy questions to learn more about the health of your business
-						</Typography>
+						<SectionTitle>Health Check</SectionTitle>
+						<Spacer />
+						<Box className="content-area">
+							<Typography className="list-describer">
+								This quick health check will help you:
+							</Typography>
+							<List component="ul" className="ul-list">
+								<Typography component="li">fill knowledge gaps</Typography>
+								<Typography component="li">
+									identify areas to improve your cash flow
+								</Typography>
+							</List>
+							<Typography>
+								Your results will show you key discover topics and activities to
+								complete.
+							</Typography>
+							<Typography>
+								As you make changes to your business, you can use the health
+								check to review your progress.
+							</Typography>
+							<Typography>
+								If you want to see your previous health checks, see ‘List of
+								Health Checks’ in the control panel.
+							</Typography>
+						</Box>
+						<Spacer space={3} />
+						<Divider />
+						<Spacer />
 						{loading ? (
 							<Loading />
 						) : (

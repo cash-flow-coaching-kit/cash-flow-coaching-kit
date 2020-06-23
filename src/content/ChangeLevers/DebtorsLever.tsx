@@ -72,8 +72,8 @@ export default function DebtorsLever(): ReactElement {
 	const styles = useChangeLeversStyles()
 	return (
 		<ExpandableNav
-			title="Debtors Lever"
-			subHeading="Collect cash owned to you faster"
+			title="Debtors"
+			subHeading="Collect cash owed to you faster"
 			defaultExpanded={false}
 		>
 			{/* Invoice earlier */}

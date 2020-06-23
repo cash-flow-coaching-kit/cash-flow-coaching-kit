@@ -62,7 +62,7 @@ export default function PricingLever(): ReactElement {
 
 	return (
 		<ExpandableNav
-			title="Pricing Lever"
+			title="Pricing"
 			subHeading="Change pricing to improve cash flow"
 			defaultExpanded={false}
 		>

@@ -14,28 +14,29 @@ import {
 	ActionChecklist,
 } from "../content/CoachingConversation"
 
-// Client list styling
-const useCLStyles = makeStyles((theme) => ({
-	tagline: {
-		marginBottom: theme.spacing(4),
-	},
-}))
-
 /**
  * Client listing page
  *
  * @returns ReactElement
  */
 const ClientList = (): ReactElement => {
-	const styles = useCLStyles()
-
 	return (
 		<>
 			<PageContainer>
-				<Typography variant="h5" align="center" className={styles.tagline}>
-					Manage your client list and prepare for your coaching conversation
-				</Typography>
 				<Grid container spacing={3}>
+					<Grid item xs={12} sm={8}>
+						<SectionTitle>Clients and coaching</SectionTitle>
+						<Box className="content-area">
+							<Typography>Manage and prepare your coaching.</Typography>
+							<Typography>
+								Read our coaching guidance to prepare for your client. These
+								will help you and your client get the most value from the kit.
+							</Typography>
+							<Typography>
+								You can also import and export client data in your client list.
+							</Typography>
+						</Box>
+					</Grid>
 					<Grid item xs={12} md={6}>
 						<ClientListing />
 					</Grid>

@@ -67,8 +67,8 @@ export default function InventoryLever(): ReactElement {
 	const styles = useChangeLeversStyles()
 	return (
 		<ExpandableNav
-			title="Inventory Lever"
-			subHeading="Reduce amount of cash tied up in unsold inventory"
+			title="Inventory"
+			subHeading="Manage your inventory and ordering"
 			defaultExpanded={false}
 		>
 			{/* Reduce cost of stock or materials */}

@@ -14,15 +14,10 @@ export default function Prepare(): ReactElement {
 			<Box className={cls.box}>
 				<List className={cls.list}>
 					<Typography component="li">
-						Familiarise yourself with the tools in this kit. For more
-						information click on the ‘Show me how’ button.
+						Familiarise yourself with the tools in this kit.
 					</Typography>
 					<Typography component="li">
-						Note the key things you want to discuss with your client.
-					</Typography>
-					<Typography component="li">
-						Identify the cash flow coaching kit tools that will be most suitable
-						to aid your coaching conversation.
+						Identify the tools that will be most suitable to your client.
 					</Typography>
 					<Typography component="li">Ask your client to:</Typography>
 					<List className={cls.list}>
@@ -30,12 +25,12 @@ export default function Prepare(): ReactElement {
 							prepare a list of questions to ask
 						</Typography>
 						<Typography component="li">
-							bring the financial projections or reports for their business.
+							bring the financial projections or reports for their business
 						</Typography>
 					</List>
 					<Typography component="li">
-						For an existing client you can review their previous action
-						checklist, canvases and financials.
+						For an existing client, review their previous action checklist,
+						canvases and financials.
 					</Typography>
 				</List>
 			</Box>

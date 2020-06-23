@@ -158,7 +158,7 @@ export default function Modal({
 					form="checklist-bulk-add"
 					disabled={submitting}
 				>
-					Confirm
+					Add to checklist
 				</Button>
 			</DialogActions>
 		</Dialog>

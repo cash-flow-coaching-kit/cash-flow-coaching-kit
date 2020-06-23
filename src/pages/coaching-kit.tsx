@@ -16,16 +16,18 @@ import {
 	Avatar,
 	List,
 	ListItem,
+	Box,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { PageContainer } from "../components/Layouts"
 import { PrivateRoutes, routeVarReplacement } from "../util/routes/routes"
 import PageTip from "../components/PageTip"
+import Spacer from "../components/Spacer"
 
 const useCKStyles = makeStyles((theme) => ({
 	MainHeading: {
-		paddingTop: theme.spacing(5),
-		paddingBottom: theme.spacing(2),
+		paddingTop: theme.spacing(0),
+		marginBottom: theme.spacing(2),
 		fontSize: "1.8rem",
 	},
 	SectionTitle: {
@@ -76,29 +78,41 @@ const CoachingKit = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography
-					component="h1"
-					align="center"
-					className={styles.MainHeading}
-				>
-					Work through the coaching kit phases to help you answer the Four Key
-					Questions for your business
+				<Typography component="h1" className={styles.MainHeading}>
+					The cash flow kit
 				</Typography>
 
-				<ExpansionPanel>
-					<ExpansionPanelSummary
-						expandIcon={<ExpandMoreIcon />}
-						aria-controls="four-questions-content"
-						id="four-questions-header"
-					>
-						<Typography variant="h6" component="h2">
-							What are the <em> Four Key Questions</em>
+				<Grid container spacing={0}>
+					<Grid item xs={12} sm={8}>
+						<Typography className={styles.contentText}>
+							The cash flow kit has three phases: discover, plan and action.
+							Working through the kit will help you plan, maintain and grow your
+							business.
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
-						<Grid container>
-							<Grid item>
-								<Typography
+						<Typography className={styles.contentText}>
+							In each phase in the kit, you will focus on 4 key questions. They
+							look at profit, provisioning, liquidity and goals. Answering these
+							will create a foundation for strong cash flow management.
+						</Typography>
+					</Grid>
+				</Grid>
+
+				<Spacer space={2} />
+				<Box>
+					<ExpansionPanel>
+						<ExpansionPanelSummary
+							expandIcon={<ExpandMoreIcon />}
+							aria-controls="four-questions-content"
+							id="four-questions-header"
+						>
+							<Typography variant="h6" component="h2">
+								What are the <em> Four Key Questions</em>?
+							</Typography>
+						</ExpansionPanelSummary>
+						<ExpansionPanelDetails>
+							<Grid container>
+								<Grid item xs={12}>
+									{/* <Typography
 									variant="body1"
 									component="p"
 									className={styles.contentText}
@@ -114,31 +128,32 @@ const CoachingKit = (): ReactElement => {
 									They are important because they set the foundation for strong
 									cash flow management by focusing on four critical factors -
 									profit, provisioning, liquidity and meeting goals.
-								</Typography>
-								<List>
-									<ListItem className={styles.contentText}>
-										1. Am I trading profitably?
-									</ListItem>
-									<Divider />
-									<ListItem className={styles.contentText}>
-										2. Have I put enough aside to meet my regular financial
-										commitments?
-									</ListItem>
-									<Divider />
-									<ListItem className={styles.contentText}>
-										3. Does my business have enough to spend on myself and pay
-										others?
-									</ListItem>
-									<Divider />
-									<ListItem className={styles.contentText}>
-										4. Is my business improving its financial position?
-									</ListItem>
-								</List>
+								</Typography> */}
+									<List style={{ padding: 0 }}>
+										<ListItem className={styles.contentText}>
+											1. Am I trading profitably?
+										</ListItem>
+										<Divider />
+										<ListItem className={styles.contentText}>
+											2. Have I put enough aside to meet my regular financial
+											commitments?
+										</ListItem>
+										<Divider />
+										<ListItem className={styles.contentText}>
+											3. Does my business have enough to spend on myself and pay
+											others?
+										</ListItem>
+										<Divider />
+										<ListItem className={styles.contentText}>
+											4. Is my business improving its financial position?
+										</ListItem>
+									</List>
+								</Grid>
 							</Grid>
-						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-
+						</ExpansionPanelDetails>
+					</ExpansionPanel>
+				</Box>
+				<Spacer space={2} />
 				<Grid container spacing={3}>
 					<Grid item sm={4}>
 						<Grid container spacing={3} direction="column">
@@ -155,9 +170,9 @@ const CoachingKit = (): ReactElement => {
 									variant="body1"
 									component="p"
 									className={styles.contentText}
+									align="center"
 								>
-									Do you want to learn about cash flow fundamentals and topics
-									to get a competitive advantage?
+									Learn about cash flow management.
 								</Typography>
 							</Grid>
 							<Grid item>
@@ -177,9 +192,8 @@ const CoachingKit = (): ReactElement => {
 											color="textSecondary"
 											component="p"
 										>
-											Answer ten simple questions to learn more about the health
-											of your business and find opportunities to improve your
-											cash flow.
+											Answer 10 questions to learn about the health of your
+											business.
 										</Typography>
 									</CardContent>
 									<CardActions>
@@ -214,8 +228,8 @@ const CoachingKit = (): ReactElement => {
 											color="textSecondary"
 											component="p"
 										>
-											Build your knowledge on key areas of your business, with
-											activities and ideas that you can do at any time.
+											Build your business knowledge with activities and ideas
+											that you can do at any time.
 										</Typography>
 									</CardContent>
 									<CardActions>
@@ -241,15 +255,15 @@ const CoachingKit = (): ReactElement => {
 									variant="h5"
 									className={styles.SectionTitle}
 								>
-									Apply
+									Plan
 								</Typography>
 								<Typography
 									variant="body1"
 									component="p"
 									className={styles.contentText}
+									align="center"
 								>
-									Do you want to understand your current cash flow and explore
-									ways to help improve it?
+									Understand your current cash flow and plan improvements.
 								</Typography>
 							</Grid>
 							<Grid item>
@@ -270,9 +284,8 @@ const CoachingKit = (): ReactElement => {
 											color="textSecondary"
 											component="p"
 										>
-											Input simple financial figures to understand the cash flow
-											of your business, and see the factors that contribute to
-											your success.
+											Input simple figures to review, plan, change and track
+											your cash flow.
 										</Typography>
 									</CardContent>
 									<CardActions>
@@ -332,15 +345,15 @@ const CoachingKit = (): ReactElement => {
 									variant="h5"
 									className={styles.SectionTitle}
 								>
-									Plan &amp; Action
+									Action
 								</Typography>
 								<Typography
 									variant="body1"
 									component="p"
 									className={styles.contentText}
+									align="center"
 								>
-									Do you want to create your personalised action plan to keep
-									yourself accountable and monitor your progress?
+									Create an action checklist and track your progress.
 								</Typography>
 							</Grid>
 							<Grid item>
@@ -378,6 +391,18 @@ const CoachingKit = (): ReactElement => {
 								</Card>
 							</Grid>
 						</Grid>
+					</Grid>
+					<Grid item xs={12} sm={8}>
+						<Spacer space={3} />
+						<Typography className={styles.contentText}>
+							The Cash Flow Coaching Kit allows business advisors to work with
+							their clients to improve cash flow management.
+						</Typography>
+						<Typography className={styles.contentText}>
+							You can use the kit for your own self-directed learning. However,
+							we recommended that you use it with a professional advisor. They
+							can help with any questions or issues it raises.
+						</Typography>
 					</Grid>
 				</Grid>
 				<PageTip tip="CoachingKitTips" />

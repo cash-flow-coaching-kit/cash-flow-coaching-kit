@@ -24,6 +24,7 @@ import {
 	InventoryLever,
 	StaffingLever,
 } from "../content/ChangeLevers"
+import Spacer from "../components/Spacer"
 
 const ChangeLevers = (): ReactElement => {
 	const styles = makeStyles((theme) => ({
@@ -37,17 +38,27 @@ const ChangeLevers = (): ReactElement => {
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
-						<Typography variant="h5" align="center" className={styles.pushDown}>
-							Explore practical ideas and actions to improve your cash flow
-						</Typography>
-						<SectionTitle>Improve Cash IN position</SectionTitle>
+						<Box className="content-area">
+							<Typography variant="h5">
+								Use your cash flow knowledge and canvas to explore possible
+								changes that can be made.
+							</Typography>
+							<Typography>
+								Below are actions that will improve your cash flow in and out.
+							</Typography>
+							<Typography>
+								Add the actions you want to take to your action checklist.
+							</Typography>
+						</Box>
+						<Spacer space={3} />
+						<SectionTitle>Improve cash flow in</SectionTitle>
 						<Box className={styles.pushDown}>
 							<PricingLever />
 							<VolumeLever />
 							<DebtorsLever />
 						</Box>
 
-						<SectionTitle>Reduce Cash OUT position</SectionTitle>
+						<SectionTitle>Reduce cash flow out</SectionTitle>
 						<Box>
 							<AssetLever />
 							<ExpensesLever />

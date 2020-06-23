@@ -45,8 +45,8 @@ export default function AssetLever(): ReactElement {
 	const styles = useChangeLeversStyles()
 	return (
 		<ExpandableNav
-			title="Assets Lever"
-			subHeading="Make your assets work for you and free up cash flow which is currently tied up in the business"
+			title="Assets"
+			subHeading="Utilise your assets"
 			defaultExpanded={false}
 		>
 			{/* Sell Assets */}

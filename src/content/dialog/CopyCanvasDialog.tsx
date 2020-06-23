@@ -252,12 +252,12 @@ export default function CopyCanvasDialog({
 						)}
 						<Spacer space={4} />
 						<Typography component="em">
-							Copying will copy your values over to the new canvas
+							All your figures will be copied to a new canvas.
 						</Typography>
 						<br />
 						<Typography component="em">
-							Copying to either a Plan or Forecast will move the closing balance
-							to the opening
+							If you copy to a Plan or Forcast canvas, your closing balance will
+							be your opening balance.
 						</Typography>
 					</>
 				)
