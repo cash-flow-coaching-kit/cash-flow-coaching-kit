@@ -8,6 +8,7 @@ import { routes } from "./_config/data"
 import Logo from "../../Logo"
 import { PrivateRoutes } from "../../../util/routes/routes"
 import useCurrentClient from "../../../state/client/useCurrentClient"
+import Logout from "../../Logout"
 
 /**
  * Renders the primary navigation
@@ -58,6 +59,7 @@ const PrimaryNavbar = (): ReactElement => {
 							>
 								Help
 							</Button>
+							<Logout />
 						</Grid>
 					</Grid>
 				</Toolbar>
