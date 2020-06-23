@@ -274,8 +274,15 @@ const Homepage = (): ReactElement => {
 							align="center"
 						>
 							We recommend using the EXPORT function regularly to avoid data
-							loss. Please refer to the Terms &amp; Conditions of use and our
-							Data usage and privacy statement.
+							loss. Please refer to the{" "}
+							<a
+								href="/docs/Terms and Cond.docx"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Terms &amp; Conditions
+							</a>{" "}
+							of use and our Data usage and privacy statement.
 						</Typography>
 						<Typography
 							variant="body2"
