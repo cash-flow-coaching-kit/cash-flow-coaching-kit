@@ -1,6 +1,6 @@
 import { BaseCFCStruct, CashFlow } from "../../data/_config/shape"
 import GSTApplicable from "../../util/filters/ByGSTApplicable"
-import { sum, pipe, add, minusBy } from "../../util/reduce/math"
+import { sum, pipe, add, minusBy, numOrZero } from "../../util/reduce/math"
 import { removeGST, calculateGST } from "../../util/money/gst"
 
 /**
@@ -72,17 +72,21 @@ export function calcCashFlowNonGSTTotal(values: CashFlow[]): number {
  * @returns {number}
  */
 export function calcCashFlowTotal(values: CashFlow[]): number {
-	return pipe(
-		add(calcCashFlowGSTTotal(values)),
-		add(calcCashFlowNonGSTTotal(values))
-	)(0)
+	return numOrZero(
+		pipe(
+			add(calcCashFlowGSTTotal(values)),
+			add(calcCashFlowNonGSTTotal(values))
+		)(0)
+	)
 }
 
 export function calcTotalCashOut(values: BaseCFCStruct): number {
-	return pipe(
-		add(values.paygWithholding),
-		add(values.superAmount)
-	)(calcCashFlowTotal(values.cashOutItems))
+	return numOrZero(
+		pipe(
+			add(values.paygWithholding),
+			add(values.superAmount)
+		)(calcCashFlowTotal(values.cashOutItems))
+	)
 }
 
 /**
@@ -104,10 +108,12 @@ export function calcCashSurplus(values: BaseCFCStruct): number {
  * @returns {number}
  */
 export function calcAvailableToSpend(values: BaseCFCStruct): number {
-	return pipe(
-		add(values.openingBalance),
-		minusBy(values.incomeTax)
-	)(calcCashSurplus(values))
+	return numOrZero(
+		pipe(
+			add(values.openingBalance),
+			minusBy(values.incomeTax)
+		)(calcCashSurplus(values))
+	)
 }
 
 /**
@@ -118,7 +124,7 @@ export function calcAvailableToSpend(values: BaseCFCStruct): number {
  * @returns {number}
  */
 export function calcClosingBalance(values: BaseCFCStruct): number {
-	return calcAvailableToSpend(values) - values.cashToOwner
+	return calcAvailableToSpend(values) - numOrZero(values.cashToOwner)
 }
 
 /**
@@ -129,11 +135,13 @@ export function calcClosingBalance(values: BaseCFCStruct): number {
  * @returns {number}
  */
 export function calcTotalNetAssets(values: BaseCFCStruct): number {
-	return pipe(
-		add(values.stock),
-		minusBy(values.creditors),
-		add(values.assets),
-		add(values.debtors),
-		minusBy(values.loans)
-	)(calcClosingBalance(values))
+	return numOrZero(
+		pipe(
+			add(values.stock),
+			minusBy(values.creditors),
+			add(values.assets),
+			add(values.debtors),
+			minusBy(values.loans)
+		)(calcClosingBalance(values))
+	)
 }

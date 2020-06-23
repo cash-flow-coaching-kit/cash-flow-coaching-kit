@@ -7,7 +7,7 @@ import ChecklistModal from "../../components/ChecklistModal"
 // #region Change staff mix list content
 function StaffMixListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Can you outsource some tasks or roles or increase the flexibility of
 				your workforce through part-time, casual or contracted staff?
@@ -24,7 +24,7 @@ function StaffMixListContent(): ReactElement {
 // #region Increase utilisation list content
 function IncreaseUtilisationListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Do your staff understand their contribution to helping you operate the
 				business?
@@ -44,7 +44,7 @@ function IncreaseUtilisationListContent(): ReactElement {
 // #region Match staffing levels to demand list content
 function MatchStaffingLevelsListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Do you have enough staff to cover your peak periods?
 			</Typography>
@@ -58,7 +58,7 @@ function MatchStaffingLevelsListContent(): ReactElement {
 // #region Reduce turnover list content
 function ReduceTurnoverListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				How can you keep your staff happy? More training? Review of
 				remuneration? Alignment to the business goals? Positive culture?
@@ -74,7 +74,7 @@ function ReduceTurnoverListContent(): ReactElement {
 // #region Employing staff list content
 function EmployingStaffListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Do you need specialist skills such as sales and marketing to help your
 				business succeed?
@@ -101,14 +101,14 @@ export default function StaffingLever(): ReactElement {
 			defaultExpanded={false}
 		>
 			{/* Change staff mix */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Change staff mix
 					</Typography>
 					<StaffMixListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Staffing Lever"
@@ -121,14 +121,14 @@ export default function StaffingLever(): ReactElement {
 			</Grid>
 
 			{/* Increase utilisation */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Increase utilisation
 					</Typography>
 					<IncreaseUtilisationListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Staffing Lever"
@@ -141,14 +141,14 @@ export default function StaffingLever(): ReactElement {
 			</Grid>
 
 			{/* Match staffing levels to demand */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Match staffing levels to demand
 					</Typography>
 					<MatchStaffingLevelsListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Staffing Lever"
@@ -161,14 +161,14 @@ export default function StaffingLever(): ReactElement {
 			</Grid>
 
 			{/* Reduce turnover */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Reduce turnover
 					</Typography>
 					<ReduceTurnoverListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Staffing Lever"
@@ -181,14 +181,14 @@ export default function StaffingLever(): ReactElement {
 			</Grid>
 
 			{/* Employing staff */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Employing staff
 					</Typography>
 					<EmployingStaffListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Staffing Lever"

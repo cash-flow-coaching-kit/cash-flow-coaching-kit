@@ -15,10 +15,17 @@ export const useActionsStyles = makeStyles((theme) => ({
 		justifyContent: "flex-start",
 		marginTop: theme.spacing(3),
 		alignItems: "center",
+		[theme.breakpoints.down("sm")]: {
+			flexDirection: "column",
+			alignItems: "flex-start",
+			marginTop: theme.spacing(2),
+		},
 	},
 	saveIndicator: {
-		marginLeft: theme.spacing(2),
 		userSelect: "none",
+		[theme.breakpoints.up("sm")]: {
+			marginLeft: theme.spacing(2),
+		},
 	},
 }))
 
