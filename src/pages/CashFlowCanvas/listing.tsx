@@ -65,7 +65,7 @@ const CFCListing = (): ReactElement => {
 	return (
 		<>
 			<PageContainer>
-				<SectionTitle>
+				<SectionTitle component="h1">
 					Previously saved canvases{" "}
 					<Typography variant="subtitle1" component="p" color="textSecondary">
 						Load previous canvas by selecting the list below

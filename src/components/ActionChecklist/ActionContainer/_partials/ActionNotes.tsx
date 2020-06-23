@@ -93,6 +93,7 @@ const ActionNotes = ({
 						<Tooltip title="Delete note">
 							<IconButton onClick={removeNote}>
 								<DeleteIcon />
+								<span className="MuiTypography-srOnly">Delete note</span>
 							</IconButton>
 						</Tooltip>
 					</Grid>

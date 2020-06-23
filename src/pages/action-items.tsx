@@ -102,7 +102,7 @@ const ActionChecklist = (): ReactElement => {
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
-						<SectionTitle>Action Items</SectionTitle>
+						<SectionTitle component="h1">Action Items</SectionTitle>
 						<Box className="content-area">
 							<Typography>
 								Your checklist has all your actions you selected in previous

@@ -14,7 +14,7 @@ const HCListing = (): ReactElement => {
 	return (
 		<>
 			<PageContainer>
-				<SectionTitle>Saved Health Checks</SectionTitle>
+				<SectionTitle component="h1">Saved Health Checks</SectionTitle>
 				<Box className="content-area">
 					<Typography>
 						Use your previous health checks to review your progress.

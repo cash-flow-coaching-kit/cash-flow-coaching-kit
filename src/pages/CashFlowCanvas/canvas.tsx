@@ -20,7 +20,7 @@ export default function CFCCanvas(): ReactElement {
 			<PageContainer maxWidth="lg">
 				<Grid container spacing={3}>
 					<Grid item sm={9}>
-						<SectionTitle>Cash flow canvas</SectionTitle>
+						<SectionTitle component="h1">Cash flow canvas</SectionTitle>
 						<Box className="content-area">
 							<Typography>
 								The cash flow canvas will help you answer the four key
@@ -54,7 +54,9 @@ export default function CFCCanvas(): ReactElement {
 							</Typography>
 						</Box>
 						<Spacer space={3} />
-						<Typography variant="h6">Start your cash flow canvas</Typography>
+						<Typography variant="h6" component="h2">
+							Start your cash flow canvas
+						</Typography>
 						<Spacer />
 						<CreateCanvasForm />
 					</Grid>

@@ -12,7 +12,7 @@ import { ISummaryTitleProps } from "../_config/shape"
 const SummaryTitle = ({ createdAt }: ISummaryTitleProps): ReactElement => {
 	return (
 		<>
-			<Typography variant="h5" align="center">
+			<Typography variant="h5" align="center" component="h1">
 				Your results{" "}
 				{createdAt ? `on the ${format(createdAt, "do 'of' MMMM yyyy")}` : false}
 			</Typography>

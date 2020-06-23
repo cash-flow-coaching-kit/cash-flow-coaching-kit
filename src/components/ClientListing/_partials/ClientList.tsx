@@ -68,11 +68,13 @@ const ClientList = ({
 						<Tooltip title="Export data">
 							<IconButton>
 								<PublishIcon />
+								<span className="MuiTypography-srOnly">Export data</span>
 							</IconButton>
 						</Tooltip>
 						<Tooltip title="Delete">
 							<IconButton>
 								<DeleteIcon />
+								<span className="MuiTypography-srOnly">Delete client</span>
 							</IconButton>
 						</Tooltip>
 					</ListItemSecondaryAction>

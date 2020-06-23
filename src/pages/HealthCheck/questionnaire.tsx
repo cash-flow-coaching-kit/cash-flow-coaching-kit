@@ -59,7 +59,7 @@ const HCQuestionnaire = (): ReactElement => {
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
-						<SectionTitle>Health Check</SectionTitle>
+						<SectionTitle component="h1">Health Check</SectionTitle>
 						<Spacer />
 						<Box className="content-area">
 							<Typography className="list-describer">

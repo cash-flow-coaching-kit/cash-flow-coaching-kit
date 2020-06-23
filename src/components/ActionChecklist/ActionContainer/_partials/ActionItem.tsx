@@ -248,6 +248,7 @@ const ActionItem = ({
 							<Tooltip title="Delete">
 								<IconButton onClick={handleDelete}>
 									<DeleteIcon />
+									<span className="MuiTypography-srOnly">Delete item</span>
 								</IconButton>
 							</Tooltip>
 							<ConfirmDialogue
@@ -265,6 +266,7 @@ const ActionItem = ({
 									{...provided.dragHandleProps}
 								>
 									<DragIndicatorIcon />
+									<span className="MuiTypography-srOnly">Reorder priority</span>
 								</IconButton>
 							</Tooltip>
 						</Grid>

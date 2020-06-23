@@ -39,7 +39,7 @@ const ChangeLevers = (): ReactElement => {
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
 						<Box className="content-area">
-							<Typography variant="h5">
+							<Typography variant="h5" component="h1">
 								Use your cash flow knowledge and canvas to explore possible
 								changes that can be made.
 							</Typography>
