@@ -4,6 +4,7 @@ import PublicRoutesWrapper from "./Public"
 import PrivateRoutesWrapper from "./Private"
 import syncClientsWithDb from "../../data/client/syncWithDB"
 import { ClientContext } from "../../state/client"
+import SkipToContent from "../SkipToContent"
 
 /**
  * Application router component
@@ -23,6 +24,7 @@ const AppRouter = (): ReactElement => {
 		<Router>
 			<Switch>
 				<>
+					<SkipToContent />
 					<PublicRoutesWrapper />
 					{/* TODO: Hide if the user does not have any clients */}
 					<PrivateRoutesWrapper />
