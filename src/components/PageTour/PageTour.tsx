@@ -2,6 +2,7 @@ import React, { ReactElement, useState } from "react"
 import Tour, { ReactourStep } from "reactour"
 import { Button } from "@material-ui/core"
 import { useLocation, useParams } from "react-router-dom"
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock"
 import hasProperty from "../../util/object/hasProperty"
 
 type PageTourProps = {
@@ -87,6 +88,9 @@ export default function PageTour({ steps }: PageTourProps): ReactElement {
 	 */
 	const openTour = (): void => setOpen(true)
 
+	const disableBody = (target: any): void => disableBodyScroll(target)
+	const enableBody = (target: any): void => enableBodyScroll(target)
+
 	return (
 		<>
 			<div className="sr-only">
@@ -94,7 +98,14 @@ export default function PageTour({ steps }: PageTourProps): ReactElement {
 					Start tour
 				</Button>
 			</div>
-			<Tour steps={steps} isOpen={open} onRequestClose={closeTour} />
+			<Tour
+				steps={steps}
+				isOpen={open}
+				onRequestClose={closeTour}
+				onAfterOpen={disableBody}
+				onBeforeClose={enableBody}
+				startAt={0}
+			/>
 		</>
 	)
 }
