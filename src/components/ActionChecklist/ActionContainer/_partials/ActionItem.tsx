@@ -48,6 +48,7 @@ const ActionItem = ({
 		data.description
 	)
 	const [dialogueOpen, setDialogueOpen] = useState<boolean>(false)
+	const [datepickerOpen, setDatepickerOpen] = useState(false)
 
 	/**
 	 * Triggers a update action to change the state
@@ -138,6 +139,7 @@ const ActionItem = ({
 				...data,
 				reviewBy: date,
 			})
+			setDatepickerOpen(false)
 		}
 	}
 
@@ -239,6 +241,9 @@ const ActionItem = ({
 											"aria-label": "change date",
 										}}
 										className={styles.datepicker}
+										open={datepickerOpen}
+										onOpen={(): void => setDatepickerOpen(true)}
+										onClose={(): void => setDatepickerOpen(false)}
 										fullWidth
 									/>
 								</MuiPickersUtilsProvider>

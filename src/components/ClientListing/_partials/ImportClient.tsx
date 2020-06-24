@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react"
-import GetAppIcon from "@material-ui/icons/GetApp"
+import PublishIcon from "@material-ui/icons/Publish"
 import { Button } from "@material-ui/core"
 
 /**
@@ -10,7 +10,7 @@ import { Button } from "@material-ui/core"
  */
 const ImportClient = (): ReactElement => {
 	return (
-		<Button variant="outlined" startIcon={<GetAppIcon />}>
+		<Button variant="outlined" startIcon={<PublishIcon />}>
 			Import
 		</Button>
 	)

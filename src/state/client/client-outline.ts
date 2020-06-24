@@ -1,5 +1,9 @@
 import { Dispatch } from "react"
-import { ClientDataStruct, ClientId } from "../../data/_config/shape"
+import {
+	ClientDataStruct,
+	ClientId,
+	HealthCheckId,
+} from "../../data/_config/shape"
 
 /**
  * Actions that can be performed for state changes
@@ -13,7 +17,10 @@ export enum ClientActionTypes {
 	BulkAdd = "bulk_add",
 	ChangeCurrentClient = "change_current_client",
 	UpdateClientSynced = "change_client_syned",
+	UpdateLastViewedHC = "change_last_viewed_hc",
 }
+
+export type LastViewedHC = HealthCheckId | null
 
 /**
  * Defines the type:payload type pairing
@@ -29,6 +36,10 @@ export type IClientReducerAction =
 	| { type: ClientActionTypes.BulkAdd; payload: ClientDataStruct[] }
 	| { type: ClientActionTypes.ChangeCurrentClient; payload: ClientId }
 	| { type: ClientActionTypes.UpdateClientSynced; payload: boolean }
+	| {
+			type: ClientActionTypes.UpdateLastViewedHC
+			payload: LastViewedHC
+	  }
 
 /**
  * Data structure for the state object
@@ -40,6 +51,7 @@ export interface IClientData {
 	clients: ClientDataStruct[]
 	currentClient?: ClientDataStruct
 	clientSynced: boolean
+	lastViewedHC: LastViewedHC
 }
 
 /**

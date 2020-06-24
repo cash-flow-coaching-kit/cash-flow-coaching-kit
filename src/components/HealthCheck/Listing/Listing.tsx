@@ -15,6 +15,7 @@ import {
 	HealthCheckId,
 } from "../../../data/_config/shape"
 import HealthCheckUseCase from "../../../data/healthChecks/HealthCheckLogic"
+import { ClientActionTypes } from "../../../state/client/client-outline"
 
 /**
  * Component used to render the completed health checks for the
@@ -25,7 +26,8 @@ import HealthCheckUseCase from "../../../data/healthChecks/HealthCheckLogic"
 const Listing = (): ReactElement => {
 	const [state, send] = useMachine(HCListingMachine)
 	const {
-		state: { currentClient },
+		state: { currentClient, lastViewedHC },
+		dispatch,
 	} = useContext(ClientContext)
 	const [clientQuizzes, setClientQuizzess] = useState<HealthCheckDataStruct[]>(
 		[]
@@ -70,6 +72,13 @@ const Listing = (): ReactElement => {
 			// count === number of items deleted
 			// only proceed if 1 or more was deleted (ideally should always be 1)
 			if (count > 0) {
+				if (lastViewedHC !== null && `${id}` === `${lastViewedHC}`) {
+					dispatch({
+						type: ClientActionTypes.UpdateLastViewedHC,
+						payload: null,
+					})
+				}
+
 				const copy = clientQuizzes.filter((item) => item.id !== id)
 				if (copy.length === 0) {
 					send("IS_EMPTY")
