@@ -20,6 +20,7 @@ export default memo(function MoneyInput({
 	...props
 }: OutlinedTextFieldProps): ReactElement {
 	const [useMimic, setUseMimic] = useState(true)
+	const [error, setError] = useState("")
 	const input = useRef<HTMLInputElement>()
 
 	/**
@@ -33,14 +34,22 @@ export default memo(function MoneyInput({
 			`${inputVal}`.startsWith("00") ||
 			(`${value}`.startsWith("0") && `${inputVal}`.length > 1)
 		) {
+			setError("Amount can't start with a zero")
 			return
 		}
 
-		if (inputVal.match(/\D/g)) return
+		if (inputVal.match(/\D/g)) {
+			setError("Amount can only include digits")
+			return
+		}
 
 		const val = parseInt(inputVal, 10)
 		// eslint-disable-next-line no-restricted-globals
-		if (isNaN(val) || val > 999999999) return
+		if (isNaN(val) || val > 999999999) {
+			setError("Please enter a valid number between 0 and 999,999,999")
+			return
+		}
+		setError("")
 
 		if (typeof onChange !== "undefined") {
 			onChange(e)
@@ -77,6 +86,8 @@ export default memo(function MoneyInput({
 			onBlur={onBlur}
 			onFocus={onFocus}
 			value={useMimic ? formatNumber(`${value}`) : value}
+			error={error !== ""}
+			helperText={error}
 			// eslint-disable-next-line react/jsx-props-no-spreading
 			{...props}
 		/>
