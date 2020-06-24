@@ -29,6 +29,9 @@ export const useSummaryStyles = makeStyles((theme) => ({
 		[theme.breakpoints.down("md")]: {
 			flexDirection: "column",
 		},
+		"& .MuiCardHeader-content": {
+			width: "100%",
+		},
 	},
 	cardActions: {
 		alignSelf: "flex-end",
