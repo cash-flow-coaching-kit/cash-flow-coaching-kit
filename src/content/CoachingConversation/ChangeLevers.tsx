@@ -61,6 +61,8 @@ export default function ChangeLevers(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/Change Levers coaching tips.docx"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
 							Download Transcript
 						</Button>

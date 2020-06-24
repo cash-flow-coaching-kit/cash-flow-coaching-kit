@@ -1,3 +1,4 @@
+import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import React, { ReactElement } from "react"
 import {
 	Typography,
@@ -14,7 +15,6 @@ import {
 	ExpansionPanelDetails,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
@@ -90,6 +90,8 @@ const DTFundingBusiness = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Tamakos-funding.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Tamako's Funding
 										</Button>
@@ -109,6 +111,8 @@ const DTFundingBusiness = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Charlottes-loans.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Charlotte's Loans
 										</Button>
@@ -432,12 +436,12 @@ const DTFundingBusiness = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						startIcon={<PictureAsPdf />}
+						endIcon={<ExitToAppIcon />}
 						href="/pdf/Funding-Activity.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
-						Download your own
-						<br />
-						Funding activity template
+						Download activity
 					</Button>
 				</Container>
 				<Container
@@ -497,7 +501,7 @@ const DTFundingBusiness = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Funding your buisiness
+								Funding your business
 							</Button>
 						</Grid>
 						<Grid item sm={6}>

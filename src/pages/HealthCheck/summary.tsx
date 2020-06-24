@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react"
+import React, { ReactElement, useEffect, useState, useContext } from "react"
 import { useParams, Link } from "react-router-dom"
 import {
 	Grid,
@@ -10,7 +10,7 @@ import {
 	makeStyles,
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
-import ReplayIcon from "@material-ui/icons/Replay"
+import AddIcon from "@material-ui/icons/Add"
 import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
@@ -25,18 +25,12 @@ import {
 import { HealthCheckDataStruct } from "../../data/_config/shape"
 import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
 import useCurrentClient from "../../state/client/useCurrentClient"
+import { ClientContext } from "../../state/client"
+import { ClientActionTypes } from "../../state/client/client-outline"
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
 		marginTop: theme.spacing(3),
-		"& > div:last-child": {
-			marginTop: theme.spacing(1),
-			[theme.breakpoints.up("sm")]: {
-				display: "flex",
-				justifyContent: "flex-end",
-				marginTop: 0,
-			},
-		},
 	},
 }))
 
@@ -47,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
  */
 const HCSummary = (): ReactElement => {
 	const [currentClient] = useCurrentClient()
+	const { dispatch } = useContext(ClientContext)
 	const { id } = useParams()
 	const [healthCheck, setHealthCheck] = useState<
 		HealthCheckDataStruct | undefined
@@ -58,6 +53,10 @@ const HCSummary = (): ReactElement => {
 
 	useEffect(() => {
 		if (id && currentClient) {
+			dispatch({
+				type: ClientActionTypes.UpdateLastViewedHC,
+				payload: id,
+			})
 			;(async function getHC(): Promise<void> {
 				if (typeof currentClient.id !== "undefined") {
 					// Fetches the health checks for the client and sets state values
@@ -75,12 +74,6 @@ const HCSummary = (): ReactElement => {
 			})()
 		}
 	}, [id, currentClient])
-
-	const retakeLink = (): string => {
-		return routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
-			[":id?", `${healthCheck?.id || ""}`],
-		])
-	}
 
 	return (
 		<>
@@ -100,15 +93,6 @@ const HCSummary = (): ReactElement => {
 									justify="space-between"
 									className={styles.summaryActions}
 								>
-									<Grid item xs={12} sm={6}>
-										<Button
-											variant="outlined"
-											component={Link}
-											to={retakeLink()}
-										>
-											Re-take Health Check
-										</Button>
-									</Grid>
 									<Grid item xs={12} sm={6}>
 										<Button
 											color="primary"
@@ -131,18 +115,24 @@ const HCSummary = (): ReactElement => {
 								<ListItem
 									button
 									component={Link}
+									to={routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
+										[":id?", ""],
+									])}
+								>
+									<ListItemIcon>
+										<AddIcon />
+									</ListItemIcon>
+									<ListItemText>Start a new Health Check</ListItemText>
+								</ListItem>
+								<ListItem
+									button
+									component={Link}
 									to={PrivateRoutes.HealthCheckList}
 								>
 									<ListItemIcon>
 										<ListIcon />
 									</ListItemIcon>
 									<ListItemText>List of Health Checks</ListItemText>
-								</ListItem>
-								<ListItem button component={Link} to={retakeLink()}>
-									<ListItemIcon>
-										<ReplayIcon />
-									</ListItemIcon>
-									<ListItemText>Re-take Health Check</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>

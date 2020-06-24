@@ -40,6 +40,7 @@ import {
 	newNotesItem,
 	newPriorityItem,
 	bulkAddChecklists,
+	newChecklistItem,
 } from "../../../data/ActionChecklist/_config/utilities"
 import ActionPriorityUseCase from "../../../data/ActionChecklist/PriorityLogic"
 import { ActionChecklistContext } from "../../../state/action-checklist"
@@ -48,6 +49,7 @@ import filterByActionContainer from "../../../util/filters/ByActionContainer"
 import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
 import SnackbarMsg from "../../SnackbarMsg"
 import { actionItemKeyTitleMapping } from "../../ActionChecklist/ActionContainer/_config/utilities"
+import ActionChecklistUseCase from "../../../data/ActionChecklist/ChecklistLogic"
 
 /**
  * Form used to add predefined checklist items
@@ -254,27 +256,65 @@ export default function Form({ container, client }: FormProps): ReactElement {
 	 */
 	async function onSubmission(e: FormEvent<HTMLFormElement>): Promise<void> {
 		e.preventDefault()
-		const pID = await preSubmitCheck()
-		const items = options.reduce(
-			constructSelectedItems(formChecklists, client, container),
-			[]
-		)
-		const nItems = items.map((i) => {
-			const hasExistsing = checklists?.filter(
-				(c) => c.description === i.description
+		if (formChecklists.indexOf(true) !== -1) {
+			// They have actually selected something
+			const pID = await preSubmitCheck()
+			const items = options.reduce(
+				constructSelectedItems(formChecklists, client, container),
+				[]
 			)
-			if (hasExistsing && hasExistsing.length > 0) {
-				return {
-					...i,
-					id: hasExistsing[0].id || -1,
+			const nItems = items.map((i) => {
+				const hasExistsing = checklists?.filter(
+					(c) => c.description === i.description
+				)
+				if (hasExistsing && hasExistsing.length > 0) {
+					return {
+						...i,
+						id: hasExistsing[0].id || -1,
+					}
 				}
+				return i
+			})
+
+			const [newItems, success] = await bulkAddChecklists(nItems, pID)
+
+			if (!success) {
+				showSnackbar(
+					"Something went wrong. Check the data and try again",
+					"error"
+				)
+				return
 			}
-			return i
-		})
 
-		const [newItems, success] = await bulkAddChecklists(nItems, pID)
+			dispatch({
+				type: ActionChecklistActionTypes.BulkAddActionItems,
+				payload: {
+					items: newItems,
+					priorityId: pID,
+				},
+			})
+		} else {
+			const pID = await preSubmitCheck()
+			const priorityItem = await ActionPriorityUseCase.findById(pID)
+			if (priorityItem?.order.length === 0) {
+				const actionItem = newChecklistItem(client, container)
+				const aID = await ActionChecklistUseCase.create(actionItem)
+				await ActionPriorityUseCase.update(pID, {
+					...priorityItem,
+					order: [aID],
+				})
 
-		if (!success || typeof noteId === "undefined") {
+				dispatch({
+					type: ActionChecklistActionTypes.AddNewActionItem,
+					payload: {
+						checklist: { ...actionItem, id: aID },
+						priority: pID,
+					},
+				})
+			}
+		}
+
+		if (typeof noteId === "undefined") {
 			showSnackbar(
 				"Something went wrong. Check the data and try again",
 				"error"
@@ -287,14 +327,6 @@ export default function Form({ container, client }: FormProps): ReactElement {
 		await ActionNotesUseCase.put(updatedNote)
 
 		dispatch({
-			type: ActionChecklistActionTypes.BulkAddActionItems,
-			payload: {
-				items: newItems,
-				priorityId: pID,
-			},
-		})
-
-		dispatch({
 			type: ActionChecklistActionTypes.UpdateNotes,
 			payload: {
 				data: updatedNote,
@@ -303,9 +335,7 @@ export default function Form({ container, client }: FormProps): ReactElement {
 		})
 
 		showSnackbar(
-			`Items we addded to the ${actionItemKeyTitleMapping(
-				container
-			)} checklist`,
+			`Items we added to the ${actionItemKeyTitleMapping(container)} checklist`,
 			"success"
 		)
 	}

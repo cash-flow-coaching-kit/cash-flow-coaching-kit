@@ -6,7 +6,7 @@ import { NavigationRoutes } from "../_partials"
 import usePrimaryStyles from "./_config/styles"
 import { routes } from "./_config/data"
 import Logo from "../../Logo"
-import { PrivateRoutes } from "../../../util/routes/routes"
+import { PublicRoutes } from "../../../util/routes/routes"
 import useCurrentClient from "../../../state/client/useCurrentClient"
 
 /**
@@ -41,7 +41,7 @@ const PrimaryNavbar = (): ReactElement => {
 							<Grid item md={2} lg={4} />
 						)}
 						<Grid item md={6} lg={4} className={`${sharedStyle.logoBox}`}>
-							<Logo to={PrivateRoutes.CoachingKit} />
+							<Logo to={PublicRoutes.Home} />
 						</Grid>
 						<Grid
 							item

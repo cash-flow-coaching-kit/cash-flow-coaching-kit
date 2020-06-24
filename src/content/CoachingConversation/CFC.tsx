@@ -17,7 +17,7 @@ export default function CFC(): ReactElement {
 	const cls = useStyles()
 
 	return (
-		<ExpandableNav title="Cash Flow Coaching Kit" defaultExpanded={false}>
+		<ExpandableNav title="Cash Flow Canvas" defaultExpanded={false}>
 			<Box className={cls.box}>
 				<List className={cls.list}>
 					<Typography component="li">
@@ -71,6 +71,8 @@ export default function CFC(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/Cash Flow Canvas coaching tips.docx"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
 							Download Transcript
 						</Button>

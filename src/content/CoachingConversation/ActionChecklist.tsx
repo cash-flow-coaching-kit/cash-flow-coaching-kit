@@ -74,6 +74,8 @@ export default function ActionChecklist(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/Action Checklist coaching tips.docx"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
 							Download Transcript
 						</Button>
