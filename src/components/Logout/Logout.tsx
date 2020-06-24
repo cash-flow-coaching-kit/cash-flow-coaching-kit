@@ -7,15 +7,50 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogActions,
+	makeStyles,
+	Theme,
+	createStyles,
+	Backdrop,
+	CircularProgress,
 } from "@material-ui/core"
 import { useSharedNavStyles } from "../Navbar/_config/style"
+import ClientDB from "../../data/client/ClientDatabase"
+import HealthCheckDB from "../../data/healthChecks/HealthCheckDatabase"
+import ActionChecklistDB from "../../data/ActionChecklist/ActionChecklistDatabase"
+import CFCDB from "../../data/CFC/CFCDatabase"
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		backdrop: {
+			zIndex: theme.zIndex.drawer + 1,
+			color: "#fff",
+		},
+	})
+)
 
 export default function Logout(): ReactElement {
 	const sharedStyle = useSharedNavStyles()
+	const classes = useStyles()
 	const [open, setOpen] = useState(false)
+	const [loading, setLoading] = useState(false)
 
 	const handleOpen = (): void => setOpen(true)
 	const handleClose = (): void => setOpen(false)
+
+	const exitApplication = async (): Promise<void> => {
+		setLoading(true)
+		ClientDB.close()
+		HealthCheckDB.close()
+		ActionChecklistDB.close()
+		CFCDB.close()
+
+		await ClientDB.delete()
+		await HealthCheckDB.delete()
+		await ActionChecklistDB.delete()
+		await CFCDB.delete()
+
+		window.location.replace("/")
+	}
 
 	return (
 		<>
@@ -36,16 +71,22 @@ export default function Logout(): ReactElement {
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose}>Cancel</Button>
+					<Button onClick={handleClose} disabled={loading}>
+						Cancel
+					</Button>
 					<Button
-						onClick={handleClose}
+						onClick={exitApplication}
 						color="primary"
 						variant="contained"
 						autoFocus
+						disabled={loading}
 					>
 						Exit
 					</Button>
 				</DialogActions>
+				<Backdrop className={classes.backdrop} open={loading}>
+					<CircularProgress color="inherit" />
+				</Backdrop>
 			</Dialog>
 		</>
 	)
