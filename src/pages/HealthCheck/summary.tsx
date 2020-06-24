@@ -40,8 +40,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-const QUESTIONS_OFFSET = 4
-
 /**
  * Health check summary page
  *
@@ -53,9 +51,6 @@ const HCSummary = (): ReactElement => {
 	const [healthCheck, setHealthCheck] = useState<
 		HealthCheckDataStruct | undefined
 	>()
-	const [fourQuestions, setFourQuestions] = useState<
-		QuestionOptions[] | undefined
-	>(undefined)
 	const [tileAnswers, setTileAnswers] = useState<QuestionOptions[] | undefined>(
 		undefined
 	)
@@ -74,8 +69,7 @@ const HCSummary = (): ReactElement => {
 					)
 					if (hc) {
 						setHealthCheck(hc)
-						setFourQuestions(hc.answers.slice(0, QUESTIONS_OFFSET))
-						setTileAnswers(hc.answers.slice(QUESTIONS_OFFSET))
+						setTileAnswers(hc.answers)
 					}
 				}
 			})()
@@ -97,7 +91,7 @@ const HCSummary = (): ReactElement => {
 							<>
 								<SummaryTitle createdAt={healthCheck.createdAt} />
 								<QuestionSummaries
-									questions={questions.slice(QUESTIONS_OFFSET)}
+									questions={questions}
 									tileAnswers={tileAnswers}
 								/>
 								<Grid
@@ -132,7 +126,6 @@ const HCSummary = (): ReactElement => {
 						)}
 					</Grid>
 					<Grid item xs={12} md={4} lg={3}>
-						<FourQuestions answers={fourQuestions || []} />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
 								<ListItem

@@ -78,18 +78,23 @@ const CoachingKit = (): ReactElement => {
 	return (
 		<>
 			<PageContainer role="main">
-				<Typography component="h1" className={styles.MainHeading}>
-					The cash flow kit
+				<Typography
+					component="h1"
+					className={styles.MainHeading}
+					align="center"
+				>
+					The cash flow coaching kit
 				</Typography>
 
 				<Grid container spacing={0}>
+					<Grid item sm={2} />
 					<Grid item xs={12} sm={8}>
-						<Typography className={styles.contentText}>
+						<Typography className={styles.contentText} align="center">
 							The cash flow kit has three phases: discover, plan and action.
 							Working through the kit will help you plan, maintain and grow your
 							business.
 						</Typography>
-						<Typography className={styles.contentText}>
+						<Typography className={styles.contentText} align="center">
 							In each phase in the kit, you will focus on 4 key questions. They
 							look at profit, provisioning, liquidity and goals. Answering these
 							will create a foundation for strong cash flow management.
@@ -255,7 +260,7 @@ const CoachingKit = (): ReactElement => {
 									variant="h5"
 									className={styles.SectionTitle}
 								>
-									Plan
+									Apply
 								</Typography>
 								<Typography
 									variant="body1"
@@ -345,7 +350,7 @@ const CoachingKit = (): ReactElement => {
 									variant="h5"
 									className={styles.SectionTitle}
 								>
-									Action
+									Plan &amp; Action
 								</Typography>
 								<Typography
 									variant="body1"

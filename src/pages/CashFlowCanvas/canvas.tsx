@@ -43,7 +43,7 @@ export default function CFCCanvas(): ReactElement {
 									flow
 								</Typography>
 								<Typography component="li">
-									Plan - create a new future cash flow that meets your goalsw
+									Plan - create a new future cash flow that meets your goals
 								</Typography>
 								<Typography component="li">
 									Track - compare your actual and predicted cash flow
@@ -54,10 +54,6 @@ export default function CFCCanvas(): ReactElement {
 							</Typography>
 						</Box>
 						<Spacer space={3} />
-						<Typography variant="h6" component="h2">
-							Start your cash flow canvas
-						</Typography>
-						<Spacer />
 						<CreateCanvasForm />
 					</Grid>
 					<Grid item sm={3}>
