@@ -58,12 +58,14 @@ const ClientList = ({
 									}}
 								>
 									<VisibilityIcon />
+									<span className="MuiTypography-srOnly">Manage client</span>
 								</IconButton>
 							</Tooltip>
 						)}
 						<Tooltip title="Delete">
 							<IconButton>
 								<DeleteIcon />
+								<span className="MuiTypography-srOnly">Delete client data</span>
 							</IconButton>
 						</Tooltip>
 					</ListItemSecondaryAction>
