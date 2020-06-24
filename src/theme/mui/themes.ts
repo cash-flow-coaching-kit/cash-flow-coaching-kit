@@ -59,7 +59,7 @@ export const settingsTheme: ThemeOptions = {
 	...defaultTheme,
 	palette: {
 		primary: {
-			main: deepOrange.A400,
+			main: deepOrange.A700,
 		},
 		secondary: {
 			main: deepOrange["300"],
