@@ -63,7 +63,8 @@ export default memo(function MoneyInput({
 	function onFocus(): void {
 		setUseMimic(false)
 		if (value === 0 && input.current) {
-			input.current.select()
+			// input.current.select()
+			input.current.setSelectionRange(0, 9999)
 		}
 	}
 
