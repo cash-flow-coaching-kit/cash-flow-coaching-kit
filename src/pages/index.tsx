@@ -209,6 +209,7 @@ const Homepage = (): ReactElement => {
 									<Button
 										color="primary"
 										href="/transcripts/Take-a-tour-of-the-kit.docx"
+										aria-label="Download transcript: Take a tour of the kit"
 									>
 										Download Transcript
 									</Button>
@@ -228,6 +229,7 @@ const Homepage = (): ReactElement => {
 									<Button
 										color="primary"
 										href="/transcripts/What-advisors-think-of-the-kit.docx"
+										aria-label="Download transcript: What advisors think of the kit"
 									>
 										Download Transcript
 									</Button>

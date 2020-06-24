@@ -67,6 +67,7 @@ export default function HealthCheck(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/Health Check coaching tips.docx"
+							aria-label="Download transcript: Health Check coaching tips"
 						>
 							Download Transcript
 						</Button>

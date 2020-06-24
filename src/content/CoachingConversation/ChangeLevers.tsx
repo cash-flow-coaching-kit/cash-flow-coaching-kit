@@ -69,6 +69,7 @@ export default function ChangeLevers(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/Change Levers coaching tips.docx"
+							aria-label="Download transcript: Change Levers coaching tips"
 						>
 							Download Transcript
 						</Button>

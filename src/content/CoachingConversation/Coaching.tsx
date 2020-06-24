@@ -67,6 +67,7 @@ export default function Coaching(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/What-advisors-think-of-the-kit.docx"
+							aria-label="Download transcript: What advisors think of the kit"
 						>
 							Download Transcript
 						</Button>

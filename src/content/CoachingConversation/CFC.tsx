@@ -74,6 +74,7 @@ export default function CFC(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/Cash Flow Canvas coaching tips.docx"
+							aria-label="Download transcript: Cash Flow Canvas coaching tips"
 						>
 							Download Transcript
 						</Button>
