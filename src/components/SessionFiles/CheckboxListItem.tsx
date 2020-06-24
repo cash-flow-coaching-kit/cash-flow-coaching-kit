@@ -20,7 +20,7 @@ export default React.memo(function CheckboxListItem({
 					checked={checked}
 					tabIndex={-1}
 					disableRipple
-					inputProps={{ "aria-labelledby": label }}
+					inputProps={{ "aria-label": label }}
 				/>
 			</ListItemIcon>
 			<ListItemText>{label}</ListItemText>
