@@ -25,12 +25,15 @@ export default function Logout(): ReactElement {
 				startIcon={<PowerSettingsNewIcon />}
 				onClick={handleOpen}
 			>
-				Logout
+				Exit
 			</Button>
 			<Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-				<DialogTitle>Are you sure you want to logout?</DialogTitle>
+				<DialogTitle>Are you sure you want to exit?</DialogTitle>
 				<DialogContent>
-					<DialogContentText>Hello</DialogContentText>
+					<DialogContentText>
+						Make sure you have saved all your data before you leave as all
+						existing data will be deleted.
+					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose}>Cancel</Button>
@@ -40,7 +43,7 @@ export default function Logout(): ReactElement {
 						variant="contained"
 						autoFocus
 					>
-						Logout
+						Exit
 					</Button>
 				</DialogActions>
 			</Dialog>
