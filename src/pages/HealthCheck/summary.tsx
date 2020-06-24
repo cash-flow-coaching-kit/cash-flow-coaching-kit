@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
 import ReplayIcon from "@material-ui/icons/Replay"
+import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
 import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
@@ -25,6 +26,9 @@ import {
 import { HealthCheckDataStruct } from "../../data/_config/shape"
 import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
 import useCurrentClient from "../../state/client/useCurrentClient"
+import HealthCheckPDF, {
+	HealthCheckQuestionSet,
+} from "../../components/PDF/HealthCheckPDF"
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
@@ -86,6 +90,18 @@ const HCSummary = (): ReactElement => {
 		return routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
 			[":id?", `${healthCheck?.id || ""}`],
 		])
+	}
+
+	const printPDF = async () => {
+		const data: HealthCheckQuestionSet = {}
+		questions.forEach((q, idx) => {
+			const { question } = q
+			const answer = healthCheck?.answers[idx] || "positive"
+			const text = q.options[answer]
+			data[idx] = { question, answer, text }
+		})
+		const pdf = await HealthCheckPDF(currentClient?.name ?? "Client", data)
+		pdf.open()
 	}
 
 	return (
@@ -150,6 +166,12 @@ const HCSummary = (): ReactElement => {
 										<ReplayIcon />
 									</ListItemIcon>
 									<ListItemText>Re-take Health Check</ListItemText>
+								</ListItem>
+								<ListItem button>
+									<ListItemIcon>
+										<PictureAsPdfIcon />
+									</ListItemIcon>
+									<ListItemText onClick={printPDF}>Generate PDF</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>
