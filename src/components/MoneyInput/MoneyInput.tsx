@@ -1,4 +1,11 @@
-import React, { ReactElement, memo, ChangeEvent, useState, useRef } from "react"
+import React, {
+	ReactElement,
+	memo,
+	ChangeEvent,
+	useState,
+	useRef,
+	MouseEvent,
+} from "react"
 import {
 	TextField,
 	InputAdornment,
@@ -68,6 +75,10 @@ export default memo(function MoneyInput({
 		}
 	}
 
+	function onMouseUp(e: MouseEvent): void {
+		e.preventDefault()
+	}
+
 	return (
 		<TextField
 			fullWidth
@@ -86,6 +97,7 @@ export default memo(function MoneyInput({
 			onChange={onChangePreCheck}
 			onBlur={onBlur}
 			onFocus={onFocus}
+			onMouseUp={onMouseUp}
 			value={useMimic ? formatNumber(`${value}`) : value}
 			error={error !== ""}
 			helperText={error}
