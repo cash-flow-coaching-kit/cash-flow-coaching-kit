@@ -71,6 +71,7 @@ export default React.memo(function FormItem({
 				<TextField
 					variant="outlined"
 					name={`${name}[${index}].description`}
+					id={`${name}[${index}].description`}
 					value={value.description}
 					onChange={onChange}
 					label="Description"
@@ -106,6 +107,7 @@ export default React.memo(function FormItem({
 				<Tooltip title="Group data">
 					<IconButton>
 						<GroupWorkIcon />
+						<span className="MuiTypography-srOnly">Group imported data</span>
 					</IconButton>
 				</Tooltip>
 			</Grid>

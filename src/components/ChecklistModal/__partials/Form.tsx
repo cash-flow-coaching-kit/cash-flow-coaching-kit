@@ -183,6 +183,7 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 				<Grid item xs={12} md={8}>
 					<TextField
 						name={`items[${idx}].description`}
+						id={`items[${idx}].description`}
 						label="Customise your action"
 						variant="outlined"
 						value={item.description}
@@ -206,6 +207,9 @@ export default function Form({ onFormSubmission }: FormProps): ReactElement {
 							}}
 							KeyboardButtonProps={{
 								"aria-label": "change date",
+							}}
+							inputProps={{
+								"aria-label": "Review by",
 							}}
 							className={style.input}
 						/>

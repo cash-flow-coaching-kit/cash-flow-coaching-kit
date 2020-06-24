@@ -29,6 +29,10 @@ export default memo(function MoneyInput(
 				},
 			}}
 			label="Amount"
+			InputLabelProps={{
+				htmlFor: props.name,
+			}}
+			id={props.name}
 			placeholder="0"
 			// eslint-disable-next-line react/jsx-props-no-spreading
 			{...props}
