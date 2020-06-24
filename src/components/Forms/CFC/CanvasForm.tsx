@@ -137,9 +137,13 @@ export default function CanvasForm({
 					calculated,
 					paygWithholding,
 					superAmount,
-					incomeTax
+					calculated.incomeTaxPercentage
 				),
-				three: calcQuestionThree(openingBalance, calculated, incomeTax),
+				three: calcQuestionThree(
+					openingBalance,
+					calculated,
+					calculated.incomeTaxPercentage
+				),
 				four: undefined,
 			},
 		})

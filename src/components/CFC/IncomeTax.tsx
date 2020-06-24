@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, ChangeEvent, useState } from "react"
 import {
 	Box,
 	Typography,
@@ -46,8 +46,37 @@ export default React.memo(function IncomeTax({
 	calculated,
 }: IncomeTaxProps): ReactElement {
 	const cls = useInputWrapper()
+	const [error, setError] = useState("")
 	const styles = useStyles({ stacked: true, mini: true, fullHeight: false })
 	const cusCls = useCustomStyles()
+
+	function onPercentageChange(e: ChangeEvent<HTMLInputElement>): void {
+		const inputVal = e.target.value.trim() === "" ? "0" : e.target.value.trim()
+		if (
+			`${inputVal}`.startsWith("00") ||
+			(`${value}`.startsWith("0") && `${inputVal}`.length > 1)
+		) {
+			setError("Amount can't start with a zero")
+			return
+		}
+
+		if (inputVal.match(/\D/g)) {
+			setError("Amount can only include digits")
+			return
+		}
+
+		const val = parseInt(inputVal, 10)
+		// eslint-disable-next-line no-restricted-globals
+		if (isNaN(val) || val > 100 || val < 0) {
+			setError("Please enter a valid number between 0 and 100")
+			return
+		}
+		setError("")
+
+		if (typeof onChange !== "undefined") {
+			onChange(e)
+		}
+	}
 
 	return (
 		<Box
@@ -61,7 +90,7 @@ export default React.memo(function IncomeTax({
 				</Typography>
 				<TextField
 					value={value}
-					onChange={onChange}
+					onChange={onPercentageChange}
 					name="incomeTax"
 					variant="outlined"
 					label="Income tax percent"
@@ -69,6 +98,8 @@ export default React.memo(function IncomeTax({
 						endAdornment: <InputAdornment position="end">%</InputAdornment>,
 					}}
 					className={cusCls.textfield}
+					error={error !== ""}
+					helperText={error}
 				/>
 			</Box>
 			<Typography variant="h6">
