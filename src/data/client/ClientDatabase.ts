@@ -26,6 +26,8 @@ class ClientDatabase extends Dexie {
 		this.applyMigrations()
 
 		this.clients = this.table("clients")
+
+		this.replaceIdsWithStrings()
 	}
 
 	/**
@@ -43,6 +45,14 @@ class ClientDatabase extends Dexie {
 
 		this.version(2).stores({
 			clients: "++id, name, createdAt",
+		})
+	}
+
+	private replaceIdsWithStrings(): void {
+		this.clients.toCollection().modify((client) => {
+			if (typeof client.id === "number") {
+				client.id = `${client.id}`
+			}
 		})
 	}
 }

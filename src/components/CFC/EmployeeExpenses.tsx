@@ -35,7 +35,7 @@ export default function EmployeeExpenses({
 	const cls = useInputWrapper()
 
 	return (
-		<Box className={`${cls.wrapper} ${cls.highlight}`}>
+		<Box className={`${cls.wrapper} ${cls.highlightLeft} ${cls.plain}`}>
 			<PayG value={payg} onChange={onChange} />
 			<Spacer />
 			<Super value={superAmount} onChange={onChange} />

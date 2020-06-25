@@ -19,7 +19,7 @@ export default function CFCCanvas(): ReactElement {
 		<>
 			<PageContainer maxWidth="lg">
 				<Grid container spacing={3}>
-					<Grid item sm={9}>
+					<Grid item xs={12} md={9}>
 						<SectionTitle component="h1">Cash Flow Canvas</SectionTitle>
 						<Box className="content-area">
 							<Typography>
@@ -56,7 +56,7 @@ export default function CFCCanvas(): ReactElement {
 						<Spacer space={3} />
 						<CreateCanvasForm />
 					</Grid>
-					<Grid item sm={3}>
+					<Grid item xs={12} md={3}>
 						<FourQuestions />
 						<ControlPanel />
 					</Grid>

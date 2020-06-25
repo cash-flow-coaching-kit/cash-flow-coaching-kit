@@ -85,7 +85,7 @@ const ActionItem = ({
 	const onDialogueConfirm = (): void => {
 		if (!lastItemInList) {
 			// Deletes the item from the db & state
-			deleteAction(data.id || -1)
+			deleteAction(data.id || "")
 		} else {
 			// Reset the last item
 			setCacheDescription("")

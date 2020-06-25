@@ -1,3 +1,4 @@
+import { ReactElement } from "react"
 import {
 	CanvasType,
 	CFCTimeFrame,
@@ -19,6 +20,7 @@ export type ControlProps<T> = {
 export interface BaseProps {
 	customTitle: string
 	onChange: InputChange
+	useCustomTitle: boolean
 }
 
 export interface PanelProps extends BaseProps {
@@ -31,7 +33,6 @@ export interface PanelProps extends BaseProps {
 
 export interface CustomTitleProps extends BaseProps {
 	changeCheck: InputChange
-	useCustomTitle: boolean
 }
 
 // #endregion
@@ -44,4 +45,5 @@ export interface RepeaterFormProps {
 	total: number
 	addItem: () => void
 	removeItem: (id: CashFlow["id"]) => void
+	beforeTotalChild?: () => ReactElement
 }

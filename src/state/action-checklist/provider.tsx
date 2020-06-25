@@ -77,6 +77,10 @@ const createChecklistIfNeeded = async (
 			id: priorityId,
 			order: [id],
 		})
+		await ActionPriorityUseCase.update(priorityId, {
+			...newPriority,
+			order: [id],
+		})
 		const dataWithItem = data.concat({ ...newItem, id })
 
 		return [dataWithItem, priorityWithItem, curNotes]

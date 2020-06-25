@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function numOrZero(val: any): number {
+	const num = parseInt(val, 10)
 	// eslint-disable-next-line no-restricted-globals
-	if (typeof val === "number" && !isNaN(val)) return val
+	if (typeof num === "number" && !isNaN(num)) return num
 	return 0
 }
 

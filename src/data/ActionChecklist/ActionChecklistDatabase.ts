@@ -57,6 +57,8 @@ class ActionChecklistDatabase extends Dexie {
 		this.actionItems = this.table("actionItems")
 		this.priority = this.table("priority")
 		this.notes = this.table("notes")
+
+		this.replaceIdsWithStrings()
 	}
 
 	/**
@@ -116,6 +118,36 @@ class ActionChecklistDatabase extends Dexie {
 				"++id, [actionContainer+clientId], clientId, completed, description, reviewBy",
 			priority: "++id, [actionContainer+clientId], clientId, *order",
 			notes: "++id, [actionContainer+clientId], notes, clientId",
+		})
+	}
+
+	private replaceIdsWithStrings(): void {
+		this.actionItems.toCollection().modify((items) => {
+			if (typeof items.id === "number") {
+				items.id = `${items.id}`
+			}
+			if (typeof items.clientId === "number") {
+				items.clientId = `${items.clientId}`
+			}
+		})
+
+		this.notes.toCollection().modify((note) => {
+			if (typeof note.id === "number") {
+				note.id = `${note.id}`
+			}
+			if (typeof note.clientId === "number") {
+				note.clientId = `${note.clientId}`
+			}
+		})
+
+		this.priority.toCollection().modify((prior) => {
+			if (typeof prior.id === "number") {
+				prior.id = `${prior.id}`
+			}
+			if (typeof prior.clientId === "number") {
+				prior.clientId = `${prior.clientId}`
+			}
+			prior.order = prior.order.map((o) => (typeof o === "number" ? `${o}` : o))
 		})
 	}
 }

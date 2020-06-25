@@ -42,9 +42,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	clientBox: {
 		flexGrow: 2,
-		"& h6": {
-			width: "100%",
-		},
+		minWidth: 0,
 	},
 	childList: {
 		marginLeft: theme.spacing(3),
@@ -134,11 +132,10 @@ export default function MobileNavbar(): ReactElement {
 									Client
 								</Typography>
 								<Typography
-									className={primaryStyle.clientName}
+									className={`${primaryStyle.clientName} truncate`}
 									variant="h6"
-									noWrap
 								>
-									{currentClient?.name || ""}
+									<span>{currentClient?.name || ""}</span>
 								</Typography>
 							</>
 						)}
