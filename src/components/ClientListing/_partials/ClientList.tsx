@@ -36,6 +36,7 @@ const ClientList = ({
 	 * @returns void
 	 */
 	const handleChange = (client: ClientDataStruct) => (): void => {
+		console.log(client)
 		if (client?.id) {
 			dispatch({
 				type: ClientActionTypes.ChangeCurrentClient,
@@ -53,11 +54,7 @@ const ClientList = ({
 						<ListItemSecondaryAction>
 							{!isClientSelected(currentClient, client.id) && (
 								<Tooltip title="Manage client">
-									<IconButton
-										onClick={(): void => {
-											handleChange(client)
-										}}
-									>
+									<IconButton onClick={handleChange(client)}>
 										<VisibilityIcon />
 										<span className="MuiTypography-srOnly">Manage client</span>
 									</IconButton>
