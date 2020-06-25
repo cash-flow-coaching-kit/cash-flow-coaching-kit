@@ -64,7 +64,9 @@ const ClientListing = (): ReactElement => {
 						<>
 							<List>
 								<ListItem>
-									<ListItemText>{currentClient?.name}</ListItemText>
+									<ListItemText className="truncate list-item">
+										{currentClient?.name}
+									</ListItemText>
 								</ListItem>
 							</List>
 							<Divider />
