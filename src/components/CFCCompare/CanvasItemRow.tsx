@@ -2,7 +2,7 @@ import React, { ReactElement } from "react"
 import { TableCell, TableRow } from "@material-ui/core"
 import { CanvasItemRowProps } from "./__config/shape"
 import { calculateDifferencePer } from "./__config/utilities"
-import { addDollarSign } from "../../util/money/formatting"
+import { addDollarSign, formatNumber } from "../../util/money/formatting"
 import useStyles from "./__config/styles"
 
 /**
@@ -37,19 +37,19 @@ export default function CanvasItemRow({
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
 			>
-				{val1}
+				{formatNumber(`${val1}`)}
 			</TableCell>
 			<TableCell
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
 			>
-				{val2}
+				{formatNumber(`${val2}`)}
 			</TableCell>
 			<TableCell
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
 			>
-				{addDollarSign(`${val1 - val2}`)}
+				{addDollarSign(formatNumber(`${val1 - val2}`))}
 			</TableCell>
 			<TableCell
 				className={border ? "" : cls.noBorderBottom}

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, Fragment } from "react"
+import React, { ReactElement, useState, Fragment, useEffect } from "react"
 import {
 	AppBar,
 	Toolbar,
@@ -14,9 +14,9 @@ import {
 	Typography,
 } from "@material-ui/core"
 import MenuIcon from "@material-ui/icons/Menu"
-import { useHistory } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import Logo from "../../Logo"
-import { PrivateRoutes } from "../../../util/routes/routes"
+import { PublicRoutes } from "../../../util/routes/routes"
 import { routes as secondaryRoutes } from "../Secondary/_config/data"
 import { routes as primaryRoutes } from "../Primary/_config/data"
 import { INavRoutes } from "../_config/shape"
@@ -42,15 +42,22 @@ const useStyles = makeStyles((theme) => ({
 	},
 	clientBox: {
 		flexGrow: 2,
-		"& h6": {
-			width: "100%",
-		},
+		minWidth: 0,
 	},
 	childList: {
 		marginLeft: theme.spacing(3),
 		marginBottom: theme.spacing(1),
 		paddingTop: 0,
 		borderBottom: `1px solid ${theme.palette.divider}`,
+	},
+	item: {
+		color: "inherit",
+		"&.active": {
+			fontWeight: theme.typography.fontWeightBold,
+			"& *": {
+				fontWeight: "inherit",
+			},
+		},
 	},
 }))
 
@@ -65,20 +72,19 @@ export default function MobileNavbar(): ReactElement {
 	const [open, setOpen] = useState(false)
 	const cls = useStyles()
 	const primaryStyle = usePrimaryStyles()
-	const history = useHistory()
+	const location = useLocation()
 
 	const openDrawer = (): void => setOpen(true)
 	const closeDrawer = (): void => setOpen(false)
-	const goTo = (to: string) => (): void => {
+
+	useEffect(() => {
 		closeDrawer()
-		// eslint-disable-next-line
-		history.push(to)
-	}
+	}, [location.pathname])
 
 	const renderRoutes = (route: INavRoutes): ReactElement => {
 		return (
 			<Fragment key={route.route}>
-				<ListItem button onClick={goTo(route.route)}>
+				<ListItem component={NavLink} to={route.route} className={cls.item}>
 					{route.Icon && (
 						<ListItemIcon>
 							<route.Icon />
@@ -113,7 +119,7 @@ export default function MobileNavbar(): ReactElement {
 						<MenuIcon />
 					</IconButton>
 					<Box className={cls.logo}>
-						<Logo to={PrivateRoutes.CoachingKit} />
+						<Logo to={PublicRoutes.Home} />
 					</Box>
 					<Divider orientation="vertical" flexItem className={cls.divider} />
 					<Box className={cls.clientBox}>
@@ -126,11 +132,10 @@ export default function MobileNavbar(): ReactElement {
 									Client
 								</Typography>
 								<Typography
-									className={primaryStyle.clientName}
+									className={`${primaryStyle.clientName} truncate`}
 									variant="h6"
-									noWrap
 								>
-									{currentClient?.name || ""}
+									<span>{currentClient?.name || ""}</span>
 								</Typography>
 							</>
 						)}

@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: props.stacked ? "column" : "row",
 		display: "flex",
 		height: props.fullHeight ? "100%" : "auto",
+		[theme.breakpoints.down("sm")]: {
+			flexDirection: "column",
+			alignItem: "flex-start",
+		},
 	}),
 	type: (props: InputProps): StyleRtn => ({
 		flexGrow: 2,
@@ -26,9 +30,18 @@ const useStyles = makeStyles((theme) => ({
 		"& p": {
 			color: theme.palette.grey[700],
 		},
+		[theme.breakpoints.down("md")]: {
+			marginBottom: 0,
+			paddingRight: 0,
+		},
 	}),
 	moneyInput: (props: InputProps): StyleRtn => ({
-		maxWidth: props.stacked ? "100%" : "30%",
+		[theme.breakpoints.up("md")]: {
+			maxWidth: props.stacked ? "100%" : "30%",
+		},
+		[theme.breakpoints.down("md")]: {
+			marginTop: theme.spacing(2),
+		},
 	}),
 }))
 

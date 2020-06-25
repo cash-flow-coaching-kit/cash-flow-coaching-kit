@@ -27,6 +27,8 @@ class CFCDatabase extends Dexie {
 
 		// eslint-disable-next-line
 		this.canvases = this.table("canvases")
+
+		this.replaceIdsWithStrings()
 	}
 
 	/**
@@ -63,6 +65,46 @@ class CFCDatabase extends Dexie {
         *cashInItems,
         *cashOutItems
       `,
+		})
+
+		this.version(1.1).stores({
+			canvases: `
+        ++id,
+        clientId,
+        createdAt,
+        canvasTitle,
+        canvasType,
+        canvasTimeFrame,
+        canvasStartDate,
+        canvasEndDate,
+        gstOnSales,
+        gstOnPurchases,
+        openingBalance,
+        paygWithholding,
+        superAmount,
+        incomeTax,
+        cashToOwner,
+        cashToBank,
+        stock,
+        creditors,
+        debtors,
+        assets,
+        loans,
+        *cashInItems,
+				*cashOutItems,
+				[canvasType+canvasTimeFrame+clientId]
+      `,
+		})
+	}
+
+	private replaceIdsWithStrings(): void {
+		this.canvases.toCollection().modify((canvas) => {
+			if (typeof canvas.id === "number") {
+				canvas.id = `${canvas.id}`
+			}
+			if (typeof canvas.clientId === "number") {
+				canvas.clientId = `${canvas.clientId}`
+			}
 		})
 	}
 }

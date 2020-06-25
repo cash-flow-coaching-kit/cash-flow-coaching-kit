@@ -86,6 +86,10 @@ export default function CreateCanvasForm(): ReactElement {
 		setFieldValue("canvasEndDate", end, false)
 	}
 
+	useEffect(() => {
+		changeDateValue("canvasStartDate", canvasStartDate)
+	}, [canvasTimeFrame, canvasStartDate])
+
 	const inputChange = useCallback(handleChange, [])
 
 	function disabledCreate(): boolean {

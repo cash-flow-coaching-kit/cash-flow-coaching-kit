@@ -6,6 +6,7 @@ import {
 	calcCashSurplus,
 	calcCashFlowGST,
 	calcClosingBalance,
+	calcIncomeTaxPer,
 } from "../../../state/CFC/accumulators"
 
 /**
@@ -22,6 +23,7 @@ function calculateInitial(values: BaseCFCStruct): CalculatedValues {
 		totalNetAssets: calcTotalNetAssets(values),
 		cashSurplus: calcCashSurplus(values),
 		availableToSpend: calcAvailableToSpend(values),
+		incomeTaxPercentage: calcIncomeTaxPer(values),
 	}
 }
 

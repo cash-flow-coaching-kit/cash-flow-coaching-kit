@@ -2,15 +2,13 @@ import React, { ReactElement, useState, MouseEvent, useContext } from "react"
 import {
 	List,
 	ListItem,
-	ListItemIcon,
-	Radio,
 	ListItemText,
 	ListItemSecondaryAction,
 	IconButton,
 	Tooltip,
 } from "@material-ui/core"
-import PublishIcon from "@material-ui/icons/Publish"
 import { clone } from "lodash-es"
+import VisibilityIcon from "@material-ui/icons/Visibility"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import { ClientActionTypes } from "../../../state/client/client-outline"
 import { IClientListProps } from "../_config/shape"
@@ -50,7 +48,8 @@ const ClientList = ({
 	 * @param {ChangeEvent<HTMLInputElement>} event Event created by the radio change
 	 * @returns void
 	 */
-	const handleChange = (client: ClientDataStruct): void => {
+	const handleChange = (client: ClientDataStruct) => (): void => {
+		console.log(client)
 		if (client?.id) {
 			dispatch({
 				type: ClientActionTypes.ChangeCurrentClient,
@@ -113,34 +112,29 @@ const ClientList = ({
 	}
 
 	return (
-		<List>
-			{clients.map((client, idx) => (
-				<ListItem key={constructKey(key, idx)}>
-					<ListItemIcon>
-						<Tooltip title="Manage client">
-							<Radio
-								checked={isClientSelected(currentClient, client.id)}
-								value={client.id}
-								inputProps={{ "aria-label": client.name }}
-								onChange={(): void => {
-									handleChange(client)
-								}}
-								name="selected-client"
-							/>
-						</Tooltip>
-					</ListItemIcon>
-					<ListItemText primary={client.name} />
-					<ListItemSecondaryAction>
-						<Tooltip title="Export data">
-							<IconButton>
-								<PublishIcon />
-							</IconButton>
-						</Tooltip>
-						<IconDeleteButtonwDialog onClick={handleDelete(client.id)} />
-					</ListItemSecondaryAction>
-				</ListItem>
-			))}
-		</List>
+		<>
+			<List>
+				{clients.map((client, idx) => (
+					<ListItem key={constructKey(key, idx)} className="list-item-padded">
+						<ListItemText
+							className="truncate list-item"
+							primary={client.name}
+						/>
+						<ListItemSecondaryAction>
+							{!isClientSelected(currentClient, client.id) && (
+								<Tooltip title="Manage client">
+									<IconButton onClick={handleChange(client)}>
+										<VisibilityIcon />
+										<span className="MuiTypography-srOnly">Manage client</span>
+									</IconButton>
+								</Tooltip>
+							)}
+							<IconDeleteButtonwDialog onClick={handleDelete(client.id)} />
+						</ListItemSecondaryAction>
+					</ListItem>
+				))}
+			</List>
+		</>
 	)
 }
 

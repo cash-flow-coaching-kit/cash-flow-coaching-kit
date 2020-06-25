@@ -2,7 +2,7 @@ import React, { ReactElement } from "react"
 import { Box, Typography, Grid, Divider } from "@material-ui/core"
 import { useInputWrapper } from "./__config/styles"
 import { ClosingBalance, CashToOwner } from "."
-import { addDollarSign } from "../../util/money/formatting"
+import { addDollarSign, formatNumber } from "../../util/money/formatting"
 import Spacer from "../Spacer/Spacer"
 
 /**
@@ -46,7 +46,9 @@ export default function CashBalance({
 					<Divider />
 				</Grid>
 				<Grid item sm={12}>
-					<ClosingBalance value={addDollarSign(`${closingBalance}`)} />
+					<ClosingBalance
+						value={addDollarSign(formatNumber(`${closingBalance}`))}
+					/>
 				</Grid>
 			</Grid>
 		</Box>
