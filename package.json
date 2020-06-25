@@ -23,9 +23,11 @@
 		"@types/react-beautiful-dnd": "^12.1.2",
 		"@types/react-dom": "^16.9.0",
 		"@types/react-router-dom": "^5.1.4",
+		"@types/uuid": "^8.0.0",
 		"@xstate/react": "^0.8.1",
 		"date-fns": "^2.12.0",
 		"dexie": "^3.0.1",
+		"dexie-export-import": "^1.0.0-rc.2",
 		"electron": "^8.2.3",
 		"formik": "^2.1.4",
 		"lodash-es": "^4.17.15",
@@ -38,6 +40,7 @@
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "3.4.1",
 		"typescript": "~3.7.2",
+		"uuid": "^8.1.0",
 		"xstate": "^4.9.1",
 		"yarn": "^1.22.4"
 	},
@@ -136,6 +139,9 @@
 		],
 		"extraGlobals": [
 			"window"
+		],
+		"transformIgnorePatterns": [
+			"<rootDir>/node_modules/(?!lodash-es)"
 		]
 	}
 }

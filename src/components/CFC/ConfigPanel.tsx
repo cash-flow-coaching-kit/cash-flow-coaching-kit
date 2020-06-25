@@ -66,7 +66,7 @@ const Panel = memo(function Panel({
 					canvasType: canvasTypeValue,
 				},
 				currentClient.id,
-				id ? parseInt(id, 10) : undefined
+				id || undefined
 			)
 			dispatch({
 				type: CFCActionTypes.ChangeDuplicateError,

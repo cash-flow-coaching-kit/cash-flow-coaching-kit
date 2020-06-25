@@ -241,8 +241,8 @@ export default function Form({ container, client }: FormProps): ReactElement {
 				setPriorityId(id)
 				return id
 			}
-			setPriorityId(d[0].id || -1)
-			return d[0].id || -1
+			setPriorityId(d[0].id || "")
+			return d[0].id || ""
 		}
 
 		return priorityId
@@ -270,7 +270,7 @@ export default function Form({ container, client }: FormProps): ReactElement {
 				if (hasExistsing && hasExistsing.length > 0) {
 					return {
 						...i,
-						id: hasExistsing[0].id || -1,
+						id: hasExistsing[0].id || "",
 					}
 				}
 				return i

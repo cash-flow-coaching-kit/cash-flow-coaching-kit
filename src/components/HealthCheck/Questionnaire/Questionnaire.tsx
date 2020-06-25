@@ -73,7 +73,7 @@ const Questionnaire = (): ReactElement => {
 	 *
 	 * @param {number} id ID of the health check to redirect to
 	 */
-	const redirectToSummary = (id: number): void => {
+	const redirectToSummary = (id: string): void => {
 		history.push(
 			routeVarReplacement(PrivateRoutes.HealthCheckSummary, [[":id", `${id}`]])
 		)
