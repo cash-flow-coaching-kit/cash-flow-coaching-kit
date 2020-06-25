@@ -98,7 +98,8 @@ const ActionChecklist = (): ReactElement => {
 	const printPDF = async () => {
 		const pdf = await ActionChecklistPDF(
 			currentClient?.name ?? "Client",
-			checklistCollection
+			checklistCollection,
+			notes
 		)
 		pdf.open()
 	}

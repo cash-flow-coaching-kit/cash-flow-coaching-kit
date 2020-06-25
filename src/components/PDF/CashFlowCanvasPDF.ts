@@ -1,5 +1,7 @@
 import pdfMake from "pdfmake/build/pdfmake"
 import pdfFonts from "pdfmake/build/vfs_fonts"
+import { green } from "@material-ui/core/colors"
+import { format } from "date-fns"
 import {
 	frameContent,
 	basicTable,
@@ -14,6 +16,8 @@ import {
 	calcTotalCashOut,
 } from "../../state/CFC/accumulators"
 import { calculateInitial } from "../Forms/CFC"
+import { canvasDisplayTitle } from "../CFC/__config/utilities"
+import upperFirst from "../../util/strings/upperCaseFirst"
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
@@ -34,6 +38,7 @@ const cashInSection = (cashInItems: CashFlow[], cashInTotal: number): any => {
 	return frameContent([
 		{
 			text: "Cash IN",
+			bold: true,
 		},
 		basicTable([
 			...cashInItems.map((line) => [
@@ -70,7 +75,7 @@ const cashOutSection = (
 	cashOutTotal: number
 ): any => {
 	return frameContent([
-		"Cash OUT",
+		{ text: "Cash OUT", bold: true },
 		basicTable([
 			...cashOutItems.map((line) => [
 				line.description,
@@ -127,6 +132,7 @@ const incomeSection = (incomeTax: number): any => {
 			[
 				[
 					"Income/Company Tax",
+					// TODO: Needs to use the new calculations in feature/122 branch
 					{ text: formatDollars(incomeTax), style: ["rightAlign"] },
 				],
 			],
@@ -151,7 +157,7 @@ const closingCashBalanceSection = (
 	closingBalance: number
 ): any => {
 	return frameContent([
-		"Your Closing Cash Balance",
+		{ text: "Your Closing Cash Balance", bold: true },
 		basicTable([
 			[
 				"Cash to owner",
@@ -174,7 +180,7 @@ const yourNetAssetPositionSection = (
 	totalNetAssets: number
 ): any => {
 	return frameContent([
-		"Your net asset position",
+		{ text: "Your net asset position", bold: true },
 		basicTable([
 			["Stocks", { text: formatDollars(stock), style: ["rightAlign"] }],
 			["Creditors", { text: formatDollars(creditors), style: ["rightAlign"] }],
@@ -182,7 +188,7 @@ const yourNetAssetPositionSection = (
 			["Assets", { text: formatDollars(assets), style: ["rightAlign"] }],
 			["Loans", { text: formatDollars(loans), style: ["rightAlign"] }],
 			[
-				"Total net assets",
+				{ text: "Total net assets", bold: true },
 				{ text: formatDollars(totalNetAssets), style: ["rightAlign"] },
 			],
 		]),
@@ -223,8 +229,35 @@ export default async (title: string, values: BaseCFCStruct) => {
 		...pageDefaultSettings(),
 
 		content: [
-			pageHeading(`${title} - CANVAS - ${canvasTitle}`),
+			pageHeading(`${title} - CANVAS - ${canvasDisplayTitle(values)}`),
 			pagePadding([
+				frameContent({
+					table: {
+						widths: ["25%", "25%", "25%", "25%"],
+						body: [
+							[
+								[
+									{ text: "Canvas Type", bold: true },
+									upperFirst(values.canvasType),
+								],
+								[
+									{ text: "Time-frame", bold: true },
+									upperFirst(values.canvasTimeFrame),
+								],
+								[
+									{ text: "Start date", bold: true },
+									`${format(values.canvasStartDate, "dd/MM/yyyy")}`,
+								],
+								[
+									{ text: "End date", bold: true },
+									`${format(values.canvasEndDate, "dd/MM/yyyy")}`,
+								],
+							],
+						],
+					},
+					layout: "noBorders",
+				}),
+				" ",
 				openingBalanceSection(openingBalance),
 
 				{
@@ -262,10 +295,11 @@ export default async (title: string, values: BaseCFCStruct) => {
 
 		styles: {
 			pageHeader: {
-				fontSize: 22,
+				fontSize: 20,
 				bold: true,
-				fillColor: "#43A047",
+				fillColor: green["800"],
 				color: "white",
+				alignment: "center",
 			},
 			rightAlign: {
 				// fillColor: "#CCCCCC",
