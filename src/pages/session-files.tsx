@@ -32,6 +32,7 @@ import {
 } from "../components/SessionFiles/__config/utilities"
 import CheckboxListItem from "../components/SessionFiles/CheckboxListItem"
 import useStyles from "../components/SessionFiles/__config/styles"
+import SectionTitle from "../components/SectionTitle"
 
 const SessionFiles = (): ReactElement => {
 	const cls = useStyles()
@@ -125,10 +126,17 @@ const SessionFiles = (): ReactElement => {
 		<PageContainer>
 			<Grid container spacing={3}>
 				<Grid item xs={12} md={9}>
-					<Typography variant="h5" align="center">
-						Select items from your coaching session to create a pdf file to
-						share or review
-					</Typography>
+					<Box className="content-area">
+						<SectionTitle>Downloads</SectionTitle>
+						<Typography>
+							All the activities you completed in your session are saved here.
+							Download and save the files to share and review.
+						</Typography>
+						<Typography>
+							Select the items you want to save and download them from the
+							control panel.
+						</Typography>
+					</Box>
 					<Box className={cls.dropdownWrapper}>
 						<SingleDownloads title="Change Levers" id="changeLevers" />
 						<SingleDownloads title="Action Checklist" id="actionChecklist" />
