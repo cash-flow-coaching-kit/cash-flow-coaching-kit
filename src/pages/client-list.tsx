@@ -25,12 +25,13 @@ const ClientList = (): ReactElement => {
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={8}>
-						<SectionTitle component="h1">Clients and coaching</SectionTitle>
+						<SectionTitle component="h1">Clients and Coaching</SectionTitle>
 						<Box className="content-area">
 							<Typography>Manage and prepare your coaching.</Typography>
 							<Typography>
 								Read our coaching guidance to prepare for your client. These
-								will help you and your client get the most value from the kit.
+								materials will help you and your client get the most value from
+								the kit.
 							</Typography>
 							<Typography>
 								You can also import and export client data in your client list.

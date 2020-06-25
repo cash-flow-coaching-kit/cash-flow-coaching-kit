@@ -71,7 +71,7 @@ const HCQuestionnaire = (): ReactElement => {
 									<ListItemIcon>
 										<ListIcon />
 									</ListItemIcon>
-									<ListItemText>List of Health Checks</ListItemText>
+									<ListItemText>Saved Health Checks</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>

@@ -102,12 +102,12 @@ const ActionChecklist = (): ReactElement => {
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
-						<SectionTitle component="h1">Action Items</SectionTitle>
+						<SectionTitle component="h1">Action Checklist</SectionTitle>
 						<Box className="content-area">
 							<Typography>
 								Your checklist has all your actions you selected in previous
-								parts of the cash flow kit. It is categorised by cash flow in
-								and out actions.
+								parts of the Cash Flow Coaching Kit. It is categorised by cash
+								flow in and out actions.
 							</Typography>
 							<Typography>
 								Use the checklist to track, prioritise and review your actions.

@@ -30,7 +30,7 @@ export default function Prepare(): ReactElement {
 					</List>
 					<Typography component="li">
 						For an existing client, review their previous action checklist,
-						canvases and financials.
+						canvasses and financials.
 					</Typography>
 				</List>
 			</Box>

@@ -8,11 +8,11 @@ import {
 	ListItemText,
 	Button,
 	makeStyles,
+	Typography,
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
 import AddIcon from "@material-ui/icons/Add"
 import { PageContainer } from "../../components/Layouts"
-import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
 import { PrivateRoutes, routeVarReplacement } from "../../util/routes/routes"
 import QuestionSummaries from "../../components/HealthCheck/Summary"
@@ -27,10 +27,15 @@ import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
 import useCurrentClient from "../../state/client/useCurrentClient"
 import { ClientContext } from "../../state/client"
 import { ClientActionTypes } from "../../state/client/client-outline"
+import Spacer from "../../components/Spacer"
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
 		marginTop: theme.spacing(3),
+	},
+	actionRow: {
+		display: "flex",
+		justifyContent: "flex-end",
 	},
 }))
 
@@ -90,10 +95,10 @@ const HCSummary = (): ReactElement => {
 								<Grid
 									container
 									spacing={0}
-									justify="space-between"
+									justify="flex-end"
 									className={styles.summaryActions}
 								>
-									<Grid item xs={12} sm={6}>
+									<Grid item xs={12} className={styles.actionRow}>
 										<Button
 											color="primary"
 											variant="contained"
@@ -104,6 +109,19 @@ const HCSummary = (): ReactElement => {
 										</Button>
 									</Grid>
 								</Grid>
+								<Spacer space={4} />
+								<Typography>
+									Cash flow is a key business challenge that may affect small
+									business owners’ mental health and wellbeing. A range of{" "}
+									<a
+										href="https://www.ato.gov.au/General/Financial-difficulties-and-serious-hardship/small-business-owners-experiencing-mental-health-issues/health-and-wellbeing-organisations/"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										resources are available
+									</a>{" "}
+									if you need assistance.
+								</Typography>
 							</>
 						) : (
 							<InvalidHC />
@@ -132,7 +150,7 @@ const HCSummary = (): ReactElement => {
 									<ListItemIcon>
 										<ListIcon />
 									</ListItemIcon>
-									<ListItemText>List of Health Checks</ListItemText>
+									<ListItemText>Saved Health Checks</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>

@@ -56,7 +56,7 @@ export default function Logo({ to, className = "" }: LogoProps): ReactElement {
 			<Box className={`${cls.root} ${className}`}>
 				<img src="/images/logo.png" alt="" className={cls.img} />
 				<Typography className={cls.type} variant="h6" component="span">
-					Cash flow coaching kit
+					Cash Flow Coaching Kit
 				</Typography>
 			</Box>
 		</Link>

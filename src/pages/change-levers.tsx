@@ -40,8 +40,8 @@ const ChangeLevers = (): ReactElement => {
 					<Grid item xs={12} md={9}>
 						<Box className="content-area">
 							<Typography variant="h5" component="h1">
-								Use your cash flow knowledge and canvas to explore possible
-								changes that can be made.
+								Use your new cash flow knowledge to explore possible changes you
+								can make to improve your cash flow
 							</Typography>
 							<Typography>
 								Below are actions that will improve your cash flow in and out.

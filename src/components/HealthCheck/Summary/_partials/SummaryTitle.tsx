@@ -17,7 +17,7 @@ const SummaryTitle = ({ createdAt }: ISummaryTitleProps): ReactElement => {
 				{createdAt ? `on the ${format(createdAt, "do 'of' MMMM yyyy")}` : false}
 			</Typography>
 			<Typography align="center">
-				Learn more about topics covered in the health check to improve your
+				Learn more about topics covered in the Health Check to improve your
 				business.
 			</Typography>
 		</>

@@ -112,7 +112,7 @@ const Homepage = (): ReactElement => {
 						component="h1"
 						className={styles.MainHeading}
 					>
-						Cash Flow Kit
+						Cash Flow Coaching Kit
 					</Typography>
 					<Typography align="center" component="p" variant="h5">
 						Plan and improve your small business.
@@ -168,7 +168,7 @@ const Homepage = (): ReactElement => {
 									variant="h5"
 									className={styles.SectionTitle}
 								>
-									Action
+									Plan &amp; Action
 								</Typography>
 								<Typography
 									variant="body1"

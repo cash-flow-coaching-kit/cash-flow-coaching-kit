@@ -102,16 +102,16 @@ const CoachingKit = (): ReactElement => {
 					className={styles.MainHeading}
 					align="center"
 				>
-					The cash flow coaching kit
+					Cash Flow Coaching Kit
 				</Typography>
 
 				<Grid container spacing={0}>
 					<Grid item sm={2} />
 					<Grid item xs={12} sm={8}>
 						<Typography className={styles.contentText} align="center">
-							The cash flow kit has three phases: discover, plan and action.
-							Working through the kit will help you plan, maintain and grow your
-							business.
+							The Cash Flow Coaching Kit has three stages, Discover, Apply and
+							Plan and Action. Working through the kit will help you plan,
+							maintain and grow your business.
 						</Typography>
 						<Typography className={styles.contentText} align="center">
 							In each phase in the kit, you will focus on 4 key questions. They
@@ -366,7 +366,8 @@ const CoachingKit = (): ReactElement => {
 									className={styles.contentText}
 									align="center"
 								>
-									Create an action checklist and track your progress.
+									Create a list of actions and deadlines to help you track you
+									cash flow improvements over time.
 								</Typography>
 							</Grid>
 							<Grid item>

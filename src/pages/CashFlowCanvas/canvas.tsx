@@ -20,7 +20,7 @@ export default function CFCCanvas(): ReactElement {
 			<PageContainer maxWidth="lg">
 				<Grid container spacing={3}>
 					<Grid item sm={9}>
-						<SectionTitle component="h1">Cash flow canvas</SectionTitle>
+						<SectionTitle component="h1">Cash Flow Canvas</SectionTitle>
 						<Box className="content-area">
 							<Typography>
 								The cash flow canvas will help you answer the four key
@@ -43,14 +43,14 @@ export default function CFCCanvas(): ReactElement {
 									flow
 								</Typography>
 								<Typography component="li">
-									Plan - create a new future cash flow that meets your goals
+									Plan - create future cash flow that meets your goals
 								</Typography>
 								<Typography component="li">
 									Track - compare your actual and predicted cash flow
 								</Typography>
 							</List>
 							<Typography>
-								To import, save or compare data, see the control panel.
+								To import, save or compare data, see the Control Panel.
 							</Typography>
 						</Box>
 						<Spacer space={3} />

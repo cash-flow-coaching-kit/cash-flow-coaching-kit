@@ -57,7 +57,7 @@ export default function ControlPanel(): ReactElement {
 					<ListItemIcon>
 						<FormatListNumberedIcon />
 					</ListItemIcon>
-					<ListItemText>List of Canvases</ListItemText>
+					<ListItemText>List of Canvasses</ListItemText>
 				</ListItem>
 				{!isCompare() && !isNewPage() && <ControlCompareLink />}
 				{!isNewPage() && (
