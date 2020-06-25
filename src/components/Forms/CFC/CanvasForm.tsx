@@ -52,6 +52,8 @@ import {
 	calcQuestionTwo,
 	calcQuestionThree,
 } from "../../CFC/__config/utilities"
+import { ProcessFileItem } from "../../ImportDataModal/lib/ImportDataGeneralLib"
+import { newTimestamp } from "../../../util/dates"
 
 /**
  * Form used to edit a CFC
@@ -76,6 +78,7 @@ export default function CanvasForm({
 	const [currentClient] = useCurrentClient()
 	const [stateMachine, updateMachine] = useMachine(fetchMachine)
 	const { duplicateError, invalidDateError, dispatch } = useContext(CFCContext)
+	const { canvasItemUpdater, setCanvasItemUpdater } = useContext(CFCContext)
 
 	const { setFieldValue, handleChange, values, setValues } = useFormik<
 		BaseCFCStruct
@@ -116,6 +119,39 @@ export default function CanvasForm({
 	const cashOutGST = useMemo(() => calcCashFlowGST(cashOutItems), [
 		cashOutItems,
 	])
+
+	const addDataImportItems = useCallback(
+		(items: any) => {
+			let id = newTimestamp()
+
+			const newCashInItems = [
+				...values.cashInItems,
+				...items
+					.filter(({ amount }: ProcessFileItem) => amount > 0)
+					.map(({ row, description, amount }: ProcessFileItem) =>
+						createCashFlowItem(id++, description, Math.floor(amount))
+					),
+			]
+			setFieldValue("cashInItems", newCashInItems, false)
+
+			const newCashOutItems = [
+				...values.cashOutItems,
+				...items
+					.filter(({ amount }: ProcessFileItem) => amount < 0)
+					.map(({ row, description, amount }: ProcessFileItem) =>
+						createCashFlowItem(id++, description, Math.floor(amount))
+					),
+			]
+			setFieldValue("cashOutItems", newCashOutItems, false)
+		},
+		[values]
+	)
+
+	// add an updater to list to be used by Data Import
+	useEffect(() => {
+		setCanvasItemUpdater?.([addDataImportItems])
+		return () => setCanvasItemUpdater?.([])
+	}, [addDataImportItems])
 
 	useEffect(() => {
 		if (!useCustomTitle) {
@@ -186,7 +222,12 @@ export default function CanvasForm({
 		msg: SnackbarMsgData["msg"],
 		severity: SnackbarMsgData["severity"]
 	): void {
-		setSnackbar({ ...snackbar, msg, severity, open: true })
+		setSnackbar({
+			...snackbar,
+			msg,
+			severity,
+			open: true,
+		})
 	}
 
 	/**
@@ -273,9 +314,18 @@ export default function CanvasForm({
 	 * @param {"cashInItems" | "cashOutItems"} key
 	 */
 	const addCashFlowItem = useCallback(
-		(key: "cashInItems" | "cashOutItems") => (): void => {
+		(
+			key: "cashInItems" | "cashOutItems",
+			description = "",
+			amount = 0,
+			gstApplicable = true
+		) => (): void => {
 			const items = values[key]
-			setFieldValue(key, items.concat(createCashFlowItem()), false)
+			setFieldValue(
+				key,
+				items.concat(createCashFlowItem(description, amount, gstApplicable)),
+				false
+			)
 		},
 		[setFieldValue, values]
 	)
