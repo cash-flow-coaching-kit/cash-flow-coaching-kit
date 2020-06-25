@@ -47,7 +47,7 @@ export const CFCYourPosition = (): ReactElement => (
 		<Typography variant="h6">Understanding your position</Typography>
 
 		<Typography>
-			Easily see if your business is getting ahead or falling behind
+			Easily see if your business is getting ahead or falling behind.
 		</Typography>
 	</div>
 )
@@ -57,7 +57,7 @@ export const CFCControlPanel = (): ReactElement => (
 		<Typography variant="h6">Control Panel</Typography>
 
 		<Typography>
-			Here you can open an existing Canvas, copy, delete , or create a new
+			Here you can open an existing Canvas, copy, delete, or create a new
 			Canvas.
 		</Typography>
 		<br />
