@@ -39,9 +39,10 @@ const ChangeLevers = (): ReactElement => {
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
 						<Box className="content-area">
-							<Typography variant="h5" component="h1">
+							<SectionTitle component="h1">Change Levers</SectionTitle>
+							<Typography>
 								Use your new cash flow knowledge to explore possible changes you
-								can make to improve your cash flow
+								can make to improve your cash flow.
 							</Typography>
 							<Typography>
 								Below are actions that will improve your cash flow in and out.
