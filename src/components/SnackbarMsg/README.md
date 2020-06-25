@@ -14,7 +14,7 @@ const FormComponent = () => {
 	function show(
 		msg: SnackbarMsgData["msg"],
 		severity: SnackbarMsgData["severity"]
-	) {
+	): void {
 		setSnackbar({ ...snackbar, msg, severity, open: true })
 	}
 

@@ -1,11 +1,11 @@
-import React, { ReactElement, useContext } from "react"
+import React, { ReactElement } from "react"
 import { Typography, Box } from "@material-ui/core"
 import ExpandableNav from "../ExpandableNav"
 import { useTaskBuilderStyles } from "./__config/styles"
 import { Form } from "./__partials"
 import { TaskbuilderProps } from "./__config/shape"
-import { ClientContext } from "../../state/client"
 import IfElseLoading from "../IfElseLoading"
+import useCurrentClient from "../../state/client/useCurrentClient"
 
 /**
  * Taskbuilder component used on Discover topics pages
@@ -23,9 +23,7 @@ export default function Taskbuilder({
 	container,
 }: TaskbuilderProps): ReactElement {
 	const styles = useTaskBuilderStyles()
-	const {
-		state: { currentClient },
-	} = useContext(ClientContext)
+	const [currentClient] = useCurrentClient()
 
 	return (
 		<ExpandableNav title="Task builder">

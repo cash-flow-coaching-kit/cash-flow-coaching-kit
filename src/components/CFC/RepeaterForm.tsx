@@ -1,8 +1,8 @@
 import React, { ReactElement, memo, useCallback, MouseEvent } from "react"
-import { Divider, Box } from "@material-ui/core"
+import { Divider, Box, Typography } from "@material-ui/core"
 import Spacer from "../Spacer/Spacer"
 import ComputedPanels from "../ComputedPanels"
-import { addDollarSign } from "../../util/money/formatting"
+import { addDollarSign, formatNumber } from "../../util/money/formatting"
 import FormHeader from "./FormHeader"
 import { RepeaterFormProps } from "./__config/shape"
 import { useRepeaterStyles as useStyles } from "./__config/styles"
@@ -33,6 +33,7 @@ export default memo(function RepeaterForm({
 	gst,
 	addItem,
 	removeItem,
+	beforeTotalChild,
 }: RepeaterFormProps): ReactElement {
 	const cls = useStyles()
 
@@ -62,34 +63,54 @@ export default memo(function RepeaterForm({
 	return (
 		<>
 			<Box className={cls.body}>
-				<FormHeader />
-				{values.map((item, idx) => (
-					<FormItem
-						name={name}
-						value={item}
-						onChange={onChange}
-						index={idx}
-						key={item.id}
-						removeItem={removeFormItem(item.id)}
-					/>
-				))}
+				<Typography
+					className={cls.mobileNotice}
+					style={{ fontStyle: "italic" }}
+				>
+					It appears that you are using a mobile device. Remember to scroll to
+					view the full form below
+					<Spacer />
+				</Typography>
+				<Box className={cls.form}>
+					<Box className={cls.formInner}>
+						<FormHeader />
+						{values.map((item, idx) => (
+							<FormItem
+								name={name}
+								value={item}
+								onChange={onChange}
+								index={idx}
+								key={item.id}
+								removeItem={removeFormItem(item.id)}
+							/>
+						))}
+					</Box>
+				</Box>
 				<Spacer />
 				<FormActions addItem={addItem} addDisabled={isAddDisabled()} />
 			</Box>
+			{typeof beforeTotalChild !== "undefined" && (
+				<>
+					<Spacer />
+					<Divider />
+					<Spacer />
+					{beforeTotalChild()}
+				</>
+			)}
 			<Spacer />
 			<Divider />
 			<Spacer />
 			<Box className={cls.body}>
 				<ComputedPanels
-					title="Total (exec GST)"
+					title="Total (exc GST)"
 					wrapped={false}
-					value={addDollarSign(`${total}`)}
+					value={addDollarSign(formatNumber(`${total}`))}
 				/>
 				<ComputedPanels
 					title="GST"
 					mini
 					wrapped={false}
-					value={addDollarSign(`${gst}`)}
+					value={addDollarSign(formatNumber(`${gst}`))}
 				/>
 			</Box>
 		</>

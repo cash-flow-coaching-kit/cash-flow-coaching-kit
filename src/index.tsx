@@ -18,3 +18,18 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister()
+
+if (process.env.NODE_ENV === "production") {
+	// eslint-disable-next-line
+	window.onbeforeunload = function (e: any): any {
+		// eslint-disable-next-line
+		e = e || window.event
+		// old browsers
+		if (e) {
+			// eslint-disable-next-line
+			e.returnValue = "Sure?"
+		}
+		// safari, chrome(chrome ignores text)
+		return "Sure?"
+	}
+}

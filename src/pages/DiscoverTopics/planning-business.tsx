@@ -14,7 +14,7 @@ import {
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
+import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
@@ -94,6 +94,8 @@ const DTPlanningBusiness = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Kirras-native-foods.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Kirra's Native Foods
 										</Button>
@@ -113,6 +115,8 @@ const DTPlanningBusiness = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Sanjanas-restaurant.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Sanjana's Restaurant
 										</Button>
@@ -127,7 +131,7 @@ const DTPlanningBusiness = (): ReactElement => {
 					</Grid>
 				</Grid>
 				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
-					Quicksnaps - Deciding how to exit your business.
+					Quicksnaps – What to consider when you plan your business
 				</Typography>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
@@ -250,9 +254,6 @@ const DTPlanningBusiness = (): ReactElement => {
 									<Typography component="li" className={styles.list}>
 										How much of a buffer do you need to include in pricing?
 									</Typography>
-									<Typography component="li" className={styles.list}>
-										How much do you need to start your business?
-									</Typography>
 								</List>
 							</Grid>
 						</Grid>
@@ -280,6 +281,9 @@ const DTPlanningBusiness = (): ReactElement => {
 							</Grid>
 							<Grid item sm={6}>
 								<List>
+									<Typography component="li" className={styles.list}>
+										How much do you need to start your business?
+									</Typography>
 									<Typography component="li" className={styles.list}>
 										How much do you need to have in reserve while your business
 										ramps up?
@@ -322,10 +326,12 @@ const DTPlanningBusiness = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						startIcon={<PictureAsPdf />}
+						endIcon={<ExitToAppIcon />}
 						href="/pdf/BusinessPlan-Activity.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
-						Build your own business plan
+						Download activity
 					</Button>
 				</Container>
 				<Container
@@ -344,8 +350,8 @@ const DTPlanningBusiness = (): ReactElement => {
 					>
 						When you review your business plan, look for ways to improve your
 						cash flow and financial performance. You can use the canvas tool and
-						change lever cards to help you consider what changes you can make in
-						your business and the impact they may have on your cash flow.
+						change levers to help you consider what changes you can make in your
+						business and the impact they may have on your cash flow.
 					</Typography>
 					<Typography
 						variant="body1"

@@ -1,5 +1,13 @@
-import React, { useContext, ReactElement, useEffect } from "react"
-import { Box, Card, Divider, CardContent } from "@material-ui/core"
+import React, { useContext, ReactElement, useEffect, useState } from "react"
+import {
+	Box,
+	Card,
+	Divider,
+	CardContent,
+	List,
+	ListItem,
+	ListItemText,
+} from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
 import { useMachine } from "@xstate/react"
 import { ClientContext } from "../../state/client"
@@ -10,6 +18,10 @@ import { IClientState } from "../../state/client/client-outline"
 import ClientListingMachine from "./_config/machine"
 import Loading from "../Loading"
 import SectionTitle from "../SectionTitle"
+import Spacer from "../Spacer"
+import ExportClientButton from "./_partials/ExportClient"
+import { SnackbarMsgData } from "../SnackbarMsg/SnackbarMsg"
+import SnackbarMsg from "../SnackbarMsg"
 
 /**
  * Component to render the whole Client Listing component
@@ -20,10 +32,32 @@ import SectionTitle from "../SectionTitle"
 const ClientListing = (): ReactElement => {
 	const clientStore: IClientState = useContext(ClientContext)
 	const {
-		state: { clientSynced, clients },
+		state: { clientSynced, clients, currentClient },
 	} = clientStore
 	const [state, send] = useMachine(ClientListingMachine)
 	const styles = useCLStyles()
+	const [snackbar, setSnackbar] = useState<SnackbarMsgData>({
+		open: false,
+		msg: "",
+	})
+
+	function showSnackbar(
+		msg: SnackbarMsgData["msg"],
+		severity: SnackbarMsgData["severity"]
+	): void {
+		setSnackbar({ ...snackbar, msg, severity, open: true })
+	}
+
+	function handleClose(
+		event: React.SyntheticEvent | React.MouseEvent,
+		reason?: string
+	): void {
+		if (reason && reason === "clickaway") {
+			return
+		}
+
+		setSnackbar({ ...snackbar, open: false })
+	}
 
 	// Change the state of the component once clients are synced
 	useEffect(() => {
@@ -41,10 +75,44 @@ const ClientListing = (): ReactElement => {
 	 *
 	 * @returns ReactElement
 	 */
-	const renderWithMachine = (): ReactElement => {
+	const renderWithMachine = (type: "list" | "current"): ReactElement => {
 		switch (state.value) {
 			case "data":
-				return <ClientList store={clientStore} />
+				if (type === "list") {
+					return <ClientList store={clientStore} />
+				}
+
+				if (type === "current") {
+					return (
+						<>
+							<List>
+								<ListItem>
+									<ListItemText className="truncate list-item">
+										{currentClient?.name}
+									</ListItemText>
+								</ListItem>
+							</List>
+							<Divider />
+							{currentClient?.id && (
+								<>
+									<CardContent className={styles.actions}>
+										<ExportClientButton
+											client={currentClient.id}
+											showSnackbar={showSnackbar}
+										/>
+									</CardContent>
+									<SnackbarMsg
+										// eslint-disable-next-line react/jsx-props-no-spreading
+										{...snackbar}
+										onClose={handleClose}
+									/>
+								</>
+							)}
+						</>
+					)
+				}
+
+				return <></>
 			case "empty":
 				return <NoClients />
 			case "loading":
@@ -55,9 +123,12 @@ const ClientListing = (): ReactElement => {
 
 	return (
 		<Box>
+			<SectionTitle>Current Client</SectionTitle>
+			<Card>{renderWithMachine("current")}</Card>
+			<Spacer space={4} />
 			<SectionTitle>Client List</SectionTitle>
 			<Card>
-				{renderWithMachine()}
+				{renderWithMachine("list")}
 				<Divider />
 				<CardContent className={styles.actions}>
 					<ImportClient />

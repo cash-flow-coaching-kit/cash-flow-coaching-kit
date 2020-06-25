@@ -1,3 +1,4 @@
+import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import React, { ReactElement } from "react"
 import {
 	Typography,
@@ -14,7 +15,6 @@ import {
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
@@ -97,6 +97,8 @@ const DTRecordKeeping = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Edens-digital-records.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Eden's Digital Records
 										</Button>
@@ -115,7 +117,9 @@ const DTRecordKeeping = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Lisas-Paper-records.docx"
+											href="/transcripts/Lisas-paper-records.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Lisa's Paper Records
 										</Button>
@@ -313,9 +317,12 @@ const DTRecordKeeping = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						startIcon={<PictureAsPdf />}
+						endIcon={<ExitToAppIcon />}
+						href="/pdf/RecordKeeping-Activity.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
-						Download record keeping activity
+						Download activity
 					</Button>
 					<Typography component="h2" className={styles.SectionTitle}>
 						ATO App
@@ -344,6 +351,8 @@ const DTRecordKeeping = (): ReactElement => {
 						color="primary"
 						size="large"
 						href="https://www.ato.gov.au/General/Online-services/ATO-app/"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						ATO app
 					</Button>
@@ -401,12 +410,12 @@ const DTRecordKeeping = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="what books and records should you keep"
+								title="what books and records should my company keep"
 								href="https://asic.gov.au/for-business/your-business/small-business/compliance-for-small-business/small-business-what-books-and-records-should-my-company-keep/"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								What books &amp; records should you keep
+								What books &amp; records should my company keep
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>

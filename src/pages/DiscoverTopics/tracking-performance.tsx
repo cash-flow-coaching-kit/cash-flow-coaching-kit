@@ -95,6 +95,8 @@ const TrackingPerformance = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Tinas-hair-and-beauty.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Tina's Hair &amp; Beauty
 										</Button>
@@ -114,6 +116,8 @@ const TrackingPerformance = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Anders-retirement-plan.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Anders' Retirement Plan
 										</Button>

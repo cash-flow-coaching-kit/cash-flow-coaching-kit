@@ -1,5 +1,6 @@
 import { MouseEvent } from "react"
 import { QuestionOptions } from "../../_config/shape"
+import { DatabaseId } from "../../../../data/_config/shape"
 
 /**
  * OptionTile props
@@ -21,5 +22,5 @@ export interface IQuestionnaireOptions {
  */
 export interface IQuestionnaireProps {
 	previousAnswers?: QuestionOptions[]
-	dbID?: number
+	dbID?: DatabaseId
 }

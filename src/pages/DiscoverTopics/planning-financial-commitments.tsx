@@ -14,7 +14,7 @@ import {
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import PictureAsPdf from "@material-ui/icons/PictureAsPdf"
+import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
@@ -93,7 +93,12 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 										src="https://www.youtube.com/embed/FSJsiEaRNRU"
 									/>
 									<CardActions>
-										<Button color="primary" href="/transcripts/Micks-farm.docx">
+										<Button
+											color="primary"
+											href="/transcripts/Micks-farm.docx"
+											target="_blank"
+											rel="noopener noreferrer"
+										>
 											Download Transcript: Mick's Farm
 										</Button>
 									</CardActions>
@@ -112,6 +117,8 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Mings-disability-services.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Ming's Disability Services
 										</Button>
@@ -277,6 +284,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 										Put aside money into a separate account for personal income
 										tax
 									</Typography>
+									<Typography component="li" className={styles.list}>
+										You can use the PAYG withholding calculator to work out how
+										much to put aside
+									</Typography>
 								</List>
 							</Grid>
 						</Grid>
@@ -346,10 +357,12 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						startIcon={<PictureAsPdf />}
+						endIcon={<ExitToAppIcon />}
 						href="/pdf/KnowYourCommitments-Activity.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
-						Identify and map your commitments
+						Download activity
 					</Button>
 				</Container>
 				<Container
