@@ -5,9 +5,15 @@ const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		justifyContent: "flex-end",
 		alignItems: "center",
+		[theme.breakpoints.down("sm")]: {
+			flexDirection: "column",
+			alignItems: "flex-start",
+		},
 	},
 	saveButton: {
-		marginLeft: theme.spacing(1),
+		[theme.breakpoints.up("md")]: {
+			marginLeft: theme.spacing(1),
+		},
 	},
 }))
 

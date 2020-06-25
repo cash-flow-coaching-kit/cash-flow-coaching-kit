@@ -21,6 +21,7 @@ export interface ICFCState {
 	dispatch: Dispatch<CFCReducerActions>
 	leftCompare?: CFCStruct
 	rightCompare?: CFCStruct
+	copyCanvasActive: boolean
 }
 
 /**
@@ -34,6 +35,7 @@ export enum CFCActionTypes {
 	ChangeInvalidDateError = "change_invalid_date_error",
 	ChangeQuestionValues = "change_question_values",
 	ChangeCompare = "change_compare",
+	ChangeCopyCanvasActive = "change_copy_canvas_active",
 }
 
 export type ChangeComparePayload = {
@@ -61,6 +63,10 @@ export type CFCReducerActions =
 	| {
 			type: CFCActionTypes.ChangeQuestionValues
 			payload: ICFCState["questionValues"]
+	  }
+	| {
+			type: CFCActionTypes.ChangeCopyCanvasActive
+			payload: ICFCState["copyCanvasActive"]
 	  }
 	| {
 			type: CFCActionTypes.ChangeCompare

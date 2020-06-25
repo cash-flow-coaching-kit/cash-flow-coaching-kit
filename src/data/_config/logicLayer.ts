@@ -1,5 +1,7 @@
 import Dexie, { IndexableType } from "dexie"
+import { v4 as uuidv4 } from "uuid"
 import { DatabaseId, ClientId } from "./shape"
+import hasProperty from "../../util/object/hasProperty"
 
 /**
  * Logic Layer to implement per database/table combo
@@ -34,6 +36,7 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	protected defaultCreate(data: E): Promise<I> {
 		return this.database.transaction("rw", this.table.name, () => {
 			return this.table.add({
+				id: uuidv4(),
 				...data,
 			})
 		})
@@ -166,14 +169,22 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	public bulkAdd(items: E[]): Promise<I[]> {
+		const addItems: E[] = items.reduce((acc: E[], cur: E) => {
+			return acc.concat({ ...cur, id: uuidv4() })
+		}, [])
+
 		return this.database.transaction("rw", this.table.name, () => {
-			return this.table.bulkAdd<true>(items, { allKeys: true })
+			return this.table.bulkAdd<true>(addItems, { allKeys: true })
 		})
 	}
 
 	public bulkPut(items: E[]): Promise<I[]> {
+		const putItems: E[] = items.reduce((acc: E[], cur: E) => {
+			return acc.concat(hasProperty(cur, "id") ? cur : { ...cur, id: uuidv4() })
+		}, [])
+
 		return this.database.transaction("rw", this.table.name, () => {
-			return this.table.bulkPut<true>(items, { allKeys: true })
+			return this.table.bulkPut<true>(putItems, { allKeys: true })
 		})
 	}
 
@@ -188,6 +199,23 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 		return this.database.transaction("rw", this.table.name, () => {
 			return this.table.get(id)
 		})
+	}
+
+	/**
+	 * Deletes the data for a specific client
+	 *
+	 * @param {ClientId} clientId
+	 * @returns {Promise<number>}
+	 * @memberof ILogicLayer
+	 */
+	public deleteByClient(clientId: ClientId): Promise<number> {
+		return this.database.transaction("rw", this.table.name, () => {
+			return this.table.where("clientId").equals(clientId).delete()
+		})
+	}
+
+	public last(): Promise<E | undefined> {
+		return this.table.toCollection().last()
 	}
 }
 

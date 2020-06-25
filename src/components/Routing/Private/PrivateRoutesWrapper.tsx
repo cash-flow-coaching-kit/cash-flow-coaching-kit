@@ -37,9 +37,6 @@ const PrivateRoutesWrapper = (): ReactElement => {
 			<Route path={PrivateRoutes.CoachingKit}>
 				<CoachingKit />
 			</Route>
-			<Route path={PrivateRoutes.ClientList}>
-				<ClientList />
-			</Route>
 			<Route path={PrivateRoutes.SessionFiles}>
 				<SessionFiles />
 			</Route>
@@ -76,6 +73,10 @@ const PrivateRoutesWrapper = (): ReactElement => {
 				they require the state values provided by this context setup
 			*/}
 			<ActionChecklistProvider>
+				<Route path={PrivateRoutes.ClientList}>
+					<ClientList />
+				</Route>
+
 				<Route path={PrivateRoutes.ChangeLevers}>
 					<ChangeLevers />
 				</Route>
