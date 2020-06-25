@@ -1,5 +1,5 @@
 import React, { ReactElement, memo, useCallback, MouseEvent } from "react"
-import { Divider, Box } from "@material-ui/core"
+import { Divider, Box, Typography } from "@material-ui/core"
 import Spacer from "../Spacer/Spacer"
 import ComputedPanels from "../ComputedPanels"
 import { addDollarSign, formatNumber } from "../../util/money/formatting"
@@ -63,6 +63,14 @@ export default memo(function RepeaterForm({
 	return (
 		<>
 			<Box className={cls.body}>
+				<Typography
+					className={cls.mobileNotice}
+					style={{ fontStyle: "italic" }}
+				>
+					It appears that you are using a mobile device. Remember to scroll to
+					view the full form below
+					<Spacer />
+				</Typography>
 				<Box className={cls.form}>
 					<Box className={cls.formInner}>
 						<FormHeader />

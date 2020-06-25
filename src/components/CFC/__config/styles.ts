@@ -49,6 +49,12 @@ const useRepeaterStyles = makeStyles((theme) => ({
 			paddingBottom: theme.spacing(1),
 		},
 	},
+	mobileNotice: {
+		display: "block",
+		[theme.breakpoints.up("sm")]: {
+			display: "none",
+		},
+	},
 }))
 
 // eslint-disable-next-line import/prefer-default-export
