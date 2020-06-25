@@ -32,6 +32,7 @@
 		"formik": "^2.1.4",
 		"lodash-es": "^4.17.15",
 		"node-sass": "^4.14.0",
+		"p-min-delay": "^3.1.0",
 		"pdfmake": "^0.1.65",
 		"qs": "^6.9.4",
 		"react": "^16.13.1",
@@ -40,6 +41,7 @@
 		"react-dom": "^16.13.1",
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "3.4.1",
+		"source-map-explorer": "^2.4.2",
 		"typescript": "~3.7.2",
 		"uuid": "^8.1.0",
 		"xstate": "^4.9.1",
@@ -51,7 +53,8 @@
 		"test": "react-scripts test --env=jsdom",
 		"test:unit": "react-scripts test --env=jsdom",
 		"test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"analyze": "source-map-explorer 'build/static/js/*.js'"
 	},
 	"browserslist": {
 		"production": [
