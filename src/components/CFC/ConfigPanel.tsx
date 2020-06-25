@@ -28,6 +28,7 @@ import Spacer from "../Spacer"
  */
 interface ConfigPanelProps extends PanelProps, CustomTitleProps {
 	wrapped?: boolean
+	showDuplicateError?: boolean
 }
 
 // Duplicate canvas error message
@@ -51,6 +52,7 @@ const Panel = memo(function Panel({
 	onChange,
 	onDateChange,
 	customTitle,
+	useCustomTitle,
 }: PanelProps) {
 	const [currentClient, clientSynced] = useCurrentClient()
 	const { id } = useParams()
@@ -68,6 +70,7 @@ const Panel = memo(function Panel({
 				currentClient.id,
 				id || undefined
 			)
+
 			dispatch({
 				type: CFCActionTypes.ChangeDuplicateError,
 				payload: dup !== false,
@@ -82,11 +85,11 @@ const Panel = memo(function Panel({
 		customTitle,
 		id,
 		dispatch,
+		useCustomTitle,
 	])
 
 	useEffect(() => {
 		if (clientSynced) {
-			console.log("Fetch possible dups")
 			fetchPossibleDups()
 		}
 	}, [fetchPossibleDups, clientSynced, id])
@@ -102,16 +105,16 @@ const Panel = memo(function Panel({
 	return (
 		<>
 			<Grid container spacing={2}>
-				<Grid item sm={3}>
+				<Grid item xs={12} md={3}>
 					<CanvasTypeSelect value={canvasTypeValue} onChange={onChange} />
 				</Grid>
-				<Grid item sm={3}>
+				<Grid item xs={12} md={3}>
 					<CanvasTimeFrameSelect
 						value={canvasTimeframeValue}
 						onChange={onChange}
 					/>
 				</Grid>
-				<Grid item sm={6}>
+				<Grid item xs={12} md={6}>
 					<DateRange
 						startDate={startDate}
 						endDate={endDate}
@@ -151,6 +154,7 @@ function ConfigPanel({
 	changeCheck,
 	useCustomTitle,
 	wrapped = true,
+	showDuplicateError = true,
 }: ConfigPanelProps): ReactElement {
 	const wrapperCls = useInputWrapper()
 	const { duplicateError } = useContext(CFCContext)
@@ -171,8 +175,9 @@ function ConfigPanel({
 				onDateChange={onDateChange}
 				onChange={onChange}
 				customTitle={customTitle}
+				useCustomTitle={useCustomTitle}
 			/>
-			{duplicateError && (
+			{showDuplicateError && duplicateError && (
 				<>
 					<Spacer />
 					<DuplicateCanvasError />

@@ -39,7 +39,7 @@ export default function CompareSelector({
 
 	return (
 		<Grid container spacing={2} alignItems="center">
-			<Grid item sm={3}>
+			<Grid item xs={12} md={3}>
 				<Typography variant="h6" className={cls.compareLabel}>
 					Compare
 					<Tooltip title={tipContent} className={cls.compareTooltip}>
@@ -47,7 +47,7 @@ export default function CompareSelector({
 					</Tooltip>
 				</Typography>
 			</Grid>
-			<Grid item sm={4}>
+			<Grid item xs={12} md={4}>
 				<SelectField
 					name="left-side-compare"
 					label="Canvas"
@@ -56,12 +56,12 @@ export default function CompareSelector({
 					options={selectOptions}
 				/>
 			</Grid>
-			<Grid item sm={1}>
+			<Grid item xs={12} md={1} className={cls.to}>
 				<Typography align="center" variant="overline" component="p">
 					to
 				</Typography>
 			</Grid>
-			<Grid item sm={4}>
+			<Grid item xs={12} md={4}>
 				<SelectField
 					name="right-side-compare"
 					label="Canvas"
@@ -71,7 +71,7 @@ export default function CompareSelector({
 				/>
 			</Grid>
 			{leftSelected.canvasTimeFrame !== rightSelected.canvasTimeFrame && (
-				<Grid item sm={12}>
+				<Grid item xs={12}>
 					<TimeframeOutOfSync />
 				</Grid>
 			)}

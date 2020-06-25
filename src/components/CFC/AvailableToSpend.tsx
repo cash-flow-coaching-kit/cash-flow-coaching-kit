@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react"
 import { ComputedProps } from "./__config/shape"
 import ComputedPanels from "../ComputedPanels"
-import { addDollarSign } from "../../util/money/formatting"
+import { addDollarSign, formatNumber } from "../../util/money/formatting"
 
 /**
  * Component used to display the Available to Spend value
@@ -19,7 +19,7 @@ export default React.memo(function AvailableToSpend({
 		<ComputedPanels
 			title="Available to Spend (exc GST and Tax)"
 			description="The Opening Balance plus any Cash Surplus."
-			value={addDollarSign(value)}
+			value={addDollarSign(formatNumber(value))}
 		/>
 	)
 })

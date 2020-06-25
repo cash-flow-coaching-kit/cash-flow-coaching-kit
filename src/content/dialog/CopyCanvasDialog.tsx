@@ -10,7 +10,7 @@ import {
 import { useMachine } from "@xstate/react"
 import { useHistory, useParams } from "react-router-dom"
 import { useFormik } from "formik"
-import { omit } from "lodash-es"
+import { omit, values } from "lodash-es"
 import { isValid } from "date-fns"
 import fetchMachine from "../../components/Forms/CFC/__config/machine"
 import useCurrentClient from "../../state/client/useCurrentClient"
@@ -148,7 +148,7 @@ export default function CopyCanvasDialog({
 				canvasEndDate: data.canvasEndDate,
 			})
 
-			const isDup = await performDupFind(data, currentClient.id)
+			const isDup = await performDupFind(data, currentClient.id, useCustomTitle)
 			setIsDuplicate(isDup !== false)
 
 			// check if the canvas is using a custom title
@@ -158,7 +158,7 @@ export default function CopyCanvasDialog({
 			// Move to resolve
 			changeState("RESOLVE")
 		}
-	}, [currentClient, changeState, id, setValues])
+	}, [currentClient, changeState, id, setValues, useCustomTitle])
 
 	useEffect(() => {
 		// If component moves to `open` fetch the new data
@@ -171,10 +171,14 @@ export default function CopyCanvasDialog({
 	// #region Form Change Events
 	const checkDuplicate = useCallback(async () => {
 		if (currentClient?.id) {
-			const isDup = await performDupFind(values, currentClient.id)
+			const isDup = await performDupFind(
+				values,
+				currentClient.id,
+				useCustomTitle
+			)
 			setIsDuplicate(isDup !== false)
 		}
-	}, [values, currentClient])
+	}, [values, currentClient, useCustomTitle])
 
 	useEffect(() => {
 		checkDuplicate()
@@ -207,6 +211,10 @@ export default function CopyCanvasDialog({
 		setFieldValue("canvasStartDate", canvasStartDate, false)
 		setFieldValue("canvasEndDate", canvasEndDate, false)
 	}
+
+	useEffect(() => {
+		changeDateValue("canvasStartDate", values.canvasStartDate)
+	}, [values.canvasTimeFrame, values.canvasStartDate])
 	// #endregion
 
 	// #region Component rendering
@@ -243,6 +251,7 @@ export default function CopyCanvasDialog({
 							}}
 							useCustomTitle={useCustomTitle}
 							wrapped={false}
+							showDuplicateError={false}
 						/>
 						{isDuplicate && (
 							<>

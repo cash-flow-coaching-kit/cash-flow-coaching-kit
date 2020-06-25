@@ -75,7 +75,12 @@ export default function CanvasForm({
 	const { id: canvasId } = useParams()
 	const [currentClient] = useCurrentClient()
 	const [stateMachine, updateMachine] = useMachine(fetchMachine)
-	const { duplicateError, invalidDateError, dispatch } = useContext(CFCContext)
+	const {
+		duplicateError,
+		invalidDateError,
+		dispatch,
+		copyCanvasActive,
+	} = useContext(CFCContext)
 
 	const { setFieldValue, handleChange, values, setValues } = useFormik<
 		BaseCFCStruct
@@ -132,9 +137,13 @@ export default function CanvasForm({
 					calculated,
 					paygWithholding,
 					superAmount,
-					incomeTax
+					calculated.incomeTaxPercentage
 				),
-				three: calcQuestionThree(openingBalance, calculated, incomeTax),
+				three: calcQuestionThree(
+					openingBalance,
+					calculated,
+					calculated.incomeTaxPercentage
+				),
 				four: undefined,
 			},
 		})
@@ -225,7 +234,6 @@ export default function CanvasForm({
 	useEffect(() => {
 		const id = setInterval(async () => {
 			if (!isEqual(previousValues, values) && !disableSaving()) {
-				console.log("Save")
 				handleFormSave()
 			}
 		}, 1000)
@@ -262,6 +270,10 @@ export default function CanvasForm({
 		setFieldValue("canvasStartDate", start, false)
 		setFieldValue("canvasEndDate", end, false)
 	}
+
+	useEffect(() => {
+		changeDateValue("canvasStartDate", canvasStartDate)
+	}, [canvasTimeFrame, canvasStartDate])
 
 	const inputChange = useCallback(handleChange, [])
 	// #endregion
@@ -321,6 +333,7 @@ export default function CanvasForm({
 					setUseCustomTitle(e.target.checked)
 				}}
 				useCustomTitle={useCustomTitle}
+				showDuplicateError={!copyCanvasActive}
 			/>
 			<IfElseLoading if={stateMachine.value !== "loading"}>
 				<Spacer />
@@ -364,20 +377,26 @@ export default function CanvasForm({
 						gst={cashOutGST}
 						addItem={addCashFlowItem("cashOutItems")}
 						removeItem={removeItem("cashOutItems")}
+						beforeTotalChild={(): ReactElement => (
+							<EmployeeExpenses
+								payg={paygWithholding}
+								super={superAmount}
+								onChange={inputChange}
+							/>
+						)}
 					/>
 				</Box>
 				<Spacer />
-				<EmployeeExpenses
-					payg={paygWithholding}
-					super={superAmount}
-					onChange={inputChange}
-				/>
 				<Spacer />
 				<CashSurplus value={`${calculated.cashSurplus}`} />
 				<Spacer />
-				<AvailableToSpend value={`${calculated.availableToSpend}`} />
+				<IncomeTax
+					value={incomeTax}
+					onChange={inputChange}
+					calculated={calculated.incomeTaxPercentage}
+				/>
 				<Spacer />
-				<IncomeTax value={incomeTax} onChange={inputChange} />
+				<AvailableToSpend value={`${calculated.availableToSpend}`} />
 				<Spacer />
 				<CashBalance
 					cashToOwner={cashToOwner}
