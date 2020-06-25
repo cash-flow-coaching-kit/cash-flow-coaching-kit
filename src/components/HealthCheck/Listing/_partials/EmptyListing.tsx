@@ -14,7 +14,7 @@ import {
 const EmptyListing = (): ReactElement => {
 	return (
 		<CardContent>
-			<Typography variant="h6">No quizzes have been found</Typography>
+			<Typography variant="h6">No Health Checks have been found</Typography>
 			<Typography>
 				Check that you have the correct{" "}
 				<Link to={PrivateRoutes.ClientList}>client selected</Link> or{" "}
@@ -23,7 +23,7 @@ const EmptyListing = (): ReactElement => {
 						[":id?", ""],
 					])}
 				>
-					start a new quiz
+					start a new Health Check
 				</Link>
 				.
 			</Typography>

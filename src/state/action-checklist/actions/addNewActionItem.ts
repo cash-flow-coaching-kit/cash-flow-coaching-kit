@@ -1,6 +1,8 @@
 import { uniq } from "lodash-es"
 import { IActionChecklistState, IAddNewActionItemPayload } from "../shape"
 import { ActionChecklistPriorityStruct } from "../../../data/_config/shape"
+import filterById from "../../../util/filters/ById"
+import { newPriorityItem } from "../../../data/ActionChecklist/_config/utilities"
 
 /**
  * Adds a new action item and appends the id to the
@@ -26,6 +28,16 @@ const addNewActionItem = (
 		},
 		[]
 	)
+
+	const hasPriority = state.priority.filter(filterById(pID))
+	if (hasPriority.length === 0) {
+		// eslint-disable-next-line
+		newPriority.push({
+			...newPriorityItem(checklist.clientId, checklist.actionContainer),
+			order: [checklist?.id || -1],
+			id: pID,
+		})
+	}
 
 	return {
 		...state,

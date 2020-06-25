@@ -2,9 +2,9 @@ import React, { ReactElement, useContext } from "react"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
-import PublishIcon from "@material-ui/icons/Publish"
 import { useHistory, useLocation, useParams } from "react-router-dom"
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered"
+import GetAppIcon from "@material-ui/icons/GetApp"
 import ExpandableNav from "../ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
 import CopyCanvasTrigger from "./CopyCanvasTrigger"
@@ -78,7 +78,7 @@ export default function ControlPanel(): ReactElement {
 				{!isNewPage() && !isCompare() && (
 					<ListItem button>
 						<ListItemIcon>
-							<PublishIcon />
+							<GetAppIcon />
 						</ListItemIcon>
 						<ListItemText>Import data</ListItemText>
 					</ListItem>
