@@ -98,12 +98,12 @@ const ActionChecklist = (): ReactElement => {
 		<>
 			<PageContainer>
 				<Grid container spacing={3}>
-					<Grid item xs={9}>
+					<Grid item xs={12} md={9}>
 						<SectionTitle>Action Items</SectionTitle>
 						<ActionHeader />
 						<Box>{renderActionChecklist()}</Box>
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item xs={12} md={3}>
 						<FourQuestions />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
