@@ -29,7 +29,7 @@ export const CFCCreateCanvas = (): ReactElement => (
 
 export const CFCFillingOutCanvas = (): ReactElement => (
 	<div className="content-area">
-		<Typography variant="h6">Filing out the Canvas</Typography>
+		<Typography variant="h6">Filling out the Canvas</Typography>
 
 		<Typography>
 			You can directly enter figures into the Canvas or import from a
