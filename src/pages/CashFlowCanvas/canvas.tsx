@@ -23,7 +23,7 @@ export default function CFCCanvas(): ReactElement {
 						<SectionTitle component="h1">Cash Flow Canvas</SectionTitle>
 						<Box className="content-area">
 							<Typography>
-								The cash flow canvas will help you answer the four key
+								The Cash Flow Canvas will help you answer the four key
 								questions. Knowing and understanding these will ensure you make
 								informed decisions and plans for your business.
 							</Typography>

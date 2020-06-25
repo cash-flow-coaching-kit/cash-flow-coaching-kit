@@ -223,8 +223,12 @@ export default function CopyCanvasDialog({
 				return (
 					<>
 						<Typography component="em">
-							If you copy to a Plan or Forcast canvas, your closing balance will
-							be your opening balance.
+							If you copy to a Plan or Forecast canvas, your closing balance
+							will be your opening balance.
+						</Typography>
+						<br />
+						<Typography component="em">
+							All your figures will be copied to a new Canvas.
 						</Typography>
 						<Spacer />
 						<CanvasTitle
@@ -255,10 +259,6 @@ export default function CopyCanvasDialog({
 								<DuplicateCanvasError />
 							</>
 						)}
-						<Spacer space={4} />
-						<Typography component="em">
-							All your figures will be copied to a new Canvas.
-						</Typography>
 					</>
 				)
 			case "loading":
