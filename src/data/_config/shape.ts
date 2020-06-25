@@ -4,7 +4,7 @@ import { PossibleActionItems } from "../../state/action-checklist/shape"
 // Defines all the ID types for the different tables
 // All inherits from the base Id, but they are separated
 // to make it clear what is being referenced in code
-export type DatabaseId = number
+export type DatabaseId = string
 export type ClientId = DatabaseId
 export type HealthCheckId = DatabaseId
 export type ActionChecklistId = DatabaseId
@@ -239,7 +239,7 @@ export type CFCTimeFrame =
  * @export
  */
 export interface CashFlow {
-	id: number
+	id: DatabaseId
 	description: string
 	amount: number
 	gstApplicable: boolean

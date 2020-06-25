@@ -160,7 +160,7 @@ export default function CanvasForm({
 	// #region Fetch data on load
 	const fetchFormData = useCallback(async () => {
 		if (currentClient?.id) {
-			const data = await CFCUseCase.findById(parseInt(canvasId, 10))
+			const data = await CFCUseCase.findById(canvasId)
 			if (data) {
 				setValues(data, false)
 				setPreviousValues(data)
@@ -226,7 +226,7 @@ export default function CanvasForm({
 	}, [invalidDateError, duplicateError, useCustomTitle, canvasTitle])
 
 	const handleFormSave = useCallback(async () => {
-		await CFCUseCase.update(parseInt(canvasId, 10), values)
+		await CFCUseCase.update(canvasId, values)
 		setPreviousValues(values)
 		setLastSaved(new Date())
 	}, [canvasId, values])

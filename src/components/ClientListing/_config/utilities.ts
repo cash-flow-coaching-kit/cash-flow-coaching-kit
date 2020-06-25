@@ -20,7 +20,7 @@ export const hasClients = ({ state: { clients } }: IClientState): boolean => {
  */
 export const isClientSelected = (
 	currentClient: ClientDataStruct | undefined,
-	id = -1
+	id = ""
 ): boolean => {
 	return (currentClient && currentClient.id === id) || false
 }

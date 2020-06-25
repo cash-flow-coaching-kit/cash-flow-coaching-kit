@@ -35,7 +35,8 @@ const ClientList = ({
 	 * @param {ChangeEvent<HTMLInputElement>} event Event created by the radio change
 	 * @returns void
 	 */
-	const handleChange = (client: ClientDataStruct): void => {
+	const handleChange = (client: ClientDataStruct) => (): void => {
+		console.log(client)
 		if (client?.id) {
 			dispatch({
 				type: ClientActionTypes.ChangeCurrentClient,
@@ -45,33 +46,36 @@ const ClientList = ({
 	}
 
 	return (
-		<List>
-			{clients.map((client, idx) => (
-				<ListItem key={constructKey(key, idx)} className="list-item-padded">
-					<ListItemText primary={client.name} />
-					<ListItemSecondaryAction>
-						{!isClientSelected(currentClient, client.id) && (
-							<Tooltip title="Manage client">
-								<IconButton
-									onClick={(): void => {
-										handleChange(client)
-									}}
-								>
-									<VisibilityIcon />
-									<span className="MuiTypography-srOnly">Manage client</span>
+		<>
+			<List>
+				{clients.map((client, idx) => (
+					<ListItem key={constructKey(key, idx)} className="list-item-padded">
+						<ListItemText
+							className="truncate list-item"
+							primary={client.name}
+						/>
+						<ListItemSecondaryAction>
+							{!isClientSelected(currentClient, client.id) && (
+								<Tooltip title="Manage client">
+									<IconButton onClick={handleChange(client)}>
+										<VisibilityIcon />
+										<span className="MuiTypography-srOnly">Manage client</span>
+									</IconButton>
+								</Tooltip>
+							)}
+							<Tooltip title="Delete">
+								<IconButton>
+									<DeleteIcon />
+									<span className="MuiTypography-srOnly">
+										Delete client data
+									</span>
 								</IconButton>
 							</Tooltip>
-						)}
-						<Tooltip title="Delete">
-							<IconButton>
-								<DeleteIcon />
-								<span className="MuiTypography-srOnly">Delete client data</span>
-							</IconButton>
-						</Tooltip>
-					</ListItemSecondaryAction>
-				</ListItem>
-			))}
-		</List>
+						</ListItemSecondaryAction>
+					</ListItem>
+				))}
+			</List>
+		</>
 	)
 }
 

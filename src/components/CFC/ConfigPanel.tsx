@@ -68,8 +68,7 @@ const Panel = memo(function Panel({
 					canvasType: canvasTypeValue,
 				},
 				currentClient.id,
-				useCustomTitle,
-				id ? parseInt(id, 10) : undefined
+				id || undefined
 			)
 
 			dispatch({

@@ -27,6 +27,8 @@ class CFCDatabase extends Dexie {
 
 		// eslint-disable-next-line
 		this.canvases = this.table("canvases")
+
+		this.replaceIdsWithStrings()
 	}
 
 	/**
@@ -92,6 +94,17 @@ class CFCDatabase extends Dexie {
 				*cashOutItems,
 				[canvasType+canvasTimeFrame+clientId]
       `,
+		})
+	}
+
+	private replaceIdsWithStrings(): void {
+		this.canvases.toCollection().modify((canvas) => {
+			if (typeof canvas.id === "number") {
+				canvas.id = `${canvas.id}`
+			}
+			if (typeof canvas.clientId === "number") {
+				canvas.clientId = `${canvas.clientId}`
+			}
 		})
 	}
 }

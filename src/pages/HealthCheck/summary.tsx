@@ -68,7 +68,7 @@ const HCSummary = (): ReactElement => {
 					const hc:
 						| HealthCheckDataStruct
 						| undefined = await HealthCheckUseCase.findByClientId(
-						parseInt(id, 10),
+						id,
 						currentClient.id
 					)
 					if (hc) {
@@ -79,7 +79,7 @@ const HCSummary = (): ReactElement => {
 				}
 			})()
 		}
-	}, [id, currentClient])
+	}, [id, currentClient, dispatch])
 
 	return (
 		<>
