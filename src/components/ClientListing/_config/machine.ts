@@ -25,7 +25,11 @@ const ClientListingMachine = Machine<
 				HAS_DATA: "data",
 			},
 		},
-		data: {},
+		data: {
+			on: {
+				IS_EMPTY: "empty",
+			},
+		},
 	},
 })
 
