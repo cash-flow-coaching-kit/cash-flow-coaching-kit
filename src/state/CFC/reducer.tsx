@@ -3,6 +3,7 @@ import { ICFCState, CFCReducerActions, CFCActionTypes } from "./shape"
 import setDuplicateError from "./actions/setDuplicateError"
 import setInvalidDateError from "./actions/setInvalidDateError"
 import setQuestionValues from "./actions/setQuestionValues"
+import setCompareCanvases from "./actions/setCompareCanvases"
 
 type ICFCReducer = Reducer<ICFCState, CFCReducerActions>
 
@@ -24,6 +25,8 @@ const CFCReducer: ICFCReducer = (
 			return setInvalidDateError(state, action.payload)
 		case CFCActionTypes.ChangeQuestionValues:
 			return setQuestionValues(state, action.payload)
+		case CFCActionTypes.ChangeCompare:
+			return setCompareCanvases(state, action.payload)
 		default:
 			return state
 	}

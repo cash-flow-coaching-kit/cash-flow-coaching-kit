@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useContext } from "react"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
@@ -12,6 +12,8 @@ import { ControlCompareLink } from "../CFCCompare"
 import CFCUseCase from "../../data/CFC/CFCLogic"
 import CashFlowCanvasPDF from "../PDF/CashFlowCanvasPDF"
 import useCurrentClient from "../../state/client/useCurrentClient"
+import CFCContext from "../../state/CFC/context"
+import CFCComparePDF from "../PDF/CFCComparePDF"
 
 /**
  * Canvas page control panel component
@@ -24,6 +26,7 @@ export default function ControlPanel(): ReactElement {
 	const location = useLocation()
 	const { id: canvasId } = useParams()
 	const [currentClient] = useCurrentClient()
+	const { leftCompare, rightCompare } = useContext(CFCContext)
 
 	const goTo = (route: PrivateRoutes) => (): void => {
 		// eslint-disable-next-line
@@ -39,12 +42,24 @@ export default function ControlPanel(): ReactElement {
 	}
 
 	const printPDF = async () => {
-		const data = await CFCUseCase.findById(parseInt(canvasId, 10))
-		// console.log("data", canvasId, data)
-		if (data === undefined) alert("no data")
-		else {
-			const pdf = await CashFlowCanvasPDF(currentClient?.name ?? "Client", data)
-			pdf.open()
+		if (canvasId && !isCompare()) {
+			const data = await CFCUseCase.findById(parseInt(canvasId, 10))
+			// console.log("data", canvasId, data)
+			if (data === undefined) alert("no data")
+			else {
+				const pdf = await CashFlowCanvasPDF(
+					currentClient?.name ?? "Client",
+					data
+				)
+				pdf.open()
+			}
+		}
+
+		if (isCompare()) {
+			if (leftCompare && rightCompare) {
+				const pdf = await CFCComparePDF(leftCompare, rightCompare)
+				pdf.open()
+			}
 		}
 	}
 
