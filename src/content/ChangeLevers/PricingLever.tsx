@@ -7,7 +7,7 @@ import useChangeLeversStyles from "./styles"
 // #region Change Prices list content
 function ChangePricesListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				How much margin do you need to cover your expenses?
 			</Typography>
@@ -25,7 +25,7 @@ function ChangePricesListContent(): ReactElement {
 // #region Focus on list content
 function FocusOnListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Which are your most profitable customers, products or services?
 			</Typography>
@@ -44,7 +44,7 @@ function FocusOnListContent(): ReactElement {
 // #region Increase value list content
 function IncreaseValueListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				What other problems could you help your customer solve?
 			</Typography>
@@ -67,14 +67,14 @@ export default function PricingLever(): ReactElement {
 			defaultExpanded={false}
 		>
 			{/* Change Prices */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Change prices
 					</Typography>
 					<ChangePricesListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashInActions"
 						title="Pricing Lever"
@@ -87,14 +87,14 @@ export default function PricingLever(): ReactElement {
 			</Grid>
 
 			{/* Focus on */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Focus on the most profitable customers, products or services
 					</Typography>
 					<FocusOnListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						title="Pricing Lever"
 						container="cashInActions"
@@ -107,14 +107,14 @@ export default function PricingLever(): ReactElement {
 			</Grid>
 
 			{/* Increase value */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Increase value you deliver
 					</Typography>
 					<IncreaseValueListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						title="Pricing Lever"
 						container="cashInActions"

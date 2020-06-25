@@ -48,6 +48,7 @@ const ActionItem = ({
 		data.description
 	)
 	const [dialogueOpen, setDialogueOpen] = useState<boolean>(false)
+	const [datepickerOpen, setDatepickerOpen] = useState(false)
 
 	/**
 	 * Triggers a update action to change the state
@@ -138,6 +139,7 @@ const ActionItem = ({
 				...data,
 				reviewBy: date,
 			})
+			setDatepickerOpen(false)
 		}
 	}
 
@@ -184,13 +186,13 @@ const ActionItem = ({
 				>
 					<Grid
 						container
-						spacing={3}
+						spacing={2}
 						className={`${styles.gridRoot} ${
 							globalHide && data.completed ? styles.hide : ""
 						}`}
 					>
 						{/* TODO: Split some of these into other partials */}
-						<Grid item xs={1}>
+						<Grid item xs={2} sm={1} md={1}>
 							<Tooltip title="Mark as done">
 								<Checkbox
 									checked={data.completed}
@@ -202,7 +204,7 @@ const ActionItem = ({
 								/>
 							</Tooltip>
 						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={10} sm={5} md={6}>
 							{data.completed ? (
 								<Typography className={styles.completedText}>
 									{data.description}
@@ -219,7 +221,7 @@ const ActionItem = ({
 								/>
 							)}
 						</Grid>
-						<Grid item xs={3}>
+						<Grid item xs={12} sm={4} md={3}>
 							{data.completed ? (
 								<Typography className={styles.completedText}>
 									{format(data.reviewBy, "dd/MM/yyyy")}
@@ -231,7 +233,6 @@ const ActionItem = ({
 										variant="inline"
 										inputVariant="outlined"
 										format="dd/MM/yyyy"
-										margin="normal"
 										id={`action-reviewby--${data?.id}`}
 										label="Review by"
 										value={data.reviewBy}
@@ -240,11 +241,15 @@ const ActionItem = ({
 											"aria-label": "change date",
 										}}
 										className={styles.datepicker}
+										open={datepickerOpen}
+										onOpen={(): void => setDatepickerOpen(true)}
+										onClose={(): void => setDatepickerOpen(false)}
+										fullWidth
 									/>
 								</MuiPickersUtilsProvider>
 							)}
 						</Grid>
-						<Grid item xs={2} className={styles.actions}>
+						<Grid item xs={12} sm={2} md={2} className={styles.actions}>
 							<Tooltip title="Delete">
 								<IconButton onClick={handleDelete}>
 									<DeleteIcon />

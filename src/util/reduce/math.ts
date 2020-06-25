@@ -1,11 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+function numOrZero(val: any): number {
+	// eslint-disable-next-line no-restricted-globals
+	if (typeof val === "number" && !isNaN(val)) return val
+	return 0
+}
+
 /**
  * A reducer method to sum an array of numbers
  *
  * @returns {ReducerHOF<number, number>}
  */
 function sum(): ReducerHOF<number, number> {
-	return (acc, cur): number => acc + cur
+	return (acc, cur): number => numOrZero(acc) + numOrZero(cur)
 }
 
 /**
@@ -16,7 +22,7 @@ function sum(): ReducerHOF<number, number> {
  */
 function add(val: number): MathHOF {
 	return (x): number => {
-		return x + val
+		return numOrZero(x) + numOrZero(val)
 	}
 }
 
@@ -28,7 +34,7 @@ function add(val: number): MathHOF {
  */
 function minusBy(val: number): MathHOF {
 	return (x): number => {
-		return x - val
+		return numOrZero(x) - numOrZero(val)
 	}
 }
 
@@ -40,7 +46,7 @@ function minusBy(val: number): MathHOF {
  */
 function divideBy(val: number): MathHOF {
 	return (x): number => {
-		return x / val
+		return numOrZero(val) === 0 ? 0 : numOrZero(x) / numOrZero(val)
 	}
 }
 
@@ -54,4 +60,4 @@ const pipe = <Input extends any, Output extends any, Fns extends any[]>(
 	...fns: Fns
 ) => (x: Input): Output => fns.reduce((v, f) => f(v), x)
 
-export { sum, minusBy, divideBy, pipe, add }
+export { sum, minusBy, divideBy, pipe, add, numOrZero }

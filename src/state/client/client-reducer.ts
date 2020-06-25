@@ -12,6 +12,7 @@ import {
 	updateClientSynced,
 	removeClient,
 } from "./actions"
+import changeLastViewedHC from "./actions/changeLastViewedHC"
 
 /**
  * Reducer used for the client state
@@ -39,6 +40,9 @@ const ClientReducer: Reducer<IClientState, IClientReducerAction> = (
 		}
 		case ClientActionTypes.UpdateClientSynced: {
 			return updateClientSynced(state, action.payload)
+		}
+		case ClientActionTypes.UpdateLastViewedHC: {
+			return changeLastViewedHC(state, action.payload)
 		}
 		default: {
 			return state
