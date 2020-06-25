@@ -197,7 +197,6 @@ const yourNetAssetPositionSection = (
 
 export default async (title: string, values: BaseCFCStruct) => {
 	const {
-		canvasTitle,
 		openingBalance,
 		cashInItems,
 		cashOutItems,
