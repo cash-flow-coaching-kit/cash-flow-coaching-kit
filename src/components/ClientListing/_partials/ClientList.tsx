@@ -2,22 +2,18 @@ import React, { ReactElement, useState } from "react"
 import {
 	List,
 	ListItem,
-	ListItemIcon,
-	Radio,
 	ListItemText,
 	ListItemSecondaryAction,
 	IconButton,
 	Tooltip,
 } from "@material-ui/core"
 import DeleteIcon from "@material-ui/icons/Delete"
+import VisibilityIcon from "@material-ui/icons/Visibility"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import { ClientActionTypes } from "../../../state/client/client-outline"
 import { IClientListProps } from "../_config/shape"
 import { isClientSelected } from "../_config/utilities"
 import { ClientDataStruct } from "../../../data/_config/shape"
-import ExportClientButton from "./ExportClient"
-import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
-import SnackbarMsg from "../../SnackbarMsg"
 
 /**
  * Renders a list of current clients with the ability to change
@@ -32,28 +28,6 @@ const ClientList = ({
 	},
 }: IClientListProps): ReactElement => {
 	const [key] = useState(generateKey())
-	const [snackbar, setSnackbar] = useState<SnackbarMsgData>({
-		open: false,
-		msg: "",
-	})
-
-	function showSnackbar(
-		msg: SnackbarMsgData["msg"],
-		severity: SnackbarMsgData["severity"]
-	): void {
-		setSnackbar({ ...snackbar, msg, severity, open: true })
-	}
-
-	function handleClose(
-		event: React.SyntheticEvent | React.MouseEvent,
-		reason?: string
-	): void {
-		if (reason && reason === "clickaway") {
-			return
-		}
-
-		setSnackbar({ ...snackbar, open: false })
-	}
 
 	/**
 	 * Changes the current client selected for editing
@@ -74,38 +48,33 @@ const ClientList = ({
 		<>
 			<List>
 				{clients.map((client, idx) => (
-					<ListItem key={constructKey(key, idx)}>
-						<ListItemIcon>
-							<Tooltip title="Manage client">
-								<Radio
-									checked={isClientSelected(currentClient, client.id)}
-									value={client.id}
-									inputProps={{ "aria-label": client.name }}
-									onChange={handleChange(client)}
-									name="selected-client"
-								/>
-							</Tooltip>
-						</ListItemIcon>
+					<ListItem key={constructKey(key, idx)} className="list-item-padded">
 						<ListItemText primary={client.name} />
 						<ListItemSecondaryAction>
-							<ExportClientButton
-								client={client.id || ""}
-								showSnackbar={showSnackbar}
-							/>
+							{!isClientSelected(currentClient, client.id) && (
+								<Tooltip title="Manage client">
+									<IconButton
+										onClick={(): void => {
+											handleChange(client)
+										}}
+									>
+										<VisibilityIcon />
+										<span className="MuiTypography-srOnly">Manage client</span>
+									</IconButton>
+								</Tooltip>
+							)}
 							<Tooltip title="Delete">
 								<IconButton>
 									<DeleteIcon />
+									<span className="MuiTypography-srOnly">
+										Delete client data
+									</span>
 								</IconButton>
 							</Tooltip>
 						</ListItemSecondaryAction>
 					</ListItem>
 				))}
 			</List>
-			<SnackbarMsg
-				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...snackbar}
-				onClose={handleClose}
-			/>
 		</>
 	)
 }

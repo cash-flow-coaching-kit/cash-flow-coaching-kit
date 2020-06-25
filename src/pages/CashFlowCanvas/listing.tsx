@@ -63,20 +63,22 @@ const CFCListing = (): ReactElement => {
 	}
 
 	return (
-		<PageContainer>
-			<SectionTitle>
-				Previously saved canvases{" "}
-				<Typography variant="subtitle1" component="p" color="textSecondary">
-					Load previous canvas by selecting the list below
-				</Typography>
-			</SectionTitle>
+		<>
+			<PageContainer>
+				<SectionTitle>
+					Previously saved canvases{" "}
+					<Typography variant="subtitle1" component="p" color="textSecondary">
+						Load previous canvas by selecting the list below
+					</Typography>
+				</SectionTitle>
 
-			<Grid container spacing={2}>
-				<Grid item sm={6}>
-					<Card>{renderBasedOnState()}</Card>
+				<Grid container spacing={2}>
+					<Grid item sm={6}>
+						<Card>{renderBasedOnState()}</Card>
+					</Grid>
 				</Grid>
-			</Grid>
-		</PageContainer>
+			</PageContainer>
+		</>
 	)
 }
 

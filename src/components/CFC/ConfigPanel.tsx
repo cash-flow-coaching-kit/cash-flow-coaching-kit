@@ -33,8 +33,8 @@ interface ConfigPanelProps extends PanelProps, CustomTitleProps {
 // Duplicate canvas error message
 export const DuplicateCanvasError = (): ReactElement => (
 	<Alert severity="error">
-		A canvas with this title has already been created. Make sure that
-		you&apos;re canvas title is unique
+		A canvas with this title has already been created. Make sure that your
+		canvas title is unique.
 	</Alert>
 )
 

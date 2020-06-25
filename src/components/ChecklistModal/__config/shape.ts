@@ -1,6 +1,7 @@
 import { ReactNode } from "react"
 import { PossibleActionItems } from "../../../state/action-checklist/shape"
 import { BaseActionChecklistStruct } from "../../../data/_config/shape"
+import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
 
 // Alias for the title type
 // - used to allow easy override if this needs to change
@@ -22,6 +23,11 @@ export interface ChecklistModalProps {
 	children?: ReactNode
 }
 
+type showSnackbarFn = (
+	msg: SnackbarMsgData["msg"],
+	severity: SnackbarMsgData["severity"]
+) => void
+
 /**
  * Prop defition for the `Modal` sub component
  *
@@ -32,6 +38,7 @@ export interface ChecklistModalProps {
 export interface ModalProps extends ChecklistModalProps {
 	open: boolean
 	onClose(): void
+	showSnackbar: showSnackbarFn
 }
 
 // Type defition for a single Form item data
@@ -58,4 +65,6 @@ export interface FormValues {
  */
 export interface FormProps {
 	onFormSubmission(values: FormValues): Promise<boolean>
+	closeModal: ModalProps["onClose"]
+	showSnackbar: showSnackbarFn
 }

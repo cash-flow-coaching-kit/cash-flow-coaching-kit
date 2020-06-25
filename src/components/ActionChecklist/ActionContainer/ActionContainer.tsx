@@ -193,13 +193,7 @@ const ActionContainer = ({
 	 * @returns boolean
 	 */
 	const lastItemInList = (): boolean => {
-		return (
-			data.length === 1 &&
-			(identfier === "cashInActions" ||
-				identfier === "cashOutActions" ||
-				typeof notes === "undefined" ||
-				notes?.notes === "")
-		)
+		return data.length === 1
 	}
 
 	/**

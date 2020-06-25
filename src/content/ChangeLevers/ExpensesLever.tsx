@@ -7,7 +7,7 @@ import ChecklistModal from "../../components/ChecklistModal"
 // #region Reduce discretionary spending list content
 function ReduceSpendingListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Do you have any non-essential expenses?
 			</Typography>
@@ -24,7 +24,7 @@ function ReduceSpendingListContent(): ReactElement {
 // #region Reduce overheads list content
 function ReduceOverheadsListContent(): ReactElement {
 	return (
-		<ul>
+		<ul className="change-levers-ul">
 			<Typography component="li">
 				Can you negotiate prices on operating expenses such as utilities, rent
 				or maintenance services?
@@ -48,14 +48,14 @@ export default function ExpensesLever(): ReactElement {
 			defaultExpanded={false}
 		>
 			{/* Reduce discretionary spending */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Reduce discretionary spending
 					</Typography>
 					<ReduceSpendingListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Expenses Lever"
@@ -68,14 +68,14 @@ export default function ExpensesLever(): ReactElement {
 			</Grid>
 
 			{/* Reduce overheads */}
-			<Grid container spacing={3} className={styles.details}>
-				<Grid item xs={8}>
+			<Grid container spacing={2} className={styles.details}>
+				<Grid item xs={12} lg={8}>
 					<Typography variant="h6" className={styles.contentHeadings}>
 						Reduce overheads
 					</Typography>
 					<ReduceOverheadsListContent />
 				</Grid>
-				<Grid item xs={4} className={styles.actionGridItem}>
+				<Grid item xs={12} lg={4} className={styles.actionGridItem}>
 					<ChecklistModal
 						container="cashOutActions"
 						title="Expenses Lever"

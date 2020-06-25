@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from "react"
-import { Button, Menu, MenuItem, Divider } from "@material-ui/core"
-import { Link as RouterLink } from "react-router-dom"
+import { Button, Menu, MenuItem, Divider, useTheme } from "@material-ui/core"
+import { NavLink as RouterLink } from "react-router-dom"
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown"
 import { generateKey, constructKey } from "../../../util/lists/key"
 import {
@@ -95,6 +95,7 @@ const NavigationRoutes = ({
 	...buttonProps
 }: INavigationRoutesProps): ReactElement => {
 	const [key] = useState(generateKey())
+	const theme = useTheme()
 
 	return (
 		<>
@@ -116,6 +117,9 @@ const NavigationRoutes = ({
 						<Button
 							startIcon={route.Icon ? <route.Icon /> : null}
 							component={RouterLink}
+							activeStyle={{
+								fontWeight: theme.typography.fontWeightBold,
+							}}
 							to={route.route}
 							// eslint-disable-next-line react/jsx-props-no-spreading
 							{...buttonProps}
