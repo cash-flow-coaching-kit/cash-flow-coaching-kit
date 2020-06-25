@@ -43,8 +43,8 @@ export default function ControlPanel(): ReactElement {
 	}
 
 	const printPDF = async () => {
-		if (canvasId && !isCompare()) {
-			const data = await CFCUseCase.findById(parseInt(canvasId, 10))
+		if (canvasId && typeof canvasId === "string" && !isCompare()) {
+			const data = await CFCUseCase.findById(canvasId)
 			// console.log("data", canvasId, data)
 			if (data === undefined) alert("no data")
 			else {
