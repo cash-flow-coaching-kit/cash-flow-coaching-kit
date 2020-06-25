@@ -102,6 +102,22 @@ export function calcCashSurplus(values: BaseCFCStruct): number {
 }
 
 /**
+ * Calculates the income/company tax based on the form incomeTax percentage
+ *
+ * @export
+ * @param {BaseCFCStruct} values
+ * @returns {number}
+ */
+export function calcIncomeTaxPer(values: BaseCFCStruct): number {
+	const num = parseInt(`${values.incomeTax}`, 10)
+	if (isNaN(num) || num === 0) {
+		return 0
+	}
+
+	return Math.round(calcCashSurplus(values) * (num / 100))
+}
+
+/**
  * Calculates the amount available to spend
  *
  * @export
@@ -112,7 +128,7 @@ export function calcAvailableToSpend(values: BaseCFCStruct): number {
 	return numOrZero(
 		pipe(
 			add(values.openingBalance),
-			minusBy(values.incomeTax)
+			minusBy(calcIncomeTaxPer(values))
 		)(calcCashSurplus(values))
 	)
 }
@@ -145,20 +161,4 @@ export function calcTotalNetAssets(values: BaseCFCStruct): number {
 			minusBy(values.loans)
 		)(calcClosingBalance(values))
 	)
-}
-
-/**
- * Calculates the income/company tax based on the form incomeTax percentage
- *
- * @export
- * @param {BaseCFCStruct} values
- * @returns {number}
- */
-export function calcIncomeTaxPer(values: BaseCFCStruct): number {
-	const num = parseInt(`${values.incomeTax}`, 10)
-	if (isNaN(num) || num === 0) {
-		return 0
-	}
-
-	return Math.round(calcCashSurplus(values) * (num / 100))
 }
