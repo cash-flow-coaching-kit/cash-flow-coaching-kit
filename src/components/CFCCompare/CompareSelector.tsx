@@ -34,7 +34,7 @@ export default function CompareSelector({
 	const changeSelectedCanvas = (idx: number) => (
 		e: ChangeEvent<HTMLInputElement>
 	): void => {
-		changeSelected(idx, parseInt(e.target.value, 10))
+		changeSelected(idx, e.target.value)
 	}
 
 	return (

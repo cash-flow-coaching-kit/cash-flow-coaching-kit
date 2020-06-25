@@ -1,19 +1,28 @@
-import React, { ReactElement } from "react"
-import PublishIcon from "@material-ui/icons/Publish"
+import React, { ReactElement, useState } from "react"
+import GetAppIcon from "@material-ui/icons/GetApp"
 import { Button } from "@material-ui/core"
+import { ImportClientDialog } from "../../../content/dialog"
 
 /**
  * Handles the functionality to import a client
  *
  * @returns ReactElement
- * TODO: Implement functionality
  */
-const ImportClient = (): ReactElement => {
+export default function ImportClient(): ReactElement {
+	const [dialogOpen, setDialogOpen] = useState(false)
+	const onDialogClose = (): void => setDialogOpen(false)
+	const onDialogOpen = (): void => setDialogOpen(true)
+
 	return (
-		<Button variant="outlined" startIcon={<PublishIcon />}>
-			Import
-		</Button>
+		<>
+			<Button
+				variant="outlined"
+				startIcon={<GetAppIcon />}
+				onClick={onDialogOpen}
+			>
+				Import
+			</Button>
+			<ImportClientDialog open={dialogOpen} onClose={onDialogClose} />
+		</>
 	)
 }
-
-export default ImportClient

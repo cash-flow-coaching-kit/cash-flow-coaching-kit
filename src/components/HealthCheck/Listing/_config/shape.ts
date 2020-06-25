@@ -1,4 +1,7 @@
-import { HealthCheckDataStruct } from "../../../../data/_config/shape"
+import {
+	HealthCheckDataStruct,
+	DatabaseId,
+} from "../../../../data/_config/shape"
 
 /**
  * Prop shape for the QuizList component
@@ -8,5 +11,5 @@ import { HealthCheckDataStruct } from "../../../../data/_config/shape"
  */
 export interface IQuizListProps {
 	clientQuizzes: HealthCheckDataStruct[]
-	removeHealthCheck(id: number): Promise<void>
+	removeHealthCheck(id: DatabaseId): Promise<void>
 }

@@ -1,17 +1,15 @@
-import React, { useContext, ReactElement, useEffect } from "react"
+import React, { useContext, ReactElement, useEffect, useState } from "react"
 import {
 	Box,
 	Card,
 	Divider,
 	CardContent,
-	Button,
 	List,
 	ListItem,
 	ListItemText,
 } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
 import { useMachine } from "@xstate/react"
-import GetAppIcon from "@material-ui/icons/GetApp"
 import { ClientContext } from "../../state/client"
 import { NewClientDialog } from "../../content/dialog"
 import { useCLStyles } from "./_config/styles"
@@ -21,6 +19,9 @@ import ClientListingMachine from "./_config/machine"
 import Loading from "../Loading"
 import SectionTitle from "../SectionTitle"
 import Spacer from "../Spacer"
+import ExportClientButton from "./_partials/ExportClient"
+import { SnackbarMsgData } from "../SnackbarMsg/SnackbarMsg"
+import SnackbarMsg from "../SnackbarMsg"
 
 /**
  * Component to render the whole Client Listing component
@@ -35,6 +36,28 @@ const ClientListing = (): ReactElement => {
 	} = clientStore
 	const [state, send] = useMachine(ClientListingMachine)
 	const styles = useCLStyles()
+	const [snackbar, setSnackbar] = useState<SnackbarMsgData>({
+		open: false,
+		msg: "",
+	})
+
+	function showSnackbar(
+		msg: SnackbarMsgData["msg"],
+		severity: SnackbarMsgData["severity"]
+	): void {
+		setSnackbar({ ...snackbar, msg, severity, open: true })
+	}
+
+	function handleClose(
+		event: React.SyntheticEvent | React.MouseEvent,
+		reason?: string
+	): void {
+		if (reason && reason === "clickaway") {
+			return
+		}
+
+		setSnackbar({ ...snackbar, open: false })
+	}
 
 	// Change the state of the component once clients are synced
 	useEffect(() => {
@@ -70,11 +93,21 @@ const ClientListing = (): ReactElement => {
 								</ListItem>
 							</List>
 							<Divider />
-							<CardContent className={styles.actions}>
-								<Button variant="outlined" startIcon={<GetAppIcon />}>
-									Export data
-								</Button>
-							</CardContent>
+							{currentClient?.id && (
+								<>
+									<CardContent className={styles.actions}>
+										<ExportClientButton
+											client={currentClient.id}
+											showSnackbar={showSnackbar}
+										/>
+									</CardContent>
+									<SnackbarMsg
+										// eslint-disable-next-line react/jsx-props-no-spreading
+										{...snackbar}
+										onClose={handleClose}
+									/>
+								</>
+							)}
 						</>
 					)
 				}

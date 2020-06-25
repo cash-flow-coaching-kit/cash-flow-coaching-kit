@@ -131,7 +131,7 @@ export default function CopyCanvasDialog({
 	const fetchCanvasData = useCallback(async () => {
 		if (currentClient?.id) {
 			// fetches the data
-			const data = await CFCUseCase.findById(parseInt(id, 10))
+			const data = await CFCUseCase.findById(id)
 			// If it can't be found move to reject
 			if (!data) {
 				changeState("REJECT")
