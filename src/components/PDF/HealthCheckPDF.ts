@@ -1,11 +1,13 @@
 import pdfMake from "pdfmake/build/pdfmake"
 import pdfFonts from "pdfmake/build/vfs_fonts"
+import { purple, grey } from "@material-ui/core/colors"
 import {
 	pageDefaultSettings,
 	pageHeading,
 	pagePadding,
 	addPadding,
 } from "./PDFLib"
+import { answerTheming } from "../HealthCheck/_config/data"
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
@@ -31,31 +33,6 @@ const questionElementTop = ({
 	])
 }
 
-const questionElementBottom = ({
-	question,
-	answer,
-	text,
-}: HealthCheckQuestion) => {
-	return [
-		{
-			table: {
-				widths: ["*"], // to make it full length
-				heights: [125], // set the height for each block
-				body: [
-					[
-						addPadding([
-							{ text: question, style: "question" },
-							" ",
-							{ text, style: answer },
-						]),
-					],
-				],
-			},
-		},
-		" ",
-	]
-}
-
 export interface HealthCheckParams {
 	title: string
 	answers: {
@@ -77,7 +54,7 @@ export default async (title: string, answers: HealthCheckQuestionSet) => {
 						body: [
 							[
 								{
-									text: "FOUR KEY QUESTIONS",
+									text: "Four Key Questions",
 									style: "tableHeading",
 									colSpan: 2,
 								},
@@ -92,58 +69,47 @@ export default async (title: string, answers: HealthCheckQuestionSet) => {
 				" ",
 
 				{
+					style: "tableCell",
 					table: {
-						widths: ["*", 20, "*"],
+						widths: ["*", "*"],
 						body: [
-							[
-								questionElementBottom(answers[4]),
-								{},
-								questionElementBottom(answers[5]),
-							],
+							[questionElementTop(answers[4]), questionElementTop(answers[5])],
 
-							[
-								questionElementBottom(answers[6]),
-								{},
-								questionElementBottom(answers[7]),
-							],
+							[questionElementTop(answers[6]), questionElementTop(answers[7])],
 
-							[
-								questionElementBottom(answers[8]),
-								{},
-								questionElementBottom(answers[9]),
-							],
+							[questionElementTop(answers[8]), questionElementTop(answers[9])],
 						],
 					},
-					layout: "noBorders",
 				},
 			]),
 		],
 
 		styles: {
 			pageHeader: {
-				fontSize: 22,
+				fontSize: 20,
 				bold: true,
-				fillColor: "#9C27B0",
+				fillColor: purple["500"],
 				color: "white",
+				alignment: "center",
 			},
 			tableHeading: {
-				fillColor: "#cccccc",
+				fillColor: grey["200"],
 				alignment: "center",
 			},
 			question: {},
 			positive: {
-				fontSize: 18,
-				color: "green",
+				fontSize: 16,
+				color: answerTheming[0].color,
 				bold: true,
 			},
 			negative: {
-				fontSize: 18,
-				color: "red",
+				fontSize: 16,
+				color: answerTheming[1].color,
 				bold: true,
 			},
 			neutral: {
-				fontSize: 18,
-				color: "orange",
+				fontSize: 16,
+				color: answerTheming[2].color,
 				bold: true,
 			},
 		},
@@ -151,6 +117,7 @@ export default async (title: string, answers: HealthCheckQuestionSet) => {
 		defaultStyle: {
 			fontSize: 15,
 			bold: false,
+			color: "#000",
 		},
 	}
 	return pdfMake.createPdf(docDefinition)
