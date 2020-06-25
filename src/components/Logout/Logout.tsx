@@ -28,7 +28,15 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-export default function Logout(): ReactElement {
+interface LogoutProps {
+	color?: "inherit" | "primary" | "secondary" | "default"
+	variant?: "text" | "outlined" | "contained"
+}
+
+export default function Logout({
+	color = "inherit",
+	variant = "text",
+}: LogoutProps): ReactElement {
 	const sharedStyle = useSharedNavStyles()
 	const classes = useStyles()
 	const [open, setOpen] = useState(false)
@@ -56,9 +64,10 @@ export default function Logout(): ReactElement {
 		<>
 			<Button
 				className={sharedStyle.button}
-				color="inherit"
+				color={color}
 				startIcon={<PowerSettingsNewIcon />}
 				onClick={handleOpen}
+				variant={variant}
 			>
 				Exit
 			</Button>
