@@ -50,7 +50,10 @@ const ClientList = ({
 			<List>
 				{clients.map((client, idx) => (
 					<ListItem key={constructKey(key, idx)} className="list-item-padded">
-						<ListItemText primary={client.name} />
+						<ListItemText
+							className="truncate list-item"
+							primary={client.name}
+						/>
 						<ListItemSecondaryAction>
 							{!isClientSelected(currentClient, client.id) && (
 								<Tooltip title="Manage client">
