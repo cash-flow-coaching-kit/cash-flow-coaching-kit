@@ -30,6 +30,7 @@ import filterByActionContainer from "../util/filters/ByActionContainer"
 import { ActionChecklistMachine } from "../data/ActionChecklist/_config/machine"
 import Loading from "../components/Loading"
 import ActionChecklistPDF from "../components/PDF/ActionChecklistPDF"
+import servePDF from "../components/PDF/servePDF"
 
 /**
  * Action Checklist page component
@@ -101,7 +102,7 @@ const ActionChecklist = (): ReactElement => {
 			checklistCollection,
 			notes
 		)
-		pdf.open()
+		servePDF(pdf)
 	}
 
 	return (

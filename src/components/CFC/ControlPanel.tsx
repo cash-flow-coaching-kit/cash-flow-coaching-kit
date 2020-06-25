@@ -14,6 +14,7 @@ import CashFlowCanvasPDF from "../PDF/CashFlowCanvasPDF"
 import useCurrentClient from "../../state/client/useCurrentClient"
 import CFCContext from "../../state/CFC/context"
 import CFCComparePDF from "../PDF/CFCComparePDF"
+import servePDF from "../PDF/servePDF"
 
 /**
  * Canvas page control panel component
@@ -51,14 +52,14 @@ export default function ControlPanel(): ReactElement {
 					currentClient?.name ?? "Client",
 					data
 				)
-				pdf.open()
+				servePDF(pdf)
 			}
 		}
 
 		if (isCompare()) {
 			if (leftCompare && rightCompare) {
 				const pdf = await CFCComparePDF(leftCompare, rightCompare)
-				pdf.open()
+				servePDF(pdf)
 			}
 		}
 	}

@@ -31,6 +31,7 @@ import HealthCheckPDF, {
 } from "../../components/PDF/HealthCheckPDF"
 import { ClientContext } from "../../state/client"
 import { ClientActionTypes } from "../../state/client/client-outline"
+import servePDF from "../../components/PDF/servePDF"
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
@@ -94,7 +95,7 @@ const HCSummary = (): ReactElement => {
 			data[idx] = { question, answer, text }
 		})
 		const pdf = await HealthCheckPDF(currentClient?.name ?? "Client", data)
-		pdf.open()
+		servePDF(pdf)
 	}
 
 	return (
