@@ -1,3 +1,3 @@
 if (!window.crypto) {
-	window.crypto = window.msCrypto
+  window.crypto = window.msCrypto;
 }
