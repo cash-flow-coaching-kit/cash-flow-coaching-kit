@@ -7,6 +7,11 @@ import {
 	ListItemIcon,
 	ListItemText,
 	Box,
+	makeStyles,
+	Theme,
+	createStyles,
+	Backdrop,
+	CircularProgress,
 } from "@material-ui/core"
 import GetAppIcon from "@material-ui/icons/GetApp"
 import JSZip from "jszip"
@@ -48,8 +53,21 @@ import ActionChecklistPDF from "../components/PDF/ActionChecklistPDF"
 import CashFlowCanvasPDF from "../components/PDF/CashFlowCanvasPDF"
 import hasProperty from "../util/object/hasProperty"
 import { canvasDisplayTitle } from "../components/CFC/__config/utilities"
+import SnackbarMsg, {
+	SnackbarMsgData,
+} from "../components/SnackbarMsg/SnackbarMsg"
+
+const useSessionStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		backdrop: {
+			zIndex: theme.zIndex.drawer + 1,
+			color: "#fff",
+		},
+	})
+)
 
 const SessionFiles = (): ReactElement => {
+	const classes = useSessionStyles()
 	const cls = useStyles()
 	const [selectedFiles, setSelectedFiles] = useState<SelectedFiles>({
 		changeLevers: false,
@@ -65,7 +83,28 @@ const SessionFiles = (): ReactElement => {
 	const assetBaseUrl = process.env.REACT_APP_ASSETS_URL || ""
 
 	const [fetching, setFetching] = useState(true)
+	const [exporting, setExporting] = useState(false)
 	const [currentClient, synced] = useCurrentClient()
+
+	const [snackbar, setSnackbar] = useState<SnackbarMsgData>({
+		open: false,
+		msg: "",
+	})
+
+	function showSnackbar(
+		msg: SnackbarMsgData["msg"],
+		severity: SnackbarMsgData["severity"]
+	): void {
+		setSnackbar({ ...snackbar, msg, severity, open: true })
+	}
+
+	function handleClose(event?: React.SyntheticEvent, reason?: string): void {
+		if (reason === "clickaway") {
+			return
+		}
+
+		setSnackbar({ ...snackbar, open: false })
+	}
 
 	const fetchData = useCallback(async () => {
 		if (currentClient?.id) {
@@ -135,6 +174,7 @@ const SessionFiles = (): ReactElement => {
 
 	const generateZip = async (): Promise<void> => {
 		if (currentClient?.id) {
+			setExporting(true)
 			const zip = new JSZip()
 
 			// Change Levers document
@@ -227,34 +267,48 @@ const SessionFiles = (): ReactElement => {
 				})
 				.filter((v) => typeof v !== "undefined")
 
-			Promise.all([...HCPromises, ...CFCPromises]).then((res) => {
-				const names = [...HCNames, ...CFCNames]
+			Promise.all([...HCPromises, ...CFCPromises])
+				.then((res) => {
+					const names = [...HCNames, ...CFCNames]
 
-				const blobPromises = res
-					.map((pdf, i) => {
-						if (pdf) {
-							return pdfMakeBlobPromise(pdf, names[i])
-						}
-						return undefined
-					})
-					.filter((v) => typeof v !== "undefined")
+					const blobPromises = res
+						.map((pdf, i) => {
+							if (pdf) {
+								return pdfMakeBlobPromise(pdf, names[i])
+							}
+							return undefined
+						})
+						.filter((v) => typeof v !== "undefined")
 
-				Promise.all([...DTPromises, ...blobPromises]).then((res1) => {
-					console.log(res1)
-					res1.forEach((doc) => {
-						if (hasProperty(doc, "fileName")) {
-							zip.file(doc.fileName, doc.buffer)
-						} else {
-							zip.file(doc.filename, doc.blob)
-						}
-					})
+					Promise.all([...DTPromises, ...blobPromises])
+						.then((res1) => {
+							res1.forEach((doc) => {
+								if (hasProperty(doc, "fileName")) {
+									zip.file(doc.fileName, doc.buffer)
+								} else {
+									zip.file(doc.filename, doc.blob)
+								}
+							})
 
-					zip.generateAsync({ type: "blob" }).then(function (content) {
-						// see FileSaver.js
-						saveAs(content, "example.zip")
-					})
+							zip.generateAsync({ type: "blob" }).then(function (content) {
+								// see FileSaver.js
+								saveAs(content, "example.zip")
+								setExporting(false)
+								showSnackbar(
+									"The PDFs has been successfully exported",
+									"success"
+								)
+							})
+						})
+						.catch(() => {
+							setExporting(false)
+							showSnackbar("Something went wrong, please try again", "error")
+						})
 				})
-			})
+				.catch(() => {
+					setExporting(false)
+					showSnackbar("Something went wrong, please try again", "error")
+				})
 		}
 	}
 
@@ -289,53 +343,60 @@ const SessionFiles = (): ReactElement => {
 	)
 
 	return (
-		<PageContainer>
-			<Grid container spacing={3}>
-				<Grid item xs={12} md={9}>
-					<Box className="content-area">
-						<SectionTitle>Downloads</SectionTitle>
-						<Typography>
-							All the activities you completed in your session are saved here.
-							Download and save the files to share and review.
-						</Typography>
-						<Typography>
-							Select the items you want to save and download them from the
-							control panel.
-						</Typography>
-					</Box>
-					<Box className={cls.dropdownWrapper}>
-						<SingleDownloads title="Change Levers" id="changeLevers" />
-						<SingleDownloads title="Action Checklist" id="actionChecklist" />
-						<FileListing
-							title="Discover Topics"
-							state={selectedFiles.discoverTopics}
-							setState={setSelectedFiles}
-							data={discoverTopics}
-							id="discoverTopics"
-						/>
-						<FileListing
-							title="Health Check"
-							state={selectedFiles.healthChecks}
-							setState={setSelectedFiles}
-							data={HCListing}
-							id="healthChecks"
-							loading={fetching}
-						/>
-						<FileListing
-							title="Cash Flow Canvas"
-							state={selectedFiles.cfc}
-							setState={setSelectedFiles}
-							data={CFCListing}
-							id="cfc"
-							loading={fetching}
-						/>
-					</Box>
+		<>
+			<PageContainer>
+				<Grid container spacing={3}>
+					<Grid item xs={12} md={9}>
+						<Box className="content-area">
+							<SectionTitle>Downloads</SectionTitle>
+							<Typography>
+								All the activities you completed in your session are saved here.
+								Download and save the files to share and review.
+							</Typography>
+							<Typography>
+								Select the items you want to save and download them from the
+								control panel.
+							</Typography>
+						</Box>
+						<Box className={cls.dropdownWrapper}>
+							<SingleDownloads title="Change Levers" id="changeLevers" />
+							<SingleDownloads title="Action Checklist" id="actionChecklist" />
+							<FileListing
+								title="Discover Topics"
+								state={selectedFiles.discoverTopics}
+								setState={setSelectedFiles}
+								data={discoverTopics}
+								id="discoverTopics"
+							/>
+							<FileListing
+								title="Health Check"
+								state={selectedFiles.healthChecks}
+								setState={setSelectedFiles}
+								data={HCListing}
+								id="healthChecks"
+								loading={fetching}
+							/>
+							<FileListing
+								title="Cash Flow Canvas"
+								state={selectedFiles.cfc}
+								setState={setSelectedFiles}
+								data={CFCListing}
+								id="cfc"
+								loading={fetching}
+							/>
+						</Box>
+					</Grid>
+					<Grid item xs={12} md={3}>
+						<Nav />
+					</Grid>
 				</Grid>
-				<Grid item xs={12} md={3}>
-					<Nav />
-				</Grid>
-			</Grid>
-		</PageContainer>
+			</PageContainer>
+			<Backdrop className={classes.backdrop} open={exporting}>
+				<CircularProgress color="inherit" />
+			</Backdrop>
+			{/* eslint-disable-next-line react/jsx-props-no-spreading */}
+			<SnackbarMsg {...snackbar} onClose={handleClose} />
+		</>
 	)
 }
 
