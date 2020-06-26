@@ -13,7 +13,7 @@ dependencies:
 hooks:
   build: |
     set -e
-    yarn build
+    yarn build --nodaemon
 
 # The configuration of the application when it is exposed to the web.
 web:
