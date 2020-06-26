@@ -33,6 +33,19 @@ export default function ImportDataModal({
 		setCurrentItems(newItems)
 	}
 
+	const toggleType = (row: number, event: any) => {
+		console.log("row", row)
+		const newItems: ProcessFileItem[] = currentItems.map((i) => {
+			if (i.row === row)
+				return {
+					...i,
+					type: i.type === "in" ? "out" : "in",
+				}
+			return i
+		})
+		setCurrentItems(newItems)
+	}
+
 	const onOpenFileDialog = () => {
 		// alert("import")
 		fileRef!.current.click()
@@ -64,11 +77,16 @@ export default function ImportDataModal({
 	}
 
 	const renderSingleItem = (item: ProcessFileItem): ReactElement => {
-		const { row, description, amount } = item
+		const { row, description, amount, type } = item
 		return (
 			<TableRow key={row}>
 				<TableCell>{description}</TableCell>
 				<TableCell align="right">${Math.floor(amount)}</TableCell>
+				<TableCell>
+					<Button onClick={toggleType.bind(null, row)}>
+						{type === "in" ? "Cash IN" : "Cash OUT"}
+					</Button>
+				</TableCell>
 				<TableCell>
 					<IconDeleteButton onClick={deleteItem.bind(null, row)} />
 				</TableCell>

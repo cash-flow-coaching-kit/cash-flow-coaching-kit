@@ -127,7 +127,7 @@ export default function CanvasForm({
 			const newCashInItems = [
 				...values.cashInItems,
 				...items
-					.filter(({ amount }: ProcessFileItem) => amount > 0)
+					.filter(({ type }: ProcessFileItem) => type === "in")
 					.map(({ row, description, amount }: ProcessFileItem) =>
 						createCashFlowItem(id++, description, Math.floor(amount))
 					),
@@ -137,9 +137,9 @@ export default function CanvasForm({
 			const newCashOutItems = [
 				...values.cashOutItems,
 				...items
-					.filter(({ amount }: ProcessFileItem) => amount < 0)
+					.filter(({ type }: ProcessFileItem) => type === "out")
 					.map(({ row, description, amount }: ProcessFileItem) =>
-						createCashFlowItem(id++, description, -Math.floor(amount))
+						createCashFlowItem(id++, description, Math.floor(amount))
 					),
 			]
 			setFieldValue("cashOutItems", newCashOutItems, false)

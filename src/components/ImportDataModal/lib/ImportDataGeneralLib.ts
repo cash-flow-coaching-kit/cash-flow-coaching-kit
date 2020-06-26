@@ -4,6 +4,7 @@ export type ProcessFileItem = {
 	row: number
 	description: string
 	amount: number
+	type: "in" | "out"
 }
 
 export const generalProcessFile = async (

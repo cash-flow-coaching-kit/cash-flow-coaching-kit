@@ -21,7 +21,12 @@ const excelProcessSheet = (worksheet: Worksheet): ProcessFileItem[] => {
 		const last: any = values.pop()
 		if (typeof last === "number") {
 			const description = values.join(" ").trim()
-			result.push({ row: rowNumber, description, amount: last })
+			result.push({
+				row: rowNumber,
+				description,
+				amount: Math.abs(last),
+				type: last > 0 ? "in" : "out",
+			})
 		}
 	})
 	return result
