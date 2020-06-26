@@ -1,5 +1,11 @@
 import { IClientState } from "../../../state/client/client-outline"
-import { ClientDataStruct } from "../../../data/_config/shape"
+import { ClientDataStruct, ClientId } from "../../../data/_config/shape"
+import ClientUseCase from "../../../data/client/ClientLogic"
+import HealthCheckUseCase from "../../../data/healthChecks/HealthCheckLogic"
+import ActionChecklistUseCase from "../../../data/ActionChecklist/ChecklistLogic"
+import ActionPriorityUseCase from "../../../data/ActionChecklist/PriorityLogic"
+import ActionNotesUseCase from "../../../data/ActionChecklist/NotesLogic"
+import CFCUseCase from "../../../data/CFC/CFCLogic"
 
 /**
  * Checks if the store contains any clients
@@ -23,4 +29,25 @@ export const isClientSelected = (
 	id = ""
 ): boolean => {
 	return (currentClient && currentClient.id === id) || false
+}
+
+export const deleteClientRelatedData = async (
+	client: ClientId
+): Promise<boolean | Error> => {
+	try {
+		// delete client data from ClientDB
+		await ClientUseCase.delete(client)
+		// delete client data from HealthCheckDB
+		await HealthCheckUseCase.deleteByClient(client)
+		// delete client data from ActionChecklistDB
+		await ActionChecklistUseCase.deleteByClient(client)
+		await ActionPriorityUseCase.deleteByClient(client)
+		await ActionNotesUseCase.deleteByClient(client)
+		// delete client data from CFCDB
+		await CFCUseCase.deleteByClient(client)
+
+		return true
+	} catch (e) {
+		return e
+	}
 }

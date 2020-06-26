@@ -1,4 +1,5 @@
 import { IClientState } from "../../../state/client/client-outline"
+import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
 
 /**
  * Prop definition for the `<ClientList>` component
@@ -8,6 +9,10 @@ import { IClientState } from "../../../state/client/client-outline"
  */
 export interface IClientListProps {
 	store: IClientState
+	showSnackbar: (
+		msg: SnackbarMsgData["msg"],
+		severity: SnackbarMsgData["severity"]
+	) => void
 }
 
 /**

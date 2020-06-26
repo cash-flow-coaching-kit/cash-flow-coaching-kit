@@ -8,6 +8,7 @@ import {
 	ListItem,
 	ListItemText,
 } from "@material-ui/core"
+
 import AddIcon from "@material-ui/icons/Add"
 import { useMachine } from "@xstate/react"
 import { ClientContext } from "../../state/client"
@@ -18,10 +19,9 @@ import { IClientState } from "../../state/client/client-outline"
 import ClientListingMachine from "./_config/machine"
 import Loading from "../Loading"
 import SectionTitle from "../SectionTitle"
+import SnackbarMsg, { SnackbarMsgData } from "../SnackbarMsg/SnackbarMsg"
 import Spacer from "../Spacer"
 import ExportClientButton from "./_partials/ExportClient"
-import { SnackbarMsgData } from "../SnackbarMsg/SnackbarMsg"
-import SnackbarMsg from "../SnackbarMsg"
 
 /**
  * Component to render the whole Client Listing component
@@ -79,7 +79,7 @@ const ClientListing = (): ReactElement => {
 		switch (state.value) {
 			case "data":
 				if (type === "list") {
-					return <ClientList store={clientStore} />
+					return <ClientList store={clientStore} showSnackbar={showSnackbar} />
 				}
 
 				if (type === "current") {
@@ -122,25 +122,29 @@ const ClientListing = (): ReactElement => {
 	}
 
 	return (
-		<Box>
-			<SectionTitle component="h2">Current Client</SectionTitle>
-			<Card>{renderWithMachine("current")}</Card>
-			<Spacer space={4} />
-			<SectionTitle component="h2">Client List</SectionTitle>
-			<Card>
-				{renderWithMachine("list")}
-				<Divider />
-				<CardContent className={styles.actions}>
-					<ImportClient />
-					<NewClientDialog
-						triggerText="Add new client"
-						startIcon={<AddIcon />}
-						className={styles.button}
-						size="medium"
-					/>
-				</CardContent>
-			</Card>
-		</Box>
+		<>
+			<Box>
+				<SectionTitle component="h2">Current Client</SectionTitle>
+				<Card>{renderWithMachine("current")}</Card>
+				<Spacer space={4} />
+				<SectionTitle component="h2">Client List</SectionTitle>
+				<Card>
+					{renderWithMachine("list")}
+					<Divider />
+					<CardContent className={styles.actions}>
+						<ImportClient />
+						<NewClientDialog
+							triggerText="Add new client"
+							startIcon={<AddIcon />}
+							className={styles.button}
+							size="medium"
+						/>
+					</CardContent>
+				</Card>
+			</Box>
+			{/* eslint-disable-next-line react/jsx-props-no-spreading */}
+			<SnackbarMsg {...snackbar} onClose={handleClose} />
+		</>
 	)
 }
 
