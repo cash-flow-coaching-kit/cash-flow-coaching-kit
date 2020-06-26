@@ -44,7 +44,7 @@ export default function ExportClientButton({
 
 	return (
 		<>
-			<Tooltip title="Export data">
+			<Tooltip title="Export data. Your file will save to your browser's automatic download location.">
 				<IconButton onClick={exportClient}>
 					{processing ? <CircularProgress size={24} /> : <PublishIcon />}
 				</IconButton>
