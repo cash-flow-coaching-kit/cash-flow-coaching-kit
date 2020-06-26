@@ -85,7 +85,6 @@ const Panel = memo(function Panel({
 		customTitle,
 		id,
 		dispatch,
-		useCustomTitle,
 	])
 
 	useEffect(() => {
