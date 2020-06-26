@@ -48,6 +48,7 @@ const ActionItem = ({
 		data.description
 	)
 	const [dialogueOpen, setDialogueOpen] = useState<boolean>(false)
+	const [datepickerOpen, setDatepickerOpen] = useState(false)
 
 	/**
 	 * Triggers a update action to change the state
@@ -84,7 +85,7 @@ const ActionItem = ({
 	const onDialogueConfirm = (): void => {
 		if (!lastItemInList) {
 			// Deletes the item from the db & state
-			deleteAction(data.id || -1)
+			deleteAction(data.id || "")
 		} else {
 			// Reset the last item
 			setCacheDescription("")
@@ -138,6 +139,7 @@ const ActionItem = ({
 				...data,
 				reviewBy: date,
 			})
+			setDatepickerOpen(false)
 		}
 	}
 
@@ -239,6 +241,9 @@ const ActionItem = ({
 											"aria-label": "change date",
 										}}
 										className={styles.datepicker}
+										open={datepickerOpen}
+										onOpen={(): void => setDatepickerOpen(true)}
+										onClose={(): void => setDatepickerOpen(false)}
 										fullWidth
 									/>
 								</MuiPickersUtilsProvider>

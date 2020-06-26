@@ -17,11 +17,23 @@ export const useSummaryStyles = makeStyles((theme) => ({
 			height: "100%",
 		},
 	},
+	areaRoot: {
+		display: "flex",
+		flexDirection: "column",
+	},
 	cardHeader: {
 		flexGrow: 2,
 		alignItems: "flex-start",
+		width: "100%",
+		boxSizing: "border-box",
 		[theme.breakpoints.down("md")]: {
 			flexDirection: "column",
 		},
+		"& .MuiCardHeader-content": {
+			width: "100%",
+		},
+	},
+	cardActions: {
+		alignSelf: "flex-end",
 	},
 }))

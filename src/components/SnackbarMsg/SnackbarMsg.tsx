@@ -25,7 +25,10 @@ export interface SnackbarMsgData {
  * @extends {SnackbarMsgData}
  */
 export interface SnackbarMsgProps extends SnackbarMsgData {
-	onClose(event?: React.SyntheticEvent, reason?: string): void
+	onClose: (
+		event: React.SyntheticEvent | React.MouseEvent,
+		reason?: string
+	) => void
 }
 // #endregion
 
@@ -68,7 +71,6 @@ export default function SnackbarMsg({
 						<CloseIcon fontSize="small" />
 					</IconButton>
 				}
-				onClose={onClose}
 			>
 				{msg}
 			</Alert>

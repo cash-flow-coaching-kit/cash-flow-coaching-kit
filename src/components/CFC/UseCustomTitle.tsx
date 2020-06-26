@@ -23,7 +23,7 @@ interface UseCustomTitleProps {
 }
 
 const tipContent =
-	"By default, the canvas title will be made up of the four fields above. However, to make idenfiying canvases easier, you are able to assign a custom title to the canvas."
+	"To make idenfiying canvases easier, you are able to assign a custom title to the canvas. However, you can disable this and the canvas title will be made up of the four fields below"
 
 /**
  * Component that allows a user to opt into a custom canvas title
@@ -48,6 +48,17 @@ export default function UseCustomTitle({
 
 	return (
 		<Box>
+			{useCustom && (
+				<TextField
+					name="canvasTitle"
+					label="Custom canvas title"
+					variant="outlined"
+					value={title}
+					onChange={onChange}
+					fullWidth
+					className={cls.textField}
+				/>
+			)}
 			<Box className={cls.checkboxRoot}>
 				<FormControlLabel
 					control={
@@ -63,17 +74,6 @@ export default function UseCustomTitle({
 					<InfoIcon color="primary" />
 				</Tooltip>
 			</Box>
-			{useCustom && (
-				<TextField
-					name="canvasTitle"
-					label="Custom canvas title"
-					variant="outlined"
-					value={title}
-					onChange={onChange}
-					fullWidth
-					className={cls.textField}
-				/>
-			)}
 			<Divider className={cls.divider} />
 		</Box>
 	)

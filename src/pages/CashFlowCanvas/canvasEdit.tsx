@@ -105,10 +105,10 @@ export default function CanvasEdit(): ReactElement {
 		<>
 			<PageContainer maxWidth="lg">
 				<Grid container spacing={3}>
-					<Grid item sm={9}>
+					<Grid item xs={12} md={9}>
 						<CanvasForm initialValues={initial} customTitle={useCustom()} />
 					</Grid>
-					<Grid item sm={3}>
+					<Grid item xs={12} md={3}>
 						<CFCFourQuestions values={questionValues} />
 						<ControlPanel />
 					</Grid>

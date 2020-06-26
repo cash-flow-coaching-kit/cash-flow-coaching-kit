@@ -9,6 +9,7 @@ export const defaultClientState: IClientState = {
 	state: {
 		clients: [],
 		clientSynced: false,
+		lastViewedHC: null,
 	},
 	dispatch: () => null,
 }

@@ -11,19 +11,17 @@ export default function CFCCompare(): ReactElement {
 	const { questionValues } = useContext(CFCContext)
 
 	return (
-		<>
-			<PageContainer>
-				<SectionTitle>Compare canvas fields</SectionTitle>
-				<Grid container spacing={3}>
-					<Grid item sm={9}>
-						<CompareCanvases />
-					</Grid>
-					<Grid item sm={3}>
-						<CFCFourQuestions values={questionValues} />
-						<ControlPanel />
-					</Grid>
+		<PageContainer>
+			<SectionTitle>Compare canvas fields</SectionTitle>
+			<Grid container spacing={3}>
+				<Grid item xs={12} md={9}>
+					<CompareCanvases />
 				</Grid>
-			</PageContainer>
-		</>
+				<Grid item xs={12} md={3}>
+					<CFCFourQuestions values={questionValues} />
+					<ControlPanel />
+				</Grid>
+			</Grid>
+		</PageContainer>
 	)
 }

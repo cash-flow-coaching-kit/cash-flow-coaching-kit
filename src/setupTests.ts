@@ -20,7 +20,10 @@ Object.defineProperty(global.window, "crypto", {
 global.console = {
 	warn: jest.fn(),
 	log: global.console.log,
+	error: jest.fn(),
 }
+
+global.URL.createObjectURL = jest.fn()
 
 class LocalStorageMock {
 	constructor() {

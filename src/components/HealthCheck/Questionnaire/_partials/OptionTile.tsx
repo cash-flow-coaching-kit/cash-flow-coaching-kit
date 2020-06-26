@@ -4,6 +4,7 @@ import {
 	CardActionArea,
 	CardContent,
 	Typography,
+	useTheme,
 } from "@material-ui/core"
 import { getOptionByAnswer } from "../../_config/utilities"
 import { answerTheming } from "../../_config/data"
@@ -27,12 +28,18 @@ const OptionTile = ({
 }: IQuestionnaireOptions): ReactElement => {
 	const style = useOptionTileStyles()
 	const theme = getOptionByAnswer(optionKey, answerTheming)
+	const muiTheme = useTheme()
 
 	return (
 		<Card
-			raised={currentAnswer ? currentAnswer === optionKey : false}
 			onClick={(e: MouseEvent<HTMLDivElement>): void => {
 				changeAnswer(e, optionKey)
+			}}
+			style={{
+				boxShadow:
+					currentAnswer === optionKey
+						? `inset 0 0 0 3px ${muiTheme.palette.primary.main}`
+						: "",
 			}}
 		>
 			<CardActionArea>

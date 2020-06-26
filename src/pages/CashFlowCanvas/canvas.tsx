@@ -34,10 +34,10 @@ export default function CFCCanvas(): ReactElement {
 		<>
 			<PageContainer maxWidth="lg">
 				<Grid container spacing={3}>
-					<Grid item sm={9}>
+					<Grid item xs={12} md={9}>
 						<CreateCanvasForm />
 					</Grid>
-					<Grid item sm={3}>
+					<Grid item xs={12} md={3}>
 						<FourQuestions />
 						<ControlPanel />
 					</Grid>

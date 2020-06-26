@@ -2,8 +2,6 @@
 	"name": "dcfck-app",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "./",
-	"main": "src/start.js",
 	"dependencies": {
 		"@date-io/date-fns": "1.x",
 		"@loadable/component": "^5.12.0",
@@ -25,11 +23,12 @@
 		"@types/react-dom": "^16.9.0",
 		"@types/react-router-dom": "^5.1.4",
 		"@types/reactour": "^1.17.0",
+		"@types/uuid": "^8.0.0",
 		"@xstate/react": "^0.8.1",
 		"body-scroll-lock": "^3.0.3",
 		"date-fns": "^2.12.0",
 		"dexie": "^3.0.1",
-		"electron": "^8.2.3",
+		"dexie-export-import": "^1.0.0-rc.2",
 		"formik": "^2.1.4",
 		"lodash-es": "^4.17.15",
 		"node-sass": "^4.14.0",
@@ -43,23 +42,17 @@
 		"reactour": "^1.17.0",
 		"styled-components": "^4.0.0",
 		"typescript": "~3.7.2",
+		"uuid": "^8.1.0",
 		"xstate": "^4.9.1",
 		"yarn": "^1.22.4"
 	},
 	"scripts": {
-		"start": "nf start -p 3000",
 		"start:web": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"test:unit": "react-scripts test --env=jsdom",
 		"test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
-		"eject": "react-scripts eject",
-		"electron": "electron .",
-		"electron-start": "node src/start-react",
-		"react-start": "BROWSER=none react-scripts start",
-		"pack": "build --dir",
-		"dist": "npm run build && build",
-		"postinstall": "electron-builder install-app-deps"
+		"eject": "react-scripts eject"
 	},
 	"browserslist": {
 		"production": [
@@ -80,7 +73,6 @@
 		"@typescript-eslint/eslint-plugin": "^2.29.0",
 		"commitizen": "^4.0.4",
 		"cz-conventional-changelog": "^3.1.0",
-		"electron-builder": "^22.5.1",
 		"eslint": "^6.8.0",
 		"eslint-config-airbnb-typescript": "^7.2.1",
 		"eslint-config-prettier": "^6.11.0",
@@ -119,15 +111,6 @@
 			"path": "./node_modules/cz-conventional-changelog"
 		}
 	},
-	"build": {
-		"appId": "com.electron.electron-with-create-react-app",
-		"win": {
-			"iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
-		},
-		"directories": {
-			"buildResources": "public"
-		}
-	},
 	"jest": {
 		"collectCoverageFrom": [
 			"src/**/*.{js,ts}",
@@ -141,6 +124,9 @@
 		],
 		"extraGlobals": [
 			"window"
+		],
+		"transformIgnorePatterns": [
+			"<rootDir>/node_modules/(?!lodash-es)"
 		]
 	}
 }

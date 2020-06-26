@@ -1,4 +1,8 @@
-import { BaseCFCStruct, ClientId } from "../../../data/_config/shape"
+import {
+	BaseCFCStruct,
+	ClientId,
+	DatabaseId,
+} from "../../../data/_config/shape"
 import CFCUseCase from "../../../data/CFC/CFCLogic"
 import { newTimestamp } from "../../../util/dates"
 
@@ -12,7 +16,7 @@ import { newTimestamp } from "../../../util/dates"
 async function onCreate(
 	values: BaseCFCStruct,
 	client: ClientId
-): Promise<number> {
+): Promise<DatabaseId> {
 	const id = await CFCUseCase.create({
 		...values,
 		clientId: client,
