@@ -53,10 +53,14 @@ export default function ImportDataModal({
 		reader.readAsArrayBuffer(file)
 	}
 
-	const onAddToCanvas = () => {
-		canvasItemUpdater.forEach((updater) => updater(currentItems))
+	const onEmptyAndClose = () => {
 		setCurrentItems([]) // clear list
 		return onClose()
+	}
+
+	const onAddToCanvas = () => {
+		canvasItemUpdater.forEach((updater) => updater(currentItems))
+		return onEmptyAndClose()
 	}
 
 	const renderSingleItem = (item: ProcessFileItem): ReactElement => {
@@ -108,7 +112,7 @@ export default function ImportDataModal({
 					<Button onClick={onAddToCanvas} disabled={currentItems.length === 0}>
 						Add To Canvas
 					</Button>
-					<Button onClick={onClose}>Close</Button>
+					<Button onClick={onEmptyAndClose}>Cancel</Button>
 				</DialogActions>
 			</Dialog>
 			<input
