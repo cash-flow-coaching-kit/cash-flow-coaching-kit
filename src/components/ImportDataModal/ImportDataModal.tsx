@@ -83,8 +83,19 @@ export default function ImportDataModal({
 	return (
 		<>
 			<Dialog open={open}>
-				<DialogTitle>Import Data from Accounting Package</DialogTitle>
+				<DialogTitle>Import data</DialogTitle>
 				<DialogContent>
+					<p>
+						You can import data into the Cash Flow Canvas from Xero, MYOB,
+						QuickBooks or any spreadsheet.
+					</p>
+					<p>
+						To import data click Open File and select the file you wish to
+						import. This will load each item from your file. Remove items you
+						don't want imported into the canvas. Once complete, select Add to
+						Canvas.
+					</p>
+					<p>Imported data must be in .xlsx format.</p>
 					{/* <pre>{JSON.stringify(currentItems, null, 2)}</pre> */}
 					{currentItems.length === 0 ? (
 						<p onClick={onOpenFileDialog}>Please import a file.</p>
