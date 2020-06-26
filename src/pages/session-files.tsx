@@ -292,7 +292,7 @@ const SessionFiles = (): ReactElement => {
 
 							zip.generateAsync({ type: "blob" }).then(function (content) {
 								// see FileSaver.js
-								saveAs(content, "example.zip")
+								saveAs(content, `${currentClient.name.replace(/ /g, "-")}.zip`)
 								setExporting(false)
 								showSnackbar(
 									"The PDFs has been successfully exported",
