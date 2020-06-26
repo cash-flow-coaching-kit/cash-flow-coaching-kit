@@ -9,6 +9,10 @@ import {
 	Box,
 } from "@material-ui/core"
 import GetAppIcon from "@material-ui/icons/GetApp"
+import JSZip from "jszip"
+import { fetch as fetchPolyfill } from "whatwg-fetch"
+import { saveAs } from "file-saver"
+import { format } from "date-fns"
 import { HealthCheckDataStruct, CFCStruct } from "../data/_config/shape"
 import HealthCheckUseCase from "../data/healthChecks/HealthCheckLogic"
 import CFCUseCase from "../data/CFC/CFCLogic"
@@ -25,6 +29,7 @@ import {
 import {
 	discoverTopics,
 	staticTitles,
+	changeLeversPath,
 } from "../components/SessionFiles/__config/constants"
 import {
 	healthCheckToData,
@@ -33,6 +38,16 @@ import {
 import CheckboxListItem from "../components/SessionFiles/CheckboxListItem"
 import useStyles from "../components/SessionFiles/__config/styles"
 import SectionTitle from "../components/SectionTitle"
+import HealthCheckPDF, {
+	HealthCheckQuestionSet,
+} from "../components/PDF/HealthCheckPDF"
+import { questions } from "../components/HealthCheck/_config/data"
+import ActionChecklistUseCase from "../data/ActionChecklist/ChecklistLogic"
+import ActionNotesUseCase from "../data/ActionChecklist/NotesLogic"
+import ActionChecklistPDF from "../components/PDF/ActionChecklistPDF"
+import CashFlowCanvasPDF from "../components/PDF/CashFlowCanvasPDF"
+import hasProperty from "../util/object/hasProperty"
+import { canvasDisplayTitle } from "../components/CFC/__config/utilities"
 
 const SessionFiles = (): ReactElement => {
 	const cls = useStyles()
@@ -47,6 +62,7 @@ const SessionFiles = (): ReactElement => {
 	const [cfc, setCfc] = useState<CFCStruct[]>([])
 	const [HCListing, setHCListing] = useState<FileListingStruct[]>([])
 	const [CFCListing, setCFCListing] = useState<FileListingStruct[]>([])
+	const assetBaseUrl = process.env.REACT_APP_ASSETS_URL || ""
 
 	const [fetching, setFetching] = useState(true)
 	const [currentClient, synced] = useCurrentClient()
@@ -92,11 +108,161 @@ const SessionFiles = (): ReactElement => {
 		}))
 	}
 
+	const getStaticPdf = (name: string, url: string) => {
+		// IE does not support Fetch response.arrayBuffer().
+		// Use Polyfill Fetch for PDF response buffer.
+		return fetchPolyfill(url, {
+			method: "GET",
+		})
+			.then((response: any) => response.arrayBuffer())
+			.then((buffer: any) => ({ fileName: name, buffer }))
+	}
+
+	const makeStaticPdf = async (name: string, path: string): Promise<any> => {
+		const file = encodeURI(`${assetBaseUrl}${path}`)
+		const pdf = await getStaticPdf(name, file)
+		return pdf
+	}
+
+	const pdfMakeBlobPromise = (
+		pdf: pdfMake.TCreatedPdf,
+		filename: string
+	): Promise<{ blob: Blob; filename: string }> => {
+		return new Promise((resolve) => {
+			pdf.getBlob((b: Blob) => resolve({ blob: b, filename }))
+		})
+	}
+
+	const generateZip = async (): Promise<void> => {
+		if (currentClient?.id) {
+			const zip = new JSZip()
+
+			// Change Levers document
+			if (selectedFiles.cfc) {
+				const CHPDF = await makeStaticPdf("ChangeLevers.pdf", changeLeversPath)
+				zip.file(CHPDF.fileName, CHPDF.buffer)
+			}
+
+			// Action Checklist
+			if (selectedFiles.actionChecklist) {
+				const checklists = await ActionChecklistUseCase.findByClient(
+					currentClient.id
+				)
+				const notes = await ActionNotesUseCase.findByClient(currentClient.id)
+				const ACPDF = await ActionChecklistPDF(
+					currentClient?.name ?? "Client",
+					checklists,
+					notes
+				)
+				const blob = await pdfMakeBlobPromise(
+					ACPDF,
+					"ActionChecklistSummary.pdf"
+				)
+				zip.file(blob.filename, blob.blob)
+			}
+
+			// Discover Topics
+			const DTPromises: any = selectedFiles.discoverTopics
+				.map((val, idx) => {
+					if (val) {
+						return makeStaticPdf(
+							`${discoverTopics[idx].name}.pdf`,
+							encodeURI(discoverTopics[idx].path)
+						)
+					}
+					return undefined
+				})
+				.filter((v) => typeof v !== "undefined")
+
+			// Health Checks
+			const HCNames: string[] = []
+			const HCPromises = selectedFiles.healthChecks
+				.map((val, idx) => {
+					if (val) {
+						const data = healthChecks[idx]
+						if (data) {
+							const pdfData: HealthCheckQuestionSet = {}
+							questions.forEach((q, i) => {
+								const { question } = q
+								const answer = data?.answers[i] || "positive"
+								const text = q.options[answer]
+								// eslint-disable-next-line
+								pdfData[i] = { question, answer, text }
+							})
+							// eslint-disable-next-line
+							HCNames.push(
+								`Completed Health Check ${format(
+									data.createdAt!,
+									"dd/MM/yyyy"
+								)}.pdf`
+									.replace(/ /g, "-")
+									.replace(/\//g, "-")
+							)
+							return HealthCheckPDF(currentClient?.name ?? "Client", pdfData)
+						}
+					}
+
+					return undefined
+				})
+				.filter((v) => typeof v !== "undefined")
+
+			// CFC
+			const CFCNames: string[] = []
+			const CFCPromises = selectedFiles.cfc
+				.map((val, idx) => {
+					if (val) {
+						const data = cfc[idx]
+						if (data) {
+							// eslint-disable-next-line
+							CFCNames.push(
+								`${canvasDisplayTitle(data)}.pdf`
+									.replace(/ /g, "-")
+									.replace(/\//g, "-")
+							)
+							return CashFlowCanvasPDF(currentClient?.name ?? "Client", data)
+						}
+					}
+
+					return undefined
+				})
+				.filter((v) => typeof v !== "undefined")
+
+			Promise.all([...HCPromises, ...CFCPromises]).then((res) => {
+				const names = [...HCNames, ...CFCNames]
+
+				const blobPromises = res
+					.map((pdf, i) => {
+						if (pdf) {
+							return pdfMakeBlobPromise(pdf, names[i])
+						}
+						return undefined
+					})
+					.filter((v) => typeof v !== "undefined")
+
+				Promise.all([...DTPromises, ...blobPromises]).then((res1) => {
+					console.log(res1)
+					res1.forEach((doc) => {
+						if (hasProperty(doc, "fileName")) {
+							zip.file(doc.fileName, doc.buffer)
+						} else {
+							zip.file(doc.filename, doc.blob)
+						}
+					})
+
+					zip.generateAsync({ type: "blob" }).then(function (content) {
+						// see FileSaver.js
+						saveAs(content, "example.zip")
+					})
+				})
+			})
+		}
+	}
+
 	const Nav = React.memo(() => {
 		return (
 			<ExpandableNav>
 				<List component="nav" disablePadding>
-					<ListItem button>
+					<ListItem button onClick={generateZip}>
 						<ListItemIcon>
 							<GetAppIcon />
 						</ListItemIcon>

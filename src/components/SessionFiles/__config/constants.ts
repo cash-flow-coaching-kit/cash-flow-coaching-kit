@@ -62,3 +62,5 @@ export const discoverTopics: DiscoverTopicsStruct[] = [
 		path: "/pdf/Selling, closing and succession planning - Quicksnaps.pdf",
 	},
 ]
+
+export const changeLeversPath = "/pdf/Change levers.pdf"
