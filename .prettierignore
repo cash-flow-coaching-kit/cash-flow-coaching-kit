@@ -4,3 +4,4 @@ package.json
 src/start-react.js
 src/start.js
 **/*.test.ts
+build/**/*
