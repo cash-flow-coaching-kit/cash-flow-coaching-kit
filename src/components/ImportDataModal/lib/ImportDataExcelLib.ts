@@ -12,8 +12,13 @@ const excelProcessSheet = (worksheet: Worksheet): ProcessFileItem[] => {
 	worksheet.eachRow({ includeEmpty: true }, function (row, rowNumber) {
 		let values =
 			typeof row.values === "object" ? Object.values(row.values) : row.values
-		values = values.filter((a) => a)
-		const last = values.pop()
+		values = values
+			.filter((a: any) => a)
+			.map((a: any) => {
+				// check for and extract computed values
+				return typeof a === "object" ? a?.result : a
+			})
+		const last: any = values.pop()
 		if (typeof last === "number") {
 			const description = values.join(" ").trim()
 			result.push({ row: rowNumber, description, amount: last })
