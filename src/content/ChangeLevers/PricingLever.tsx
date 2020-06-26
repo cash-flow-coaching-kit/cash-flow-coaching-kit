@@ -68,7 +68,11 @@ export default function PricingLever(): ReactElement {
 			{/* Change Prices */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Change prices
 					</Typography>
 					<ChangePricesListContent />
@@ -88,7 +92,11 @@ export default function PricingLever(): ReactElement {
 			{/* Focus on */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Focus on the most profitable customers, products or services
 					</Typography>
 					<FocusOnListContent />
@@ -108,7 +116,11 @@ export default function PricingLever(): ReactElement {
 			{/* Increase value */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Increase value you deliver
 					</Typography>
 					<IncreaseValueListContent />
