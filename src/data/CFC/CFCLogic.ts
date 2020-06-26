@@ -49,7 +49,8 @@ class CFCLogic extends ILogicLayer<CFCStruct, BaseCFCStruct> {
 	findPossibleDuplicates(
 		type: CanvasType,
 		timeframe: CFCTimeFrame,
-		clientId: ClientId
+		clientId: ClientId,
+		canvasTitle: string
 	): Promise<CFCStruct[]> {
 		return this.database.transaction("r", this.table.name, () => {
 			return this.table
@@ -58,6 +59,8 @@ class CFCLogic extends ILogicLayer<CFCStruct, BaseCFCStruct> {
 					canvasTimeFrame: timeframe,
 					clientId,
 				})
+				.or("canvasTitle")
+				.startsWith(canvasTitle)
 				.toArray()
 		})
 	}

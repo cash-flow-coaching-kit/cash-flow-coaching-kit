@@ -141,6 +141,12 @@ export function identifyIfDuplicate(
 	usingCustom: boolean,
 	canvasId?: CFCId
 ): DupResponse {
+	console.log({
+		dups,
+		values,
+		usingCustom,
+		canvasId,
+	})
 	if (dups.length === 0) return false
 	const { canvasTitle, canvasEndDate, canvasStartDate } = values
 
@@ -183,7 +189,8 @@ export async function performDupFind(
 	const dups = await CFCUseCase.findPossibleDuplicates(
 		slice.canvasType,
 		slice.canvasTimeFrame,
-		client
+		client,
+		slice.canvasTitle
 	)
 
 	return identifyIfDuplicate(dups, slice, usingCustom, canvasId)
