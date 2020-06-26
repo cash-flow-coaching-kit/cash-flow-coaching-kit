@@ -1,8 +1,12 @@
-import React, { ReactElement, useState } from "react"
+import React, { ReactElement, useState, useEffect } from "react"
 import Tour, { ReactourStep } from "reactour"
 import { Button } from "@material-ui/core"
 import { useLocation, useParams } from "react-router-dom"
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock"
+import {
+	disableBodyScroll,
+	enableBodyScroll,
+	clearAllBodyScrollLocks,
+} from "body-scroll-lock"
 import hasProperty from "../../util/object/hasProperty"
 
 type PageTourProps = {
@@ -22,6 +26,13 @@ export default function PageTour({ steps }: PageTourProps): ReactElement {
 	const location = useLocation()
 	const params = useParams()
 
+	const disableBody = (target: any): void => disableBodyScroll(target)
+	const enableBody = (target: any): void => enableBodyScroll(target)
+
+	useEffect(() => {
+		return (): void => clearAllBodyScrollLocks()
+	}, [])
+
 	/**
 	 * Strips off the beginning and ending "/"
 	 *
@@ -35,7 +46,7 @@ export default function PageTour({ steps }: PageTourProps): ReactElement {
 	 * @returns {string}
 	 */
 	const getRouteValue = (): string => {
-		const re = /\/[\d]+?$/g
+		const re = /\/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/gi
 		const path = stripPathname()
 
 		if (Object.keys(params).length > 0 && path.match(re)) {
@@ -87,9 +98,6 @@ export default function PageTour({ steps }: PageTourProps): ReactElement {
 	 * Opens the tour component
 	 */
 	const openTour = (): void => setOpen(true)
-
-	const disableBody = (target: any): void => disableBodyScroll(target)
-	const enableBody = (target: any): void => enableBodyScroll(target)
 
 	return (
 		<>
