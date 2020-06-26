@@ -123,10 +123,10 @@ const ClientListing = (): ReactElement => {
 
 	return (
 		<Box>
-			<SectionTitle>Current Client</SectionTitle>
+			<SectionTitle component="h2">Current Client</SectionTitle>
 			<Card>{renderWithMachine("current")}</Card>
 			<Spacer space={4} />
-			<SectionTitle>Client List</SectionTitle>
+			<SectionTitle component="h2">Client List</SectionTitle>
 			<Card>
 				{renderWithMachine("list")}
 				<Divider />

@@ -42,7 +42,7 @@ const ClientList = (): ReactElement => {
 						<ClientListing />
 					</Grid>
 					<Grid item xs={12} md={6}>
-						<SectionTitle>Coaching Conversation</SectionTitle>
+						<SectionTitle component="h2">Coaching Conversation</SectionTitle>
 						<Box>
 							<Prepare />
 							<Coaching />
