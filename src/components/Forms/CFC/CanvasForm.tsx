@@ -139,7 +139,7 @@ export default function CanvasForm({
 				...items
 					.filter(({ amount }: ProcessFileItem) => amount < 0)
 					.map(({ row, description, amount }: ProcessFileItem) =>
-						createCashFlowItem(id++, description, Math.floor(amount))
+						createCashFlowItem(id++, description, -Math.floor(amount))
 					),
 			]
 			setFieldValue("cashOutItems", newCashOutItems, false)
