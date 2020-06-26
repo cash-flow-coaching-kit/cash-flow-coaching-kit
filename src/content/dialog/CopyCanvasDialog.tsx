@@ -200,24 +200,21 @@ export default function CopyCanvasDialog({
 	 * @param {K} k
 	 * @param {BaseCFCStruct[K]} v
 	 */
-	const changeDateValue = useCallback(
-		(k: CanvasDateKeys, v: Date): void => {
-			const { canvasStartDate, canvasEndDate } = changeDate<CFCPanelSlice>(
-				k,
-				v,
-				values
-			)
+	const changeDateValue = (k: CanvasDateKeys, v: Date): void => {
+		const { canvasStartDate, canvasEndDate } = changeDate<CFCPanelSlice>(
+			k,
+			v,
+			values
+		)
 
-			// Sets the field value
-			setFieldValue("canvasStartDate", canvasStartDate, false)
-			setFieldValue("canvasEndDate", canvasEndDate, false)
-		},
-		[setFieldValue, values]
-	)
+		// Sets the field value
+		setFieldValue("canvasStartDate", canvasStartDate, false)
+		setFieldValue("canvasEndDate", canvasEndDate, false)
+	}
 
 	useEffect(() => {
 		changeDateValue("canvasStartDate", values.canvasStartDate)
-	}, [values.canvasTimeFrame, values.canvasStartDate, changeDateValue])
+	}, [values.canvasTimeFrame, values.canvasStartDate])
 	// #endregion
 
 	// #region Component rendering

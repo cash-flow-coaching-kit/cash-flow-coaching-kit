@@ -68,6 +68,7 @@ const Panel = memo(function Panel({
 					canvasType: canvasTypeValue,
 				},
 				currentClient.id,
+				useCustomTitle,
 				id || undefined
 			)
 
@@ -85,6 +86,7 @@ const Panel = memo(function Panel({
 		customTitle,
 		id,
 		dispatch,
+		useCustomTitle,
 	])
 
 	useEffect(() => {
