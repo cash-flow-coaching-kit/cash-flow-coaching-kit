@@ -52,14 +52,14 @@ const ChangeLevers = (): ReactElement => {
 							</Typography>
 						</Box>
 						<Spacer space={3} />
-						<SectionTitle>Improve cash flow in</SectionTitle>
+						<SectionTitle component="h2">Improve cash flow in</SectionTitle>
 						<Box className={styles.pushDown}>
 							<PricingLever />
 							<VolumeLever />
 							<DebtorsLever />
 						</Box>
 
-						<SectionTitle>Reduce cash flow out</SectionTitle>
+						<SectionTitle component="h2">Reduce cash flow out</SectionTitle>
 						<Box>
 							<AssetLever />
 							<ExpensesLever />
