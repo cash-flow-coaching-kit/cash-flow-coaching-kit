@@ -178,7 +178,7 @@ const SessionFiles = (): ReactElement => {
 			const zip = new JSZip()
 
 			// Change Levers document
-			if (selectedFiles.cfc) {
+			if (selectedFiles.changeLevers) {
 				const CHPDF = await makeStaticPdf("ChangeLevers.pdf", changeLeversPath)
 				zip.file(CHPDF.fileName, CHPDF.buffer)
 			}
@@ -207,7 +207,7 @@ const SessionFiles = (): ReactElement => {
 					if (val) {
 						return makeStaticPdf(
 							`${discoverTopics[idx].name}.pdf`,
-							encodeURI(discoverTopics[idx].path)
+							discoverTopics[idx].path
 						)
 					}
 					return undefined
