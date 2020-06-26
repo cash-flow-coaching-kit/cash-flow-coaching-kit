@@ -141,12 +141,6 @@ export function identifyIfDuplicate(
 	usingCustom: boolean,
 	canvasId?: CFCId
 ): DupResponse {
-	console.log({
-		dups,
-		values,
-		usingCustom,
-		canvasId,
-	})
 	if (dups.length === 0) return false
 	const { canvasTitle, canvasEndDate, canvasStartDate } = values
 

@@ -72,8 +72,6 @@ const Panel = memo(function Panel({
 				id || undefined
 			)
 
-			console.log(dup)
-
 			dispatch({
 				type: CFCActionTypes.ChangeDuplicateError,
 				payload: dup !== false,
