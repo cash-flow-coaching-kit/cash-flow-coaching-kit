@@ -1,0 +1,2 @@
+(this["webpackJsonpdcfck-app"]=this["webpackJsonpdcfck-app"]||[]).push([[10],{798:function(t,c,p){"use strict";p.r(c);var s=p(158),i=Object(s.a)((function(t){return{list:{listStyle:"disc",paddingLeft:t.spacing(2)}}}));c.default=i}}]);
+//# sourceMappingURL=10.86de24f7.chunk.js.map
