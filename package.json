@@ -62,7 +62,7 @@
 	},
 	"scripts": {
 		"start:web": "react-scripts start",
-		"build": "react-scripts --max_old_space_size=768 build",
+		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"test:unit": "react-scripts test --env=jsdom",
 		"test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
