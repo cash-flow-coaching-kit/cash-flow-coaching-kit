@@ -49,6 +49,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 	},
 	contentText: {
 		margin: theme.spacing(2, 0),
+		width: "100%",
 	},
 	alignJustifyContent: {
 		display: "flex",

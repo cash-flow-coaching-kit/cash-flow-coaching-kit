@@ -188,6 +188,7 @@ export default function Form({ container, client }: FormProps): ReactElement {
 				name={createNameField(option)}
 				checked={formChecklists[idx]}
 				disabled={inChecklists(option, checklists || [])}
+				className={styles.label}
 			/>
 		)
 	}
