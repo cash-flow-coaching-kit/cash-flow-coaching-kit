@@ -1,9 +1,38 @@
-import Excel, { Worksheet, Workbook } from "exceljs"
+/* eslint-disable */
+import { Worksheet, Workbook } from "exceljs"
 import { ProcessFileItem } from "./ImportDataGeneralLib"
+
+const rewritePattern = require("regexpu-core")
+const {
+	generateRegexpuOptions,
+} = require("@babel/helper-create-regexp-features-plugin/lib/util")
+
+const { RegExp } = global
+try {
+	new RegExp("a", "u")
+} catch (err) {
+	// @ts-ignore
+	global.RegExp = function (pattern, flags) {
+		if (flags && flags.includes("u")) {
+			return new RegExp(
+				rewritePattern(
+					pattern,
+					flags,
+					generateRegexpuOptions({ flags, pattern })
+				)
+			)
+		}
+		return new RegExp(pattern, flags)
+	}
+	// @ts-ignore
+	global.RegExp.prototype = RegExp
+}
+
+const ExcelJS = require("exceljs/dist/es5/exceljs.browser")
 
 const excelCreateFromData = async (data: Uint8Array) => {
 	try {
-		const workbook = new Excel.Workbook()
+		const workbook = new ExcelJS.Workbook()
 		await workbook.xlsx.load(data)
 		return workbook
 	} catch (err) {
