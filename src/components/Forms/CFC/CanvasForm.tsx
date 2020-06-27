@@ -313,80 +313,83 @@ export default function CanvasForm({
 
 	return (
 		<>
-			<CanvasTitle
-				type={canvasType}
-				timeframe={canvasTimeFrame}
-				startDate={canvasStartDate}
-				endDate={canvasEndDate}
-				customTitle={canvasTitle}
-				useCustomTitle={useCustomTitle}
-			/>
-			<ConfigPanel
-				canvasTypeValue={canvasType}
-				canvasTimeframeValue={canvasTimeFrame}
-				onChange={inputChange}
-				startDate={canvasStartDate}
-				endDate={canvasEndDate}
-				onDateChange={changeDateValue}
-				customTitle={canvasTitle}
-				changeCheck={(e: InputChange): void => {
-					setUseCustomTitle(e.target.checked)
-				}}
-				useCustomTitle={useCustomTitle}
-				showDuplicateError={!copyCanvasActive}
-			/>
+			<div data-reactour="create-a-canvas">
+				<CanvasTitle
+					type={canvasType}
+					timeframe={canvasTimeFrame}
+					startDate={canvasStartDate}
+					endDate={canvasEndDate}
+					customTitle={canvasTitle}
+					useCustomTitle={useCustomTitle}
+				/>
+				<ConfigPanel
+					canvasTypeValue={canvasType}
+					canvasTimeframeValue={canvasTimeFrame}
+					onChange={inputChange}
+					startDate={canvasStartDate}
+					endDate={canvasEndDate}
+					onDateChange={changeDateValue}
+					customTitle={canvasTitle}
+					changeCheck={(e: InputChange): void => {
+						setUseCustomTitle(e.target.checked)
+					}}
+					useCustomTitle={useCustomTitle}
+					showDuplicateError={!copyCanvasActive}
+				/>
+			</div>
 			<IfElseLoading if={stateMachine.value !== "loading"}>
 				<Spacer />
-				<OpeningBalance value={openingBalance} onChange={inputChange} />
-				<Spacer />
-				<Box className={cls.wrapper}>
-					<Typography variant="h6">Cash IN</Typography>
-					<Typography>
-						Cash received, or revenue, including GST (if applicable). This may
-						be for services or sales. See Change Levers for ideas on how to
-						improve your Cash IN.
-					</Typography>
+				<div data-reactour="cfc-filling-out-the-canvas">
+					<OpeningBalance value={openingBalance} onChange={inputChange} />
 					<Spacer />
-					<Divider />
-					<Spacer space={3} />
-					<RepeaterForm
-						name="cashInItems"
-						values={cashInItems}
-						onChange={inputChange}
-						total={cashInTotal}
-						gst={cashInGST}
-						addItem={addCashFlowItem("cashInItems")}
-						removeItem={removeItem("cashInItems")}
-					/>
-				</Box>
-				<Spacer />
-				<Box className={cls.wrapper}>
-					<Typography variant="h6">Cash OUT</Typography>
-					<Typography>
-						All expenses, including GST (if applicable). See Change Levers for
-						ideas on how to reduce your Cash OUT.
-					</Typography>
+					<Box className={cls.wrapper}>
+						<Typography variant="h6">Cash IN</Typography>
+						<Typography>
+							Cash received, or revenue, including GST (if applicable). This may
+							be for services or sales. See Change Levers for ideas on how to
+							improve your Cash IN.
+						</Typography>
+						<Spacer />
+						<Divider />
+						<Spacer space={3} />
+						<RepeaterForm
+							name="cashInItems"
+							values={cashInItems}
+							onChange={inputChange}
+							total={cashInTotal}
+							gst={cashInGST}
+							addItem={addCashFlowItem("cashInItems")}
+							removeItem={removeItem("cashInItems")}
+						/>
+					</Box>
 					<Spacer />
-					<Divider />
-					<Spacer space={3} />
-					<RepeaterForm
-						name="cashOutItems"
-						values={cashOutItems}
-						onChange={inputChange}
-						total={cashOutTotal}
-						gst={cashOutGST}
-						addItem={addCashFlowItem("cashOutItems")}
-						removeItem={removeItem("cashOutItems")}
-						beforeTotalChild={(): ReactElement => (
-							<EmployeeExpenses
-								payg={paygWithholding}
-								super={superAmount}
-								onChange={inputChange}
-							/>
-						)}
-					/>
-				</Box>
-				<Spacer />
+					<Box className={cls.wrapper}>
+						<Typography variant="h6">Cash OUT</Typography>
+						<Typography>
+							All expenses, including GST (if applicable). See Change Levers for
+							ideas on how to reduce your Cash OUT.
+						</Typography>
+						<Spacer />
+						<Divider />
+						<Spacer space={3} />
+						<RepeaterForm
+							name="cashOutItems"
+							values={cashOutItems}
+							onChange={inputChange}
+							total={cashOutTotal}
+							gst={cashOutGST}
+							addItem={addCashFlowItem("cashOutItems")}
+							removeItem={removeItem("cashOutItems")}
+							beforeTotalChild={(): ReactElement => (
+								<EmployeeExpenses
+									payg={paygWithholding}
+									super={superAmount}
+									onChange={inputChange}
+								/>
+							)}
+						/>
+					</Box>
+				</div>
 				<Spacer />
 				<CashSurplus value={`${calculated.cashSurplus}`} />
 				<Spacer />
@@ -398,21 +401,23 @@ export default function CanvasForm({
 				<Spacer />
 				<AvailableToSpend value={`${calculated.availableToSpend}`} />
 				<Spacer />
-				<CashBalance
-					cashToOwner={cashToOwner}
-					onChange={inputChange}
-					closingBalance={calculated.closingBalance}
-				/>
-				<Spacer />
-				<FallingBehind
-					stock={stock}
-					creditors={creditors}
-					debtors={debtors}
-					assets={assets}
-					loans={loans}
-					totalNetAssets={calculated.totalNetAssets}
-					onChange={inputChange}
-				/>
+				<div data-reactour="cfc-your-position">
+					<CashBalance
+						cashToOwner={cashToOwner}
+						onChange={inputChange}
+						closingBalance={calculated.closingBalance}
+					/>
+					<Spacer />
+					<FallingBehind
+						stock={stock}
+						creditors={creditors}
+						debtors={debtors}
+						assets={assets}
+						loans={loans}
+						totalNetAssets={calculated.totalNetAssets}
+						onChange={inputChange}
+					/>
+				</div>
 				<Spacer space={4} />
 				<Divider />
 				<Spacer />

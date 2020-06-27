@@ -65,7 +65,7 @@ export default function ControlPanel(): ReactElement {
 	}
 
 	return (
-		<ExpandableNav>
+		<ExpandableNav reactourLabel="canvas-control-panel">
 			<List component="nav" disablePadding>
 				{!isNewPage() && !isCompare() && <CopyCanvasTrigger />}
 				{(!isNewPage() || isCompare()) && (
