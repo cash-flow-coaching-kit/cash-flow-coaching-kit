@@ -79,7 +79,11 @@ export default function DebtorsLever(): ReactElement {
 			{/* Invoice earlier */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Invoice earlier
 					</Typography>
 					<InvoiceEarlierListContent />
@@ -99,7 +103,11 @@ export default function DebtorsLever(): ReactElement {
 			{/* Follow up */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Follow up
 					</Typography>
 					<FollowUpListContent />
@@ -119,7 +127,11 @@ export default function DebtorsLever(): ReactElement {
 			{/* Reduce terms */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Reduce terms
 					</Typography>
 					<ReduceTermsListContent />
@@ -139,7 +151,11 @@ export default function DebtorsLever(): ReactElement {
 			{/* Early payment discount */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Early payment discount
 					</Typography>
 					<EarlyPaymentListContent />

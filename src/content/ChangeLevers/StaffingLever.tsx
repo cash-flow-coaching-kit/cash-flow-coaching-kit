@@ -103,7 +103,11 @@ export default function StaffingLever(): ReactElement {
 			{/* Change staff mix */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Change staff mix
 					</Typography>
 					<StaffMixListContent />
@@ -123,7 +127,11 @@ export default function StaffingLever(): ReactElement {
 			{/* Increase utilisation */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Increase utilisation
 					</Typography>
 					<IncreaseUtilisationListContent />
@@ -143,7 +151,11 @@ export default function StaffingLever(): ReactElement {
 			{/* Match staffing levels to demand */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Match staffing levels to demand
 					</Typography>
 					<MatchStaffingLevelsListContent />
@@ -163,7 +175,11 @@ export default function StaffingLever(): ReactElement {
 			{/* Reduce turnover */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Reduce turnover
 					</Typography>
 					<ReduceTurnoverListContent />
@@ -183,7 +199,11 @@ export default function StaffingLever(): ReactElement {
 			{/* Employing staff */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Employing staff
 					</Typography>
 					<EmployingStaffListContent />

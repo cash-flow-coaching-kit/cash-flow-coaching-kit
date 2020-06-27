@@ -21,13 +21,14 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 2,
 		paddingRight: props.stacked ? 0 : theme.spacing(2),
 		marginBottom: !props.stacked ? 0 : theme.spacing(2),
-		"& h6": {
+		"& p": {
 			fontWeight: theme.typography.fontWeightRegular,
 			fontSize: props.mini
 				? theme.typography.body1.fontSize
 				: theme.typography.h6.fontSize,
 		},
-		"& p": {
+		"& span": {
+			display: "block",
 			color: theme.palette.grey[700],
 		},
 		[theme.breakpoints.down("md")]: {

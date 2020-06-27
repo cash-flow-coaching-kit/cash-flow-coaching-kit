@@ -343,7 +343,9 @@ export default function CanvasForm({
 					<OpeningBalance value={openingBalance} onChange={inputChange} />
 					<Spacer />
 					<Box className={cls.wrapper}>
-						<Typography variant="h6">Cash IN</Typography>
+						<Typography variant="h6" component="p">
+							Cash IN
+						</Typography>
 						<Typography>
 							Cash received, or revenue, including GST (if applicable). This may
 							be for services or sales. See Change Levers for ideas on how to
@@ -364,7 +366,9 @@ export default function CanvasForm({
 					</Box>
 					<Spacer />
 					<Box className={cls.wrapper}>
-						<Typography variant="h6">Cash OUT</Typography>
+						<Typography variant="h6" component="p">
+							Cash OUT
+						</Typography>
 						<Typography>
 							All expenses, including GST (if applicable). See Change Levers for
 							ideas on how to reduce your Cash OUT.

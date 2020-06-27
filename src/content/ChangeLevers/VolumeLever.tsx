@@ -75,7 +75,11 @@ export default function VolumeLever(): ReactElement {
 			{/* Increase customers */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Increase your number of potential customers
 					</Typography>
 					<IncreaseCustomersListContent />
@@ -95,7 +99,11 @@ export default function VolumeLever(): ReactElement {
 			{/* Increase products */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Increase your products or services
 					</Typography>
 					<IncreaseProductsListContent />
@@ -115,7 +123,11 @@ export default function VolumeLever(): ReactElement {
 			{/* Sell into */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Sell into new market or territory
 					</Typography>
 					<SellIntoListContent />
@@ -135,7 +147,11 @@ export default function VolumeLever(): ReactElement {
 			{/* Improve sale process */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Improve sale process
 					</Typography>
 					<ImproveListContent />

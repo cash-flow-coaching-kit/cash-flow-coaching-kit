@@ -13,7 +13,7 @@ export default function CFCCompare(): ReactElement {
 
 	return (
 		<PageContainer>
-			<SectionTitle>Compare canvas fields</SectionTitle>
+			<SectionTitle component="h1">Compare canvas fields</SectionTitle>
 			<Typography>
 				Compare different canvasses to track cash flow trends
 			</Typography>

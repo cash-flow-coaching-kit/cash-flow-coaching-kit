@@ -50,7 +50,11 @@ export default function ExpensesLever(): ReactElement {
 			{/* Reduce discretionary spending */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Reduce discretionary spending
 					</Typography>
 					<ReduceSpendingListContent />
@@ -70,7 +74,11 @@ export default function ExpensesLever(): ReactElement {
 			{/* Reduce overheads */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Reduce overheads
 					</Typography>
 					<ReduceOverheadsListContent />

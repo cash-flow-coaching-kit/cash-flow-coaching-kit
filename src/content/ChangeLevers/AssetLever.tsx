@@ -52,7 +52,11 @@ export default function AssetLever(): ReactElement {
 			{/* Sell Assets */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Sell underutilised assets
 					</Typography>
 					<SellAssetsListContent />
@@ -72,7 +76,11 @@ export default function AssetLever(): ReactElement {
 			{/* Refinance */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Refinance
 					</Typography>
 					<RefinanceListContent />
@@ -92,7 +100,11 @@ export default function AssetLever(): ReactElement {
 			{/* Sell and lease back */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Sell and lease back
 					</Typography>
 					<SellLeaseListContent />
