@@ -32,6 +32,8 @@ import filterByActionContainer from "../util/filters/ByActionContainer"
 import { ActionChecklistMachine } from "../data/ActionChecklist/_config/machine"
 import Loading from "../components/Loading"
 import Spacer from "../components/Spacer"
+import ActionChecklistPDF from "../components/PDF/ActionChecklistPDF"
+import servePDF from "../components/PDF/servePDF"
 
 /**
  * Action Checklist page component
@@ -97,6 +99,15 @@ const ActionChecklist = (): ReactElement => {
 		}
 	}
 
+	const printPDF = async () => {
+		const pdf = await ActionChecklistPDF(
+			currentClient?.name ?? "Client",
+			checklistCollection,
+			notes
+		)
+		servePDF(pdf)
+	}
+
 	return (
 		<>
 			<PageContainer>
@@ -127,7 +138,7 @@ const ActionChecklist = (): ReactElement => {
 									<ListItemIcon>
 										<PictureAsPdfIcon />
 									</ListItemIcon>
-									<ListItemText>Generate PDF</ListItemText>
+									<ListItemText onClick={printPDF}>Generate PDF</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>

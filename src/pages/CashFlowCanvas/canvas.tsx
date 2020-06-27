@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react"
-import { Grid, Box, Typography, List, Divider } from "@material-ui/core"
+import { Grid, Box, Typography, List } from "@material-ui/core"
+import { ReactourStep } from "reactour"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import CreateCanvasForm from "../../components/Forms/CFC/CanvasCreate"
@@ -7,6 +8,22 @@ import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ControlPanel from "../../components/CFC/ControlPanel"
 import SectionTitle from "../../components/SectionTitle"
 import Spacer from "../../components/Spacer"
+import PageTour from "../../components/PageTour"
+import {
+	CFC4QsTourContent,
+	CFCCreateCanvas,
+} from "../../components/CFC/__config/constants"
+
+const steps: ReactourStep[] = [
+	{
+		selector: "[data-reactour='four-questions-nav']",
+		content: CFC4QsTourContent,
+	},
+	{
+		selector: "[data-reactour='create-a-canvas']",
+		content: CFCCreateCanvas,
+	},
+]
 
 /**
  * Create a CFC page
@@ -63,6 +80,7 @@ export default function CFCCanvas(): ReactElement {
 				</Grid>
 			</PageContainer>
 			<PageTip tip="CFCanvasTip" />
+			<PageTour steps={steps} />
 		</>
 	)
 }
