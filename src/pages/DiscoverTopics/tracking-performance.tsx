@@ -21,6 +21,7 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Taskbuilder from "../../components/Taskbuilder"
+import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 
 const TrackingPerformance = (): ReactElement => {
 	const styles = useDTStyles()
@@ -127,6 +128,7 @@ const TrackingPerformance = (): ReactElement => {
 					</Grid>
 					<Grid item xs={12} md={4} lg={3}>
 						<Taskbuilder container="tracking" />
+						<QuicksnapsPanel filename="Tracking your performance - Quicksnaps.pdf" />
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>

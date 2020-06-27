@@ -22,6 +22,7 @@ import { routes as primaryRoutes } from "../Primary/_config/data"
 import { INavRoutes } from "../_config/shape"
 import useCurrentClient from "../../../state/client/useCurrentClient"
 import usePrimaryStyles from "../Primary/_config/styles"
+import ShowMeHow from "../../ShowMeHow"
 import Logout from "../../Logout"
 import Spacer from "../../Spacer"
 
@@ -150,6 +151,10 @@ export default function MobileNavbar(): ReactElement {
 				onClose={closeDrawer}
 				classes={{ paper: cls.drawer }}
 			>
+				<List component="div" className="MuiListItem-gutters">
+					<ShowMeHow triggerCallback={closeDrawer} />
+				</List>
+				<Divider />
 				<List>{secondaryRoutes.map(renderRoutes)}</List>
 				<Divider />
 				<List>{primaryRoutes.map(renderRoutes)}</List>

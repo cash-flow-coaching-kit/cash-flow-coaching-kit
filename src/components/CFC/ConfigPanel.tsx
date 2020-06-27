@@ -68,6 +68,7 @@ const Panel = memo(function Panel({
 					canvasType: canvasTypeValue,
 				},
 				currentClient.id,
+				useCustomTitle,
 				id || undefined
 			)
 

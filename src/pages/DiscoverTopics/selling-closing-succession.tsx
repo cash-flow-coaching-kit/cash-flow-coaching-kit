@@ -14,6 +14,7 @@ import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
+import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 
 const DTSellingClosingSuccession = (): ReactElement => {
 	const styles = useDTStyles()
@@ -262,6 +263,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 					</Grid>
 					<Grid item xs={12} md={4} lg={3}>
 						<Taskbuilder container="transition" />
+						<QuicksnapsPanel filename="Selling, closing and succession planning - Quicksnaps.pdf" />
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>
