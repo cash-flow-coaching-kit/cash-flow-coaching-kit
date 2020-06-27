@@ -76,8 +76,8 @@ export default function CanvasList({
 				<ListItemText
 					primary={canvasDisplayTitle(item)}
 					secondary={
-						item.createdAt
-							? format(item.createdAt, "dd/MM/yyyy hh:mm a")
+						item.canvasStartDate
+							? format(item.canvasStartDate, "dd/MM/yyyy")
 							: false
 					}
 				/>
