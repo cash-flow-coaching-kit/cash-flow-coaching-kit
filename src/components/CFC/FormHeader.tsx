@@ -28,16 +28,16 @@ export default memo(function FormHeader(): ReactElement {
 	return (
 		<>
 			<Grid container spacing={2}>
-				<Grid item sm={DescriptionSize}>
+				<Grid item xs={DescriptionSize}>
 					<Typography className={cls.label}>Description</Typography>
 				</Grid>
-				<Grid item sm={AmountSize}>
+				<Grid item xs={AmountSize}>
 					<Typography className={cls.label}>Amount</Typography>
 				</Grid>
-				<Grid item sm={ApplyGSTSize}>
+				<Grid item xs={ApplyGSTSize}>
 					<Typography className={cls.label}>Apply GST</Typography>
 				</Grid>
-				<Grid item sm={ActionsSize}>
+				<Grid item xs={ActionsSize}>
 					<Typography className={cls.label}>Actions</Typography>
 				</Grid>
 			</Grid>

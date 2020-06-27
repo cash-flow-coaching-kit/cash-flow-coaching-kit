@@ -22,7 +22,7 @@ const addNewActionItem = (
 		(collection: ActionChecklistPriorityStruct[], item) => {
 			return collection.concat(
 				item.id === pID
-					? { ...item, order: uniq([...item.order, checklist?.id || -1]) }
+					? { ...item, order: uniq([...item.order, checklist?.id || ""]) }
 					: item
 			)
 		},
@@ -34,7 +34,7 @@ const addNewActionItem = (
 		// eslint-disable-next-line
 		newPriority.push({
 			...newPriorityItem(checklist.clientId, checklist.actionContainer),
-			order: [checklist?.id || -1],
+			order: [checklist?.id || ""],
 			id: pID,
 		})
 	}

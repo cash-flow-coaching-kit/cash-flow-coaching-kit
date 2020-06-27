@@ -53,7 +53,7 @@ const QuizList = ({
 									[":id", `${quiz.id}`],
 								])}
 							/>
-							<IconDeleteButtonwDialog onClick={removeItem(quiz.id || -1)} />
+							<IconDeleteButtonwDialog onClick={removeItem(quiz.id || "")} />
 						</ListItemSecondaryAction>
 					</ListItem>
 				)

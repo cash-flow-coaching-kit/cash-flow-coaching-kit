@@ -69,8 +69,8 @@ const bulkAddActionItem = (
 	const { items, priorityId } = payload
 
 	const newChecklist = [...state.checklistCollection, ...items]
-	const additionalOrders = items.reduce((arr: number[], item) => {
-		return typeof item.id === "number" ? [...arr, item.id] : arr
+	const additionalOrders = items.reduce((arr: string[], item) => {
+		return typeof item.id === "string" ? [...arr, item.id] : arr
 	}, [])
 
 	const newPriority = appendOrCreatePriority(

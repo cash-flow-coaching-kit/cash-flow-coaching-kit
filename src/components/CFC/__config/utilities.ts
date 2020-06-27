@@ -138,20 +138,21 @@ type DupResponse = false | CFCStruct
 export function identifyIfDuplicate(
 	dups: CFCStruct[],
 	values: CFCPanelSlice,
+	usingCustom: boolean,
 	canvasId?: CFCId
 ): DupResponse {
 	if (dups.length === 0) return false
 	const { canvasTitle, canvasEndDate, canvasStartDate } = values
 
 	const filtered = dups.filter((item) => {
-		if (canvasTitle === "" && item.canvasTitle === "") {
+		if (!usingCustom) {
 			return (
 				isSameDay(item.canvasStartDate, canvasStartDate) &&
 				isSameDay(item.canvasEndDate, canvasEndDate)
 			)
 		}
 
-		return item.canvasTitle === canvasTitle
+		return item.canvasTitle === "" ? false : item.canvasTitle === canvasTitle
 	})
 
 	if (!canvasId) {
@@ -176,6 +177,7 @@ export function identifyIfDuplicate(
 export async function performDupFind(
 	slice: CFCPanelSlice,
 	client: ClientId,
+	usingCustom: boolean,
 	canvasId?: CFCId
 ): Promise<DupResponse> {
 	const dups = await CFCUseCase.findPossibleDuplicates(
@@ -184,7 +186,7 @@ export async function performDupFind(
 		client
 	)
 
-	return identifyIfDuplicate(dups, slice, canvasId)
+	return identifyIfDuplicate(dups, slice, usingCustom, canvasId)
 }
 
 /**

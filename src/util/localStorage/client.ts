@@ -1,7 +1,7 @@
 import { ClientId } from "../../data/_config/shape"
 
 const storageKey = "currentClientId"
-export const emptyClientValue = -1
+export const emptyClientValue = ""
 
 export function setStorageClient(id: ClientId): void {
 	window.localStorage.setItem(storageKey, `${id}`)
@@ -10,7 +10,7 @@ export function setStorageClient(id: ClientId): void {
 export function getStorageClient(): ClientId | undefined {
 	const id = window.localStorage.getItem(storageKey)
 	if (id) {
-		return parseInt(id, 10)
+		return id
 	}
 
 	return undefined

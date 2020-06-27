@@ -97,11 +97,11 @@ const ActionContainer = ({
 			return
 		}
 
-		const order = arraySwap<number>(
+		const order = arraySwap<string>(
 			priority.order,
 			source.index,
 			destination.index,
-			parseInt(draggableId, 10)
+			draggableId
 		)
 
 		dispatch({
@@ -216,7 +216,7 @@ const ActionContainer = ({
 		if (checklistItem?.id) {
 			return (
 				<ActionItem
-					key={constructKey(key, checklistItem?.id)}
+					key={checklistItem?.id}
 					draggableId={checklistItem?.id}
 					index={idx}
 					data={checklistItem}

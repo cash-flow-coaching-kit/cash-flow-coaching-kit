@@ -1,5 +1,5 @@
 import { BaseCFCStruct, CFCPanelSlice } from "../../../data/_config/shape"
-import { syncEndDate } from "../../../util/dates"
+import { calculatedEndDate } from "../../../util/dates"
 
 type DateRtn = {
 	canvasStartDate: BaseCFCStruct["canvasStartDate"]
@@ -21,11 +21,11 @@ export default function changeDate<T extends CFCPanelSlice>(
 	}
 
 	// This checks if the start date is ahead of the end date
-	if (k === "canvasStartDate" && syncEndDate(v, values.canvasEndDate)) {
+	if (k === "canvasStartDate") {
 		// if it is, it will set the end date to the start date
 		return {
 			...val,
-			canvasEndDate: v,
+			canvasEndDate: calculatedEndDate(v, values.canvasTimeFrame),
 		}
 	}
 

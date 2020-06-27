@@ -5,6 +5,7 @@ export const defaultCFCState: ICFCState = {
 	dispatch: () => null,
 	duplicateError: false,
 	invalidDateError: false,
+	copyCanvasActive: false,
 	questionValues: {
 		one: 0,
 		two: 0,

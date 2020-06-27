@@ -1,14 +1,13 @@
+import { v4 as uuidv4 } from "uuid"
 import { CashFlow } from "../../data/_config/shape"
-import { newTimestamp } from "../../util/dates"
 
 export default function createCashFlowItem(
-	id: number | null = null,
 	description = "",
 	amount = 0,
 	gstApplicable = true
 ): CashFlow {
 	return {
-		id: id || newTimestamp(),
+		id: uuidv4(),
 		description,
 		amount,
 		gstApplicable,

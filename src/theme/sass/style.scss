@@ -28,5 +28,18 @@ code {
 }
 
 .list-item-padded {
-	padding-right: calc(48px * 2) !important;
+	padding-right: calc(48px * 2 + 8px) !important;
+}
+
+.truncate {
+	&.list-item {
+		flex: 1 1 100% !important;
+	}
+
+	> *:first-child {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: block;
+	}
 }

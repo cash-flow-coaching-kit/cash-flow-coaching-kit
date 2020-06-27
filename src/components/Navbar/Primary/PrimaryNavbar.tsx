@@ -8,6 +8,7 @@ import { routes } from "./_config/data"
 import Logo from "../../Logo"
 import { PublicRoutes } from "../../../util/routes/routes"
 import useCurrentClient from "../../../state/client/useCurrentClient"
+import Logout from "../../Logout"
 
 /**
  * Renders the primary navigation
@@ -25,23 +26,34 @@ const PrimaryNavbar = (): ReactElement => {
 				<Toolbar>
 					<Grid container spacing={2}>
 						{currentClient ? (
-							<Grid item md={2} lg={4} className={styles.clientGridItem}>
+							<Grid item sm={2} md={2} lg={4} className={styles.clientGridItem}>
 								<Typography className={styles.clientCaption} variant="caption">
 									Client
 								</Typography>
-								<Typography className={styles.clientName} variant="h6">
-									{currentClient.name}
+								<Typography
+									className={`${styles.clientName} truncate`}
+									variant="h6"
+								>
+									<span>{currentClient.name}</span>
 								</Typography>
 							</Grid>
 						) : (
 							<Grid item md={2} lg={4} />
 						)}
-						<Grid item md={6} lg={4} className={`${sharedStyle.logoBox}`}>
+						<Grid
+							item
+							sm={5}
+							md={5}
+							lg={4}
+							className={`${sharedStyle.logoBox}`}
+						>
 							<Logo to={PublicRoutes.Home} />
 						</Grid>
 						<Grid
 							item
-							sm={4}
+							sm={5}
+							md={5}
+							lg={4}
 							className={`${sharedStyle.box} ${sharedStyle.small}`}
 						>
 							<NavigationRoutes
@@ -58,6 +70,7 @@ const PrimaryNavbar = (): ReactElement => {
 							>
 								Help
 							</Button>
+							<Logout />
 						</Grid>
 					</Grid>
 				</Toolbar>

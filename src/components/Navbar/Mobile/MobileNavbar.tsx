@@ -22,6 +22,8 @@ import { routes as primaryRoutes } from "../Primary/_config/data"
 import { INavRoutes } from "../_config/shape"
 import useCurrentClient from "../../../state/client/useCurrentClient"
 import usePrimaryStyles from "../Primary/_config/styles"
+import Logout from "../../Logout"
+import Spacer from "../../Spacer"
 
 const useStyles = makeStyles((theme) => ({
 	drawer: {
@@ -42,9 +44,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	clientBox: {
 		flexGrow: 2,
-		"& h6": {
-			width: "100%",
-		},
+		minWidth: 0,
 	},
 	childList: {
 		marginLeft: theme.spacing(3),
@@ -134,11 +134,10 @@ export default function MobileNavbar(): ReactElement {
 									Client
 								</Typography>
 								<Typography
-									className={primaryStyle.clientName}
+									className={`${primaryStyle.clientName} truncate`}
 									variant="h6"
-									noWrap
 								>
-									{currentClient?.name || ""}
+									<span>{currentClient?.name || ""}</span>
 								</Typography>
 							</>
 						)}
@@ -154,6 +153,11 @@ export default function MobileNavbar(): ReactElement {
 				<List>{secondaryRoutes.map(renderRoutes)}</List>
 				<Divider />
 				<List>{primaryRoutes.map(renderRoutes)}</List>
+				<Divider />
+				<Spacer />
+				<Box style={{ padding: "0 16px" }}>
+					<Logout color="primary" variant="contained" />
+				</Box>
 			</Drawer>
 		</>
 	)
