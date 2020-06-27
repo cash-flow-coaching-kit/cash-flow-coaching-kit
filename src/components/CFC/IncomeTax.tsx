@@ -83,8 +83,10 @@ export default React.memo(function IncomeTax({
 			className={`${cls.wrapper} ${cls.highlight} ${styles.root} ${cusCls.box}`}
 		>
 			<Box className={styles.type}>
-				<Typography variant="h6">Income Tax or Company Tax</Typography>
-				<Typography>
+				<Typography variant="h6" component="p">
+					Income Tax or Company Tax
+				</Typography>
+				<Typography component="span">
 					Estimated amount to pay your tax; approximately {value}% of your Cash
 					Surplus.
 				</Typography>

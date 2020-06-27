@@ -6,6 +6,9 @@ name: "app"
 # The type key specifies the language and version for your application.
 type: "nodejs:12"
 
+build:
+  flavor: none
+
 # dependencies:
 #   nodejs:
 #     yarn: "*"

@@ -1,5 +1,6 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useState, useEffect } from "react"
 import { Typography, makeStyles } from "@material-ui/core"
+import { useParams } from "react-router-dom"
 import { CFCTimeFrame, CanvasType } from "../../data/_config/shape"
 import { generateTitle } from "./__config/utilities"
 
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: theme.spacing(2),
 	},
 	noTitle: {
-		color: theme.palette.grey[500],
+		color: theme.palette.grey[600],
 	},
 }))
 
@@ -51,6 +52,12 @@ export default React.memo(function CanvasTitle({
 	useCustomTitle,
 }: CanvasTitleProps): ReactElement {
 	const cls = useStyles()
+	const { id } = useParams()
+	const [comp, setComp] = useState<"h3" | "h1">("h3")
+
+	useEffect(() => {
+		setComp(typeof id === "undefined" ? "h3" : "h1")
+	}, [id, setComp])
 
 	/**
 	 * Placeholder component when there is no custom title
@@ -59,7 +66,11 @@ export default React.memo(function CanvasTitle({
 	 */
 	function AddTitle(): ReactElement {
 		return (
-			<Typography variant="h5" className={`${cls.title} ${cls.noTitle}`}>
+			<Typography
+				variant="h5"
+				component="span"
+				className={`${cls.title} ${cls.noTitle}`}
+			>
 				Add a title below
 			</Typography>
 		)
@@ -67,10 +78,10 @@ export default React.memo(function CanvasTitle({
 
 	return (
 		<>
-			<Typography variant="overline" className={cls.caption}>
+			<Typography variant="overline" component="span" className={cls.caption}>
 				Canvas title
 			</Typography>
-			<Typography variant="h5" className={cls.title}>
+			<Typography variant="h5" className={cls.title} component={comp}>
 				{useCustomTitle
 					? customTitle || <AddTitle />
 					: generateTitle(type, timeframe, startDate, endDate)}

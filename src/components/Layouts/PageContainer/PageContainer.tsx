@@ -11,15 +11,26 @@ import usePCStyles from "./_config/styles"
 const PageContainer = ({
 	children,
 	className,
+	id,
+	// eslint-disable-next-line
 	...rest
 }: IPageContainer): ReactElement => {
 	const styles = usePCStyles()
 
 	return (
-		// eslint-disable-next-line react/jsx-props-no-spreading
-		<Container className={`${styles.container} ${className}`} {...rest}>
-			{children}
-		</Container>
+		<>
+			{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+			<a id="main-page-container" tabIndex={-1} className="visually-hidden">
+				Main content anchor
+			</a>
+			<Container
+				className={`${styles.container} ${className || ""}`}
+				// eslint-disable-next-line react/jsx-props-no-spreading
+				{...rest}
+			>
+				{children}
+			</Container>
+		</>
 	)
 }
 

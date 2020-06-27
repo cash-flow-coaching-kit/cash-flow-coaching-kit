@@ -21,7 +21,9 @@ export default React.memo(function TableHeader({
 	return (
 		<TableHead>
 			<TableRow>
-				<TableCell className={cls.cell1} />
+				<TableCell className={cls.cell1}>
+					<span className="MuiTypography-srOnly">Cash category</span>
+				</TableCell>
 				<TableCell className={cls.cellCanvas}>
 					{canvasDisplayTitle(left)}
 				</TableCell>

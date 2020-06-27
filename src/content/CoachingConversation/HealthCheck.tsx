@@ -21,17 +21,12 @@ export default function HealthCheck(): ReactElement {
 			<Box className={cls.box}>
 				<List className={cls.list}>
 					<Typography component="li">
-						The Health Check helps you understand how your client views their
-						business, and their knowledge of cash flow.
+						The Health Check helps you understand your clients business and
+						cashflow knowledge.
 					</Typography>
 					<Typography component="li">
 						Introduce the Health Check to your client as an opportunity to
-						understand where they are at, and identify areas for improvement.
-					</Typography>
-					<Typography component="li">
-						Listen to their responses and observe their reactions. Notice the
-						areas that they are uncomfortable with as this will provide
-						opportunities for you to coach or guide them.
+						understand where they are at.
 					</Typography>
 					<Typography component="li">
 						Consider questions such as:
@@ -49,7 +44,7 @@ export default function HealthCheck(): ReactElement {
 					</Typography>
 					<Typography component="li">
 						If your client is unsure about their results, they can learn more by
-						using the Discover Topics feature.
+						using the Discover Topics.
 					</Typography>
 				</List>
 
@@ -67,6 +62,7 @@ export default function HealthCheck(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/Health Check coaching tips.docx"
+							aria-label="Download transcript: Health Check coaching tips"
 							target="_blank"
 							rel="noopener noreferrer"
 						>

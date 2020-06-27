@@ -21,19 +21,16 @@ export default function CFC(): ReactElement {
 			<Box className={cls.box}>
 				<List className={cls.list}>
 					<Typography component="li">
-						Introduce the Cash Flow Canvas to your client as an opportunity to
-						understand how their business is performing. Consider using the Four
-						Key Questions as a frame to discuss this.
+						Introduce the Cash Flow Canvas as an opportunity to understand their
+						cashflow. Use the Four Key Questions to discuss this.
 					</Typography>
 					<Typography component="li">
-						Explain how each component, like Cash IN and Cash OUT, helps to
-						identify the main cash movements in and out of their business. Work
-						through regular financial commitments and other important items in
-						their cash flow.
+						Work through regular financial commitments and other important items
+						in their cash flow.
 					</Typography>
 					<Typography component="li">
-						Your conversations on the canvas should draw out how their business
-						is performing and identify where they want to go.
+						The canvas should draw out how their business is performing and
+						identify where they want to go.
 					</Typography>
 					<Typography component="li">
 						Consider asking questions such as:
@@ -74,6 +71,7 @@ export default function CFC(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/Cash Flow Canvas coaching tips.docx"
+							aria-label="Download transcript: Cash Flow Canvas coaching tips"
 							target="_blank"
 							rel="noopener noreferrer"
 						>

@@ -20,6 +20,7 @@ export default function ViewIconButton({ goTo }: Props): ReactElement {
 		<Tooltip title="View">
 			<IconButton component={Link} to={goTo}>
 				<VisibilityIcon />
+				<span className="MuiTypography-srOnly">View resutls</span>
 			</IconButton>
 		</Tooltip>
 	)

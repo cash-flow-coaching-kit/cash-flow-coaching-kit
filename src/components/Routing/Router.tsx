@@ -4,6 +4,7 @@ import PublicRoutesWrapper from "./Public"
 import PrivateRoutesWrapper from "./Private"
 import syncClientsWithDb from "../../data/client/syncWithDB"
 import { ClientContext } from "../../state/client"
+import SkipToContent from "../SkipToContent"
 
 /**
  * Function to scroll to the top of the page on page change
@@ -40,6 +41,7 @@ const AppRouter = (): ReactElement => {
 			<ScrollToTop />
 			<Switch>
 				<>
+					<SkipToContent />
 					<PublicRoutesWrapper />
 					{/* TODO: Hide if the user does not have any clients */}
 					<PrivateRoutesWrapper />

@@ -28,6 +28,7 @@ export default function IconDeleteButton({
 		<Tooltip title="Delete">
 			<IconButton onClick={onClick}>
 				<DeleteIcon />
+				<span className="MuiTypography-srOnly">Delete data</span>
 			</IconButton>
 		</Tooltip>
 	)

@@ -16,10 +16,10 @@ import { questionOptionsMap } from "./utilities"
  * @exports
  */
 export const fourQuestionsContent = [
-	"Am I trading profitably?",
-	"Have I put enough aside to meet my regular financial commitments?",
-	"Does my business have enough to spend on myself and pay others?",
-	"Is my business improving its financial position?",
+	"Are you trading profitably?",
+	"Have you put enough money aside to meet your regular financial commitments?",
+	"Does your business have enough to spend on yourself and pay others?",
+	"Is your business improving its financial position?",
 ]
 
 /**
@@ -29,7 +29,7 @@ export const fourQuestionsContent = [
 const fourQuestionOptions: QuestionOptionsRecord = {
 	positive: "Yes",
 	negative: "No",
-	neutral: "I don't know",
+	neutral: "Not sure",
 }
 
 /**
@@ -39,7 +39,7 @@ const fourQuestionOptions: QuestionOptionsRecord = {
 const additionalQuestionsOptions: QuestionOptionsRecord = {
 	positive: "Confident",
 	negative: "Not Confident",
-	neutral: "Unsure",
+	neutral: "Not sure",
 }
 
 /**

@@ -11,16 +11,19 @@ import {
 	Box,
 	CardHeader,
 	Avatar,
+	List,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { PrivateRoutes } from "../util/routes/routes"
 import { PublicNavbar } from "../components/Navbar"
 import { NewClientDialog } from "../content/dialog"
 import { ClientContext } from "../state/client"
+import Spacer from "../components/Spacer"
 
 const useHomepageStyles = makeStyles((theme) => ({
 	container: {
 		paddingTop: theme.spacing(5),
+		paddingBottom: theme.spacing(5),
 	},
 	grid: {
 		paddingTop: theme.spacing(5),
@@ -83,7 +86,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 	},
 	MainHeading: {
 		paddingTop: theme.spacing(2),
-		paddingBottom: theme.spacing(2),
+		paddingBottom: theme.spacing(1),
 		fontSize: "2.2rem",
 	},
 	SectionTitle: {
@@ -110,10 +113,10 @@ const Homepage = (): ReactElement => {
 						component="h1"
 						className={styles.MainHeading}
 					>
-						CASH FLOW COACHING KIT
+						Cash Flow Coaching Kit
 					</Typography>
 					<Typography align="center" component="p" variant="h5">
-						Helping businesses survive and grow.
+						Plan and improve your small business.
 					</Typography>
 				</Container>
 				<Container
@@ -136,9 +139,9 @@ const Homepage = (): ReactElement => {
 									variant="body1"
 									component="p"
 									className={styles.contentText}
+									align="center"
 								>
-									Do you want to learn about cash flow fundamentals and topics
-									to get a competitive advantage?
+									Learn about cash flow management.
 								</Typography>
 							</Grid>
 							<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
@@ -154,9 +157,9 @@ const Homepage = (): ReactElement => {
 									variant="body1"
 									component="p"
 									className={styles.contentText}
+									align="center"
 								>
-									Do you want to understand your current cash flow and explore
-									ways to help improve it?
+									Understand your current cash flow and plan improvements.
 								</Typography>
 							</Grid>
 							<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
@@ -172,9 +175,9 @@ const Homepage = (): ReactElement => {
 									variant="body1"
 									component="p"
 									className={styles.contentText}
+									align="center"
 								>
-									Do you want to create your personalised action plan to keep
-									yourself accountable and monitor your progress?
+									Create an action checklist and track your progress.
 								</Typography>
 							</Grid>
 						</Grid>
@@ -196,6 +199,52 @@ const Homepage = (): ReactElement => {
 							<NewClientDialog triggerText="Get Started" />
 						)}
 					</Box>
+					<Spacer />
+					<Grid container spacing={0}>
+						<Grid item xs={12} sm={8}>
+							<Box className="content-area">
+								<Typography variant="h5">Using the Cash Flow Kit</Typography>
+								<Typography>
+									Planning your business will help you sustain or grow your
+									business.
+								</Typography>
+								<Typography className="list-describer">
+									You can use the kit to:
+								</Typography>
+								<List component="ul" className="ul-list">
+									<Typography component="li">
+										Check the health of your business
+									</Typography>
+									<Typography component="li">
+										Learn about business management
+									</Typography>
+									<Typography component="li">Understand cash flow</Typography>
+									<Typography component="li">
+										Explore practical ways to improve cash flow
+									</Typography>
+									<Typography component="li">
+										Plan and track improvements
+									</Typography>
+								</List>
+								<Typography className="list-describer">
+									To review, plan and improve your cash flow, you need to know
+									your:
+								</Typography>
+								<List component="ul" className="ul-list">
+									<Typography component="li">Opening balance</Typography>
+									<Typography component="li">Revenue</Typography>
+									<Typography component="li">Expenses</Typography>
+								</List>
+								<Typography>
+									You can also import data from other tools and applications
+								</Typography>
+								<Typography>
+									The kit does not save information between sessions. Use the
+									export function regularly to save your progress.
+								</Typography>
+							</Box>
+						</Grid>
+					</Grid>
 					<Grid container spacing={3} className={styles.grid} justify="center">
 						{/* <Grid item xs={12} md={6}>
 							<Card variant="outlined">
@@ -210,6 +259,7 @@ const Homepage = (): ReactElement => {
 									<Button
 										color="primary"
 										href="/transcripts/Take-a-tour-of-the-kit.docx"
+										aria-label="Download transcript: Take a tour of the kit"
 										target="_blank" rel="noopener noreferrer"
 									>
 										Download Transcript
@@ -230,6 +280,7 @@ const Homepage = (): ReactElement => {
 									<Button
 										color="primary"
 										href="/transcripts/What-advisors-think-of-the-kit.docx"
+										aria-label="Download transcript: What advisors think of the kit"
 										target="_blank"
 										rel="noopener noreferrer"
 									>

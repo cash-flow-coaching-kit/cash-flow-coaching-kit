@@ -17,23 +17,20 @@ export default function Coaching(): ReactElement {
 	const cls = useStyles()
 
 	return (
-		<ExpandableNav title="Cash Flow Coaching Kit" defaultExpanded={false}>
+		<ExpandableNav title="The cash flow kit overview" defaultExpanded={false}>
 			<Box className={cls.box}>
 				<List className={cls.list}>
 					<Typography component="li">
-						The Cash Flow Coaching Kit has specific coaching phases (Discover,
-						Apply, Plan & Action) each with their own set of tools and
-						activities. Use these as most appropriate for your client.
+						Explain the coaching steps (Discover, Apply, Plan & Action) and
+						tools.
 					</Typography>
 					<Typography component="li">
 						Explain why the Four Key Questions are fundamental success factors
-						for cash flow. Refer back to these questions frequently to keep the
-						conversation focused on cash flow improvements.
+						for cash flow. Refer to these questions in every step.
 					</Typography>
 					<Typography component="li">
 						Use the Health Check or review your client’s Action Checklist tasks
-						to help start a conversation. Ask your client for their areas of
-						interest or concerns.
+						to help start a conversation.
 					</Typography>
 					<Typography component="li">
 						It isn’t necessary to complete the entire coaching kit in every
@@ -67,6 +64,7 @@ export default function Coaching(): ReactElement {
 						<Button
 							color="primary"
 							href="/transcripts/What-advisors-think-of-the-kit.docx"
+							aria-label="Download transcript: What advisors think of the kit"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
