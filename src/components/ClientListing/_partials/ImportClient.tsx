@@ -20,7 +20,7 @@ export default function ImportClient(): ReactElement {
 				startIcon={<GetAppIcon />}
 				onClick={onDialogOpen}
 			>
-				Import
+				Import data
 			</Button>
 			<ImportClientDialog open={dialogOpen} onClose={onDialogClose} />
 		</>

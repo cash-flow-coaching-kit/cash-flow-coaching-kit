@@ -64,7 +64,7 @@ export default function ExportClientButton({
 				disabled={processing}
 				className={cls.btn}
 			>
-				Export
+				Export data
 			</Button>
 			<Tooltip title="Your file will save to your browser's automatic download location.">
 				<InfoIcon color="primary" />
