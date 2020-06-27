@@ -8,12 +8,12 @@ import {
 	ListItemText,
 	Button,
 	makeStyles,
+	Typography,
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
 import AddIcon from "@material-ui/icons/Add"
 import { PageContainer } from "../../components/Layouts"
-import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
 import { PrivateRoutes, routeVarReplacement } from "../../util/routes/routes"
 import QuestionSummaries from "../../components/HealthCheck/Summary"
@@ -31,15 +31,18 @@ import HealthCheckPDF, {
 } from "../../components/PDF/HealthCheckPDF"
 import { ClientContext } from "../../state/client"
 import { ClientActionTypes } from "../../state/client/client-outline"
+import Spacer from "../../components/Spacer"
 import servePDF from "../../components/PDF/servePDF"
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
 		marginTop: theme.spacing(3),
 	},
+	actionRow: {
+		display: "flex",
+		justifyContent: "flex-end",
+	},
 }))
-
-const QUESTIONS_OFFSET = 4
 
 /**
  * Health check summary page
@@ -53,9 +56,6 @@ const HCSummary = (): ReactElement => {
 	const [healthCheck, setHealthCheck] = useState<
 		HealthCheckDataStruct | undefined
 	>()
-	const [fourQuestions, setFourQuestions] = useState<
-		QuestionOptions[] | undefined
-	>(undefined)
 	const [tileAnswers, setTileAnswers] = useState<QuestionOptions[] | undefined>(
 		undefined
 	)
@@ -78,8 +78,7 @@ const HCSummary = (): ReactElement => {
 					)
 					if (hc) {
 						setHealthCheck(hc)
-						setFourQuestions(hc.answers.slice(0, QUESTIONS_OFFSET))
-						setTileAnswers(hc.answers.slice(QUESTIONS_OFFSET))
+						setTileAnswers(hc.answers)
 					}
 				}
 			})()
@@ -92,6 +91,7 @@ const HCSummary = (): ReactElement => {
 			const { question } = q
 			const answer = healthCheck?.answers[idx] || "positive"
 			const text = q.options[answer]
+			// eslint-disable-next-line
 			data[idx] = { question, answer, text }
 		})
 		const pdf = await HealthCheckPDF(currentClient?.name ?? "Client", data)
@@ -107,16 +107,16 @@ const HCSummary = (): ReactElement => {
 							<>
 								<SummaryTitle createdAt={healthCheck.createdAt} />
 								<QuestionSummaries
-									questions={questions.slice(QUESTIONS_OFFSET)}
+									questions={questions}
 									tileAnswers={tileAnswers}
 								/>
 								<Grid
 									container
 									spacing={0}
-									justify="space-between"
+									justify="flex-end"
 									className={styles.summaryActions}
 								>
-									<Grid item xs={12} sm={6}>
+									<Grid item xs={12} className={styles.actionRow}>
 										<Button
 											color="primary"
 											variant="contained"
@@ -127,13 +127,25 @@ const HCSummary = (): ReactElement => {
 										</Button>
 									</Grid>
 								</Grid>
+								<Spacer space={4} />
+								<Typography>
+									Cash flow is a key business challenge that may affect small
+									business owners’ mental health and wellbeing. A range of{" "}
+									<a
+										href="https://www.ato.gov.au/General/Financial-difficulties-and-serious-hardship/small-business-owners-experiencing-mental-health-issues/health-and-wellbeing-organisations/"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										resources are available
+									</a>{" "}
+									if you need assistance.
+								</Typography>
 							</>
 						) : (
 							<InvalidHC />
 						)}
 					</Grid>
 					<Grid item xs={12} md={4} lg={3}>
-						<FourQuestions answers={fourQuestions || []} />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
 								<ListItem
@@ -156,7 +168,7 @@ const HCSummary = (): ReactElement => {
 									<ListItemIcon>
 										<ListIcon />
 									</ListItemIcon>
-									<ListItemText>List of Health Checks</ListItemText>
+									<ListItemText>Saved Health Checks</ListItemText>
 								</ListItem>
 								<ListItem button>
 									<ListItemIcon>

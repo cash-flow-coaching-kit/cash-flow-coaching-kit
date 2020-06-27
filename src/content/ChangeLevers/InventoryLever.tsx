@@ -67,14 +67,18 @@ export default function InventoryLever(): ReactElement {
 	const styles = useChangeLeversStyles()
 	return (
 		<ExpandableNav
-			title="Inventory Lever"
-			subHeading="Reduce amount of cash tied up in unsold inventory"
+			title="Inventory"
+			subHeading="Manage your inventory and ordering"
 			defaultExpanded={false}
 		>
 			{/* Reduce cost of stock or materials */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Reduce cost of stock or materials
 					</Typography>
 					<ReduceStockListContent />
@@ -94,7 +98,11 @@ export default function InventoryLever(): ReactElement {
 			{/* Improve terms with suppliers */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Improve terms with suppliers
 					</Typography>
 					<ImproveTermsListContent />
@@ -114,7 +122,11 @@ export default function InventoryLever(): ReactElement {
 			{/* Clear obsolete or slow moving stock */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Clear obsolete or slow moving stock
 					</Typography>
 					<ClearStockListContent />
@@ -134,7 +146,11 @@ export default function InventoryLever(): ReactElement {
 			{/* Improve ordering process */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Improve ordering process
 					</Typography>
 					<OrderingProcessListContent />

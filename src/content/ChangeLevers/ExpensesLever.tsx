@@ -43,14 +43,18 @@ export default function ExpensesLever(): ReactElement {
 	const styles = useChangeLeversStyles()
 	return (
 		<ExpandableNav
-			title="Expenses Lever"
-			subHeading="Reduce cash outflows"
+			title="Expenses"
+			subHeading="Reduce costs"
 			defaultExpanded={false}
 		>
 			{/* Reduce discretionary spending */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Reduce discretionary spending
 					</Typography>
 					<ReduceSpendingListContent />
@@ -70,7 +74,11 @@ export default function ExpensesLever(): ReactElement {
 			{/* Reduce overheads */}
 			<Grid container spacing={2} className={styles.details}>
 				<Grid item xs={12} lg={8}>
-					<Typography variant="h6" className={styles.contentHeadings}>
+					<Typography
+						variant="h6"
+						component="h4"
+						className={styles.contentHeadings}
+					>
 						Reduce overheads
 					</Typography>
 					<ReduceOverheadsListContent />

@@ -39,8 +39,10 @@ export default React.memo(function DescriptiveMoneyInput({
 	return (
 		<Box className={styles.root}>
 			<Box className={styles.type}>
-				<Typography variant="h6">{title}</Typography>
-				<Typography>{description}</Typography>
+				<Typography variant="h6" component="p">
+					{title}
+				</Typography>
+				<Typography component="span">{description}</Typography>
 			</Box>
 			<MoneyInput
 				// eslint-disable-next-line react/jsx-props-no-spreading

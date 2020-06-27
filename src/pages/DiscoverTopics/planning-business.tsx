@@ -139,12 +139,16 @@ const DTPlanningBusiness = (): ReactElement => {
 						aria-controls="forecast-demand-content"
 						id="forecast-demand-header"
 					>
-						<Typography variant="h5">Forecast demand</Typography>
+						<Typography variant="h5" component="h3">
+							Forecast demand
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
-								<Typography variant="h6">Why?</Typography>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Forecasting the demand for your product or service will help
 									you:
@@ -207,12 +211,16 @@ const DTPlanningBusiness = (): ReactElement => {
 						aria-controls="right-price-content"
 						id="right-price-header"
 					>
-						<Typography variant="h5">Setting the right price</Typography>
+						<Typography variant="h5" component="h3">
+							Setting the right price
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
-								<Typography variant="h6">Why?</Typography>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Setting the right price for your product or service will
 									maximise your cash flow and may remove any potential losses on
@@ -265,12 +273,16 @@ const DTPlanningBusiness = (): ReactElement => {
 						aria-controls="capital-content"
 						id="capital-header"
 					>
-						<Typography variant="h5">Capital to start up or grow</Typography>
+						<Typography variant="h5" component="h3">
+							Capital to start up or grow
+						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
-								<Typography variant="h6">Why?</Typography>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Securing the right amount of capital to start your business or
 									to fund growth will help you keep the business running and

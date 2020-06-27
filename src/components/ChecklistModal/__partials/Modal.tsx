@@ -183,7 +183,7 @@ export default function Modal({
 						}
 					}}
 				>
-					Confirm
+					Add to checklist
 				</Button>
 			</DialogActions>
 		</Dialog>

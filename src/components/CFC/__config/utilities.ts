@@ -152,7 +152,9 @@ export function identifyIfDuplicate(
 			)
 		}
 
-		return item.canvasTitle === "" ? false : item.canvasTitle === canvasTitle
+		return item.canvasTitle.trim() === ""
+			? false
+			: item.canvasTitle.trim() === canvasTitle.trim()
 	})
 
 	if (!canvasId) {
@@ -183,7 +185,8 @@ export async function performDupFind(
 	const dups = await CFCUseCase.findPossibleDuplicates(
 		slice.canvasType,
 		slice.canvasTimeFrame,
-		client
+		client,
+		slice.canvasTitle.trim()
 	)
 
 	return identifyIfDuplicate(dups, slice, usingCustom, canvasId)

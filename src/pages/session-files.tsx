@@ -348,7 +348,7 @@ const SessionFiles = (): ReactElement => {
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
 						<Box className="content-area">
-							<SectionTitle>Downloads</SectionTitle>
+							<SectionTitle component="h1">Downloads</SectionTitle>
 							<Typography>
 								All the activities you completed in your session are saved here.
 								Download and save the files to share and review.

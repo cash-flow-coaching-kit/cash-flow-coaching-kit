@@ -39,7 +39,7 @@ const ActionHeader = (): ReactElement => {
 						name="hide-items"
 					/>
 				}
-				label="Hide completed item"
+				label="Hide completed actions"
 			/>
 		</Box>
 	)
