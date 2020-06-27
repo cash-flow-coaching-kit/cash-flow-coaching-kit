@@ -19,6 +19,7 @@ import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
+import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 
 const DTPlanningFinanicalCommitments = (): ReactElement => {
 	const styles = useDTStyles()
@@ -27,7 +28,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 		<>
 			<PageContainer role="main">
 				<Grid container spacing={2}>
-					<Grid item sm={9}>
+					<Grid item xs={12} md={8} lg={9}>
 						<Typography
 							component="h1"
 							align="center"
@@ -126,8 +127,9 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid item sm={3}>
+					<Grid item xs={12} md={4} lg={3}>
 						<Taskbuilder container="planningCommitments" />
+						<QuicksnapsPanel filename="Planning your regular financial commitments - Quicksnaps.pdf" />
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>

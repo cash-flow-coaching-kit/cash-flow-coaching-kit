@@ -68,7 +68,10 @@ export default function CFCFourQuestions({
 	}
 
 	return (
-		<ExpandableNav title="Four key questions">
+		<ExpandableNav
+			title="Four key questions"
+			reactourLabel="cfc-four-questions"
+		>
 			<Box className={styles.box}>
 				<List className={styles.list}>
 					{fourQuestionsContent.map(
