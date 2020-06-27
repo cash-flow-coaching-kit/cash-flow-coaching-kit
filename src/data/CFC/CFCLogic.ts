@@ -60,7 +60,7 @@ class CFCLogic extends ILogicLayer<CFCStruct, BaseCFCStruct> {
 					clientId,
 				})
 				.or("canvasTitle")
-				.startsWith(canvasTitle)
+				.equals(canvasTitle)
 				.toArray()
 		})
 	}
