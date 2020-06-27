@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from "react"
+import React, { ReactElement, useState, useContext } from "react"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
@@ -9,6 +9,7 @@ import ExpandableNav from "../ExpandableNav"
 import { PrivateRoutes } from "../../util/routes/routes"
 import CopyCanvasTrigger from "./CopyCanvasTrigger"
 import { ControlCompareLink } from "../CFCCompare"
+import ImportDataModal from "../ImportDataModal/ImportDataModal"
 import CFCUseCase from "../../data/CFC/CFCLogic"
 import CashFlowCanvasPDF from "../PDF/CashFlowCanvasPDF"
 import useCurrentClient from "../../state/client/useCurrentClient"
@@ -25,6 +26,7 @@ import servePDF from "../PDF/servePDF"
 export default function ControlPanel(): ReactElement {
 	const history = useHistory()
 	const location = useLocation()
+	const [importDataOpen, setImportDataOpen] = useState<boolean>(false)
 	const { id: canvasId } = useParams()
 	const [currentClient] = useCurrentClient()
 	const { leftCompare, rightCompare } = useContext(CFCContext)
@@ -40,6 +42,10 @@ export default function ControlPanel(): ReactElement {
 
 	const isCompare = (): boolean => {
 		return location.pathname === PrivateRoutes.CFCCompare
+	}
+
+	const importData = () => {
+		setImportDataOpen(!importDataOpen)
 	}
 
 	const printPDF = async () => {
@@ -66,6 +72,7 @@ export default function ControlPanel(): ReactElement {
 
 	return (
 		<ExpandableNav reactourLabel="canvas-control-panel">
+			<ImportDataModal open={importDataOpen} onClose={importData} />
 			<List component="nav" disablePadding>
 				{!isNewPage() && !isCompare() && <CopyCanvasTrigger />}
 				{(!isNewPage() || isCompare()) && (
@@ -77,7 +84,7 @@ export default function ControlPanel(): ReactElement {
 					</ListItem>
 				)}
 				{!isNewPage() && !isCompare() && (
-					<ListItem button>
+					<ListItem button onClick={importData}>
 						<ListItemIcon>
 							<GetAppIcon />
 						</ListItemIcon>

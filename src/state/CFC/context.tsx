@@ -12,6 +12,8 @@ export const defaultCFCState: ICFCState = {
 		three: 0,
 		four: undefined,
 	},
+	canvasItemUpdater: [],
+	setCanvasItemUpdater: () => null,
 }
 
 const CFCContext = createContext(defaultCFCState)

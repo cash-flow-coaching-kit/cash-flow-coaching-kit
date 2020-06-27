@@ -52,6 +52,7 @@ import {
 	calcQuestionTwo,
 	calcQuestionThree,
 } from "../../CFC/__config/utilities"
+import { ProcessFileItem } from "../../ImportDataModal/lib/ImportDataGeneralLib"
 
 /**
  * Form used to edit a CFC
@@ -81,6 +82,7 @@ export default function CanvasForm({
 		dispatch,
 		copyCanvasActive,
 	} = useContext(CFCContext)
+	const { canvasItemUpdater, setCanvasItemUpdater } = useContext(CFCContext)
 
 	const { setFieldValue, handleChange, values, setValues } = useFormik<
 		BaseCFCStruct
@@ -121,6 +123,37 @@ export default function CanvasForm({
 	const cashOutGST = useMemo(() => calcCashFlowGST(cashOutItems), [
 		cashOutItems,
 	])
+
+	const addDataImportItems = useCallback(
+		(items: any) => {
+			const newCashInItems = [
+				...values.cashInItems,
+				...items
+					.filter(({ type }: ProcessFileItem) => type === "in")
+					.map(({ row, description, amount }: ProcessFileItem) =>
+						createCashFlowItem(description, Math.floor(amount))
+					),
+			]
+			setFieldValue("cashInItems", newCashInItems, false)
+
+			const newCashOutItems = [
+				...values.cashOutItems,
+				...items
+					.filter(({ type }: ProcessFileItem) => type === "out")
+					.map(({ row, description, amount }: ProcessFileItem) =>
+						createCashFlowItem(description, Math.floor(amount))
+					),
+			]
+			setFieldValue("cashOutItems", newCashOutItems, false)
+		},
+		[values]
+	)
+
+	// add an updater to list to be used by Data Import
+	useEffect(() => {
+		setCanvasItemUpdater?.([addDataImportItems])
+		return () => setCanvasItemUpdater?.([])
+	}, [addDataImportItems])
 
 	useEffect(() => {
 		if (!useCustomTitle) {
@@ -195,7 +228,12 @@ export default function CanvasForm({
 		msg: SnackbarMsgData["msg"],
 		severity: SnackbarMsgData["severity"]
 	): void {
-		setSnackbar({ ...snackbar, msg, severity, open: true })
+		setSnackbar({
+			...snackbar,
+			msg,
+			severity,
+			open: true,
+		})
 	}
 
 	/**
@@ -285,9 +323,18 @@ export default function CanvasForm({
 	 * @param {"cashInItems" | "cashOutItems"} key
 	 */
 	const addCashFlowItem = useCallback(
-		(key: "cashInItems" | "cashOutItems") => (): void => {
+		(
+			key: "cashInItems" | "cashOutItems",
+			description = "",
+			amount = 0,
+			gstApplicable = true
+		) => (): void => {
 			const items = values[key]
-			setFieldValue(key, items.concat(createCashFlowItem()), false)
+			setFieldValue(
+				key,
+				items.concat(createCashFlowItem(description, amount, gstApplicable)),
+				false
+			)
 		},
 		[setFieldValue, values]
 	)
