@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 	separator: {
 		paddingRight: theme.spacing(1),
 		paddingLeft: theme.spacing(1),
-		color: theme.palette.grey[500],
+		color: theme.palette.grey[600],
 		textTransform: "uppercase",
 		fontSize: theme.typography.fontSize,
 		lineHeight: "56px",

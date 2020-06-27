@@ -167,6 +167,7 @@ const Form = React.forwardRef(
 					<Grid item xs={12} md={8}>
 						<TextField
 							name={`items[${idx}].description`}
+							id={`items[${idx}].description`}
 							label="Customise your action"
 							variant="outlined"
 							value={item.description}
