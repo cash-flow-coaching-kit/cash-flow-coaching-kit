@@ -200,7 +200,7 @@ export default function CopyCanvasDialog({
 	 * @param {K} k
 	 * @param {BaseCFCStruct[K]} v
 	 */
-	function changeDateValue(k: CanvasDateKeys, v: Date): void {
+	const changeDateValue = (k: CanvasDateKeys, v: Date): void => {
 		const { canvasStartDate, canvasEndDate } = changeDate<CFCPanelSlice>(
 			k,
 			v,

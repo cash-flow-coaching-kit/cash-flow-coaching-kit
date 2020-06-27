@@ -11,4 +11,5 @@ export interface IExpandableNavProps {
 	title?: string
 	subHeading?: string
 	defaultExpanded?: boolean
+	reactourLabel?: string
 }
