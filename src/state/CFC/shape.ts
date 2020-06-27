@@ -1,4 +1,5 @@
 import { Dispatch } from "react"
+import { CFCStruct } from "../../data/_config/shape"
 
 type QuestionValues = {
 	one: number
@@ -24,6 +25,8 @@ export interface ICFCState {
 
 	canvasItemUpdater: ItemUpdaterFunction[]
 	setCanvasItemUpdater?: any
+	leftCompare?: CFCStruct
+	rightCompare?: CFCStruct
 	copyCanvasActive: boolean
 }
 
@@ -37,7 +40,13 @@ export enum CFCActionTypes {
 	ChangeDuplicateError = "change_duplicate_error",
 	ChangeInvalidDateError = "change_invalid_date_error",
 	ChangeQuestionValues = "change_question_values",
+	ChangeCompare = "change_compare",
 	ChangeCopyCanvasActive = "change_copy_canvas_active",
+}
+
+export type ChangeComparePayload = {
+	left: CFCStruct
+	right: CFCStruct
 }
 
 /**
@@ -64,4 +73,8 @@ export type CFCReducerActions =
 	| {
 			type: CFCActionTypes.ChangeCopyCanvasActive
 			payload: ICFCState["copyCanvasActive"]
+	  }
+	| {
+			type: CFCActionTypes.ChangeCompare
+			payload: ChangeComparePayload
 	  }

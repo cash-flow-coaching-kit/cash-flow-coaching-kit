@@ -21,4 +21,7 @@ export const useFormStyles = makeStyles((theme) => ({
 	fill: {
 		width: "100%",
 	},
+	label: {
+		display: "flex",
+	},
 }))

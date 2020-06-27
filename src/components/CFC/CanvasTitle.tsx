@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: theme.spacing(2),
 	},
 	noTitle: {
-		color: theme.palette.grey[500],
+		color: theme.palette.grey[600],
 	},
 }))
 

@@ -17,6 +17,18 @@ code {
 	margin: 0 -12px;
 }
 
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
 .change-levers-ul {
 	margin-bottom: 0;
 }
@@ -41,5 +53,25 @@ code {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: block;
+	}
+}
+
+.visually-hidden {
+	position: absolute !important;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	width: 1px;
+	height: 1px;
+	word-wrap: normal;
+
+	&.focusable:focus {
+		position: absolute !important;
+		left: 0.5rem !important;
+		top: 0.5rem !important;
+		overflow: visible;
+		clip: auto;
+		width: auto;
+		height: auto;
+		z-index: 99999;
 	}
 }

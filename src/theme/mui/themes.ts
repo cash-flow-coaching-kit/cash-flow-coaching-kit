@@ -23,7 +23,7 @@ export const applyTheme: ThemeOptions = {
 	...defaultTheme,
 	palette: {
 		primary: {
-			main: green["600"],
+			main: green["800"],
 		},
 		secondary: {
 			main: green["200"],
@@ -47,7 +47,7 @@ export const planActionTheme: ThemeOptions = {
 	...defaultTheme,
 	palette: {
 		primary: {
-			main: lightBlue.A700,
+			main: lightBlue["800"],
 		},
 		secondary: {
 			main: lightBlue["200"],
@@ -59,7 +59,7 @@ export const settingsTheme: ThemeOptions = {
 	...defaultTheme,
 	palette: {
 		primary: {
-			main: deepOrange.A400,
+			main: deepOrange.A700,
 		},
 		secondary: {
 			main: deepOrange["300"],

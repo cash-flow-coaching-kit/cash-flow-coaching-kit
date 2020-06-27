@@ -46,6 +46,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 	},
 	contentText: {
 		margin: theme.spacing(2, 0),
+		width: "100%",
 	},
 	alignJustifyContent: {
 		display: "flex",
@@ -209,6 +210,7 @@ const Homepage = (): ReactElement => {
 									<Button
 										color="primary"
 										href="/transcripts/Take-a-tour-of-the-kit.docx"
+										aria-label="Download transcript: Take a tour of the kit"
 										target="_blank" rel="noopener noreferrer"
 									>
 										Download Transcript
@@ -229,6 +231,7 @@ const Homepage = (): ReactElement => {
 									<Button
 										color="primary"
 										href="/transcripts/What-advisors-think-of-the-kit.docx"
+										aria-label="Download transcript: What advisors think of the kit"
 										target="_blank"
 										rel="noopener noreferrer"
 									>
