@@ -7,19 +7,15 @@ export type ProcessFileItem = {
 	type: "in" | "out"
 }
 
+// nb. Cant use MIME type to determine which process to use as requires Excel to be installed
+
 export const generalProcessFile = async (
-	fileType: string,
 	fileBuffer: any
 ): Promise<ProcessFileItem[]> => {
-	// console.log("fileType", fileType)
-
-	if (fileType.toLowerCase().indexOf("excel") >= 0) {
-		return excelProcessFile(fileBuffer)
+	const res = await excelProcessFile(fileBuffer)
+	if (!res) {
+		alert(`Invalid file. Only Excel files are allowed.`)
+		return []
 	}
-	if (fileType.toLowerCase().indexOf("sheet") >= 0) {
-		return excelProcessFile(fileBuffer)
-	}
-
-	alert("Invalid MIME type")
-	return []
+	return res
 }

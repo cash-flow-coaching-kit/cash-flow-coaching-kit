@@ -2,9 +2,13 @@ import Excel, { Worksheet, Workbook } from "exceljs"
 import { ProcessFileItem } from "./ImportDataGeneralLib"
 
 const excelCreateFromData = async (data: Uint8Array) => {
-	const workbook = new Excel.Workbook()
-	await workbook.xlsx.load(data)
-	return workbook
+	try {
+		const workbook = new Excel.Workbook()
+		await workbook.xlsx.load(data)
+		return workbook
+	} catch (err) {
+		console.log("err", err)
+	}
 }
 
 const excelProcessSheet = (worksheet: Worksheet): ProcessFileItem[] => {
@@ -34,14 +38,18 @@ const excelProcessSheet = (worksheet: Worksheet): ProcessFileItem[] => {
 
 const excelProcessWorkbook = async (
 	workbook: Workbook
-): Promise<ProcessFileItem[]> => {
+): Promise<ProcessFileItem[] | false> => {
 	const worksheet = workbook.worksheets[0]
-	return excelProcessSheet(worksheet)
+	// console.log("worksheet", worksheet)
+	if (!worksheet) return false
+	return excelProcessSheet(worksheet!)
 }
 
 export const excelProcessFile = async (
 	data: Uint8Array
-): Promise<ProcessFileItem[]> => {
+): Promise<ProcessFileItem[] | false> => {
 	const workbook = await excelCreateFromData(data)
-	return excelProcessWorkbook(workbook)
+	// console.log("workbook", workbook)
+	if (!workbook) return false
+	return excelProcessWorkbook(workbook!)
 }

@@ -60,7 +60,7 @@ export default function ImportDataModal({
 				return
 			}
 			const data = new Uint8Array(reader.result as any)
-			const newItems = await generalProcessFile(file.type, data)
+			const newItems = await generalProcessFile(data)
 			setCurrentItems([...currentItems, ...newItems])
 		}
 		reader.readAsArrayBuffer(file)

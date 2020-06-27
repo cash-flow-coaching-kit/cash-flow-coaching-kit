@@ -53,7 +53,6 @@ import {
 	calcQuestionThree,
 } from "../../CFC/__config/utilities"
 import { ProcessFileItem } from "../../ImportDataModal/lib/ImportDataGeneralLib"
-import { newTimestamp } from "../../../util/dates"
 
 /**
  * Form used to edit a CFC
