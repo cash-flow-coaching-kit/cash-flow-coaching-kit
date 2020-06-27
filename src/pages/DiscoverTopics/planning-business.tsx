@@ -146,7 +146,9 @@ const DTPlanningBusiness = (): ReactElement => {
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
-								<Typography variant="h6">Why?</Typography>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Forecasting the demand for your product or service will help
 									you:
@@ -216,7 +218,9 @@ const DTPlanningBusiness = (): ReactElement => {
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
-								<Typography variant="h6">Why?</Typography>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Setting the right price for your product or service will
 									maximise your cash flow and may remove any potential losses on
@@ -276,7 +280,9 @@ const DTPlanningBusiness = (): ReactElement => {
 					<ExpansionPanelDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
-								<Typography variant="h6">Why?</Typography>
+								<Typography variant="h6" component="h4">
+									Why?
+								</Typography>
 								<Typography>
 									Securing the right amount of capital to start your business or
 									to fund growth will help you keep the business running and
