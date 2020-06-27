@@ -38,7 +38,7 @@ export default function ControlCompareLink(): ReactElement {
 			<ListItemIcon>
 				<CompareArrowsIcon />
 			</ListItemIcon>
-			<ListItemText>Compare Canvases</ListItemText>
+			<ListItemText>Compare Canvasses</ListItemText>
 		</ListItem>
 	)
 }

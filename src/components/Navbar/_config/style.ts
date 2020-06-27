@@ -23,7 +23,7 @@ export const useSharedNavStyles = makeStyles(() => ({
 	},
 	publicLogo: {
 		justifyContent: "flex-start",
-		"& h6": {
+		"& span": {
 			color: "white",
 		},
 	},

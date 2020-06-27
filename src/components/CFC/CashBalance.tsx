@@ -36,7 +36,9 @@ export default function CashBalance({
 
 	return (
 		<Box className={cls.wrapper}>
-			<Typography variant="h6">Your Cash Balance</Typography>
+			<Typography variant="h6" component="h2">
+				Your Cash Balance
+			</Typography>
 			<Spacer />
 			<Grid container spacing={2}>
 				<Grid item sm={12}>

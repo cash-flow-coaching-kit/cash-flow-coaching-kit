@@ -53,8 +53,10 @@ export default React.memo(function ComputedPanels({
 			}`}
 		>
 			<Box className={dmiCls.type}>
-				<Typography variant="h6">{title}</Typography>
-				{description && <Typography>{description}</Typography>}
+				<Typography variant="h6" component="p">
+					{title}
+				</Typography>
+				{description && <Typography component="span">{description}</Typography>}
 			</Box>
 			<Typography variant="h6">{value}</Typography>
 		</Box>

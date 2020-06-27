@@ -37,9 +37,11 @@ const ExpandableNav = ({
 				expandIcon={<ExpandMoreIcon />}
 				className={styles.summary}
 			>
-				<Typography variant="h6">{title}</Typography>
+				<Typography variant="h6" component="h3">
+					{title}
+				</Typography>
 				{subHeading && (
-					<Typography className={styles.subHeading} variant="h6">
+					<Typography className={styles.subHeading} variant="h6" component="h3">
 						{subHeading}
 					</Typography>
 				)}

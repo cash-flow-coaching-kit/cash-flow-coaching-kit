@@ -130,7 +130,7 @@ const Listing = (): ReactElement => {
 					color="primary"
 					variant="contained"
 				>
-					Add a new Health Check
+					Start a new health check
 				</Button>
 			</CardContent>
 		</Card>

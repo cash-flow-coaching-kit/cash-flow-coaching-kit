@@ -68,7 +68,10 @@ const createChecklistIfNeeded = async (
 			action
 		)
 
-		const priorityId = await ActionPriorityUseCase.create(newPriority)
+		const priorityId = await ActionPriorityUseCase.create({
+			...newPriority,
+			order: [id],
+		})
 		const priorityWithItem = priority.concat({
 			...newPriority,
 			id: priorityId,

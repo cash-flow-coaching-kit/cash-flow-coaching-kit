@@ -7,4 +7,6 @@ import {
 export type SectionTitleProps = StandardProps<
 	TypographyProps,
 	TypographyClassKey
->
+> & {
+	component?: string
+}

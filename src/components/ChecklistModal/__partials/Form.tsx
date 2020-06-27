@@ -168,7 +168,7 @@ const Form = React.forwardRef(
 						<TextField
 							name={`items[${idx}].description`}
 							id={`items[${idx}].description`}
-							label="Customise your action"
+							label="Describe what you will do"
 							variant="outlined"
 							value={item.description}
 							onChange={form.handleChange}

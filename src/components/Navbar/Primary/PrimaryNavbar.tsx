@@ -33,6 +33,7 @@ const PrimaryNavbar = (): ReactElement => {
 								<Typography
 									className={`${styles.clientName} truncate`}
 									variant="h6"
+									component="p"
 								>
 									<span>{currentClient.name}</span>
 								</Typography>
