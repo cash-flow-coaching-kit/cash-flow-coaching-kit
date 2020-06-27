@@ -102,7 +102,7 @@ export default function CreateCanvasForm(): ReactElement {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} data-reactour="create-a-canvas">
 				<CanvasTitle
 					type={canvasType}
 					timeframe={canvasTimeFrame}
