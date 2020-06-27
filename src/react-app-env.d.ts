@@ -1,6 +1,7 @@
 /// <reference types="react-scripts" />
 declare module "fake-indexeddb"
 declare module "fake-indexeddb/lib/FDBKeyRange"
+declare module "whatwg-fetch"
 
 // Type definition for a `.reduce` method
 type ReducerHOF<A = any[], C = any> = (

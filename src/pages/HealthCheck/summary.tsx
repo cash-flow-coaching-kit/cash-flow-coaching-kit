@@ -10,6 +10,7 @@ import {
 	makeStyles,
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
+import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
 import AddIcon from "@material-ui/icons/Add"
 import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
@@ -25,8 +26,12 @@ import {
 import { HealthCheckDataStruct } from "../../data/_config/shape"
 import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
 import useCurrentClient from "../../state/client/useCurrentClient"
+import HealthCheckPDF, {
+	HealthCheckQuestionSet,
+} from "../../components/PDF/HealthCheckPDF"
 import { ClientContext } from "../../state/client"
 import { ClientActionTypes } from "../../state/client/client-outline"
+import servePDF from "../../components/PDF/servePDF"
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
@@ -80,6 +85,18 @@ const HCSummary = (): ReactElement => {
 			})()
 		}
 	}, [id, currentClient, dispatch])
+
+	const printPDF = async () => {
+		const data: HealthCheckQuestionSet = {}
+		questions.forEach((q, idx) => {
+			const { question } = q
+			const answer = healthCheck?.answers[idx] || "positive"
+			const text = q.options[answer]
+			data[idx] = { question, answer, text }
+		})
+		const pdf = await HealthCheckPDF(currentClient?.name ?? "Client", data)
+		servePDF(pdf)
+	}
 
 	return (
 		<>
@@ -140,6 +157,12 @@ const HCSummary = (): ReactElement => {
 										<ListIcon />
 									</ListItemIcon>
 									<ListItemText>List of Health Checks</ListItemText>
+								</ListItem>
+								<ListItem button>
+									<ListItemIcon>
+										<PictureAsPdfIcon />
+									</ListItemIcon>
+									<ListItemText onClick={printPDF}>Generate PDF</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>
