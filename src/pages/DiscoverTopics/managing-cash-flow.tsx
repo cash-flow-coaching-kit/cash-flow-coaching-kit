@@ -30,7 +30,7 @@ const DTManagingCashFlow = (): ReactElement => {
 		<>
 			<PageContainer role="main">
 				<Grid container spacing={2}>
-					<Grid item sm={9}>
+					<Grid item xs={12} md={8} lg={9}>
 						<Typography
 							component="h1"
 							align="center"
@@ -122,7 +122,7 @@ const DTManagingCashFlow = (): ReactElement => {
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid item sm={3}>
+					<Grid item xs={12} md={4} lg={3}>
 						<Taskbuilder container="managing" />
 						<QuicksnapsPanel filename="Managing your cash flow - Quicksnaps.pdf" />
 					</Grid>
