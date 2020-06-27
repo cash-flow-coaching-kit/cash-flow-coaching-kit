@@ -48,7 +48,7 @@ code {
 		flex: 1 1 100% !important;
 	}
 
-	> *:first-child {
+	>*:first-child {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -65,6 +65,7 @@ code {
 	}
 
 	.content-area {
+
 		p,
 		ul,
 		ol {
@@ -74,18 +75,38 @@ code {
 		.list-describer {
 			margin-bottom: 4px;
 
-			+ ul,
-			+ ol {
+			+ul,
+			+ol {
 				margin-top: 4px;
 			}
 		}
 
-		> *:first-child {
+		>*:first-child {
 			margin-top: 0;
 		}
 
-		> *:last-child {
+		>*:last-child {
 			margin-bottom: 0;
 		}
 	}
+}
+
+.visually-hidden {
+	position: absolute !important;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	width: 1px;
+	height: 1px;
+	word-wrap: normal;
+}
+
+&.focusable:focus {
+	position: absolute !important;
+	left: 0.5rem !important;
+	top: 0.5rem !important;
+	overflow: visible;
+	clip: auto;
+	width: auto;
+	height: auto;
+	z-index: 99999;
 }

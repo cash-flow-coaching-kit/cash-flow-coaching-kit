@@ -85,6 +85,13 @@ function SinglePicker({
 			label={label}
 			renderDay={renderDay(compareDay)}
 			fullWidth
+			aria-label={label}
+			KeyboardButtonProps={{
+				"aria-label": "Open calendar",
+			}}
+			inputProps={{
+				"aria-label": label,
+			}}
 		/>
 	)
 }

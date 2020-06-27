@@ -50,6 +50,7 @@ export default function UseCustomTitle({
 		<Box>
 			{useCustom && (
 				<TextField
+					id="canvasTitle"
 					name="canvasTitle"
 					label="Custom canvas title"
 					variant="outlined"
@@ -57,6 +58,9 @@ export default function UseCustomTitle({
 					onChange={onChange}
 					fullWidth
 					className={cls.textField}
+					InputLabelProps={{
+						htmlFor: "canvasTitle",
+					}}
 				/>
 			)}
 			<Box className={cls.checkboxRoot}>
