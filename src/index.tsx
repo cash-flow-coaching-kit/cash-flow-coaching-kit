@@ -1,3 +1,7 @@
+import "core-js/modules/es.promise"
+import "core-js/modules/es.object.assign"
+import "core-js/modules/es.object.keys"
+import "regenerator-runtime/runtime"
 import "react-app-polyfill/ie11"
 import "react-app-polyfill/stable"
 

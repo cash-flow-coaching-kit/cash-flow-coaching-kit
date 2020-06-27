@@ -4,9 +4,10 @@ import React, {
 	useReducer,
 	Reducer,
 	useMemo,
+	useState,
 } from "react"
 import CFCReducer from "./reducer"
-import { ICFCState, CFCReducerActions } from "./shape"
+import { ICFCState, CFCReducerActions, ItemUpdaterFunction } from "./shape"
 import CFCContext, { defaultCFCState } from "./context"
 
 type ReducerMakeup = Reducer<ICFCState, CFCReducerActions>
@@ -23,12 +24,18 @@ function CFCProvider(props: { children: ReactNode }): ReactElement {
 		defaultCFCState
 	)
 
+	const [canvasItemUpdater, setCanvasItemUpdater] = useState<
+		ItemUpdaterFunction[]
+	>([])
+
 	const value = useMemo(
 		(): ICFCState => ({
 			...state,
 			dispatch,
+			canvasItemUpdater,
+			setCanvasItemUpdater,
 		}),
-		[state]
+		[state, canvasItemUpdater]
 	)
 
 	// eslint-disable-next-line react/jsx-props-no-spreading

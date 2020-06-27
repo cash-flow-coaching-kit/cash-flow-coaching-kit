@@ -14,11 +14,17 @@ type QuestionValues = {
  * @export
  * @interface ICFCState
  */
+
+export type ItemUpdaterFunction = (items: any) => void
+
 export interface ICFCState {
 	duplicateError: boolean
 	invalidDateError: boolean
 	questionValues: QuestionValues
 	dispatch: Dispatch<CFCReducerActions>
+
+	canvasItemUpdater: ItemUpdaterFunction[]
+	setCanvasItemUpdater?: any
 	leftCompare?: CFCStruct
 	rightCompare?: CFCStruct
 	copyCanvasActive: boolean
