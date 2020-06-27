@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react"
+import React, { ReactElement, useEffect, useState, useContext } from "react"
 import { useParams, Link } from "react-router-dom"
 import {
 	Grid,
@@ -10,7 +10,8 @@ import {
 	makeStyles,
 } from "@material-ui/core"
 import ListIcon from "@material-ui/icons/List"
-import ReplayIcon from "@material-ui/icons/Replay"
+import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
+import AddIcon from "@material-ui/icons/Add"
 import { PageContainer } from "../../components/Layouts"
 import FourQuestions from "../../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../../components/ExpandableNav"
@@ -25,18 +26,16 @@ import {
 import { HealthCheckDataStruct } from "../../data/_config/shape"
 import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
 import useCurrentClient from "../../state/client/useCurrentClient"
+import HealthCheckPDF, {
+	HealthCheckQuestionSet,
+} from "../../components/PDF/HealthCheckPDF"
+import { ClientContext } from "../../state/client"
+import { ClientActionTypes } from "../../state/client/client-outline"
+import servePDF from "../../components/PDF/servePDF"
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
 		marginTop: theme.spacing(3),
-		"& > div:last-child": {
-			marginTop: theme.spacing(1),
-			[theme.breakpoints.up("sm")]: {
-				display: "flex",
-				justifyContent: "flex-end",
-				marginTop: 0,
-			},
-		},
 	},
 }))
 
@@ -49,6 +48,7 @@ const QUESTIONS_OFFSET = 4
  */
 const HCSummary = (): ReactElement => {
 	const [currentClient] = useCurrentClient()
+	const { dispatch } = useContext(ClientContext)
 	const { id } = useParams()
 	const [healthCheck, setHealthCheck] = useState<
 		HealthCheckDataStruct | undefined
@@ -63,13 +63,17 @@ const HCSummary = (): ReactElement => {
 
 	useEffect(() => {
 		if (id && currentClient) {
+			dispatch({
+				type: ClientActionTypes.UpdateLastViewedHC,
+				payload: id,
+			})
 			;(async function getHC(): Promise<void> {
 				if (typeof currentClient.id !== "undefined") {
 					// Fetches the health checks for the client and sets state values
 					const hc:
 						| HealthCheckDataStruct
 						| undefined = await HealthCheckUseCase.findByClientId(
-						parseInt(id, 10),
+						id,
 						currentClient.id
 					)
 					if (hc) {
@@ -80,12 +84,18 @@ const HCSummary = (): ReactElement => {
 				}
 			})()
 		}
-	}, [id, currentClient])
+	}, [id, currentClient, dispatch])
 
-	const retakeLink = (): string => {
-		return routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
-			[":id?", `${healthCheck?.id || ""}`],
-		])
+	const printPDF = async () => {
+		const data: HealthCheckQuestionSet = {}
+		questions.forEach((q, idx) => {
+			const { question } = q
+			const answer = healthCheck?.answers[idx] || "positive"
+			const text = q.options[answer]
+			data[idx] = { question, answer, text }
+		})
+		const pdf = await HealthCheckPDF(currentClient?.name ?? "Client", data)
+		servePDF(pdf)
 	}
 
 	return (
@@ -106,15 +116,6 @@ const HCSummary = (): ReactElement => {
 									justify="space-between"
 									className={styles.summaryActions}
 								>
-									<Grid item xs={12} sm={6}>
-										<Button
-											variant="outlined"
-											component={Link}
-											to={retakeLink()}
-										>
-											Re-take Health Check
-										</Button>
-									</Grid>
 									<Grid item xs={12} sm={6}>
 										<Button
 											color="primary"
@@ -138,6 +139,18 @@ const HCSummary = (): ReactElement => {
 								<ListItem
 									button
 									component={Link}
+									to={routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
+										[":id?", ""],
+									])}
+								>
+									<ListItemIcon>
+										<AddIcon />
+									</ListItemIcon>
+									<ListItemText>Start a new Health Check</ListItemText>
+								</ListItem>
+								<ListItem
+									button
+									component={Link}
 									to={PrivateRoutes.HealthCheckList}
 								>
 									<ListItemIcon>
@@ -145,11 +158,11 @@ const HCSummary = (): ReactElement => {
 									</ListItemIcon>
 									<ListItemText>List of Health Checks</ListItemText>
 								</ListItem>
-								<ListItem button component={Link} to={retakeLink()}>
+								<ListItem button>
 									<ListItemIcon>
-										<ReplayIcon />
+										<PictureAsPdfIcon />
 									</ListItemIcon>
-									<ListItemText>Re-take Health Check</ListItemText>
+									<ListItemText onClick={printPDF}>Generate PDF</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>

@@ -76,7 +76,7 @@ export default function CreateCanvasForm(): ReactElement {
 	 * @param {K} k
 	 * @param {BaseCFCStruct[K]} v
 	 */
-	function changeDateValue(k: CanvasDateKeys, v: Date): void {
+	const changeDateValue = (k: CanvasDateKeys, v: Date): void => {
 		const { canvasStartDate: start, canvasEndDate: end } = changeDate<
 			BaseCFCStruct
 		>(k, v, values)
@@ -85,6 +85,10 @@ export default function CreateCanvasForm(): ReactElement {
 		setFieldValue("canvasStartDate", start, false)
 		setFieldValue("canvasEndDate", end, false)
 	}
+
+	useEffect(() => {
+		changeDateValue("canvasStartDate", canvasStartDate)
+	}, [canvasTimeFrame, canvasStartDate])
 
 	const inputChange = useCallback(handleChange, [])
 
@@ -98,7 +102,7 @@ export default function CreateCanvasForm(): ReactElement {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} data-reactour="create-a-canvas">
 				<CanvasTitle
 					type={canvasType}
 					timeframe={canvasTimeFrame}

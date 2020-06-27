@@ -21,6 +21,7 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Taskbuilder from "../../components/Taskbuilder"
+import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 
 const DTManagingCashFlow = (): ReactElement => {
 	const styles = useDTStyles()
@@ -29,7 +30,7 @@ const DTManagingCashFlow = (): ReactElement => {
 		<>
 			<PageContainer role="main">
 				<Grid container spacing={2}>
-					<Grid item sm={9}>
+					<Grid item xs={12} md={8} lg={9}>
 						<Typography
 							component="h1"
 							align="center"
@@ -90,6 +91,8 @@ const DTManagingCashFlow = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Yularis-cash-flow.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Yulari's Cash Flow
 										</Button>
@@ -109,6 +112,8 @@ const DTManagingCashFlow = (): ReactElement => {
 										<Button
 											color="primary"
 											href="/transcripts/Camerons-cash-flow.docx"
+											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Download Transcript: Cameron's Cash Flow
 										</Button>
@@ -117,8 +122,9 @@ const DTManagingCashFlow = (): ReactElement => {
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid item sm={3}>
+					<Grid item xs={12} md={4} lg={3}>
 						<Taskbuilder container="managing" />
+						<QuicksnapsPanel filename="Managing your cash flow - Quicksnaps.pdf" />
 					</Grid>
 				</Grid>
 				<Typography component="h2" className={styles.SectionTitle}>

@@ -78,6 +78,8 @@ export default function ActionChecklist(): ReactElement {
 							color="primary"
 							href="/transcripts/Action Checklist coaching tips.docx"
 							aria-label="Download transcript: Action Checklist coaching tips"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
 							Download Transcript
 						</Button>

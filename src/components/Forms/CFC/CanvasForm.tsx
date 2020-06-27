@@ -75,7 +75,12 @@ export default function CanvasForm({
 	const { id: canvasId } = useParams()
 	const [currentClient] = useCurrentClient()
 	const [stateMachine, updateMachine] = useMachine(fetchMachine)
-	const { duplicateError, invalidDateError, dispatch } = useContext(CFCContext)
+	const {
+		duplicateError,
+		invalidDateError,
+		dispatch,
+		copyCanvasActive,
+	} = useContext(CFCContext)
 
 	const { setFieldValue, handleChange, values, setValues } = useFormik<
 		BaseCFCStruct
@@ -132,9 +137,13 @@ export default function CanvasForm({
 					calculated,
 					paygWithholding,
 					superAmount,
-					incomeTax
+					calculated.incomeTaxPercentage
 				),
-				three: calcQuestionThree(openingBalance, calculated, incomeTax),
+				three: calcQuestionThree(
+					openingBalance,
+					calculated,
+					calculated.incomeTaxPercentage
+				),
 				four: undefined,
 			},
 		})
@@ -151,7 +160,7 @@ export default function CanvasForm({
 	// #region Fetch data on load
 	const fetchFormData = useCallback(async () => {
 		if (currentClient?.id) {
-			const data = await CFCUseCase.findById(parseInt(canvasId, 10))
+			const data = await CFCUseCase.findById(canvasId)
 			if (data) {
 				setValues(data, false)
 				setPreviousValues(data)
@@ -217,7 +226,7 @@ export default function CanvasForm({
 	}, [invalidDateError, duplicateError, useCustomTitle, canvasTitle])
 
 	const handleFormSave = useCallback(async () => {
-		await CFCUseCase.update(parseInt(canvasId, 10), values)
+		await CFCUseCase.update(canvasId, values)
 		setPreviousValues(values)
 		setLastSaved(new Date())
 	}, [canvasId, values])
@@ -225,7 +234,6 @@ export default function CanvasForm({
 	useEffect(() => {
 		const id = setInterval(async () => {
 			if (!isEqual(previousValues, values) && !disableSaving()) {
-				console.log("Save")
 				handleFormSave()
 			}
 		}, 1000)
@@ -253,7 +261,7 @@ export default function CanvasForm({
 	 * @param {K} k
 	 * @param {BaseCFCStruct[K]} v
 	 */
-	function changeDateValue(k: CanvasDateKeys, v: Date): void {
+	const changeDateValue = (k: CanvasDateKeys, v: Date): void => {
 		const { canvasStartDate: start, canvasEndDate: end } = changeDate<
 			BaseCFCStruct
 		>(k, v, values)
@@ -262,6 +270,10 @@ export default function CanvasForm({
 		setFieldValue("canvasStartDate", start, false)
 		setFieldValue("canvasEndDate", end, false)
 	}
+
+	useEffect(() => {
+		changeDateValue("canvasStartDate", canvasStartDate)
+	}, [canvasTimeFrame, canvasStartDate])
 
 	const inputChange = useCallback(handleChange, [])
 	// #endregion
@@ -301,99 +313,111 @@ export default function CanvasForm({
 
 	return (
 		<>
-			<CanvasTitle
-				type={canvasType}
-				timeframe={canvasTimeFrame}
-				startDate={canvasStartDate}
-				endDate={canvasEndDate}
-				customTitle={canvasTitle}
-				useCustomTitle={useCustomTitle}
-			/>
-			<ConfigPanel
-				canvasTypeValue={canvasType}
-				canvasTimeframeValue={canvasTimeFrame}
-				onChange={inputChange}
-				startDate={canvasStartDate}
-				endDate={canvasEndDate}
-				onDateChange={changeDateValue}
-				customTitle={canvasTitle}
-				changeCheck={(e: InputChange): void => {
-					setUseCustomTitle(e.target.checked)
-				}}
-				useCustomTitle={useCustomTitle}
-			/>
+			<div data-reactour="create-a-canvas">
+				<CanvasTitle
+					type={canvasType}
+					timeframe={canvasTimeFrame}
+					startDate={canvasStartDate}
+					endDate={canvasEndDate}
+					customTitle={canvasTitle}
+					useCustomTitle={useCustomTitle}
+				/>
+				<ConfigPanel
+					canvasTypeValue={canvasType}
+					canvasTimeframeValue={canvasTimeFrame}
+					onChange={inputChange}
+					startDate={canvasStartDate}
+					endDate={canvasEndDate}
+					onDateChange={changeDateValue}
+					customTitle={canvasTitle}
+					changeCheck={(e: InputChange): void => {
+						setUseCustomTitle(e.target.checked)
+					}}
+					useCustomTitle={useCustomTitle}
+					showDuplicateError={!copyCanvasActive}
+				/>
+			</div>
 			<IfElseLoading if={stateMachine.value !== "loading"}>
 				<Spacer />
-				<OpeningBalance value={openingBalance} onChange={inputChange} />
-				<Spacer />
-				<Box className={cls.wrapper}>
-					<Typography variant="h6">Cash IN</Typography>
-					<Typography>
-						Cash received, or revenue, including GST (if applicable). This may
-						be for services or sales. See Change Levers for ideas on how to
-						improve your Cash IN.
-					</Typography>
+				<div data-reactour="cfc-filling-out-the-canvas">
+					<OpeningBalance value={openingBalance} onChange={inputChange} />
 					<Spacer />
-					<Divider />
-					<Spacer space={3} />
-					<RepeaterForm
-						name="cashInItems"
-						values={cashInItems}
-						onChange={inputChange}
-						total={cashInTotal}
-						gst={cashInGST}
-						addItem={addCashFlowItem("cashInItems")}
-						removeItem={removeItem("cashInItems")}
-					/>
-				</Box>
-				<Spacer />
-				<Box className={cls.wrapper}>
-					<Typography variant="h6">Cash OUT</Typography>
-					<Typography>
-						All expenses, including GST (if applicable). See Change Levers for
-						ideas on how to reduce your Cash OUT.
-					</Typography>
+					<Box className={cls.wrapper}>
+						<Typography variant="h6">Cash IN</Typography>
+						<Typography>
+							Cash received, or revenue, including GST (if applicable). This may
+							be for services or sales. See Change Levers for ideas on how to
+							improve your Cash IN.
+						</Typography>
+						<Spacer />
+						<Divider />
+						<Spacer space={3} />
+						<RepeaterForm
+							name="cashInItems"
+							values={cashInItems}
+							onChange={inputChange}
+							total={cashInTotal}
+							gst={cashInGST}
+							addItem={addCashFlowItem("cashInItems")}
+							removeItem={removeItem("cashInItems")}
+						/>
+					</Box>
 					<Spacer />
-					<Divider />
-					<Spacer space={3} />
-					<RepeaterForm
-						name="cashOutItems"
-						values={cashOutItems}
-						onChange={inputChange}
-						total={cashOutTotal}
-						gst={cashOutGST}
-						addItem={addCashFlowItem("cashOutItems")}
-						removeItem={removeItem("cashOutItems")}
-					/>
-				</Box>
-				<Spacer />
-				<EmployeeExpenses
-					payg={paygWithholding}
-					super={superAmount}
-					onChange={inputChange}
-				/>
+					<Box className={cls.wrapper}>
+						<Typography variant="h6">Cash OUT</Typography>
+						<Typography>
+							All expenses, including GST (if applicable). See Change Levers for
+							ideas on how to reduce your Cash OUT.
+						</Typography>
+						<Spacer />
+						<Divider />
+						<Spacer space={3} />
+						<RepeaterForm
+							name="cashOutItems"
+							values={cashOutItems}
+							onChange={inputChange}
+							total={cashOutTotal}
+							gst={cashOutGST}
+							addItem={addCashFlowItem("cashOutItems")}
+							removeItem={removeItem("cashOutItems")}
+							beforeTotalChild={(): ReactElement => (
+								<EmployeeExpenses
+									payg={paygWithholding}
+									super={superAmount}
+									onChange={inputChange}
+								/>
+							)}
+						/>
+					</Box>
+				</div>
 				<Spacer />
 				<CashSurplus value={`${calculated.cashSurplus}`} />
 				<Spacer />
+				<IncomeTax
+					value={incomeTax}
+					onChange={inputChange}
+					calculated={calculated.incomeTaxPercentage}
+				/>
+				<Spacer />
 				<AvailableToSpend value={`${calculated.availableToSpend}`} />
 				<Spacer />
-				<IncomeTax value={incomeTax} onChange={inputChange} />
-				<Spacer />
-				<CashBalance
-					cashToOwner={cashToOwner}
-					onChange={inputChange}
-					closingBalance={calculated.closingBalance}
-				/>
-				<Spacer />
-				<FallingBehind
-					stock={stock}
-					creditors={creditors}
-					debtors={debtors}
-					assets={assets}
-					loans={loans}
-					totalNetAssets={calculated.totalNetAssets}
-					onChange={inputChange}
-				/>
+				<div data-reactour="cfc-your-position">
+					<CashBalance
+						cashToOwner={cashToOwner}
+						onChange={inputChange}
+						closingBalance={calculated.closingBalance}
+					/>
+					<Spacer />
+					<FallingBehind
+						stock={stock}
+						creditors={creditors}
+						debtors={debtors}
+						assets={assets}
+						loans={loans}
+						totalNetAssets={calculated.totalNetAssets}
+						onChange={inputChange}
+					/>
+				</div>
 				<Spacer space={4} />
 				<Divider />
 				<Spacer />

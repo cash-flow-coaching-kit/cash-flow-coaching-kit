@@ -5,6 +5,7 @@ import {
 	Checkbox,
 	Tooltip,
 	IconButton,
+	makeStyles,
 } from "@material-ui/core"
 import GroupWorkIcon from "@material-ui/icons/GroupWork"
 import { RepeaterFormProps } from "./__config/shape"
@@ -32,6 +33,13 @@ interface FormItemProps {
 	index: number
 }
 
+const useStyles = makeStyles((theme) => ({
+	actionGridItem: {
+		height: theme.typography.pxToRem(72),
+		display: "flex",
+	},
+}))
+
 /**
  * A single form item in the repeater form
  *
@@ -52,6 +60,7 @@ export default React.memo(function FormItem({
 	index,
 	removeItem,
 }: FormItemProps): ReactElement {
+	const cls = useStyles()
 	const [dialogOpen, setDialogOpen] = useState<boolean>(false)
 	const onDialogClose = (): void => {
 		setDialogOpen(false)
@@ -66,8 +75,8 @@ export default React.memo(function FormItem({
 	}
 
 	return (
-		<Grid container spacing={2} alignItems="center">
-			<Grid item sm={DescriptionSize}>
+		<Grid container spacing={2} alignItems="stretch">
+			<Grid item xs={DescriptionSize}>
 				<TextField
 					variant="outlined"
 					name={`${name}[${index}].description`}
@@ -78,7 +87,7 @@ export default React.memo(function FormItem({
 					fullWidth
 				/>
 			</Grid>
-			<Grid item sm={AmountSize}>
+			<Grid item xs={AmountSize}>
 				<MoneyInput
 					value={value.amount}
 					onChange={onChange}
@@ -86,7 +95,7 @@ export default React.memo(function FormItem({
 					variant="outlined"
 				/>
 			</Grid>
-			<Grid item sm={ApplyGSTSize}>
+			<Grid item xs={ApplyGSTSize} className={cls.actionGridItem}>
 				<Checkbox
 					checked={value.gstApplicable}
 					onChange={onChange}
@@ -94,7 +103,7 @@ export default React.memo(function FormItem({
 					inputProps={{ "aria-label": "Apply GST" }}
 				/>
 			</Grid>
-			<Grid item sm={ActionsSize}>
+			<Grid item xs={ActionsSize} className={cls.actionGridItem}>
 				<IconDeleteButton onClick={triggerDialog} />
 				<ConfirmDialogue
 					open={dialogOpen}

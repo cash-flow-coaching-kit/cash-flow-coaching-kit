@@ -46,6 +46,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 	},
 	contentText: {
 		margin: theme.spacing(2, 0),
+		width: "100%",
 	},
 	alignJustifyContent: {
 		display: "flex",
@@ -195,8 +196,8 @@ const Homepage = (): ReactElement => {
 							<NewClientDialog triggerText="Get Started" />
 						)}
 					</Box>
-					<Grid container spacing={3} className={styles.grid}>
-						<Grid item xs={12} md={6}>
+					<Grid container spacing={3} className={styles.grid} justify="center">
+						{/* <Grid item xs={12} md={6}>
 							<Card variant="outlined">
 								<CardHeader title="Take a tour of the kit" />
 								<CardMedia
@@ -210,12 +211,13 @@ const Homepage = (): ReactElement => {
 										color="primary"
 										href="/transcripts/Take-a-tour-of-the-kit.docx"
 										aria-label="Download transcript: Take a tour of the kit"
+										target="_blank" rel="noopener noreferrer"
 									>
 										Download Transcript
 									</Button>
 								</CardActions>
 							</Card>
-						</Grid>
+						</Grid> */}
 						<Grid item xs={12} md={6}>
 							<Card variant="outlined">
 								<CardHeader title="What advisors think of the kit" />
@@ -230,6 +232,8 @@ const Homepage = (): ReactElement => {
 										color="primary"
 										href="/transcripts/What-advisors-think-of-the-kit.docx"
 										aria-label="Download transcript: What advisors think of the kit"
+										target="_blank"
+										rel="noopener noreferrer"
 									>
 										Download Transcript
 									</Button>
@@ -273,8 +277,15 @@ const Homepage = (): ReactElement => {
 							align="center"
 						>
 							We recommend using the EXPORT function regularly to avoid data
-							loss. Please refer to the Terms &amp; Conditions of use and our
-							Data usage and privacy statement.
+							loss. Please refer to the{" "}
+							<a
+								href="/docs/Terms and Cond.docx"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Terms &amp; Conditions
+							</a>{" "}
+							of use and our Data usage and privacy statement.
 						</Typography>
 						<Typography
 							variant="body2"

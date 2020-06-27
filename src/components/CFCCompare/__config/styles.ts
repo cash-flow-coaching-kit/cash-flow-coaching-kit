@@ -25,6 +25,17 @@ const useStyles = makeStyles((theme) => ({
 	noBorderBottom: {
 		borderBottom: "none",
 	},
+	table: {
+		[theme.breakpoints.down("md")]: {
+			minWidth: theme.breakpoints.values.md,
+		},
+	},
+	to: {
+		[theme.breakpoints.down("md")]: {
+			marginTop: -theme.spacing(1),
+			marginBottom: -theme.spacing(1),
+		},
+	},
 }))
 
 export default useStyles

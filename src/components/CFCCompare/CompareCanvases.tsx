@@ -69,6 +69,14 @@ export default function CompareCanvases(): ReactElement {
 					four: calcQuestionFour(leftCalc, rightCalc),
 				},
 			})
+
+			dispatch({
+				type: CFCActionTypes.ChangeCompare,
+				payload: {
+					left,
+					right,
+				},
+			})
 		}
 	}, [selectedCanvases, dispatch])
 	// #endregion

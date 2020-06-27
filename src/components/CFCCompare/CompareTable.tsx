@@ -56,7 +56,7 @@ export default function CompareTable({
 
 	return (
 		<TableContainer>
-			<Table>
+			<Table className={cls.table}>
 				<TableHeader selectedCanvases={selectedCanvases} />
 				<TableBody>
 					<CanvasItemRow
@@ -80,7 +80,7 @@ export default function CompareTable({
 					/>
 					<CanvasItemRow
 						bold
-						label="Total (exec GST)"
+						label="Total (exc GST)"
 						values={[
 							calcCashFlowTotal(selectedCanvases[0].cashInItems),
 							calcCashFlowTotal(selectedCanvases[1].cashInItems),
@@ -102,7 +102,7 @@ export default function CompareTable({
 					/>
 					<CanvasItemRow
 						bold
-						label="Total (exec GST)"
+						label="Total (exc GST)"
 						values={[
 							calcCashFlowTotal(selectedCanvases[0].cashOutItems),
 							calcCashFlowTotal(selectedCanvases[1].cashOutItems),
@@ -116,8 +116,8 @@ export default function CompareTable({
 					<CanvasItemRow
 						label="Income/Company Tax"
 						values={[
-							selectedCanvases[0].incomeTax,
-							selectedCanvases[1].incomeTax,
+							leftCalculated.incomeTaxPercentage,
+							rightCalculated.incomeTaxPercentage,
 						]}
 					/>
 					<CanvasItemRow

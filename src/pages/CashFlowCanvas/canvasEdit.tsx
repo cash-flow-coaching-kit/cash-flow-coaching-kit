@@ -3,6 +3,7 @@ import { Grid } from "@material-ui/core"
 import { useLocation } from "react-router-dom"
 import qs from "qs"
 import { toDate } from "date-fns"
+import { ReactourStep } from "reactour"
 import { PageContainer } from "../../components/Layouts"
 import CanvasForm from "../../components/Forms/CFC/CanvasForm"
 import PageTip from "../../components/PageTip"
@@ -15,6 +16,37 @@ import { initialValues } from "../../components/Forms/CFC"
 import ControlPanel from "../../components/CFC/ControlPanel"
 import CFCContext from "../../state/CFC/context"
 import { CFCFourQuestions } from "../../components/CFC"
+import {
+	CFC4QsTourContent,
+	CFCCreateCanvas,
+	CFCFillingOutCanvas,
+	CFCYourPosition,
+	CFCControlPanel,
+} from "../../components/CFC/__config/constants"
+import PageTour from "../../components/PageTour"
+
+const steps: ReactourStep[] = [
+	{
+		selector: "[data-reactour='cfc-four-questions']",
+		content: CFC4QsTourContent,
+	},
+	{
+		selector: "[data-reactour='create-a-canvas']",
+		content: CFCCreateCanvas,
+	},
+	{
+		selector: "[data-reactour='cfc-filling-out-the-canvas']",
+		content: CFCFillingOutCanvas,
+	},
+	{
+		selector: "[data-reactour='cfc-your-position']",
+		content: CFCYourPosition,
+	},
+	{
+		selector: "[data-reactour='canvas-control-panel']",
+		content: CFCControlPanel,
+	},
+]
 
 type QueryParams = {
 	title?: string
@@ -73,16 +105,18 @@ export default function CanvasEdit(): ReactElement {
 		<>
 			<PageContainer maxWidth="lg">
 				<Grid container spacing={3}>
-					<Grid item sm={9}>
+					<Grid item xs={12} md={9}>
 						<CanvasForm initialValues={initial} customTitle={useCustom()} />
 					</Grid>
-					<Grid item sm={3}>
+					<Grid item xs={12} md={3}>
 						<CFCFourQuestions values={questionValues} />
 						<ControlPanel />
 					</Grid>
 				</Grid>
 			</PageContainer>
 			<PageTip tip="CFCanvasTip" />
+
+			<PageTour steps={steps} />
 		</>
 	)
 }

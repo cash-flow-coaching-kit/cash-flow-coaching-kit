@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "row",
 		alignItems: "flex-start",
+		[theme.breakpoints.down("sm")]: {
+			flexDirection: "column",
+			alignItems: "center",
+		},
 	},
 	separator: {
 		paddingRight: theme.spacing(1),
@@ -24,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: "uppercase",
 		fontSize: theme.typography.fontSize,
 		lineHeight: "56px",
+		[theme.breakpoints.down("sm")]: {
+			lineHeight: "40px",
+		},
 	},
 }))
 
@@ -86,10 +93,11 @@ const DateRange = memo(function DateRange({
 					onChange("canvasStartDate", date)
 				} else {
 					onChange("canvasEndDate", date)
+					onClose()
 				}
 			}
 		},
-		[onChange]
+		[onChange, onClose]
 	)
 
 	// When the start date is edited and the panel is still open

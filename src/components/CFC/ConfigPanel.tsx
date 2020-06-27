@@ -28,13 +28,14 @@ import Spacer from "../Spacer"
  */
 interface ConfigPanelProps extends PanelProps, CustomTitleProps {
 	wrapped?: boolean
+	showDuplicateError?: boolean
 }
 
 // Duplicate canvas error message
 export const DuplicateCanvasError = (): ReactElement => (
 	<Alert severity="error">
-		A canvas with this title has already been created. Make sure that
-		you&apos;re canvas title is unique
+		A canvas with this title has already been created. Make sure that your
+		canvas title is unique.
 	</Alert>
 )
 
@@ -51,6 +52,7 @@ const Panel = memo(function Panel({
 	onChange,
 	onDateChange,
 	customTitle,
+	useCustomTitle,
 }: PanelProps) {
 	const [currentClient, clientSynced] = useCurrentClient()
 	const { id } = useParams()
@@ -66,8 +68,10 @@ const Panel = memo(function Panel({
 					canvasType: canvasTypeValue,
 				},
 				currentClient.id,
-				id ? parseInt(id, 10) : undefined
+				useCustomTitle,
+				id || undefined
 			)
+
 			dispatch({
 				type: CFCActionTypes.ChangeDuplicateError,
 				payload: dup !== false,
@@ -82,11 +86,11 @@ const Panel = memo(function Panel({
 		customTitle,
 		id,
 		dispatch,
+		useCustomTitle,
 	])
 
 	useEffect(() => {
 		if (clientSynced) {
-			console.log("Fetch possible dups")
 			fetchPossibleDups()
 		}
 	}, [fetchPossibleDups, clientSynced, id])
@@ -102,16 +106,16 @@ const Panel = memo(function Panel({
 	return (
 		<>
 			<Grid container spacing={2}>
-				<Grid item sm={3}>
+				<Grid item xs={12} md={3}>
 					<CanvasTypeSelect value={canvasTypeValue} onChange={onChange} />
 				</Grid>
-				<Grid item sm={3}>
+				<Grid item xs={12} md={3}>
 					<CanvasTimeFrameSelect
 						value={canvasTimeframeValue}
 						onChange={onChange}
 					/>
 				</Grid>
-				<Grid item sm={6}>
+				<Grid item xs={12} md={6}>
 					<DateRange
 						startDate={startDate}
 						endDate={endDate}
@@ -151,6 +155,7 @@ function ConfigPanel({
 	changeCheck,
 	useCustomTitle,
 	wrapped = true,
+	showDuplicateError = true,
 }: ConfigPanelProps): ReactElement {
 	const wrapperCls = useInputWrapper()
 	const { duplicateError } = useContext(CFCContext)
@@ -171,8 +176,9 @@ function ConfigPanel({
 				onDateChange={onDateChange}
 				onChange={onChange}
 				customTitle={customTitle}
+				useCustomTitle={useCustomTitle}
 			/>
-			{duplicateError && (
+			{showDuplicateError && duplicateError && (
 				<>
 					<Spacer />
 					<DuplicateCanvasError />

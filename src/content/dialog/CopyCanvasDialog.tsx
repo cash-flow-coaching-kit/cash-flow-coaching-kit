@@ -131,7 +131,7 @@ export default function CopyCanvasDialog({
 	const fetchCanvasData = useCallback(async () => {
 		if (currentClient?.id) {
 			// fetches the data
-			const data = await CFCUseCase.findById(parseInt(id, 10))
+			const data = await CFCUseCase.findById(id)
 			// If it can't be found move to reject
 			if (!data) {
 				changeState("REJECT")
@@ -148,7 +148,7 @@ export default function CopyCanvasDialog({
 				canvasEndDate: data.canvasEndDate,
 			})
 
-			const isDup = await performDupFind(data, currentClient.id)
+			const isDup = await performDupFind(data, currentClient.id, useCustomTitle)
 			setIsDuplicate(isDup !== false)
 
 			// check if the canvas is using a custom title
@@ -158,7 +158,7 @@ export default function CopyCanvasDialog({
 			// Move to resolve
 			changeState("RESOLVE")
 		}
-	}, [currentClient, changeState, id, setValues])
+	}, [currentClient, changeState, id, setValues, useCustomTitle])
 
 	useEffect(() => {
 		// If component moves to `open` fetch the new data
@@ -171,10 +171,14 @@ export default function CopyCanvasDialog({
 	// #region Form Change Events
 	const checkDuplicate = useCallback(async () => {
 		if (currentClient?.id) {
-			const isDup = await performDupFind(values, currentClient.id)
+			const isDup = await performDupFind(
+				values,
+				currentClient.id,
+				useCustomTitle
+			)
 			setIsDuplicate(isDup !== false)
 		}
-	}, [values, currentClient])
+	}, [values, currentClient, useCustomTitle])
 
 	useEffect(() => {
 		checkDuplicate()
@@ -196,7 +200,7 @@ export default function CopyCanvasDialog({
 	 * @param {K} k
 	 * @param {BaseCFCStruct[K]} v
 	 */
-	function changeDateValue(k: CanvasDateKeys, v: Date): void {
+	const changeDateValue = (k: CanvasDateKeys, v: Date): void => {
 		const { canvasStartDate, canvasEndDate } = changeDate<CFCPanelSlice>(
 			k,
 			v,
@@ -207,6 +211,10 @@ export default function CopyCanvasDialog({
 		setFieldValue("canvasStartDate", canvasStartDate, false)
 		setFieldValue("canvasEndDate", canvasEndDate, false)
 	}
+
+	useEffect(() => {
+		changeDateValue("canvasStartDate", values.canvasStartDate)
+	}, [values.canvasTimeFrame, values.canvasStartDate])
 	// #endregion
 
 	// #region Component rendering
@@ -243,6 +251,7 @@ export default function CopyCanvasDialog({
 							}}
 							useCustomTitle={useCustomTitle}
 							wrapped={false}
+							showDuplicateError={false}
 						/>
 						{isDuplicate && (
 							<>

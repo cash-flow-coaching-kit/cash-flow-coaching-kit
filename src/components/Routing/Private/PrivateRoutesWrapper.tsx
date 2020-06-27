@@ -1,29 +1,91 @@
 import React, { ReactElement } from "react"
 import { Route } from "react-router-dom"
+import loadable from "@loadable/component"
 import { PrivateRoutes } from "../../../util/routes/routes"
-import ClientList from "../../../pages/client-list"
-import SessionFiles from "../../../pages/session-files"
-import HCQuestionnaire from "../../../pages/HealthCheck/questionnaire"
-import DTListing from "../../../pages/DiscoverTopics/listing"
-import CFCCanvas from "../../../pages/CashFlowCanvas/canvas"
-import ChangeLevers from "../../../pages/change-levers"
-import ActionChecklist from "../../../pages/action-items"
-import CoachingKit from "../../../pages/coaching-kit"
-import DTFundingBusiness from "../../../pages/DiscoverTopics/funding-business"
-import DTManagingCashFlow from "../../../pages/DiscoverTopics/managing-cash-flow"
-import DTPlanningBusiness from "../../../pages/DiscoverTopics/planning-business"
-import DTPlanningFinanicalCommitments from "../../../pages/DiscoverTopics/planning-financial-commitments"
-import DTRecordKeeping from "../../../pages/DiscoverTopics/record-keeping"
-import DTSellingClosingSuccession from "../../../pages/DiscoverTopics/selling-closing-succession"
-import DTTrackingPerformance from "../../../pages/DiscoverTopics/tracking-performance"
-import HCListing from "../../../pages/HealthCheck/listing"
-import HCSummary from "../../../pages/HealthCheck/summary"
 import { ActionChecklistProvider } from "../../../state/action-checklist"
-import { PrivatePage } from "../../Layouts"
-import CanvasEdit from "../../../pages/CashFlowCanvas/canvasEdit"
-import CFCListing from "../../../pages/CashFlowCanvas/listing"
-import CFCCompare from "../../../pages/CashFlowCanvas/compare"
+import { PrivatePage, PageContainer } from "../../Layouts"
 import CFCProvider from "../../../state/CFC/provider"
+import Loading from "../../Loading"
+
+const LoadableFallback = (): ReactElement => (
+	<PageContainer>
+		<Loading />
+	</PageContainer>
+)
+
+const DTFundingBusiness = loadable(
+	() => import("../../../pages/DiscoverTopics/funding-business"),
+	{ fallback: <LoadableFallback /> }
+)
+const DTManagingCashFlow = loadable(
+	() => import("../../../pages/DiscoverTopics/managing-cash-flow"),
+	{ fallback: <LoadableFallback /> }
+)
+const DTPlanningBusiness = loadable(
+	() => import("../../../pages/DiscoverTopics/planning-business"),
+	{ fallback: <LoadableFallback /> }
+)
+const DTPlanningFinanicalCommitments = loadable(
+	() => import("../../../pages/DiscoverTopics/planning-financial-commitments"),
+	{ fallback: <LoadableFallback /> }
+)
+const DTRecordKeeping = loadable(
+	() => import("../../../pages/DiscoverTopics/record-keeping"),
+	{ fallback: <LoadableFallback /> }
+)
+const DTSellingClosingSuccession = loadable(
+	() => import("../../../pages/DiscoverTopics/selling-closing-succession"),
+	{ fallback: <LoadableFallback /> }
+)
+const DTTrackingPerformance = loadable(
+	() => import("../../../pages/DiscoverTopics/tracking-performance"),
+	{ fallback: <LoadableFallback /> }
+)
+const ClientList = loadable(() => import("../../../pages/client-list"), {
+	fallback: <LoadableFallback />,
+})
+const SessionFiles = loadable(() => import("../../../pages/session-files"), {
+	fallback: <LoadableFallback />,
+})
+const HCQuestionnaire = loadable(
+	() => import("../../../pages/HealthCheck/questionnaire"),
+	{ fallback: <LoadableFallback /> }
+)
+const DTListing = loadable(
+	() => import("../../../pages/DiscoverTopics/listing"),
+	{ fallback: <LoadableFallback /> }
+)
+const CFCCanvas = loadable(
+	() => import("../../../pages/CashFlowCanvas/canvas"),
+	{ fallback: <LoadableFallback /> }
+)
+const ChangeLevers = loadable(() => import("../../../pages/change-levers"), {
+	fallback: <LoadableFallback />,
+})
+const ActionChecklist = loadable(() => import("../../../pages/action-items"), {
+	fallback: <LoadableFallback />,
+})
+const CoachingKit = loadable(() => import("../../../pages/coaching-kit"), {
+	fallback: <LoadableFallback />,
+})
+const HCListing = loadable(() => import("../../../pages/HealthCheck/listing"), {
+	fallback: <LoadableFallback />,
+})
+const HCSummary = loadable(() => import("../../../pages/HealthCheck/summary"), {
+	fallback: <LoadableFallback />,
+})
+const CanvasEdit = loadable(
+	() => import("../../../pages/CashFlowCanvas/canvasEdit"),
+	{ fallback: <LoadableFallback /> }
+)
+const CFCListing = loadable(
+	() => import("../../../pages/CashFlowCanvas/listing"),
+	{ fallback: <LoadableFallback /> }
+)
+const CFCCompare = loadable(
+	() => import("../../../pages/CashFlowCanvas/compare"),
+	{ fallback: <LoadableFallback /> }
+)
 
 /**
  * Private route definitions, these pages should not be available
@@ -36,9 +98,6 @@ const PrivateRoutesWrapper = (): ReactElement => {
 		<PrivatePage>
 			<Route path={PrivateRoutes.CoachingKit}>
 				<CoachingKit />
-			</Route>
-			<Route path={PrivateRoutes.ClientList}>
-				<ClientList />
 			</Route>
 			<Route path={PrivateRoutes.SessionFiles}>
 				<SessionFiles />
@@ -76,6 +135,10 @@ const PrivateRoutesWrapper = (): ReactElement => {
 				they require the state values provided by this context setup
 			*/}
 			<ActionChecklistProvider>
+				<Route path={PrivateRoutes.ClientList}>
+					<ClientList />
+				</Route>
+
 				<Route path={PrivateRoutes.ChangeLevers}>
 					<ChangeLevers />
 				</Route>
