@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react"
-import { AppBar, Toolbar, Button, Typography, Grid } from "@material-ui/core"
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
+import { AppBar, Toolbar, Typography, Grid } from "@material-ui/core"
 import { useSharedNavStyles } from "../_config/style"
 import { NavigationRoutes } from "../_partials"
 import usePrimaryStyles from "./_config/styles"
@@ -9,6 +8,7 @@ import Logo from "../../Logo"
 import { PublicRoutes } from "../../../util/routes/routes"
 import useCurrentClient from "../../../state/client/useCurrentClient"
 import Logout from "../../Logout"
+import Help from "../_partials/Help"
 
 /**
  * Renders the primary navigation
@@ -63,14 +63,7 @@ const PrimaryNavbar = (): ReactElement => {
 								className={sharedStyle.button}
 							/>
 
-							{/* TODO: Pull into a separate component to add modal trigger and content */}
-							<Button
-								className={sharedStyle.button}
-								color="inherit"
-								startIcon={<HelpOutlineIcon />}
-							>
-								Help
-							</Button>
+							<Help />
 							<Logout />
 						</Grid>
 					</Grid>

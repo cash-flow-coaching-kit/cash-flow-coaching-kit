@@ -36,7 +36,7 @@ const excelCreateFromData = async (data: Uint8Array) => {
 		await workbook.xlsx.load(data)
 		return workbook
 	} catch (err) {
-		console.log("err", err)
+		// console.log("err", err)
 	}
 }
 
@@ -69,7 +69,6 @@ const excelProcessWorkbook = async (
 	workbook: Workbook
 ): Promise<ProcessFileItem[] | false> => {
 	const worksheet = workbook.worksheets[0]
-	// console.log("worksheet", worksheet)
 	if (!worksheet) return false
 	return excelProcessSheet(worksheet!)
 }

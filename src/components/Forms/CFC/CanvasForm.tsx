@@ -82,6 +82,7 @@ export default function CanvasForm({
 		dispatch,
 		copyCanvasActive,
 	} = useContext(CFCContext)
+	// eslint-disable-next-line
 	const { canvasItemUpdater, setCanvasItemUpdater } = useContext(CFCContext)
 
 	const { setFieldValue, handleChange, values, setValues } = useFormik<
@@ -146,14 +147,14 @@ export default function CanvasForm({
 			]
 			setFieldValue("cashOutItems", newCashOutItems, false)
 		},
-		[values]
+		[values, setFieldValue]
 	)
 
 	// add an updater to list to be used by Data Import
 	useEffect(() => {
 		setCanvasItemUpdater?.([addDataImportItems])
 		return () => setCanvasItemUpdater?.([])
-	}, [addDataImportItems])
+	}, [addDataImportItems, setCanvasItemUpdater])
 
 	useEffect(() => {
 		if (!useCustomTitle) {
@@ -311,6 +312,7 @@ export default function CanvasForm({
 
 	useEffect(() => {
 		changeDateValue("canvasStartDate", canvasStartDate)
+		// eslint-disable-next-line
 	}, [canvasTimeFrame, canvasStartDate])
 
 	const inputChange = useCallback(handleChange, [])

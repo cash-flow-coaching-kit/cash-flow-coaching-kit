@@ -19,6 +19,7 @@ import { PublicNavbar } from "../components/Navbar"
 import { NewClientDialog } from "../content/dialog"
 import { ClientContext } from "../state/client"
 import Spacer from "../components/Spacer"
+import ImportClient from "../components/ClientListing/_partials/ImportClient"
 
 const useHomepageStyles = makeStyles((theme) => ({
 	container: {
@@ -32,6 +33,9 @@ const useHomepageStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(5),
 		display: "flex",
 		justifyContent: "center",
+		"& .MuiButton-root + .MuiButton-root": {
+			marginLeft: theme.spacing(1),
+		},
 	},
 	embed: {
 		minHeight: "300px",
@@ -198,6 +202,7 @@ const Homepage = (): ReactElement => {
 						) : (
 							<NewClientDialog triggerText="Get Started" />
 						)}
+						<ImportClient />
 					</Box>
 					<Spacer />
 					<Grid container spacing={0}>

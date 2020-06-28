@@ -102,7 +102,6 @@ export async function bulkAddChecklists(
 	const ids = await ActionChecklistUseCase.bulkPut(items)
 
 	const newOrder = priority?.order.concat(ids)
-	console.log(uniq(newOrder))
 	await ActionPriorityUseCase.update(priorityId, {
 		...priority,
 		order: uniq(newOrder),

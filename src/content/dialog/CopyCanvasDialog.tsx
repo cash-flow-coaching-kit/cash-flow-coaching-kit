@@ -214,6 +214,7 @@ export default function CopyCanvasDialog({
 
 	useEffect(() => {
 		changeDateValue("canvasStartDate", values.canvasStartDate)
+		// eslint-disable-next-line
 	}, [values.canvasTimeFrame, values.canvasStartDate])
 	// #endregion
 

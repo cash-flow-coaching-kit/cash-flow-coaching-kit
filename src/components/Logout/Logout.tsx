@@ -18,6 +18,7 @@ import ClientDB from "../../data/client/ClientDatabase"
 import HealthCheckDB from "../../data/healthChecks/HealthCheckDatabase"
 import ActionChecklistDB from "../../data/ActionChecklist/ActionChecklistDatabase"
 import CFCDB from "../../data/CFC/CFCDatabase"
+import { removeStorageClient } from "../../util/localStorage/client"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -56,6 +57,8 @@ export default function Logout({
 		await HealthCheckDB.delete()
 		await ActionChecklistDB.delete()
 		await CFCDB.delete()
+
+		removeStorageClient()
 
 		window.location.replace("/")
 	}

@@ -34,7 +34,6 @@ export default function ImportDataModal({
 	}
 
 	const toggleType = (row: number, event: any) => {
-		console.log("row", row)
 		const newItems: ProcessFileItem[] = currentItems.map((i) => {
 			if (i.row === row)
 				return {
