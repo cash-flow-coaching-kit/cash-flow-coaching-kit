@@ -146,6 +146,8 @@ export function identifyIfDuplicate(
 
 	const filtered = dups.filter((item) => {
 		if (!usingCustom) {
+			if (item.canvasTitle !== "") return false
+
 			return (
 				isSameDay(item.canvasStartDate, canvasStartDate) &&
 				isSameDay(item.canvasEndDate, canvasEndDate)
@@ -186,7 +188,8 @@ export async function performDupFind(
 		slice.canvasType,
 		slice.canvasTimeFrame,
 		client,
-		slice.canvasTitle.trim()
+		slice.canvasTitle.trim(),
+		usingCustom
 	)
 
 	return identifyIfDuplicate(dups, slice, usingCustom, canvasId)
