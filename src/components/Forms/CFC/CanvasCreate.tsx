@@ -88,6 +88,7 @@ export default function CreateCanvasForm(): ReactElement {
 
 	useEffect(() => {
 		changeDateValue("canvasStartDate", canvasStartDate)
+		// eslint-disable-next-line
 	}, [canvasTimeFrame, canvasStartDate])
 
 	const inputChange = useCallback(handleChange, [])

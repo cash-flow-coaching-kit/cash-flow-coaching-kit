@@ -49,7 +49,6 @@ const ClientList = ({
 	 * @returns void
 	 */
 	const handleChange = (client: ClientDataStruct) => (): void => {
-		console.log(client)
 		if (client?.id) {
 			dispatch({
 				type: ClientActionTypes.ChangeCurrentClient,

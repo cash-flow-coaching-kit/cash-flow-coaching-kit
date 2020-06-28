@@ -1,13 +1,13 @@
-import React, { ReactElement, useEffect, useMemo } from "react"
+import React, { ReactElement, useEffect } from "react"
 import { useLocation, RouteProps, useHistory } from "react-router-dom"
-import { makeStyles, Box, ThemeProvider } from "@material-ui/core"
+import { makeStyles, Box } from "@material-ui/core"
 import { PrimaryNavbar, SecondaryNavbar } from "../../Navbar"
 import { IPrivatePage } from "./_config/shape"
 import checkIfPublic from "../../../util/routes/checkIfPublic"
 import MobileNavbar from "../../Navbar/Mobile"
 import useCurrentClient from "../../../state/client/useCurrentClient"
 import { PrivateRoutes, PublicRoutes } from "../../../util/routes/routes"
-import determineTheme from "../../../util/routes/routeTheming"
+import GenericPage from "../GenericPage"
 
 const useStyles = makeStyles((theme) => ({
 	desktop: {
@@ -51,28 +51,22 @@ const PrivatePage = ({ children }: IPrivatePage): ReactElement => {
 		}
 	}, [clientSynced, currentClient, location, history])
 
-	const theme = useMemo(() => {
-		return determineTheme(location.pathname)
-	}, [location])
-
 	return (
-		<>
+		<GenericPage>
 			{!checkIfPublic(location) && (
 				<>
-					<ThemeProvider theme={theme}>
-						<Box className={styles.desktop}>
-							<PrimaryNavbar />
-							<SecondaryNavbar />
-						</Box>
-						<Box className={styles.mobile}>
-							<MobileNavbar />
-						</Box>
+					<Box className={styles.desktop}>
+						<PrimaryNavbar />
+						<SecondaryNavbar />
+					</Box>
+					<Box className={styles.mobile}>
+						<MobileNavbar />
+					</Box>
 
-						<div className="private-page">{children}</div>
-					</ThemeProvider>
+					<div className="private-page">{children}</div>
 				</>
 			)}
-		</>
+		</GenericPage>
 	)
 }
 

@@ -142,11 +142,6 @@ export default function Modal({
 			return true
 		}
 
-		console.log({
-			currentClient,
-			priority,
-		})
-
 		return false
 	}
 	// #endregion

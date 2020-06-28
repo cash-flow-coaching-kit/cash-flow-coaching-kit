@@ -6,7 +6,7 @@ import React, {
 	ReactNode,
 	useEffect,
 	Dispatch,
-	useContext,
+	useCallback,
 } from "react"
 import {
 	IActionChecklistState,
@@ -24,13 +24,13 @@ import {
 	ClientId,
 	ActionChecklistNotesStruct,
 } from "../../data/_config/shape"
-import { ClientContext } from "../client"
 import {
 	newChecklistItem,
 	newPriorityItem,
 } from "../../data/ActionChecklist/_config/utilities"
 import filterByActionContainer from "../../util/filters/ByActionContainer"
 import ActionNotesUseCase from "../../data/ActionChecklist/NotesLogic"
+import useCurrentClient from "../client/useCurrentClient"
 
 type SyncResponse = [
 	ActionChecklistStruct[],
@@ -58,31 +58,33 @@ const createChecklistIfNeeded = async (
 	const find = curData.filter(filterByActionContainer(action))
 
 	if (find.length === 0) {
+		// Creates a copy of the current data
 		const data = [...curData]
 		const priority = [...curPriority]
-		const newItem: ActionChecklistStruct = newChecklistItem(clientId, action)
 
-		const id = await ActionChecklistUseCase.create(newItem)
+		// Create the new items
+		const newItem: ActionChecklistStruct = newChecklistItem(clientId, action)
 		const newPriority: ActionChecklistPriorityStruct = newPriorityItem(
 			clientId,
 			action
 		)
 
+		// Add the items to the database
+		const id = await ActionChecklistUseCase.create(newItem)
 		const priorityId = await ActionPriorityUseCase.create({
 			...newPriority,
 			order: [id],
 		})
+
+		// Add the data to the state
 		const priorityWithItem = priority.concat({
 			...newPriority,
 			id: priorityId,
 			order: [id],
 		})
-		await ActionPriorityUseCase.update(priorityId, {
-			...newPriority,
-			order: [id],
-		})
 		const dataWithItem = data.concat({ ...newItem, id })
 
+		// return the new states
 		return [dataWithItem, priorityWithItem, curNotes]
 	}
 
@@ -103,6 +105,8 @@ const completeSyncing = (
 	clientId: ClientId
 ) => async (response: SyncResponse): Promise<void> => {
 	const [data, priority, notes] = response
+
+	// Check for cash in actions
 	const CIA = await createChecklistIfNeeded(
 		data,
 		priority,
@@ -110,6 +114,8 @@ const completeSyncing = (
 		"cashInActions",
 		clientId
 	)
+
+	// Check for cash out actions
 	const COA = await createChecklistIfNeeded(
 		CIA[0],
 		CIA[1],
@@ -137,9 +143,7 @@ const completeSyncing = (
 const ActionChecklistProvider = (props: {
 	children: ReactNode
 }): ReactElement => {
-	const {
-		state: { currentClient },
-	} = useContext(ClientContext)
+	const [currentClient, synced] = useCurrentClient()
 
 	type ACReducer = Reducer<IActionChecklistState, ActionChecklistReducerActions>
 
@@ -148,17 +152,25 @@ const ActionChecklistProvider = (props: {
 		defaultActionChecklistState
 	)
 
-	useEffect(() => {
+	const fetchDBActions = useCallback(async () => {
 		if (currentClient?.id) {
 			// Get all checklist and priority items and
 			// then complete the sync with that data
-			Promise.all([
+			const res = await Promise.all([
 				ActionChecklistUseCase.findByClient(currentClient.id),
 				ActionPriorityUseCase.findByClient(currentClient.id),
 				ActionNotesUseCase.findByClient(currentClient.id),
-			]).then(completeSyncing(dispatch, currentClient.id))
+			])
+
+			completeSyncing(dispatch, currentClient.id)(res)
 		}
 	}, [currentClient])
+
+	useEffect(() => {
+		if (synced) {
+			fetchDBActions()
+		}
+	}, [synced, fetchDBActions])
 
 	const value = useMemo(
 		(): IActionChecklistState => ({

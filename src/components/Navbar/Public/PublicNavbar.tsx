@@ -1,12 +1,12 @@
 import React, { ReactElement } from "react"
-import { AppBar, Box, Toolbar, Button } from "@material-ui/core"
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
+import { AppBar, Box, Toolbar } from "@material-ui/core"
 import { useSharedNavStyles } from "../_config/style"
 import { NavigationRoutes } from "../_partials"
 import { routes } from "./_config/data"
 import { IPublicNavbarProps } from "./_config/shape"
 import { PublicRoutes } from "../../../util/routes/routes"
 import Logo from "../../Logo"
+import Help from "../_partials/Help"
 
 /**
  * Renders the primary navigation
@@ -34,14 +34,7 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 						) : (
 							false
 						)}
-						{/* TODO: Pull into a separate component to add modal trigger and content */}
-						<Button
-							className={sharedStyle.button}
-							color="inherit"
-							startIcon={<HelpOutlineIcon />}
-						>
-							Help
-						</Button>
+						<Help />
 					</Box>
 				</Toolbar>
 			</AppBar>

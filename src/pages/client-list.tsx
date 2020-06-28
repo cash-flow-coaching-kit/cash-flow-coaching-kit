@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react"
-import { Typography, Grid, makeStyles, Box } from "@material-ui/core"
+import { Typography, Grid, Box } from "@material-ui/core"
 import { PageContainer } from "../components/Layouts"
 import PageTip from "../components/PageTip"
 import ClientListing from "../components/ClientListing"

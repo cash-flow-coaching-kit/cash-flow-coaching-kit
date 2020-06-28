@@ -30,10 +30,15 @@ const ConfirmDialogue = ({
 				<></>
 			)}
 			<DialogActions>
-				<Button onClick={onConfirm} color="primary" autoFocus>
+				<Button onClick={onCancel}>{cancelText}</Button>
+				<Button
+					onClick={onConfirm}
+					color="primary"
+					variant="contained"
+					autoFocus
+				>
 					{confirmText}
 				</Button>
-				<Button onClick={onCancel}>{cancelText}</Button>
 			</DialogActions>
 		</Dialog>
 	)
