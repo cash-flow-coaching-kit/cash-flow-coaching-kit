@@ -50,17 +50,25 @@ class CFCLogic extends ILogicLayer<CFCStruct, BaseCFCStruct> {
 		type: CanvasType,
 		timeframe: CFCTimeFrame,
 		clientId: ClientId,
-		canvasTitle: string
+		canvasTitle: string,
+		usingCustomTitle: boolean
 	): Promise<CFCStruct[]> {
 		return this.database.transaction("r", this.table.name, () => {
+			if (usingCustomTitle) {
+				return this.table
+					.where({
+						clientId,
+						canvasTitle,
+					})
+					.toArray()
+			}
+
 			return this.table
 				.where({
 					canvasType: type,
 					canvasTimeFrame: timeframe,
 					clientId,
 				})
-				.or("canvasTitle")
-				.equals(canvasTitle)
 				.toArray()
 		})
 	}
