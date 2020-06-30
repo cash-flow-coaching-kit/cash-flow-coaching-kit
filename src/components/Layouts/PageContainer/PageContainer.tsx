@@ -24,6 +24,7 @@ const PageContainer = ({
 				Main content anchor
 			</a>
 			<Container
+				role="role"
 				className={`${styles.container} ${className || ""}`}
 				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...rest}
