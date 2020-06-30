@@ -48,7 +48,7 @@ const ChangeLevers = (): ReactElement => {
 								Below are actions that will improve your cash flow in and out.
 							</Typography>
 							<Typography>
-								Add the actions you want to take to your action checklist.
+								Add the actions you want to take to your Action Checklist.
 							</Typography>
 						</Box>
 						<Spacer space={3} />

@@ -61,7 +61,7 @@ export default function ChecklistModal({
 					startIcon={<AddIcon />}
 					onClick={(): void => setModalState(true)}
 				>
-					Add to action checklist
+					Add to Action Checklist
 				</Button>
 				<Modal
 					open={modalState}

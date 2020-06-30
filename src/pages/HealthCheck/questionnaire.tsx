@@ -38,7 +38,7 @@ const HCQuestionnaire = (): ReactElement => {
 								business.
 							</Typography>
 							<Typography className="list-describer">
-								This quick health check will help you:
+								This quick Health Check will help you:
 							</Typography>
 							<List component="ul" className="ul-list">
 								<Typography component="li">
@@ -53,11 +53,11 @@ const HCQuestionnaire = (): ReactElement => {
 								complete.
 							</Typography>
 							<Typography>
-								As you make changes to your business, you can use the health
-								check to review your progress.
+								As you make changes to your business, you can use the Health
+								Check to review your progress.
 							</Typography>
 							<Typography>
-								If you want to see your previous health checks, see ‘Saved
+								If you want to see your previous Health Checks, see ‘Saved
 								Health Checks’ in the control panel.
 							</Typography>
 						</Box>

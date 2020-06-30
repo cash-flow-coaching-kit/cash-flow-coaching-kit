@@ -181,7 +181,7 @@ const Homepage = (): ReactElement => {
 									className={styles.contentText}
 									align="center"
 								>
-									Create an action checklist and track your progress.
+									Create an Action Checklist and track your progress.
 								</Typography>
 							</Grid>
 						</Grid>
@@ -224,7 +224,9 @@ const Homepage = (): ReactElement => {
 					<Grid container spacing={0}>
 						<Grid item xs={12} sm={8}>
 							<Box className="content-area">
-								<Typography variant="h5">Using the Cash Flow Kit</Typography>
+								<Typography variant="h5">
+									Using the Cash Flow Coaching Kit
+								</Typography>
 								<Typography>
 									Managing your business cash flow will help you sustain and
 									grow your business.

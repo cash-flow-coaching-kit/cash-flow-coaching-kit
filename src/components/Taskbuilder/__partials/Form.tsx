@@ -373,7 +373,7 @@ export default function Form({ container, client }: FormProps): ReactElement {
 					className={styles.fill}
 					type="submit"
 				>
-					Add to action checklist
+					Add to Action Checklist
 				</Button>
 			</Box>
 		</form>
