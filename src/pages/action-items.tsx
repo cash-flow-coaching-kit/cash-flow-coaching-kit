@@ -34,6 +34,8 @@ import Loading from "../components/Loading"
 import Spacer from "../components/Spacer"
 import ActionChecklistPDF from "../components/PDF/ActionChecklistPDF"
 import servePDF from "../components/PDF/servePDF"
+import ActionChecklistUseCase from "../data/ActionChecklist/ChecklistLogic"
+import ActionNotesUseCase from "../data/ActionChecklist/NotesLogic"
 
 /**
  * Action Checklist page component
@@ -99,13 +101,19 @@ const ActionChecklist = (): ReactElement => {
 		}
 	}
 
-	const printPDF = async () => {
-		const pdf = await ActionChecklistPDF(
-			currentClient?.name ?? "Client",
-			checklistCollection,
-			notes
-		)
-		servePDF(pdf)
+	const printPDF = async (): Promise<void> => {
+		if (currentClient?.id) {
+			const clientId = currentClient.id
+			const pdfChecklists = await ActionChecklistUseCase.findByClient(clientId)
+			const pdfNotes = await ActionNotesUseCase.findByClient(clientId)
+
+			const pdf = await ActionChecklistPDF(
+				currentClient?.name ?? "Client",
+				pdfChecklists,
+				pdfNotes
+			)
+			servePDF(pdf)
+		}
 	}
 
 	return (
@@ -119,9 +127,6 @@ const ActionChecklist = (): ReactElement => {
 								Your checklist has all the actions you selected in previous
 								parts of the Cash Flow Coaching Kit. There are two parts, cash
 								flow in actions and cash flow out actions.
-							</Typography>
-							<Typography>
-								Use the checklist to track, prioritise and review your actions.
 							</Typography>
 						</Box>
 						<Spacer />
