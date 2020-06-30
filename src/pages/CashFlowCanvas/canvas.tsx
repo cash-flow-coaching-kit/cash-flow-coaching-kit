@@ -80,7 +80,9 @@ export default function CFCCanvas(): ReactElement {
 				</Grid>
 			</PageContainer>
 			<PageTip tip="CFCanvasTip" />
-			<PageTour steps={steps} />
+			<Box role="complementary">
+				<PageTour steps={steps} />
+			</Box>
 		</>
 	)
 }
