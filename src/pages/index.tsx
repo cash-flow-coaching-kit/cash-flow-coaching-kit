@@ -237,8 +237,8 @@ const Homepage = (): ReactElement => {
 								</Typography>
 								<List component="ul" className="ul-list">
 									<Typography component="li">Opening balance</Typography>
-									<Typography component="li">Revenue</Typography>
-									<Typography component="li">Expenses</Typography>
+									<Typography component="li">income</Typography>
+									<Typography component="li">expenses</Typography>
 								</List>
 								<Typography>
 									You can also import data from other tools and applications
