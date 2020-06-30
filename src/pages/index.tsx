@@ -208,7 +208,9 @@ const Homepage = (): ReactElement => {
 					<Grid container spacing={0}>
 						<Grid item xs={12} sm={8}>
 							<Box className="content-area">
-								<Typography variant="h5">Using the Cash Flow Kit</Typography>
+								<Typography variant="h5">
+									Using the Cash Flow Coaching Kit
+								</Typography>
 								<Typography>
 									Planning your business will help you sustain or grow your
 									business.

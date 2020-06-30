@@ -69,7 +69,7 @@ export default function CFCFourQuestions({
 
 	return (
 		<ExpandableNav
-			title="Four key questions"
+			title="Four Key Questions"
 			reactourLabel="cfc-four-questions"
 		>
 			<Box className={styles.box}>

@@ -241,14 +241,14 @@ const CoachingKit = (): ReactElement => {
 									>
 										<CardMedia
 											component="img"
-											alt="Discover topics"
+											alt="Discover Topics"
 											height="155"
 											image="/images/discoverTopics_thumb.png"
-											title="Discover topics"
+											title="Discover Topics"
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="h5" component="h2">
-												Discover topics
+												Discover Topics
 											</Typography>
 											<Typography
 												variant="body2"
@@ -292,14 +292,14 @@ const CoachingKit = (): ReactElement => {
 									<CardActionArea component={RouterLink} to={PrivateRoutes.CFC}>
 										<CardMedia
 											component="img"
-											alt="Cash flow canvas"
+											alt="Cash Flow Canvas"
 											height="155"
 											image="/images/cashFlowCanvas_thumb.png"
-											title="Cash flow canvas"
+											title="Cash Flow Canvas"
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="h5" component="h2">
-												Cash flow canvas
+												Cash Flow Canvas
 											</Typography>
 											<Typography
 												variant="body2"
@@ -324,14 +324,14 @@ const CoachingKit = (): ReactElement => {
 									>
 										<CardMedia
 											component="img"
-											alt="Change levers"
+											alt="Change Levers"
 											height="155"
 											image="/images/changeLevers_thumb.png"
-											title="Change levers"
+											title="Change Levers"
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="h5" component="h2">
-												Change levers
+												Change Levers
 											</Typography>
 											<Typography
 												variant="body2"
@@ -379,14 +379,14 @@ const CoachingKit = (): ReactElement => {
 									>
 										<CardMedia
 											component="img"
-											alt="Action checklist"
+											alt="Action Checklist"
 											height="155"
 											image="/images/actionChecklist_thumb.png"
-											title="Action checklist"
+											title="Action Checklist"
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="h5" component="h2">
-												Action checklist
+												Action Checklist
 											</Typography>
 											<Typography
 												variant="body2"
