@@ -41,6 +41,16 @@ const useStyles = makeStyles((theme) => ({
 	actionRow: {
 		display: "flex",
 		justifyContent: "flex-end",
+		"& a + a": {
+			marginLeft: theme.spacing(1),
+		},
+		[theme.breakpoints.down("sm")]: {
+			flexDirection: "column",
+			"& a + a": {
+				marginLeft: theme.spacing(0),
+				marginTop: theme.spacing(1),
+			},
+		},
 	},
 }))
 
@@ -117,6 +127,9 @@ const HCSummary = (): ReactElement => {
 									className={styles.summaryActions}
 								>
 									<Grid item xs={12} className={styles.actionRow}>
+										<Button component={Link} to={PrivateRoutes.DiscoverTopics}>
+											Go to Discover Topics
+										</Button>
 										<Button
 											color="primary"
 											variant="contained"
