@@ -231,7 +231,7 @@ export default function ImportClientDialog({
 					}}
 				/>
 				<Button variant="outlined" component="span">
-					Select client file
+					Select file to import
 				</Button>
 			</label>
 			<Typography variant="caption" className={cls.filename}>
