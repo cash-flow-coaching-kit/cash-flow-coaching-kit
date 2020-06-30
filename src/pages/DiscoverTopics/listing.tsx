@@ -207,7 +207,7 @@ const DTListing = (): ReactElement => {
 									className={styles.contentText}
 									gutterBottom
 								>
-									Am I trading profitably?
+									Are you trading profitably?
 								</Typography>
 								<Divider className={styles.contentText} />
 
@@ -220,7 +220,7 @@ const DTListing = (): ReactElement => {
 									className={styles.contentText}
 									gutterBottom
 								>
-									Have I put enough aside to meet my regular financial
+									Have you put enough aside to meet your regular financial
 									commitments?
 								</Typography>
 								<Divider className={styles.contentText} />
@@ -233,7 +233,7 @@ const DTListing = (): ReactElement => {
 									className={styles.contentText}
 									gutterBottom
 								>
-									Does my business have enough to spend on myself and pay
+									Does your business have enough to spend on yourself and pay
 									others?
 								</Typography>
 								<Divider className={styles.contentText} />
@@ -246,7 +246,7 @@ const DTListing = (): ReactElement => {
 									className={styles.contentText}
 									gutterBottom
 								>
-									Is my business improving its financial position?
+									Is your business improving its financial position?
 								</Typography>
 							</CardContent>
 						</Card>

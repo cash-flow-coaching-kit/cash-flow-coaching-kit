@@ -64,7 +64,7 @@ export default React.memo(function FallingBehind({
 
 	return (
 		<ExpandableNav
-			title="Is my business improving its financial position?"
+			title="Is your business improving its financial position?"
 			subHeading="Complete these fields to record your net asset position."
 			defaultExpanded={false}
 		>

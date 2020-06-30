@@ -156,21 +156,21 @@ const CoachingKit = (): ReactElement => {
 								</Typography> */}
 									<List style={{ padding: 0 }}>
 										<ListItem className={styles.contentText}>
-											1. Am I trading profitably?
+											1. Are you trading profitably?
 										</ListItem>
 										<Divider />
 										<ListItem className={styles.contentText}>
-											2. Have I put enough aside to meet my regular financial
-											commitments?
+											2. Have you put enough aside to meet your regular
+											financial commitments?
 										</ListItem>
 										<Divider />
 										<ListItem className={styles.contentText}>
-											3. Does my business have enough to spend on myself and pay
-											others?
+											3. Does your business have enough to spend on yourself and
+											pay others?
 										</ListItem>
 										<Divider />
 										<ListItem className={styles.contentText}>
-											4. Is my business improving its financial position?
+											4. Is your business improving its financial position?
 										</ListItem>
 									</List>
 								</Grid>
