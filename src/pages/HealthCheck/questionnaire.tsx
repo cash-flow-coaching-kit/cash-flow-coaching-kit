@@ -47,8 +47,8 @@ const HCQuestionnaire = (): ReactElement => {
 								complete.
 							</Typography>
 							<Typography>
-								As you make changes to your business, you can use the health
-								check to review your progress.
+								As you make changes to your business, you can use the Health
+								Check to review your progress.
 							</Typography>
 							<Typography>
 								If you want to see your previous Health Checks, see ‘List of
