@@ -125,8 +125,10 @@ const ActionChecklist = (): ReactElement => {
 						<Box className="content-area">
 							<Typography>
 								Your checklist has all the actions you selected in previous
-								parts of the Cash Flow Coaching Kit. There are two parts, cash
-								flow in actions and cash flow out actions.
+								parts of the Cash Flow Coaching Kit.
+							</Typography>
+							<Typography>
+								Use the checklist to track, prioritise and review your actions.
 							</Typography>
 						</Box>
 						<Spacer />
