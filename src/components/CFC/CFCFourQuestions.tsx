@@ -22,7 +22,7 @@ type CFC4QsProps = {
 
 const tooltipContent = [
 	"Total Cash In (exc GST) – Total Cash Out (exc GST).",
-	"GST on Sales – GST on Purchases + PAYG Withholding + Super + Income Tax or Company Tax.",
+	"GST on Sales - GST on Purchases + PAYG Withholding + Super + Income Tax or Company Tax. These are highlighted in orange on the Cash Flow Canvas.",
 	"Opening Balance + Cash Surplus (exc GST) – Income Tax or Company Tax.",
 	"Total net assets (later period, eg. Forecast) – Total net assets (earlier period, eg. Review).",
 ]

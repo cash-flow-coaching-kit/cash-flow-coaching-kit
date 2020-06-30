@@ -88,8 +88,10 @@ export function generateTitle(
 		return "Please provide a valid date"
 	}
 
+	const timeFrameToUse = timeframe === "quaterly" ? "quarterly" : timeframe
+
 	return pipe(
-		concatStr(upperFirst(`${timeframe} `)),
+		concatStr(upperFirst(`${timeFrameToUse} `)),
 		concatStr(format(startDate, "dd/MM/yyyy")),
 		concatStr(" to "),
 		concatStr(format(endDate, "dd/MM/yyyy"))

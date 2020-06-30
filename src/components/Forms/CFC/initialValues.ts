@@ -1,13 +1,12 @@
 import { BaseCFCStruct } from "../../../data/_config/shape"
 import createCashFlowItem from "../../../state/CFC/createCashFlow"
-import { calculatedEndDate } from "../../../util/dates"
 
 const initialValues: BaseCFCStruct = {
 	canvasTitle: "",
 	canvasType: "review",
 	canvasTimeFrame: "quaterly",
 	canvasStartDate: new Date(),
-	canvasEndDate: calculatedEndDate(new Date(), "quaterly"),
+	canvasEndDate: new Date(),
 	openingBalance: 0,
 	paygWithholding: 0,
 	superAmount: 0,

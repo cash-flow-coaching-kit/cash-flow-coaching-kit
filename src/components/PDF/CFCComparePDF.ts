@@ -102,8 +102,10 @@ export default async (
 							],
 							[
 								"Income/Outcome tax",
-								// TODO: Update to the correct income tax value
-								...rowValue([leftSelected.incomeTax, rightSelected.incomeTax]),
+								...rowValue([
+									leftCalc.incomeTaxPercentage,
+									rightCalc.incomeTaxPercentage,
+								]),
 							],
 							[
 								{ text: "Available to spend", bold: true },
