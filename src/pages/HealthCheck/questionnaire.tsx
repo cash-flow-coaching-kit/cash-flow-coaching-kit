@@ -34,7 +34,7 @@ const HCQuestionnaire = (): ReactElement => {
 						<Spacer />
 						<Box className="content-area">
 							<Typography className="list-describer">
-								This quick health check will help you:
+								This quick Health Check will help you:
 							</Typography>
 							<List component="ul" className="ul-list">
 								<Typography component="li">fill knowledge gaps</Typography>

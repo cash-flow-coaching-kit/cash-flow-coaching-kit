@@ -181,7 +181,7 @@ const Homepage = (): ReactElement => {
 									className={styles.contentText}
 									align="center"
 								>
-									Create an action checklist and track your progress.
+									Create an Action Checklist and track your progress.
 								</Typography>
 							</Grid>
 						</Grid>
