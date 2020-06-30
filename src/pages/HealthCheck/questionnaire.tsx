@@ -57,7 +57,7 @@ const HCQuestionnaire = (): ReactElement => {
 								check to review your progress.
 							</Typography>
 							<Typography>
-								If you want to see your previous health checks, see ‘List of
+								If you want to see your previous health checks, see ‘Saved
 								Health Checks’ in the control panel.
 							</Typography>
 						</Box>
