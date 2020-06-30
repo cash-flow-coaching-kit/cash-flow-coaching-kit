@@ -15,6 +15,7 @@ import {
 	IconButton,
 	MobileStepper,
 	Grid,
+	Box,
 } from "@material-ui/core"
 import CloseIcon from "@material-ui/icons/Close"
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
@@ -37,6 +38,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 	stepperNav: {
 		width: "100%",
+	},
+	image: {
+		width: "auto",
+		maxWidth: "100%",
+		display: "block",
+		height: "auto",
+	},
+	imageWrapper: {
+		padding: theme.spacing(1),
+		border: `1px solid ${theme.palette.grey["300"]}`,
+		borderRadius: theme.shape.borderRadius,
 	},
 }))
 
@@ -69,10 +81,16 @@ const TourStepper = (): ReactElement => {
 			<DialogContent className={cls.content}>
 				<Grid spacing={3} container>
 					<Grid item xs={12} md={8}>
-						Image
+						<Box className={cls.imageWrapper}>
+							<img
+								src={tourSteps[activeStep].image}
+								alt={tourSteps[activeStep].alt}
+								className={cls.image}
+							/>
+						</Box>
 					</Grid>
 					<Grid item xs={12} md={4}>
-						Content
+						{tourSteps[activeStep].content()}
 					</Grid>
 				</Grid>
 			</DialogContent>
