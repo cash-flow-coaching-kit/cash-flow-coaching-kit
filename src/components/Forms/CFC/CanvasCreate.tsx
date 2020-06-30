@@ -29,7 +29,7 @@ import CFCContext from "../../../state/CFC/context"
 export default function CreateCanvasForm(): ReactElement {
 	const styles = useStyles()
 
-	const [useCustomTitle, setUseCustomTitle] = useState(true)
+	const [useCustomTitle, setUseCustomTitle] = useState(false)
 	const history = useHistory()
 	const [currentClient] = useCurrentClient()
 	const { duplicateError, invalidDateError } = useContext(CFCContext)
