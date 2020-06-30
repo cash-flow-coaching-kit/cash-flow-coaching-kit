@@ -9,6 +9,10 @@ import {
 	TableRow,
 	TableBody,
 	TableCell,
+	Grid,
+	Typography,
+	Select,
+	MenuItem,
 } from "@material-ui/core"
 import { generalProcessFile, ProcessFileItem } from "./lib/ImportDataGeneralLib"
 import IconDeleteButton from "../IconDeleteButton"
@@ -82,9 +86,10 @@ export default function ImportDataModal({
 				<TableCell>{description}</TableCell>
 				<TableCell align="right">${Math.floor(amount)}</TableCell>
 				<TableCell>
-					<Button onClick={toggleType.bind(null, row)}>
-						{type === "in" ? "Cash IN" : "Cash OUT"}
-					</Button>
+					<Select value={type} onChange={toggleType.bind(null, row)}>
+						<MenuItem value="in">Cash IN</MenuItem>
+						<MenuItem value="out">Cash Out</MenuItem>
+					</Select>
 				</TableCell>
 				<TableCell>
 					<IconDeleteButton onClick={deleteItem.bind(null, row)} />
@@ -95,7 +100,7 @@ export default function ImportDataModal({
 
 	const renderItems = (items: ProcessFileItem[]): ReactElement => {
 		return (
-			<Table>
+			<Table size="small">
 				<TableBody>{items.map((item) => renderSingleItem(item))}</TableBody>
 			</Table>
 		)
@@ -103,34 +108,101 @@ export default function ImportDataModal({
 
 	return (
 		<>
-			<Dialog open={open}>
-				<DialogTitle>Import data</DialogTitle>
-				<DialogContent>
-					<p>
-						You can import data into the Cash Flow Canvas from Xero, MYOB,
-						QuickBooks or any spreadsheet.
-					</p>
-					<p>
-						To import data click Open File and select the file you wish to
-						import. This will load each item from your file. Remove items you
-						don't want imported into the canvas. Once complete, select Add to
-						Canvas.
-					</p>
-					<p>Imported data must be in .xlsx format.</p>
-					{/* <pre>{JSON.stringify(currentItems, null, 2)}</pre> */}
-					{currentItems.length === 0 ? (
-						<p onClick={onOpenFileDialog}>Please import a file.</p>
-					) : (
-						renderItems(currentItems)
-					)}
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={onOpenFileDialog}>Open File</Button>
-					<Button onClick={onAddToCanvas} disabled={currentItems.length === 0}>
-						Add To Canvas
-					</Button>
-					<Button onClick={onEmptyAndClose}>Cancel</Button>
-				</DialogActions>
+			<Dialog open={open} fullWidth maxWidth="md">
+				{currentItems.length === 0 ? (
+					<>
+						<DialogTitle>
+							Complete the following steps to import data into your Cash Flow
+							Canvas.
+						</DialogTitle>
+						<DialogContent>
+							<Grid container spacing={0}>
+								<Grid item xs={6}>
+									<ol style={{ paddingRight: 24 }}>
+										<li>
+											<Typography>
+												Open your chosen accounting package. The kit supports
+												Xero, MYOB, and QuickBooks.
+											</Typography>
+										</li>
+										<li>
+											<Typography>
+												Go to the reporting section in your accounting package.
+											</Typography>
+										</li>
+										<li>
+											<Typography>
+												Select and export the report you would like to use in
+												the kit. It will download as an Excel file.
+											</Typography>
+										</li>
+										<li>
+											<Typography>
+												Go back to the Cash Flow Coaching Kit.
+											</Typography>
+										</li>
+										<li>
+											<Typography>
+												Press the open file button. Select the Excel file from
+												your file system.
+											</Typography>
+										</li>
+									</ol>
+									<Typography>
+										Your data will then appear in a new screen.
+									</Typography>
+								</Grid>
+								<Grid item xs={6}>
+									<img
+										src="/images/importdata.png"
+										alt="Import Data"
+										style={{ width: "100%", padding: 0 }}
+									/>
+								</Grid>
+							</Grid>
+						</DialogContent>
+						<DialogActions>
+							<Button onClick={onOpenFileDialog}>Open File</Button>
+							<Button onClick={onEmptyAndClose}>Cancel</Button>
+						</DialogActions>
+					</>
+				) : (
+					<>
+						<DialogTitle>
+							Follow these steps to get your data ready to import.
+						</DialogTitle>
+						<DialogContent>
+							<ol>
+								<li>
+									<Typography>
+										For each item, select if it is cash in or cash out.
+									</Typography>
+								</li>
+								<li>
+									<Typography>
+										Remove any unwanted items from the list by clicking on the
+										bin icon.
+									</Typography>
+								</li>
+								<li>
+									<Typography>
+										Press 'Add to Canvas' to import your data.
+									</Typography>
+								</li>
+							</ol>
+							{renderItems(currentItems)}
+						</DialogContent>
+						<DialogActions>
+							<Button
+								onClick={onAddToCanvas}
+								disabled={currentItems.length === 0}
+							>
+								Add To Canvas
+							</Button>
+							<Button onClick={onEmptyAndClose}>Cancel</Button>
+						</DialogActions>
+					</>
+				)}
 			</Dialog>
 			<input
 				hidden

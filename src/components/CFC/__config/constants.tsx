@@ -18,10 +18,10 @@ export const CFC4QsTourContent = (): ReactElement => (
 
 export const CFCCreateCanvas = (): ReactElement => (
 	<div className="content-area">
-		<Typography variant="h6">Create a Canvas</Typography>
+		<Typography variant="h6">Create a canvas</Typography>
 
 		<Typography>
-			First, you will create a custom name to help identify each Canvas, then
+			First, you can create a custom name to help identify each Canvas, then
 			choose a Canvas type, time-frame and date range.
 		</Typography>
 	</div>

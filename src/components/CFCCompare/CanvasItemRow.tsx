@@ -4,6 +4,7 @@ import { CanvasItemRowProps } from "./__config/shape"
 import { calculateDifferencePer } from "./__config/utilities"
 import { addDollarSign, formatNumber } from "../../util/money/formatting"
 import useStyles from "./__config/styles"
+import { numOrZero } from "../../util/reduce/math"
 
 /**
  * Used to display the data related to a value for a field in the canvas
@@ -49,13 +50,13 @@ export default function CanvasItemRow({
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
 			>
-				{addDollarSign(formatNumber(`${val1 - val2}`))}
+				{addDollarSign(formatNumber(`${numOrZero(val1) - numOrZero(val2)}`))}
 			</TableCell>
 			<TableCell
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
 			>
-				{calculateDifferencePer(val1, val2)}
+				{calculateDifferencePer(numOrZero(val1), numOrZero(val2))}
 			</TableCell>
 		</TableRow>
 	)

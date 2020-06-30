@@ -13,6 +13,7 @@ const useInputWrapper = makeStyles((theme) => ({
 	},
 	highlightLeft: {
 		borderLeft: `5px solid ${orange[500]}`,
+		paddingLeft: theme.spacing(2),
 	},
 	plain: {
 		boxShadow: "none",
@@ -54,6 +55,10 @@ const useRepeaterStyles = makeStyles((theme) => ({
 		[theme.breakpoints.up("sm")]: {
 			display: "none",
 		},
+	},
+	gst: {
+		marginTop: theme.spacing(1),
+		borderRadius: theme.shape.borderRadius,
 	},
 }))
 

@@ -282,7 +282,7 @@ const TrackingPerformance = (): ReactElement => {
 										Do you know the busy and quiet periods in your business?
 									</Typography>
 									<Typography component="li" className={styles.list}>
-										What can you change? (Use the Change Lever cards)
+										What can you change? (Use the Change Lever)
 									</Typography>
 								</List>
 							</Grid>

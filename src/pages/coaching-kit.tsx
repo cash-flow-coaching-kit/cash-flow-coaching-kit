@@ -110,8 +110,8 @@ const CoachingKit = (): ReactElement => {
 					<Grid item sm={2} />
 					<Grid item xs={12} sm={8}>
 						<Typography className={styles.contentText} align="center">
-							The Cash Flow Coaching Kit has three stages, Discover, Apply and
-							Plan and Action. Working through the kit will help you plan,
+							The Cash Flow Coaching Kit has three phases: Discover, Apply and
+							Plan &amp; Action. Working through the kit will help you plan,
 							maintain and grow your business.
 						</Typography>
 						<Typography className={styles.contentText} align="center">
@@ -216,7 +216,7 @@ const CoachingKit = (): ReactElement => {
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="h5" component="h2">
-												Health check
+												Health Check
 											</Typography>
 											<Typography
 												variant="body2"
