@@ -103,7 +103,7 @@ export default function CanvasEdit(): ReactElement {
 
 	return (
 		<>
-			<PageContainer maxWidth="lg">
+			<PageContainer maxWidth="lg" role="main">
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
 						<CanvasForm initialValues={initial} customTitle={useCustom()} />

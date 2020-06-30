@@ -13,7 +13,7 @@ import Spacer from "../../components/Spacer"
 const HCListing = (): ReactElement => {
 	return (
 		<>
-			<PageContainer>
+			<PageContainer role="main">
 				<SectionTitle component="h1">Saved Health Checks</SectionTitle>
 				<Box className="content-area">
 					<Typography>

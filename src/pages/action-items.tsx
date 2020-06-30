@@ -118,7 +118,7 @@ const ActionChecklist = (): ReactElement => {
 
 	return (
 		<>
-			<PageContainer>
+			<PageContainer role="main">
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
 						<SectionTitle component="h1">Action Checklist</SectionTitle>
