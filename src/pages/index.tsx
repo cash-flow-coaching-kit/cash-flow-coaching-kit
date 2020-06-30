@@ -20,6 +20,7 @@ import { NewClientDialog } from "../content/dialog"
 import { ClientContext } from "../state/client"
 import Spacer from "../components/Spacer"
 import ImportClient from "../components/ClientListing/_partials/ImportClient"
+import TakeATour from "../components/TakeATour"
 
 const useHomepageStyles = makeStyles((theme) => ({
 	container: {
@@ -27,7 +28,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 		paddingBottom: theme.spacing(5),
 	},
 	grid: {
-		paddingTop: theme.spacing(5),
+		marginTop: theme.spacing(8),
 	},
 	buttonBox: {
 		marginTop: theme.spacing(5),
@@ -44,7 +45,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 	containerIndigo: {
 		backgroundColor: "#e8eaf6", // indigo50
 		padding: theme.spacing(5),
-		marginTop: theme.spacing(2),
+		marginTop: theme.spacing(8),
 	},
 	containerGrey: {
 		backgroundColor: "#f5f5f5",
@@ -204,7 +205,7 @@ const Homepage = (): ReactElement => {
 						)}
 						<ImportClient />
 					</Box>
-					<Spacer />
+					<Spacer space={5} />
 					<Grid container spacing={0}>
 						<Grid item xs={12} sm={8}>
 							<Box className="content-area">
@@ -250,7 +251,10 @@ const Homepage = (): ReactElement => {
 							</Box>
 						</Grid>
 					</Grid>
-					<Grid container spacing={3} className={styles.grid} justify="center">
+					<Grid container spacing={3} className={styles.grid}>
+						<Grid item xs={12} md={4}>
+							<TakeATour />
+						</Grid>
 						{/* <Grid item xs={12} md={6}>
 							<Card variant="outlined">
 								<CardHeader title="Take a tour of the kit" />
@@ -296,7 +300,6 @@ const Homepage = (): ReactElement => {
 						</Grid>
 					</Grid>
 				</Container>
-
 				<Container
 					component="div"
 					className={styles.containerIndigo}
