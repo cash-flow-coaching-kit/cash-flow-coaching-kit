@@ -28,7 +28,7 @@ const DTListing = (): ReactElement => {
 				<Grid container spacing={3}>
 					<Grid item md={9}>
 						<Typography component="h2" className={styles.SectionTitle}>
-							Cash Flow Topics
+							Cash flow topics
 						</Typography>
 						<Typography
 							variant="body1"

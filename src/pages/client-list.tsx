@@ -25,7 +25,7 @@ const ClientList = (): ReactElement => {
 			<PageContainer>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={8}>
-						<SectionTitle component="h1">Clients and Coaching</SectionTitle>
+						<SectionTitle component="h1">Clients and coaching</SectionTitle>
 						<Box className="content-area">
 							<Typography>Manage and prepare your coaching.</Typography>
 							<Typography>
@@ -42,7 +42,7 @@ const ClientList = (): ReactElement => {
 						<ClientListing />
 					</Grid>
 					<Grid item xs={12} md={6}>
-						<SectionTitle component="h2">Coaching Conversation</SectionTitle>
+						<SectionTitle component="h2">Coaching conversation</SectionTitle>
 						<Box>
 							<Prepare />
 							<Coaching />
