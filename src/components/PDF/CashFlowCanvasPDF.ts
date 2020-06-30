@@ -134,7 +134,10 @@ const incomeSection = (values: BaseCFCStruct): any => {
 				[
 					"Income/Company Tax",
 					// TODO: Needs to use the new calculations in feature/122 branch
-					{ text: calcIncomeTaxPer(values), style: ["rightAlign"] },
+					{
+						text: formatDollars(calcIncomeTaxPer(values)),
+						style: ["rightAlign"],
+					},
 				],
 			],
 			["yellowBlock"]
