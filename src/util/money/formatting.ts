@@ -103,5 +103,6 @@ export function formatMoney(num: number): string {
  */
 export function formatNumber(n: string): string {
 	// format number 1000000 to 1,234,567
-	return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	const formatted = n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	return `${n}`.startsWith("-") ? `-${formatted}` : formatted
 }

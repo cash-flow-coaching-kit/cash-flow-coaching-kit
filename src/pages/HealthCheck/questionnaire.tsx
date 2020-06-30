@@ -33,17 +33,23 @@ const HCQuestionnaire = (): ReactElement => {
 						<SectionTitle component="h1">Health Check</SectionTitle>
 						<Spacer />
 						<Box className="content-area">
+							<Typography>
+								Ten easy questions to learn more about the health of your
+								business.
+							</Typography>
 							<Typography className="list-describer">
 								This quick health check will help you:
 							</Typography>
 							<List component="ul" className="ul-list">
-								<Typography component="li">fill knowledge gaps</Typography>
 								<Typography component="li">
-									identify areas to improve your cash flow
+									assess your current knowledge of business cash flow
+								</Typography>
+								<Typography component="li">
+									identify areas to improve your cash flow knowledge
 								</Typography>
 							</List>
 							<Typography>
-								Your results will show you key discover topics and activities to
+								Your results will show you key topics and activities to
 								complete.
 							</Typography>
 							<Typography>
@@ -51,7 +57,7 @@ const HCQuestionnaire = (): ReactElement => {
 								check to review your progress.
 							</Typography>
 							<Typography>
-								If you want to see your previous health checks, see ‘List of
+								If you want to see your previous health checks, see ‘Saved
 								Health Checks’ in the control panel.
 							</Typography>
 						</Box>

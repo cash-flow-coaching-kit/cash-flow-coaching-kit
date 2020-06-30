@@ -64,6 +64,7 @@ export default function PricingLever(): ReactElement {
 		<ExpandableNav
 			title="Pricing"
 			subHeading="Change pricing to improve cash flow"
+			defaultExpanded={false}
 		>
 			{/* Change Prices */}
 			<Grid container spacing={2} className={styles.details}>

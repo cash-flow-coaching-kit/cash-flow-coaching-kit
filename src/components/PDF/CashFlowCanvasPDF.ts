@@ -14,6 +14,7 @@ import {
 	calcCashFlowGST,
 	calcCashFlowTotal,
 	calcTotalCashOut,
+	calcIncomeTaxPer,
 } from "../../state/CFC/accumulators"
 import { calculateInitial } from "../Forms/CFC"
 import { canvasDisplayTitle } from "../CFC/__config/utilities"
@@ -126,14 +127,17 @@ const cashSurplusSection = (cashSurplus: number): any => {
 	)
 }
 
-const incomeSection = (incomeTax: number): any => {
+const incomeSection = (values: BaseCFCStruct): any => {
 	return frameContent(
 		basicTable(
 			[
 				[
 					"Income/Company Tax",
 					// TODO: Needs to use the new calculations in feature/122 branch
-					{ text: formatDollars(incomeTax), style: ["rightAlign"] },
+					{
+						text: formatDollars(calcIncomeTaxPer(values)),
+						style: ["rightAlign"],
+					},
 				],
 			],
 			["yellowBlock"]
@@ -271,7 +275,7 @@ export default async (title: string, values: BaseCFCStruct) => {
 								cashOutSection(cashOutItems, cashOutTotal),
 								gstOnPurchasesSection(cashOutGST, paygWithholding, superAmount),
 							],
-							[cashSurplusSection(cashSurplus), incomeSection(incomeTax)],
+							[cashSurplusSection(cashSurplus), incomeSection(values)],
 							[availableToSpendSection(availableToSpend), {}],
 							[closingCashBalanceSection(cashToOwner, closingBalance), {}],
 							[

@@ -29,7 +29,7 @@ import CFCContext from "../../../state/CFC/context"
 export default function CreateCanvasForm(): ReactElement {
 	const styles = useStyles()
 
-	const [useCustomTitle, setUseCustomTitle] = useState(true)
+	const [useCustomTitle, setUseCustomTitle] = useState(false)
 	const history = useHistory()
 	const [currentClient] = useCurrentClient()
 	const { duplicateError, invalidDateError } = useContext(CFCContext)
@@ -85,11 +85,6 @@ export default function CreateCanvasForm(): ReactElement {
 		setFieldValue("canvasStartDate", start, false)
 		setFieldValue("canvasEndDate", end, false)
 	}
-
-	useEffect(() => {
-		changeDateValue("canvasStartDate", canvasStartDate)
-		// eslint-disable-next-line
-	}, [canvasTimeFrame, canvasStartDate])
 
 	const inputChange = useCallback(handleChange, [])
 

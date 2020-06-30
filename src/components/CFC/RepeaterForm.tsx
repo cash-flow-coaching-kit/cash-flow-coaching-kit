@@ -5,7 +5,10 @@ import ComputedPanels from "../ComputedPanels"
 import { addDollarSign, formatNumber } from "../../util/money/formatting"
 import FormHeader from "./FormHeader"
 import { RepeaterFormProps } from "./__config/shape"
-import { useRepeaterStyles as useStyles } from "./__config/styles"
+import {
+	useRepeaterStyles as useStyles,
+	useInputWrapper,
+} from "./__config/styles"
 import FormActions from "./FormActions"
 import FormItem from "./FormItem"
 import { CashFlow } from "../../data/_config/shape"
@@ -36,6 +39,7 @@ export default memo(function RepeaterForm({
 	beforeTotalChild,
 }: RepeaterFormProps): ReactElement {
 	const cls = useStyles()
+	const wrapperCls = useInputWrapper()
 
 	/**
 	 * Method to remove a item from the form
@@ -106,12 +110,14 @@ export default memo(function RepeaterForm({
 					wrapped={false}
 					value={addDollarSign(formatNumber(`${total}`))}
 				/>
-				<ComputedPanels
-					title="GST"
-					mini
-					wrapped={false}
-					value={addDollarSign(formatNumber(`${gst}`))}
-				/>
+				<Box className={`${wrapperCls.highlightLeft} ${cls.gst}`}>
+					<ComputedPanels
+						title="GST"
+						mini
+						wrapped={false}
+						value={addDollarSign(formatNumber(`${gst}`))}
+					/>
+				</Box>
 			</Box>
 		</>
 	)

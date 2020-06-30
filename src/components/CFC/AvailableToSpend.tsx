@@ -18,7 +18,7 @@ export default React.memo(function AvailableToSpend({
 	return (
 		<ComputedPanels
 			title="Available to Spend (exc GST and Tax)"
-			description="The Opening Balance plus any Cash Surplus."
+			description="The Opening Balance plus any Cash Surplus minus Income Tax or Company Tax"
 			value={addDollarSign(formatNumber(value))}
 		/>
 	)

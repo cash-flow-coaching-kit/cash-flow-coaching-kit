@@ -80,7 +80,7 @@ export default React.memo(function IncomeTax({
 
 	return (
 		<Box
-			className={`${cls.wrapper} ${cls.highlight} ${styles.root} ${cusCls.box}`}
+			className={`${cls.wrapper} ${cls.highlightLeft} ${styles.root} ${cusCls.box}`}
 		>
 			<Box className={styles.type}>
 				<Typography variant="h6" component="p">
