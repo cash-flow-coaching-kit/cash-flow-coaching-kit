@@ -85,6 +85,96 @@ const tourSteps: {
 		image: "/take-a-tour/Tour 4.png",
 		alt: "Health check results page",
 	},
+	{
+		content: (): ReactElement => (
+			<ContentArea>
+				<Title>Discover Topics</Title>
+				<Typography>
+					Here your client can learn and understand information about cash
+					flows. They can start to create action items using the Task Builder.
+				</Typography>
+			</ContentArea>
+		),
+		image: "/take-a-tour/Tour 5.png",
+		alt: "Discover Topics landing page",
+	},
+	{
+		content: (): ReactElement => (
+			<ContentArea>
+				<Title>The Cash Flow Canvas</Title>
+				<Typography>
+					The Canvas is a powerful visual and conversational tool. It helps your
+					client better understand their cash flow.
+				</Typography>
+				<br />
+				<Typography>
+					You can complete it manually or import data from various accounting
+					systems.
+				</Typography>
+			</ContentArea>
+		),
+		image: "/take-a-tour/Tour 6.png",
+		alt: "Cash Flow Canvas form",
+	},
+	{
+		content: (): ReactElement => (
+			<ContentArea>
+				<Title>Change Levers</Title>
+				<Typography>
+					Change Levers are potential business improvements and considerations.
+				</Typography>
+				<br />
+				<Typography>
+					Select the relevant ones with your client. You can test those
+					scenarios back in the Canvas.
+				</Typography>
+			</ContentArea>
+		),
+		image: "/take-a-tour/Tour 7.png",
+		alt: "Change Levers page",
+	},
+	{
+		content: (): ReactElement => (
+			<ContentArea>
+				<Title>Client List</Title>
+				<Typography>
+					Here you&apos;ll find all your coaching sessions. This lets you switch
+					clients and export your data. It also has coaching tips from
+					professional advisors. These will help you in your coaching
+					conversations.
+				</Typography>
+			</ContentArea>
+		),
+		image: "/take-a-tour/Tour 9.png",
+		alt: "Client List page",
+	},
+	{
+		content: (): ReactElement => (
+			<ContentArea>
+				<Title>Downloads</Title>
+				<Typography>
+					You can also download all the activities from the coaching session.
+					Use these to reinforce ideas and actions with your client.
+				</Typography>
+			</ContentArea>
+		),
+		image: "/take-a-tour/Tour 10.png",
+		alt: "Downloads page",
+	},
+	{
+		content: (): ReactElement => (
+			<ContentArea>
+				<Title>Get started</Title>
+				<Typography>
+					Now you&apos;re ready to start a coaching session with your client!
+					Click the &apos;Get Started&apos; button and enter a business name or
+					import your data.
+				</Typography>
+			</ContentArea>
+		),
+		image: "/take-a-tour/Tour 11.png",
+		alt: "Get started page",
+	},
 ]
 
 export default tourSteps

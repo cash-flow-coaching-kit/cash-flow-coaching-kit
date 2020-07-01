@@ -66,7 +66,11 @@ export default function TakeATour(): ReactElement {
 	)
 }
 
-const TourStepper = (): ReactElement => {
+const TourStepper = ({
+	closeDialog,
+}: {
+	closeDialog: () => void
+}): ReactElement => {
 	const cls = useStyles()
 	const [activeStep, setActiveStep] = useState(0)
 	const handleNext = (): void => {
@@ -74,6 +78,9 @@ const TourStepper = (): ReactElement => {
 	}
 	const handleBack = (): void => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1)
+	}
+	const finalStep = (): boolean => {
+		return activeStep === tourSteps.length - 1
 	}
 
 	return (
@@ -104,11 +111,21 @@ const TourStepper = (): ReactElement => {
 					nextButton={
 						<Button
 							size="small"
-							onClick={handleNext}
-							disabled={activeStep === tourSteps.length - 1}
+							onClick={finalStep() ? closeDialog : handleNext}
+							variant={finalStep() ? "contained" : "text"}
+							color={finalStep() ? "primary" : "default"}
 						>
-							Next
-							<KeyboardArrowRight />
+							{finalStep() ? (
+								<>
+									Close
+									<CloseIcon />
+								</>
+							) : (
+								<>
+									Next
+									<KeyboardArrowRight />
+								</>
+							)}
 						</Button>
 					}
 					backButton={
@@ -162,7 +179,7 @@ const TourDialog = ({
 					</IconButton>
 				</Toolbar>
 			</AppBar>
-			<TourStepper />
+			<TourStepper closeDialog={onClose} />
 		</Dialog>
 	)
 }
