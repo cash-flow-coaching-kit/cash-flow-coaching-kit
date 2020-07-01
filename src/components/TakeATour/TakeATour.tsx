@@ -16,6 +16,7 @@ import {
 	MobileStepper,
 	Grid,
 	Box,
+	CardActionArea,
 } from "@material-ui/core"
 import CloseIcon from "@material-ui/icons/Close"
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
@@ -188,25 +189,25 @@ const TourCard = ({ onClick }: { onClick: () => void }): ReactElement => {
 	const cls = useStyles()
 	return (
 		<Card>
-			<CardMedia
-				className={cls.media}
-				image="/take-a-tour/card-preview.png"
-				title="Preview of the Cash Flow Coaching Kit"
-			/>
-			<CardContent>
-				<Typography gutterBottom variant="h6" component="h5">
-					Welcome to the Cash Flow Coaching Kit.
-				</Typography>
-				<Typography color="textSecondary" component="p">
-					Starting a coaching session with your client is simple, let&apos;s
-					show you around.
-				</Typography>
-			</CardContent>
-			<CardActions>
-				<Button color="primary" onClick={onClick}>
-					Take a tour
-				</Button>
-			</CardActions>
+			<CardActionArea onClick={onClick}>
+				<CardMedia
+					className={cls.media}
+					image="/take-a-tour/card-preview.png"
+					title="Preview of the Cash Flow Coaching Kit"
+				/>
+				<CardContent>
+					<Typography gutterBottom variant="h6" component="h5">
+						Welcome to the Cash Flow Coaching Kit.
+					</Typography>
+					<Typography color="textSecondary" component="p">
+						Starting a coaching session with your client is simple, let&apos;s
+						show you around.
+					</Typography>
+				</CardContent>
+				<CardActions>
+					<Button color="primary">Take a tour</Button>
+				</CardActions>
+			</CardActionArea>
 		</Card>
 	)
 }
