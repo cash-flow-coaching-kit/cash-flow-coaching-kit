@@ -41,7 +41,8 @@ export default function Help(): ReactElement {
 						className="content-area"
 					>
 						<Typography>
-							For help throughout the kit, see ‘Tips’ on each page.{" "}
+							For help throughout Cash Flow Coaching Kit, see ‘Tips’ on each
+							page.{" "}
 						</Typography>
 						<br />
 						<Typography>
