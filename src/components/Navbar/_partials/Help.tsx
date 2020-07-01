@@ -7,6 +7,7 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogActions,
+	Typography,
 } from "@material-ui/core"
 import { useSharedNavStyles } from "../_config/style"
 
@@ -35,8 +36,26 @@ export default function Help(): ReactElement {
 			>
 				<DialogTitle id="help-dialog-title">Help</DialogTitle>
 				<DialogContent>
-					<DialogContentText id="help-dialog-description">
-						For help, feedback or questions, contact us.
+					<DialogContentText
+						id="help-dialog-description"
+						className="content-area"
+					>
+						<Typography>
+							For help throughout the kit, see ‘Tips’ on each page.{" "}
+						</Typography>
+						<br />
+						<Typography>
+							If you have any feedback or questions,{" "}
+							<a href={`mailto:${process.env.REACT_APP_SUPPORT_EMAIL || ""}`}>
+								contact us
+							</a>{" "}
+							({process.env.REACT_APP_SUPPORT_EMAIL || ""})
+						</Typography>
+						<br />
+						<Typography>
+							We typically respond within a day, however more complex
+							submissions may take up to a week.
+						</Typography>
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
