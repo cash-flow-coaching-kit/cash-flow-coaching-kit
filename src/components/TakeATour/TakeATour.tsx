@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function TakeATour(): ReactElement {
-	const [open, setOpen] = useState(true)
+	const [open, setOpen] = useState(false)
 
 	const handleOpen = (): void => setOpen(true)
 	const handleClose = (): void => setOpen(false)
