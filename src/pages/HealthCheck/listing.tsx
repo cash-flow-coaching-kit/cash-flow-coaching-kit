@@ -17,7 +17,7 @@ const HCListing = (): ReactElement => {
 				<SectionTitle component="h1">Saved Health Checks</SectionTitle>
 				<Box className="content-area">
 					<Typography>
-						Use your previous health checks to review your progress.
+						Use your previous Health Checks to review your progress.
 					</Typography>
 					<Typography>
 						View your past results by selecting from the list below.

@@ -121,7 +121,7 @@ const Homepage = (): ReactElement => {
 						Cash Flow Coaching Kit
 					</Typography>
 					<Typography align="center" component="p" variant="h5">
-						Plan and improve your small business.
+						Understand and improve your small business cash flow.
 					</Typography>
 				</Container>
 				<Container
@@ -182,11 +182,27 @@ const Homepage = (): ReactElement => {
 									className={styles.contentText}
 									align="center"
 								>
-									Create an action checklist and track your progress.
+									Create an Action Checklist and track your progress.
 								</Typography>
 							</Grid>
 						</Grid>
 					</Container>
+				</Container>
+				<Spacer space={5} />
+				<Container>
+					<Grid container spacing={3}>
+						<Grid item xs={12} sm={8}>
+							<Typography className={styles.contentText}>
+								The Cash Flow Coaching Kit allows business advisors to work with
+								their clients to improve cash flow management.
+							</Typography>
+							<Typography className={styles.contentText}>
+								You can use the kit for your own self-directed learning.
+								However, we recommended that you use it with a professional
+								advisor. They can help with any questions or issues it raises.
+							</Typography>
+						</Grid>
+					</Grid>
 				</Container>
 				<Container>
 					<Box className={styles.buttonBox}>
@@ -198,7 +214,7 @@ const Homepage = (): ReactElement => {
 								to={PrivateRoutes.ClientList}
 								size="large"
 							>
-								See client list
+								Get Started
 							</Button>
 						) : (
 							<NewClientDialog triggerText="Get Started" />
@@ -209,10 +225,12 @@ const Homepage = (): ReactElement => {
 					<Grid container spacing={0}>
 						<Grid item xs={12} sm={8}>
 							<Box className="content-area">
-								<Typography variant="h5">Using the Cash Flow Kit</Typography>
+								<Typography variant="h5">
+									Using the Cash Flow Coaching Kit
+								</Typography>
 								<Typography>
-									Planning your business will help you sustain or grow your
-									business.
+									Managing your business cash flow will help you sustain and
+									grow your business.
 								</Typography>
 								<Typography className="list-describer">
 									You can use the kit to:
@@ -238,11 +256,11 @@ const Homepage = (): ReactElement => {
 								</Typography>
 								<List component="ul" className="ul-list">
 									<Typography component="li">Opening balance</Typography>
-									<Typography component="li">Revenue</Typography>
-									<Typography component="li">Expenses</Typography>
+									<Typography component="li">income</Typography>
+									<Typography component="li">expenses</Typography>
 								</List>
 								<Typography>
-									You can also import data from other tools and applications
+									You can also import data from other tools and applications.
 								</Typography>
 								<Typography>
 									The kit does not save information between sessions. Use the

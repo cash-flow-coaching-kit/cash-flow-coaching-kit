@@ -480,7 +480,7 @@ const DTManagingCashFlow = (): ReactElement => {
 						component={RouterLink}
 						to={PrivateRoutes.CFC}
 					>
-						Cash flow canvas
+						Cash Flow Canvas
 					</Button>
 				</Container>
 				<Container

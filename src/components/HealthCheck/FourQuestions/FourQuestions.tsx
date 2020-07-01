@@ -35,7 +35,7 @@ const FourQuestions = ({ answers }: IFourQuestionsProps): ReactElement => {
 
 	return (
 		<ExpandableNav
-			title="Four key questions"
+			title="Four Key Questions"
 			reactourLabel="four-questions-nav"
 		>
 			<Box className={styles.box}>

@@ -282,7 +282,7 @@ const TrackingPerformance = (): ReactElement => {
 										Do you know the busy and quiet periods in your business?
 									</Typography>
 									<Typography component="li" className={styles.list}>
-										What can you change? (Use the Change lever cards)
+										What can you change? (Use the Change Lever)
 									</Typography>
 								</List>
 							</Grid>
@@ -317,7 +317,7 @@ const TrackingPerformance = (): ReactElement => {
 						component={RouterLink}
 						to={PrivateRoutes.CFC}
 					>
-						Cash flow canvas
+						Cash Flow Canvas
 					</Button>
 				</Container>
 				<Container

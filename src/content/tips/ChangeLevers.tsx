@@ -17,7 +17,7 @@ const ChangeLeversTips = (): ReactElement => {
 					Explore the actions to identify possible changes to make.
 				</Typography>
 				<Typography component="li">
-					Once decided, click the &apos;Add to action checklist button&apos;
+					Once decided, click the &apos;Add to Action Checklist button&apos;
 				</Typography>
 				<Typography component="li">Add extra detail if required</Typography>
 				<Typography component="li">

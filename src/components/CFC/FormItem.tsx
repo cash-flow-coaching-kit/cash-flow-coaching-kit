@@ -113,12 +113,6 @@ export default React.memo(function FormItem({
 				>
 					Are you sure you want to remove this item?
 				</ConfirmDialogue>
-				<Tooltip title="Group data">
-					<IconButton>
-						<GroupWorkIcon />
-						<span className="MuiTypography-srOnly">Group imported data</span>
-					</IconButton>
-				</Tooltip>
 			</Grid>
 		</Grid>
 	)

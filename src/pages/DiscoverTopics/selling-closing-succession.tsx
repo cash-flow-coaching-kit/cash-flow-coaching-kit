@@ -540,7 +540,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 				</Grid>
 				<Container component="div" className={styles.containerWrapUp}>
 					<Typography component="h2" className={styles.SectionTitle}>
-						Wrap Up
+						Wrap up
 					</Typography>
 					<Typography
 						variant="body1"

@@ -110,8 +110,8 @@ const CoachingKit = (): ReactElement => {
 					<Grid item sm={2} />
 					<Grid item xs={12} sm={8}>
 						<Typography className={styles.contentText} align="center">
-							The Cash Flow Coaching Kit has three stages, Discover, Apply and
-							Plan and Action. Working through the kit will help you plan,
+							The Cash Flow Coaching Kit has three phases: Discover, Apply and
+							Plan &amp; Action. Working through the kit will help you plan,
 							maintain and grow your business.
 						</Typography>
 						<Typography className={styles.contentText} align="center">
@@ -156,21 +156,21 @@ const CoachingKit = (): ReactElement => {
 								</Typography> */}
 									<List style={{ padding: 0 }}>
 										<ListItem className={styles.contentText}>
-											1. Am I trading profitably?
+											1. Are you trading profitably?
 										</ListItem>
 										<Divider />
 										<ListItem className={styles.contentText}>
-											2. Have I put enough aside to meet my regular financial
-											commitments?
+											2. Have you put enough aside to meet your regular
+											financial commitments?
 										</ListItem>
 										<Divider />
 										<ListItem className={styles.contentText}>
-											3. Does my business have enough to spend on myself and pay
-											others?
+											3. Does your business have enough to spend on yourself and
+											pay others?
 										</ListItem>
 										<Divider />
 										<ListItem className={styles.contentText}>
-											4. Is my business improving its financial position?
+											4. Is your business improving its financial position?
 										</ListItem>
 									</List>
 								</Grid>
@@ -216,7 +216,7 @@ const CoachingKit = (): ReactElement => {
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="h5" component="h2">
-												Health check
+												Health Check
 											</Typography>
 											<Typography
 												variant="body2"
@@ -241,14 +241,14 @@ const CoachingKit = (): ReactElement => {
 									>
 										<CardMedia
 											component="img"
-											alt="Discover topics"
+											alt="Discover Topics"
 											height="155"
 											image="/images/discoverTopics_thumb.png"
-											title="Discover topics"
+											title="Discover Topics"
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="h5" component="h2">
-												Discover topics
+												Discover Topics
 											</Typography>
 											<Typography
 												variant="body2"
@@ -292,14 +292,14 @@ const CoachingKit = (): ReactElement => {
 									<CardActionArea component={RouterLink} to={PrivateRoutes.CFC}>
 										<CardMedia
 											component="img"
-											alt="Cash flow canvas"
+											alt="Cash Flow Canvas"
 											height="155"
 											image="/images/cashFlowCanvas_thumb.png"
-											title="Cash flow canvas"
+											title="Cash Flow Canvas"
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="h5" component="h2">
-												Cash flow canvas
+												Cash Flow Canvas
 											</Typography>
 											<Typography
 												variant="body2"
@@ -324,14 +324,14 @@ const CoachingKit = (): ReactElement => {
 									>
 										<CardMedia
 											component="img"
-											alt="Change levers"
+											alt="Change Levers"
 											height="155"
 											image="/images/changeLevers_thumb.png"
-											title="Change levers"
+											title="Change Levers"
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="h5" component="h2">
-												Change levers
+												Change Levers
 											</Typography>
 											<Typography
 												variant="body2"
@@ -379,14 +379,14 @@ const CoachingKit = (): ReactElement => {
 									>
 										<CardMedia
 											component="img"
-											alt="Action checklist"
+											alt="Action Checklist"
 											height="155"
 											image="/images/actionChecklist_thumb.png"
-											title="Action checklist"
+											title="Action Checklist"
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="h5" component="h2">
-												Action checklist
+												Action Checklist
 											</Typography>
 											<Typography
 												variant="body2"

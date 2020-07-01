@@ -26,7 +26,7 @@ export default function Taskbuilder({
 	const [currentClient] = useCurrentClient()
 
 	return (
-		<ExpandableNav title="Task builder">
+		<ExpandableNav title="Task Builder">
 			<Box className={styles.innerBox}>
 				{/* CONTENT */}
 				<Typography className={styles.content}>

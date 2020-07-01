@@ -1,7 +1,15 @@
 import React, { ReactElement, useCallback, useState } from "react"
-import { Tooltip, Button, Box, makeStyles } from "@material-ui/core"
+import {
+	Button,
+	Box,
+	makeStyles,
+	Dialog,
+	DialogTitle,
+	DialogContent,
+	DialogActions,
+	Typography,
+} from "@material-ui/core"
 import PublishIcon from "@material-ui/icons/Publish"
-import InfoIcon from "@material-ui/icons/Info"
 import { ClientId } from "../../../data/_config/shape"
 import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
 import ExportClient from "../../../modules/export-client"
@@ -39,6 +47,7 @@ export default function ExportClientButton({
 	showSnackbar,
 }: ExportClientProps): ReactElement {
 	const [processing, setProcessing] = useState(false)
+	const [open, setOpen] = useState(false)
 	const cls = useStyles()
 
 	const exportClient = useCallback(async () => {
@@ -51,24 +60,53 @@ export default function ExportClientButton({
 				showSnackbar(e.message, "error")
 			} finally {
 				setProcessing(false)
+				setOpen(false)
 			}
 		}
-	}, [client, setProcessing, showSnackbar])
+	}, [client, setProcessing, showSnackbar, setOpen])
+
+	const handleOpen = (): void => setOpen(true)
+	const handleClose = (): void => setOpen(false)
 
 	return (
 		<Box className={cls.box}>
 			<Button
 				startIcon={<PublishIcon />}
-				onClick={exportClient}
+				onClick={handleOpen}
 				variant="outlined"
 				disabled={processing}
 				className={cls.btn}
 			>
 				Export data
 			</Button>
-			<Tooltip title="Your file will save to your browser's automatic download location.">
-				<InfoIcon color="primary" />
-			</Tooltip>
+			<Dialog
+				open={open}
+				onClose={handleClose}
+				aria-labelledby="export-client-data-dialog-title"
+				aria-describedby="export-client-data-dialog-description"
+			>
+				<DialogTitle id="export-client-data-dialog-title">
+					Export client data
+				</DialogTitle>
+				<DialogContent>
+					<Typography id="export-client-data-dialog-description">
+						Your file will save to your browsers automatic download location. It
+						is saved as a .json file. Once downloaded you can move the file to
+						any location on your computer.
+					</Typography>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={handleClose}>Close</Button>
+					<Button
+						onClick={exportClient}
+						color="primary"
+						autoFocus
+						variant="contained"
+					>
+						Export data
+					</Button>
+				</DialogActions>
+			</Dialog>
 		</Box>
 	)
 }

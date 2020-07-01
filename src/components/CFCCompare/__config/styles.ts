@@ -12,10 +12,10 @@ const useStyles = makeStyles((theme) => ({
 		width: "20%",
 	},
 	cellCanvas: {
-		width: "25%",
+		width: "20%",
 	},
 	cellDifference: {
-		width: "15%",
+		width: "20%",
 	},
 	tableRow: {
 		"&:hover": {

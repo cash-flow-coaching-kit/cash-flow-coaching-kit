@@ -26,7 +26,7 @@ const HCQuestionnaire = (): ReactElement => {
 			<Typography variant="h6">Next Steps</Typography>
 			<List className={styles.list}>
 				<Typography component="li">
-					Look at your results and work through discover topics
+					Look at your results and work through Discover Topics
 				</Typography>
 				<Typography component="li">Prepare a Cash Flow Canvas.</Typography>
 			</List>

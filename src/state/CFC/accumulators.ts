@@ -114,7 +114,10 @@ export function calcIncomeTaxPer(values: BaseCFCStruct): number {
 		return 0
 	}
 
-	return Math.round(calcCashSurplus(values) * (num / 100))
+	const surplus = calcCashSurplus(values)
+	if (surplus <= 0) return 0
+
+	return Math.round(surplus * (num / 100))
 }
 
 /**
