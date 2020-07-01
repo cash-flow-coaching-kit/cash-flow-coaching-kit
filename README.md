@@ -16,3 +16,15 @@ The kit does not save information between sessions. Use the export function regu
 
 - The dCFCK can run using a standard Node.js server running Node.js 12.x.
 - The original dCFCK is hosted on Platform.sh. The repository includes configuration files to run it under your own account.
+
+---
+
+## Environment variables
+
+The help dialog contains a link to a support email. To add this email, add the following item to a `.env`
+
+```
+REACT_APP_SUPPORT_EMAIL=<email>
+```
+
+<small>Remember to restart your dev server once added.</small>
