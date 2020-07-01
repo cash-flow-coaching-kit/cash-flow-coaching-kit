@@ -12,7 +12,7 @@ export default function CFCCompare(): ReactElement {
 	const { questionValues } = useContext(CFCContext)
 
 	return (
-		<PageContainer>
+		<PageContainer role="main">
 			<SectionTitle component="h1">Compare canvas fields</SectionTitle>
 			<Typography>
 				Compare different canvasses to track cash flow trends

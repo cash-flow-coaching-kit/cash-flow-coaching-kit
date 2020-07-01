@@ -40,7 +40,7 @@ const PageTip = ({ tip }: IPageTip): ReactElement => {
 
 	return (
 		<>
-			<div className={style.root}>
+			<div className={style.root} role="complementary">
 				<Fab color="secondary" onClick={toggleDrawer(true)} variant="extended">
 					<HelpOutlineIcon className={style.icon} />
 					Tips

@@ -34,7 +34,7 @@ const steps: ReactourStep[] = [
 export default function CFCCanvas(): ReactElement {
 	return (
 		<>
-			<PageContainer maxWidth="lg">
+			<PageContainer maxWidth="lg" role="main">
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={9}>
 						<SectionTitle component="h1">Cash Flow Canvas</SectionTitle>
@@ -80,7 +80,9 @@ export default function CFCCanvas(): ReactElement {
 				</Grid>
 			</PageContainer>
 			<PageTip tip="CFCanvasTip" />
-			<PageTour steps={steps} />
+			<Box role="complementary">
+				<PageTour steps={steps} />
+			</Box>
 		</>
 	)
 }

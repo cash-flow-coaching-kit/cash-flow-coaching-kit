@@ -64,7 +64,7 @@ const CFCListing = (): ReactElement => {
 
 	return (
 		<>
-			<PageContainer>
+			<PageContainer role="main">
 				<SectionTitle component="h1">
 					Previously saved Canvasses{" "}
 					<Typography variant="subtitle1" component="p" color="textSecondary">
