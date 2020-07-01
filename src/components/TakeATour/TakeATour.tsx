@@ -25,7 +25,7 @@ import tourSteps from "./__config/content"
 
 const useStyles = makeStyles((theme) => ({
 	media: {
-		height: 215,
+		height: 271,
 	},
 	appbar: {
 		position: "relative",

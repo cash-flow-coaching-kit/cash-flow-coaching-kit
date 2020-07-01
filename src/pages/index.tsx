@@ -255,7 +255,7 @@ const Homepage = (): ReactElement => {
 									your:
 								</Typography>
 								<List component="ul" className="ul-list">
-									<Typography component="li">Opening balance</Typography>
+									<Typography component="li">opening balance</Typography>
 									<Typography component="li">income</Typography>
 									<Typography component="li">expenses</Typography>
 								</List>
@@ -270,7 +270,7 @@ const Homepage = (): ReactElement => {
 						</Grid>
 					</Grid>
 					<Grid container spacing={3} className={styles.grid}>
-						<Grid item xs={12} md={4}>
+						<Grid item xs={12} md={6}>
 							<TakeATour />
 						</Grid>
 						{/* <Grid item xs={12} md={6}>

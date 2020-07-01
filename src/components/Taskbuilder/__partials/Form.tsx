@@ -335,10 +335,7 @@ export default function Form({ container, client }: FormProps): ReactElement {
 			},
 		})
 
-		showSnackbar(
-			`Items we added to the ${actionItemKeyTitleMapping(container)} checklist`,
-			"success"
-		)
+		showSnackbar(`Added to your Action Checklist`, "success")
 	}
 	// #endregion
 

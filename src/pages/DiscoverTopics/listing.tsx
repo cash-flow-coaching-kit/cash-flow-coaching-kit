@@ -54,7 +54,7 @@ const DTListing = (): ReactElement => {
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="body1" component="h3">
-												Planning Your business
+												Planning your business
 											</Typography>
 										</CardContent>
 									</CardActionArea>
@@ -75,7 +75,7 @@ const DTListing = (): ReactElement => {
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="body1" component="h3">
-												Record Keeping
+												Record keeping
 											</Typography>
 										</CardContent>
 									</CardActionArea>
@@ -138,7 +138,7 @@ const DTListing = (): ReactElement => {
 										/>
 										<CardContent>
 											<Typography gutterBottom variant="body1" component="h3">
-												Planning your regular Financial commitments
+												Planning your regular financial commitments
 											</Typography>
 										</CardContent>
 									</CardActionArea>
