@@ -1,0 +1,33 @@
+/*!
+ * regjsgen 0.5.1
+ * Copyright 2014-2019 Benjamin Tan <https://bnjmnt4n.now.sh/>
+ * Available under MIT license <https://github.com/bnjmnt4n/regjsgen/blob/master/LICENSE>
+ */
+
+/*! https://mths.be/regenerate v1.3.3 by @mathias | MIT license */
+
+/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
+
+/**
+ * Character class utilities for XML NS 1.0 edition 3.
+ *
+ * @author Louis-Dominique Dubeau
+ * @license MIT
+ * @copyright Louis-Dominique Dubeau
+ */
+
+/**
+ * Character classes and associated utilities for the 2nd edition of XML 1.1.
+ *
+ * @author Louis-Dominique Dubeau
+ * @license MIT
+ * @copyright Louis-Dominique Dubeau
+ */
+
+/**
+ * Character classes and associated utilities for the 5th edition of XML 1.0.
+ *
+ * @author Louis-Dominique Dubeau
+ * @license MIT
+ * @copyright Louis-Dominique Dubeau
+ */
