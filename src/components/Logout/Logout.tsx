@@ -47,6 +47,7 @@ export default function Logout({
 	const handleClose = (): void => setOpen(false)
 
 	const exitApplication = async (): Promise<void> => {
+		window.localStorage.removeItem("blockReload")
 		setLoading(true)
 		ClientDB.close()
 		HealthCheckDB.close()

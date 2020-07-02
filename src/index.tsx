@@ -23,17 +23,23 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister()
 
-if (process.env.NODE_ENV === "production") {
-	// eslint-disable-next-line
-	window.onbeforeunload = function (e: any): any {
-		// eslint-disable-next-line
-		e = e || window.event
-		// old browsers
-		if (e) {
-			// eslint-disable-next-line
-			e.returnValue = "Sure?"
-		}
-		// safari, chrome(chrome ignores text)
-		return "Sure?"
+// if (process.env.NODE_ENV === "production") {
+// eslint-disable-next-line
+window.onbeforeunload = function (e: any): any {
+	const blockReload = window.localStorage.getItem("blockReload")
+	if (!blockReload) {
+		return
 	}
+	// if (true) return
+	// eslint-disable-next-line
+	e = e || window.event
+	// old browsers
+	if (e) {
+		// eslint-disable-next-line
+		e.returnValue = "Sure?"
+	}
+	// safari, chrome(chrome ignores text)
+	// eslint-disable-next-line consistent-return
+	return "Sure?"
 }
+// }
