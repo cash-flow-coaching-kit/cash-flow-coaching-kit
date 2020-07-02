@@ -38,7 +38,7 @@ const tourSteps: {
 	{
 		content: (): ReactElement => (
 			<ContentArea>
-				<Title>Coaching Model</Title>
+				<Title>Coaching model</Title>
 				<Typography>
 					The Kit has an in-built coaching model, which allows your client to:
 				</Typography>
@@ -64,7 +64,7 @@ const tourSteps: {
 				<Title>Health Check</Title>
 				<Typography>
 					This can help you get to know your client and their business. It will
-					show you what they want guidance on and support those needs during
+					show you what they need guidance on and support those needs during
 					your conversation.
 				</Typography>
 			</ContentArea>
@@ -78,7 +78,7 @@ const tourSteps: {
 				<Title>Health Check results</Title>
 				<Typography>
 					This gives you and your client a snapshot of the health of their
-					business. Your results links to this relevant Discover Topics.
+					business. Each result links to the relevant Discover Topic.
 				</Typography>
 			</ContentArea>
 		),

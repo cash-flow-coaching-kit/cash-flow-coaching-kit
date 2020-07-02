@@ -138,13 +138,12 @@ export default function ImportDataModal({
 										</li>
 										<li>
 											<Typography>
-												Go back to the Cash Flow Coaching Kit.
+												Return to this page and press the open file button.
 											</Typography>
 										</li>
 										<li>
 											<Typography>
-												Press the open file button. Select the Excel file from
-												your file system.
+												Select the Excel file from your file system.
 											</Typography>
 										</li>
 									</ol>

@@ -90,9 +90,9 @@ export default function ExportClientButton({
 				</DialogTitle>
 				<DialogContent>
 					<Typography id="export-client-data-dialog-description">
-						Your file will save to your browsers automatic download location. It
-						is saved as a .json file. Once downloaded you can move the file to
-						any location on your computer.
+						Your file will save to your browser&apos;s automatic download
+						location. It is saved as a .json file. Once downloaded you can move
+						the file to any location on your computer.
 					</Typography>
 				</DialogContent>
 				<DialogActions>

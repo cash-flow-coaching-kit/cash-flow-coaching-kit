@@ -12,9 +12,14 @@ import {
 import {
 	ActionChecklistStruct,
 	ActionChecklistNotesStruct,
+	ClientId,
+	ActionChecklistPriorityStruct,
 } from "../../data/_config/shape"
 import { actionTitleMapping } from "../ActionChecklist/ActionContainer/_config/data"
 import { PossibleActionItems } from "../../state/action-checklist/shape"
+import ActionChecklistUseCase from "../../data/ActionChecklist/ChecklistLogic"
+import ActionNotesUseCase from "../../data/ActionChecklist/NotesLogic"
+import ActionPriorityUseCase from "../../data/ActionChecklist/PriorityLogic"
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
@@ -40,7 +45,8 @@ const itemsSection = (items: ActionChecklistStruct[]) => {
 export default async (
 	title: string,
 	checklistCollection: ActionChecklistStruct[],
-	notes: ActionChecklistNotesStruct[]
+	notes: ActionChecklistNotesStruct[],
+	priority: ActionChecklistPriorityStruct[]
 ): Promise<TCreatedPdf> => {
 	const docDefinition: any = {
 		...pageDefaultSettings(),
@@ -55,11 +61,20 @@ export default async (
 							(i) => i.actionContainer === value
 						)
 						const note = notes.filter((i) => i.actionContainer === value)
-						if (items.length === 0) return ""
+						const prior = priority.filter((i) => i.actionContainer === value)
+
+						if (items.length === 0 || prior.length < 1) return ""
+
+						const sortedItems = prior[0].order
+							.map((p) => {
+								const idx = items.findIndex((x) => x?.id === p)
+								return items[idx]
+							})
+							.filter((v) => typeof v !== "undefined")
 
 						if (idx !== 0) arr.push(" ")
 						arr.push({ text: actionTitleMapping[value], style: "heading" })
-						arr.push(itemsSection(items))
+						arr.push(itemsSection(sortedItems))
 						if (note.length > 0 && note[0].notes !== "") {
 							arr.push(" ")
 							arr.push({ text: "Notes", style: "subHeading" })

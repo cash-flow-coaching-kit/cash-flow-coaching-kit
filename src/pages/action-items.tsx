@@ -36,6 +36,7 @@ import ActionChecklistPDF from "../components/PDF/ActionChecklistPDF"
 import servePDF from "../components/PDF/servePDF"
 import ActionChecklistUseCase from "../data/ActionChecklist/ChecklistLogic"
 import ActionNotesUseCase from "../data/ActionChecklist/NotesLogic"
+import ActionPriorityUseCase from "../data/ActionChecklist/PriorityLogic"
 
 /**
  * Action Checklist page component
@@ -106,11 +107,13 @@ const ActionChecklist = (): ReactElement => {
 			const clientId = currentClient.id
 			const pdfChecklists = await ActionChecklistUseCase.findByClient(clientId)
 			const pdfNotes = await ActionNotesUseCase.findByClient(clientId)
+			const pdfPriority = await ActionPriorityUseCase.findByClient(clientId)
 
 			const pdf = await ActionChecklistPDF(
 				currentClient?.name ?? "Client",
 				pdfChecklists,
-				pdfNotes
+				pdfNotes,
+				pdfPriority
 			)
 			servePDF(pdf)
 		}

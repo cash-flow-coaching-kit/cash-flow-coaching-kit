@@ -56,6 +56,7 @@ import { canvasDisplayTitle } from "../components/CFC/__config/utilities"
 import SnackbarMsg, {
 	SnackbarMsgData,
 } from "../components/SnackbarMsg/SnackbarMsg"
+import ActionPriorityUseCase from "../data/ActionChecklist/PriorityLogic"
 
 const useSessionStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -189,10 +190,15 @@ const SessionFiles = (): ReactElement => {
 					currentClient.id
 				)
 				const notes = await ActionNotesUseCase.findByClient(currentClient.id)
+				const pdfPriority = await ActionPriorityUseCase.findByClient(
+					currentClient.id
+				)
+
 				const ACPDF = await ActionChecklistPDF(
 					currentClient?.name ?? "Client",
 					checklists,
-					notes
+					notes,
+					pdfPriority
 				)
 				const blob = await pdfMakeBlobPromise(
 					ACPDF,

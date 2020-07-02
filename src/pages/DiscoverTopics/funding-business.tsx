@@ -133,7 +133,7 @@ const DTFundingBusiness = (): ReactElement => {
 				<Grid container spacing={3}>
 					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
-							Debt Funding
+							Debt funding
 						</Typography>
 						<Typography
 							variant="body1"
@@ -168,7 +168,7 @@ const DTFundingBusiness = (): ReactElement => {
 					</Grid>
 					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
-							Equity Funding
+							Equity funding
 						</Typography>
 						<Typography
 							variant="body1"
@@ -204,7 +204,7 @@ const DTFundingBusiness = (): ReactElement => {
 					</Grid>
 					<Grid item sm={6}>
 						<Typography component="h3" variant="h5">
-							Grant Funding
+							Grant funding
 						</Typography>
 						<Typography
 							variant="body1"
@@ -261,7 +261,7 @@ const DTFundingBusiness = (): ReactElement => {
 						id="pupose-funding-header"
 					>
 						<Typography variant="h5" component="h3">
-							Purpose of Funding
+							Purpose of funding
 						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
@@ -302,7 +302,7 @@ const DTFundingBusiness = (): ReactElement => {
 						id="enough-funding-header"
 					>
 						<Typography variant="h5" component="h3">
-							Having Enough Funding
+							Having enough funding
 						</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
