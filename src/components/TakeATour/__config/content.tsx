@@ -78,7 +78,7 @@ const tourSteps: {
 				<Title>Health Check results</Title>
 				<Typography>
 					This gives you and your client a snapshot of the health of their
-					business. Your results link to this relevant Discover Topics.
+					business. Your results links to this relevant Discover Topics.
 				</Typography>
 			</ContentArea>
 		),
