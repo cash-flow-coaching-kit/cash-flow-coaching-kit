@@ -23,7 +23,7 @@ interface UseCustomTitleProps {
 }
 
 const tipContent =
-	"To make identifying canvases easier, you can assign a custom title to the canvas. Simply tick the box and enter a title. If you do not assign a custom title, the canvas title will be made up of the four fields below"
+	"To make identifying canvases easier, you can assign a custom title to the canvas. Simply tick the box and enter a title. If you do not assign a custom title, the canvas title will be made up of the four fields below."
 
 /**
  * Component that allows a user to opt into a custom canvas title
