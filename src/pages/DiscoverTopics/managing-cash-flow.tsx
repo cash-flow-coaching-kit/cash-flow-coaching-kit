@@ -85,7 +85,7 @@ const DTManagingCashFlow = (): ReactElement => {
 										title="Yulari's Cash Flow"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/uPDZ6O3FFaY"
+										src="https://www.youtube.com/embed/uPDZ6O3FFaY?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button
@@ -106,7 +106,7 @@ const DTManagingCashFlow = (): ReactElement => {
 										title="Cameron's Cash Flow"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/aAUWgm3-zL4"
+										src="https://www.youtube.com/embed/aAUWgm3-zL4?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button

@@ -91,7 +91,7 @@ const DTRecordKeeping = (): ReactElement => {
 										title="Eden's Digital Records"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/1caO4xN-ZwA"
+										src="https://www.youtube.com/embed/1caO4xN-ZwA?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button
@@ -112,7 +112,7 @@ const DTRecordKeeping = (): ReactElement => {
 										title="Lisa's Paper Records"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/q9J_sRCKTn8"
+										src="https://www.youtube.com/embed/q9J_sRCKTn8?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button

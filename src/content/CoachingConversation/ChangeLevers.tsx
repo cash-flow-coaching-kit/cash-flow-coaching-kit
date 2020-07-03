@@ -55,7 +55,7 @@ export default function ChangeLevers(): ReactElement {
 						className={cls.embed}
 						component="iframe"
 						title="Change Levers coaching tips"
-						src="https://www.youtube.com/embed/_xYdO-STzYI"
+						src="https://www.youtube.com/embed/_xYdO-STzYI?rel=0&modestbranding=1"
 					/>
 					<CardActions>
 						<Button

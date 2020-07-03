@@ -85,7 +85,7 @@ const DTFundingBusiness = (): ReactElement => {
 										title="Tamako's Funding"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/fAe_2eyAkrU"
+										src="https://www.youtube.com/embed/fAe_2eyAkrU?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button
@@ -106,7 +106,7 @@ const DTFundingBusiness = (): ReactElement => {
 										title="Charlotte's Loans"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/BTwVYKfGyuk"
+										src="https://www.youtube.com/embed/BTwVYKfGyuk?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button
