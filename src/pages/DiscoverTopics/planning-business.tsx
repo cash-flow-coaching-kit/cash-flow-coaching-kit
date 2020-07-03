@@ -88,7 +88,7 @@ const DTPlanningBusiness = (): ReactElement => {
 										title="Kirra's Native Foods"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/LhVKOyMeFQE"
+										src="https://www.youtube.com/embed/LhVKOyMeFQE?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button
@@ -109,7 +109,7 @@ const DTPlanningBusiness = (): ReactElement => {
 										title="Sanjana's Restaurant"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/Bxj4r3Dh1EQ"
+										src="https://www.youtube.com/embed/Bxj4r3Dh1EQ?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button

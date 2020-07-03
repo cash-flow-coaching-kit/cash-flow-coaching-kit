@@ -68,7 +68,7 @@ export default function ActionChecklist(): ReactElement {
 						className={cls.embed}
 						component="iframe"
 						title="Action Checklist coaching tips"
-						src="https://www.youtube.com/embed/td4ReSc9Eos"
+						src="https://www.youtube.com/embed/td4ReSc9Eos?rel=0&modestbranding=1"
 					/>
 					<CardActions>
 						<Button

@@ -90,7 +90,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 										title="Mick's Farm"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/FSJsiEaRNRU"
+										src="https://www.youtube.com/embed/FSJsiEaRNRU?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button
@@ -111,7 +111,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 										title="Ming's Disability Services"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/wXe051xOIzI"
+										src="https://www.youtube.com/embed/wXe051xOIzI?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button

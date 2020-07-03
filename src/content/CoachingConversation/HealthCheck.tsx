@@ -56,7 +56,7 @@ export default function HealthCheck(): ReactElement {
 						className={cls.embed}
 						component="iframe"
 						title="Health Check coaching tips"
-						src="https://www.youtube.com/embed/C6Gduin0fJg"
+						src="https://www.youtube.com/embed/C6Gduin0fJg?rel=0&modestbranding=1"
 					/>
 					<CardActions>
 						<Button

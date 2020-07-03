@@ -65,7 +65,7 @@ export default function CFC(): ReactElement {
 						className={cls.embed}
 						component="iframe"
 						title="Cash Flow Canvas coaching tips"
-						src="https://www.youtube.com/embed/Q8_r35mb6YU"
+						src="https://www.youtube.com/embed/Q8_r35mb6YU?rel=0&modestbranding=1"
 					/>
 					<CardActions>
 						<Button

@@ -89,7 +89,7 @@ const TrackingPerformance = (): ReactElement => {
 										title="Tina's Hair &amp; Beauty"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/VRxQ7AkxsfY"
+										src="https://www.youtube.com/embed/VRxQ7AkxsfY?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button
@@ -110,7 +110,7 @@ const TrackingPerformance = (): ReactElement => {
 										title="Anders' Retirement Plan"
 										className={styles.embed}
 										component="iframe"
-										src="https://www.youtube.com/embed/MPNkTF-puTQ"
+										src="https://www.youtube.com/embed/MPNkTF-puTQ?rel=0&modestbranding=1"
 									/>
 									<CardActions>
 										<Button

@@ -58,7 +58,7 @@ export default function Coaching(): ReactElement {
 						className={cls.embed}
 						component="iframe"
 						title="What advisors think of the kit"
-						src="https://www.youtube.com/embed/z64Bc5K2TKo"
+						src="https://www.youtube.com/embed/z64Bc5K2TKo?rel=0&modestbranding=1"
 					/>
 					<CardActions>
 						<Button
