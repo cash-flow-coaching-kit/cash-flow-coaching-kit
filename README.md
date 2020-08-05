@@ -1,6 +1,6 @@
-## About the digital Cash Flow Consulting Kit
+## About the digital Cash Flow Coaching Kit
 
-This is an Open Source copy of the digital Cash Flow Consulting Kit (dCFCK), as found at (https://cashflowcoachingkit.com.au)[https://cashflowcoachingkit.com.au]
+This is an Open Source copy of the digital Cash Flow Coaching Kit (dCFCK), as found at (https://cashflowcoachingkit.com.au)[https://cashflowcoachingkit.com.au]
 
 You can use the kit to:
 
