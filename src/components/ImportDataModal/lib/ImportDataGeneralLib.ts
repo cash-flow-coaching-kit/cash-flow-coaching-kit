@@ -4,7 +4,7 @@ export type ProcessFileItem = {
 	row: number
 	description: string
 	amount: number
-	type: "in" | "out"
+	type: "in" | "out" | "debtors" | "creditors" | "assets" | "loans" | "stock"
 }
 
 // nb. Cant use MIME type to determine which process to use as requires Excel to be installed

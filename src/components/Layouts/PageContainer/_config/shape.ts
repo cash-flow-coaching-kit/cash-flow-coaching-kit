@@ -3,7 +3,7 @@ import {
 	ContainerProps,
 	ContainerClassKey,
 } from "@material-ui/core"
-import { ReactNode } from "react"
+// import { ReactNode, ReactElement } from "react"
 
 /**
  * Prop structure for the `<PageContainer>` component
@@ -11,7 +11,4 @@ import { ReactNode } from "react"
  * @interface IPageContainer
  * @extends {StandardProps<ContainerProps, ContainerClassKey>}
  */
-export interface IPageContainer
-	extends StandardProps<ContainerProps, ContainerClassKey> {
-	children: ReactNode
-}
+export type IPageContainer = StandardProps<ContainerProps, ContainerClassKey>

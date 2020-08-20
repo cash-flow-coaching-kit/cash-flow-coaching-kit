@@ -1,4 +1,10 @@
-import React, { ReactElement, useState, useCallback, useEffect } from "react"
+import React, {
+	ReactElement,
+	useState,
+	useCallback,
+	useEffect,
+	ChangeEvent,
+} from "react"
 import {
 	Dialog,
 	DialogTitle,
@@ -6,6 +12,8 @@ import {
 	DialogActions,
 	DialogContent,
 	Button,
+	Box,
+	makeStyles,
 } from "@material-ui/core"
 import { useMachine } from "@xstate/react"
 import { useHistory, useParams } from "react-router-dom"
@@ -30,6 +38,15 @@ import createURLParams from "../../components/Forms/CFC/createURLParams"
 import { routeVarReplacement, PrivateRoutes } from "../../util/routes/routes"
 import { performDupFind } from "../../components/CFC/__config/utilities"
 import { DuplicateCanvasError } from "../../components/CFC/ConfigPanel"
+import SelectField from "../../components/SelectField"
+import applyTrackValues from "./utilities/applyTrackValues"
+
+const useStyles = makeStyles((theme) => ({
+	trackBox: {
+		display: "flex",
+		alignItems: "center",
+	},
+}))
 
 /**
  * Prop definition for the CopyCanvasDialog component
@@ -51,6 +68,8 @@ export default function CopyCanvasDialog({
 	open,
 	onClose,
 }: CopyCanvasDialogProps): ReactElement {
+	const cls = useStyles()
+
 	// #region State Management
 	const [stateMachine, changeState] = useMachine(fetchMachine)
 	const [useCustomTitle, setUseCustomTitle] = useState(false)
@@ -59,6 +78,8 @@ export default function CopyCanvasDialog({
 	const [currentClient] = useCurrentClient()
 	const [canvasData, setCanvasData] = useState<CFCStruct>()
 	const [isDuplicate, setIsDuplicate] = useState(false)
+	const [toTrack, setToTrack] = useState(false)
+	const [divideBy, setDivideBy] = useState(1)
 	// #endregion
 
 	// #region Formik
@@ -102,8 +123,10 @@ export default function CopyCanvasDialog({
 					createdAt: newTimestamp(),
 					canvasTitle: useCustomTitle ? formValues.canvasTitle : "",
 				}
+				// apply Track values if required
+				const newData = toTrack ? applyTrackValues(data, divideBy) : data
 				// remove the id & clientid field form data
-				const cleaned = omit(data, ["id"])
+				const cleaned = omit(newData, ["id"])
 				// create the new canvas
 				const newCanvasId = await CFCUseCase.create(cleaned)
 				// redirect to the edit page for the new canvas
@@ -211,6 +234,10 @@ export default function CopyCanvasDialog({
 		setFieldValue("canvasStartDate", canvasStartDate, false)
 		setFieldValue("canvasEndDate", canvasEndDate, false)
 	}
+
+	useEffect(() => {
+		setToTrack(values.canvasType === "track")
+	}, [values.canvasType, setToTrack])
 	// #endregion
 
 	// #region Component rendering
@@ -262,6 +289,43 @@ export default function CopyCanvasDialog({
 							<>
 								<Spacer />
 								<DuplicateCanvasError />
+							</>
+						)}
+						{toTrack && (
+							<>
+								<Spacer space={3} />
+								<>
+									<Box className={cls.trackBox}>
+										<Typography>Divide copied canvas figures by:</Typography>
+										<SelectField
+											name="divide-by"
+											value={divideBy}
+											label="Divide by"
+											options={[
+												{ label: "1", value: 1 },
+												{ label: "2", value: 2 },
+												{ label: "3", value: 3 },
+												{ label: "4", value: 4 },
+												{ label: "12", value: 12 },
+												{ label: "26", value: 26 },
+												{ label: "52", value: 52 },
+											]}
+											onChange={(e: ChangeEvent<HTMLInputElement>): void =>
+												setDivideBy(parseInt(e.target.value, 10) || 1)
+											}
+										/>
+									</Box>
+									<Spacer />
+									<Typography component="em">
+										* The figure you enter will divide your Cash IN, Cash OUT
+										and regular financial commitments with the divisor
+									</Typography>
+									<br />
+									<Typography component="em">
+										* When dividing figures for your canvas, consider seasonal
+										factors which may impact your cash flow
+									</Typography>
+								</>
 							</>
 						)}
 					</>

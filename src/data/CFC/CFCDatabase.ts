@@ -1,5 +1,6 @@
 import Dexie from "dexie"
 import { CFCStruct, CFCId } from "../_config/shape"
+import hasProperty from "../../util/object/hasProperty"
 
 /**
  * Database definition for the CFC data
@@ -104,6 +105,12 @@ class CFCDatabase extends Dexie {
 			}
 			if (typeof canvas.clientId === "number") {
 				canvas.clientId = `${canvas.clientId}`
+			}
+			if (!hasProperty(canvas, "gstOnPurchases")) {
+				canvas.gstOnPurchases = undefined
+			}
+			if (!hasProperty(canvas, "gstOnSales")) {
+				canvas.gstOnSales = undefined
 			}
 		})
 	}

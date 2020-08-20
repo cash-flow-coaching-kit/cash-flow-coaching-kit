@@ -25,6 +25,8 @@ The help dialog contains a link to a support email. To add this email, add the f
 
 ```
 REACT_APP_SUPPORT_EMAIL=<email>
+REACT_APP_GTM_CONTAINER_ID=<GTM-0000000>
+REACT_APP_GTM_DATA_LAYER_NAME=<dataLayer>
 ```
 
 <small>Remember to restart your dev server once added.</small>

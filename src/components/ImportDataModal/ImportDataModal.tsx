@@ -1,4 +1,10 @@
-import React, { ReactElement, createRef, useState, useContext } from "react"
+import React, {
+	ReactElement,
+	createRef,
+	useState,
+	useContext,
+	ChangeEvent,
+} from "react"
 import {
 	Dialog,
 	DialogTitle,
@@ -32,20 +38,23 @@ export default function ImportDataModal({
 	// Canvas Item Updaters are a list of function from context to update the canvas
 	const { canvasItemUpdater } = useContext(CFCContext)
 
-	const deleteItem = (row: number, event: any) => {
+	const deleteItem = (row: number) => (event: any): void => {
 		const newItems = currentItems.filter((i) => i.row !== row)
 		setCurrentItems(newItems)
 	}
 
-	const toggleType = (row: number, event: any) => {
+	const toggleType = (row: number) => (event: any): void => {
 		const newItems: ProcessFileItem[] = currentItems.map((i) => {
-			if (i.row === row)
+			if (i.row === row) {
 				return {
 					...i,
-					type: i.type === "in" ? "out" : "in",
+					type: event.target.value as ProcessFileItem["type"],
 				}
+			}
+
 			return i
 		})
+
 		setCurrentItems(newItems)
 	}
 
@@ -86,13 +95,18 @@ export default function ImportDataModal({
 				<TableCell>{description}</TableCell>
 				<TableCell align="right">${Math.floor(amount)}</TableCell>
 				<TableCell>
-					<Select value={type} onChange={toggleType.bind(null, row)}>
+					<Select value={type} onChange={toggleType(row)}>
 						<MenuItem value="in">Cash IN</MenuItem>
 						<MenuItem value="out">Cash Out</MenuItem>
+						<MenuItem value="debtors">Debtors</MenuItem>
+						<MenuItem value="creditors">Creditors</MenuItem>
+						<MenuItem value="assets">Assets</MenuItem>
+						<MenuItem value="loans">Loans</MenuItem>
+						<MenuItem value="stock">Stock</MenuItem>
 					</Select>
 				</TableCell>
 				<TableCell>
-					<IconDeleteButton onClick={deleteItem.bind(null, row)} />
+					<IconDeleteButton onClick={deleteItem(row)} />
 				</TableCell>
 			</TableRow>
 		)

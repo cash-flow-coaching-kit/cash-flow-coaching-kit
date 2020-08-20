@@ -72,7 +72,15 @@ export function calcCashFlowNonGSTTotal(values: CashFlow[]): number {
  * @param {CashFlow[]} values
  * @returns {number}
  */
-export function calcCashFlowTotal(values: CashFlow[]): number {
+export function calcCashFlowTotal(
+	values: CashFlow[],
+	customGST?: number
+): number {
+	if (typeof customGST !== "undefined") {
+		const total = values.reduce(getKeyValue("amount"), []).reduce(sum(), 0)
+		return numOrZero(Math.floor(total - customGST))
+	}
+
 	return numOrZero(
 		pipe(
 			add(calcCashFlowGSTTotal(values)),
@@ -81,12 +89,15 @@ export function calcCashFlowTotal(values: CashFlow[]): number {
 	)
 }
 
-export function calcTotalCashOut(values: BaseCFCStruct): number {
+export function calcTotalCashOut(
+	values: BaseCFCStruct,
+	customGST?: number
+): number {
 	return numOrZero(
 		pipe(
 			add(values.paygWithholding),
 			add(values.superAmount)
-		)(calcCashFlowTotal(values.cashOutItems))
+		)(calcCashFlowTotal(values.cashOutItems, customGST))
 	)
 }
 
@@ -98,7 +109,10 @@ export function calcTotalCashOut(values: BaseCFCStruct): number {
  * @returns {number}
  */
 export function calcCashSurplus(values: BaseCFCStruct): number {
-	return calcCashFlowTotal(values.cashInItems) - calcTotalCashOut(values)
+	return (
+		calcCashFlowTotal(values.cashInItems, values.gstOnSales) -
+		calcTotalCashOut(values, values.gstOnPurchases)
+	)
 }
 
 /**

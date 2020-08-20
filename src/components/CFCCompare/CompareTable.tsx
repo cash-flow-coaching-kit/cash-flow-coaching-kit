@@ -70,10 +70,10 @@ export default function CompareTable({
 					<TableCell colSpan={5} variant="head" className={cls.noBorderBottom}>
 						Cash IN
 					</TableCell>
-					{renderRepeaterFields(
+					{/* {renderRepeaterFields(
 						selectedCanvases[0].cashInItems,
 						selectedCanvases[1].cashInItems
-					)}
+					)} */}
 					<CanvasItemRow
 						label="GST on sales"
 						values={[leftCalculated.gstOnSales, rightCalculated.gstOnSales]}
@@ -82,17 +82,23 @@ export default function CompareTable({
 						bold
 						label="Total (exc GST)"
 						values={[
-							calcCashFlowTotal(selectedCanvases[0].cashInItems),
-							calcCashFlowTotal(selectedCanvases[1].cashInItems),
+							calcCashFlowTotal(
+								selectedCanvases[0].cashInItems,
+								selectedCanvases[0].gstOnSales
+							),
+							calcCashFlowTotal(
+								selectedCanvases[1].cashInItems,
+								selectedCanvases[1].gstOnSales
+							),
 						]}
 					/>
 					<TableCell colSpan={5} variant="head" className={cls.noBorderBottom}>
 						Cash OUT
 					</TableCell>
-					{renderRepeaterFields(
+					{/* {renderRepeaterFields(
 						selectedCanvases[0].cashOutItems,
 						selectedCanvases[1].cashOutItems
-					)}
+					)} */}
 					<CanvasItemRow
 						label="GST on Purchases"
 						values={[
@@ -104,8 +110,14 @@ export default function CompareTable({
 						bold
 						label="Total (exc GST)"
 						values={[
-							calcCashFlowTotal(selectedCanvases[0].cashOutItems),
-							calcCashFlowTotal(selectedCanvases[1].cashOutItems),
+							calcCashFlowTotal(
+								selectedCanvases[0].cashOutItems,
+								selectedCanvases[0].gstOnPurchases
+							),
+							calcCashFlowTotal(
+								selectedCanvases[1].cashOutItems,
+								selectedCanvases[0].gstOnPurchases
+							),
 						]}
 					/>
 					<CanvasItemRow

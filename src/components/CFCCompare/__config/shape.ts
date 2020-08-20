@@ -34,4 +34,5 @@ export interface CanvasItemRowProps {
 	label?: string
 	bold?: boolean
 	border?: boolean
+	flip?: boolean
 }
