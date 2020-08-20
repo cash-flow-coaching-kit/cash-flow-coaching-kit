@@ -76,14 +76,30 @@ export function changeSelected(
 /**
  * Calculated the percentage difference of two fields
  *
+ * D = (C / B) * 100
+ * C = Difference in values (Column A - Column B)
+ * A = Column A
+ * B = Column B
+ *
  * @export
  * @param {number} val1
  * @param {number} val2
  * @returns {string}
  */
-export function calculateDifferencePer(val1: number, val2: number): string {
-	if (val2 === 0) return "N/A"
-	const diff = ((val1 - val2) / val2) * 100
+export function calculateDifferencePer(
+	A: number,
+	B: number,
+	flip = false
+): string {
+	if (B === 0) return flip ? "100%" : "-100%"
 
-	return pipe(toTwoDecimal, removeTrailingZeros, concatStr("%"))(`${diff}`)
+	const C = A - B
+
+	const diff = !flip ? (C / B) * 100 : -(C / B) * 100
+
+	return pipe(
+		toTwoDecimal,
+		removeTrailingZeros,
+		concatStr("%")
+	)(`${diff}`) as string
 }

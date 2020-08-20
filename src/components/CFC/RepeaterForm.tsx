@@ -1,17 +1,40 @@
 import React, { ReactElement, memo, useCallback, MouseEvent } from "react"
-import { Divider, Box, Typography } from "@material-ui/core"
+import {
+	Divider,
+	Box,
+	Typography,
+	Button,
+	makeStyles,
+	Tooltip,
+} from "@material-ui/core"
+import InfoIcon from "@material-ui/icons/Info"
 import Spacer from "../Spacer/Spacer"
 import ComputedPanels from "../ComputedPanels"
 import { addDollarSign, formatNumber } from "../../util/money/formatting"
 import FormHeader from "./FormHeader"
 import { RepeaterFormProps } from "./__config/shape"
-import {
-	useRepeaterStyles as useStyles,
-	useInputWrapper,
-} from "./__config/styles"
+import { useRepeaterStyles, useInputWrapper } from "./__config/styles"
 import FormActions from "./FormActions"
 import FormItem from "./FormItem"
 import { CashFlow } from "../../data/_config/shape"
+import useStyles from "../DescriptiveMoneyInput/__config/styles"
+import MoneyInput from "../MoneyInput"
+
+const useGSTStyles = makeStyles((theme) => ({
+	root: {
+		alignItems: "center",
+	},
+	manualBox: {
+		display: "flex",
+		alignItems: "center",
+		"& > button": {
+			marginRight: theme.spacing(1),
+		},
+	},
+}))
+
+const MANUAL_CALC_TOOLTIP =
+	"If you choose to manually calculate the GST, you will lose the ability to change it back to automatically calculate the GST."
 
 /**
  * Repeater form using for Cash Flow items
@@ -37,9 +60,14 @@ export default memo(function RepeaterForm({
 	addItem,
 	removeItem,
 	beforeTotalChild,
+	manualGSTCalculation,
+	setManualGSTCalc,
+	gstName,
 }: RepeaterFormProps): ReactElement {
-	const cls = useStyles()
+	const cls = useRepeaterStyles()
 	const wrapperCls = useInputWrapper()
+	const dmiCls = useStyles({ mini: true, stacked: false })
+	const gstCls = useGSTStyles()
 
 	/**
 	 * Method to remove a item from the form
@@ -54,6 +82,10 @@ export default memo(function RepeaterForm({
 		},
 		[removeItem]
 	)
+
+	const changeManualCalc = useCallback(() => {
+		setManualGSTCalc(!manualGSTCalculation)
+	}, [setManualGSTCalc, manualGSTCalculation])
 
 	/**
 	 * Checks if the add new button should be disabled
@@ -110,13 +142,38 @@ export default memo(function RepeaterForm({
 					wrapped={false}
 					value={addDollarSign(formatNumber(`${total}`))}
 				/>
-				<Box className={`${wrapperCls.highlightLeft} ${cls.gst}`}>
-					<ComputedPanels
-						title="GST"
-						mini
-						wrapped={false}
-						value={addDollarSign(formatNumber(`${gst}`))}
-					/>
+				<Box
+					className={`${wrapperCls.highlightLeft} ${cls.gst} ${dmiCls.root} ${gstCls.root}`}
+				>
+					<Box className={dmiCls.type}>
+						<Typography variant="h6" component="p">
+							GST
+						</Typography>
+						{!manualGSTCalculation && (
+							<Box className={gstCls.manualBox}>
+								<Button variant="outlined" onClick={changeManualCalc}>
+									Calculate{" "}
+									{manualGSTCalculation ? "Automatically" : "Manually"}
+								</Button>
+								<Tooltip title={MANUAL_CALC_TOOLTIP}>
+									<InfoIcon color="primary" />
+								</Tooltip>
+							</Box>
+						)}
+					</Box>
+					{manualGSTCalculation ? (
+						<MoneyInput
+							onChange={onChange}
+							value={gst}
+							name={gstName}
+							variant="outlined"
+							fullWidth={false}
+						/>
+					) : (
+						<Typography variant="h6">
+							{addDollarSign(formatNumber(`${gst}`))}
+						</Typography>
+					)}
 				</Box>
 			</Box>
 		</>

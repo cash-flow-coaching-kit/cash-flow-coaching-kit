@@ -4,7 +4,7 @@ import { green } from "@material-ui/core/colors"
 import { CFCStruct, CashFlow } from "../../data/_config/shape"
 import { pageDefaultSettings, pageHeading, pagePadding } from "./PDFLib"
 import { canvasDisplayTitle } from "../CFC/__config/utilities"
-import { addDollarSign } from "../../util/money/formatting"
+import { addDollarSign, formatNumber } from "../../util/money/formatting"
 import { calculateDifferencePer } from "../CFCCompare/__config/utilities"
 import { calculateInitial } from "../Forms/CFC"
 import { calcCashFlowTotal } from "../../state/CFC/accumulators"
@@ -12,13 +12,13 @@ import arrayFillWith from "../../util/array/arrayFillWith"
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
-const rowValue = (values: [number, number]): string[] => {
+const rowValue = (values: [number, number], flip = false): string[] => {
 	const [val1, val2] = values
 	return [
 		`${val1}`,
 		`${val2}`,
-		addDollarSign(`${val1 - val2}`),
-		calculateDifferencePer(val1, val2),
+		addDollarSign(formatNumber(`${val1 - val2}`)),
+		calculateDifferencePer(val1, val2, flip),
 	]
 }
 
@@ -62,10 +62,10 @@ export default async (
 								]),
 							],
 							[{ text: "Cash In", colSpan: 5, bold: true }, "", "", "", ""],
-							...renderRepeaterFields(
-								leftSelected.cashInItems,
-								rightSelected.cashInItems
-							),
+							// ...renderRepeaterFields(
+							// 	leftSelected.cashInItems,
+							// 	rightSelected.cashInItems
+							// ),
 							[
 								"GST on sales",
 								...rowValue([leftCalc.gstOnSales, rightCalc.gstOnSales]),
@@ -73,15 +73,21 @@ export default async (
 							[
 								{ text: "Total (exc GST)", bold: true },
 								...rowValue([
-									calcCashFlowTotal(leftSelected.cashInItems),
-									calcCashFlowTotal(rightSelected.cashInItems),
+									calcCashFlowTotal(
+										leftSelected.cashInItems,
+										leftSelected.gstOnSales
+									),
+									calcCashFlowTotal(
+										rightSelected.cashInItems,
+										rightSelected.gstOnSales
+									),
 								]),
 							],
 							[{ text: "Cash Out", colSpan: 5, bold: true }, "", "", "", ""],
-							...renderRepeaterFields(
-								leftSelected.cashOutItems,
-								rightSelected.cashOutItems
-							),
+							// ...renderRepeaterFields(
+							// 	leftSelected.cashOutItems,
+							// 	rightSelected.cashOutItems
+							// ),
 							[
 								"GST on Purchases",
 								...rowValue([
@@ -92,8 +98,14 @@ export default async (
 							[
 								{ text: "Total (exc GST)", bold: true },
 								...rowValue([
-									calcCashFlowTotal(leftSelected.cashOutItems),
-									calcCashFlowTotal(rightSelected.cashOutItems),
+									calcCashFlowTotal(
+										leftSelected.cashOutItems,
+										leftSelected.gstOnPurchases
+									),
+									calcCashFlowTotal(
+										rightSelected.cashOutItems,
+										rightSelected.gstOnPurchases
+									),
 								]),
 							],
 							[
@@ -101,7 +113,7 @@ export default async (
 								...rowValue([leftCalc.cashSurplus, rightCalc.cashSurplus]),
 							],
 							[
-								"Income/Outcome tax",
+								"Income/Company Tax",
 								...rowValue([
 									leftCalc.incomeTaxPercentage,
 									rightCalc.incomeTaxPercentage,

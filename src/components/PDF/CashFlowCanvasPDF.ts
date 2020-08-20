@@ -11,7 +11,6 @@ import {
 } from "./PDFLib"
 import { BaseCFCStruct, CashFlow } from "../../data/_config/shape"
 import {
-	calcCashFlowGST,
 	calcCashFlowTotal,
 	calcTotalCashOut,
 	calcIncomeTaxPer,
@@ -19,10 +18,11 @@ import {
 import { calculateInitial } from "../Forms/CFC"
 import { canvasDisplayTitle } from "../CFC/__config/utilities"
 import upperFirst from "../../util/strings/upperCaseFirst"
+import { addDollarSign, formatNumber } from "../../util/money/formatting"
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
-const formatDollars = (value: number) => `$${value.toString()}`
+const formatDollars = (value: number) => addDollarSign(formatNumber(`${value}`))
 
 const openingBalanceSection = (openingBalance: number): any => {
 	return frameContent(
@@ -206,19 +206,18 @@ export default async (title: string, values: BaseCFCStruct) => {
 		cashOutItems,
 		paygWithholding,
 		superAmount,
-		incomeTax,
 		cashToOwner,
 		stock,
 		creditors,
 		debtors,
 		assets,
 		loans,
+		gstOnPurchases: dbGSTOnPurchase,
+		gstOnSales: dbGSTOnSales,
 	} = values
 
-	const cashInTotal = calcCashFlowTotal(cashInItems)
-	const cashInGST = calcCashFlowGST(cashInItems)
-	const cashOutTotal = calcTotalCashOut(values)
-	const cashOutGST = calcCashFlowGST(cashOutItems)
+	const cashInTotal = calcCashFlowTotal(cashInItems, dbGSTOnSales)
+	const cashOutTotal = calcTotalCashOut(values, dbGSTOnPurchase)
 
 	const calculated = calculateInitial(values)
 	const {
@@ -226,6 +225,8 @@ export default async (title: string, values: BaseCFCStruct) => {
 		availableToSpend,
 		closingBalance,
 		totalNetAssets,
+		gstOnSales,
+		gstOnPurchases,
 	} = calculated
 
 	const docDefinition: any = {
@@ -269,11 +270,15 @@ export default async (title: string, values: BaseCFCStruct) => {
 						body: [
 							[
 								cashInSection(cashInItems, cashInTotal),
-								gstOnSalesSection(cashInGST),
+								gstOnSalesSection(gstOnSales),
 							],
 							[
 								cashOutSection(cashOutItems, cashOutTotal),
-								gstOnPurchasesSection(cashOutGST, paygWithholding, superAmount),
+								gstOnPurchasesSection(
+									gstOnPurchases,
+									paygWithholding,
+									superAmount
+								),
 							],
 							[cashSurplusSection(cashSurplus), incomeSection(values)],
 							[availableToSpendSection(availableToSpend), {}],

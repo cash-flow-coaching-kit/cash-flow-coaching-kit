@@ -270,6 +270,9 @@ export interface BaseCFCStruct {
 	loans: number
 	cashInItems: CashFlow[]
 	cashOutItems: CashFlow[]
+
+	gstOnSales: number | undefined
+	gstOnPurchases: number | undefined
 }
 
 /**

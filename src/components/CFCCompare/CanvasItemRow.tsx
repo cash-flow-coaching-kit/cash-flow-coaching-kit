@@ -6,6 +6,8 @@ import { addDollarSign, formatNumber } from "../../util/money/formatting"
 import useStyles from "./__config/styles"
 import { numOrZero } from "../../util/reduce/math"
 
+// export const flipValues = ["Debtors", "Stock", "Creditors"]
+
 /**
  * Used to display the data related to a value for a field in the canvas
  *
@@ -23,6 +25,7 @@ export default function CanvasItemRow({
 	label,
 	bold = false,
 	border = true,
+	flip = false,
 }: CanvasItemRowProps): ReactElement {
 	const cls = useStyles()
 
@@ -56,7 +59,7 @@ export default function CanvasItemRow({
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
 			>
-				{calculateDifferencePer(numOrZero(val1), numOrZero(val2))}
+				{calculateDifferencePer(numOrZero(val1), numOrZero(val2), flip)}
 			</TableCell>
 		</TableRow>
 	)

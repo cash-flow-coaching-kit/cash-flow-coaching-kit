@@ -19,6 +19,8 @@ const initialValues: BaseCFCStruct = {
 	loans: 0,
 	cashInItems: [createCashFlowItem()],
 	cashOutItems: [createCashFlowItem()],
+	gstOnPurchases: undefined,
+	gstOnSales: undefined,
 }
 
 export default initialValues

@@ -17,9 +17,15 @@ import {
  */
 function calculateInitial(values: BaseCFCStruct): CalculatedValues {
 	return {
-		gstOnSales: calcCashFlowGST(values.cashInItems),
+		gstOnSales:
+			typeof values.gstOnSales !== "undefined"
+				? values.gstOnSales
+				: calcCashFlowGST(values.cashInItems),
 		closingBalance: calcClosingBalance(values),
-		gstOnPurchases: calcCashFlowGST(values.cashOutItems),
+		gstOnPurchases:
+			typeof values.gstOnPurchases !== "undefined"
+				? values.gstOnPurchases
+				: calcCashFlowGST(values.cashOutItems),
 		totalNetAssets: calcTotalNetAssets(values),
 		cashSurplus: calcCashSurplus(values),
 		availableToSpend: calcAvailableToSpend(values),

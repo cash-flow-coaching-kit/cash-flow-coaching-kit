@@ -45,17 +45,21 @@ export default memo(function MoneyInput({
 			return
 		}
 
+		// if (!inputVal.match(/^(^-?[0-9]*)$/g)) {
 		if (inputVal.match(/\D/g)) {
 			setError("Amount can only include digits")
 			return
 		}
 
+		// if (inputVal !== "-") {
 		const val = parseInt(inputVal, 10)
 		// eslint-disable-next-line no-restricted-globals
 		if (isNaN(val) || val > 999999999) {
 			setError("Please enter a valid number between 0 and 999,999,999")
 			return
 		}
+		// }
+
 		setError("")
 
 		if (typeof onChange !== "undefined") {

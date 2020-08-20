@@ -9,7 +9,7 @@ import React, {
 import { useFormik } from "formik"
 import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { useParams } from "react-router-dom"
-import { isEqual } from "lodash-es"
+import { isEqual, set } from "lodash-es"
 import { useMachine } from "@xstate/react"
 import { BaseCFCStruct, CashFlow } from "../../../data/_config/shape"
 import { calculateInitial } from "."
@@ -53,6 +53,7 @@ import {
 	calcQuestionThree,
 } from "../../CFC/__config/utilities"
 import { ProcessFileItem } from "../../ImportDataModal/lib/ImportDataGeneralLib"
+import hasProperty from "../../../util/object/hasProperty"
 
 /**
  * Form used to edit a CFC
@@ -114,16 +115,39 @@ export default function CanvasForm({
 		loans,
 		cashInItems,
 		cashOutItems,
+		gstOnPurchases,
+		gstOnSales,
 	} = values
 
-	const cashInTotal = useMemo(() => calcCashFlowTotal(cashInItems), [
-		cashInItems,
+	const cashInTotal = useMemo(
+		() => calcCashFlowTotal(cashInItems, gstOnSales),
+		[cashInItems, gstOnSales]
+	)
+	const cashInGST = useMemo(() => {
+		return typeof gstOnSales !== "undefined"
+			? gstOnSales
+			: calcCashFlowGST(cashInItems)
+	}, [cashInItems, gstOnSales])
+	const cashOutTotal = useMemo(() => calcTotalCashOut(values, gstOnPurchases), [
+		values,
+		gstOnPurchases,
 	])
-	const cashInGST = useMemo(() => calcCashFlowGST(cashInItems), [cashInItems])
-	const cashOutTotal = useMemo(() => calcTotalCashOut(values), [values])
-	const cashOutGST = useMemo(() => calcCashFlowGST(cashOutItems), [
-		cashOutItems,
-	])
+	const cashOutGST = useMemo(() => {
+		return typeof gstOnPurchases !== "undefined"
+			? gstOnPurchases
+			: calcCashFlowGST(cashOutItems)
+	}, [cashOutItems, gstOnPurchases])
+
+	const calculateImportedTotal = useCallback(
+		(items: any, type: ProcessFileItem["type"]): number => {
+			return [...items]
+				.filter(({ type: t }: ProcessFileItem) => t === type)
+				.reduce((acc: number, prev: ProcessFileItem) => {
+					return acc + prev.amount
+				}, 0)
+		},
+		[]
+	)
 
 	const addDataImportItems = useCallback(
 		(items: any) => {
@@ -146,8 +170,29 @@ export default function CanvasForm({
 					),
 			]
 			setFieldValue("cashOutItems", newCashOutItems, false)
+
+			const debtorsImport = calculateImportedTotal(items, "debtors")
+			const creditorsImport = calculateImportedTotal(items, "creditors")
+			const assetsImport = calculateImportedTotal(items, "assets")
+			const loansImport = calculateImportedTotal(items, "loans")
+			const stockImport = calculateImportedTotal(items, "stock")
+
+			setFieldValue("debtors", Math.floor(debtors + debtorsImport), false)
+			setFieldValue("creditors", Math.floor(creditors + creditorsImport), false)
+			setFieldValue("assets", Math.floor(assets + assetsImport), false)
+			setFieldValue("loans", Math.floor(loans + loansImport), false)
+			setFieldValue("stock", Math.floor(stock + stockImport), false)
 		},
-		[values, setFieldValue]
+		[
+			values,
+			setFieldValue,
+			debtors,
+			creditors,
+			assets,
+			loans,
+			stock,
+			calculateImportedTotal,
+		]
 	)
 
 	// add an updater to list to be used by Data Import
@@ -189,6 +234,25 @@ export default function CanvasForm({
 		openingBalance,
 		dispatch,
 	])
+
+	const [manualCashInGST, setManualCashInGST] = useState(
+		typeof gstOnSales !== "undefined"
+	)
+	const [manualCashOutGST, setManualCashOutGST] = useState(
+		typeof gstOnPurchases !== "undefined"
+	)
+
+	useEffect(() => {
+		if (manualCashInGST && typeof values.gstOnSales === "undefined") {
+			setFieldValue("gstOnSales", 0, false)
+		}
+	}, [manualCashInGST, setFieldValue, values])
+
+	useEffect(() => {
+		if (manualCashOutGST && typeof values.gstOnPurchases === "undefined") {
+			setFieldValue("gstOnPurchases", 0, false)
+		}
+	}, [manualCashOutGST, setFieldValue, values])
 	// #endregion
 
 	// #region Fetch data on load
@@ -201,12 +265,28 @@ export default function CanvasForm({
 				if (data.canvasTitle !== "") {
 					setUseCustomTitle(true)
 				}
+
+				if (typeof data.gstOnSales !== "undefined") {
+					setManualCashInGST(true)
+				}
+
+				if (typeof data.gstOnPurchases !== "undefined") {
+					setManualCashOutGST(true)
+				}
+
 				updateMachine("RESOLVE")
 			} else {
 				updateMachine("REJECT")
 			}
 		}
-	}, [currentClient, canvasId, updateMachine, setValues])
+	}, [
+		currentClient,
+		canvasId,
+		updateMachine,
+		setValues,
+		setManualCashInGST,
+		setManualCashOutGST,
+	])
 
 	useEffect(() => {
 		fetchFormData()
@@ -256,6 +336,20 @@ export default function CanvasForm({
 	// #endregion
 
 	// #region Save canvas data
+	const ensureCustomGSTValuesAreIncluded = useCallback((): BaseCFCStruct => {
+		const valuesCopy: BaseCFCStruct = { ...values }
+
+		if (!hasProperty(valuesCopy, "gstOnSales")) {
+			set(valuesCopy, "gstOnSales", undefined)
+		}
+
+		if (!hasProperty(valuesCopy, "gstOnPurchases")) {
+			set(valuesCopy, "gstOnPurchases", undefined)
+		}
+
+		return valuesCopy
+	}, [values])
+
 	const disableSaving = useCallback((): boolean => {
 		return (
 			invalidDateError ||
@@ -265,20 +359,28 @@ export default function CanvasForm({
 	}, [invalidDateError, duplicateError, useCustomTitle, canvasTitle])
 
 	const handleFormSave = useCallback(async () => {
-		await CFCUseCase.update(canvasId, values)
-		setPreviousValues(values)
+		const completeValues = ensureCustomGSTValuesAreIncluded()
+		await CFCUseCase.update(canvasId, completeValues)
+		setPreviousValues(completeValues)
 		setLastSaved(new Date())
-	}, [canvasId, values])
+	}, [canvasId, ensureCustomGSTValuesAreIncluded])
 
 	useEffect(() => {
 		const id = setInterval(async () => {
-			if (!isEqual(previousValues, values) && !disableSaving()) {
+			const completeValues = ensureCustomGSTValuesAreIncluded()
+			if (!isEqual(previousValues, completeValues) && !disableSaving()) {
 				handleFormSave()
 			}
 		}, 1000)
 
 		return (): void => clearInterval(id)
-	}, [previousValues, values, handleFormSave, disableSaving])
+	}, [
+		previousValues,
+		values,
+		handleFormSave,
+		disableSaving,
+		ensureCustomGSTValuesAreIncluded,
+	])
 
 	/**
 	 * Manually triggers a Canvas save
@@ -406,6 +508,9 @@ export default function CanvasForm({
 							gst={cashInGST}
 							addItem={addCashFlowItem("cashInItems")}
 							removeItem={removeItem("cashInItems")}
+							manualGSTCalculation={manualCashInGST}
+							setManualGSTCalc={setManualCashInGST}
+							gstName="gstOnSales"
 						/>
 					</Box>
 					<Spacer />
@@ -435,6 +540,9 @@ export default function CanvasForm({
 									onChange={inputChange}
 								/>
 							)}
+							manualGSTCalculation={manualCashOutGST}
+							setManualGSTCalc={setManualCashOutGST}
+							gstName="gstOnPurchases"
 						/>
 					</Box>
 				</div>

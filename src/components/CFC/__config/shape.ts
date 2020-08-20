@@ -1,4 +1,4 @@
-import { ReactElement } from "react"
+import { ReactElement, Dispatch, SetStateAction } from "react"
 import {
 	CanvasType,
 	CFCTimeFrame,
@@ -43,6 +43,9 @@ export interface RepeaterFormProps {
 	onChange: InputChange
 	gst: number
 	total: number
+	manualGSTCalculation: boolean
+	setManualGSTCalc: Dispatch<SetStateAction<boolean>>
+	gstName: "gstOnPurchases" | "gstOnSales"
 	addItem: () => void
 	removeItem: (id: CashFlow["id"]) => void
 	beforeTotalChild?: () => ReactElement
