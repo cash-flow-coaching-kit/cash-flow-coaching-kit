@@ -12,21 +12,21 @@ You can use the kit to:
 
 The kit does not save information between sessions. Use the export function regularly to save your progress.
 
-## How to run this
+## How to build this yourself
 
-- The dCFCK can run using a standard Node.js server running Node.js 12.x.
-- The original dCFCK is hosted on Platform.sh. The repository includes configuration files to run it under your own account.
-
----
-
-## Environment variables
-
-The help dialog contains a link to a support email. To add this email, add the following item to a `.env`
-
+1. Create a new .env file with the relevant Environment Variables
 ```
 REACT_APP_SUPPORT_EMAIL=<email>
 REACT_APP_GTM_CONTAINER_ID=<GTM-0000000>
 REACT_APP_GTM_DATA_LAYER_NAME=<dataLayer>
 ```
+2. Run the following:
+```
+yarn install
+yarn build
+```
 
-<small>Remember to restart your dev server once added.</small>
+## How to run this
+
+- The dCFCK can run using a standard Node.js server running Node.js 12.x.
+- The original dCFCK is hosted on Platform.sh. The repository includes configuration files to run it under your own account.
