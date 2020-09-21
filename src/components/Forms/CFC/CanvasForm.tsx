@@ -9,7 +9,7 @@ import React, {
 import { useFormik } from "formik"
 import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { useParams } from "react-router-dom"
-import { isEqual, set } from "lodash-es"
+import { isEqual, set, isEmpty } from "lodash-es"
 import { useMachine } from "@xstate/react"
 import { BaseCFCStruct, CashFlow } from "../../../data/_config/shape"
 import { calculateInitial } from "."
@@ -54,6 +54,10 @@ import {
 } from "../../CFC/__config/utilities"
 import { ProcessFileItem } from "../../ImportDataModal/lib/ImportDataGeneralLib"
 import hasProperty from "../../../util/object/hasProperty"
+
+const isGSTValid = (value: any): boolean => {
+	return typeof value !== "undefined" && value !== null && !isEmpty(value)
+}
 
 /**
  * Form used to edit a CFC
@@ -124,17 +128,19 @@ export default function CanvasForm({
 		[cashInItems, gstOnSales]
 	)
 	const cashInGST = useMemo(() => {
-		return typeof gstOnSales !== "undefined"
-			? gstOnSales
+		return isGSTValid(gstOnSales)
+			? gstOnSales || 0
 			: calcCashFlowGST(cashInItems)
 	}, [cashInItems, gstOnSales])
+
 	const cashOutTotal = useMemo(() => calcTotalCashOut(values, gstOnPurchases), [
 		values,
 		gstOnPurchases,
 	])
+
 	const cashOutGST = useMemo(() => {
-		return typeof gstOnPurchases !== "undefined"
-			? gstOnPurchases
+		return isGSTValid(gstOnPurchases)
+			? gstOnPurchases || 0
 			: calcCashFlowGST(cashOutItems)
 	}, [cashOutItems, gstOnPurchases])
 
@@ -235,21 +241,19 @@ export default function CanvasForm({
 		dispatch,
 	])
 
-	const [manualCashInGST, setManualCashInGST] = useState(
-		typeof gstOnSales !== "undefined"
-	)
+	const [manualCashInGST, setManualCashInGST] = useState(isGSTValid(gstOnSales))
 	const [manualCashOutGST, setManualCashOutGST] = useState(
-		typeof gstOnPurchases !== "undefined"
+		isGSTValid(gstOnPurchases)
 	)
 
 	useEffect(() => {
-		if (manualCashInGST && typeof values.gstOnSales === "undefined") {
+		if (manualCashInGST && !isGSTValid(values.gstOnSales)) {
 			setFieldValue("gstOnSales", 0, false)
 		}
 	}, [manualCashInGST, setFieldValue, values])
 
 	useEffect(() => {
-		if (manualCashOutGST && typeof values.gstOnPurchases === "undefined") {
+		if (manualCashOutGST && !isGSTValid(values.gstOnPurchases)) {
 			setFieldValue("gstOnPurchases", 0, false)
 		}
 	}, [manualCashOutGST, setFieldValue, values])
@@ -266,11 +270,11 @@ export default function CanvasForm({
 					setUseCustomTitle(true)
 				}
 
-				if (typeof data.gstOnSales !== "undefined") {
+				if (isGSTValid(data.gstOnSales)) {
 					setManualCashInGST(true)
 				}
 
-				if (typeof data.gstOnPurchases !== "undefined") {
+				if (isGSTValid(data.gstOnPurchases)) {
 					setManualCashOutGST(true)
 				}
 
