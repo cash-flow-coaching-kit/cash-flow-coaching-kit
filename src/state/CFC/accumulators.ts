@@ -2,7 +2,7 @@
 import { BaseCFCStruct, CashFlow } from "../../data/_config/shape"
 import GSTApplicable from "../../util/filters/ByGSTApplicable"
 import { sum, pipe, add, minusBy, numOrZero } from "../../util/reduce/math"
-import { removeGST, calculateGST } from "../../util/money/gst"
+import { removeGST, calculateGST, isGSTValid } from "../../util/money/gst"
 
 /**
  * Extracts the values for a specific key
@@ -76,9 +76,9 @@ export function calcCashFlowTotal(
 	values: CashFlow[],
 	customGST?: number
 ): number {
-	if (typeof customGST !== "undefined") {
+	if (isGSTValid(customGST)) {
 		const total = values.reduce(getKeyValue("amount"), []).reduce(sum(), 0)
-		return numOrZero(Math.floor(total - customGST))
+		return numOrZero(Math.floor(total - customGST!))
 	}
 
 	return numOrZero(

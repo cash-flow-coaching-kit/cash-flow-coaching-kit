@@ -5,9 +5,6 @@ import CanvasItemRow from "./CanvasItemRow"
 import { CompareTableProps } from "./__config/shape"
 import { calculateInitial } from "../Forms/CFC"
 import { calcCashFlowTotal } from "../../state/CFC/accumulators"
-import { CashFlow } from "../../data/_config/shape"
-import arrayFillWith from "../../util/array/arrayFillWith"
-import { newTimestamp } from "../../util/dates"
 import useStyles from "./__config/styles"
 
 /**
@@ -39,20 +36,20 @@ export default function CompareTable({
 	 * @param {CashFlow[]} val2
 	 * @returns {ReactElement[]}
 	 */
-	function renderRepeaterFields(
-		val1: CashFlow[],
-		val2: CashFlow[]
-	): ReactElement[] {
-		const len = val1.length > val2.length ? val1.length : val2.length
-		const arr = arrayFillWith(len, 0)
-		return arr.map((item, idx) => (
-			<CanvasItemRow
-				key={val1[idx]?.id || val2[idx]?.id || newTimestamp()}
-				values={[val1[idx]?.amount || 0, val2[idx]?.amount || 0]}
-				border={idx >= len - 1}
-			/>
-		))
-	}
+	// function renderRepeaterFields(
+	// 	val1: CashFlow[],
+	// 	val2: CashFlow[]
+	// ): ReactElement[] {
+	// 	const len = val1.length > val2.length ? val1.length : val2.length
+	// 	const arr = arrayFillWith(len, 0)
+	// 	return arr.map((item, idx) => (
+	// 		<CanvasItemRow
+	// 			key={val1[idx]?.id || val2[idx]?.id || newTimestamp()}
+	// 			values={[val1[idx]?.amount || 0, val2[idx]?.amount || 0]}
+	// 			border={idx >= len - 1}
+	// 		/>
+	// 	))
+	// }
 
 	return (
 		<TableContainer>

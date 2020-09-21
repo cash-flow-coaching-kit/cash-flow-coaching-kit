@@ -8,6 +8,7 @@ import {
 	calcClosingBalance,
 	calcIncomeTaxPer,
 } from "../../../state/CFC/accumulators"
+import { isGSTValid } from "../../../util/money/gst"
 
 /**
  * Calculates the values for the dynamic values
@@ -17,15 +18,13 @@ import {
  */
 function calculateInitial(values: BaseCFCStruct): CalculatedValues {
 	return {
-		gstOnSales:
-			typeof values.gstOnSales !== "undefined"
-				? values.gstOnSales
-				: calcCashFlowGST(values.cashInItems),
+		gstOnSales: isGSTValid(values.gstOnSales)
+			? values.gstOnSales!
+			: calcCashFlowGST(values.cashInItems),
 		closingBalance: calcClosingBalance(values),
-		gstOnPurchases:
-			typeof values.gstOnPurchases !== "undefined"
-				? values.gstOnPurchases
-				: calcCashFlowGST(values.cashOutItems),
+		gstOnPurchases: isGSTValid(values.gstOnPurchases)
+			? values.gstOnPurchases!
+			: calcCashFlowGST(values.cashOutItems),
 		totalNetAssets: calcTotalNetAssets(values),
 		cashSurplus: calcCashSurplus(values),
 		availableToSpend: calcAvailableToSpend(values),

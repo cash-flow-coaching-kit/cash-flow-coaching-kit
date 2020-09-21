@@ -1,13 +1,5 @@
 import React, { ReactElement, MouseEvent, useState } from "react"
-import {
-	Grid,
-	TextField,
-	Checkbox,
-	Tooltip,
-	IconButton,
-	makeStyles,
-} from "@material-ui/core"
-import GroupWorkIcon from "@material-ui/icons/GroupWork"
+import { Grid, TextField, Checkbox, makeStyles } from "@material-ui/core"
 import { RepeaterFormProps } from "./__config/shape"
 import { CashFlow } from "../../data/_config/shape"
 import {

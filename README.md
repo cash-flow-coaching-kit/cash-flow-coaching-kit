@@ -15,12 +15,15 @@ The kit does not save information between sessions. Use the export function regu
 ## How to build this yourself
 
 1. Create a new .env file with the relevant Environment Variables
+
 ```
 REACT_APP_SUPPORT_EMAIL=<email>
 REACT_APP_GTM_CONTAINER_ID=<GTM-0000000>
 REACT_APP_GTM_DATA_LAYER_NAME=<dataLayer>
 ```
+
 2. Run the following:
+
 ```
 yarn install
 yarn build

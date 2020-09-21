@@ -1,4 +1,5 @@
 import { CFCStruct, CashFlow } from "../../../data/_config/shape"
+import { isGSTValid } from "../../../util/money/gst"
 
 const performDivide = (value: number, divideBy: number): number => {
 	return Math.floor(value / divideBy)
@@ -11,10 +12,9 @@ export default (data: CFCStruct, divideBy: number): CFCStruct => {
 			typeof data.gstOnPurchases !== "undefined"
 				? performDivide(data.gstOnPurchases, divideBy)
 				: undefined,
-		gstOnSales:
-			typeof data.gstOnSales !== "undefined"
-				? performDivide(data.gstOnSales, divideBy)
-				: undefined,
+		gstOnSales: typeof isGSTValid(data.gstOnSales)
+			? performDivide(data.gstOnSales!, divideBy)
+			: undefined,
 		paygWithholding: performDivide(data.paygWithholding, divideBy),
 		superAmount: performDivide(data.superAmount, divideBy),
 		cashToOwner: performDivide(data.cashToOwner, divideBy),
