@@ -48,7 +48,6 @@ import { ActionChecklistActionTypes } from "../../../state/action-checklist/shap
 import filterByActionContainer from "../../../util/filters/ByActionContainer"
 import { SnackbarMsgData } from "../../SnackbarMsg/SnackbarMsg"
 import SnackbarMsg from "../../SnackbarMsg"
-import { actionItemKeyTitleMapping } from "../../ActionChecklist/ActionContainer/_config/utilities"
 import ActionChecklistUseCase from "../../../data/ActionChecklist/ChecklistLogic"
 
 /**

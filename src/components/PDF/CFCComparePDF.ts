@@ -1,14 +1,14 @@
 import pdfMake from "pdfmake/build/pdfmake"
 import pdfFonts from "pdfmake/build/vfs_fonts"
 import { green } from "@material-ui/core/colors"
-import { CFCStruct, CashFlow } from "../../data/_config/shape"
+import { CFCStruct } from "../../data/_config/shape"
 import { pageDefaultSettings, pageHeading, pagePadding } from "./PDFLib"
 import { canvasDisplayTitle } from "../CFC/__config/utilities"
 import { addDollarSign, formatNumber } from "../../util/money/formatting"
 import { calculateDifferencePer } from "../CFCCompare/__config/utilities"
 import { calculateInitial } from "../Forms/CFC"
 import { calcCashFlowTotal } from "../../state/CFC/accumulators"
-import arrayFillWith from "../../util/array/arrayFillWith"
+// import arrayFillWith from "../../util/array/arrayFillWith"
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
@@ -22,14 +22,14 @@ const rowValue = (values: [number, number], flip = false): string[] => {
 	]
 }
 
-function renderRepeaterFields(val1: CashFlow[], val2: CashFlow[]): string[][] {
-	const len = val1.length > val2.length ? val1.length : val2.length
-	const arr = arrayFillWith(len, 0)
-	return arr.map((item, idx) => [
-		"",
-		...rowValue([val1[idx]?.amount || 0, val2[idx]?.amount || 0]),
-	])
-}
+// function renderRepeaterFields(val1: CashFlow[], val2: CashFlow[]): string[][] {
+// 	const len = val1.length > val2.length ? val1.length : val2.length
+// 	const arr = arrayFillWith(len, 0)
+// 	return arr.map((item, idx) => [
+// 		"",
+// 		...rowValue([val1[idx]?.amount || 0, val2[idx]?.amount || 0]),
+// 	])
+// }
 
 export default async (
 	leftSelected: CFCStruct,

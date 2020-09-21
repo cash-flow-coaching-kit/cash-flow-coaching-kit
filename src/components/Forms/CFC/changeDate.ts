@@ -1,5 +1,5 @@
 import { BaseCFCStruct, CFCPanelSlice } from "../../../data/_config/shape"
-import { calculatedEndDate, syncEndDate } from "../../../util/dates"
+import { syncEndDate } from "../../../util/dates"
 
 type DateRtn = {
 	canvasStartDate: BaseCFCStruct["canvasStartDate"]

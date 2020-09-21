@@ -9,7 +9,7 @@ import React, {
 import { useFormik } from "formik"
 import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { useParams } from "react-router-dom"
-import { isEqual, set, isEmpty } from "lodash-es"
+import { isEqual, set } from "lodash-es"
 import { useMachine } from "@xstate/react"
 import { BaseCFCStruct, CashFlow } from "../../../data/_config/shape"
 import { calculateInitial } from "."
@@ -54,10 +54,7 @@ import {
 } from "../../CFC/__config/utilities"
 import { ProcessFileItem } from "../../ImportDataModal/lib/ImportDataGeneralLib"
 import hasProperty from "../../../util/object/hasProperty"
-
-const isGSTValid = (value: any): boolean => {
-	return typeof value !== "undefined" && value !== null && !isEmpty(value)
-}
+import { isGSTValid } from "../../../util/money/gst"
 
 /**
  * Form used to edit a CFC
