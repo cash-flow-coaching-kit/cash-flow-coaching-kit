@@ -8,21 +8,20 @@ const performDivide = (value: number, divideBy: number): number => {
 export default (data: CFCStruct, divideBy: number): CFCStruct => {
 	return {
 		...data,
-		gstOnPurchases:
-			typeof data.gstOnPurchases !== "undefined"
-				? performDivide(data.gstOnPurchases, divideBy)
-				: undefined,
-		gstOnSales: typeof isGSTValid(data.gstOnSales)
+		gstOnPurchases: isGSTValid(data.gstOnPurchases)
+			? performDivide(data.gstOnPurchases!, divideBy)
+			: undefined,
+		gstOnSales: isGSTValid(data.gstOnSales)
 			? performDivide(data.gstOnSales!, divideBy)
 			: undefined,
 		paygWithholding: performDivide(data.paygWithholding, divideBy),
 		superAmount: performDivide(data.superAmount, divideBy),
 		cashToOwner: performDivide(data.cashToOwner, divideBy),
-		debtors: performDivide(data.debtors, divideBy),
-		creditors: performDivide(data.creditors, divideBy),
-		assets: performDivide(data.assets, divideBy),
-		loans: performDivide(data.loans, divideBy),
-		stock: performDivide(data.stock, divideBy),
+		debtors: data.debtors,
+		creditors: data.creditors,
+		assets: data.assets,
+		loans: data.loans,
+		stock: data.stock,
 		cashInItems: data.cashInItems.reduce((acc: CashFlow[], cur) => {
 			return acc.concat({
 				...cur,

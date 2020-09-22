@@ -145,7 +145,7 @@ const HCSummary = (): ReactElement => {
 									Cash flow is a key business challenge that may affect small
 									business owners’ mental health and wellbeing. A range of{" "}
 									<a
-										href="https://www.ato.gov.au/General/Financial-difficulties-and-serious-hardship/small-business-owners-experiencing-mental-health-issues/health-and-wellbeing-organisations/"
+										href="https://www.ato.gov.au/smallbizmentalhealth"
 										target="_blank"
 										rel="noopener noreferrer"
 									>

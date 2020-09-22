@@ -91,7 +91,7 @@ export function calculateDifferencePer(
 	B: number,
 	flip = false
 ): string {
-	if (B === 0) return flip ? "100%" : "-100%"
+	if (A === 0 || B === 0) return "N/A"
 
 	const C = A - B
 
