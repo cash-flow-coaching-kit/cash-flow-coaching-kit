@@ -143,13 +143,13 @@ const HCSummary = (): ReactElement => {
 								<Spacer space={4} />
 								<Typography>
 									Cash flow is a key business challenge that may affect small
-									business owners’ mental health and wellbeing. A range of{" "}
+									business owners’ mental health and wellbeing.{" "}
 									<a
 										href="https://www.ato.gov.au/smallbizmentalhealth"
 										target="_blank"
 										rel="noopener noreferrer"
 									>
-										resources are available
+										Support is available
 									</a>{" "}
 									if you need assistance.
 								</Typography>
