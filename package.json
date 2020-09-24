@@ -62,6 +62,7 @@
 	},
 	"scripts": {
 		"start:web": "react-scripts start",
+		"start:ie11": "yarn build && serve build",
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"test:unit": "react-scripts test --env=jsdom",
