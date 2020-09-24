@@ -1,4 +1,5 @@
 import { isAfter } from "date-fns"
+import { toNumber } from "lodash-es"
 import { CFCStruct, ClientId, CFCId } from "../../../data/_config/shape"
 import CFCUseCase from "../../../data/CFC/CFCLogic"
 import { SelectFieldOptions } from "../../SelectField/SelectField"
@@ -91,7 +92,8 @@ export function calculateDifferencePer(
 	B: number,
 	flip = false
 ): string {
-	if (A === 0 || B === 0) return "N/A"
+	// Note: A,B can be a string from PDF ('0')
+	if (!toNumber(A) || !toNumber(B)) return "N/A"
 
 	const C = A - B
 
