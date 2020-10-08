@@ -39,13 +39,13 @@ describe("Unit tests for CFC database", () => {
     let items: CFCStruct[] = [
       {...initialValues, clientId},
       {...initialValues, clientId},
-      {...initialValues, clientId, canvasType: "plan", canvasTimeFrame: "quaterly"},
+      {...initialValues, clientId, canvasType: "plan", canvasTimeFrame: "quarterly"},
     ]
     await CFCUseCase.bulkAdd(items)
-    let possible = await CFCUseCase.findPossibleDuplicates("review", "quaterly", clientId)
+    let possible = await CFCUseCase.findPossibleDuplicates("review", "quarterly", clientId)
     expect(possible).toHaveLength(2)
 
-    possible = await CFCUseCase.findPossibleDuplicates("plan", "quaterly", clientId)
+    possible = await CFCUseCase.findPossibleDuplicates("plan", "quarterly", clientId)
     expect(possible).toHaveLength(1)
   })
 })

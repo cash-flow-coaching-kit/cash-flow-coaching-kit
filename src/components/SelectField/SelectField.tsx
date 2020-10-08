@@ -54,7 +54,7 @@ export default React.memo(function SelectField({
 				{options.map((opt) => (
 					<MenuItem value={opt.value} key={`${name}--${opt.label}`}>
 						{/* I am sorry about this... I can't spell that great */}
-						{opt.label === "Quaterly" ? "Quarterly" : opt.label}
+						{opt.label === "Quarterly" ? "Quarterly" : opt.label}
 					</MenuItem>
 				))}
 			</Select>

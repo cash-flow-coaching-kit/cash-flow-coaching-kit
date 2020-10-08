@@ -60,7 +60,7 @@ export function canvasTimeFrameOptions(): Opts {
 		"weekly",
 		"fortnightly",
 		"monthly",
-		"quaterly",
+		"quarterly",
 		"biannually",
 		"yearly",
 		"other",
@@ -88,7 +88,7 @@ export function generateTitle(
 		return "Please provide a valid date"
 	}
 
-	const timeFrameToUse = timeframe === "quaterly" ? "quarterly" : timeframe
+	const timeFrameToUse = timeframe === "quarterly" ? "quarterly" : timeframe
 
 	return pipe(
 		concatStr(upperFirst(`${timeFrameToUse} `)),

@@ -4,7 +4,7 @@ import createCashFlowItem from "../../../state/CFC/createCashFlow"
 const initialValues: BaseCFCStruct = {
 	canvasTitle: "",
 	canvasType: "review",
-	canvasTimeFrame: "quaterly",
+	canvasTimeFrame: "quarterly",
 	canvasStartDate: new Date(),
 	canvasEndDate: new Date(),
 	openingBalance: 0,
