@@ -145,8 +145,10 @@ export default function CanvasForm({
 		(items: any, type: ProcessFileItem["type"]): number => {
 			return [...items]
 				.filter(({ type: t }: ProcessFileItem) => t === type)
-				.reduce((acc: number, prev: ProcessFileItem) => {
-					return acc + prev.amount
+				.reduce((acc: number, { amount, gst }: ProcessFileItem) => {
+					const gstApplicable = gst === "applygst"
+					const newAmount = gstApplicable ? amount * 1.1 : amount
+					return acc + newAmount
 				}, 0)
 		},
 		[]
@@ -158,9 +160,16 @@ export default function CanvasForm({
 				...values.cashInItems,
 				...items
 					.filter(({ type }: ProcessFileItem) => type === "in")
-					.map(({ row, description, amount }: ProcessFileItem) =>
-						createCashFlowItem(description, Math.floor(amount))
-					),
+					.map(({ row, description, amount, gst }: ProcessFileItem) => {
+						console.log("in", row, description, amount, gst)
+						const gstApplicable = gst === "applygst"
+						const newAmount = gstApplicable ? amount * 1.1 : amount
+						return createCashFlowItem(
+							description,
+							Math.floor(newAmount),
+							gstApplicable
+						)
+					}),
 			]
 			setFieldValue("cashInItems", newCashInItems, false)
 
@@ -168,9 +177,16 @@ export default function CanvasForm({
 				...values.cashOutItems,
 				...items
 					.filter(({ type }: ProcessFileItem) => type === "out")
-					.map(({ row, description, amount }: ProcessFileItem) =>
-						createCashFlowItem(description, Math.floor(amount))
-					),
+					.map(({ row, description, amount, gst }: ProcessFileItem) => {
+						console.log("out", row, description, amount, gst)
+						const gstApplicable = gst === "applygst"
+						const newAmount = gstApplicable ? amount * 1.1 : amount
+						return createCashFlowItem(
+							description,
+							Math.floor(newAmount),
+							gstApplicable
+						)
+					}),
 			]
 			setFieldValue("cashOutItems", newCashOutItems, false)
 

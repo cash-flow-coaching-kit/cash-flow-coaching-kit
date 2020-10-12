@@ -52,6 +52,21 @@ export default function ImportDataModal({
 		setCurrentItems(newItems)
 	}
 
+	const toggleGST = (row: number) => (event: any): void => {
+		const newItems: ProcessFileItem[] = currentItems.map((i) => {
+			if (i.row === row) {
+				return {
+					...i,
+					gst: event.target.value as ProcessFileItem["gst"],
+				}
+			}
+
+			return i
+		})
+
+		setCurrentItems(newItems)
+	}
+
 	const onOpenFileDialog = () => {
 		// alert("import")
 		fileRef!.current.click()
@@ -83,7 +98,7 @@ export default function ImportDataModal({
 	}
 
 	const renderSingleItem = (item: ProcessFileItem): ReactElement => {
-		const { row, description, amount, type } = item
+		const { row, description, amount, type, gst } = item
 		return (
 			<TableRow key={row}>
 				<TableCell>{description}</TableCell>
@@ -97,6 +112,12 @@ export default function ImportDataModal({
 						<MenuItem value="assets">Assets</MenuItem>
 						<MenuItem value="loans">Loans</MenuItem>
 						<MenuItem value="stock">Stock</MenuItem>
+					</Select>
+				</TableCell>
+				<TableCell>
+					<Select value={gst} onChange={toggleGST(row)}>
+						<MenuItem value="applygst">Apply GST</MenuItem>
+						<MenuItem value="nogst">No GST</MenuItem>
 					</Select>
 				</TableCell>
 				<TableCell>
