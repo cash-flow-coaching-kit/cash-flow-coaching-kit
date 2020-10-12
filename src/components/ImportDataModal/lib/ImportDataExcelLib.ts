@@ -59,6 +59,7 @@ const excelProcessSheet = (worksheet: Worksheet): ProcessFileItem[] => {
 				description,
 				amount: Math.abs(last),
 				type: last > 0 ? "in" : "out",
+				gst: "applygst",
 			})
 		}
 	})
