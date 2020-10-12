@@ -27,18 +27,18 @@ describe("Unit tests for the CFC utility methods", () => {
   })
 
   test("generateTitle", function() {
-    const timeFrame: CFCTimeFrame = "quaterly"
+    const timeFrame: CFCTimeFrame = "quarterly"
     const type: CanvasType = "plan"
     const start = toDate(new Date(2020, 6, 1))
     const end = toDate(new Date(2020, 7, 1))
 
-    const expected = "Plan Quaterly 01/07/2020 to 01/08/2020"
+    const expected = "Plan Quarterly 01/07/2020 to 01/08/2020"
 
     expect(generateTitle(type, timeFrame, start, end)).toEqual(expected)
   })
 
   test("generateTitle - invalid dates", function() {
-    const timeFrame: CFCTimeFrame = "quaterly"
+    const timeFrame: CFCTimeFrame = "quarterly"
     const type: CanvasType = "plan"
 
     const expected = "Please provide a valid date"
@@ -52,7 +52,7 @@ describe("Unit tests for the CFC utility methods", () => {
       canvasStartDate: toDate(new Date(2020, 6, 1)),
       canvasEndDate: toDate(new Date(2020, 7, 1)),
     }
-    const expected = "Review Quaterly 01/07/2020 to 01/08/2020"
+    const expected = "Review Quarterly 01/07/2020 to 01/08/2020"
 
     expect(canvasDisplayTitle(data)).toBe(expected)
 

@@ -227,7 +227,7 @@ export type CFCTimeFrame =
 	| "weekly"
 	| "fortnightly"
 	| "monthly"
-	| "quaterly"
+	| "quarterly"
 	| "biannually"
 	| "yearly"
 	| "other"

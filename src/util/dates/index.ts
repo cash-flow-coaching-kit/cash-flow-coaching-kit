@@ -28,7 +28,7 @@ export function calculatedEndDate(start: Date, timeframe: CFCTimeFrame): Date {
 			return addWeeks(start, 2)
 		case "monthly":
 			return addMonths(start, 1)
-		case "quaterly":
+		case "quarterly":
 			return addMonths(start, 3)
 		case "biannually":
 			return addMonths(start, 6)

@@ -362,15 +362,6 @@ const Homepage = (): ReactElement => {
 							</a>{" "}
 							of use and our Data usage and privacy statement.
 						</Typography>
-						<Typography
-							variant="body2"
-							component="p"
-							className={styles.contentText}
-							align="center"
-						>
-							If you have any questions about the kit, please use our feedback
-							form.
-						</Typography>
 					</Container>
 				</Container>
 			</Box>
