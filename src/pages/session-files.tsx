@@ -1,4 +1,10 @@
-import React, { ReactElement, useState, useCallback, useEffect } from "react"
+import React, {
+	ReactElement,
+	useState,
+	useCallback,
+	useEffect,
+	useContext,
+} from "react"
 import {
 	Grid,
 	Typography,
@@ -57,6 +63,7 @@ import SnackbarMsg, {
 	SnackbarMsgData,
 } from "../components/SnackbarMsg/SnackbarMsg"
 import ActionPriorityUseCase from "../data/ActionChecklist/PriorityLogic"
+import CFCContext from "../state/CFC/context"
 
 const useSessionStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -91,6 +98,8 @@ const SessionFiles = (): ReactElement => {
 		open: false,
 		msg: "",
 	})
+
+	const { questionValues } = useContext(CFCContext)
 
 	function showSnackbar(
 		msg: SnackbarMsgData["msg"],
@@ -265,7 +274,12 @@ const SessionFiles = (): ReactElement => {
 									.replace(/ /g, "-")
 									.replace(/\//g, "-")
 							)
-							return CashFlowCanvasPDF(currentClient?.name ?? "Client", data)
+
+							return CashFlowCanvasPDF(
+								currentClient?.name ?? "Client",
+								data,
+								questionValues
+							)
 						}
 					}
 

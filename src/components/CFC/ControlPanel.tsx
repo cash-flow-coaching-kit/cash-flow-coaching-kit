@@ -30,6 +30,7 @@ export default function ControlPanel(): ReactElement {
 	const { id: canvasId } = useParams()
 	const [currentClient] = useCurrentClient()
 	const { leftCompare, rightCompare } = useContext(CFCContext)
+	const { questionValues } = useContext(CFCContext)
 
 	const goTo = (route: PrivateRoutes) => (): void => {
 		// eslint-disable-next-line
@@ -55,7 +56,8 @@ export default function ControlPanel(): ReactElement {
 			else {
 				const pdf = await CashFlowCanvasPDF(
 					currentClient?.name ?? "Client",
-					data
+					data,
+					questionValues
 				)
 				servePDF(pdf)
 			}

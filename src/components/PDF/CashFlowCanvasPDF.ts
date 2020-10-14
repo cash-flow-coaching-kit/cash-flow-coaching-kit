@@ -175,6 +175,20 @@ const closingCashBalanceSection = (
 	])
 }
 
+const question2Section = (value: number) => {
+	return frameContent(
+		basicTable(
+			[
+				[
+					"Have you put enough money aside to meet your regular financial commitments?",
+					{ text: formatDollars(value), style: ["rightAlign"] },
+				],
+			],
+			["yellowBlock"]
+		)
+	)
+}
+
 const yourNetAssetPositionSection = (
 	stock: number,
 	creditors: number,
@@ -199,7 +213,13 @@ const yourNetAssetPositionSection = (
 	])
 }
 
-export default async (title: string, values: BaseCFCStruct) => {
+export default async (
+	title: string,
+	values: BaseCFCStruct,
+	questionValues: any // QuestionValues
+) => {
+	console.log("values", values, questionValues)
+
 	const {
 		openingBalance,
 		cashInItems,
@@ -282,17 +302,20 @@ export default async (title: string, values: BaseCFCStruct) => {
 							],
 							[cashSurplusSection(cashSurplus), incomeSection(values)],
 							[availableToSpendSection(availableToSpend), {}],
-							[closingCashBalanceSection(cashToOwner, closingBalance), {}],
 							[
-								yourNetAssetPositionSection(
-									stock,
-									creditors,
-									debtors,
-									assets,
-									loans,
-									totalNetAssets
-								),
-								{},
+								[
+									closingCashBalanceSection(cashToOwner, closingBalance),
+									{ text: " ", style: ["spacer"] },
+									yourNetAssetPositionSection(
+										stock,
+										creditors,
+										debtors,
+										assets,
+										loans,
+										totalNetAssets
+									),
+								],
+								question2Section(questionValues.two),
 							],
 						],
 					},
@@ -315,6 +338,9 @@ export default async (title: string, values: BaseCFCStruct) => {
 			},
 			yellowBlock: {
 				fillColor: "yellow",
+			},
+			spacer: {
+				fontSize: 4, // cheat for a spacer between blocks
 			},
 		},
 
