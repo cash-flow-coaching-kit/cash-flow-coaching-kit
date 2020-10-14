@@ -97,6 +97,20 @@ export default function CompareTable({
 						selectedCanvases[1].cashOutItems
 					)} */}
 					<CanvasItemRow
+						label="PAYG Withholding"
+						values={[
+							selectedCanvases[0].paygWithholding,
+							selectedCanvases[1].paygWithholding,
+						]}
+					/>
+					<CanvasItemRow
+						label="Super"
+						values={[
+							selectedCanvases[0].superAmount,
+							selectedCanvases[1].superAmount,
+						]}
+					/>
+					<CanvasItemRow
 						label="GST on Purchases"
 						values={[
 							leftCalculated.gstOnPurchases,
