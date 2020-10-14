@@ -89,6 +89,20 @@ export default async (
 							// 	rightSelected.cashOutItems
 							// ),
 							[
+								"PAYG Withholding",
+								...rowValue([
+									leftSelected.paygWithholding,
+									rightSelected.paygWithholding,
+								]),
+							],
+							[
+								"Super",
+								...rowValue([
+									leftSelected.superAmount,
+									rightSelected.superAmount,
+								]),
+							],
+							[
 								"GST on Purchases",
 								...rowValue([
 									leftCalc.gstOnPurchases,
