@@ -145,11 +145,10 @@ export default function CanvasForm({
 		(items: any, type: ProcessFileItem["type"]): number => {
 			return [...items]
 				.filter(({ type: t }: ProcessFileItem) => t === type)
-				.reduce((acc: number, { amount, gst }: ProcessFileItem) => {
-					const gstApplicable = gst === "applygst"
-					const newAmount = gstApplicable ? amount * 1.1 : amount
-					return acc + newAmount
-				}, 0)
+				.reduce(
+					(acc: number, { amount, gst }: ProcessFileItem) => acc + amount,
+					0
+				)
 		},
 		[]
 	)
