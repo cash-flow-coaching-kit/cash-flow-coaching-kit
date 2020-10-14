@@ -115,10 +115,12 @@ export default function ImportDataModal({
 					</Select>
 				</TableCell>
 				<TableCell>
-					<Select value={gst} onChange={toggleGST(row)}>
-						<MenuItem value="applygst">Apply GST</MenuItem>
-						<MenuItem value="nogst">No GST</MenuItem>
-					</Select>
+					{(type === "in" || type === "out") && (
+						<Select value={gst} onChange={toggleGST(row)}>
+							<MenuItem value="applygst">Apply GST</MenuItem>
+							<MenuItem value="nogst">No GST</MenuItem>
+						</Select>
+					)}
 				</TableCell>
 				<TableCell>
 					<IconDeleteButton onClick={deleteItem(row)} />
