@@ -36,31 +36,31 @@ export default memo(function MoneyInput({
 	 * @param {ChangeEvent<HTMLInputElement>} e
 	 */
 	function onChangePreCheck(e: ChangeEvent<HTMLInputElement>): void {
-		const inputVal: string = e.target.value === "" ? "0" : e.target.value
-		if (
-			`${inputVal}`.startsWith("00") ||
-			(`${value}`.startsWith("0") && `${inputVal}`.length > 1)
-		) {
-			setError("Amount can't start with a zero")
-			return
+		// attempt to sanitise the input instead of an error
+
+		const inputValue = `${e.target.value}`
+		const cleanedValue = inputValue
+			.replace(/([^\d-]+)/gi, "") // leave numbers and -
+			.replace(/(?!^)-/g, "") // remove minus other than start of string
+
+		if (inputValue === "-0" || inputValue === "0-") {
+			// spacial case - keep minus for UX
+			e.target.value = "-"
+			setError("Not a valid whole number")
+		} else if (cleanedValue === "") {
+			e.target.value = "0"
+			setError("")
+		} else {
+			const asNumber = parseFloat(cleanedValue)
+			if (inputValue && !asNumber && asNumber !== 0) {
+				setError("Not a valid whole number")
+			} else {
+				e.target.value = asNumber.toFixed(0)
+				setError("")
+			}
 		}
 
-		// if (!inputVal.match(/^(^-?[0-9]*)$/g)) {
-		if (inputVal.match(/\D/g)) {
-			setError("Amount can only include digits")
-			return
-		}
-
-		// if (inputVal !== "-") {
-		const val = parseInt(inputVal, 10)
-		// eslint-disable-next-line no-restricted-globals
-		if (isNaN(val) || val > 999999999) {
-			setError("Please enter a valid number between 0 and 999,999,999")
-			return
-		}
-		// }
-
-		setError("")
+		// console.log("e", e)
 
 		if (typeof onChange !== "undefined") {
 			onChange(e)
