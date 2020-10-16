@@ -73,7 +73,7 @@ export default function ControlPanel(): ReactElement {
 
 	return (
 		<ExpandableNav reactourLabel="canvas-control-panel">
-			<ImportDataModal open={importDataOpen} onClose={importData} />
+			{importDataOpen && <ImportDataModal open onClose={importData} />}
 			<List component="nav" disablePadding>
 				{!isNewPage() && !isCompare() && <CopyCanvasTrigger />}
 				{(!isNewPage() || isCompare()) && (

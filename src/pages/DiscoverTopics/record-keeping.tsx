@@ -9,9 +9,9 @@ import {
 	CardActions,
 	CardMedia,
 	Button,
-	ExpansionPanel,
-	ExpansionPanelSummary,
-	ExpansionPanelDetails,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
@@ -136,8 +136,8 @@ const DTRecordKeeping = (): ReactElement => {
 				<Typography component="h2" className={styles.SectionTitle}>
 					Quicksnaps - How do you stay on top of your record keeping?
 				</Typography>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="records-rely-on-content"
 						id="records-rely-on"
@@ -145,8 +145,8 @@ const DTRecordKeeping = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Records you can rely on
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -174,10 +174,10 @@ const DTRecordKeeping = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="accounting-system-content"
 						id="accounting-system-header"
@@ -185,8 +185,8 @@ const DTRecordKeeping = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							An accounting system to make your business more efficient
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -218,10 +218,10 @@ const DTRecordKeeping = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="help-record-keeping-content"
 						id="help-record-keeping-header"
@@ -229,8 +229,8 @@ const DTRecordKeeping = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Help with record keeping
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -256,10 +256,10 @@ const DTRecordKeeping = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="financial-commistments-content"
 						id="financial-commistments-header"
@@ -267,8 +267,8 @@ const DTRecordKeeping = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Records to meet financial commitments
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -293,8 +293,8 @@ const DTRecordKeeping = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
+					</AccordionDetails>
+				</Accordion>
 				<Container
 					maxWidth="lg"
 					component="div"

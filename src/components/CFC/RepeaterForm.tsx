@@ -93,7 +93,10 @@ export default memo(function RepeaterForm({
 	 * @returns {boolean}
 	 */
 	const isAddDisabled = useCallback(() => {
-		return values.findIndex((item) => item.description === "") !== -1
+		return (
+			values.length >= 6 ||
+			values.findIndex((item) => item.description === "") !== -1
+		)
 	}, [values])
 
 	return (
