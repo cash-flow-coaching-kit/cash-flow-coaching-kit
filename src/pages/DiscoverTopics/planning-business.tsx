@@ -8,9 +8,9 @@ import {
 	CardActions,
 	CardMedia,
 	Button,
-	ExpansionPanel,
-	ExpansionPanelSummary,
-	ExpansionPanelDetails,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
@@ -133,8 +133,8 @@ const DTPlanningBusiness = (): ReactElement => {
 				<Typography variant="h4" component="h2" className={styles.SectionTitle}>
 					Quicksnaps – What to consider when you plan your business
 				</Typography>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="forecast-demand-content"
 						id="forecast-demand-header"
@@ -142,8 +142,8 @@ const DTPlanningBusiness = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Forecast demand
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -203,10 +203,10 @@ const DTPlanningBusiness = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="right-price-content"
 						id="right-price-header"
@@ -214,8 +214,8 @@ const DTPlanningBusiness = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Setting the right price
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -265,10 +265,10 @@ const DTPlanningBusiness = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="capital-content"
 						id="capital-header"
@@ -276,8 +276,8 @@ const DTPlanningBusiness = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Capital to start up or grow
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -311,8 +311,8 @@ const DTPlanningBusiness = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
+					</AccordionDetails>
+				</Accordion>
 				<Container
 					maxWidth="lg"
 					component="div"

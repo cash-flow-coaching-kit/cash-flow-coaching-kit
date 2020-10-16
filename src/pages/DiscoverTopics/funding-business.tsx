@@ -10,9 +10,9 @@ import {
 	CardMedia,
 	Container,
 	Button,
-	ExpansionPanel,
-	ExpansionPanelSummary,
-	ExpansionPanelDetails,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { PageContainer } from "../../components/Layouts"
@@ -254,8 +254,8 @@ const DTFundingBusiness = (): ReactElement => {
 				<Typography component="h2" className={styles.SectionTitle}>
 					Quicksnaps - What to look for when funding your business.
 				</Typography>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="pupose-funding-content"
 						id="pupose-funding-header"
@@ -263,8 +263,8 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Purpose of funding
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -293,10 +293,10 @@ const DTFundingBusiness = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="enough-funding-content"
 						id="enough-funding-header"
@@ -304,8 +304,8 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Having enough funding
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -332,10 +332,10 @@ const DTFundingBusiness = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="funding-opportunities-content"
 						id="funding-opportunities-header"
@@ -343,8 +343,8 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Funding opportunities
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -372,10 +372,10 @@ const DTFundingBusiness = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="right-terms-content"
 						id="right-terms-header"
@@ -383,8 +383,8 @@ const DTFundingBusiness = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Right terms
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -413,8 +413,8 @@ const DTFundingBusiness = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
+					</AccordionDetails>
+				</Accordion>
 				<Container
 					maxWidth="lg"
 					component="div"
