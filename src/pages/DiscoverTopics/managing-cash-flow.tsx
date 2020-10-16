@@ -9,9 +9,9 @@ import {
 	CardActions,
 	CardMedia,
 	Button,
-	ExpansionPanel,
-	ExpansionPanelSummary,
-	ExpansionPanelDetails,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
@@ -130,8 +130,8 @@ const DTManagingCashFlow = (): ReactElement => {
 				<Typography component="h2" className={styles.SectionTitle}>
 					Quicksnaps - Want to know the secrets of successful cash flow?
 				</Typography>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="timing-cashflow-content"
 						id="timing-cashflow-header"
@@ -139,8 +139,8 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							The timing of cash flow and the impact on your bank balance
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -169,10 +169,10 @@ const DTManagingCashFlow = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="profit-cashflow-content"
 						id="profit-cashflow-header"
@@ -180,8 +180,8 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Profit and cash flow are different
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -212,10 +212,10 @@ const DTManagingCashFlow = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="cash-not-yours-content"
 						id="cash-not-yours-header"
@@ -223,8 +223,8 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Cash that is not yours
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -266,10 +266,10 @@ const DTManagingCashFlow = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="working-capital-content"
 						id="working-capital-header"
@@ -277,8 +277,8 @@ const DTManagingCashFlow = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Working capital
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -306,8 +306,8 @@ const DTManagingCashFlow = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
+					</AccordionDetails>
+				</Accordion>
 				<Typography component="h2" className={styles.SectionTitle}>
 					Seven tips for maximising cash flow
 				</Typography>

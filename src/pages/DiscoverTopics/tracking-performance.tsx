@@ -9,9 +9,9 @@ import {
 	CardActions,
 	CardMedia,
 	Button,
-	ExpansionPanel,
-	ExpansionPanelSummary,
-	ExpansionPanelDetails,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
@@ -134,8 +134,8 @@ const TrackingPerformance = (): ReactElement => {
 				<Typography component="h2" className={styles.SectionTitle}>
 					Quicksnaps - How to best track your business performance.
 				</Typography>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="review-regularly-content"
 						id="review-regularly-header"
@@ -143,8 +143,8 @@ const TrackingPerformance = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Review your business regularly
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -181,10 +181,10 @@ const TrackingPerformance = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="know-what-content"
 						id="know-what-header"
@@ -192,8 +192,8 @@ const TrackingPerformance = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Know what to look for
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -240,10 +240,10 @@ const TrackingPerformance = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="past-performance-content"
 						id="past-performance-header"
@@ -251,8 +251,8 @@ const TrackingPerformance = (): ReactElement => {
 						<Typography variant="h5" component="h3">
 							Past performance, future success
 						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
+					</AccordionSummary>
+					<AccordionDetails>
 						<Grid container spacing={3}>
 							<Grid item sm={6}>
 								<Typography variant="h6" component="h4">
@@ -287,8 +287,8 @@ const TrackingPerformance = (): ReactElement => {
 								</List>
 							</Grid>
 						</Grid>
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
+					</AccordionDetails>
+				</Accordion>
 				<Container
 					maxWidth="lg"
 					component="div"

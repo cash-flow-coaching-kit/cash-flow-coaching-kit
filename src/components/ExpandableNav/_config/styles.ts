@@ -8,7 +8,7 @@ const useExpandableNavStyles = makeStyles((theme) => ({
 		flexDirection: "column",
 	},
 	summary: {
-		"& .MuiExpansionPanelSummary-content": {
+		"& .MuiAccordionSummary-content": {
 			flexDirection: "column",
 		},
 	},

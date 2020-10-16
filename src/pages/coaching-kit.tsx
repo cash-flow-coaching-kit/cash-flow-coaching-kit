@@ -8,9 +8,9 @@ import {
 	CardContent,
 	CardMedia,
 	Divider,
-	ExpansionPanel,
-	ExpansionPanelSummary,
-	ExpansionPanelDetails,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
 	makeStyles,
 	Avatar,
 	List,
@@ -124,8 +124,8 @@ const CoachingKit = (): ReactElement => {
 
 				<Spacer space={2} />
 				<Box>
-					<ExpansionPanel>
-						<ExpansionPanelSummary
+					<Accordion>
+						<AccordionSummary
 							expandIcon={<ExpandMoreIcon />}
 							aria-controls="four-questions-content"
 							id="four-questions-header"
@@ -133,8 +133,8 @@ const CoachingKit = (): ReactElement => {
 							<Typography variant="h6" component="h2">
 								What are the <em> Four Key Questions</em>?
 							</Typography>
-						</ExpansionPanelSummary>
-						<ExpansionPanelDetails>
+						</AccordionSummary>
+						<AccordionDetails>
 							<Grid container>
 								<Grid item xs={12}>
 									{/* <Typography
@@ -175,8 +175,8 @@ const CoachingKit = (): ReactElement => {
 									</List>
 								</Grid>
 							</Grid>
-						</ExpansionPanelDetails>
-					</ExpansionPanel>
+						</AccordionDetails>
+					</Accordion>
 				</Box>
 				<Spacer space={2} />
 				<Grid container spacing={3}>

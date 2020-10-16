@@ -5,9 +5,9 @@ import {
 	List,
 	Container,
 	Button,
-	ExpansionPanel,
-	ExpansionPanelSummary,
-	ExpansionPanelDetails,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { PageContainer } from "../../components/Layouts"
@@ -55,8 +55,8 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						<Typography component="h2" className={styles.SectionTitle}>
 							Quicksnaps - Deciding how to exit your business.
 						</Typography>
-						<ExpansionPanel>
-							<ExpansionPanelSummary
+						<Accordion>
+							<AccordionSummary
 								expandIcon={<ExpandMoreIcon />}
 								aria-controls="purpose-exiting-content"
 								id="purpose-exiting-header"
@@ -64,8 +64,8 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								<Typography variant="h5" component="h3">
 									Purpose for exiting
 								</Typography>
-							</ExpansionPanelSummary>
-							<ExpansionPanelDetails>
+							</AccordionSummary>
+							<AccordionDetails>
 								<Grid container spacing={3}>
 									<Grid item sm={6}>
 										<Typography variant="h6" component="h4">
@@ -109,10 +109,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 										</List>
 									</Grid>
 								</Grid>
-							</ExpansionPanelDetails>
-						</ExpansionPanel>
-						<ExpansionPanel>
-							<ExpansionPanelSummary
+							</AccordionDetails>
+						</Accordion>
+						<Accordion>
+							<AccordionSummary
 								expandIcon={<ExpandMoreIcon />}
 								aria-controls="family-objectives-support-content"
 								id="family-objectives-support-header"
@@ -120,8 +120,8 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								<Typography variant="h5" component="h3">
 									Family objectives and support
 								</Typography>
-							</ExpansionPanelSummary>
-							<ExpansionPanelDetails>
+							</AccordionSummary>
+							<AccordionDetails>
 								<Grid container spacing={3}>
 									<Grid item sm={6}>
 										<Typography variant="h6" component="h4">
@@ -162,10 +162,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 										</List>
 									</Grid>
 								</Grid>
-							</ExpansionPanelDetails>
-						</ExpansionPanel>
-						<ExpansionPanel>
-							<ExpansionPanelSummary
+							</AccordionDetails>
+						</Accordion>
+						<Accordion>
+							<AccordionSummary
 								expandIcon={<ExpandMoreIcon />}
 								aria-controls="options-exit-content"
 								id="options-exit-header"
@@ -173,8 +173,8 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								<Typography variant="h5" component="h3">
 									Options to exit
 								</Typography>
-							</ExpansionPanelSummary>
-							<ExpansionPanelDetails>
+							</AccordionSummary>
+							<AccordionDetails>
 								<Grid container spacing={3}>
 									<Grid item sm={6}>
 										<Typography variant="h6" component="h4">
@@ -209,10 +209,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 										</List>
 									</Grid>
 								</Grid>
-							</ExpansionPanelDetails>
-						</ExpansionPanel>
-						<ExpansionPanel>
-							<ExpansionPanelSummary
+							</AccordionDetails>
+						</Accordion>
+						<Accordion>
+							<AccordionSummary
 								expandIcon={<ExpandMoreIcon />}
 								aria-controls="preparing-exit-content"
 								id="preparing-exit-header"
@@ -220,8 +220,8 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								<Typography variant="h5" component="h3">
 									Preparing for exit
 								</Typography>
-							</ExpansionPanelSummary>
-							<ExpansionPanelDetails>
+							</AccordionSummary>
+							<AccordionDetails>
 								<Grid container spacing={3}>
 									<Grid item sm={6}>
 										<Typography variant="h6" component="h4">
@@ -258,8 +258,8 @@ const DTSellingClosingSuccession = (): ReactElement => {
 										</List>
 									</Grid>
 								</Grid>
-							</ExpansionPanelDetails>
-						</ExpansionPanel>
+							</AccordionDetails>
+						</Accordion>
 					</Grid>
 					<Grid item xs={12} md={4} lg={3}>
 						<Taskbuilder container="transition" />
