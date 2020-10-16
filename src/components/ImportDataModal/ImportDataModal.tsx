@@ -55,7 +55,9 @@ export default function ImportDataModal({
 	}, [canvasId])
 
 	const deleteItem = (id: string) => (event: any): void => {
-		const newItems = currentItems.filter((i) => i.id !== id)
+		const newItems = currentItems
+			.filter((i) => i.id !== id)
+			.map((i) => (i.merge === id ? { ...i, merge: NO_MERGE } : i))
 		setCurrentItems(newItems)
 	}
 
