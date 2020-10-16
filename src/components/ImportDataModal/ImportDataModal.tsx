@@ -65,6 +65,7 @@ export default function ImportDataModal({
 				return {
 					...i,
 					type: event.target.value as ProcessFileItem["type"],
+					merge: NO_MERGE,
 				}
 			}
 			return i
@@ -87,14 +88,13 @@ export default function ImportDataModal({
 
 	const toggleMergeInto = (id: string) => (event: any): void => {
 		const newItems: ProcessFileItem[] = currentItems.map((i) => {
-			if (i.id === id) {
+			// edge case where linked to an item that gets linked - update the link
+			if (i.id === id || i.merge === id) {
 				return {
 					...i,
 					merge: event.target.value as ProcessFileItem["merge"],
 				}
 			}
-			console.log("i", i)
-
 			return i
 		})
 		setCurrentItems(newItems)
@@ -129,58 +129,72 @@ export default function ImportDataModal({
 	}
 
 	const renderMergeOptions = (
-		id: string,
+		parentId: string,
+		type: string,
 		merge: string,
 		cashItems: CFCStruct[]
 	) => (
-		<Select value={merge} onChange={toggleMergeInto(id)}>
-			<MenuItem value={NO_MERGE}>Add as a new line item</MenuItem>
-			{cashItems !== undefined &&
-				cashItems.map(({ id, description }: any) => (
-					<MenuItem key={id} value={id}>
-						Add to {description || "No description"}
-					</MenuItem>
-				))}
+		<Select value={merge} onChange={toggleMergeInto(parentId)}>
+			<MenuItem value={NO_MERGE}>Create a new line item</MenuItem>
+			{
+				// existing items
+				cashItems !== undefined &&
+					cashItems.map(({ id, description }: any) => (
+						<MenuItem key={id} value={id}>
+							Add to {description || "No description"}
+						</MenuItem>
+					))
+			}
+			{
+				// new import items
+				currentItems
+					.filter(
+						(i) => i.merge === NO_MERGE && i.type === type && i.id !== parentId
+					)
+					.map(({ id, description }) => (
+						<MenuItem key={id} value={id}>
+							Merge with {description}
+						</MenuItem>
+					))
+			}
 		</Select>
 	)
 
 	const renderSingleItem = (item: ProcessFileItem): ReactElement => {
 		const { id, description, amount, type, gst, merge } = item
 		return (
-			<>
-				<TableRow key={id}>
-					<TableCell>{description}</TableCell>
-					<TableCell align="right">${Math.floor(amount)}</TableCell>
-					<TableCell>
-						<Select value={type} onChange={toggleType(id)}>
-							<MenuItem value="in">Cash IN</MenuItem>
-							<MenuItem value="out">Cash Out</MenuItem>
-							<MenuItem value="debtors">Debtors</MenuItem>
-							<MenuItem value="creditors">Creditors</MenuItem>
-							<MenuItem value="assets">Assets</MenuItem>
-							<MenuItem value="loans">Loans</MenuItem>
-							<MenuItem value="stock">Stock</MenuItem>
+			<TableRow key={id}>
+				<TableCell>{description}</TableCell>
+				<TableCell align="right">${Math.floor(amount)}</TableCell>
+				<TableCell>
+					<Select value={type} onChange={toggleType(id)}>
+						<MenuItem value="in">Cash IN</MenuItem>
+						<MenuItem value="out">Cash Out</MenuItem>
+						<MenuItem value="debtors">Debtors</MenuItem>
+						<MenuItem value="creditors">Creditors</MenuItem>
+						<MenuItem value="assets">Assets</MenuItem>
+						<MenuItem value="loans">Loans</MenuItem>
+						<MenuItem value="stock">Stock</MenuItem>
+					</Select>
+				</TableCell>
+				<TableCell>
+					{type === "in" &&
+						renderMergeOptions(id, "in", merge, canvasData?.cashInItems)}
+					{type === "out" &&
+						renderMergeOptions(id, "out", merge, canvasData?.cashOutItems)}
+				</TableCell>
+				<TableCell>
+					{(type === "in" || type === "out") && (
+						<Select value={gst} onChange={toggleGST(id)}>
+							<MenuItem value="applygst">Apply GST</MenuItem>
+							<MenuItem value="nogst">No GST</MenuItem>
 						</Select>
-					</TableCell>
-					<TableCell>
-						{type === "in" &&
-							renderMergeOptions(id, merge, canvasData?.cashInItems)}
-						{type === "out" &&
-							renderMergeOptions(id, merge, canvasData?.cashOutItems)}
-					</TableCell>
-					<TableCell>
-						{(type === "in" || type === "out") && (
-							<Select value={gst} onChange={toggleGST(id)}>
-								<MenuItem value="applygst">Apply GST</MenuItem>
-								<MenuItem value="nogst">No GST</MenuItem>
-							</Select>
-						)}
-					</TableCell>
-					<TableCell>
-						<IconDeleteButton onClick={deleteItem(id)} />
-					</TableCell>
-				</TableRow>
-			</>
+					)}
+				</TableCell>
+				<TableCell>
+					<IconDeleteButton onClick={deleteItem(id)} />
+				</TableCell>
+			</TableRow>
 		)
 	}
 

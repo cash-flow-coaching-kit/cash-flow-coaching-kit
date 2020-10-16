@@ -99,7 +99,7 @@ const calcCashItems = (
 				const mergeAmount = calcMergeAmount(importedItems, i.id)
 				return {
 					...i,
-					amount: toNumber(i.amount) + mergeAmount,
+					amount: Math.floor(toNumber(i.amount) + mergeAmount),
 				}
 			}),
 		// new items + merge values
