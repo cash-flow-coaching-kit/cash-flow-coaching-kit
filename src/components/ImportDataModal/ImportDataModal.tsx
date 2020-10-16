@@ -1,4 +1,11 @@
-import React, { ReactElement, createRef, useState, useContext } from "react"
+import React, {
+	ReactElement,
+	createRef,
+	useState,
+	useContext,
+	useEffect,
+} from "react"
+import { useParams } from "react-router-dom"
 import {
 	Dialog,
 	DialogTitle,
@@ -14,10 +21,15 @@ import {
 	Select,
 	MenuItem,
 } from "@material-ui/core"
-import { generalProcessFile, ProcessFileItem } from "./lib/ImportDataGeneralLib"
+import {
+	generalProcessFile,
+	NO_MERGE,
+	ProcessFileItem,
+} from "./lib/ImportDataGeneralLib"
 import IconDeleteButton from "../IconDeleteButton"
 import CFCContext from "../../state/CFC/context"
-// import DeleteIcon from "@material-ui/icons/Delete"
+import CFCUseCase from "../../data/CFC/CFCLogic"
+import { CFCStruct } from "../../data/_config/shape"
 
 export default function ImportDataModal({
 	open,
@@ -28,53 +40,72 @@ export default function ImportDataModal({
 }): ReactElement {
 	const fileRef: any = createRef()
 	const [currentItems, setCurrentItems] = useState<ProcessFileItem[]>([])
+	const { id: canvasId } = useParams<any>()
 
 	// Canvas Item Updaters are a list of function from context to update the canvas
 	const { canvasItemUpdater } = useContext(CFCContext)
 
-	const deleteItem = (row: number) => (event: any): void => {
-		const newItems = currentItems.filter((i) => i.row !== row)
+	const [canvasData, setCanvasData] = useState<any>()
+	useEffect(() => {
+		// load the current canvas so we can merge
+		;(async () => {
+			const t = await CFCUseCase.findById(canvasId)
+			setCanvasData(t)
+		})()
+	}, [canvasId])
+
+	const deleteItem = (id: string) => (event: any): void => {
+		const newItems = currentItems.filter((i) => i.id !== id)
 		setCurrentItems(newItems)
 	}
 
-	const toggleType = (row: number) => (event: any): void => {
+	const toggleType = (id: string) => (event: any): void => {
 		const newItems: ProcessFileItem[] = currentItems.map((i) => {
-			if (i.row === row) {
+			if (i.id === id) {
 				return {
 					...i,
 					type: event.target.value as ProcessFileItem["type"],
 				}
 			}
-
 			return i
 		})
-
 		setCurrentItems(newItems)
 	}
 
-	const toggleGST = (row: number) => (event: any): void => {
+	const toggleGST = (id: string) => (event: any): void => {
 		const newItems: ProcessFileItem[] = currentItems.map((i) => {
-			if (i.row === row) {
+			if (i.id === id) {
 				return {
 					...i,
 					gst: event.target.value as ProcessFileItem["gst"],
 				}
 			}
-
 			return i
 		})
-
 		setCurrentItems(newItems)
 	}
 
-	const onOpenFileDialog = () => {
-		// alert("import")
-		fileRef!.current.click()
+	const toggleMergeInto = (id: string) => (event: any): void => {
+		const newItems: ProcessFileItem[] = currentItems.map((i) => {
+			if (i.id === id) {
+				return {
+					...i,
+					merge: event.target.value as ProcessFileItem["merge"],
+				}
+			}
+			console.log("i", i)
+
+			return i
+		})
+		setCurrentItems(newItems)
 	}
+
+	const onOpenFileDialog = () => fileRef!.current.click()
 
 	const onFileChange = (event: any) => {
 		const file = event.target.files[0]
 		const reader = new FileReader()
+		// eslint-disable-next-line
 		reader.onload = async () => {
 			if (!reader.result) {
 				alert("empty")
@@ -97,44 +128,81 @@ export default function ImportDataModal({
 		return onEmptyAndClose()
 	}
 
+	const renderMergeOptions = (
+		id: string,
+		merge: string,
+		cashItems: CFCStruct[]
+	) => (
+		<Select value={merge} onChange={toggleMergeInto(id)}>
+			<MenuItem value={NO_MERGE}>Add as a new line item</MenuItem>
+			{cashItems !== undefined &&
+				cashItems.map(({ id, description }: any) => (
+					<MenuItem key={id} value={id}>
+						Add to {description || "No description"}
+					</MenuItem>
+				))}
+		</Select>
+	)
+
 	const renderSingleItem = (item: ProcessFileItem): ReactElement => {
-		const { row, description, amount, type, gst } = item
+		const { id, description, amount, type, gst, merge } = item
 		return (
-			<TableRow key={row}>
-				<TableCell>{description}</TableCell>
-				<TableCell align="right">${Math.floor(amount)}</TableCell>
-				<TableCell>
-					<Select value={type} onChange={toggleType(row)}>
-						<MenuItem value="in">Cash IN</MenuItem>
-						<MenuItem value="out">Cash Out</MenuItem>
-						<MenuItem value="debtors">Debtors</MenuItem>
-						<MenuItem value="creditors">Creditors</MenuItem>
-						<MenuItem value="assets">Assets</MenuItem>
-						<MenuItem value="loans">Loans</MenuItem>
-						<MenuItem value="stock">Stock</MenuItem>
-					</Select>
-				</TableCell>
-				<TableCell>
-					{(type === "in" || type === "out") && (
-						<Select value={gst} onChange={toggleGST(row)}>
-							<MenuItem value="applygst">Apply GST</MenuItem>
-							<MenuItem value="nogst">No GST</MenuItem>
+			<>
+				<TableRow key={id}>
+					<TableCell>{description}</TableCell>
+					<TableCell align="right">${Math.floor(amount)}</TableCell>
+					<TableCell>
+						<Select value={type} onChange={toggleType(id)}>
+							<MenuItem value="in">Cash IN</MenuItem>
+							<MenuItem value="out">Cash Out</MenuItem>
+							<MenuItem value="debtors">Debtors</MenuItem>
+							<MenuItem value="creditors">Creditors</MenuItem>
+							<MenuItem value="assets">Assets</MenuItem>
+							<MenuItem value="loans">Loans</MenuItem>
+							<MenuItem value="stock">Stock</MenuItem>
 						</Select>
-					)}
-				</TableCell>
-				<TableCell>
-					<IconDeleteButton onClick={deleteItem(row)} />
-				</TableCell>
-			</TableRow>
+					</TableCell>
+					<TableCell>
+						{type === "in" &&
+							renderMergeOptions(id, merge, canvasData?.cashInItems)}
+						{type === "out" &&
+							renderMergeOptions(id, merge, canvasData?.cashOutItems)}
+					</TableCell>
+					<TableCell>
+						{(type === "in" || type === "out") && (
+							<Select value={gst} onChange={toggleGST(id)}>
+								<MenuItem value="applygst">Apply GST</MenuItem>
+								<MenuItem value="nogst">No GST</MenuItem>
+							</Select>
+						)}
+					</TableCell>
+					<TableCell>
+						<IconDeleteButton onClick={deleteItem(id)} />
+					</TableCell>
+				</TableRow>
+			</>
 		)
 	}
 
-	const renderItems = (items: ProcessFileItem[]): ReactElement => {
-		return (
-			<Table size="small">
-				<TableBody>{items.map((item) => renderSingleItem(item))}</TableBody>
-			</Table>
-		)
+	const renderItems = (): ReactElement => (
+		<Table size="small">
+			<TableBody>
+				{currentItems.map((item) => renderSingleItem(item))}
+			</TableBody>
+		</Table>
+	)
+
+	const cashItemCount = (type: "in" | "out") =>
+		currentItems.filter((i) => i.type === type && i.merge === NO_MERGE).length +
+		canvasData?.cashInItems.length
+
+	const renderSubmitButton = () => {
+		if (currentItems.length === 0)
+			return <Button disabled>No items to add</Button>
+		if (cashItemCount("in") > 6) return <Button disabled>Max 6 Cash In</Button>
+		if (cashItemCount("out") > 6)
+			return <Button disabled>Max 6 Cash Out</Button>
+		return <Button onClick={onAddToCanvas}>Add To Canvas</Button>
 	}
 
 	return (
@@ -220,15 +288,10 @@ export default function ImportDataModal({
 									</Typography>
 								</li>
 							</ol>
-							{renderItems(currentItems)}
+							{renderItems()}
 						</DialogContent>
 						<DialogActions>
-							<Button
-								onClick={onAddToCanvas}
-								disabled={currentItems.length === 0}
-							>
-								Add To Canvas
-							</Button>
+							{renderSubmitButton()}
 							<Button onClick={onEmptyAndClose}>Cancel</Button>
 						</DialogActions>
 					</>

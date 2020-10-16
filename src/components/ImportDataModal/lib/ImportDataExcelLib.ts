@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Worksheet, Workbook } from "exceljs"
-import { ProcessFileItem } from "./ImportDataGeneralLib"
+import { NO_MERGE, ProcessFileItem } from "./ImportDataGeneralLib"
+import { v4 as uuidv4 } from "uuid"
 
 const rewritePattern = require("regexpu-core")
 const {
@@ -55,11 +56,13 @@ const excelProcessSheet = (worksheet: Worksheet): ProcessFileItem[] => {
 		if (typeof last === "number") {
 			const description = values.join(" ").trim()
 			result.push({
-				row: rowNumber,
+				id: uuidv4(),
+				// row: rowNumber,
 				description,
 				amount: Math.abs(last),
 				type: last > 0 ? "in" : "out",
 				gst: "applygst",
+				merge: NO_MERGE,
 			})
 		}
 	})

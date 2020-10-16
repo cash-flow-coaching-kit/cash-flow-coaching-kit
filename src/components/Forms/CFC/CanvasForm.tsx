@@ -9,7 +9,7 @@ import React, {
 import { useFormik } from "formik"
 import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { useParams } from "react-router-dom"
-import { isEqual, set } from "lodash-es"
+import { isEqual, set, toNumber } from "lodash-es"
 import { useMachine } from "@xstate/react"
 import { BaseCFCStruct, CashFlow } from "../../../data/_config/shape"
 import { calculateInitial } from "."
@@ -52,7 +52,10 @@ import {
 	calcQuestionTwo,
 	calcQuestionThree,
 } from "../../CFC/__config/utilities"
-import { ProcessFileItem } from "../../ImportDataModal/lib/ImportDataGeneralLib"
+import {
+	NO_MERGE,
+	ProcessFileItem,
+} from "../../ImportDataModal/lib/ImportDataGeneralLib"
 import hasProperty from "../../../util/object/hasProperty"
 import { isGSTValid } from "../../../util/money/gst"
 
@@ -66,6 +69,55 @@ import { isGSTValid } from "../../../util/money/gst"
  * }
  * @returns {ReactElement}
  */
+
+const calcImportedTotal = (items: any, type: ProcessFileItem["type"]): number =>
+	[...items]
+		.filter(({ type: t }: ProcessFileItem) => t === type)
+		.reduce((acc: number, { amount }: ProcessFileItem) => acc + amount, 0)
+
+const calcMergeAmount = (
+	importedItems: ProcessFileItem[],
+	id: string
+): number =>
+	importedItems
+		.filter((j: ProcessFileItem) => j.merge === id)
+		.reduce((a: number, j: ProcessFileItem) => {
+			const rate = j.gst === "applygst" ? 1.1 : 1.0
+			return a + toNumber(j.amount) * rate
+		}, 0)
+
+const calcCashItems = (
+	existingItems: CashFlow[],
+	importedItems: ProcessFileItem[],
+	type: "in" | "out"
+): CashFlow[] => {
+	return [
+		// existing items + merge values
+		...existingItems
+			.filter((i) => i.description && i.amount)
+			.map((i) => {
+				const mergeAmount = calcMergeAmount(importedItems, i.id)
+				return {
+					...i,
+					amount: toNumber(i.amount) + mergeAmount,
+				}
+			}),
+		// new items + merge values
+		...importedItems
+			.filter((i: ProcessFileItem) => i.type === type && i.merge === NO_MERGE)
+			.map((i: ProcessFileItem) => {
+				const gstApplicable = i.gst === "applygst"
+				const rate = gstApplicable ? 1.1 : 1.0
+				const mergeAmount = calcMergeAmount(importedItems, i.id)
+				return createCashFlowItem(
+					i.description,
+					Math.floor(i.amount * rate + mergeAmount),
+					gstApplicable
+				)
+			}),
+	]
+}
+
 export default function CanvasForm({
 	initialValues,
 	customTitle,
@@ -141,76 +193,25 @@ export default function CanvasForm({
 			: calcCashFlowGST(cashOutItems)
 	}, [cashOutItems, gstOnPurchases])
 
-	const calculateImportedTotal = useCallback(
-		(items: any, type: ProcessFileItem["type"]): number => {
-			return [...items]
-				.filter(({ type: t }: ProcessFileItem) => t === type)
-				.reduce(
-					(acc: number, { amount, gst }: ProcessFileItem) => acc + amount,
-					0
-				)
-		},
-		[]
-	)
-
 	const addDataImportItems = useCallback(
-		(items: any) => {
-			const newCashInItems = [
-				...values.cashInItems,
-				...items
-					.filter(({ type }: ProcessFileItem) => type === "in")
-					.map(({ row, description, amount, gst }: ProcessFileItem) => {
-						console.log("in", row, description, amount, gst)
-						const gstApplicable = gst === "applygst"
-						const newAmount = gstApplicable ? amount * 1.1 : amount
-						return createCashFlowItem(
-							description,
-							Math.floor(newAmount),
-							gstApplicable
-						)
-					}),
-			]
+		(items: ProcessFileItem[]) => {
+			const newCashInItems = calcCashItems(values.cashInItems, items, "in")
+			const newCashOutItems = calcCashItems(values.cashOutItems, items, "out")
+			const debtorsImport = calcImportedTotal(items, "debtors")
+			const creditorsImport = calcImportedTotal(items, "creditors")
+			const assetsImport = calcImportedTotal(items, "assets")
+			const loansImport = calcImportedTotal(items, "loans")
+			const stockImport = calcImportedTotal(items, "stock")
+
 			setFieldValue("cashInItems", newCashInItems, false)
-
-			const newCashOutItems = [
-				...values.cashOutItems,
-				...items
-					.filter(({ type }: ProcessFileItem) => type === "out")
-					.map(({ row, description, amount, gst }: ProcessFileItem) => {
-						console.log("out", row, description, amount, gst)
-						const gstApplicable = gst === "applygst"
-						const newAmount = gstApplicable ? amount * 1.1 : amount
-						return createCashFlowItem(
-							description,
-							Math.floor(newAmount),
-							gstApplicable
-						)
-					}),
-			]
 			setFieldValue("cashOutItems", newCashOutItems, false)
-
-			const debtorsImport = calculateImportedTotal(items, "debtors")
-			const creditorsImport = calculateImportedTotal(items, "creditors")
-			const assetsImport = calculateImportedTotal(items, "assets")
-			const loansImport = calculateImportedTotal(items, "loans")
-			const stockImport = calculateImportedTotal(items, "stock")
-
 			setFieldValue("debtors", Math.floor(debtors + debtorsImport), false)
 			setFieldValue("creditors", Math.floor(creditors + creditorsImport), false)
 			setFieldValue("assets", Math.floor(assets + assetsImport), false)
 			setFieldValue("loans", Math.floor(loans + loansImport), false)
 			setFieldValue("stock", Math.floor(stock + stockImport), false)
 		},
-		[
-			values,
-			setFieldValue,
-			debtors,
-			creditors,
-			assets,
-			loans,
-			stock,
-			calculateImportedTotal,
-		]
+		[values, setFieldValue, debtors, creditors, assets, loans, stock]
 	)
 
 	// add an updater to list to be used by Data Import
