@@ -57,12 +57,11 @@ const excelProcessSheet = (worksheet: Worksheet): ProcessFileItem[] => {
 			const description = values.join(" ").trim()
 			result.push({
 				id: uuidv4(),
-				// row: rowNumber,
 				description,
-				amount: Math.abs(last),
-				type: last > 0 ? "in" : "out",
+				amount: last,
+				type: null,
 				gst: "applygst",
-				merge: NO_MERGE,
+				merge: null,
 			})
 		}
 	})

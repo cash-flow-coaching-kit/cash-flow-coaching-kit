@@ -7,9 +7,17 @@ export type ProcessFileItem = {
 	// row: number
 	description: string
 	amount: number
-	type: "in" | "out" | "debtors" | "creditors" | "assets" | "loans" | "stock"
+	type:
+		| null // start with null to force a selection
+		| "in"
+		| "out"
+		| "debtors"
+		| "creditors"
+		| "assets"
+		| "loans"
+		| "stock"
 	gst: "applygst" | "nogst"
-	merge: string // if to merge into existing line or add new line
+	merge: string | null // if to merge into existing line or add new line + force selection if null
 }
 
 // nb. Cant use MIME type to determine which process to use as requires Excel to be installed

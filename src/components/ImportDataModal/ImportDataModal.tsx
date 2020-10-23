@@ -20,6 +20,7 @@ import {
 	Typography,
 	Select,
 	MenuItem,
+	TableHead,
 } from "@material-ui/core"
 import {
 	generalProcessFile,
@@ -67,7 +68,7 @@ export default function ImportDataModal({
 				return {
 					...i,
 					type: event.target.value as ProcessFileItem["type"],
-					merge: NO_MERGE,
+					merge: null,
 				}
 			}
 			return i
@@ -133,19 +134,21 @@ export default function ImportDataModal({
 	const renderMergeOptions = (
 		parentId: string,
 		type: string,
-		merge: string,
+		merge: string | null,
 		cashItems: CFCStruct[]
 	) => (
-		<Select value={merge} onChange={toggleMergeInto(parentId)}>
-			<MenuItem value={NO_MERGE}>Create a new line item</MenuItem>
+		<Select value={merge || ""} onChange={toggleMergeInto(parentId)}>
+			<MenuItem value={NO_MERGE}>Keep item description</MenuItem>
 			{
 				// existing items
 				cashItems !== undefined &&
-					cashItems.map(({ id, description }: any) => (
-						<MenuItem key={id} value={id}>
-							Add to {description || "No description"}
-						</MenuItem>
-					))
+					cashItems
+						.filter(({ description }: any) => description) // remove blank lines
+						.map(({ id, description }: any) => (
+							<MenuItem key={id} value={id}>
+								Add to {description || "No description"}
+							</MenuItem>
+						))
 			}
 			{
 				// new import items
@@ -155,7 +158,7 @@ export default function ImportDataModal({
 					)
 					.map(({ id, description }) => (
 						<MenuItem key={id} value={id}>
-							Merge with {description}
+							Group with {description}
 						</MenuItem>
 					))
 			}
@@ -169,7 +172,7 @@ export default function ImportDataModal({
 				<TableCell>{description}</TableCell>
 				<TableCell align="right">${Math.floor(amount)}</TableCell>
 				<TableCell>
-					<Select value={type} onChange={toggleType(id)}>
+					<Select value={type || ""} onChange={toggleType(id)}>
 						<MenuItem value="in">Cash IN</MenuItem>
 						<MenuItem value="out">Cash Out</MenuItem>
 						<MenuItem value="debtors">Debtors</MenuItem>
@@ -202,6 +205,16 @@ export default function ImportDataModal({
 
 	const renderItems = (): ReactElement => (
 		<Table size="small">
+			<TableHead>
+				<TableRow>
+					<TableCell>Description</TableCell>
+					<TableCell align="right">Amount</TableCell>
+					<TableCell>Select Type</TableCell>
+					<TableCell>Group Related Items</TableCell>
+					<TableCell>GST</TableCell>
+					<TableCell />
+				</TableRow>
+			</TableHead>
 			<TableBody>
 				{currentItems.map((item) => renderSingleItem(item))}
 			</TableBody>
@@ -212,12 +225,24 @@ export default function ImportDataModal({
 		currentItems.filter((i) => i.type === type && i.merge === NO_MERGE).length +
 		canvasData?.cashInItems.length
 
+	const noTypeCount = () =>
+		currentItems.reduce((a, item) => (item.type ? a : a + 1), 0)
+
+	const noGroupCount = () =>
+		currentItems.reduce(
+			(a, item) =>
+				(item.type === "in" || item.type === "out") && !item.merge ? a + 1 : a,
+			0
+		)
+
 	const renderSubmitButton = () => {
 		if (currentItems.length === 0)
 			return <Button disabled>No items to add</Button>
 		if (cashItemCount("in") > 6) return <Button disabled>Max 6 Cash In</Button>
 		if (cashItemCount("out") > 6)
 			return <Button disabled>Max 6 Cash Out</Button>
+		if (noTypeCount() > 0) return <Button disabled>Missing Types</Button>
+		if (noGroupCount() > 0) return <Button disabled>Missing Groups</Button>
 		return <Button onClick={onAddToCanvas}>Add To Canvas</Button>
 	}
 
@@ -289,7 +314,21 @@ export default function ImportDataModal({
 							<ol>
 								<li>
 									<Typography>
-										For each item, select if it is cash in or cash out.
+										For each item, choose from the <b>‘Select Type’</b> list.
+									</Typography>
+								</li>
+								<li>
+									<Typography>
+										For each Cash IN or Cash OUT item, choose from the{" "}
+										<b>‘Group Related Items’</b> list to either keep the current
+										Cash IN or Cash OUT item description or to group the item
+										with other related items. Items need to be grouped to a
+										maximum of six Cash IN and six Cash OUT items.
+									</Typography>
+								</li>
+								<li>
+									<Typography>
+										GST classification is defaulted to <b>‘Apply GST’</b>.
 									</Typography>
 								</li>
 								<li>
@@ -300,7 +339,7 @@ export default function ImportDataModal({
 								</li>
 								<li>
 									<Typography>
-										Press 'Add to Canvas' to import your data.
+										Press <b>‘Add to Canvas’</b> to import your data.
 									</Typography>
 								</li>
 							</ol>
