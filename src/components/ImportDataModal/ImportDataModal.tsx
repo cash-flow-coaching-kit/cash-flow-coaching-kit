@@ -223,7 +223,7 @@ export default function ImportDataModal({
 
 	const cashItemCount = (type: "in" | "out") =>
 		currentItems.filter((i) => i.type === type && i.merge === NO_MERGE).length +
-		canvasData?.cashInItems.length
+		canvasData?.cashInItems.filter((i: any) => i.description).length
 
 	const noTypeCount = () =>
 		currentItems.reduce((a, item) => (item.type ? a : a + 1), 0)
