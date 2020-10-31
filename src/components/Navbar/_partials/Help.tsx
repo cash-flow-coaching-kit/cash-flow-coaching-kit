@@ -40,22 +40,29 @@ export default function Help(): ReactElement {
 						id="help-dialog-description"
 						className="content-area"
 					>
-						<Typography>
-							For help throughout Cash Flow Coaching Kit, see ‘Tips’ on each
-							page.{" "}
+						<Typography style={{ fontWeight: "bold" }}>
+							Report a problem
 						</Typography>
-						<br />
 						<Typography>
-							If you have any feedback or questions,{" "}
+							Please report technical problems at{" "}
 							<a href={`mailto:${process.env.REACT_APP_SUPPORT_EMAIL || ""}`}>
-								contact us
-							</a>{" "}
-							({process.env.REACT_APP_SUPPORT_EMAIL || ""})
+								{process.env.REACT_APP_SUPPORT_EMAIL || ""}
+							</a>
+							.
 						</Typography>
-						<br />
+						<Typography style={{ marginTop: 6 }}>
+							Our service standard for resolution is generally one business day.
+						</Typography>
+						<Typography style={{ fontWeight: "bold", marginTop: 12 }}>
+							Help and tips
+						</Typography>
 						<Typography>
-							We typically respond within a day, however more complex
-							submissions may take up to a week.
+							Remember there are tips on each page to help tax professionals and
+							business advisors use the Cash Flow Coaching Kit.
+						</Typography>
+						<Typography style={{ marginTop: 6 }}>
+							If you are a small business please contact your tax professional
+							or business advisor for support.
 						</Typography>
 					</DialogContentText>
 				</DialogContent>
