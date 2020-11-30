@@ -354,7 +354,7 @@ const Homepage = (): ReactElement => {
 							We recommend using the EXPORT function regularly to avoid data
 							loss. Please refer to the{" "}
 							<a
-								href="/docs/Terms and Cond.docx"
+								href="/docs/Terms and Conditions.pdf"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
