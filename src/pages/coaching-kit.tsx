@@ -110,21 +110,22 @@ const CoachingKit = (): ReactElement => {
 					<Grid item sm={2} />
 					<Grid item xs={12} sm={8}>
 						<Typography className={styles.contentText} align="center">
-							The Cash Flow Coaching Kit is a coaching resource for tax
-							professionals and business advisors to help their small business
-							clients manage their cash flow. If you are a small business owner
-							please contact your tax professional or business advisor for
-							support.
+							The Cash Flow Coaching Kit allows business advisors to work with
+							their clients to improve cash flow management.
+						</Typography>
+						<Typography className={styles.contentText} align="center">
+							You can use the kit for your own self-directed learning. However,
+							we recommended that you use it with a professional advisor. They
+							can help with any questions or issues it raises.
 						</Typography>
 						<Typography className={styles.contentText} align="center">
 							The Cash Flow Coaching Kit has three phases: Discover, Apply and
-							Plan &amp; Action. Working through the kit will help you plan,
-							maintain and grow your business.
+							Plan &amp; Action.
 						</Typography>
 						<Typography className={styles.contentText} align="center">
-							In each phase in the kit, you will focus on 4 key questions. They
-							look at profit, provisioning, liquidity and goals. Answering these
-							will create a foundation for strong cash flow management.
+							In each phase in the kit, focus on the 4 key questions. They look
+							at profit, provisioning, liquidity and goals. Answering these will
+							create a foundation for strong cash flow management.
 						</Typography>
 					</Grid>
 				</Grid>
@@ -411,18 +412,6 @@ const CoachingKit = (): ReactElement => {
 								</Card>
 							</Grid>
 						</Grid>
-					</Grid>
-					<Grid item xs={12} sm={8}>
-						<Spacer space={3} />
-						<Typography className={styles.contentText}>
-							The Cash Flow Coaching Kit allows business advisors to work with
-							their clients to improve cash flow management.
-						</Typography>
-						<Typography className={styles.contentText}>
-							You can use the kit for your own self-directed learning. However,
-							we recommended that you use it with a professional advisor. They
-							can help with any questions or issues it raises.
-						</Typography>
 					</Grid>
 				</Grid>
 				<PageTip tip="CoachingKitTips" />
