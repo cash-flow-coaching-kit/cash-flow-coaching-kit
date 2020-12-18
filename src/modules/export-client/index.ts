@@ -38,7 +38,7 @@ export function exportFilter(client: ClientId): ExportOptions["filter"] {
  * @returns {Promise<Blob>}
  */
 export async function exportData(db: Dexie, client: ClientId): Promise<Blob> {
-	const blob: Blob = await exportDB(db, {
+	const blob: Blob = await exportDB(db as any, {
 		filter: exportFilter(client),
 	})
 	return blob
