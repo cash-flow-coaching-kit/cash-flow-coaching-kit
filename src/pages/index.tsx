@@ -11,7 +11,6 @@ import {
 	Box,
 	CardHeader,
 	Avatar,
-	List,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { PrivateRoutes } from "../util/routes/routes"
@@ -121,7 +120,7 @@ const Homepage = (): ReactElement => {
 						Cash Flow Coaching Kit
 					</Typography>
 					<Typography align="center" component="p" variant="h5">
-						Understand and improve your small business cash flow.
+						Understand and improve small business cash flow.
 					</Typography>
 				</Container>
 				<Container
@@ -205,6 +204,24 @@ const Homepage = (): ReactElement => {
 					</Grid>
 				</Container>
 				<Container>
+					<Grid container spacing={0}>
+						<Grid item xs={12} sm={8}>
+							<Box className="content-area">
+								<Typography>
+									You can also import data from other tools and applications.
+								</Typography>
+								<Typography>
+									The kit does not save information between sessions. Use the
+									export function regularly to save your progress.
+								</Typography>
+								<Typography>
+									To add a new client click on GET STARTED or to add an existing
+									client click on IMPORT DATA
+								</Typography>
+							</Box>
+						</Grid>
+					</Grid>
+					<Spacer space={5} />
 					<Box className={styles.buttonBox}>
 						{hasClients() ? (
 							<Button
@@ -221,54 +238,6 @@ const Homepage = (): ReactElement => {
 						)}
 						<ImportClient />
 					</Box>
-					<Spacer space={5} />
-					<Grid container spacing={0}>
-						<Grid item xs={12} sm={8}>
-							<Box className="content-area">
-								<Typography variant="h5">
-									Using the Cash Flow Coaching Kit
-								</Typography>
-								<Typography>
-									Managing your business cash flow will help you sustain and
-									grow your business.
-								</Typography>
-								<Typography className="list-describer">
-									You can use the kit to:
-								</Typography>
-								<List component="ul" className="ul-list">
-									<Typography component="li">
-										Check the health of your business
-									</Typography>
-									<Typography component="li">
-										Learn about business management
-									</Typography>
-									<Typography component="li">Understand cash flow</Typography>
-									<Typography component="li">
-										Explore practical ways to improve cash flow
-									</Typography>
-									<Typography component="li">
-										Plan and track improvements
-									</Typography>
-								</List>
-								<Typography className="list-describer">
-									To review, plan and improve your cash flow, you need to know
-									your:
-								</Typography>
-								<List component="ul" className="ul-list">
-									<Typography component="li">opening balance</Typography>
-									<Typography component="li">income</Typography>
-									<Typography component="li">expenses</Typography>
-								</List>
-								<Typography>
-									You can also import data from other tools and applications.
-								</Typography>
-								<Typography>
-									The kit does not save information between sessions. Use the
-									export function regularly to save your progress.
-								</Typography>
-							</Box>
-						</Grid>
-					</Grid>
 					<Grid container spacing={3} className={styles.grid}>
 						<Grid item xs={12} md={6}>
 							<TakeATour />
