@@ -86,7 +86,7 @@ export async function importToDatabase(
 ): Promise<Error | boolean> {
 	const blob = new Blob([JSON.stringify(data)])
 	try {
-		await importInto(db, blob, {
+		await importInto(db as any, blob, {
 			overwriteValues: true,
 		})
 		return true
