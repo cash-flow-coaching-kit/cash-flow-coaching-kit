@@ -68,7 +68,8 @@
 		"test:unit": "react-scripts test --env=jsdom",
 		"test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
 		"eject": "react-scripts eject",
-		"analyze": "source-map-explorer 'build/static/js/*.js'"
+		"analyze": "source-map-explorer 'build/static/js/*.js'",
+		"clean": "rimraf build"
 	},
 	"browserslist": {
 		"production": [
