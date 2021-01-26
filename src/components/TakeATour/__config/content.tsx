@@ -136,6 +136,19 @@ const tourSteps: {
 	{
 		content: (): ReactElement => (
 			<ContentArea>
+				<Title>Action Checklist</Title>
+				<Typography>
+					The Action Checklist allows you to create and manage a list of things
+					you need to complete.
+				</Typography>
+			</ContentArea>
+		),
+		image: "/take-a-tour/Tour 8.png",
+		alt: "Action Checklist page",
+	},
+	{
+		content: (): ReactElement => (
+			<ContentArea>
 				<Title>Client List</Title>
 				<Typography>
 					Here you&apos;ll find all your coaching sessions. This lets you switch
