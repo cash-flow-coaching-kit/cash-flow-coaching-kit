@@ -17,7 +17,10 @@ export default function Coaching(): ReactElement {
 	const cls = useStyles()
 
 	return (
-		<ExpandableNav title="The cash flow kit overview" defaultExpanded={false}>
+		<ExpandableNav
+			title="The Cash Flow Coaching Kit overview"
+			defaultExpanded={false}
+		>
 			<Box className={cls.box}>
 				<List className={cls.list}>
 					<Typography component="li">

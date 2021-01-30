@@ -30,8 +30,8 @@ export default function Taskbuilder({
 			<Box className={styles.innerBox}>
 				{/* CONTENT */}
 				<Typography className={styles.content}>
-					Review the topic content and mark the tasks you will complete to
-					better understand your cash flow.
+					Review the topic content, mark the tasks you will complete and then
+					add to the Action Checklist.
 				</Typography>
 
 				{/* FORM */}

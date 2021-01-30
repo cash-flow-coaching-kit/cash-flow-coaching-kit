@@ -21,7 +21,7 @@ export default function HealthCheck(): ReactElement {
 			<Box className={cls.box}>
 				<List className={cls.list}>
 					<Typography component="li">
-						The Health Check helps you understand your clients business and
+						The Health Check helps you understand your client's business and
 						cashflow knowledge.
 					</Typography>
 					<Typography component="li">

@@ -32,12 +32,18 @@ const itemsSection = (items: ActionChecklistStruct[]) => {
 	}
 
 	return basicTable(
-		items.map(({ description, reviewBy }) => [
+		items.map(({ description, reviewBy, completed }) => [
 			{
 				text: description || "No description provided",
-				style: description === "" ? "noResult" : "",
+				style: [
+					description === "" ? "noResult" : "",
+					completed ? "completed" : "",
+				],
 			},
-			format(reviewBy, "dd/MM/yyyy"),
+			{
+				text: format(reviewBy, "dd/MM/yyyy"),
+				style: [completed ? "completed" : ""],
+			},
 		])
 	)
 }
@@ -60,6 +66,7 @@ export default async (
 						const items = checklistCollection.filter(
 							(i) => i.actionContainer === value
 						)
+
 						const note = notes.filter((i) => i.actionContainer === value)
 						const prior = priority.filter((i) => i.actionContainer === value)
 
@@ -108,6 +115,9 @@ export default async (
 			noResult: {
 				italics: true,
 				color: "#333",
+			},
+			completed: {
+				decoration: "lineThrough",
 			},
 		},
 
