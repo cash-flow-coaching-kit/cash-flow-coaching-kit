@@ -120,7 +120,7 @@ const Homepage = (): ReactElement => {
 						Cash Flow Coaching Kit
 					</Typography>
 					<Typography align="center" component="p" variant="h5">
-						Understand and improve small business cash flow.
+						Understand and improve small business cash flow
 					</Typography>
 				</Container>
 				<Container
