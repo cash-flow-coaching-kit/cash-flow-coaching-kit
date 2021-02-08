@@ -55,6 +55,10 @@ const useHomepageStyles = makeStyles((theme) => ({
 		margin: theme.spacing(2, 0),
 		width: "100%",
 	},
+	aboutText: {
+		textAlign: "center",
+		marginBottom: 24,
+	},
 	alignJustifyContent: {
 		display: "flex",
 		flexDirection: "column",
@@ -120,7 +124,7 @@ const Homepage = (): ReactElement => {
 						Cash Flow Coaching Kit
 					</Typography>
 					<Typography align="center" component="p" variant="h5">
-						Understand and improve small business cash flow.
+						Understand and improve small business cash flow
 					</Typography>
 				</Container>
 				<Container
@@ -190,35 +194,23 @@ const Homepage = (): ReactElement => {
 				<Spacer space={5} />
 				<Container>
 					<Grid container spacing={3}>
-						<Grid item xs={12} sm={8}>
-							<Typography className={styles.contentText}>
-								The Cash Flow Coaching Kit allows business advisors to work with
-								their clients to improve cash flow management.
+						<Grid item xs={12} sm={12}>
+							<Typography className={styles.aboutText}>
+								The Cash Flow Coaching Kit is a coaching resource for tax
+								professionals and business advisors to help their small business
+								clients manage their cash flow.
 							</Typography>
-							<Typography className={styles.contentText}>
-								You can use the kit for your own self-directed learning.
-								However, we recommended that you use it with a professional
-								advisor. They can help with any questions or issues it raises.
+							<Typography className={styles.aboutText}>
+								Small businesses are encouraged to seek the assistance of a
+								trusted advisor about ways to better manage cash flow and use
+								the Cash Flow Coaching Kit.
 							</Typography>
-						</Grid>
-					</Grid>
-				</Container>
-				<Container>
-					<Grid container spacing={0}>
-						<Grid item xs={12} sm={8}>
-							<Box className="content-area">
-								<Typography>
-									You can also import data from other tools and applications.
-								</Typography>
-								<Typography>
-									The kit does not save information between sessions. Use the
-									export function regularly to save your progress.
-								</Typography>
-								<Typography>
-									To add a new client click on GET STARTED or to add an existing
-									client click on IMPORT DATA
-								</Typography>
-							</Box>
+							<Typography className={styles.aboutText}>
+								GET STARTED to add a new client
+							</Typography>
+							<Typography className={styles.aboutText}>
+								IMPORT DATA to view data from a previous session
+							</Typography>
 						</Grid>
 					</Grid>
 					<Spacer space={5} />

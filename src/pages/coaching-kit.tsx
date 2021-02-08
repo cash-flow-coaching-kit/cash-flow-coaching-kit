@@ -110,15 +110,6 @@ const CoachingKit = (): ReactElement => {
 					<Grid item sm={2} />
 					<Grid item xs={12} sm={8}>
 						<Typography className={styles.contentText} align="center">
-							The Cash Flow Coaching Kit allows business advisors to work with
-							their clients to improve cash flow management.
-						</Typography>
-						<Typography className={styles.contentText} align="center">
-							You can use the kit for your own self-directed learning. However,
-							we recommended that you use it with a professional advisor. They
-							can help with any questions or issues it raises.
-						</Typography>
-						<Typography className={styles.contentText} align="center">
 							The Cash Flow Coaching Kit has three phases: Discover, Apply and
 							Plan &amp; Action.
 						</Typography>
