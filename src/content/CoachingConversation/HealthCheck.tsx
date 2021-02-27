@@ -46,6 +46,18 @@ export default function HealthCheck(): ReactElement {
 						If your client is unsure about their results, they can learn more by
 						using the Discover Topics.
 					</Typography>
+					<Typography component="li">
+						Cash flow is a key business challenge that may affect small business
+						owners’ mental health and wellbeing.{" "}
+						<a
+							href="https://www.ato.gov.au/smallbizmentalhealth"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Support is available
+						</a>{" "}
+						if you need assistance.
+					</Typography>
 				</List>
 
 				<Spacer space={4} />
