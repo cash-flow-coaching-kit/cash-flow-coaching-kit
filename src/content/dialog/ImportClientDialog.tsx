@@ -365,18 +365,9 @@ export default function ImportClientDialog({
 			<DialogTitle>Import client data</DialogTitle>
 			<DialogContent>
 				<Typography component="p" variant="body1" className={cls.contentText}>
-					<strong>Disclaimer</strong>
-				</Typography>
-				<Typography component="p" variant="body1" className={cls.contentText}>
 					If you have used the Cash Flow Coaching Kit before and have previously
-					exported your work, you'll be able import that data from your device
-					and continue where you left off.
-				</Typography>
-				<Typography component="p" variant="body1" className={cls.contentText}>
-					<strong>
-						Please note, you will not be able to import files from the beta
-						version of the kit.
-					</strong>
+					exported your work, you'll be able to import that data from your
+					device and continue where you left off.
 				</Typography>
 				<Typography component="p" variant="body1" className={cls.contentText}>
 					The data you enter into the kit will be stored on this device only.
