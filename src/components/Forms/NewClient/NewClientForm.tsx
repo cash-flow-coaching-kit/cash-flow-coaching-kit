@@ -128,8 +128,7 @@ const NewClientForm = ({
 			{/* Moved the DialogContent into the form for the submit to work in IE11 */}
 			<DialogContent>
 				<Typography>
-					It can be your business name or something memorable. If you have
-					multiple businesses, add them later.{" "}
+					If you have multiple businesses, you can add more later.
 				</Typography>
 				<Spacer />
 				<TextField
