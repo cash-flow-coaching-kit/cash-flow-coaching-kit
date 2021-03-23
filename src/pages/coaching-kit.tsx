@@ -7,19 +7,13 @@ import {
 	CardActions,
 	CardContent,
 	CardMedia,
-	Divider,
-	Accordion,
-	AccordionSummary,
-	AccordionDetails,
 	makeStyles,
 	Avatar,
 	List,
 	ListItem,
-	Box,
 	CardActionArea,
 	useTheme,
 } from "@material-ui/core"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
 import { PageContainer } from "../components/Layouts"
 import { PrivateRoutes, routeVarReplacement } from "../util/routes/routes"
@@ -110,74 +104,49 @@ const CoachingKit = (): ReactElement => {
 					<Grid item sm={2} />
 					<Grid item xs={12} sm={8}>
 						<Typography className={styles.contentText} align="center">
-							The Cash Flow Coaching Kit has three phases: Discover, Apply and
-							Plan &amp; Action.
+							Four key questions unlock fundamental concepts for good cash flow
+							management.
 						</Typography>
 						<Typography className={styles.contentText} align="center">
-							In each phase in the kit, focus on the 4 key questions. They look
-							at profit, provisioning, liquidity and goals. Answering these will
-							create a foundation for strong cash flow management.
+							They focus on profit, provisioning, liquidity and meeting goals.
+						</Typography>
+						<Typography className={styles.contentText} align="center">
+							Use the tools in the coaching phases; Discover, Apply and Plan
+							&amp; Action to help small businesses answer the questions,
+							understand cash flow and identify areas to improve.
 						</Typography>
 					</Grid>
 				</Grid>
 
 				<Spacer space={2} />
-				<Box>
-					<Accordion>
-						<AccordionSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="four-questions-content"
-							id="four-questions-header"
-						>
-							<Typography variant="h6" component="h2">
-								What are the <em> Four Key Questions</em>?
-							</Typography>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Grid container>
-								<Grid item xs={12}>
-									{/* <Typography
-									variant="body1"
-									component="p"
-									className={styles.contentText}
-								>
-									These questions will help you understand your business cash
-									flow and identify areas that you can improve.
-								</Typography>
-								<Typography
-									variant="body1"
-									component="p"
-									className={styles.contentText}
-								>
-									They are important because they set the foundation for strong
-									cash flow management by focusing on four critical factors -
-									profit, provisioning, liquidity and meeting goals.
-								</Typography> */}
-									<List style={{ padding: 0 }}>
-										<ListItem className={styles.contentText}>
-											1. Are you trading profitably?
-										</ListItem>
-										<Divider />
-										<ListItem className={styles.contentText}>
-											2. Have you put enough aside to meet your regular
-											financial commitments?
-										</ListItem>
-										<Divider />
-										<ListItem className={styles.contentText}>
-											3. Does your business have enough to spend on yourself and
-											pay others?
-										</ListItem>
-										<Divider />
-										<ListItem className={styles.contentText}>
-											4. Is your business improving its financial position?
-										</ListItem>
-									</List>
-								</Grid>
-							</Grid>
-						</AccordionDetails>
-					</Accordion>
-				</Box>
+
+				<Grid container spacing={0}>
+					<Grid item sm={2} />
+					<Grid item xs={12} sm={8}>
+						<Typography variant="h6" component="h2">
+							What are the <em> Four Key Questions</em>?
+						</Typography>
+						<List style={{ padding: 0 }}>
+							<ListItem className={styles.contentText}>
+								1. Are you trading profitably?
+							</ListItem>
+							<ListItem className={styles.contentText}>
+								2. Have you put enough aside to meet your regular financial
+								commitments?
+							</ListItem>
+							<ListItem className={styles.contentText}>
+								3. Does your business have enough to spend on yourself and pay
+								others?
+							</ListItem>
+							<ListItem className={styles.contentText}>
+								4. Is your business improving its financial position?
+							</ListItem>
+						</List>
+					</Grid>
+				</Grid>
+
 				<Spacer space={2} />
+
 				<Grid container spacing={3}>
 					<Grid item sm={4}>
 						<Grid container spacing={3} direction="column">
