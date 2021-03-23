@@ -371,7 +371,8 @@ export default function ImportClientDialog({
 				</Typography>
 				<Typography component="p" variant="body1" className={cls.contentText}>
 					The data you enter into the kit will be stored on this device only.
-					Clearing your browser cache will erase all client data.
+					Exiting or clearing your browser cache will erase all unsaved client
+					data.
 				</Typography>
 			</DialogContent>
 			<DialogContent>
