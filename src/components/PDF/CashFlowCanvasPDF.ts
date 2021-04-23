@@ -286,7 +286,7 @@ export default async (
 
 				{
 					table: {
-						widths: ["60%", "*"],
+						widths: ["55%", "*"],
 						body: [
 							[
 								cashInSection(cashInItems, cashInTotal),
@@ -345,7 +345,7 @@ export default async (
 		},
 
 		defaultStyle: {
-			fontSize: 15,
+			fontSize: 13,
 			bold: false,
 		},
 	}
