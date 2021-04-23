@@ -1,0 +1,22 @@
+# From https://medium.com/@johnjjung/building-an-electron-app-on-github-actions-windows-and-macos-53ab69703f7c
+name: CI
+
+# Run on push to 'feature/pipeline' branch (testing)
+on:
+  push:
+    branches:
+      - feature/pipeline
+
+# List contents (testing)
+jobs:
+  build_on_mac:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          ref: feature/pipeline
+      - uses: actions/setup-node@master
+        with:
+          node-version: 15
+      - name: see directory
+        run: ls
