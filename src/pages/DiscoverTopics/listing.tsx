@@ -15,6 +15,7 @@ import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import { PrivateRoutes } from "../../util/routes/routes"
 import useDTStyles from "./_config/styles"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 
 const DTListing = (): ReactElement => {
 	const styles = useDTStyles()
@@ -254,7 +255,7 @@ const DTListing = (): ReactElement => {
 				</Grid>
 			</PageContainer>
 
-			<PageTip tip="DiscoverTopicsTips" />
+			<PageTip tip={DiscoverTopicsTips} />
 		</>
 	)
 }

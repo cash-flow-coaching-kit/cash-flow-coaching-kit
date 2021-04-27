@@ -19,6 +19,7 @@ import { PageContainer } from "../components/Layouts"
 import { PrivateRoutes, routeVarReplacement } from "../util/routes/routes"
 import PageTip from "../components/PageTip"
 import Spacer from "../components/Spacer"
+import CoachingKitTips from "../content/tips/CoachingKitTips"
 
 const Arrow = (): ReactElement => {
 	const theme = useTheme()
@@ -378,7 +379,7 @@ const CoachingKit = (): ReactElement => {
 						</Grid>
 					</Grid>
 				</Grid>
-				<PageTip tip="CoachingKitTips" />
+				<PageTip tip={CoachingKitTips} />
 			</PageContainer>
 		</>
 	)

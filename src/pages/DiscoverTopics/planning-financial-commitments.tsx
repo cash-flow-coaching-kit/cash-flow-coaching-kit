@@ -20,6 +20,7 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 
 const DTPlanningFinanicalCommitments = (): ReactElement => {
 	const styles = useDTStyles()
@@ -487,7 +488,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 				</Container>
 			</PageContainer>
 
-			<PageTip tip="DiscoverTopicsTips" />
+			<PageTip tip={DiscoverTopicsTips} />
 		</>
 	)
 }

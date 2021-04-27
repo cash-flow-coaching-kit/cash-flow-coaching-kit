@@ -1,10 +1,9 @@
-import React, { ReactElement, useState, MouseEvent } from "react"
+import React, { ReactElement, useState, MouseEvent, createElement } from "react"
 import { Fab, Drawer, Button, Box, Typography } from "@material-ui/core"
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 import HighlightOffIcon from "@material-ui/icons/HighlightOff"
 import usePageTipStyles from "./_config/style"
 import { IPageTip } from "./_config/shape"
-import { AsyncTip } from "./_partials"
 
 /**
  * Renders a page tip tooltip at the bottom left of the page
@@ -64,7 +63,7 @@ const PageTip = ({ tip }: IPageTip): ReactElement => {
 					</Button>
 				</Box>
 
-				<AsyncTip tip={tip} />
+				{createElement(tip, {})}
 			</Drawer>
 		</>
 	)

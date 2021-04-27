@@ -7,7 +7,7 @@ import useSharedTipStyling from "./style"
  *
  * @returns ReactElement
  */
-const ActionChecklistTip = (): ReactElement => {
+const ActionChecklistTips = (): ReactElement => {
 	const styles = useSharedTipStyling()
 
 	return (
@@ -41,4 +41,4 @@ const ActionChecklistTip = (): ReactElement => {
 	)
 }
 
-export default ActionChecklistTip
+export default ActionChecklistTips
