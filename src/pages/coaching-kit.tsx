@@ -111,6 +111,10 @@ const CoachingKit = (): ReactElement => {
 							They focus on profit, provisioning, liquidity and meeting goals.
 						</Typography>
 						<Typography className={styles.contentText} align="center">
+							Use the Coaching Conversation Guide on the Client List page to get
+							the most value from the kit.
+						</Typography>
+						<Typography className={styles.contentText} align="center">
 							Use the tools in the coaching phases; Discover, Apply and Plan
 							&amp; Action to help small businesses answer the questions,
 							understand cash flow and identify areas to improve.
