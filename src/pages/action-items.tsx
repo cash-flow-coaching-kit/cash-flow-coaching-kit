@@ -37,6 +37,7 @@ import servePDF from "../components/PDF/servePDF"
 import ActionChecklistUseCase from "../data/ActionChecklist/ChecklistLogic"
 import ActionNotesUseCase from "../data/ActionChecklist/NotesLogic"
 import ActionPriorityUseCase from "../data/ActionChecklist/PriorityLogic"
+import ActionChecklistTips from "../content/tips/ActionChecklistTips"
 
 /**
  * Action Checklist page component
@@ -156,7 +157,7 @@ const ActionChecklist = (): ReactElement => {
 				</Grid>
 			</PageContainer>
 
-			<PageTip tip="ActionChecklistTip" />
+			<PageTip tip={ActionChecklistTips} />
 		</>
 	)
 }

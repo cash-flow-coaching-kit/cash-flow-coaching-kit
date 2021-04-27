@@ -25,6 +25,7 @@ import {
 	StaffingLever,
 } from "../content/ChangeLevers"
 import Spacer from "../components/Spacer"
+import ChangeLeversTips from "../content/tips/ChangeLeversTips"
 
 const ChangeLevers = (): ReactElement => {
 	const styles = makeStyles((theme) => ({
@@ -89,7 +90,7 @@ const ChangeLevers = (): ReactElement => {
 				</Grid>
 			</PageContainer>
 
-			<PageTip tip="ChangeLevers" />
+			<PageTip tip={ChangeLeversTips} />
 		</>
 	)
 }

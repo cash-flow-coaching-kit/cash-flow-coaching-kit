@@ -22,6 +22,7 @@ import useDTStyles from "./_config/styles"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 
 const DTManagingCashFlow = (): ReactElement => {
 	const styles = useDTStyles()
@@ -550,7 +551,7 @@ const DTManagingCashFlow = (): ReactElement => {
 				</Container>
 			</PageContainer>
 
-			<PageTip tip="DiscoverTopicsTips" />
+			<PageTip tip={DiscoverTopicsTips} />
 		</>
 	)
 }

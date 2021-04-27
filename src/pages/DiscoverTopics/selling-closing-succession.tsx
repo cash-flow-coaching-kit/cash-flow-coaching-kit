@@ -15,6 +15,7 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 
 const DTSellingClosingSuccession = (): ReactElement => {
 	const styles = useDTStyles()
@@ -622,7 +623,7 @@ const DTSellingClosingSuccession = (): ReactElement => {
 				</Container>
 			</PageContainer>
 
-			<PageTip tip="DiscoverTopicsTips" />
+			<PageTip tip={DiscoverTopicsTips} />
 		</>
 	)
 }

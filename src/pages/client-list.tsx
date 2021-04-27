@@ -13,6 +13,7 @@ import {
 	ChangeLevers,
 	ActionChecklist,
 } from "../content/CoachingConversation"
+import ClientListTips from "../content/tips/ClientListTips"
 
 /**
  * Client listing page
@@ -58,7 +59,7 @@ const ClientList = (): ReactElement => {
 				</Grid>
 			</PageContainer>
 
-			<PageTip tip="ClientListTips" />
+			<PageTip tip={ClientListTips} />
 		</>
 	)
 }
