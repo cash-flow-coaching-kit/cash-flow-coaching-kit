@@ -30,20 +30,6 @@ const ClientListTips = (): ReactElement => {
 					Review the privacy and data usage policy for more information
 				</Typography>
 			</List>
-			<Typography variant="h6">Next Steps</Typography>
-			<List className={styles.list}>
-				<Typography component="li">
-					Update your client’s data each time you have a coaching conversation
-					to record their progress
-				</Typography>
-				<Typography component="li">
-					Use the Client List to transfer your information from one device to
-					another
-				</Typography>
-				<Typography component="li">
-					Visit Health Check first for new clients
-				</Typography>
-			</List>
 		</>
 	)
 }

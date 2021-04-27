@@ -79,7 +79,7 @@ export default function Logout({
 				<DialogTitle>Are you sure you want to exit?</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
-						Make sure you have saved all your data before you leave as all
+						Make sure you have exported all your data before you leave as all
 						existing data will be deleted.
 					</DialogContentText>
 				</DialogContent>

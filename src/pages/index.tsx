@@ -303,8 +303,8 @@ const Homepage = (): ReactElement => {
 							align="center"
 						>
 							The data you enter into the Cash Flow Coaching Kit will be stored
-							on this device only. Clearing your browser cache will erase all
-							client data.
+							on this device only. Exiting or clearing your browser cache will
+							erase all unsaved client data.
 						</Typography>
 						<Typography
 							variant="body2"
@@ -312,8 +312,8 @@ const Homepage = (): ReactElement => {
 							className={styles.contentText}
 							align="center"
 						>
-							We recommend using the EXPORT function regularly to avoid data
-							loss. Please refer to the{" "}
+							We recommend regularly using the EXPORT DATA function from the
+							Client List to avoid data loss. Please refer to the{" "}
 							<a
 								href="/docs/Terms and Conditions.pdf"
 								target="_blank"
