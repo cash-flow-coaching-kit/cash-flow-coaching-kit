@@ -321,7 +321,15 @@ const Homepage = (): ReactElement => {
 							>
 								Terms &amp; Conditions
 							</a>{" "}
-							of use and our Data usage and privacy statement.
+							of use and our{" "}
+							<a
+								href="/docs/Data usage and privacy statement.pdf"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Data usage and privacy statement
+							</a>
+							.
 						</Typography>
 					</Container>
 				</Container>
