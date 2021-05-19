@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from "react"
+import { useHistory } from "react-router-dom"
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew"
 import {
 	Button,
@@ -42,6 +43,7 @@ export default function Logout({
 	const classes = useStyles()
 	const [open, setOpen] = useState(false)
 	const [loading, setLoading] = useState(false)
+	const history = useHistory()
 
 	const handleOpen = (): void => setOpen(true)
 	const handleClose = (): void => setOpen(false)
@@ -61,7 +63,7 @@ export default function Logout({
 
 		removeStorageClient()
 
-		window.location.replace("/")
+		history.push("/");
 	}
 
 	return (

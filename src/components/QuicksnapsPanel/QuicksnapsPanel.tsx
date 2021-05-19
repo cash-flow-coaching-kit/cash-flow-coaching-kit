@@ -13,7 +13,7 @@ export default function QuicksnapsPanel({ filename }: QPProps): ReactElement {
 			<List component="nav" disablePadding>
 				<ListItem
 					component="a"
-					href={`/pdf/${filename}`}
+					href={`./pdf/${filename}`}
 					target="_blank"
 					rel="noopener noreferrer"
 					style={{

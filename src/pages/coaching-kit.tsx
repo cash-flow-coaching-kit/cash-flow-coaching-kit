@@ -179,7 +179,7 @@ const CoachingKit = (): ReactElement => {
 										<CardMedia
 											component="img"
 											height="155"
-											image="/images/healthCheck_thumb.png"
+											image="./images/healthCheck_thumb.png"
 											title="Health check"
 										/>
 										<CardContent>
@@ -211,7 +211,7 @@ const CoachingKit = (): ReactElement => {
 											component="img"
 											alt="Discover Topics"
 											height="155"
-											image="/images/discoverTopics_thumb.png"
+											image="./images/discoverTopics_thumb.png"
 											title="Discover Topics"
 										/>
 										<CardContent>
@@ -262,7 +262,7 @@ const CoachingKit = (): ReactElement => {
 											component="img"
 											alt="Cash Flow Canvas"
 											height="155"
-											image="/images/cashFlowCanvas_thumb.png"
+											image="./images/cashFlowCanvas_thumb.png"
 											title="Cash Flow Canvas"
 										/>
 										<CardContent>
@@ -294,7 +294,7 @@ const CoachingKit = (): ReactElement => {
 											component="img"
 											alt="Change Levers"
 											height="155"
-											image="/images/changeLevers_thumb.png"
+											image="./images/changeLevers_thumb.png"
 											title="Change Levers"
 										/>
 										<CardContent>
@@ -349,7 +349,7 @@ const CoachingKit = (): ReactElement => {
 											component="img"
 											alt="Action Checklist"
 											height="155"
-											image="/images/actionChecklist_thumb.png"
+											image="./images/actionChecklist_thumb.png"
 											title="Action Checklist"
 										/>
 										<CardContent>

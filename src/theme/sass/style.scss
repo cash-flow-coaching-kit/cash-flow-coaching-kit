@@ -113,3 +113,17 @@ code {
 .MuiTooltip-tooltip {
 	font-size: 0.75rem !important;
 }
+
+.download-link {
+	color: white;
+	background-color: #3f51b5;
+	border: 2px solid white;
+	text-decoration: none;
+	padding: 10px;
+	cursor: pointer;
+	margin-right: 15px;
+	font-weight: bold;
+	&:hover {
+		background-color: rgb(44, 56, 126);
+	}
+}

@@ -1,22 +1,56 @@
 # From https://medium.com/@johnjjung/building-an-electron-app-on-github-actions-windows-and-macos-53ab69703f7c
 name: CI
 
-# Run on push to 'feature/pipeline' branch (testing)
+# Run on push to 'release branch or master' branch
 on:
   push:
     branches:
-      - feature/pipeline
+      - "master"
 
-# List contents (testing)
+# List contents
 jobs:
   build_on_mac:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@master
         with:
-          ref: feature/pipeline
-      - uses: actions/setup-node@master
+          # Update with your branch, that has the latest change
+          ref: "releases/v1.0"
+      - uses: actions/setup-node@v2
         with:
           node-version: 15
-      - name: see directory
-        run: ls
+      # SpicyPizza/create-envfile@v1 doesn't seem to work, and also delimits with ':'
+      - name: Create env file
+        run: |
+          touch .env
+          echo REACT_APP_SUPPORT_EMAIL=help@cashflowcoachingkit.com.au >> .env
+          echo REACT_APP_AWS_CONTENT_DELIVERY_URL=di8he5rpe0sl7.cloudfront.net >> .env
+          echo REACT_APP_GA_ID=UA-177371209-1 >> .env
+          echo REACT_APP_VERSION=$npm_package_version >> .env
+      - name: Install dependencies
+        run: yarn install
+      - name: Build electron
+        run: yarn electron:package
+      - name: See built binaries
+        run: ls ./dist
+      # Make available on GitHub Actions page
+      # TODO Replace with environment variables
+      - uses: actions/upload-artifact@v2
+        with:
+          name: macOS
+          path: ./dist/cash-flow-coaching-kit-0.1.0.dmg
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Windows
+          path: ./dist/cash-flow-coaching-kit Setup 0.1.0.exe
+
+      # TODO deploy to s3
+
+      # TODO Upload to release (perhaps separate action when ready for release?)
+      # - uses: lucyio/upload-to-release@master
+      #   with:
+      #     name: lucyio/electron
+      #     path: ./electron_dist
+      #     action: unpublished
+      #     release_id: 0.x.x
+      #     release-repo: lucyio/electron

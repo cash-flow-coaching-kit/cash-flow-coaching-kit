@@ -20,9 +20,13 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
 
 const DTPlanningBusiness = (): ReactElement => {
 	const styles = useDTStyles()
+	const isOnline = useHasInternet()
+
 	return (
 		<>
 			<PageContainer role="main">
@@ -85,15 +89,19 @@ const DTPlanningBusiness = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Kirra's Native Foods" />
 									<CardMedia
-										title="Kirra's Native Foods"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/LhVKOyMeFQE?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Kirra's Native Foods"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/LhVKOyMeFQE?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Kirras-native-foods.docx"
+											href="./transcripts/Kirras-native-foods.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -106,15 +114,19 @@ const DTPlanningBusiness = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Sanjana's Restaurant" />
 									<CardMedia
-										title="Sanjana's Restaurant"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/Bxj4r3Dh1EQ?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Sanjana's Restaurant"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/Bxj4r3Dh1EQ?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Sanjanas-restaurant.docx"
+											href="./transcripts/Sanjanas-restaurant.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -339,7 +351,7 @@ const DTPlanningBusiness = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						href="/pdf/BusinessPlan-Activity.pdf"
+						href="./pdf/BusinessPlan-Activity.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -398,7 +410,10 @@ const DTPlanningBusiness = (): ReactElement => {
 								size="large"
 								className={styles.button}
 								title="Plan for success"
-								href="https://www.business.gov.au/New-to-business-essentials/Plan-for-success"
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/New-to-business-essentials/Plan-for-success",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -413,7 +428,10 @@ const DTPlanningBusiness = (): ReactElement => {
 								size="large"
 								className={styles.button}
 								title="How to develop your business plan"
-								href="https://www.business.gov.au/planning/business-plans/how-to-develop-your-business-plan"
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/planning/business-plans/how-to-develop-your-business-plan",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -427,7 +445,10 @@ const DTPlanningBusiness = (): ReactElement => {
 								size="large"
 								className={styles.button}
 								title="Starting your business checklist"
-								href="https://www.business.gov.au/planning/templates-and-tools/checklists/starting-your-business-checklist"
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/planning/templates-and-tools/checklists/starting-your-business-checklist",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -441,7 +462,10 @@ const DTPlanningBusiness = (): ReactElement => {
 								size="large"
 								className={styles.button}
 								title="Licenses or permits you may require"
-								href="https://ablis.business.gov.au/pages/home.aspx"
+								href={setToggleOfflineContent(
+									"https://ablis.business.gov.au/pages/home.aspx",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>

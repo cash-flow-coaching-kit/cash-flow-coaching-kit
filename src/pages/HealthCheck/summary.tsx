@@ -26,6 +26,7 @@ import {
 import { HealthCheckDataStruct } from "../../data/_config/shape"
 import HealthCheckUseCase from "../../data/healthChecks/HealthCheckLogic"
 import useCurrentClient from "../../state/client/useCurrentClient"
+import useHasInternet from "../../context/useHasInternet"
 import HealthCheckPDF, {
 	HealthCheckQuestionSet,
 } from "../../components/PDF/HealthCheckPDF"
@@ -33,6 +34,7 @@ import { ClientContext } from "../../state/client"
 import { ClientActionTypes } from "../../state/client/client-outline"
 import Spacer from "../../components/Spacer"
 import servePDF from "../../components/PDF/servePDF"
+import { setToggleOfflineContent } from "./../../util/helper"
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
@@ -61,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
  */
 const HCSummary = (): ReactElement => {
 	const [currentClient] = useCurrentClient()
+	const isOnline = useHasInternet()
 	const { dispatch } = useContext(ClientContext)
 	const { id } = useParams()
 	const [healthCheck, setHealthCheck] = useState<
@@ -145,7 +148,10 @@ const HCSummary = (): ReactElement => {
 									Cash flow is a key business challenge that may affect small
 									business owners’ mental health and wellbeing.{" "}
 									<a
-										href="https://www.ato.gov.au/smallbizmentalhealth"
+										href={setToggleOfflineContent(
+											"https://www.ato.gov.au/smallbizmentalhealth",
+											isOnline
+										)}
 										target="_blank"
 										rel="noopener noreferrer"
 									>

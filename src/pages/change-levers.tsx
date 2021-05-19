@@ -73,7 +73,7 @@ const ChangeLevers = (): ReactElement => {
 							<List component="nav" disablePadding>
 								<ListItem
 									component="a"
-									href="/pdf/Change levers.pdf"
+									href="./pdf/Change levers.pdf"
 									target="_blank"
 									rel="noopener noreferrer"
 									style={{ color: "inherit" }}

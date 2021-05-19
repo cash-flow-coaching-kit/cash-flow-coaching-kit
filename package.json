@@ -1,7 +1,11 @@
 {
 	"name": "dcfck-app",
 	"version": "0.1.0",
+	"author": "Cash Flow Coaching Kit",
+	"description": "Cash Flow Coaching Kit",
 	"private": true,
+	"homepage": "./",
+	"main": "public/electron.js",
 	"dependencies": {
 		"@date-io/date-fns": "1.x",
 		"@loadable/component": "5.14.1",
@@ -30,11 +34,14 @@
 		"@types/uuid": "8.3.0",
 		"@xstate/react": "^0.8.1",
 		"body-scroll-lock": "3.1.5",
+		"concurrently": "^6.0.2",
 		"core-js": "3.8.1",
 		"date-fns": "2.16.1",
 		"detect-browser": "5.2.0",
 		"dexie": "3.0.3",
 		"dexie-export-import": "^1.0.0-rc.2",
+		"electron-is-dev": "^2.0.0",
+		"electron-log": "^4.3.4",
 		"exceljs": "4.2.0",
 		"file-saver": "2.0.5",
 		"formik": "2.2.6",
@@ -43,11 +50,13 @@
 		"node-sass": "^4.14.0",
 		"p-min-delay": "^3.1.0",
 		"pdfmake": "^0.1.65",
+		"puppeteer": "^9.0.0",
 		"qs": "^6.9.4",
 		"react": "^16.13.1",
 		"react-app-polyfill": "^1.0.6",
 		"react-beautiful-dnd": "^13.0.0",
 		"react-dom": "^16.13.1",
+		"react-ga": "^3.3.0",
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "3.4.1",
 		"reactour": "^1.17.0",
@@ -56,9 +65,11 @@
 		"styled-components": "^4.0.0",
 		"typescript": "~3.7.2",
 		"uuid": "8.3.2",
+		"wait-on": "^5.3.0",
 		"whatwg-fetch": "3.5.0",
 		"xstate": "4.15.1",
-		"yarn": "1.22.10"
+		"yarn": "1.22.10",
+		"youtube-dl": "^3.5.0"
 	},
 	"scripts": {
 		"start:web": "react-scripts start",
@@ -69,7 +80,24 @@
 		"test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
 		"eject": "react-scripts eject",
 		"analyze": "source-map-explorer 'build/static/js/*.js'",
-		"clean": "rimraf build"
+		"clean": "rimraf build",
+		"start": "run-p build start:web",
+		"electron:serve": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+		"electron:package": "electron-builder -c.extraMetadata.main=build/electron.js -mwl --publish never",
+		"preelectron:package": "run-s refresh:offlinedoc build",
+		"refresh:offlinevid": "node ./public/start-refresh-youtube-videos.mjs",
+		"refresh:offlinedoc": "node ./public/start-refresh-website-statics.mjs"
+	},
+	"build": {
+		"productName": "cash-flow-coaching-kit",
+		"appId": "com.dcfck.app",
+		"mac": {
+			"icon": "build/icon.icns"
+		},
+		"win": {
+			"icon": "build/icon.ico"
+		},
+		"npmRebuild": false
 	},
 	"browserslist": {
 		"production": [
@@ -90,6 +118,8 @@
 		"@typescript-eslint/eslint-plugin": "^2.29.0",
 		"commitizen": "4.2.2",
 		"cz-conventional-changelog": "3.3.0",
+		"electron": "^12.0.4",
+		"electron-builder": "^22.10.5",
 		"eslint": "^6.8.0",
 		"eslint-config-airbnb-typescript": "^7.2.1",
 		"eslint-config-prettier": "^6.11.0",
@@ -102,6 +132,7 @@
 		"fake-indexeddb": "^3.0.0",
 		"foreman": "^3.0.1",
 		"husky": "4.3.6",
+		"npm-run-all": "^4.1.5",
 		"prettier": "2.2.1",
 		"pretty-quick": "^2.0.1",
 		"typescript-eslint-parser": "^22.0.0"
@@ -117,12 +148,6 @@
 		"**/*.test.ts",
 		"src/setupTests.ts"
 	],
-	"husky": {
-		"hooks": {
-			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-			"pre-commit": "pretty-quick --staged"
-		}
-	},
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"

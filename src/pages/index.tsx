@@ -1,5 +1,6 @@
 import React, { ReactElement, useContext } from "react"
 import { Link as RouterLink } from "react-router-dom"
+
 import {
 	Typography,
 	Container,
@@ -14,12 +15,14 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { PrivateRoutes } from "../util/routes/routes"
+import { setToggleOfflineContent } from "../util/helper"
 import { PublicNavbar } from "../components/Navbar"
 import { NewClientDialog } from "../content/dialog"
 import { ClientContext } from "../state/client"
 import Spacer from "../components/Spacer"
 import ImportClient from "../components/ClientListing/_partials/ImportClient"
 import TakeATour from "../components/TakeATour"
+import useHasInternet from "./../context/useHasInternet"
 
 const useHomepageStyles = makeStyles((theme) => ({
 	container: {
@@ -108,6 +111,7 @@ const Homepage = (): ReactElement => {
 		state: { clients },
 	} = useContext(ClientContext)
 	const styles = useHomepageStyles()
+	const isOnline = useHasInternet()
 
 	const hasClients = (): boolean => clients.length > 0
 
@@ -246,7 +250,7 @@ const Homepage = (): ReactElement => {
 								<CardActions>
 									<Button
 										color="primary"
-										href="/transcripts/Take-a-tour-of-the-kit.docx"
+										href="./transcripts/Take-a-tour-of-the-kit.docx"
 										aria-label="Download transcript: Take a tour of the kit"
 										target="_blank" rel="noopener noreferrer"
 									>
@@ -260,14 +264,18 @@ const Homepage = (): ReactElement => {
 								<CardHeader title="What advisors think of the kit" />
 								<CardMedia
 									className={styles.embed}
-									component="iframe"
+									component={isOnline ? "iframe" : "video"}
 									title="What advisors think of the kit"
-									src="https://www.youtube.com/embed/z64Bc5K2TKo?rel=0&modestbranding=1"
+									src={setToggleOfflineContent(
+										"https://www.youtube.com/embed/z64Bc5K2TKo?rel=0&modestbranding=1",
+										isOnline
+									)}
+									controls
 								/>
 								<CardActions>
 									<Button
 										color="primary"
-										href="/transcripts/What-advisors-think-of-the-kit.docx"
+										href="./transcripts/What-advisors-think-of-the-kit.docx"
 										aria-label="Download transcript: What advisors think of the kit"
 										target="_blank"
 										rel="noopener noreferrer"
@@ -315,7 +323,7 @@ const Homepage = (): ReactElement => {
 							We recommend using the EXPORT function regularly to avoid data
 							loss. Please refer to the{" "}
 							<a
-								href="/docs/Terms and Conditions.pdf"
+								href="./docs/Terms and Conditions.pdf"
 								target="_blank"
 								rel="noopener noreferrer"
 							>

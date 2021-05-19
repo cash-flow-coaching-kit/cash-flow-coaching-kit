@@ -20,9 +20,12 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
 
 const DTFundingBusiness = (): ReactElement => {
 	const styles = useDTStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<>
@@ -82,15 +85,19 @@ const DTFundingBusiness = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Tamako's Funding" />
 									<CardMedia
+										component={isOnline ? "iframe" : "video"}
 										title="Tamako's Funding"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/fAe_2eyAkrU?rel=0&modestbranding=1"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/fAe_2eyAkrU?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Tamakos-funding.docx"
+											href="./transcripts/Tamakos-funding.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -103,15 +110,19 @@ const DTFundingBusiness = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Charlotte's Loans" />
 									<CardMedia
+										component={isOnline ? "iframe" : "video"}
 										title="Charlotte's Loans"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/BTwVYKfGyuk?rel=0&modestbranding=1"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/BTwVYKfGyuk?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Charlottes-loans.docx"
+											href="./transcripts/Charlottes-loans.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -439,7 +450,7 @@ const DTFundingBusiness = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						href="/pdf/Funding-Activity.pdf"
+						href="./pdf/Funding-Activity.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -499,7 +510,10 @@ const DTFundingBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.qld.gov.au/starting-business/costs-finance-banking/funding-business"
+								href={setToggleOfflineContent(
+									"https://www.business.qld.gov.au/starting-business/costs-finance-banking/funding-business",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -512,7 +526,10 @@ const DTFundingBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.gov.au/Finance/Seeking-finance/Reasons-and-options-for-seeking-finance"
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/Finance/Seeking-finance/Reasons-and-options-for-seeking-finance",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>

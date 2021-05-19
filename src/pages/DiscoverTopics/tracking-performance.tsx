@@ -22,9 +22,12 @@ import useDTStyles from "./_config/styles"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
 
 const TrackingPerformance = (): ReactElement => {
 	const styles = useDTStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<>
@@ -86,15 +89,19 @@ const TrackingPerformance = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Tina's Hair &amp; Beauty" />
 									<CardMedia
-										title="Tina's Hair &amp; Beauty"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/VRxQ7AkxsfY?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Tina's Hair &amp; Beauty"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/VRxQ7AkxsfY?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Tinas-hair-and-beauty.docx"
+											href="./transcripts/Tinas-hair-and-beauty.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -107,15 +114,19 @@ const TrackingPerformance = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Anders' Retirement Plan" />
 									<CardMedia
-										title="Anders' Retirement Plan"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/MPNkTF-puTQ?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Anders' Retirement Plan"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/MPNkTF-puTQ?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Anders-retirement-plan.docx"
+											href="./transcripts/Anders-retirement-plan.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -363,7 +374,10 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.qld.gov.au/running-business/protecting-business/risk-management/surviving-downturn/assess-performance"
+								href={setToggleOfflineContent(
+									"https://www.business.qld.gov.au/running-business/protecting-business/risk-management/surviving-downturn/assess-performance",
+									isOnline
+								)}
 								title="assess business performance"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -377,7 +391,10 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.qld.gov.au/running-business/finances-cash-flow/managing-money/monitoring-performance"
+								href={setToggleOfflineContent(
+									"https://www.business.qld.gov.au/running-business/finances-cash-flow/managing-money/monitoring-performance",
+									isOnline
+								)}
 								title="monitoring your financial performance"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -391,7 +408,10 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.qld.gov.au/starting-business/planning/market-customer-research/benchmarking"
+								href={setToggleOfflineContent(
+									"https://www.business.qld.gov.au/starting-business/planning/market-customer-research/benchmarking",
+									isOnline
+								)}
 								title="benchmarking your business"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -405,7 +425,10 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.vic.gov.au/money-profit-and-accounting/financial-processes-and-procedures/check-your-financial-health"
+								href={setToggleOfflineContent(
+									"https://www.business.vic.gov.au/money-profit-and-accounting/financial-processes-and-procedures/check-your-financial-health",
+									isOnline
+								)}
 								title="check the financial health of your business"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -419,7 +442,10 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.qld.gov.au/running-business/growing-business/tips-improving"
+								href={setToggleOfflineContent(
+									"https://www.business.qld.gov.au/running-business/growing-business/tips-improving",
+									isOnline
+								)}
 								title="improving business performance"
 								target="_blank"
 								rel="noopener noreferrer"

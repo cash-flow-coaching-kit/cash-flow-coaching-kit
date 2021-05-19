@@ -15,9 +15,12 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
 
 const DTSellingClosingSuccession = (): ReactElement => {
 	const styles = useDTStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<>
@@ -574,7 +577,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 								className={styles.button}
-								href="https://www.business.gov.au/closing/selling-or-closing"
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/closing/selling-or-closing",
+									isOnline
+								)}
 							>
 								Selling or closing
 							</Button>
@@ -587,7 +593,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 								className={styles.button}
-								href="https://www.business.gov.au/Closing/Selling-or-closing/Close-your-business"
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/Closing/Selling-or-closing/Close-your-business",
+									isOnline
+								)}
 							>
 								Close your business
 							</Button>
@@ -600,7 +609,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 								className={styles.button}
-								href="https://www.business.gov.au/Closing/Selling-or-closing/Sell-your-business"
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/Closing/Selling-or-closing/Sell-your-business",
+									isOnline
+								)}
 							>
 								Sell your business
 							</Button>
@@ -613,7 +625,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 								className={styles.button}
-								href="https://asic.gov.au/for-business/closing-your-company/deregistration/"
+								href={setToggleOfflineContent(
+									"https://asic.gov.au/for-business/closing-your-company/deregistration/",
+									isOnline
+								)}
 							>
 								Deregister your company
 							</Button>

@@ -192,7 +192,7 @@ const TourCard = ({ onClick }: { onClick: () => void }): ReactElement => {
 			<CardActionArea onClick={onClick}>
 				<CardMedia
 					className={cls.media}
-					image="/take-a-tour/card-preview.png"
+					image="./take-a-tour/card-preview.png"
 					title="Preview of the Cash Flow Coaching Kit"
 				/>
 				<CardContent>

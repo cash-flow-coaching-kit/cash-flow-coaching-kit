@@ -12,9 +12,12 @@ import {
 import ExpandableNav from "../../components/ExpandableNav"
 import useStyles from "./styles"
 import Spacer from "../../components/Spacer"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
 
 export default function Coaching(): ReactElement {
 	const cls = useStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<ExpandableNav
@@ -59,14 +62,18 @@ export default function Coaching(): ReactElement {
 					<CardHeader title="What advisors think of the kit" />
 					<CardMedia
 						className={cls.embed}
-						component="iframe"
+						component={isOnline ? "iframe" : "video"}
 						title="What advisors think of the kit"
-						src="https://www.youtube.com/embed/z64Bc5K2TKo?rel=0&modestbranding=1"
+						src={setToggleOfflineContent(
+							"https://www.youtube.com/embed/z64Bc5K2TKo?rel=0&modestbranding=1",
+							isOnline
+						)}
+						controls
 					/>
 					<CardActions>
 						<Button
 							color="primary"
-							href="/transcripts/What-advisors-think-of-the-kit.docx"
+							href="./transcripts/What-advisors-think-of-the-kit.docx"
 							aria-label="Download transcript: What advisors think of the kit"
 							target="_blank"
 							rel="noopener noreferrer"

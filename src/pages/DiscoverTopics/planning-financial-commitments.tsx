@@ -20,9 +20,12 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
 
 const DTPlanningFinanicalCommitments = (): ReactElement => {
 	const styles = useDTStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<>
@@ -87,15 +90,19 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Mick's Farm" />
 									<CardMedia
-										title="Mick's Farm"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/FSJsiEaRNRU?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Mick's Farm"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/FSJsiEaRNRU?rel=0&modestbranding=1/",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Micks-farm.docx"
+											href="./transcripts/Micks-farm.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -108,15 +115,19 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Ming's Disability Services" />
 									<CardMedia
-										title="Ming's Disability Services"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/wXe051xOIzI?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Ming's Disability Services"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/wXe051xOIzI?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Mings-disability-services.docx"
+											href="./transcripts/Mings-disability-services.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -358,7 +369,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						href="/pdf/KnowYourCommitments-Activity.pdf"
+						href="./pdf/KnowYourCommitments-Activity.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -416,7 +427,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								size="large"
 								className={styles.button}
 								title="taxation and your employees"
-								href="https://www.business.gov.au/People/Pay-and-conditions/Employees-pay-leave-and-entitlements"
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/People/Pay-and-conditions/Employees-pay-leave-and-entitlements",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -431,7 +445,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								size="large"
 								className={styles.button}
 								title="due dates by month"
-								href="https://www.ato.gov.au/Business/Reports-and-returns/Due-dates-for-lodging-and-paying/Due-dates-by-month/"
+								href={setToggleOfflineContent(
+									"https://www.ato.gov.au/Business/Reports-and-returns/Due-dates-for-lodging-and-paying/Due-dates-by-month/",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -446,7 +463,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								size="large"
 								className={styles.button}
 								title="due dates by topic"
-								href="https://www.ato.gov.au/Business/Reports-and-returns/Due-dates-for-lodging-and-paying/Due-dates-by-topic/"
+								href={setToggleOfflineContent(
+									"https://www.ato.gov.au/Business/Reports-and-returns/Due-dates-for-lodging-and-paying/Due-dates-by-topic/",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -461,7 +481,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								size="large"
 								className={styles.button}
 								title="ato app"
-								href="https://www.ato.gov.au/General/Online-services/ATO-app/"
+								href={setToggleOfflineContent(
+									"https://www.ato.gov.au/General/Online-services/ATO-app/",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -476,7 +499,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								size="large"
 								className={styles.button}
 								title="ato business key dates"
-								href="https://www.ato.gov.au/Newsroom/smallbusiness/Key-dates"
+								href={setToggleOfflineContent(
+									"https://www.ato.gov.au/Newsroom/smallbusiness/Key-dates",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
