@@ -12,13 +12,13 @@ import { calcCashFlowTotal } from "../../state/CFC/accumulators"
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
-const rowValue = (values: [number, number], flip = false): string[] => {
+const rowValue = (values: [number, number], flip = false): any[] => {
 	const [val1, val2] = values
 	return [
-		`${val1}`,
-		`${val2}`,
-		addDollarSign(formatNumber(`${val1 - val2}`)),
-		calculateDifferencePer(val1, val2, flip),
+		{ text: addDollarSign(formatNumber(`${val1}`)), alignment: "right" },
+		{ text: addDollarSign(formatNumber(`${val2}`)), alignment: "right" },
+		{ text: addDollarSign(formatNumber(`${val1 - val2}`)), alignment: "right" },
+		{ text: calculateDifferencePer(val1, val2, flip), alignment: "right" },
 	]
 }
 
