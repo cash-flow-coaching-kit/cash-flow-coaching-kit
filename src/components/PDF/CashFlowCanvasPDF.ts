@@ -218,8 +218,6 @@ export default async (
 	values: BaseCFCStruct,
 	questionValues: any // QuestionValues
 ) => {
-	console.log("values", values, questionValues)
-
 	const {
 		openingBalance,
 		cashInItems,
