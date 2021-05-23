@@ -95,9 +95,10 @@ export function calculateDifferencePer(
 	// Note: A,B can be a string from PDF ('0')
 	if (!toNumber(A) || !toNumber(B)) return "N/A"
 
+	const factor = flip ? -100 : 100
 	const C = A - B
 
-	const diff = !flip ? (C / B) * 100 : -(C / B) * 100
+	const diff = factor * (C / Math.abs(B))
 
 	return pipe(
 		toTwoDecimal,
