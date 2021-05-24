@@ -72,13 +72,10 @@ export function calcCashFlowNonGSTTotal(values: CashFlow[]): number {
  * @param {CashFlow[]} values
  * @returns {number}
  */
-export function calcCashFlowTotal(
-	values: CashFlow[],
-	customGST?: number
-): number {
+export function calcCashFlowTotal(values: CashFlow[], customGST = 0): number {
 	if (isGSTValid(customGST)) {
 		const total = values.reduce(getKeyValue("amount"), []).reduce(sum(), 0)
-		return numOrZero(Math.floor(total - customGST!))
+		return numOrZero(Math.floor(total - customGST))
 	}
 
 	return numOrZero(

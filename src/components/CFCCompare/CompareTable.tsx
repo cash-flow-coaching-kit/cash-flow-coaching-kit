@@ -1,5 +1,12 @@
 import React, { ReactElement, useMemo } from "react"
-import { TableContainer, Table, TableBody, TableCell } from "@material-ui/core"
+import {
+	TableContainer,
+	Table,
+	TableBody,
+	TableCell,
+	TableRow,
+} from "@material-ui/core"
+import { toNumber } from "lodash"
 import TableHeader from "./TableHeader"
 import CanvasItemRow from "./CanvasItemRow"
 import { CompareTableProps } from "./__config/shape"
@@ -64,9 +71,15 @@ export default function CompareTable({
 							selectedCanvases[1].openingBalance,
 						]}
 					/>
-					<TableCell colSpan={5} variant="head" className={cls.noBorderBottom}>
-						Cash IN
-					</TableCell>
+					<TableRow>
+						<TableCell
+							colSpan={5}
+							variant="head"
+							className={cls.noBorderBottom}
+						>
+							Cash IN
+						</TableCell>
+					</TableRow>
 					{/* {renderRepeaterFields(
 						selectedCanvases[0].cashInItems,
 						selectedCanvases[1].cashInItems
@@ -77,21 +90,35 @@ export default function CompareTable({
 					/>
 					<CanvasItemRow
 						bold
-						label="Total (exc GST)"
+						label="Total Cash In"
+						values={[
+							calcCashFlowTotal(selectedCanvases[0].cashInItems, 0),
+							calcCashFlowTotal(selectedCanvases[1].cashInItems, 0),
+						]}
+					/>
+					<CanvasItemRow
+						bold
+						label="(exc GST)"
 						values={[
 							calcCashFlowTotal(
 								selectedCanvases[0].cashInItems,
-								selectedCanvases[0].gstOnSales
+								leftCalculated.gstOnSales
 							),
 							calcCashFlowTotal(
 								selectedCanvases[1].cashInItems,
-								selectedCanvases[1].gstOnSales
+								rightCalculated.gstOnSales
 							),
 						]}
 					/>
-					<TableCell colSpan={5} variant="head" className={cls.noBorderBottom}>
-						Cash OUT
-					</TableCell>
+					<TableRow>
+						<TableCell
+							colSpan={5}
+							variant="head"
+							className={cls.noBorderBottom}
+						>
+							Cash OUT
+						</TableCell>
+					</TableRow>
 					{/* {renderRepeaterFields(
 						selectedCanvases[0].cashOutItems,
 						selectedCanvases[1].cashOutItems
@@ -119,16 +146,28 @@ export default function CompareTable({
 					/>
 					<CanvasItemRow
 						bold
-						label="Total (exc GST)"
+						label="Total Cash Out"
+						values={[
+							calcCashFlowTotal(selectedCanvases[0].cashOutItems, 0),
+							calcCashFlowTotal(selectedCanvases[1].cashOutItems, 0),
+						]}
+					/>
+					<CanvasItemRow
+						bold
+						label="(exc GST, PAYG W & Super)"
 						values={[
 							calcCashFlowTotal(
 								selectedCanvases[0].cashOutItems,
-								selectedCanvases[0].gstOnPurchases
-							),
+								leftCalculated.gstOnPurchases
+							) +
+								toNumber(selectedCanvases[0].superAmount) +
+								toNumber(selectedCanvases[0].paygWithholding),
 							calcCashFlowTotal(
 								selectedCanvases[1].cashOutItems,
-								selectedCanvases[0].gstOnPurchases
-							),
+								rightCalculated.gstOnPurchases
+							) +
+								toNumber(selectedCanvases[1].superAmount) +
+								toNumber(selectedCanvases[1].paygWithholding),
 						]}
 					/>
 					<CanvasItemRow
