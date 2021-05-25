@@ -24,18 +24,14 @@ export default React.memo(function TableHeader({
 				<TableCell className={cls.cell1}>
 					<span className="MuiTypography-srOnly">Cash category</span>
 				</TableCell>
-				<TableCell className={cls.cellCanvas} align="right">
+				<TableCell className={cls.cellCanvas}>
 					{canvasDisplayTitle(left)}
 				</TableCell>
-				<TableCell className={cls.cellCanvas} align="right">
+				<TableCell className={cls.cellCanvas}>
 					{canvasDisplayTitle(right)}
 				</TableCell>
-				<TableCell className={cls.cellDifference} align="right">
-					$ Difference
-				</TableCell>
-				<TableCell className={cls.cellDifference} align="right">
-					% Difference
-				</TableCell>
+				<TableCell className={cls.cellDifference}>$ Difference</TableCell>
+				<TableCell className={cls.cellDifference}>% Difference</TableCell>
 			</TableRow>
 		</TableHead>
 	)
