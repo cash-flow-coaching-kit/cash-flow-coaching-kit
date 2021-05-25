@@ -1,4 +1,4 @@
-// import { isEmpty } from "lodash-es"
+import { isEmpty } from "lodash-es"
 import { divideBy, minusBy, pipe } from "../reduce/math"
 
 /**
@@ -23,8 +23,7 @@ function removeGST(x: number): number {
 }
 
 const isGSTValid = (value: any): boolean => {
-	return !!value || value === 0
-	// return typeof value !== "undefined" && value !== null && !isEmpty(value)
+	return typeof value !== "undefined" && value !== null && !isEmpty(value)
 }
 
 export { calculateGST, removeGST, isGSTValid }

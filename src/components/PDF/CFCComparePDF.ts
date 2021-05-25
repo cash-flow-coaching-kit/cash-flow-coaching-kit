@@ -1,7 +1,6 @@
 import pdfMake from "pdfmake/build/pdfmake"
 import pdfFonts from "pdfmake/build/vfs_fonts"
 import { green } from "@material-ui/core/colors"
-import { toNumber } from "lodash"
 import { CFCStruct } from "../../data/_config/shape"
 import { pageDefaultSettings, pageHeading, pagePadding } from "./PDFLib"
 import { canvasDisplayTitle } from "../CFC/__config/utilities"
@@ -13,13 +12,13 @@ import { calcCashFlowTotal } from "../../state/CFC/accumulators"
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
-const rowValue = (values: [number, number], flip = false): any[] => {
+const rowValue = (values: [number, number], flip = false): string[] => {
 	const [val1, val2] = values
 	return [
-		{ text: addDollarSign(formatNumber(`${val1}`)), alignment: "right" },
-		{ text: addDollarSign(formatNumber(`${val2}`)), alignment: "right" },
-		{ text: addDollarSign(formatNumber(`${val1 - val2}`)), alignment: "right" },
-		{ text: calculateDifferencePer(val1, val2, flip), alignment: "right" },
+		`${val1}`,
+		`${val2}`,
+		addDollarSign(formatNumber(`${val1 - val2}`)),
+		calculateDifferencePer(val1, val2, flip),
 	]
 }
 
@@ -72,22 +71,15 @@ export default async (
 								...rowValue([leftCalc.gstOnSales, rightCalc.gstOnSales]),
 							],
 							[
-								{ text: "Total", bold: true },
-								...rowValue([
-									calcCashFlowTotal(leftSelected.cashInItems, 0),
-									calcCashFlowTotal(rightSelected.cashInItems, 0),
-								]),
-							],
-							[
-								{ text: "(exc GST)", bold: true },
+								{ text: "Total (exc GST)", bold: true },
 								...rowValue([
 									calcCashFlowTotal(
 										leftSelected.cashInItems,
-										leftCalc.gstOnSales
+										leftSelected.gstOnSales
 									),
 									calcCashFlowTotal(
 										rightSelected.cashInItems,
-										rightCalc.gstOnSales
+										rightSelected.gstOnSales
 									),
 								]),
 							],
@@ -118,27 +110,16 @@ export default async (
 								]),
 							],
 							[
-								{ text: "Total Cash Out", bold: true },
-								...rowValue([
-									calcCashFlowTotal(leftSelected.cashOutItems, 0),
-									calcCashFlowTotal(rightSelected.cashOutItems, 0),
-								]),
-							],
-							[
-								{ text: "(exc GST, PAYG W & Super)", bold: true },
+								{ text: "Total (exc GST)", bold: true },
 								...rowValue([
 									calcCashFlowTotal(
 										leftSelected.cashOutItems,
-										leftCalc.gstOnPurchases
-									) +
-										toNumber(leftSelected.superAmount) +
-										toNumber(leftSelected.paygWithholding),
+										leftSelected.gstOnPurchases
+									),
 									calcCashFlowTotal(
 										rightSelected.cashOutItems,
-										rightCalc.gstOnPurchases
-									) +
-										toNumber(rightSelected.superAmount) +
-										toNumber(rightSelected.paygWithholding),
+										rightSelected.gstOnPurchases
+									),
 								]),
 							],
 							[

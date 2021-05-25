@@ -40,28 +40,24 @@ export default function CanvasItemRow({
 			<TableCell
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
-				align="right"
 			>
-				{addDollarSign(formatNumber(`${val1}`))}
+				{formatNumber(`${val1}`)}
 			</TableCell>
 			<TableCell
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
-				align="right"
 			>
-				{addDollarSign(formatNumber(`${val2}`))}
+				{formatNumber(`${val2}`)}
 			</TableCell>
 			<TableCell
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
-				align="right"
 			>
 				{addDollarSign(formatNumber(`${numOrZero(val1) - numOrZero(val2)}`))}
 			</TableCell>
 			<TableCell
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
-				align="right"
 			>
 				{calculateDifferencePer(numOrZero(val1), numOrZero(val2), flip)}
 			</TableCell>
