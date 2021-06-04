@@ -71,7 +71,7 @@ export default async (
 								...rowValue([leftCalc.gstOnSales, rightCalc.gstOnSales]),
 							],
 							[
-								{ text: "Total (exc GST)", bold: true },
+								{ text: "Total Cash In\n(exc GST)", bold: true },
 								...rowValue([
 									calcCashFlowTotal(
 										leftSelected.cashInItems,
@@ -110,7 +110,10 @@ export default async (
 								]),
 							],
 							[
-								{ text: "Total (exc GST)", bold: true },
+								{
+									text: "Total Cash Out\n(exc GST, PAYG W & Super)",
+									bold: true,
+								},
 								...rowValue([
 									calcCashFlowTotal(
 										leftSelected.cashOutItems,

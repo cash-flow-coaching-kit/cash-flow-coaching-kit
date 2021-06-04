@@ -77,7 +77,7 @@ export default function CompareTable({
 					/>
 					<CanvasItemRow
 						bold
-						label="Total (exc GST)"
+						label="Total Cash In<br />(exc GST)"
 						values={[
 							calcCashFlowTotal(
 								selectedCanvases[0].cashInItems,
@@ -119,7 +119,7 @@ export default function CompareTable({
 					/>
 					<CanvasItemRow
 						bold
-						label="Total (exc GST)"
+						label="Total Cash Out<br/>(exc GST, PAYG W & Super)"
 						values={[
 							calcCashFlowTotal(
 								selectedCanvases[0].cashOutItems,

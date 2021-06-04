@@ -34,9 +34,10 @@ export default function CanvasItemRow({
 			<TableCell
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
-			>
-				{label || ""}
-			</TableCell>
+				dangerouslySetInnerHTML={{
+					__html: label || "",
+				}}
+			/>
 			<TableCell
 				className={border ? "" : cls.noBorderBottom}
 				variant={bold ? "head" : "body"}
