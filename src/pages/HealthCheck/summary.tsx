@@ -213,7 +213,10 @@ const HCSummary = (): ReactElement => {
 									</ListItemIcon>
 									<ListItemText>Saved Health Checks</ListItemText>
 								</ListItem>
-								<ListItem button>
+								<ListItem
+									button
+									style={{ cursor: "pointer" }}
+								>
 									<ListItemIcon>
 										<PictureAsPdfIcon />
 									</ListItemIcon>

@@ -23,7 +23,7 @@ export default function QuicksnapsPanel({ filename }: QPProps): ReactElement {
 					rel="noopener noreferrer"
 					style={{
 						color: "inherit",
-						cursor: "pointer",
+						cursor: "pointer"
 					}}
 				>
 					<ListItemIcon>

@@ -80,14 +80,10 @@ const ChangeLevers = (): ReactElement => {
 							<List component="nav" disablePadding>
 								<ListItem
 									component="a"
-<<<<<<< HEAD
-									href="./pdf/Change levers.pdf"
-=======
 									onClick={() => saveFile("Change levers.pdf")}
->>>>>>> feature/ADD-18
 									target="_blank"
 									rel="noopener noreferrer"
-									style={{ color: "inherit" }}
+									style={{ color: "inherit", cursor: "pointer" }}
 								>
 									<ListItemIcon>
 										<PictureAsPdfIcon />
