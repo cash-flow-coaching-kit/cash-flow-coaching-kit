@@ -49,28 +49,28 @@ jobs:
         run: ls ./dist
 
       # Make available on GitHub Actions page
-      - name: Extract version
-        id: extract_version
-        uses: Saionaro/extract-package-version@v1.1.1
-      - uses: actions/upload-artifact@v2
-        with:
-          name: macOS
-          path: ./dist/*.dmg
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Windows
-          path: ./dist/*.exe
+      # - name: Extract version
+      #   id: extract_version
+      #   uses: Saionaro/extract-package-version@v1.1.1
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: macOS
+      #     path: ./dist/*.dmg
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Windows
+      #     path: ./dist/*.exe
 
-      - name: Upload Release Assets
-        uses: softprops/action-gh-release@v1
-        with:
-          body: ${{ steps.extract_version.outputs.version }}
-          name: ${{ steps.extract_version.outputs.version }}
-          tag_name: v${{ steps.extract_version.outputs.version }}
-          prerelease: true
-          files: ./dist/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Upload Release Assets
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     body: ${{ steps.extract_version.outputs.version }}
+      #     name: ${{ steps.extract_version.outputs.version }}
+      #     tag_name: v${{ steps.extract_version.outputs.version }}
+      #     prerelease: true
+      #     files: ./dist/*
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1

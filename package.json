@@ -87,7 +87,7 @@
 		"clean": "rimraf build",
 		"start": "run-p build start:web",
 		"electron:serve": "export NODE_ENV=dev && concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-		"electron:package": "electron-builder -c.extraMetadata.main=build/electron.js -mw --publish never",
+		"electron:package": "electron-builder -c.extraMetadata.main=build/electron.js -mw --publish always",
 		"preelectron:package": "run-s refresh:offlinedoc build",
 		"refresh:offlinevid": "node ./public/start-refresh-youtube-videos.mjs",
 		"refresh:offlinedoc": "node ./public/start-refresh-website-statics.mjs"
