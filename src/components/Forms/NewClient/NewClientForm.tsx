@@ -44,6 +44,14 @@ interface NewClientFormProps {
 	handleClose: any
 }
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
 /**
  * Form used to register a new client. Uses Formik
  *
@@ -148,12 +156,14 @@ const NewClientForm = ({
 					autoFocus
 				/>
 			</DialogContent>
-			<DialogContent className={styles.content}>
-				<DialogContentText>
-					Remember: The kit does not save information between sessions. Use the
-					export function regularly to save your progress.
-				</DialogContentText>
-			</DialogContent>
+			{!isDesktop &&
+				<DialogContent className={styles.content}>
+					<DialogContentText>
+						Remember: The kit does not save information between sessions. Use the
+						export function regularly to save your progress.
+					</DialogContentText>
+				</DialogContent>
+			}
 			<DialogActions>
 				<Button onClick={handleClose} color="primary">
 					Cancel

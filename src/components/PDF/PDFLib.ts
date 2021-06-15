@@ -85,7 +85,7 @@ export const pagePadding = (content: any) => addPadding(content, 20)
 export const basicTable = (items: any, style: string[] = []) => {
 	return {
 		table: {
-			widths: ["75%", "*"],
+			widths: ["70%", "*"],
 			body: items,
 		},
 		style,

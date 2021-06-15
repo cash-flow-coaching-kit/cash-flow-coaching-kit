@@ -22,6 +22,21 @@ import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 import { setToggleOfflineContent } from "./../../util/helper"
 import useHasInternet from "./../../context/useHasInternet"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+import fileSaver from 'file-saver'
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
+const saveFile = async (filename: string) => {
+	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
+	fileSaver.saveAs(blob, filename)
+}
 
 const DTPlanningFinanicalCommitments = (): ReactElement => {
 	const styles = useDTStyles()
@@ -106,7 +121,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Mick's Farm
+											Download Transcript: Mick's Farm.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -131,7 +149,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Ming's Disability Services
+											Download Transcript: Ming's Disability Services.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -369,9 +390,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						href="./pdf/KnowYourCommitments-Activity.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
+						onClick={() => saveFile("KnowYourCommitments-Activity.pdf")}
 					>
 						Download activity
 					</Button>
@@ -417,7 +436,10 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						component="p"
 						className={styles.contentText}
 					>
-						You might like to visit these links for more information
+						You might like to visit these links for more information.{" "}
+						{!isOnline && isDesktop
+							? "Internet access is required for full functionality."
+							: ""}
 					</Typography>
 					<Grid container spacing={3}>
 						<Grid item xs={12} sm>
@@ -426,7 +448,11 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="taxation and your employees"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Taxation and your employees."
+								}
 								href={setToggleOfflineContent(
 									"https://www.business.gov.au/People/Pay-and-conditions/Employees-pay-leave-and-entitlements",
 									isOnline
@@ -434,7 +460,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Taxation and your employees
+								Taxation and your employees.
 							</Button>
 						</Grid>
 
@@ -444,7 +470,11 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="due dates by month"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Due dates by month."
+								}
 								href={setToggleOfflineContent(
 									"https://www.ato.gov.au/Business/Reports-and-returns/Due-dates-for-lodging-and-paying/Due-dates-by-month/",
 									isOnline
@@ -452,7 +482,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Due dates by month
+								Due dates by month.
 							</Button>
 						</Grid>
 
@@ -462,7 +492,11 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="due dates by topic"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Due dates by topic."
+								}
 								href={setToggleOfflineContent(
 									"https://www.ato.gov.au/Business/Reports-and-returns/Due-dates-for-lodging-and-paying/Due-dates-by-topic/",
 									isOnline
@@ -470,7 +504,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Due dates by topic
+								Due dates by topic.
 							</Button>
 						</Grid>
 
@@ -480,7 +514,11 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="ato app"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "ATO App."
+								}
 								href={setToggleOfflineContent(
 									"https://www.ato.gov.au/General/Online-services/ATO-app/",
 									isOnline
@@ -488,7 +526,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								ATO App
+								ATO App.{" "}
 							</Button>
 						</Grid>
 
@@ -498,7 +536,11 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="ato business key dates"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "ATO business key dates."
+								}
 								href={setToggleOfflineContent(
 									"https://www.ato.gov.au/Newsroom/smallbusiness/Key-dates",
 									isOnline
@@ -506,14 +548,14 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								ATO business key dates
+								ATO business key dates.
 							</Button>
 						</Grid>
 					</Grid>
 				</Container>
 			</PageContainer>
 
-			<PageTip tip="DiscoverTopicsTips" />
+			<PageTip tip={DiscoverTopicsTips} />
 		</>
 	)
 }

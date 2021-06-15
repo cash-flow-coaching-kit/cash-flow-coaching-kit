@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from "react"
 import { useHistory } from "react-router-dom"
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew"
+import HomeIcon from "@material-ui/icons/Home"
 import {
 	Button,
 	Dialog,
@@ -35,6 +36,14 @@ interface LogoutProps {
 	variant?: "text" | "outlined" | "contained"
 }
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
 export default function Logout({
 	color = "inherit",
 	variant = "text",
@@ -63,7 +72,11 @@ export default function Logout({
 
 		removeStorageClient()
 
-		history.push("/");
+		returnToHome()
+	}
+
+	const returnToHome = () => {
+		history.push("/")
 	}
 
 	return (
@@ -71,32 +84,41 @@ export default function Logout({
 			<Button
 				className={sharedStyle.button}
 				color={color}
-				startIcon={<PowerSettingsNewIcon />}
+				startIcon={isDesktop ? <HomeIcon /> : <PowerSettingsNewIcon />}
 				onClick={handleOpen}
 				variant={variant}
 			>
-				Exit
+				{isDesktop ? "Return To Home" : "Exit"}
 			</Button>
 			<Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-				<DialogTitle>Are you sure you want to exit?</DialogTitle>
+				<DialogTitle>
+					Are you sure you want to {isDesktop ? " return to home" : " exit"}?
+				</DialogTitle>
 				<DialogContent>
-					<DialogContentText>
-						Make sure you have saved all your data before you leave as all
-						existing data will be deleted.
-					</DialogContentText>
+					{isDesktop ? (
+						<DialogContentText>
+							Your data has been saved. We recommend you export your data to a
+							safe location.
+						</DialogContentText>
+					) : (
+						<DialogContentText>
+							Make sure you have exported all your data before you leave as all
+							existing data will be deleted.
+						</DialogContentText>
+					)}
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose} disabled={loading}>
 						Cancel
 					</Button>
 					<Button
-						onClick={exitApplication}
+						onClick={isDesktop ? returnToHome : exitApplication}
 						color="primary"
 						variant="contained"
 						autoFocus
 						disabled={loading}
 					>
-						Exit
+						{isDesktop ? "Return To Home" : "Exit"}
 					</Button>
 				</DialogActions>
 				<Backdrop className={classes.backdrop} open={loading}>

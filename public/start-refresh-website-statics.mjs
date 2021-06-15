@@ -1,14 +1,19 @@
 import puppeteer from "puppeteer";
 import {  OFFLINE_GOV_DATA } from '../src/static/offline-url-data.mjs'
+import { EventEmitter } from 'events'
 
 // we're using async/await - so we need an async function, that we can run
 const run = async (url, filename, dir) => {
+
+  EventEmitter.setMaxListeners(1000)
 
   // open the browser and prepare a page
   const browser = await puppeteer.launch({
         headless: true
     })
   const page = await browser.newPage()
+
+  await page.setDefaultNavigationTimeout(0);
   
   // set the size of the viewport, so our screenshot will have the desired size
   await page.setViewport({

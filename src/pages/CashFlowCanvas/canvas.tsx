@@ -13,6 +13,7 @@ import {
 	CFC4QsTourContent,
 	CFCCreateCanvas,
 } from "../../components/CFC/__config/constants"
+import CFCanvasTips from "../../content/tips/CFCanvasTips"
 
 const steps: ReactourStep[] = [
 	{
@@ -79,7 +80,7 @@ export default function CFCCanvas(): ReactElement {
 					</Grid>
 				</Grid>
 			</PageContainer>
-			<PageTip tip="CFCanvasTip" />
+			<PageTip tip={CFCanvasTips} />
 			<Box role="complementary">
 				<PageTour steps={steps} />
 			</Box>

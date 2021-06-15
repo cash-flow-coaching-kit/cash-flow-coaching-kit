@@ -7,7 +7,7 @@ import useSharedTipStyling from "./style"
  *
  * @returns ReactElement
  */
-const HCQuestionnaire = (): ReactElement => {
+const HCQuestionnaireTips = (): ReactElement => {
 	const styles = useSharedTipStyling()
 
 	return (
@@ -34,4 +34,4 @@ const HCQuestionnaire = (): ReactElement => {
 	)
 }
 
-export default HCQuestionnaire
+export default HCQuestionnaireTips

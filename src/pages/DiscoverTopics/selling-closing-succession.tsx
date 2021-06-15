@@ -17,6 +17,15 @@ import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 import { setToggleOfflineContent } from "./../../util/helper"
 import useHasInternet from "./../../context/useHasInternet"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 
 const DTSellingClosingSuccession = (): ReactElement => {
 	const styles = useDTStyles()
@@ -566,7 +575,10 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						className={styles.contentText}
 						gutterBottom
 					>
-						You might like to visit these links for more information
+						You might like to visit these links for more information.{" "}
+						{!isOnline && isDesktop
+							? "Internet access is required for full functionality."
+							: ""}
 					</Typography>
 					<Grid container spacing={3}>
 						<Grid item sm={6} md={3}>
@@ -576,13 +588,18 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								variant="contained"
 								target="_blank"
 								rel="noopener noreferrer"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Selling or closing."
+								}
 								className={styles.button}
 								href={setToggleOfflineContent(
 									"https://www.business.gov.au/closing/selling-or-closing",
 									isOnline
 								)}
 							>
-								Selling or closing
+								Selling or closing.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -593,12 +610,17 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 								className={styles.button}
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Close your business."
+								}
 								href={setToggleOfflineContent(
 									"https://www.business.gov.au/Closing/Selling-or-closing/Close-your-business",
 									isOnline
 								)}
 							>
-								Close your business
+								Close your business.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -609,12 +631,17 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 								className={styles.button}
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Sell your business."
+								}
 								href={setToggleOfflineContent(
 									"https://www.business.gov.au/Closing/Selling-or-closing/Sell-your-business",
 									isOnline
 								)}
 							>
-								Sell your business
+								Sell your business.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -625,19 +652,24 @@ const DTSellingClosingSuccession = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 								className={styles.button}
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Deregister your company."
+								}
 								href={setToggleOfflineContent(
 									"https://asic.gov.au/for-business/closing-your-company/deregistration/",
 									isOnline
 								)}
 							>
-								Deregister your company
+								Deregister your company.
 							</Button>
 						</Grid>
 					</Grid>
 				</Container>
 			</PageContainer>
 
-			<PageTip tip="DiscoverTopicsTips" />
+			<PageTip tip={DiscoverTopicsTips} />
 		</>
 	)
 }

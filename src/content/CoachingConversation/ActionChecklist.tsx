@@ -15,6 +15,13 @@ import Spacer from "../../components/Spacer"
 import { setToggleOfflineContent } from "./../../util/helper"
 import useHasInternet from "./../../context/useHasInternet"
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 export default function ActionChecklist(): ReactElement {
 	const cls = useStyles()
 	const isOnline = useHasInternet()
@@ -85,7 +92,10 @@ export default function ActionChecklist(): ReactElement {
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							Download Transcript
+							Download Transcript.{" "}
+							{!isOnline && isDesktop
+								? " Internet access is required for closed caption. "
+								: ""}
 						</Button>
 					</CardActions>
 				</Card>

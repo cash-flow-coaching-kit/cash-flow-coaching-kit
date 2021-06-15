@@ -24,6 +24,15 @@ import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 import { setToggleOfflineContent } from "./../../util/helper"
 import useHasInternet from "./../../context/useHasInternet"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 
 const TrackingPerformance = (): ReactElement => {
 	const styles = useDTStyles()
@@ -105,7 +114,10 @@ const TrackingPerformance = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Tina's Hair &amp; Beauty
+											Download Transcript: Tina's Hair &amp; Beauty.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -130,7 +142,10 @@ const TrackingPerformance = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Anders' Retirement Plan
+											Download Transcript: Anders' Retirement Plan.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -365,7 +380,10 @@ const TrackingPerformance = (): ReactElement => {
 						component="p"
 						className={styles.contentText}
 					>
-						You might like to visit these links for more information
+						You might like to visit these links for more information.{" "}
+						{!isOnline && isDesktop
+							? "Internet access is required for full functionality."
+							: ""}
 					</Typography>
 					<Grid container spacing={3}>
 						<Grid item sm={6} md>
@@ -374,15 +392,19 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Assess business performance."
+								}
 								href={setToggleOfflineContent(
 									"https://www.business.qld.gov.au/running-business/protecting-business/risk-management/surviving-downturn/assess-performance",
 									isOnline
 								)}
-								title="assess business performance"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Assess business performance
+								Assess business performance.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -395,11 +417,15 @@ const TrackingPerformance = (): ReactElement => {
 									"https://www.business.qld.gov.au/running-business/finances-cash-flow/managing-money/monitoring-performance",
 									isOnline
 								)}
-								title="monitoring your financial performance"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Monitoring your financial performance."
+								}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Monitoring your financial performance
+								Monitoring your financial performance.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -412,11 +438,15 @@ const TrackingPerformance = (): ReactElement => {
 									"https://www.business.qld.gov.au/starting-business/planning/market-customer-research/benchmarking",
 									isOnline
 								)}
-								title="benchmarking your business"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Benchmarking your business."
+								}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Benchmarking your business
+								Benchmarking your business.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -429,11 +459,15 @@ const TrackingPerformance = (): ReactElement => {
 									"https://www.business.vic.gov.au/money-profit-and-accounting/financial-processes-and-procedures/check-your-financial-health",
 									isOnline
 								)}
-								title="check the financial health of your business"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Check the financial health of your business."
+								}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Check the financial health of your business
+								Check the financial health of your business.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -446,18 +480,22 @@ const TrackingPerformance = (): ReactElement => {
 									"https://www.business.qld.gov.au/running-business/growing-business/tips-improving",
 									isOnline
 								)}
-								title="improving business performance"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Improving business performance."
+								}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Improving business performance
+								Improving business performance.
 							</Button>
 						</Grid>
 					</Grid>
 				</Container>
 			</PageContainer>
 
-			<PageTip tip="DiscoverTopicsTips" />
+			<PageTip tip={DiscoverTopicsTips} />
 		</>
 	)
 }

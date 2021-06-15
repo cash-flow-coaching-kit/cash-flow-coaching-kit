@@ -22,6 +22,21 @@ import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 import { setToggleOfflineContent } from "./../../util/helper"
 import useHasInternet from "./../../context/useHasInternet"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+import fileSaver from 'file-saver'
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
+const saveFile = async (filename: string) => {
+	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
+	fileSaver.saveAs(blob, filename)
+}
 
 const DTPlanningBusiness = (): ReactElement => {
 	const styles = useDTStyles()
@@ -105,7 +120,10 @@ const DTPlanningBusiness = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Kirra's Native Foods
+											Download Transcript: Kirra's Native Foods.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -130,7 +148,10 @@ const DTPlanningBusiness = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Sanjana's Restaurant
+											Download Transcript: Sanjana's Restaurant.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -351,9 +372,7 @@ const DTPlanningBusiness = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						href="./pdf/BusinessPlan-Activity.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
+						onClick={() => saveFile("BusinessPlan-Activity.pdf")}
 					>
 						Download activity
 					</Button>
@@ -400,7 +419,10 @@ const DTPlanningBusiness = (): ReactElement => {
 						component="p"
 						className={styles.contentText}
 					>
-						You might like to visit these links for more information
+						You might like to visit these links for more information.{" "}
+						{!isOnline && isDesktop
+							? "Internet access is required for full functionality."
+							: ""}
 					</Typography>
 					<Grid container spacing={3}>
 						<Grid item sm={6} md={3}>
@@ -409,7 +431,11 @@ const DTPlanningBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="Plan for success"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Plan for success."
+								}
 								href={setToggleOfflineContent(
 									"https://www.business.gov.au/New-to-business-essentials/Plan-for-success",
 									isOnline
@@ -417,7 +443,7 @@ const DTPlanningBusiness = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Plan for success
+								Plan for success.
 							</Button>
 						</Grid>
 
@@ -427,7 +453,11 @@ const DTPlanningBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="How to develop your business plan"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "How to develop your business plan."
+								}
 								href={setToggleOfflineContent(
 									"https://www.business.gov.au/planning/business-plans/how-to-develop-your-business-plan",
 									isOnline
@@ -435,7 +465,7 @@ const DTPlanningBusiness = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								How to develop your business plan
+								How to develop your business plan.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -444,7 +474,11 @@ const DTPlanningBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="Starting your business checklist"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Starting your business checklist."
+								}
 								href={setToggleOfflineContent(
 									"https://www.business.gov.au/planning/templates-and-tools/checklists/starting-your-business-checklist",
 									isOnline
@@ -452,7 +486,7 @@ const DTPlanningBusiness = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Starting your business checklist
+								Starting your business checklist.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -461,7 +495,11 @@ const DTPlanningBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="Licenses or permits you may require"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Licenses or permits you may require."
+								}
 								href={setToggleOfflineContent(
 									"https://ablis.business.gov.au/pages/home.aspx",
 									isOnline
@@ -469,14 +507,14 @@ const DTPlanningBusiness = (): ReactElement => {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Licenses or permits you may require
+								Licenses or permits you may require.
 							</Button>
 						</Grid>
 					</Grid>
 				</Container>
 			</PageContainer>
 
-			<PageTip tip="DiscoverTopicsTips" />
+			<PageTip tip={DiscoverTopicsTips} />
 		</>
 	)
 }

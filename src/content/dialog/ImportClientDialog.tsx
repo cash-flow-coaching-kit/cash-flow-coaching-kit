@@ -137,6 +137,14 @@ const successContent = {
 	},
 }
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
 export default function ImportClientDialog({
 	open,
 	onClose,
@@ -371,8 +379,7 @@ export default function ImportClientDialog({
 				</Typography>
 				<Typography component="p" variant="body1" className={cls.contentText}>
 					The data you enter into the kit will be stored on this device only.
-					Exiting or clearing your browser cache will erase all unsaved client
-					data.
+					{isDesktop ? "" : "Exiting or clearing your browser cache will erase all unsaved client data."}
 				</Typography>
 			</DialogContent>
 			<DialogContent>

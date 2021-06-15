@@ -10,8 +10,8 @@ import Help from "../_partials/Help"
 import ReactGA from "react-ga"
 
 const uploadConfig = {
-	mac: "cash-flow-coaching-kit.dmg",
-	win: "cash-flow-coaching-kit.exe",
+	mac: "Cash Flow Coaching Kit.dmg",
+	win: "Cash Flow Coaching Kit.exe"
 }
 
 const trackingId = process.env.REACT_APP_GA_ID || ""
@@ -78,9 +78,9 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 										<button
 											onClick={triggerGATracking("mac")}
 											className="download-link"
-											title="Download desktop app - available for Windows or Mac OS X"
+											title="Download free desktop application - available for Windows or Mac"
 										>
-											{"Download for Mac OS X"}
+											Download free desktop app for Mac
 										</button>
 									</form>
 								</Box>
@@ -95,9 +95,9 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 										<button
 											onClick={triggerGATracking("win")}
 											className="download-link"
-											title="Download desktop app - available for Windows or Mac OS X"
+											title="Download free desktop application - available for Windows or Mac"
 										>
-											{"Download for Windows"}
+											Download free desktop app for Windows
 										</button>
 									</form>
 								</Box>

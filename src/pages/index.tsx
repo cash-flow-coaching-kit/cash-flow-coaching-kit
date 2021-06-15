@@ -106,6 +106,14 @@ const useHomepageStyles = makeStyles((theme) => ({
 	},
 }))
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
 const Homepage = (): ReactElement => {
 	const {
 		state: { clients },
@@ -209,6 +217,19 @@ const Homepage = (): ReactElement => {
 								trusted advisor about ways to better manage cash flow and use
 								the Cash Flow Coaching Kit.
 							</Typography>
+							{isDesktop && (
+								<>
+									<Typography className={styles.aboutText}>
+										The Cash Flow Coaching Kit desktop application will
+										regularly save your data during sessions.
+									</Typography>
+									<Typography className={styles.aboutText}>
+										We recommend you periodically export your data and back up
+										that data to a safe location.
+									</Typography>
+								</>
+							)}
+
 							<Typography className={styles.aboutText}>
 								GET STARTED to add a new client
 							</Typography>
@@ -280,7 +301,10 @@ const Homepage = (): ReactElement => {
 										target="_blank"
 										rel="noopener noreferrer"
 									>
-										Download Transcript
+										Download Transcript.{" "}
+										{!isOnline && isDesktop
+											? " Internet access is required for closed caption. "
+											: ""}
 									</Button>
 								</CardActions>
 							</Card>
@@ -299,10 +323,10 @@ const Homepage = (): ReactElement => {
 							className={styles.contentText}
 							align="center"
 						>
-							This website does not collect or store any personal information,
-							including the name of your business, any financial records you
-							input or upload, or any of the actions you are taking with your
-							business.
+							This {isDesktop ? " application " : " website "} does not collect
+							or store any personal information, including the name of your
+							business, any financial records you input or upload, or any of the
+							actions you are taking with your business.
 						</Typography>
 						<Typography
 							variant="body2"
@@ -311,8 +335,10 @@ const Homepage = (): ReactElement => {
 							align="center"
 						>
 							The data you enter into the Cash Flow Coaching Kit will be stored
-							on this device only. Clearing your browser cache will erase all
-							client data.
+							on this device only.{" "}
+							{isDesktop
+								? ""
+								: "Exiting or clearing your browser cache will erase all unsaved client data."}
 						</Typography>
 						<Typography
 							variant="body2"
@@ -320,8 +346,10 @@ const Homepage = (): ReactElement => {
 							className={styles.contentText}
 							align="center"
 						>
-							We recommend using the EXPORT function regularly to avoid data
-							loss. Please refer to the{" "}
+							{isDesktop
+								? ""
+								: "We recommend regularly using the EXPORT DATA function from the Client List to avoid data loss. "}{" "}
+							Please refer to the{" "}
 							<a
 								href="./docs/Terms and Conditions.pdf"
 								target="_blank"
@@ -329,7 +357,15 @@ const Homepage = (): ReactElement => {
 							>
 								Terms &amp; Conditions
 							</a>{" "}
-							of use and our Data usage and privacy statement.
+							of use and our{" "}
+							<a
+								href="./docs/Data usage and privacy statement.pdf"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Data usage and privacy statement
+							</a>
+							.
 						</Typography>
 					</Container>
 				</Container>

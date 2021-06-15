@@ -19,6 +19,7 @@ import { PageContainer } from "../components/Layouts"
 import { PrivateRoutes, routeVarReplacement } from "../util/routes/routes"
 import PageTip from "../components/PageTip"
 import Spacer from "../components/Spacer"
+import CoachingKitTips from "../content/tips/CoachingKitTips"
 
 const Arrow = (): ReactElement => {
 	const theme = useTheme()
@@ -109,6 +110,10 @@ const CoachingKit = (): ReactElement => {
 						</Typography>
 						<Typography className={styles.contentText} align="center">
 							They focus on profit, provisioning, liquidity and meeting goals.
+						</Typography>
+						<Typography className={styles.contentText} align="center">
+							Use the Coaching Conversation Guide on the Client List page to get
+							the most value from the kit.
 						</Typography>
 						<Typography className={styles.contentText} align="center">
 							Use the tools in the coaching phases; Discover, Apply and Plan
@@ -374,7 +379,7 @@ const CoachingKit = (): ReactElement => {
 						</Grid>
 					</Grid>
 				</Grid>
-				<PageTip tip="CoachingKitTips" />
+				<PageTip tip={CoachingKitTips} />
 			</PageContainer>
 		</>
 	)

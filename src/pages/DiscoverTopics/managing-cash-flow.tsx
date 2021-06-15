@@ -24,6 +24,15 @@ import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
 import { setToggleOfflineContent } from "./../../util/helper"
 import useHasInternet from "./../../context/useHasInternet"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 
 const DTManagingCashFlow = (): ReactElement => {
 	const styles = useDTStyles()
@@ -101,7 +110,10 @@ const DTManagingCashFlow = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Yulari's Cash Flow
+											Download Transcript: Yulari's Cash Flow.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -126,7 +138,10 @@ const DTManagingCashFlow = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Cameron's Cash Flow
+											Download Transcript: Cameron's Cash Flow.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -526,7 +541,10 @@ const DTManagingCashFlow = (): ReactElement => {
 						component="p"
 						className={styles.contentText}
 					>
-						You might like to visit these links for more information
+						You might like to visit these links for more information.{" "}
+						{!isOnline && isDesktop
+							? "Internet access is required for full functionality."
+							: ""}
 					</Typography>
 					<Grid container spacing={3}>
 						<Grid item sm={6}>
@@ -535,14 +553,19 @@ const DTManagingCashFlow = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="Cash flow statement"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Cash flow statement."
+								}
 								href={setToggleOfflineContent(
-									"https://www.business.gov.au/Finance/Accounting/How-to-set-up-a-cash-flow-statement", isOnline
+									"https://www.business.gov.au/Finance/Accounting/How-to-set-up-a-cash-flow-statement",
+									isOnline
 								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Cash flow statement
+								Cash flow statement.
 							</Button>
 						</Grid>
 						<Grid item sm={6}>
@@ -551,21 +574,26 @@ const DTManagingCashFlow = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="Cash flow and budgeting"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Cash flow and budgeting."
+								}
 								href={setToggleOfflineContent(
-									"https://www.business.gov.au/Finance/Accounting/How-to-create-a-budget", isOnline
+									"https://www.business.gov.au/Finance/Accounting/How-to-create-a-budget",
+									isOnline
 								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Cash flow and budgeting
+								Cash flow and budgeting.
 							</Button>
 						</Grid>
 					</Grid>
 				</Container>
 			</PageContainer>
 
-			<PageTip tip="DiscoverTopicsTips" />
+			<PageTip tip={DiscoverTopicsTips} />
 		</>
 	)
 }

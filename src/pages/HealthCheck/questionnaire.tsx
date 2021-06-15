@@ -18,6 +18,7 @@ import { PrivateRoutes } from "../../util/routes/routes"
 import Questionnaire from "../../components/HealthCheck/Questionnaire/Questionnaire"
 import Spacer from "../../components/Spacer"
 import SectionTitle from "../../components/SectionTitle"
+import HCQuestionnaireTips from "../../content/tips/HCQuestionnaireTips"
 
 /**
  * Health check questionnaire page
@@ -85,7 +86,7 @@ const HCQuestionnaire = (): ReactElement => {
 				</Grid>
 			</PageContainer>
 
-			<PageTip tip="HCQuestionnaire" />
+			<PageTip tip={HCQuestionnaireTips} />
 		</>
 	)
 }

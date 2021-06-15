@@ -13,6 +13,15 @@ import {
 	ChangeLevers,
 	ActionChecklist,
 } from "../content/CoachingConversation"
+import ClientListTips from "../content/tips/ClientListTips"
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 
 /**
  * Client listing page
@@ -29,9 +38,9 @@ const ClientList = (): ReactElement => {
 						<Box className="content-area">
 							<Typography>Manage and prepare your coaching.</Typography>
 							<Typography>
-								Read our coaching guidance to prepare for your client. These
-								materials will help you and your client get the most value from
-								the kit.
+								Read our coaching conversation guide to prepare for your client.
+								These materials will help you and your client get the most value
+								from the kit.
 							</Typography>
 							<Typography>
 								You can also import and export client data in your client list.
@@ -42,7 +51,9 @@ const ClientList = (): ReactElement => {
 						<ClientListing />
 					</Grid>
 					<Grid item xs={12} md={6}>
-						<SectionTitle component="h2">Coaching conversation</SectionTitle>
+						<SectionTitle component="h2">
+							Coaching conversation guide
+						</SectionTitle>
 						<Box>
 							<Prepare />
 							<Coaching />
@@ -56,7 +67,8 @@ const ClientList = (): ReactElement => {
 				</Grid>
 			</PageContainer>
 
-			<PageTip tip="ClientListTips" />
+			{!isDesktop && <PageTip tip={ClientListTips} />}
+
 		</>
 	)
 }

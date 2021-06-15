@@ -33,8 +33,8 @@ import HealthCheckPDF, {
 import { ClientContext } from "../../state/client"
 import { ClientActionTypes } from "../../state/client/client-outline"
 import Spacer from "../../components/Spacer"
-import servePDF from "../../components/PDF/servePDF"
 import { setToggleOfflineContent } from "./../../util/helper"
+
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
@@ -55,6 +55,14 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 }))
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 
 /**
  * Health check summary page
@@ -98,8 +106,18 @@ const HCSummary = (): ReactElement => {
 		}
 	}, [id, currentClient, dispatch])
 
+	const pdfMakeBlobPromise = (
+		pdf: pdfMake.TCreatedPdf,
+		filename: string
+	): Promise<{ blob: Blob; filename: string }> => {
+		return new Promise((resolve) => {
+			pdf.getBlob((b: Blob) => resolve({ blob: b, filename }))
+		})
+	}
+
 	const printPDF = async () => {
 		const data: HealthCheckQuestionSet = {}
+
 		questions.forEach((q, idx) => {
 			const { question } = q
 			const answer = healthCheck?.answers[idx] || "positive"
@@ -108,7 +126,8 @@ const HCSummary = (): ReactElement => {
 			data[idx] = { question, answer, text }
 		})
 		const pdf = await HealthCheckPDF(currentClient?.name ?? "Client", data)
-		servePDF(pdf)
+		const blob = await pdfMakeBlobPromise(pdf, "HealthCheck.pdf")
+		saveAs(blob.blob, `HealthCheck.pdf`)
 	}
 
 	return (
@@ -153,6 +172,11 @@ const HCSummary = (): ReactElement => {
 											isOnline
 										)}
 										target="_blank"
+										title={
+											isDesktop
+												? "Internet access is required for full functionality."
+												: "Support is available if you need assistance."
+										}
 										rel="noopener noreferrer"
 									>
 										Support is available
@@ -193,7 +217,9 @@ const HCSummary = (): ReactElement => {
 									<ListItemIcon>
 										<PictureAsPdfIcon />
 									</ListItemIcon>
-									<ListItemText onClick={printPDF}>Generate PDF</ListItemText>
+									<ListItemText onClick={printPDF}>
+										Download Generated PDF
+									</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>
