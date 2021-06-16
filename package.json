@@ -127,8 +127,8 @@
 				"provider": "github",
 				"owner": "pragmapartners",
 				"repo": "cash-flow-coaching-kit",
-				"releaseType": "prerelease",
-				"publishAutoUpdate": true
+				"publishAutoUpdate": true,
+				"releaseType": "prerelease"
 			}
 		]
 	},
