@@ -128,7 +128,7 @@
 				"owner": "pragmapartners",
 				"repo": "cash-flow-coaching-kit",
 				"publishAutoUpdate": true,
-				"releaseType": "prerelease"
+				"releaseType": "draft"
 			}
 		]
 	},

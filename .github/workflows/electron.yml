@@ -30,7 +30,6 @@ jobs:
           echo REACT_APP_APPLEIDPASS=${{ secrets.APPLE_ID_ASP }} >> .env
           echo WIN_CSC_LINK=${{ secrets.WIN_SIGN_CERT }} >> .env
           echo WIN_CSC_KEY_PASSWORD=${{ secrets.WIN_SIGN_PASS }} >> .env
-          echo EP_PRE_RELEASEis=true >> .env
 
       - name: Install dependencies
         run: yarn install
