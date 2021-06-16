@@ -68,7 +68,7 @@ jobs:
           name: ${{ steps.extract_version.outputs.version }}
           tag_name: v${{ steps.extract_version.outputs.version }}
           prerelease: true
-            files: ./dist/*
+          files: ./dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
