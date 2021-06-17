@@ -155,7 +155,11 @@ const ActionChecklist = (): ReactElement => {
 						<FourQuestions />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
-								<ListItem button style={{ cursor: "pointer" }}>
+								<ListItem
+									component="button"
+									className="pdfDownloadLink"
+									onClick={printPDF}
+								>
 									<ListItemIcon>
 										<PictureAsPdfIcon />
 									</ListItemIcon>

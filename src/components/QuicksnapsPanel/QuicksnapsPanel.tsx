@@ -10,21 +10,16 @@ type QPProps = {
 
 const saveFile = async(filename:string) => {
 	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
-	fileSaver.saveAs(blob, filename)
+	return(fileSaver.saveAs(blob, filename))
 }
 export default function QuicksnapsPanel({ filename }: QPProps): ReactElement {
 	return (
 		<ExpandableNav>
 			<List component="nav" disablePadding>
 				<ListItem
-					component="a"
+					component="button"
 					onClick={() => saveFile(filename)}
-					target="_blank"
-					rel="noopener noreferrer"
-					style={{
-						color: "inherit",
-						cursor: "pointer"
-					}}
+					className="pdfDownloadLink"
 				>
 					<ListItemIcon>
 						<PictureAsPdfIcon />

@@ -111,11 +111,15 @@ export default function ControlPanel(): ReactElement {
 				</ListItem>
 				{!isCompare() && !isNewPage() && <ControlCompareLink />}
 				{!isNewPage() && (
-					<ListItem button>
+					<ListItem
+						component="button"
+						className="pdfDownloadLink"
+						onClick={printPDF}
+					>
 						<ListItemIcon>
 							<PictureAsPdfIcon />
 						</ListItemIcon>
-						<ListItemText onClick={printPDF}>Download Generated PDF</ListItemText>
+						<ListItemText>Download Generated PDF</ListItemText>
 					</ListItem>
 				)}
 			</List>

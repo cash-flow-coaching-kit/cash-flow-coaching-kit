@@ -79,11 +79,9 @@ const ChangeLevers = (): ReactElement => {
 						<ExpandableNav>
 							<List component="nav" disablePadding>
 								<ListItem
-									component="a"
+									component="button"
 									onClick={() => saveFile("Change levers.pdf")}
-									target="_blank"
-									rel="noopener noreferrer"
-									style={{ color: "inherit", cursor: "pointer" }}
+									className="pdfDownloadLink"
 								>
 									<ListItemIcon>
 										<PictureAsPdfIcon />

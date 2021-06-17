@@ -148,3 +148,20 @@ code {
 .hidden {
 	display: none;
 }
+.pdfDownloadLink {
+	color: inherit;
+	cursor: pointer;
+	background-color: inherit;
+	border: 0;
+	&:hover {
+		background-color: whitesmoke;
+	}
+}
+.pdfDownloadButton {
+	color: #0000ee;
+	cursor: pointer;
+	text-decoration: underline;
+	background-color: inherit;
+	border: 0;
+	padding: 0;
+}

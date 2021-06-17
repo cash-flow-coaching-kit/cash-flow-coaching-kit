@@ -23,6 +23,7 @@ import Spacer from "../components/Spacer"
 import ImportClient from "../components/ClientListing/_partials/ImportClient"
 import TakeATour from "../components/TakeATour"
 import useHasInternet from "./../context/useHasInternet"
+import fileSaver from 'file-saver'
 
 const useHomepageStyles = makeStyles((theme) => ({
 	container: {
@@ -112,6 +113,11 @@ let isDesktop = false
 const userAgent = navigator.userAgent.toLowerCase()
 if (userAgent.indexOf(" electron/") > -1) {
 	isDesktop = true
+}
+
+const saveFile = async (filename: string) => {
+	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
+	return fileSaver.saveAs(blob, filename)
 }
 
 const Homepage = (): ReactElement => {
@@ -350,21 +356,21 @@ const Homepage = (): ReactElement => {
 								? ""
 								: "We recommend regularly using the EXPORT DATA function from the Client List to avoid data loss. "}{" "}
 							Please refer to the{" "}
-							<a
-								href="./docs/Terms and Conditions.pdf"
-								target="_blank"
-								rel="noopener noreferrer"
+							<button
+								onClick={() => saveFile("./docs/Terms and Conditions.pdf")}
+								className="pdfDownloadButton"
 							>
 								Terms &amp; Conditions
-							</a>{" "}
+							</button>{" "}
 							of use and our{" "}
-							<a
-								href="./docs/Data usage and privacy statement.pdf"
-								target="_blank"
-								rel="noopener noreferrer"
+							<button
+								onClick={() =>
+									saveFile("./docs/Data usage and privacy statement.pdf")
+								}
+								className="pdfDownloadButton"
 							>
 								Data usage and privacy statement
-							</a>
+							</button>
 							.
 						</Typography>
 					</Container>

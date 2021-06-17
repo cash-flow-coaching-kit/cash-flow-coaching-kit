@@ -214,15 +214,14 @@ const HCSummary = (): ReactElement => {
 									<ListItemText>Saved Health Checks</ListItemText>
 								</ListItem>
 								<ListItem
-									button
-									style={{ cursor: "pointer" }}
+									component="button"
+									className="pdfDownloadLink"
+									onClick={printPDF}
 								>
 									<ListItemIcon>
 										<PictureAsPdfIcon />
 									</ListItemIcon>
-									<ListItemText onClick={printPDF}>
-										Download Generated PDF
-									</ListItemText>
+									<ListItemText>Download Generated PDF</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>
