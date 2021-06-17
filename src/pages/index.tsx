@@ -116,7 +116,7 @@ if (userAgent.indexOf(" electron/") > -1) {
 }
 
 const saveFile = async (filename: string) => {
-	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
+	const blob = await fetch("./doc/" + filename).then((r) => r.blob())
 	return fileSaver.saveAs(blob, filename)
 }
 
@@ -357,7 +357,7 @@ const Homepage = (): ReactElement => {
 								: "We recommend regularly using the EXPORT DATA function from the Client List to avoid data loss. "}{" "}
 							Please refer to the{" "}
 							<button
-								onClick={() => saveFile("./docs/Terms and Conditions.pdf")}
+								onClick={() => saveFile("Terms and Conditions.pdf")}
 								className="pdfDownloadButton"
 							>
 								Terms &amp; Conditions
@@ -365,7 +365,7 @@ const Homepage = (): ReactElement => {
 							of use and our{" "}
 							<button
 								onClick={() =>
-									saveFile("./docs/Data usage and privacy statement.pdf")
+									saveFile("Data usage and privacy statement.pdf")
 								}
 								className="pdfDownloadButton"
 							>
