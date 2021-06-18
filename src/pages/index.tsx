@@ -359,15 +359,15 @@ const Homepage = (): ReactElement => {
 							<button
 								onClick={() => saveFile("Terms and Conditions.pdf")}
 								className="pdfDownloadButton"
+								title="Download Terms & Conditions"
 							>
 								Terms &amp; Conditions
 							</button>{" "}
 							of use and our{" "}
 							<button
-								onClick={() =>
-									saveFile("Data usage and privacy statement.pdf")
-								}
+								onClick={() => saveFile("Data usage and privacy statement.pdf")}
 								className="pdfDownloadButton"
+								title="Download Data usage and privacy statement"
 							>
 								Data usage and privacy statement
 							</button>
