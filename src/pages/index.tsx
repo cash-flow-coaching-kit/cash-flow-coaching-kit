@@ -116,7 +116,7 @@ if (userAgent.indexOf(" electron/") > -1) {
 }
 
 const saveFile = async (filename: string) => {
-	const blob = await fetch("./doc/" + filename).then((r) => r.blob())
+	const blob = await fetch("./docs/" + filename).then((r) => r.blob())
 	return fileSaver.saveAs(blob, filename)
 }
 
