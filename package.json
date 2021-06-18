@@ -53,7 +53,6 @@
 		"node-sass": "^4.14.0",
 		"p-min-delay": "^3.1.0",
 		"pdfmake": "^0.1.65",
-		"puppeteer": "^9.0.0",
 		"qs": "^6.9.4",
 		"react": "^16.13.1",
 		"react-app-polyfill": "^1.0.6",
