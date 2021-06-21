@@ -341,15 +341,10 @@ const Homepage = (): ReactElement => {
 							align="center"
 						>
 							The data you enter into the Cash Flow Coaching Kit will be stored
-<<<<<<< HEAD
-							on this device only. Exiting or clearing your browser cache will
-							erase all unsaved client data.
-=======
 							on this device only.{" "}
 							{isDesktop
 								? ""
 								: "Exiting or clearing your browser cache will erase all unsaved client data."}
->>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 						</Typography>
 						<Typography
 							variant="body2"
@@ -357,25 +352,6 @@ const Homepage = (): ReactElement => {
 							className={styles.contentText}
 							align="center"
 						>
-<<<<<<< HEAD
-							We recommend regularly using the EXPORT DATA function from the
-							Client List to avoid data loss. Please refer to the{" "}
-							<a
-								href="/docs/Terms and Conditions.pdf"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								Terms &amp; Conditions
-							</a>{" "}
-							of use and our{" "}
-							<a
-								href="/docs/Data usage and privacy statement.pdf"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								Data usage and privacy statement
-							</a>
-=======
 							{isDesktop
 								? ""
 								: "We recommend regularly using the EXPORT DATA function from the Client List to avoid data loss. "}{" "}
@@ -395,7 +371,6 @@ const Homepage = (): ReactElement => {
 							>
 								Data usage and privacy statement
 							</button>
->>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 							.
 						</Typography>
 					</Container>

@@ -20,9 +20,6 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
-<<<<<<< HEAD
-import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
-=======
 import { setToggleOfflineContent } from "./../../util/helper"
 import useHasInternet from "./../../context/useHasInternet"
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
@@ -40,7 +37,6 @@ const saveFile = async (filename: string) => {
 	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
 	fileSaver.saveAs(blob, filename)
 }
->>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 
 const DTRecordKeeping = (): ReactElement => {
 	const styles = useDTStyles()

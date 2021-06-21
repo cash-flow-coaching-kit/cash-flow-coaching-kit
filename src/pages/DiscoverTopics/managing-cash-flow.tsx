@@ -22,9 +22,6 @@ import useDTStyles from "./_config/styles"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
-<<<<<<< HEAD
-import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
-=======
 import { setToggleOfflineContent } from "./../../util/helper"
 import useHasInternet from "./../../context/useHasInternet"
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
@@ -36,7 +33,6 @@ const userAgent = navigator.userAgent.toLowerCase()
 if (userAgent.indexOf(" electron/") > -1) {
 	isDesktop = true
 }
->>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 
 const DTManagingCashFlow = (): ReactElement => {
 	const styles = useDTStyles()

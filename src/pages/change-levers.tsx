@@ -26,15 +26,12 @@ import {
 } from "../content/ChangeLevers"
 import Spacer from "../components/Spacer"
 import ChangeLeversTips from "../content/tips/ChangeLeversTips"
-<<<<<<< HEAD
-=======
 import fileSaver from "file-saver"
 
 const saveFile = async (filename: string) => {
 	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
 	fileSaver.saveAs(blob, filename)
 }
->>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 
 const ChangeLevers = (): ReactElement => {
 	const styles = makeStyles((theme) => ({
