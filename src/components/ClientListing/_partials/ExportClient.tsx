@@ -33,6 +33,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
 /**
  * Component used to handle exporting a clients data
  *
@@ -90,7 +98,8 @@ export default function ExportClientButton({
 				</DialogTitle>
 				<DialogContent>
 					<Typography id="export-client-data-dialog-description">
-						Your file will save to your browser&apos;s automatic download
+						Your file will save to your{" "}
+						{isDesktop ? " desktop's " : " browser's automatic "} download
 						location. It is saved as a .json file. Once downloaded you can move
 						the file to any location on your computer.
 					</Typography>

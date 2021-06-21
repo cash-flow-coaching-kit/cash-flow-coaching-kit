@@ -26,6 +26,12 @@ import {
 } from "../content/ChangeLevers"
 import Spacer from "../components/Spacer"
 import ChangeLeversTips from "../content/tips/ChangeLeversTips"
+import fileSaver from "file-saver"
+
+const saveFile = async (filename: string) => {
+	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
+	fileSaver.saveAs(blob, filename)
+}
 
 const ChangeLevers = (): ReactElement => {
 	const styles = makeStyles((theme) => ({
@@ -73,16 +79,14 @@ const ChangeLevers = (): ReactElement => {
 						<ExpandableNav>
 							<List component="nav" disablePadding>
 								<ListItem
-									component="a"
-									href="/pdf/Change levers.pdf"
-									target="_blank"
-									rel="noopener noreferrer"
-									style={{ color: "inherit" }}
+									component="button"
+									onClick={() => saveFile("Change levers.pdf")}
+									className="pdfDownloadLink"
 								>
 									<ListItemIcon>
 										<PictureAsPdfIcon />
 									</ListItemIcon>
-									<ListItemText>Change Levers PDF</ListItemText>
+									<ListItemText>Download Change Levers PDF</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>

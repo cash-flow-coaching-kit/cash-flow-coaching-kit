@@ -33,7 +33,6 @@ import { ActionChecklistMachine } from "../data/ActionChecklist/_config/machine"
 import Loading from "../components/Loading"
 import Spacer from "../components/Spacer"
 import ActionChecklistPDF from "../components/PDF/ActionChecklistPDF"
-import servePDF from "../components/PDF/servePDF"
 import ActionChecklistUseCase from "../data/ActionChecklist/ChecklistLogic"
 import ActionNotesUseCase from "../data/ActionChecklist/NotesLogic"
 import ActionPriorityUseCase from "../data/ActionChecklist/PriorityLogic"
@@ -103,6 +102,15 @@ const ActionChecklist = (): ReactElement => {
 		}
 	}
 
+	const pdfMakeBlobPromise = (
+		pdf: pdfMake.TCreatedPdf,
+		filename: string
+	): Promise<{ blob: Blob; filename: string }> => {
+		return new Promise((resolve) => {
+			pdf.getBlob((b: Blob) => resolve({ blob: b, filename }))
+		})
+	}
+
 	const printPDF = async (): Promise<void> => {
 		if (currentClient?.id) {
 			const clientId = currentClient.id
@@ -116,7 +124,9 @@ const ActionChecklist = (): ReactElement => {
 				pdfNotes,
 				pdfPriority
 			)
-			servePDF(pdf)
+
+			const blob = await pdfMakeBlobPromise(pdf, "ActionChecklistSummary.pdf")
+			saveAs(blob.blob, `ActionChecklistSummary.pdf`)
 		}
 	}
 
@@ -145,11 +155,17 @@ const ActionChecklist = (): ReactElement => {
 						<FourQuestions />
 						<ExpandableNav>
 							<List component="nav" disablePadding>
-								<ListItem button>
+								<ListItem
+									component="button"
+									className="pdfDownloadLink"
+									onClick={printPDF}
+								>
 									<ListItemIcon>
 										<PictureAsPdfIcon />
 									</ListItemIcon>
-									<ListItemText onClick={printPDF}>Generate PDF</ListItemText>
+									<ListItemText onClick={printPDF}>
+										Download Generated PDF
+									</ListItemText>
 								</ListItem>
 							</List>
 						</ExpandableNav>

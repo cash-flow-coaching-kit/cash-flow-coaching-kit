@@ -1,14 +1,16 @@
 /* eslint-disable */
-import { Worksheet, Workbook } from "exceljs"
-import { NO_MERGE, ProcessFileItem } from "./ImportDataGeneralLib"
+import { ProcessFileItem } from "./ImportDataGeneralLib"
 import { v4 as uuidv4 } from "uuid"
+import XLSX from "xlsx"
 
 const rewritePattern = require("regexpu-core")
+
 const {
 	generateRegexpuOptions,
 } = require("@babel/helper-create-regexp-features-plugin/lib/util")
 
 const { RegExp } = global
+
 try {
 	new RegExp("a", "u")
 } catch (err) {
@@ -29,32 +31,21 @@ try {
 	global.RegExp.prototype = RegExp
 }
 
-const ExcelJS = require("exceljs/dist/es5/exceljs.browser")
-
 const excelCreateFromData = async (data: Uint8Array) => {
 	try {
-		const workbook = new ExcelJS.Workbook()
-		await workbook.xlsx.load(data)
+		const workbook = XLSX.read(data, { type: "array" })
 		return workbook
 	} catch (err) {
 		// console.log("err", err)
 	}
 }
 
-const excelProcessSheet = (worksheet: Worksheet): ProcessFileItem[] => {
+const excelProcessSheet = (data: any[]): ProcessFileItem[] => {
 	const result: ProcessFileItem[] = []
-	worksheet.eachRow({ includeEmpty: true }, function (row, rowNumber) {
-		let values =
-			typeof row.values === "object" ? Object.values(row.values) : row.values
-		values = values
-			.filter((a: any) => a)
-			.map((a: any) => {
-				// check for and extract computed values
-				return typeof a === "object" ? a?.result : a
-			})
+	data.filter(Boolean).forEach((values: any[]) => {
 		const last: any = values.pop()
 		if (typeof last === "number") {
-			const description = values.join(" ").trim()
+			const description = values.filter(Boolean).join(" ").trim()
 			result.push({
 				id: uuidv4(),
 				description,
@@ -69,18 +60,18 @@ const excelProcessSheet = (worksheet: Worksheet): ProcessFileItem[] => {
 }
 
 const excelProcessWorkbook = async (
-	workbook: Workbook
+	workbook: XLSX.WorkBook
 ): Promise<ProcessFileItem[] | false> => {
-	const worksheet = workbook.worksheets[0]
-	if (!worksheet) return false
-	return excelProcessSheet(worksheet!)
+	const worksheet = workbook.Sheets[workbook.SheetNames[0]]
+	const data = XLSX.utils.sheet_to_json(worksheet, { header: 1 })
+	if (!data) return false
+	return excelProcessSheet(data)
 }
 
 export const excelProcessFile = async (
 	data: Uint8Array
 ): Promise<ProcessFileItem[] | false> => {
 	const workbook = await excelCreateFromData(data)
-	// console.log("workbook", workbook)
 	if (!workbook) return false
 	return excelProcessWorkbook(workbook!)
 }

@@ -1,12 +1,17 @@
 {
-	"name": "dcfck-app",
-	"version": "0.1.0",
-	"private": true,
+	"name": "cash-flow-coaching-kit",
+	"version": "0.0.1",
+	"author": "Cash Flow Coaching Kit",
+	"description": "Cash Flow Coaching Kit",
+	"license": "UNLICENSED",
+	"homepage": "./",
+	"main": "public/electron.js",
 	"dependencies": {
 		"@date-io/date-fns": "1.x",
+		"@imjs/electron-differential-updater": "^5.1.4",
 		"@loadable/component": "5.14.1",
 		"@material-ui/core": "4.11.2",
-		"@material-ui/icons": "^4.9.1",
+		"@material-ui/icons": "^4.11.2",
 		"@material-ui/lab": "^4.0.0-alpha.53",
 		"@material-ui/pickers": "^3.2.10",
 		"@testing-library/jest-dom": "^4.2.4",
@@ -30,11 +35,16 @@
 		"@types/uuid": "8.3.0",
 		"@xstate/react": "^0.8.1",
 		"body-scroll-lock": "3.1.5",
+		"concurrently": "^6.0.2",
 		"core-js": "3.8.1",
 		"date-fns": "2.16.1",
 		"detect-browser": "5.2.0",
 		"dexie": "3.0.3",
 		"dexie-export-import": "^1.0.0-rc.2",
+		"electron-is-dev": "^2.0.0",
+		"electron-notarize": "^1.0.0",
+		"electron-updater": "^4.3.8",
+		"events": "^3.3.0",
 		"exceljs": "4.2.0",
 		"file-saver": "2.0.5",
 		"formik": "2.2.6",
@@ -48,17 +58,21 @@
 		"react-app-polyfill": "^1.0.6",
 		"react-beautiful-dnd": "^13.0.0",
 		"react-dom": "^16.13.1",
+		"react-ga": "^3.3.0",
 		"react-router-dom": "^5.1.2",
-		"react-scripts": "3.4.1",
+		"react-scripts": "^3.4.1",
 		"reactour": "^1.17.0",
 		"regenerator-runtime": "^0.13.5",
 		"source-map-explorer": "2.5.1",
 		"styled-components": "^4.0.0",
 		"typescript": "~3.7.2",
 		"uuid": "8.3.2",
+		"wait-on": "^5.3.0",
 		"whatwg-fetch": "3.5.0",
+		"xlsx": "^0.17.0",
 		"xstate": "4.15.1",
-		"yarn": "1.22.10"
+		"yarn": "1.22.10",
+		"youtube-dl": "^3.5.0"
 	},
 	"scripts": {
 		"start:web": "react-scripts start",
@@ -69,7 +83,57 @@
 		"test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
 		"eject": "react-scripts eject",
 		"analyze": "source-map-explorer 'build/static/js/*.js'",
-		"clean": "rimraf build"
+		"clean": "rimraf build",
+		"start": "run-p build start:web",
+		"electron:serve": "export NODE_ENV=dev && concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+		"electron:package": "electron-builder -c.extraMetadata.main=build/electron.js -mw --publish always",
+		"preelectron:package": "run-s refresh:offlinedoc build",
+		"refresh:offlinevid": "node ./public/start-refresh-youtube-videos.mjs",
+		"refresh:offlinedoc": "node ./public/start-refresh-website-statics.mjs"
+	},
+	"build": {
+		"productName": "Cash Flow Coaching Kit",
+		"appId": "com.dcfck.app",
+		"afterSign": "assets/mac/notarize.js",
+		"directories": {
+			"buildResources": "build"
+		},
+		"dmg": {
+			"sign": false
+		},
+		"mac": {
+			"icon": "build/icon.icns",
+			"hardenedRuntime": true,
+			"gatekeeperAssess": false,
+			"entitlements": "assets/mac/entitlements.mac.plist",
+			"entitlementsInherit": "assets/mac/entitlements.mac.plist",
+			"category": "public.app-category.finance",
+			"type": "distribution"
+		},
+		"win": {
+			"icon": "build/icon.ico",
+			"publisherName": "Cash Flow Coaching Kit",
+			"signAndEditExecutable": true,
+			"verifyUpdateCodeSignature": false,
+			"target": "nsis"
+		},
+		"asarUnpack": [
+			"**/*.node"
+		],
+		"npmRebuild": false,
+		"publish": [
+			{
+				"provider": "github",
+				"owner": "cash-flow-coaching-kit",
+				"repo": "cash-flow-coaching-kit",
+				"publishAutoUpdate": true,
+				"releaseType": "prerelease"
+			}
+		]
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/cash-flow-coaching-kit/cash-flow-coaching-kit.git"
 	},
 	"browserslist": {
 		"production": [
@@ -90,6 +154,8 @@
 		"@typescript-eslint/eslint-plugin": "^2.29.0",
 		"commitizen": "4.2.2",
 		"cz-conventional-changelog": "3.3.0",
+		"electron": "^13.1.2",
+		"electron-builder": "^22.10.5",
 		"eslint": "^6.8.0",
 		"eslint-config-airbnb-typescript": "^7.2.1",
 		"eslint-config-prettier": "^6.11.0",
@@ -102,8 +168,10 @@
 		"fake-indexeddb": "^3.0.0",
 		"foreman": "^3.0.1",
 		"husky": "4.3.6",
+		"npm-run-all": "^4.1.5",
 		"prettier": "2.2.1",
 		"pretty-quick": "^2.0.1",
+		"puppeteer": "^9.0.0",
 		"typescript-eslint-parser": "^22.0.0"
 	},
 	"eslintIgnore": [
@@ -117,12 +185,6 @@
 		"**/*.test.ts",
 		"src/setupTests.ts"
 	],
-	"husky": {
-		"hooks": {
-			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-			"pre-commit": "pretty-quick --staged"
-		}
-	},
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"

@@ -12,9 +12,20 @@ import {
 import ExpandableNav from "../../components/ExpandableNav"
 import useStyles from "./styles"
 import Spacer from "../../components/Spacer"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 
 export default function HealthCheck(): ReactElement {
 	const cls = useStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<ExpandableNav title="Health Check" defaultExpanded={false}>
@@ -50,7 +61,15 @@ export default function HealthCheck(): ReactElement {
 						Cash flow is a key business challenge that may affect small business
 						owners’ mental health and wellbeing.{" "}
 						<a
-							href="https://www.ato.gov.au/smallbizmentalhealth"
+							href={setToggleOfflineContent(
+								"https://www.ato.gov.au/smallbizmentalhealth",
+								isOnline
+							)}
+							title={
+								!isOnline && isDesktop
+									? "Internet access is required for full functionality."
+									: "Support is available if you need assistance."
+							}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -66,19 +85,26 @@ export default function HealthCheck(): ReactElement {
 					<CardHeader title="Health Check coaching tips" />
 					<CardMedia
 						className={cls.embed}
-						component="iframe"
+						component={isOnline ? "iframe" : "video"}
 						title="Health Check coaching tips"
-						src="https://www.youtube.com/embed/C6Gduin0fJg?rel=0&modestbranding=1"
+						src={setToggleOfflineContent(
+							"https://www.youtube.com/embed/C6Gduin0fJg?rel=0&modestbranding=1",
+							isOnline
+						)}
+						controls
 					/>
 					<CardActions>
 						<Button
 							color="primary"
-							href="/transcripts/Health Check coaching tips.docx"
+							href="./transcripts/Health Check coaching tips.docx"
 							aria-label="Download transcript: Health Check coaching tips"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							Download Transcript
+							Download Transcript.{" "}
+							{!isOnline && isDesktop
+								? " Internet access is required for closed caption. "
+								: ""}
 						</Button>
 					</CardActions>
 				</Card>
