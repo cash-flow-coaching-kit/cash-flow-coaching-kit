@@ -113,3 +113,55 @@ code {
 .MuiTooltip-tooltip {
 	font-size: 0.75rem !important;
 }
+
+.download-link {
+	color: white;
+	background-color: #3f51b5;
+	border: 2px solid white;
+	text-decoration: none;
+	padding: 10px;
+	cursor: pointer;
+	margin-right: 15px;
+	font-weight: bold;
+	&:hover {
+		background-color: rgb(44, 56, 126);
+	}
+}
+
+#version {
+	position: fixed;
+	right: 20px;
+	bottom: 0;
+}
+
+#notification {
+	position: fixed;
+	bottom: 75px;
+	left: 20px;
+	width: 200px;
+	padding: 20px;
+	border-radius: 5px;
+	background-color: white;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	opacity: 0.7;
+}
+.hidden {
+	display: none;
+}
+.pdfDownloadLink {
+	color: inherit;
+	cursor: pointer;
+	background-color: inherit;
+	border: 0;
+	&:hover {
+		background-color: whitesmoke;
+	}
+}
+.pdfDownloadButton {
+	color: #0000ee;
+	cursor: pointer;
+	text-decoration: underline;
+	background-color: inherit;
+	border: 0;
+	padding: 0;
+}

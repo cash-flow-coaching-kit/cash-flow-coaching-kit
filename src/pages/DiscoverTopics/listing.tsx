@@ -50,7 +50,7 @@ const DTListing = (): ReactElement => {
 											component="img"
 											alt="Planning your business"
 											height="140"
-											image="/images/planning-business.ebd51a56.png"
+											image="./images/planning-business.ebd51a56.png"
 											title="Planning your business"
 										/>
 										<CardContent>
@@ -71,7 +71,7 @@ const DTListing = (): ReactElement => {
 											component="img"
 											alt="Record Keeping"
 											height="140"
-											image="/images/budget.e07d4e44.png"
+											image="./images/budget.e07d4e44.png"
 											title="Record Keeping"
 										/>
 										<CardContent>
@@ -92,7 +92,7 @@ const DTListing = (): ReactElement => {
 											component="img"
 											alt="Funding your business"
 											height="140"
-											image="/images/funding.a3b58fb3.png"
+											image="./images/funding.a3b58fb3.png"
 											title="Funding your business"
 										/>
 										<CardContent>
@@ -113,7 +113,7 @@ const DTListing = (): ReactElement => {
 											component="img"
 											alt="Managing your cash flow"
 											height="140"
-											image="/images/managing.1825be92.png"
+											image="./images/managing.1825be92.png"
 											title="Managing your cash flow"
 										/>
 										<CardContent>
@@ -134,7 +134,7 @@ const DTListing = (): ReactElement => {
 											component="img"
 											alt="Planning your regular Financial commitments"
 											height="140"
-											image="/images/planning-commitments.71750b55.png"
+											image="./images/planning-commitments.71750b55.png"
 											title="Planning your regular Financial commitments"
 										/>
 										<CardContent>
@@ -155,7 +155,7 @@ const DTListing = (): ReactElement => {
 											component="img"
 											alt="Tracking your performance"
 											height="140"
-											image="/images/tracking.66e33c25.png"
+											image="./images/tracking.66e33c25.png"
 											title="Tracking your performance"
 										/>
 										<CardContent>

@@ -1,5 +1,6 @@
 import React, { ReactElement, useContext } from "react"
 import { Link as RouterLink } from "react-router-dom"
+
 import {
 	Typography,
 	Container,
@@ -14,12 +15,15 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { PrivateRoutes } from "../util/routes/routes"
+import { setToggleOfflineContent } from "../util/helper"
 import { PublicNavbar } from "../components/Navbar"
 import { NewClientDialog } from "../content/dialog"
 import { ClientContext } from "../state/client"
 import Spacer from "../components/Spacer"
 import ImportClient from "../components/ClientListing/_partials/ImportClient"
 import TakeATour from "../components/TakeATour"
+import useHasInternet from "./../context/useHasInternet"
+import fileSaver from 'file-saver'
 
 const useHomepageStyles = makeStyles((theme) => ({
 	container: {
@@ -103,11 +107,25 @@ const useHomepageStyles = makeStyles((theme) => ({
 	},
 }))
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
+const saveFile = async (filename: string) => {
+	const blob = await fetch("./docs/" + filename).then((r) => r.blob())
+	return fileSaver.saveAs(blob, filename)
+}
+
 const Homepage = (): ReactElement => {
 	const {
 		state: { clients },
 	} = useContext(ClientContext)
 	const styles = useHomepageStyles()
+	const isOnline = useHasInternet()
 
 	const hasClients = (): boolean => clients.length > 0
 
@@ -205,6 +223,19 @@ const Homepage = (): ReactElement => {
 								trusted advisor about ways to better manage cash flow and use
 								the Cash Flow Coaching Kit.
 							</Typography>
+							{isDesktop && (
+								<>
+									<Typography className={styles.aboutText}>
+										The Cash Flow Coaching Kit desktop application will
+										regularly save your data during sessions.
+									</Typography>
+									<Typography className={styles.aboutText}>
+										We recommend you periodically export your data and back up
+										that data to a safe location.
+									</Typography>
+								</>
+							)}
+
 							<Typography className={styles.aboutText}>
 								GET STARTED to add a new client
 							</Typography>
@@ -246,7 +277,7 @@ const Homepage = (): ReactElement => {
 								<CardActions>
 									<Button
 										color="primary"
-										href="/transcripts/Take-a-tour-of-the-kit.docx"
+										href="./transcripts/Take-a-tour-of-the-kit.docx"
 										aria-label="Download transcript: Take a tour of the kit"
 										target="_blank" rel="noopener noreferrer"
 									>
@@ -260,19 +291,26 @@ const Homepage = (): ReactElement => {
 								<CardHeader title="What advisors think of the kit" />
 								<CardMedia
 									className={styles.embed}
-									component="iframe"
+									component={isOnline ? "iframe" : "video"}
 									title="What advisors think of the kit"
-									src="https://www.youtube.com/embed/z64Bc5K2TKo?rel=0&modestbranding=1"
+									src={setToggleOfflineContent(
+										"https://www.youtube.com/embed/z64Bc5K2TKo?rel=0&modestbranding=1",
+										isOnline
+									)}
+									controls
 								/>
 								<CardActions>
 									<Button
 										color="primary"
-										href="/transcripts/What-advisors-think-of-the-kit.docx"
+										href="./transcripts/What-advisors-think-of-the-kit.docx"
 										aria-label="Download transcript: What advisors think of the kit"
 										target="_blank"
 										rel="noopener noreferrer"
 									>
-										Download Transcript
+										Download Transcript.{" "}
+										{!isOnline && isDesktop
+											? " Internet access is required for closed caption. "
+											: ""}
 									</Button>
 								</CardActions>
 							</Card>
@@ -291,10 +329,10 @@ const Homepage = (): ReactElement => {
 							className={styles.contentText}
 							align="center"
 						>
-							This website does not collect or store any personal information,
-							including the name of your business, any financial records you
-							input or upload, or any of the actions you are taking with your
-							business.
+							This {isDesktop ? " application " : " website "} does not collect
+							or store any personal information, including the name of your
+							business, any financial records you input or upload, or any of the
+							actions you are taking with your business.
 						</Typography>
 						<Typography
 							variant="body2"
@@ -303,8 +341,15 @@ const Homepage = (): ReactElement => {
 							align="center"
 						>
 							The data you enter into the Cash Flow Coaching Kit will be stored
+<<<<<<< HEAD
 							on this device only. Exiting or clearing your browser cache will
 							erase all unsaved client data.
+=======
+							on this device only.{" "}
+							{isDesktop
+								? ""
+								: "Exiting or clearing your browser cache will erase all unsaved client data."}
+>>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 						</Typography>
 						<Typography
 							variant="body2"
@@ -312,6 +357,7 @@ const Homepage = (): ReactElement => {
 							className={styles.contentText}
 							align="center"
 						>
+<<<<<<< HEAD
 							We recommend regularly using the EXPORT DATA function from the
 							Client List to avoid data loss. Please refer to the{" "}
 							<a
@@ -329,6 +375,27 @@ const Homepage = (): ReactElement => {
 							>
 								Data usage and privacy statement
 							</a>
+=======
+							{isDesktop
+								? ""
+								: "We recommend regularly using the EXPORT DATA function from the Client List to avoid data loss. "}{" "}
+							Please refer to the{" "}
+							<button
+								onClick={() => saveFile("Terms and Conditions.pdf")}
+								className="pdfDownloadButton"
+								title="Download Terms & Conditions"
+							>
+								Terms &amp; Conditions
+							</button>{" "}
+							of use and our{" "}
+							<button
+								onClick={() => saveFile("Data usage and privacy statement.pdf")}
+								className="pdfDownloadButton"
+								title="Download Data usage and privacy statement"
+							>
+								Data usage and privacy statement
+							</button>
+>>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 							.
 						</Typography>
 					</Container>

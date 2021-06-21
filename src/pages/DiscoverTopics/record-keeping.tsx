@@ -20,10 +20,31 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+<<<<<<< HEAD
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+=======
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+import fileSaver from "file-saver"
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
+const saveFile = async (filename: string) => {
+	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
+	fileSaver.saveAs(blob, filename)
+}
+>>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 
 const DTRecordKeeping = (): ReactElement => {
 	const styles = useDTStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<>
@@ -89,19 +110,26 @@ const DTRecordKeeping = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Eden's Digital Records" />
 									<CardMedia
-										title="Eden's Digital Records"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/1caO4xN-ZwA?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Eden's Digital Records"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/1caO4xN-ZwA?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Edens-digital-records.docx"
+											href="./transcripts/Edens-digital-records.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Eden's Digital Records
+											Download Transcript: Eden's Digital Records.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -110,19 +138,26 @@ const DTRecordKeeping = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Lisa's Paper Records" />
 									<CardMedia
-										title="Lisa's Paper Records"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/q9J_sRCKTn8?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Lisa's Paper Records"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/q9J_sRCKTn8?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Lisas-paper-records.docx"
+											href="./transcripts/Lisas-paper-records.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Lisa's Paper Records
+											Download Transcript: Lisa's Paper Records.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -319,9 +354,7 @@ const DTRecordKeeping = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						href="/pdf/RecordKeeping-Activity.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
+						onClick={() => saveFile("RecordKeeping-Activity.pdf")}
 					>
 						Download activity
 					</Button>
@@ -351,11 +384,19 @@ const DTRecordKeeping = (): ReactElement => {
 						variant="contained"
 						color="primary"
 						size="large"
-						href="https://www.ato.gov.au/General/Online-services/ATO-app/"
+						title={
+							!isOnline && isDesktop
+								? "Internet access is required for full functionality."
+								: "ATO app."
+						}
+						href={setToggleOfflineContent(
+							"https://www.ato.gov.au/General/Online-services/ATO-app/",
+							isOnline
+						)}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						ATO app
+						ATO app.
 					</Button>
 				</Container>
 				<Container
@@ -402,7 +443,10 @@ const DTRecordKeeping = (): ReactElement => {
 						component="p"
 						className={styles.contentText}
 					>
-						You might like to visit these links for more information
+						You might like to visit these links for more information.{" "}
+						{!isOnline && isDesktop
+							? "Internet access is required for full functionality."
+							: ""}
 					</Typography>
 					<Grid container spacing={3}>
 						<Grid item sm={6} md={3}>
@@ -411,12 +455,19 @@ const DTRecordKeeping = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="what books and records should my company keep"
-								href="https://asic.gov.au/for-business/your-business/small-business/compliance-for-small-business/small-business-what-books-and-records-should-my-company-keep/"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "What books & records should my company keep."
+								}
+								href={setToggleOfflineContent(
+									"https://asic.gov.au/for-business/your-business/small-business/compliance-for-small-business/small-business-what-books-and-records-should-my-company-keep/",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								What books &amp; records should my company keep
+								What books &amp; records should my company keep.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -425,12 +476,19 @@ const DTRecordKeeping = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="record keeping for small business"
-								href="https://www.ato.gov.au/General/Other-languages/In-detail/Information-in-other-languages/Record-keeping-for-small-businesses/"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Record keeping for small business."
+								}
+								href={setToggleOfflineContent(
+									"https://www.ato.gov.au/General/Other-languages/In-detail/Information-in-other-languages/Record-keeping-for-small-businesses/",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Record keeping for small business
+								Record keeping for small business.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -439,12 +497,19 @@ const DTRecordKeeping = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="key webinar topics for small business"
-								href="https://www.ato.gov.au/Business/Starting-your-own-business/Small-business-webinars-and-workshops/Small-business-webinars/"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Key webinar topics for small business."
+								}
+								href={setToggleOfflineContent(
+									"https://www.ato.gov.au/Business/Starting-your-own-business/Small-business-webinars-and-workshops/Small-business-webinars/",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Key webinar topics for small business
+								Key webinar topics for small business.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -453,12 +518,19 @@ const DTRecordKeeping = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="records required by law"
-								href="https://www.ato.gov.au/Business/Record-keeping-for-business/Detailed-business-record-keeping-requirements/"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Records required by law."
+								}
+								href={setToggleOfflineContent(
+									"https://www.ato.gov.au/Business/Record-keeping-for-business/Detailed-business-record-keeping-requirements/",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Records required by law
+								Records required by law.
 							</Button>
 						</Grid>
 					</Grid>

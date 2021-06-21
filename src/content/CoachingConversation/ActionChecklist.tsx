@@ -12,9 +12,19 @@ import {
 import ExpandableNav from "../../components/ExpandableNav"
 import useStyles from "./styles"
 import Spacer from "../../components/Spacer"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 export default function ActionChecklist(): ReactElement {
 	const cls = useStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<ExpandableNav title="Action Checklist" defaultExpanded={false}>
@@ -66,19 +76,26 @@ export default function ActionChecklist(): ReactElement {
 					<CardHeader title="Action Checklist coaching tips" />
 					<CardMedia
 						className={cls.embed}
-						component="iframe"
+						component={isOnline ? "iframe" : "video"}
 						title="Action Checklist coaching tips"
-						src="https://www.youtube.com/embed/td4ReSc9Eos?rel=0&modestbranding=1"
+						src={setToggleOfflineContent(
+							"https://www.youtube.com/embed/td4ReSc9Eos?rel=0&modestbranding=1",
+							isOnline
+						)}
+						controls
 					/>
 					<CardActions>
 						<Button
 							color="primary"
-							href="/transcripts/Action Checklist coaching tips.docx"
+							href="./transcripts/Action Checklist coaching tips.docx"
 							aria-label="Download transcript: Action Checklist coaching tips"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							Download Transcript
+							Download Transcript.{" "}
+							{!isOnline && isDesktop
+								? " Internet access is required for closed caption. "
+								: ""}
 						</Button>
 					</CardActions>
 				</Card>

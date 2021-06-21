@@ -12,9 +12,19 @@ import {
 import ExpandableNav from "../../components/ExpandableNav"
 import useStyles from "./styles"
 import Spacer from "../../components/Spacer"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 export default function CFC(): ReactElement {
 	const cls = useStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<ExpandableNav title="Cash Flow Canvas" defaultExpanded={false}>
@@ -63,19 +73,27 @@ export default function CFC(): ReactElement {
 					<CardHeader title="Cash Flow Canvas coaching tips" />
 					<CardMedia
 						className={cls.embed}
-						component="iframe"
+						component={isOnline ? "iframe" : "video"}
 						title="Cash Flow Canvas coaching tips"
-						src="https://www.youtube.com/embed/Q8_r35mb6YU?rel=0&modestbranding=1"
+						src={setToggleOfflineContent(
+							"https://www.youtube.com/embed/Q8_r35mb6YU?rel=0&modestbranding=1",
+							isOnline
+						)}
+						controls
 					/>
+
 					<CardActions>
 						<Button
 							color="primary"
-							href="/transcripts/Cash Flow Canvas coaching tips.docx"
+							href="./transcripts/Cash Flow Canvas coaching tips.docx"
 							aria-label="Download transcript: Cash Flow Canvas coaching tips"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							Download Transcript
+							Download Transcript.{" "}
+							{!isOnline && isDesktop
+								? " Internet access is required for closed caption. "
+								: ""}
 						</Button>
 					</CardActions>
 				</Card>

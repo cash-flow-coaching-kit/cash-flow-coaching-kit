@@ -20,10 +20,31 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+<<<<<<< HEAD
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+=======
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+import fileSaver from 'file-saver'
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
+const saveFile = async (filename: string) => {
+	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
+	fileSaver.saveAs(blob, filename)
+}
+>>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 
 const DTFundingBusiness = (): ReactElement => {
 	const styles = useDTStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<>
@@ -83,19 +104,26 @@ const DTFundingBusiness = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Tamako's Funding" />
 									<CardMedia
+										component={isOnline ? "iframe" : "video"}
 										title="Tamako's Funding"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/fAe_2eyAkrU?rel=0&modestbranding=1"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/fAe_2eyAkrU?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Tamakos-funding.docx"
+											href="./transcripts/Tamakos-funding.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Tamako's Funding
+											Download Transcript: Tamako's Funding.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -104,19 +132,26 @@ const DTFundingBusiness = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Charlotte's Loans" />
 									<CardMedia
+										component={isOnline ? "iframe" : "video"}
 										title="Charlotte's Loans"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/BTwVYKfGyuk?rel=0&modestbranding=1"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/BTwVYKfGyuk?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Charlottes-loans.docx"
+											href="./transcripts/Charlottes-loans.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Charlotte's Loans
+											Download Transcript: Charlotte's Loans.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -440,9 +475,7 @@ const DTFundingBusiness = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						href="/pdf/Funding-Activity.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
+						onClick={() => saveFile("Funding-Activity.pdf")}
 					>
 						Download activity
 					</Button>
@@ -491,7 +524,10 @@ const DTFundingBusiness = (): ReactElement => {
 						component="p"
 						className={styles.contentText}
 					>
-						You might like to visit these links for more information
+						You might like to visit these links for more information.
+						{!isOnline && isDesktop
+							? "Internet access is required for full functionality."
+							: ""}
 					</Typography>
 					<Grid container spacing={3}>
 						<Grid item sm={6}>
@@ -499,12 +535,20 @@ const DTFundingBusiness = (): ReactElement => {
 								variant="contained"
 								fullWidth
 								size="large"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Funding your business."
+								}
 								className={styles.button}
-								href="https://www.business.qld.gov.au/starting-business/costs-finance-banking/funding-business"
+								href={setToggleOfflineContent(
+									"https://www.business.qld.gov.au/starting-business/costs-finance-banking/funding-business",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Funding your business
+								Funding your business.
 							</Button>
 						</Grid>
 						<Grid item sm={6}>
@@ -513,11 +557,19 @@ const DTFundingBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.gov.au/Finance/Seeking-finance/Reasons-and-options-for-seeking-finance"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Reasons for seeking finance."
+								}
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/Finance/Seeking-finance/Reasons-and-options-for-seeking-finance",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Reasons for seeking finance
+								Reasons for seeking finance.
 							</Button>
 						</Grid>
 					</Grid>

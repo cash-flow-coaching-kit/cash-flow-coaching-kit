@@ -13,7 +13,7 @@
 
 		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-		<title>Cash flow coaching kit</title>
+		<title>Cash Flow Coaching Kit</title>
 
 		<script src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CCustomEvent"></script>
 		<script src="https://unpkg.com/mdn-polyfills/MouseEvent"></script>
@@ -36,10 +36,36 @@
 		</script>
 	</head>
 	<body>
+		<div id="notification" class="hidden">
+			<p id="message"></p>
+			<p id="postMessage"></p>
+			<button id="close-button" onClick="closeNotification()">
+				Close
+			</button>
+			<button id="restart-button" onClick="restartApp()" class="hidden">
+				Restart
+			</button>
+		</div>
+
 		<noscript>
 			You need to enable JavaScript to run this app.
 			<iframe src="https://www.googletagmanager.com/ns.html?id=%REACT_APP_GTM_CONTAINER_ID%" height="0" width="0" style="display:none;visibility:hidden"></iframe>
 		</noscript>
+
 		<div id="root"></div>
+		<p id="version"></p>
+
+		<div id="notification" class="hidden">
+			<p id="message"></p>
+			<p id="postMessage"></p>
+			<button id="close-button" onClick="closeNotification()">
+				Close
+			</button>
+			<button id="restart-button" onClick="restartApp()" class="hidden">
+				Restart
+			</button>
+		</div>
+
+		<script src="./autoUpdate.js" defer></script>
 	</body>
 </html>

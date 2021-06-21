@@ -1,0 +1,102 @@
+# From https://medium.com/@johnjjung/building-an-electron-app-on-github-actions-windows-and-macos-53ab69703f7c
+name: CI
+
+# Run on push to 'release branch or master' branch
+on:
+  push:
+    branches:
+      - "master"
+
+# List contents
+jobs:
+  build_on_mac:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          # Update with your branch, that has the latest change
+          ref: "master"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 15
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo REACT_APP_SUPPORT_EMAIL=${{ secrets.APP_SUPPORT_EMAIL }} >> .env
+          echo REACT_APP_AWS_CONTENT_DELIVERY_URL=${{ secrets.APP_AWS_CONTENT_DELIVERY_URL }} >> .env
+          echo REACT_APP_GA_ID=${{ secrets.APP_GA_ID }} >> .env
+          echo REACT_APP_APPLEID=${{ secrets.APPLE_ID }} >> .env
+          echo REACT_APP_APPLEIDPASS=${{ secrets.APPLE_ID_ASP }} >> .env
+          echo WIN_CSC_LINK=${{ secrets.WIN_SIGN_CERT }} >> .env
+          echo WIN_CSC_KEY_PASSWORD=${{ secrets.WIN_SIGN_PASS }} >> .env
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build electron
+        env:
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REACT_APP_APPLEID: ${{ secrets.APPLE_ID }}
+          REACT_APP_APPLEIDPASS: ${{ secrets.APPLE_ID_ASP }}
+          WIN_CSC_LINK: ${{ secrets.WIN_SIGN_CERT }}
+          WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_SIGN_PASS }}
+        run: yarn electron:package
+
+      - name: See built binaries
+        run: ls ./dist
+
+      # # Make available on GitHub Actions page
+      - name: Extract version
+        id: extract_version
+        uses: Saionaro/extract-package-version@v1.1.1
+      - uses: actions/upload-artifact@v2
+        with:
+          name: macOS
+          path: ./dist/*.dmg
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Windows
+          path: ./dist/*.exe
+
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{ steps.extract_version.outputs.version }}
+          name: ${{ steps.extract_version.outputs.version }}
+          tag_name: v${{ steps.extract_version.outputs.version }}
+          prerelease: true
+          files: ./dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.S3_BUCKET_REGION }}
+
+      - name: Rearrange file for s3
+        run: |
+          mkdir s3Folder
+          cd s3Folder
+          mkdir mac
+          mkdir win
+          cd ../
+          cp ./dist/*.dmg ./s3Folder/mac/Cash\ Flow\ Coaching\ Kit.dmg
+          cp ./dist/*.exe ./s3Folder/win/Cash\ Flow\ Coaching\ Kit.exe
+
+      - name: Upload to s3
+        uses: reggionick/s3-deploy@v3
+        with:
+          folder: s3Folder
+          bucket: ${{ secrets.S3_BUCKET }}/latest
+          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+          bucket-region: ${{ secrets.S3_BUCKET_REGION }}
+          invalidation: /
+          delete-removed: true
+          no-cache: true
+          private: true

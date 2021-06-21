@@ -22,10 +22,25 @@ import useDTStyles from "./_config/styles"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+<<<<<<< HEAD
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+=======
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+>>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 
 const TrackingPerformance = (): ReactElement => {
 	const styles = useDTStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<>
@@ -87,19 +102,26 @@ const TrackingPerformance = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Tina's Hair &amp; Beauty" />
 									<CardMedia
-										title="Tina's Hair &amp; Beauty"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/VRxQ7AkxsfY?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Tina's Hair &amp; Beauty"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/VRxQ7AkxsfY?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Tinas-hair-and-beauty.docx"
+											href="./transcripts/Tinas-hair-and-beauty.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Tina's Hair &amp; Beauty
+											Download Transcript: Tina's Hair &amp; Beauty.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -108,19 +130,26 @@ const TrackingPerformance = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Anders' Retirement Plan" />
 									<CardMedia
-										title="Anders' Retirement Plan"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/MPNkTF-puTQ?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Anders' Retirement Plan"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/MPNkTF-puTQ?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Anders-retirement-plan.docx"
+											href="./transcripts/Anders-retirement-plan.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Anders' Retirement Plan
+											Download Transcript: Anders' Retirement Plan.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -355,7 +384,10 @@ const TrackingPerformance = (): ReactElement => {
 						component="p"
 						className={styles.contentText}
 					>
-						You might like to visit these links for more information
+						You might like to visit these links for more information.{" "}
+						{!isOnline && isDesktop
+							? "Internet access is required for full functionality."
+							: ""}
 					</Typography>
 					<Grid container spacing={3}>
 						<Grid item sm={6} md>
@@ -364,12 +396,19 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.qld.gov.au/running-business/protecting-business/risk-management/surviving-downturn/assess-performance"
-								title="assess business performance"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Assess business performance."
+								}
+								href={setToggleOfflineContent(
+									"https://www.business.qld.gov.au/running-business/protecting-business/risk-management/surviving-downturn/assess-performance",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Assess business performance
+								Assess business performance.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -378,12 +417,19 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.qld.gov.au/running-business/finances-cash-flow/managing-money/monitoring-performance"
-								title="monitoring your financial performance"
+								href={setToggleOfflineContent(
+									"https://www.business.qld.gov.au/running-business/finances-cash-flow/managing-money/monitoring-performance",
+									isOnline
+								)}
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Monitoring your financial performance."
+								}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Monitoring your financial performance
+								Monitoring your financial performance.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -392,12 +438,19 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.qld.gov.au/starting-business/planning/market-customer-research/benchmarking"
-								title="benchmarking your business"
+								href={setToggleOfflineContent(
+									"https://www.business.qld.gov.au/starting-business/planning/market-customer-research/benchmarking",
+									isOnline
+								)}
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Benchmarking your business."
+								}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Benchmarking your business
+								Benchmarking your business.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -406,12 +459,19 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.vic.gov.au/money-profit-and-accounting/financial-processes-and-procedures/check-your-financial-health"
-								title="check the financial health of your business"
+								href={setToggleOfflineContent(
+									"https://www.business.vic.gov.au/money-profit-and-accounting/financial-processes-and-procedures/check-your-financial-health",
+									isOnline
+								)}
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Check the financial health of your business."
+								}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Check the financial health of your business
+								Check the financial health of your business.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md>
@@ -420,12 +480,19 @@ const TrackingPerformance = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.qld.gov.au/running-business/growing-business/tips-improving"
-								title="improving business performance"
+								href={setToggleOfflineContent(
+									"https://www.business.qld.gov.au/running-business/growing-business/tips-improving",
+									isOnline
+								)}
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Improving business performance."
+								}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Improving business performance
+								Improving business performance.
 							</Button>
 						</Grid>
 					</Grid>

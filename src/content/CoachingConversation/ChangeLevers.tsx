@@ -12,9 +12,19 @@ import {
 import ExpandableNav from "../../components/ExpandableNav"
 import useStyles from "./styles"
 import Spacer from "../../components/Spacer"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 export default function ChangeLevers(): ReactElement {
 	const cls = useStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<ExpandableNav title="Change Levers" defaultExpanded={false}>
@@ -53,19 +63,26 @@ export default function ChangeLevers(): ReactElement {
 					<CardHeader title="Change Levers coaching tips" />
 					<CardMedia
 						className={cls.embed}
-						component="iframe"
+						component={isOnline ? "iframe" : "video"}
 						title="Change Levers coaching tips"
-						src="https://www.youtube.com/embed/_xYdO-STzYI?rel=0&modestbranding=1"
+						src={setToggleOfflineContent(
+							"https://www.youtube.com/embed/_xYdO-STzYI?rel=0&modestbranding=1",
+							isOnline
+						)}
+						controls
 					/>
 					<CardActions>
 						<Button
 							color="primary"
-							href="/transcripts/Change Levers coaching tips.docx"
+							href="./transcripts/Change Levers coaching tips.docx"
 							aria-label="Download transcript: Change Levers coaching tips"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							Download Transcript
+							Download Transcript.{" "}
+							{!isOnline && isDesktop
+								? " Internet access is required for closed caption. "
+								: ""}
 						</Button>
 					</CardActions>
 				</Card>

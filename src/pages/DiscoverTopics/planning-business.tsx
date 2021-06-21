@@ -20,10 +20,32 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+<<<<<<< HEAD
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+=======
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
+import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+import fileSaver from 'file-saver'
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
+const saveFile = async (filename: string) => {
+	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
+	fileSaver.saveAs(blob, filename)
+}
+>>>>>>> 316b708cfa8dd6cd18dbad61985d0195e75d4330
 
 const DTPlanningBusiness = (): ReactElement => {
 	const styles = useDTStyles()
+	const isOnline = useHasInternet()
+
 	return (
 		<>
 			<PageContainer role="main">
@@ -86,19 +108,26 @@ const DTPlanningBusiness = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Kirra's Native Foods" />
 									<CardMedia
-										title="Kirra's Native Foods"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/LhVKOyMeFQE?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Kirra's Native Foods"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/LhVKOyMeFQE?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Kirras-native-foods.docx"
+											href="./transcripts/Kirras-native-foods.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Kirra's Native Foods
+											Download Transcript: Kirra's Native Foods.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -107,19 +136,26 @@ const DTPlanningBusiness = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Sanjana's Restaurant" />
 									<CardMedia
-										title="Sanjana's Restaurant"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/Bxj4r3Dh1EQ?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Sanjana's Restaurant"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/Bxj4r3Dh1EQ?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Sanjanas-restaurant.docx"
+											href="./transcripts/Sanjanas-restaurant.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Sanjana's Restaurant
+											Download Transcript: Sanjana's Restaurant.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -340,9 +376,7 @@ const DTPlanningBusiness = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						href="/pdf/BusinessPlan-Activity.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
+						onClick={() => saveFile("BusinessPlan-Activity.pdf")}
 					>
 						Download activity
 					</Button>
@@ -389,7 +423,10 @@ const DTPlanningBusiness = (): ReactElement => {
 						component="p"
 						className={styles.contentText}
 					>
-						You might like to visit these links for more information
+						You might like to visit these links for more information.{" "}
+						{!isOnline && isDesktop
+							? "Internet access is required for full functionality."
+							: ""}
 					</Typography>
 					<Grid container spacing={3}>
 						<Grid item sm={6} md={3}>
@@ -398,12 +435,19 @@ const DTPlanningBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="Plan for success"
-								href="https://www.business.gov.au/New-to-business-essentials/Plan-for-success"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Plan for success."
+								}
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/New-to-business-essentials/Plan-for-success",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Plan for success
+								Plan for success.
 							</Button>
 						</Grid>
 
@@ -413,12 +457,19 @@ const DTPlanningBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="How to develop your business plan"
-								href="https://www.business.gov.au/planning/business-plans/how-to-develop-your-business-plan"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "How to develop your business plan."
+								}
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/planning/business-plans/how-to-develop-your-business-plan",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								How to develop your business plan
+								How to develop your business plan.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -427,12 +478,19 @@ const DTPlanningBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="Starting your business checklist"
-								href="https://www.business.gov.au/planning/templates-and-tools/checklists/starting-your-business-checklist"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Starting your business checklist."
+								}
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/planning/templates-and-tools/checklists/starting-your-business-checklist",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Starting your business checklist
+								Starting your business checklist.
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>
@@ -441,12 +499,19 @@ const DTPlanningBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="Licenses or permits you may require"
-								href="https://ablis.business.gov.au/pages/home.aspx"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Licenses or permits you may require."
+								}
+								href={setToggleOfflineContent(
+									"https://ablis.business.gov.au/pages/home.aspx",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Licenses or permits you may require
+								Licenses or permits you may require.
 							</Button>
 						</Grid>
 					</Grid>
