@@ -21,7 +21,7 @@ REACT_APP_GA_ID=
 
 ```
 yarn
-yarn electron:package
+yarn run electron:package
 ```
 
 ## How to run this
@@ -30,4 +30,8 @@ yarn electron:package
 
 ## Uploading to s3
 
-- Make sure the filename you are loading has the version number removed, make sure the filename stays the same as the one you are replacing
+- move via github action into `latest` folder, following command might be handy for using aws cli to move from latest to the correct folders
+
+`aws s3 cp s3://dcfck/latest/mac/Cash\ Flow\ Coaching\ Kit.dmg s3://dcfck/mac/`
+
+`aws s3 cp s3://dcfck/latest/win/Cash\ Flow\ Coaching\ Kit.exe s3://dcfck/win/`
