@@ -32,7 +32,7 @@ const tourSteps: {
 				</Typography>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 1.png",
+		image: "./take-a-tour/Tour 1.png",
 		alt: "Get started page with expanded four questions",
 	},
 	{
@@ -55,7 +55,7 @@ const tourSteps: {
 				</ul>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 2.png",
+		image: "./take-a-tour/Tour 2.png",
 		alt: "Get started page highlighting the proposed Coaching model",
 	},
 	{
@@ -69,7 +69,7 @@ const tourSteps: {
 				</Typography>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 3.png",
+		image: "./take-a-tour/Tour 3.png",
 		alt: "Health check questionnaire page",
 	},
 	{
@@ -82,7 +82,7 @@ const tourSteps: {
 				</Typography>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 4.png",
+		image: "./take-a-tour/Tour 4.png",
 		alt: "Health check results page",
 	},
 	{
@@ -95,7 +95,7 @@ const tourSteps: {
 				</Typography>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 5.png",
+		image: "./take-a-tour/Tour 5.png",
 		alt: "Discover Topics landing page",
 	},
 	{
@@ -113,7 +113,7 @@ const tourSteps: {
 				</Typography>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 6.png",
+		image: "./take-a-tour/Tour 6.png",
 		alt: "Cash Flow Canvas form",
 	},
 	{
@@ -130,7 +130,7 @@ const tourSteps: {
 				</Typography>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 7.png",
+		image: "./take-a-tour/Tour 7.png",
 		alt: "Change Levers page",
 	},
 	{
@@ -145,7 +145,7 @@ const tourSteps: {
 				</Typography>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 8.png",
+		image: "./take-a-tour/Tour 8.png",
 		alt: "Action Checklist page",
 	},
 	{
@@ -160,7 +160,7 @@ const tourSteps: {
 				</Typography>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 9.png",
+		image: "./take-a-tour/Tour 9.png",
 		alt: "Client List page",
 	},
 	{
@@ -173,7 +173,7 @@ const tourSteps: {
 				</Typography>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 10.png",
+		image: "./take-a-tour/Tour 10.png",
 		alt: "Downloads page",
 	},
 	{
@@ -187,7 +187,7 @@ const tourSteps: {
 				</Typography>
 			</ContentArea>
 		),
-		image: "/take-a-tour/Tour 11.png",
+		image: "./take-a-tour/Tour 11.png",
 		alt: "Get started page",
 	},
 ]

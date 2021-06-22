@@ -10,6 +10,14 @@ import useCurrentClient from "../../../state/client/useCurrentClient"
 import Logout from "../../Logout"
 import Help from "../_partials/Help"
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
 /**
  * Renders the primary navigation
  *
@@ -26,7 +34,13 @@ const PrimaryNavbar = (): ReactElement => {
 				<Toolbar>
 					<Grid container spacing={2}>
 						{currentClient ? (
-							<Grid item sm={2} md={2} lg={4} className={styles.clientGridItem}>
+							<Grid
+								item
+								sm={2}
+								md={isDesktop ? 1 : 2}
+								lg={isDesktop ? 3 : 4}
+								className={styles.clientGridItem}
+							>
 								<Typography className={styles.clientCaption} variant="caption">
 									Client
 								</Typography>
@@ -44,8 +58,8 @@ const PrimaryNavbar = (): ReactElement => {
 						<Grid
 							item
 							sm={5}
-							md={5}
-							lg={4}
+							md={isDesktop ? 6 : 5}
+							lg={isDesktop ? 5 : 4}
 							className={`${sharedStyle.logoBox}`}
 						>
 							<Logo to={PublicRoutes.Home} />

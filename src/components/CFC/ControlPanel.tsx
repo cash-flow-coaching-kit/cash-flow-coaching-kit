@@ -15,7 +15,7 @@ import CashFlowCanvasPDF from "../PDF/CashFlowCanvasPDF"
 import useCurrentClient from "../../state/client/useCurrentClient"
 import CFCContext from "../../state/CFC/context"
 import CFCComparePDF from "../PDF/CFCComparePDF"
-import servePDF from "../PDF/servePDF"
+
 
 /**
  * Canvas page control panel component
@@ -29,8 +29,8 @@ export default function ControlPanel(): ReactElement {
 	const [importDataOpen, setImportDataOpen] = useState<boolean>(false)
 	const { id: canvasId } = useParams()
 	const [currentClient] = useCurrentClient()
-	const { leftCompare, rightCompare } = useContext(CFCContext)
 	const { questionValues } = useContext(CFCContext)
+	const { leftCompare, rightCompare } = useContext(CFCContext)
 
 	const goTo = (route: PrivateRoutes) => (): void => {
 		// eslint-disable-next-line
@@ -49,9 +49,19 @@ export default function ControlPanel(): ReactElement {
 		setImportDataOpen(!importDataOpen)
 	}
 
+	const pdfMakeBlobPromise = (
+		pdf: pdfMake.TCreatedPdf,
+		filename: string
+	): Promise<{ blob: Blob; filename: string }> => {
+		return new Promise((resolve) => {
+			pdf.getBlob((b: Blob) => resolve({ blob: b, filename }))
+		})
+	}
+
 	const printPDF = async () => {
 		if (canvasId && typeof canvasId === "string" && !isCompare()) {
 			const data = await CFCUseCase.findById(canvasId)
+
 			if (data === undefined) alert("no data")
 			else {
 				const pdf = await CashFlowCanvasPDF(
@@ -59,14 +69,15 @@ export default function ControlPanel(): ReactElement {
 					data,
 					questionValues
 				)
-				servePDF(pdf)
+				const blob = await pdfMakeBlobPromise(pdf, "Canvas.pdf")
+				saveAs(blob.blob, `Canvas.pdf`)
 			}
 		}
-
 		if (isCompare()) {
 			if (leftCompare && rightCompare) {
 				const pdf = await CFCComparePDF(leftCompare, rightCompare)
-				servePDF(pdf)
+				const blob = await pdfMakeBlobPromise(pdf, "CompareCanvas.pdf")
+				saveAs(blob.blob, `CompareCanvas.pdf`)
 			}
 		}
 	}
@@ -100,11 +111,15 @@ export default function ControlPanel(): ReactElement {
 				</ListItem>
 				{!isCompare() && !isNewPage() && <ControlCompareLink />}
 				{!isNewPage() && (
-					<ListItem button>
+					<ListItem
+						component="button"
+						className="pdfDownloadLink"
+						onClick={printPDF}
+					>
 						<ListItemIcon>
 							<PictureAsPdfIcon />
 						</ListItemIcon>
-						<ListItemText onClick={printPDF}>Generate PDF</ListItemText>
+						<ListItemText>Download Generated PDF</ListItemText>
 					</ListItem>
 				)}
 			</List>

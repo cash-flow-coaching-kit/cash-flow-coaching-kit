@@ -15,6 +15,14 @@ import {
 } from "../content/CoachingConversation"
 import ClientListTips from "../content/tips/ClientListTips"
 
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
+
 /**
  * Client listing page
  *
@@ -59,7 +67,8 @@ const ClientList = (): ReactElement => {
 				</Grid>
 			</PageContainer>
 
-			<PageTip tip={ClientListTips} />
+			{!isDesktop && <PageTip tip={ClientListTips} />}
+
 		</>
 	)
 }

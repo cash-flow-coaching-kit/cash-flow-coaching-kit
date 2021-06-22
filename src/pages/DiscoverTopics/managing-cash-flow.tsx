@@ -22,10 +22,21 @@ import useDTStyles from "./_config/styles"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
+import { setToggleOfflineContent } from "./../../util/helper"
+import useHasInternet from "./../../context/useHasInternet"
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
+
+// Set flag for web or desktop mode
+let isDesktop = false
+
+const userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(" electron/") > -1) {
+	isDesktop = true
+}
 
 const DTManagingCashFlow = (): ReactElement => {
 	const styles = useDTStyles()
+	const isOnline = useHasInternet()
 
 	return (
 		<>
@@ -83,19 +94,26 @@ const DTManagingCashFlow = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Yulari's Cash Flow" />
 									<CardMedia
-										title="Yulari's Cash Flow"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/uPDZ6O3FFaY?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Yulari's Cash Flow"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/uPDZ6O3FFaY?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Yularis-cash-flow.docx"
+											href="./transcripts/Yularis-cash-flow.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Yulari's Cash Flow
+											Download Transcript: Yulari's Cash Flow.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -104,19 +122,26 @@ const DTManagingCashFlow = (): ReactElement => {
 								<Card variant="outlined">
 									<CardHeader title="Cameron's Cash Flow" />
 									<CardMedia
-										title="Cameron's Cash Flow"
 										className={styles.embed}
-										component="iframe"
-										src="https://www.youtube.com/embed/aAUWgm3-zL4?rel=0&modestbranding=1"
+										component={isOnline ? "iframe" : "video"}
+										title="Cameron's Cash Flow"
+										src={setToggleOfflineContent(
+											"https://www.youtube.com/embed/aAUWgm3-zL4?rel=0&modestbranding=1",
+											isOnline
+										)}
+										controls
 									/>
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Camerons-cash-flow.docx"
+											href="./transcripts/Camerons-cash-flow.docx"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Cameron's Cash Flow
+											Download Transcript: Cameron's Cash Flow.{" "}
+											{!isOnline && isDesktop
+												? " Internet access is required for closed caption. "
+												: ""}
 										</Button>
 									</CardActions>
 								</Card>
@@ -516,7 +541,10 @@ const DTManagingCashFlow = (): ReactElement => {
 						component="p"
 						className={styles.contentText}
 					>
-						You might like to visit these links for more information
+						You might like to visit these links for more information.{" "}
+						{!isOnline && isDesktop
+							? "Internet access is required for full functionality."
+							: ""}
 					</Typography>
 					<Grid container spacing={3}>
 						<Grid item sm={6}>
@@ -525,12 +553,19 @@ const DTManagingCashFlow = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="Cash flow statement"
-								href="https://www.business.gov.au/Finance/Accounting/How-to-set-up-a-cash-flow-statement"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Cash flow statement."
+								}
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/Finance/Accounting/How-to-set-up-a-cash-flow-statement",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Cash flow statement
+								Cash flow statement.
 							</Button>
 						</Grid>
 						<Grid item sm={6}>
@@ -539,12 +574,19 @@ const DTManagingCashFlow = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="Cash flow and budgeting"
-								href="https://www.business.gov.au/Finance/Accounting/How-to-create-a-budget"
+								title={
+									!isOnline && isDesktop
+										? "Internet access is required for full functionality."
+										: "Cash flow and budgeting."
+								}
+								href={setToggleOfflineContent(
+									"https://www.business.gov.au/Finance/Accounting/How-to-create-a-budget",
+									isOnline
+								)}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Cash flow and budgeting
+								Cash flow and budgeting.
 							</Button>
 						</Grid>
 					</Grid>

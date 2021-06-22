@@ -293,7 +293,7 @@ export default function ImportDataModal({
 								</Grid>
 								<Grid item xs={6}>
 									<img
-										src="/images/importdata.png"
+										src="./images/importdata.png"
 										alt="Import Data"
 										style={{ width: "100%", padding: 0 }}
 									/>
