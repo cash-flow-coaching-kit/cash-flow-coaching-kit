@@ -37,12 +37,12 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 
 	const desktopDownload = (type: String) => {
 		const macLink =
-			"http://" +
+			"https://" +
 			process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL +
 			"/mac/" +
 			uploadConfig.mac
 		const winLink =
-			"http://" +
+			"https://" +
 			process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL +
 			"/win/" +
 			uploadConfig.win
