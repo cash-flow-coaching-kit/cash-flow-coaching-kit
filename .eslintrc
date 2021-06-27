@@ -3,9 +3,9 @@
 	"extends": [
 		"airbnb-typescript",
 		"plugin:@typescript-eslint/recommended",
-		"prettier",
-		"prettier/@typescript-eslint",
-		"prettier/react"
+		"prettier"
+		// "prettier/@typescript-eslint",
+		// "prettier/react"
 	],
 	"env": {
 		"browser": true,
@@ -46,6 +46,7 @@
 		"@typescript-eslint/interface-name-prefix": [2, "always"],
 		"import/no-cycle": [0, "never"],
 		"import/no-unresolved": "error",
+		"@typescript-eslint/explicit-module-boundary-types": "off",
 
 		// Functional programming errors
 		"fp/no-arguments": "error",
@@ -78,14 +79,19 @@
 			"version": "detect"
 		}
 	},
-	"overrides": [{
-		"files": ["*.d.ts", "*.ts", "*.tsx"],
-		"rules": {
-			"@typescript-eslint/no-unused-vars": [2, {
-				"args": "none"
-			}],
-			"no-unused-vars": "off",
-			"@typescript-eslint/interface-name-prefix": [0, "never"]
+	"overrides": [
+		{
+			"files": ["*.d.ts", "*.ts", "*.tsx"],
+			"rules": {
+				"@typescript-eslint/no-unused-vars": [
+					2,
+					{
+						"args": "none"
+					}
+				],
+				"no-unused-vars": "off",
+				"@typescript-eslint/interface-name-prefix": [0, "never"]
+			}
 		}
-	}]
+	]
 }
