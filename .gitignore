@@ -179,3 +179,4 @@ coverage/
 # build/
 
 .vercel
+/.husky
