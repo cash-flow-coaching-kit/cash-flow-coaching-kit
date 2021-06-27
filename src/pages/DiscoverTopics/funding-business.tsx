@@ -95,7 +95,7 @@ const DTFundingBusiness = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Tamako's Funding
+											Download Transcript: Tamako&rsquo;s Funding
 										</Button>
 									</CardActions>
 								</Card>
@@ -116,7 +116,7 @@ const DTFundingBusiness = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Charlotte's Loans
+											Download Transcript: Charlotte&rsquo;s Loans
 										</Button>
 									</CardActions>
 								</Card>
@@ -247,7 +247,7 @@ const DTFundingBusiness = (): ReactElement => {
 							<Typography component="li" className={styles.list}>
 								It is important to understand the tax implications of a
 								crowdfunded business, as well as your liability for delivering
-								to "backers".
+								to &ldquo;backers&rdquo;.
 							</Typography>
 						</List>
 					</Grid>

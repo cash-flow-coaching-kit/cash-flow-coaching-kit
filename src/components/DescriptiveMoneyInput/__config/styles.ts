@@ -5,7 +5,7 @@ type InputProps = {
 	mini: boolean
 	fullHeight?: boolean
 }
-type StyleRtn = {}
+type StyleRtn = any // eslint-disable-line
 
 const useStyles = makeStyles((theme) => ({
 	root: (props: InputProps): StyleRtn => ({

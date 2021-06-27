@@ -52,6 +52,7 @@ export async function loadBlobAsJSON(
  * @param {*} data
  * @returns {boolean}
  */
+// eslint-disable-next-line
 export function validateJSONData(data: any): boolean {
 	const keys = Object.keys(data)
 	const validKeys: DatabaseNames[] = [
@@ -86,9 +87,13 @@ export async function importToDatabase(
 ): Promise<Error | boolean> {
 	const blob = new Blob([JSON.stringify(data)])
 	try {
-		await importInto(db as any, blob, {
-			overwriteValues: true,
-		})
+		await importInto(
+			db as any, // eslint-disable-line
+			blob,
+			{
+				overwriteValues: true,
+			}
+		)
 		return true
 	} catch (e) {
 		return e
@@ -218,7 +223,7 @@ export default async function ImportClient(
 				: Promise.resolve(false),
 		]
 
-		return Promise.all(promises)
+		return await Promise.all(promises)
 	} catch (e) {
 		// eslint-disable-next-line
 		throw new Error(e.message)

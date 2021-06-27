@@ -7,6 +7,9 @@
  * @param {T} replace
  * @returns {T[]}
  */
+
+/* eslint-disable fp/no-mutating-methods */
+
 const arraySwap = <T>(
 	arr: T[],
 	source: number,

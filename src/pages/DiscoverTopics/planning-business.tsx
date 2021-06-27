@@ -46,8 +46,8 @@ const DTPlanningBusiness = (): ReactElement => {
 							have a well researched business plan, you are able to accurately
 							forecast and analyse your business. This helps you to be
 							financially prepared for circumstances outside of your control,
-							find opportunities to grow your business, and ensure you don't run
-							out of money.
+							find opportunities to grow your business, and ensure you
+							don&rsquo;t run out of money.
 						</Typography>
 						<Typography
 							variant="body1"
@@ -98,7 +98,7 @@ const DTPlanningBusiness = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Kirra's Native Foods
+											Download Transcript: Kirra&rsquo;s Native Foods
 										</Button>
 									</CardActions>
 								</Card>
@@ -119,7 +119,7 @@ const DTPlanningBusiness = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Sanjana's Restaurant
+											Download Transcript: Sanjana&rsquo;s Restaurant
 										</Button>
 									</CardActions>
 								</Card>

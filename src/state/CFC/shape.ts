@@ -15,7 +15,7 @@ type QuestionValues = {
  * @interface ICFCState
  */
 
-export type ItemUpdaterFunction = (items: any) => void
+export type ItemUpdaterFunction = (items: any) => void // eslint-disable-line
 
 export interface ICFCState {
 	duplicateError: boolean
@@ -24,7 +24,7 @@ export interface ICFCState {
 	dispatch: Dispatch<CFCReducerActions>
 
 	canvasItemUpdater: ItemUpdaterFunction[]
-	setCanvasItemUpdater?: any
+	setCanvasItemUpdater?: any // eslint-disable-line
 	leftCompare?: CFCStruct
 	rightCompare?: CFCStruct
 	copyCanvasActive: boolean

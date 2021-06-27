@@ -27,7 +27,7 @@ export default function ControlPanel(): ReactElement {
 	const history = useHistory()
 	const location = useLocation()
 	const [importDataOpen, setImportDataOpen] = useState<boolean>(false)
-	const { id: canvasId } = useParams()
+	const { id: canvasId } = useParams() as any  // eslint-disable-line
 	const [currentClient] = useCurrentClient()
 	const { leftCompare, rightCompare } = useContext(CFCContext)
 	const { questionValues } = useContext(CFCContext)
@@ -37,13 +37,10 @@ export default function ControlPanel(): ReactElement {
 		history.push(route)
 	}
 
-	const isNewPage = (): boolean => {
-		return location.pathname === PrivateRoutes.CFC
-	}
+	const isNewPage = (): boolean => location.pathname === PrivateRoutes.CFC
 
-	const isCompare = (): boolean => {
-		return location.pathname === PrivateRoutes.CFCCompare
-	}
+	const isCompare = (): boolean =>
+		location.pathname === PrivateRoutes.CFCCompare
 
 	const importData = () => {
 		setImportDataOpen(!importDataOpen)
@@ -52,7 +49,7 @@ export default function ControlPanel(): ReactElement {
 	const printPDF = async () => {
 		if (canvasId && typeof canvasId === "string" && !isCompare()) {
 			const data = await CFCUseCase.findById(canvasId)
-			if (data === undefined) alert("no data")
+			if (data === undefined) alert("no data")  // eslint-disable-line
 			else {
 				const pdf = await CashFlowCanvasPDF(
 					currentClient?.name ?? "Client",

@@ -34,12 +34,12 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	protected defaultCreate(data: E): Promise<I> {
-		return this.database.transaction("rw", this.table.name, () => {
-			return this.table.add({
+		return this.database.transaction("rw", this.table.name, () =>
+			this.table.add({
 				id: uuidv4(),
 				...data,
 			})
-		})
+		)
 	}
 
 	/**
@@ -53,9 +53,9 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	protected defaultSync(): Promise<E[]> {
-		return this.database.transaction("r", this.table.name, () => {
-			return this.table.toArray()
-		})
+		return this.database.transaction("r", this.table.name, () =>
+			this.table.toArray()
+		)
 	}
 
 	/**
@@ -71,9 +71,9 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	protected defaultDelete<T extends IndexableType>(id: T): Promise<number> {
-		return this.database.transaction("rw", this.table.name, () => {
-			return this.table.where("id").equals(id).delete()
-		})
+		return this.database.transaction("rw", this.table.name, () =>
+			this.table.where("id").equals(id).delete()
+		)
 	}
 
 	/**
@@ -89,9 +89,9 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	protected defaultUpdate(id: I, data: B): Promise<number> {
-		return this.database.transaction("rw", this.table.name, () => {
-			return this.table.update(id, data)
-		})
+		return this.database.transaction("rw", this.table.name, () =>
+			this.table.update(id, data)
+		)
 	}
 
 	/**
@@ -155,9 +155,9 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	public findByClient(clientId: ClientId): Promise<E[]> {
-		return this.database.transaction("r", this.table.name, () => {
-			return this.table.where({ clientId }).toArray()
-		})
+		return this.database.transaction("r", this.table.name, () =>
+			this.table.where({ clientId }).toArray()
+		)
 	}
 
 	/**
@@ -169,23 +169,26 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	public bulkAdd(items: E[]): Promise<I[]> {
-		const addItems: E[] = items.reduce((acc: E[], cur: E) => {
-			return acc.concat({ ...cur, id: uuidv4() })
-		}, [])
+		const addItems: E[] = items.reduce(
+			(acc: E[], cur: E) => acc.concat({ ...cur, id: uuidv4() }),
+			[]
+		)
 
-		return this.database.transaction("rw", this.table.name, () => {
-			return this.table.bulkAdd<true>(addItems, { allKeys: true })
-		})
+		return this.database.transaction("rw", this.table.name, () =>
+			this.table.bulkAdd<true>(addItems, { allKeys: true })
+		)
 	}
 
 	public bulkPut(items: E[]): Promise<I[]> {
-		const putItems: E[] = items.reduce((acc: E[], cur: E) => {
-			return acc.concat(hasProperty(cur, "id") ? cur : { ...cur, id: uuidv4() })
-		}, [])
+		const putItems: E[] = items.reduce(
+			(acc: E[], cur: E) =>
+				acc.concat(hasProperty(cur, "id") ? cur : { ...cur, id: uuidv4() }),
+			[]
+		)
 
-		return this.database.transaction("rw", this.table.name, () => {
-			return this.table.bulkPut<true>(putItems, { allKeys: true })
-		})
+		return this.database.transaction("rw", this.table.name, () =>
+			this.table.bulkPut<true>(putItems, { allKeys: true })
+		)
 	}
 
 	/**
@@ -196,9 +199,9 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	public findById(id: I): Promise<E | undefined> {
-		return this.database.transaction("rw", this.table.name, () => {
-			return this.table.get(id)
-		})
+		return this.database.transaction("rw", this.table.name, () =>
+			this.table.get(id)
+		)
 	}
 
 	/**
@@ -209,9 +212,9 @@ abstract class ILogicLayer<E, B, I = DatabaseId> {
 	 * @memberof ILogicLayer
 	 */
 	public deleteByClient(clientId: ClientId): Promise<number> {
-		return this.database.transaction("rw", this.table.name, () => {
-			return this.table.where("clientId").equals(clientId).delete()
-		})
+		return this.database.transaction("rw", this.table.name, () =>
+			this.table.where("clientId").equals(clientId).delete()
+		)
 	}
 
 	public last(): Promise<E | undefined> {

@@ -9,7 +9,7 @@ import {
 } from "./PDFLib"
 import { answerTheming } from "../HealthCheck/_config/data"
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs
+pdfMake.vfs = pdfFonts.pdfMake.vfs // eslint-disable-line fp/no-mutation
 
 export interface HealthCheckQuestion {
 	question: string
@@ -21,17 +21,12 @@ export interface HealthCheckQuestionSet {
 	[key: number]: HealthCheckQuestion // 0..9
 }
 
-const questionElementTop = ({
-	question,
-	answer,
-	text,
-}: HealthCheckQuestion) => {
-	return addPadding([
+const questionElementTop = ({ question, answer, text }: HealthCheckQuestion) =>
+	addPadding([
 		{ text: question, style: "question" },
 		" ",
 		{ text, style: answer },
 	])
-}
 
 export interface HealthCheckParams {
 	title: string
@@ -41,6 +36,7 @@ export interface HealthCheckParams {
 }
 
 export default async (title: string, answers: HealthCheckQuestionSet) => {
+	// eslint-disable-next-line
 	const docDefinition: any = {
 		...pageDefaultSettings(),
 

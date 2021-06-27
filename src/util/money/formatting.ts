@@ -8,9 +8,7 @@ import { pipe } from "../reduce/math"
  * @returns {NumToStrHOF}
  */
 export function toFixed(val: number): NumToStrHOF {
-	return (x: number): string => {
-		return x.toFixed(val)
-	}
+	return (x: number): string => x.toFixed(val)
 }
 
 /**

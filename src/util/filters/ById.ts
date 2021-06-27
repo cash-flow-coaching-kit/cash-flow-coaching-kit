@@ -12,11 +12,11 @@ import { BaseDatabaseStruct, DatabaseId } from "../../data/_config/shape"
  * @param {boolean} reject If reject is true, then it will return the opposite.
  * @returns BaseDatabaseStruct[]
  */
-const filterById = (id: DatabaseId, reject = false) => (
-	item: BaseDatabaseStruct
-): boolean => {
-	const res = item.id === id
-	return reject ? !res : res
-}
+const filterById =
+	(id: DatabaseId, reject = false) =>
+	(item: BaseDatabaseStruct): boolean => {
+		const res = item.id === id
+		return reject ? !res : res
+	}
 
 export default filterById

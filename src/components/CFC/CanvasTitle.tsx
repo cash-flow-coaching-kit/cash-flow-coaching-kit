@@ -43,49 +43,51 @@ const useStyles = makeStyles((theme) => ({
  * }
  * @returns {ReactElement}
  */
-export default React.memo(function CanvasTitle({
-	type,
-	timeframe,
-	startDate,
-	endDate,
-	customTitle,
-	useCustomTitle,
-}: CanvasTitleProps): ReactElement {
-	const cls = useStyles()
-	const { id } = useParams()
-	const [comp, setComp] = useState<"h3" | "h1">("h3")
+export default React.memo(
+	({
+		type,
+		timeframe,
+		startDate,
+		endDate,
+		customTitle,
+		useCustomTitle,
+	}: CanvasTitleProps): ReactElement => {
+		const cls = useStyles()
+		const { id } = useParams() as any  // eslint-disable-line
+		const [comp, setComp] = useState<"h3" | "h1">("h3")
 
-	useEffect(() => {
-		setComp(typeof id === "undefined" ? "h3" : "h1")
-	}, [id, setComp])
+		useEffect(() => {
+			setComp(typeof id === "undefined" ? "h3" : "h1")
+		}, [id, setComp])
 
-	/**
-	 * Placeholder component when there is no custom title
-	 *
-	 * @returns {ReactElement}
-	 */
-	function AddTitle(): ReactElement {
+		/**
+		 * Placeholder component when there is no custom title
+		 *
+		 * @returns {ReactElement}
+		 */
+		function AddTitle(): ReactElement {
+			return (
+				<Typography
+					variant="h5"
+					component="span"
+					className={`${cls.title} ${cls.noTitle}`}
+				>
+					Add a title below
+				</Typography>
+			)
+		}
+
 		return (
-			<Typography
-				variant="h5"
-				component="span"
-				className={`${cls.title} ${cls.noTitle}`}
-			>
-				Add a title below
-			</Typography>
+			<>
+				<Typography variant="overline" component="span" className={cls.caption}>
+					Canvas title
+				</Typography>
+				<Typography variant="h5" className={cls.title} component={comp}>
+					{useCustomTitle
+						? customTitle || <AddTitle />
+						: generateTitle(type, timeframe, startDate, endDate)}
+				</Typography>
+			</>
 		)
 	}
-
-	return (
-		<>
-			<Typography variant="overline" component="span" className={cls.caption}>
-				Canvas title
-			</Typography>
-			<Typography variant="h5" className={cls.title} component={comp}>
-				{useCustomTitle
-					? customTitle || <AddTitle />
-					: generateTitle(type, timeframe, startDate, endDate)}
-			</Typography>
-		</>
-	)
-})
+)

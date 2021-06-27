@@ -2,6 +2,7 @@ import React, { ReactElement } from "react"
 import { Box, useTheme } from "@material-ui/core"
 
 type SpacerProps = {
+	// eslint-disable-next-line
 	space?: number
 }
 

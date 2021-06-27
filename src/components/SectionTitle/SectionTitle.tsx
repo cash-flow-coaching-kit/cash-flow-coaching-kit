@@ -12,6 +12,7 @@ import useSTStyles from "./_config/styles"
 const SectionTitle = ({
 	children,
 	className,
+	// eslint-disable-next-line
 	...props
 }: SectionTitleProps): ReactElement => {
 	const styles = useSTStyles()

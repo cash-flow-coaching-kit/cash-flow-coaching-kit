@@ -41,7 +41,7 @@ const useNCDStyles = makeStyles((theme) => ({
 
 interface NewClientFormProps {
 	closeDialog: (cb: () => void) => void
-	handleClose: any
+	handleClose: any // eslint-disable-line
 }
 
 /**
@@ -111,12 +111,8 @@ const NewClientForm = ({
 	 * @param {keyof INCFormErrors} key Error item to look for
 	 * @returns boolean
 	 */
-	const hasError = (
-		errors: INCFormErrors,
-		key: keyof INCFormErrors
-	): boolean => {
-		return typeof errors[key] !== "undefined" && errors[key] !== ""
-	}
+	const hasError = (errors: INCFormErrors, key: keyof INCFormErrors): boolean =>
+		typeof errors[key] !== "undefined" && errors[key] !== ""
 
 	return (
 		<form

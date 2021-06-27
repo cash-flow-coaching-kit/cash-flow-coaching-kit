@@ -8,9 +8,8 @@ import { actionTitleMapping } from "./data"
  * @param {PossibleActionItems} key
  * @returns string
  */
-export const actionItemKeyTitleMapping = (key: PossibleActionItems): string => {
-	return actionTitleMapping[key]
-}
+export const actionItemKeyTitleMapping = (key: PossibleActionItems): string =>
+	actionTitleMapping[key]
 
 /**
  * Get a list of identifiers that are "static",
@@ -29,6 +28,5 @@ export const staticIdentifier = (): PossibleActionItems[] => [
  * @param {PossibleActionItems} identifier
  * @returns boolean
  */
-export const allowNotes = (identifier: PossibleActionItems): boolean => {
-	return staticIdentifier().indexOf(identifier) === -1
-}
+export const allowNotes = (identifier: PossibleActionItems): boolean =>
+	staticIdentifier().indexOf(identifier) === -1

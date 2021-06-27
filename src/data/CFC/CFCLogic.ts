@@ -32,9 +32,9 @@ class CFCLogic extends ILogicLayer<CFCStruct, BaseCFCStruct> {
 	 * @memberof CFCLogic
 	 */
 	countClientRecords(clientId: ClientId): Promise<number> {
-		return this.database.transaction("r", this.table.name, () => {
-			return this.table.where({ clientId }).count()
-		})
+		return this.database.transaction("r", this.table.name, () =>
+			this.table.where({ clientId }).count()
+		)
 	}
 
 	/**

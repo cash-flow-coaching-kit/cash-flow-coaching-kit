@@ -40,74 +40,73 @@ const useCustomStyles = makeStyles((theme) => ({
  * }
  * @returns {ReactElement}
  */
-export default React.memo(function IncomeTax({
-	value,
-	onChange,
-	calculated,
-}: IncomeTaxProps): ReactElement {
-	const cls = useInputWrapper()
-	const [error, setError] = useState("")
-	const styles = useStyles({ stacked: true, mini: true, fullHeight: false })
-	const cusCls = useCustomStyles()
+export default React.memo(
+	({ value, onChange, calculated }: IncomeTaxProps): ReactElement => {
+		const cls = useInputWrapper()
+		const [error, setError] = useState("")
+		const styles = useStyles({ stacked: true, mini: true, fullHeight: false })
+		const cusCls = useCustomStyles()
 
-	function onPercentageChange(e: ChangeEvent<HTMLInputElement>): void {
-		const inputVal = e.target.value.trim() === "" ? "0" : e.target.value.trim()
-		if (
-			`${inputVal}`.startsWith("00") ||
-			(`${value}`.startsWith("0") && `${inputVal}`.length > 1)
-		) {
-			setError("Amount can't start with a zero")
-			return
+		function onPercentageChange(e: ChangeEvent<HTMLInputElement>): void {
+			const inputVal =
+				e.target.value.trim() === "" ? "0" : e.target.value.trim()
+			if (
+				`${inputVal}`.startsWith("00") ||
+				(`${value}`.startsWith("0") && `${inputVal}`.length > 1)
+			) {
+				setError("Amount can't start with a zero")
+				return
+			}
+
+			if (inputVal.match(/\D/g)) {
+				setError("Amount can only include digits")
+				return
+			}
+
+			const val = parseInt(inputVal, 10)
+			// eslint-disable-next-line no-restricted-globals
+			if (isNaN(val) || val > 100 || val < 0) {
+				setError("Please enter a valid number between 0 and 100")
+				return
+			}
+			setError("")
+
+			if (typeof onChange !== "undefined") {
+				onChange(e)
+			}
 		}
 
-		if (inputVal.match(/\D/g)) {
-			setError("Amount can only include digits")
-			return
-		}
-
-		const val = parseInt(inputVal, 10)
-		// eslint-disable-next-line no-restricted-globals
-		if (isNaN(val) || val > 100 || val < 0) {
-			setError("Please enter a valid number between 0 and 100")
-			return
-		}
-		setError("")
-
-		if (typeof onChange !== "undefined") {
-			onChange(e)
-		}
-	}
-
-	return (
-		<Box
-			className={`${cls.wrapper} ${cls.highlightLeft} ${styles.root} ${cusCls.box}`}
-		>
-			<Box className={styles.type}>
-				<Typography variant="h6" component="p">
-					Income Tax or Company Tax
+		return (
+			<Box
+				className={`${cls.wrapper} ${cls.highlightLeft} ${styles.root} ${cusCls.box}`}
+			>
+				<Box className={styles.type}>
+					<Typography variant="h6" component="p">
+						Income Tax or Company Tax
+					</Typography>
+					<Typography component="span">
+						Estimated amount to pay your tax; approximately {value}% of your
+						Cash Surplus.
+					</Typography>
+					<TextField
+						value={value}
+						onChange={onPercentageChange}
+						name="incomeTax"
+						variant="outlined"
+						label="Income tax percent"
+						InputProps={{
+							endAdornment: <InputAdornment position="end">%</InputAdornment>,
+						}}
+						className={cusCls.textfield}
+						error={error !== ""}
+						helperText={error}
+					/>
+				</Box>
+				<Typography variant="h6">
+					{/* eslint-disable-next-line no-restricted-globals */}
+					{addDollarSign(formatNumber(`${isNaN(calculated) ? 0 : calculated}`))}
 				</Typography>
-				<Typography component="span">
-					Estimated amount to pay your tax; approximately {value}% of your Cash
-					Surplus.
-				</Typography>
-				<TextField
-					value={value}
-					onChange={onPercentageChange}
-					name="incomeTax"
-					variant="outlined"
-					label="Income tax percent"
-					InputProps={{
-						endAdornment: <InputAdornment position="end">%</InputAdornment>,
-					}}
-					className={cusCls.textfield}
-					error={error !== ""}
-					helperText={error}
-				/>
 			</Box>
-			<Typography variant="h6">
-				{/* eslint-disable-next-line no-restricted-globals */}
-				{addDollarSign(formatNumber(`${isNaN(calculated) ? 0 : calculated}`))}
-			</Typography>
-		</Box>
-	)
-})
+		)
+	}
+)

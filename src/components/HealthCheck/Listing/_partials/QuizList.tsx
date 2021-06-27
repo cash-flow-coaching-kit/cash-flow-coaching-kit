@@ -27,10 +27,11 @@ const QuizList = ({
 	removeHealthCheck,
 }: IQuizListProps): ReactElement => {
 	const removeItem = useCallback(
-		(id: HealthCheckId) => (e: MouseEvent<HTMLButtonElement>): void => {
-			e.preventDefault()
-			removeHealthCheck(id)
-		},
+		(id: HealthCheckId) =>
+			(e: MouseEvent<HTMLButtonElement>): void => {
+				e.preventDefault()
+				removeHealthCheck(id)
+			},
 		[removeHealthCheck]
 	)
 

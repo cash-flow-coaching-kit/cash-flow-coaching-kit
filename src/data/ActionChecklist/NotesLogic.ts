@@ -34,9 +34,9 @@ class ActionChecklistNotesLogic extends ILogicLayer<
 	 * @memberof ActionChecklistNotesLogic
 	 */
 	put(data: ActionChecklistNotesStruct): Promise<ActionChecklistNotesId> {
-		return this.database.transaction("rw", this.table.name, () => {
-			return this.table.put(data)
-		})
+		return this.database.transaction("rw", this.table.name, () =>
+			this.table.put(data)
+		)
 	}
 }
 

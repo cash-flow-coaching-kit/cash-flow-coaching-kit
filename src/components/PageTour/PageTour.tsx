@@ -24,14 +24,12 @@ const LSKey = "react-tour-completed"
  */
 export default function PageTour({ steps }: PageTourProps): ReactElement {
 	const location = useLocation()
-	const params = useParams()
+	const params = useParams() as any // eslint-disable-line
 
-	const disableBody = (target: any): void => disableBodyScroll(target)
-	const enableBody = (target: any): void => enableBodyScroll(target)
+	const disableBody = (target: any): void => disableBodyScroll(target) // eslint-disable-line
+	const enableBody = (target: any): void => enableBodyScroll(target) // eslint-disable-line
 
-	useEffect(() => {
-		return (): void => clearAllBodyScrollLocks()
-	}, [])
+	useEffect(() => (): void => clearAllBodyScrollLocks(), [])
 
 	/**
 	 * Strips off the beginning and ending "/"
@@ -46,7 +44,8 @@ export default function PageTour({ steps }: PageTourProps): ReactElement {
 	 * @returns {string}
 	 */
 	const getRouteValue = (): string => {
-		const re = /\/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/gi
+		const re =
+			/\/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/gi
 		const path = stripPathname()
 
 		if (Object.keys(params).length > 0 && path.match(re)) {
@@ -76,7 +75,8 @@ export default function PageTour({ steps }: PageTourProps): ReactElement {
 	 *
 	 * @param json
 	 */
-	const setLSValue = (json: {}): void => {
+	// eslint-disable-next-line
+	const setLSValue = (json: any): void => {
 		window.localStorage.setItem(LSKey, JSON.stringify(json))
 	}
 
