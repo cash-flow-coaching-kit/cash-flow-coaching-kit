@@ -21,13 +21,15 @@ export default function CompareTable({
 }: CompareTableProps): ReactElement {
 	const cls = useStyles()
 
-	const leftCalculated = useMemo(() => {
-		return calculateInitial(selectedCanvases[0])
-	}, [selectedCanvases])
+	const leftCalculated = useMemo(
+		() => calculateInitial(selectedCanvases[0]),
+		[selectedCanvases]
+	)
 
-	const rightCalculated = useMemo(() => {
-		return calculateInitial(selectedCanvases[1])
-	}, [selectedCanvases])
+	const rightCalculated = useMemo(
+		() => calculateInitial(selectedCanvases[1]),
+		[selectedCanvases]
+	)
 
 	/**
 	 * Renders the repeater form values

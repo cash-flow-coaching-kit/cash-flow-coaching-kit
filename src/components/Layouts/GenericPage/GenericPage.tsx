@@ -10,9 +10,7 @@ export default function GenericPage({
 }): ReactElement {
 	const location: RouteProps["location"] = useLocation()
 
-	const theme = useMemo(() => {
-		return determineTheme(location.pathname)
-	}, [location])
+	const theme = useMemo(() => determineTheme(location.pathname), [location])
 
 	return <ThemeProvider theme={theme}>{children}</ThemeProvider>
 }

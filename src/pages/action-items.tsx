@@ -65,8 +65,8 @@ const ActionChecklist = (): ReactElement => {
 	 *
 	 * @returns ReactElement[]
 	 */
-	const renderActionContainers = (): ReactElement[] => {
-		return (Object.keys(ActionItemMapping) as PossibleActionItems[]).map(
+	const renderActionContainers = (): ReactElement[] =>
+		(Object.keys(ActionItemMapping) as PossibleActionItems[]).map(
 			(item, idx) => {
 				if (currentClient?.id) {
 					const data = checklistCollection.filter(filterByActionContainer(item))
@@ -90,7 +90,6 @@ const ActionChecklist = (): ReactElement => {
 				return <Fragment key={constructKey(key, idx)} />
 			}
 		)
-	}
 
 	const renderActionChecklist = (): ReactElement => {
 		switch (state.value) {

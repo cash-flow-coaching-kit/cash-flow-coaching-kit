@@ -183,18 +183,14 @@ const ActionContainer = ({
 	 *
 	 * @returns boolean
 	 */
-	const preventAddingNew = (): boolean => {
-		return lastInArray(data).description === ""
-	}
+	const preventAddingNew = (): boolean => lastInArray(data).description === ""
 
 	/**
 	 * Checks if the item is the last in the list
 	 *
 	 * @returns boolean
 	 */
-	const lastItemInList = (): boolean => {
-		return data.length === 1
-	}
+	const lastItemInList = (): boolean => data.length === 1
 
 	/**
 	 * Map method to render all the action items

@@ -15,17 +15,13 @@ import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
-import { setToggleOfflineContent } from "./../../util/helper"
-import useHasInternet from "./../../context/useHasInternet"
+import { setToggleOfflineContent } from "../../util/helper"
+import useHasInternet from "../../context/useHasInternet"
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
-}
+const isDesktop = userAgent.indexOf(" electron/") > -1
 
 const DTSellingClosingSuccession = (): ReactElement => {
 	const styles = useDTStyles()
@@ -95,8 +91,9 @@ const DTSellingClosingSuccession = (): ReactElement => {
 											</Typography>
 											<Typography component="li" className={styles.list}>
 												Is the decision to exit right for you at this time?
-												Consider whether the decision to exit is a 'business'
-												decision or a 'personal' decision. Many small businesses
+												Consider whether the decision to exit is a
+												&lsquo;business&rsquo; decision or a
+												&lsquo;personal&rsquo; decision. Many small businesses
 												are a very personal matter for owners.
 											</Typography>
 											<Typography component="li" className={styles.list}>
@@ -559,9 +556,9 @@ const DTSellingClosingSuccession = (): ReactElement => {
 						component="p"
 						className={styles.contentText}
 					>
-						Exiting your business can be a complex and emotional time. Don't
-						forget to look after yourself. Seek professional advice from you
-						business advisor, accountant and/or solicitor to help you
+						Exiting your business can be a complex and emotional time.
+						Don&rsquo;t forget to look after yourself. Seek professional advice
+						from you business advisor, accountant and/or solicitor to help you
 						successfully navigate this process.
 					</Typography>
 				</Container>

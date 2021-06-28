@@ -15,23 +15,19 @@ import {
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
+import fileSaver from "file-saver"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
-import { setToggleOfflineContent } from "./../../util/helper"
-import useHasInternet from "./../../context/useHasInternet"
+import { setToggleOfflineContent } from "../../util/helper"
+import useHasInternet from "../../context/useHasInternet"
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
-import fileSaver from 'file-saver'
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
-}
+const isDesktop = userAgent.indexOf(" electron/") > -1
 
 const saveFile = async (filename: string) => {
 	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
@@ -121,7 +117,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Mick's Farm.{" "}
+											Download Transcript: Mick&rsquo;s Farm.{" "}
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -149,7 +145,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Ming's Disability Services.{" "}
+											Download Transcript: Ming&rsquo;s Disability Services.{" "}
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}

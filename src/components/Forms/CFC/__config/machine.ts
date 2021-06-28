@@ -2,9 +2,9 @@ import { Machine } from "xstate"
 
 interface Schema {
 	states: {
-		loading: {}
-		success: {}
-		failure: {}
+		loading: Record<string, unknown>
+		success: Record<string, unknown>
+		failure: Record<string, unknown>
 	}
 }
 type Events = { type: "RESOLVE" } | { type: "REJECT" } | { type: "RETRY" }

@@ -19,13 +19,12 @@ const addNewActionItem = (
 	const { checklist, priority: pID } = payload
 
 	const newPriority = state.priority.reduce(
-		(collection: ActionChecklistPriorityStruct[], item) => {
-			return collection.concat(
+		(collection: ActionChecklistPriorityStruct[], item) =>
+			collection.concat(
 				item.id === pID
 					? { ...item, order: uniq([...item.order, checklist?.id || ""]) }
 					: item
-			)
-		},
+			),
 		[]
 	)
 

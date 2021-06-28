@@ -71,10 +71,10 @@ const useStyles = makeStyles((theme) => ({
 // #region Machine Definitions
 interface MachineSchema {
 	states: {
-		idle: {}
-		loading: {}
-		success: {}
-		failure: {}
+		idle: Record<string, unknown>
+		loading: Record<string, unknown>
+		success: Record<string, unknown>
+		failure: Record<string, unknown>
 	}
 }
 
@@ -138,13 +138,8 @@ const successContent = {
 }
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
-}
-
+const isDesktop = userAgent.indexOf(" electron/") > -1
 export default function ImportClientDialog({
 	open,
 	onClose,
@@ -276,35 +271,33 @@ export default function ImportClientDialog({
 
 		return (
 			<>
-				{response.map(
-					(res, idx): ReactElement => {
-						if (res instanceof Error) {
-							return (
-								<Box key={keys[idx]} className={cls.result}>
-									<successContent.iserror.icon color="error" />
-									<Typography component="strong">
-										{databaseConfig[keys[idx]]}:
-									</Typography>
-									<Typography>{res.message}</Typography>
-								</Box>
-							)
-						}
-
-						const config = successContent[res ? "istrue" : "isfalse"]
-
+				{response.map((res, idx): ReactElement => {
+					if (res instanceof Error) {
 						return (
 							<Box key={keys[idx]} className={cls.result}>
-								<config.icon
-									style={res ? { color: green[500] } : { color: orange[500] }}
-								/>
+								<successContent.iserror.icon color="error" />
 								<Typography component="strong">
 									{databaseConfig[keys[idx]]}:
 								</Typography>
-								<Typography>{config.content}</Typography>
+								<Typography>{res.message}</Typography>
 							</Box>
 						)
 					}
-				)}
+
+					const config = successContent[res ? "istrue" : "isfalse"]
+
+					return (
+						<Box key={keys[idx]} className={cls.result}>
+							<config.icon
+								style={res ? { color: green[500] } : { color: orange[500] }}
+							/>
+							<Typography component="strong">
+								{databaseConfig[keys[idx]]}:
+							</Typography>
+							<Typography>{config.content}</Typography>
+						</Box>
+					)
+				})}
 				<Spacer space={3} />
 				{RetryButton("Import another file")}
 			</>
@@ -374,12 +367,14 @@ export default function ImportClientDialog({
 			<DialogContent>
 				<Typography component="p" variant="body1" className={cls.contentText}>
 					If you have used the Cash Flow Coaching Kit before and have previously
-					exported your work, you'll be able to import that data from your
+					exported your work, you&rsquo;ll be able to import that data from your
 					device and continue where you left off.
 				</Typography>
 				<Typography component="p" variant="body1" className={cls.contentText}>
 					The data you enter into the kit will be stored on this device only.
-					{isDesktop ? "" : "Exiting or clearing your browser cache will erase all unsaved client data."}
+					{isDesktop
+						? ""
+						: "Exiting or clearing your browser cache will erase all unsaved client data."}
 				</Typography>
 			</DialogContent>
 			<DialogContent>

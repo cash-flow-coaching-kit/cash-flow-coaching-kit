@@ -37,16 +37,16 @@ export default function ImportDataModal({
 	onClose,
 }: {
 	open: boolean
-	onClose: any
+	onClose: any // eslint-disable-line
 }): ReactElement {
-	const fileRef: any = createRef()
+	const fileRef: any = createRef() // eslint-disable-line
 	const [currentItems, setCurrentItems] = useState<ProcessFileItem[]>([])
-	const { id: canvasId } = useParams<any>()
+	const { id: canvasId } = useParams<any>() // eslint-disable-line
 
 	// Canvas Item Updaters are a list of function from context to update the canvas
 	const { canvasItemUpdater } = useContext(CFCContext)
 
-	const [canvasData, setCanvasData] = useState<any>()
+	const [canvasData, setCanvasData] = useState<any>() // eslint-disable-line
 	useEffect(() => {
 		// load the current canvas so we can merge
 		;(async () => {
@@ -55,66 +55,79 @@ export default function ImportDataModal({
 		})()
 	}, [canvasId])
 
-	const deleteItem = (id: string) => (event: any): void => {
-		const newItems = currentItems
-			.filter((i) => i.id !== id)
-			.map((i) => (i.merge === id ? { ...i, merge: NO_MERGE } : i))
-		setCurrentItems(newItems)
-	}
+	const deleteItem =
+		(id: string) =>
+		// eslint-disable-next-line
+		(event: any): void => {
+			const newItems = currentItems
+				.filter((i) => i.id !== id)
+				.map((i) => (i.merge === id ? { ...i, merge: NO_MERGE } : i))
+			setCurrentItems(newItems)
+		}
 
-	const toggleType = (id: string) => (event: any): void => {
-		const newItems: ProcessFileItem[] = currentItems.map((i) => {
-			if (i.id === id) {
-				return {
-					...i,
-					type: event.target.value as ProcessFileItem["type"],
-					merge: null,
+	const toggleType =
+		(id: string) =>
+		// eslint-disable-next-line
+		(event: any): void => {
+			const newItems: ProcessFileItem[] = currentItems.map((i) => {
+				if (i.id === id) {
+					return {
+						...i,
+						type: event.target.value as ProcessFileItem["type"],
+						merge: null,
+					}
 				}
-			}
-			return i
-		})
-		setCurrentItems(newItems)
-	}
+				return i
+			})
+			setCurrentItems(newItems)
+		}
 
-	const toggleGST = (id: string) => (event: any): void => {
-		const newItems: ProcessFileItem[] = currentItems.map((i) => {
-			if (i.id === id) {
-				return {
-					...i,
-					gst: event.target.value as ProcessFileItem["gst"],
+	const toggleGST =
+		(id: string) =>
+		// eslint-disable-next-line
+		(event: any): void => {
+			const newItems: ProcessFileItem[] = currentItems.map((i) => {
+				if (i.id === id) {
+					return {
+						...i,
+						gst: event.target.value as ProcessFileItem["gst"],
+					}
 				}
-			}
-			return i
-		})
-		setCurrentItems(newItems)
-	}
+				return i
+			})
+			setCurrentItems(newItems)
+		}
 
-	const toggleMergeInto = (id: string) => (event: any): void => {
-		const newItems: ProcessFileItem[] = currentItems.map((i) => {
-			// edge case where linked to an item that gets linked - update the link
-			if (i.id === id || i.merge === id) {
-				return {
-					...i,
-					merge: event.target.value as ProcessFileItem["merge"],
+	const toggleMergeInto =
+		(id: string) =>
+		// eslint-disable-next-line
+		(event: any): void => {
+			const newItems: ProcessFileItem[] = currentItems.map((i) => {
+				// edge case where linked to an item that gets linked - update the link
+				if (i.id === id || i.merge === id) {
+					return {
+						...i,
+						merge: event.target.value as ProcessFileItem["merge"],
+					}
 				}
-			}
-			return i
-		})
-		setCurrentItems(newItems)
-	}
+				return i
+			})
+			setCurrentItems(newItems)
+		}
 
-	const onOpenFileDialog = () => fileRef!.current.click()
+	const onOpenFileDialog = () => fileRef!.current.click() // eslint-disable-line
 
+	// eslint-disable-next-line
 	const onFileChange = (event: any) => {
 		const file = event.target.files[0]
 		const reader = new FileReader()
 		// eslint-disable-next-line
 		reader.onload = async () => {
 			if (!reader.result) {
-				alert("empty")
+				alert("empty") // eslint-disable-line
 				return
 			}
-			const data = new Uint8Array(reader.result as any)
+			const data = new Uint8Array(reader.result as any) // eslint-disable-line
 			const newItems = await generalProcessFile(data)
 			setCurrentItems([...currentItems, ...newItems])
 		}
@@ -143,7 +156,9 @@ export default function ImportDataModal({
 				// existing items
 				cashItems !== undefined &&
 					cashItems
+						// eslint-disable-next-line
 						.filter(({ description }: any) => description) // remove blank lines
+						// eslint-disable-next-line
 						.map(({ id, description }: any) => (
 							<MenuItem key={id} value={id}>
 								Add to {description || "No description"}
@@ -223,7 +238,7 @@ export default function ImportDataModal({
 
 	const cashItemCount = (type: "in" | "out") =>
 		currentItems.filter((i) => i.type === type && i.merge === NO_MERGE).length +
-		canvasData?.cashInItems.filter((i: any) => i.description).length
+		canvasData?.cashInItems.filter((i: any) => i.description).length // eslint-disable-line
 
 	const noTypeCount = () =>
 		currentItems.reduce((a, item) => (item.type ? a : a + 1), 0)

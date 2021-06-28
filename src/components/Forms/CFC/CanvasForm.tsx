@@ -70,6 +70,7 @@ import { isGSTValid } from "../../../util/money/gst"
  * @returns {ReactElement}
  */
 
+// eslint-disable-next-line
 const calcImportedTotal = (items: any, type: ProcessFileItem["type"]): number =>
 	[...items]
 		.filter(({ type: t }: ProcessFileItem) => t === type)
@@ -90,33 +91,31 @@ const calcCashItems = (
 	existingItems: CashFlow[],
 	importedItems: ProcessFileItem[],
 	type: "in" | "out"
-): CashFlow[] => {
-	return [
-		// existing items + merge values
-		...existingItems
-			.filter((i) => i.description && i.amount)
-			.map((i) => {
-				const mergeAmount = calcMergeAmount(importedItems, i.id)
-				return {
-					...i,
-					amount: Math.floor(toNumber(i.amount) + mergeAmount),
-				}
-			}),
-		// new items + merge values
-		...importedItems
-			.filter((i: ProcessFileItem) => i.type === type && i.merge === NO_MERGE)
-			.map((i: ProcessFileItem) => {
-				const gstApplicable = i.gst === "applygst"
-				const rate = gstApplicable ? 1.1 : 1.0
-				const mergeAmount = calcMergeAmount(importedItems, i.id)
-				return createCashFlowItem(
-					i.description,
-					Math.floor(i.amount * rate + mergeAmount),
-					gstApplicable
-				)
-			}),
-	]
-}
+): CashFlow[] => [
+	// existing items + merge values
+	...existingItems
+		.filter((i) => i.description && i.amount)
+		.map((i) => {
+			const mergeAmount = calcMergeAmount(importedItems, i.id)
+			return {
+				...i,
+				amount: Math.floor(toNumber(i.amount) + mergeAmount),
+			}
+		}),
+	// new items + merge values
+	...importedItems
+		.filter((i: ProcessFileItem) => i.type === type && i.merge === NO_MERGE)
+		.map((i: ProcessFileItem) => {
+			const gstApplicable = i.gst === "applygst"
+			const rate = gstApplicable ? 1.1 : 1.0
+			const mergeAmount = calcMergeAmount(importedItems, i.id)
+			return createCashFlowItem(
+				i.description,
+				Math.floor(i.amount * rate + mergeAmount),
+				gstApplicable
+			)
+		}),
+]
 
 export default function CanvasForm({
 	initialValues,
@@ -127,25 +126,20 @@ export default function CanvasForm({
 	const styles = useStyles()
 	// #region State management
 	const [lastSaved, setLastSaved] = useState(new Date())
-	const { id: canvasId } = useParams()
+	const { id: canvasId } = useParams() as any // eslint-disable-line
 	const [currentClient] = useCurrentClient()
 	const [stateMachine, updateMachine] = useMachine(fetchMachine)
-	const {
-		duplicateError,
-		invalidDateError,
-		dispatch,
-		copyCanvasActive,
-	} = useContext(CFCContext)
+	const { duplicateError, invalidDateError, dispatch, copyCanvasActive } =
+		useContext(CFCContext)
 	// eslint-disable-next-line
 	const { canvasItemUpdater, setCanvasItemUpdater } = useContext(CFCContext)
 
-	const { setFieldValue, handleChange, values, setValues } = useFormik<
-		BaseCFCStruct
-	>({
-		initialValues,
-		// Submit is not used for this form
-		onSubmit: (): void => {},
-	})
+	const { setFieldValue, handleChange, values, setValues } =
+		useFormik<BaseCFCStruct>({
+			initialValues,
+			// Submit is not used for this form
+			onSubmit: (): void => {},
+		})
 	const [previousValues, setPreviousValues] = useState(initialValues)
 	const [useCustomTitle, setUseCustomTitle] = useState(customTitle)
 	const calculated = useMemo(() => calculateInitial(values), [values])
@@ -176,22 +170,24 @@ export default function CanvasForm({
 		() => calcCashFlowTotal(cashInItems, gstOnSales),
 		[cashInItems, gstOnSales]
 	)
-	const cashInGST = useMemo(() => {
-		return isGSTValid(gstOnSales)
-			? gstOnSales || 0
-			: calcCashFlowGST(cashInItems)
-	}, [cashInItems, gstOnSales])
+	const cashInGST = useMemo(
+		() =>
+			isGSTValid(gstOnSales) ? gstOnSales || 0 : calcCashFlowGST(cashInItems),
+		[cashInItems, gstOnSales]
+	)
 
-	const cashOutTotal = useMemo(() => calcTotalCashOut(values, gstOnPurchases), [
-		values,
-		gstOnPurchases,
-	])
+	const cashOutTotal = useMemo(
+		() => calcTotalCashOut(values, gstOnPurchases),
+		[values, gstOnPurchases]
+	)
 
-	const cashOutGST = useMemo(() => {
-		return isGSTValid(gstOnPurchases)
-			? gstOnPurchases || 0
-			: calcCashFlowGST(cashOutItems)
-	}, [cashOutItems, gstOnPurchases])
+	const cashOutGST = useMemo(
+		() =>
+			isGSTValid(gstOnPurchases)
+				? gstOnPurchases || 0
+				: calcCashFlowGST(cashOutItems),
+		[cashOutItems, gstOnPurchases]
+	)
 
 	const addDataImportItems = useCallback(
 		(items: ProcessFileItem[]) => {
@@ -367,13 +363,13 @@ export default function CanvasForm({
 		return valuesCopy
 	}, [values])
 
-	const disableSaving = useCallback((): boolean => {
-		return (
+	const disableSaving = useCallback(
+		(): boolean =>
 			invalidDateError ||
 			duplicateError ||
-			(useCustomTitle && canvasTitle === "")
-		)
-	}, [invalidDateError, duplicateError, useCustomTitle, canvasTitle])
+			(useCustomTitle && canvasTitle === ""),
+		[invalidDateError, duplicateError, useCustomTitle, canvasTitle]
+	)
 
 	const handleFormSave = useCallback(async () => {
 		const completeValues = ensureCustomGSTValuesAreIncluded()
@@ -420,9 +416,8 @@ export default function CanvasForm({
 	 * @param {BaseCFCStruct[K]} v
 	 */
 	const changeDateValue = (k: CanvasDateKeys, v: Date): void => {
-		const { canvasStartDate: start, canvasEndDate: end } = changeDate<
-			BaseCFCStruct
-		>(k, v, values)
+		const { canvasStartDate: start, canvasEndDate: end } =
+			changeDate<BaseCFCStruct>(k, v, values)
 
 		// Sets the field value
 		setFieldValue("canvasStartDate", start, false)
@@ -440,18 +435,19 @@ export default function CanvasForm({
 	 */
 	const addCashFlowItem = useCallback(
 		(
-			key: "cashInItems" | "cashOutItems",
-			description = "",
-			amount = 0,
-			gstApplicable = true
-		) => (): void => {
-			const items = values[key]
-			setFieldValue(
-				key,
-				items.concat(createCashFlowItem(description, amount, gstApplicable)),
-				false
-			)
-		},
+				key: "cashInItems" | "cashOutItems",
+				description = "",
+				amount = 0,
+				gstApplicable = true
+			) =>
+			(): void => {
+				const items = values[key]
+				setFieldValue(
+					key,
+					items.concat(createCashFlowItem(description, amount, gstApplicable)),
+					false
+				)
+			},
 		[setFieldValue, values]
 	)
 
@@ -462,9 +458,10 @@ export default function CanvasForm({
 	 * @param {CashFlow["id"]} id
 	 */
 	const removeItem = useCallback(
-		(key: "cashInItems" | "cashOutItems") => (id: CashFlow["id"]): void => {
-			setFieldValue(key, removeCashflowItem(id, values[key]), false)
-		},
+		(key: "cashInItems" | "cashOutItems") =>
+			(id: CashFlow["id"]): void => {
+				setFieldValue(key, removeCashflowItem(id, values[key]), false)
+			},
 		[values, setFieldValue]
 	)
 	// #endregion

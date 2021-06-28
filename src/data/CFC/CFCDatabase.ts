@@ -101,15 +101,19 @@ class CFCDatabase extends Dexie {
 	private replaceIdsWithStrings(): void {
 		this.canvases.toCollection().modify((canvas) => {
 			if (typeof canvas.id === "number") {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				canvas.id = `${canvas.id}`
 			}
 			if (typeof canvas.clientId === "number") {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				canvas.clientId = `${canvas.clientId}`
 			}
 			if (!hasProperty(canvas, "gstOnPurchases")) {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				canvas.gstOnPurchases = undefined
 			}
 			if (!hasProperty(canvas, "gstOnSales")) {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				canvas.gstOnSales = undefined
 			}
 		})

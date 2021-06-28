@@ -9,7 +9,7 @@ import CFCUseCase from "../../data/CFC/CFCLogic"
 export default function ControlCompareLink(): ReactElement {
 	const history = useHistory()
 	const [count, setCount] = useState(0)
-	const { id } = useParams()
+	const { id } = useParams() as any  // eslint-disable-line
 	const [currentClient, clientSynced] = useCurrentClient()
 	const getCount = useCallback(async () => {
 		if (currentClient?.id) {

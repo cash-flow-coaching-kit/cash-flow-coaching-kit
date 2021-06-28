@@ -34,26 +34,25 @@ export default function CreateCanvasForm(): ReactElement {
 	const [currentClient] = useCurrentClient()
 	const { duplicateError, invalidDateError } = useContext(CFCContext)
 
-	const { setFieldValue, handleChange, values, handleSubmit } = useFormik<
-		BaseCFCStruct
-	>({
-		initialValues,
-		onSubmit: async (formValues: BaseCFCStruct) => {
-			if (currentClient?.id) {
-				const id = await onCreate(formValues, currentClient.id)
-				// Creates some url search parameters to pass onto the edit page
-				const query = createURLParams(formValues, useCustomTitle)
+	const { setFieldValue, handleChange, values, handleSubmit } =
+		useFormik<BaseCFCStruct>({
+			initialValues,
+			onSubmit: async (formValues: BaseCFCStruct) => {
+				if (currentClient?.id) {
+					const id = await onCreate(formValues, currentClient.id)
+					// Creates some url search parameters to pass onto the edit page
+					const query = createURLParams(formValues, useCustomTitle)
 
-				// Redirects the user to the edit page
-				// eslint-disable-next-line
+					// Redirects the user to the edit page
+					// eslint-disable-next-line
 				history.push(
-					`${routeVarReplacement(PrivateRoutes.CFCEdit, [
-						[":id", `${id}`],
-					])}?${query}`
-				)
-			}
-		},
-	})
+						`${routeVarReplacement(PrivateRoutes.CFCEdit, [
+							[":id", `${id}`],
+						])}?${query}`
+					)
+				}
+			},
+		})
 
 	useEffect(() => {
 		if (!useCustomTitle) {
@@ -77,9 +76,8 @@ export default function CreateCanvasForm(): ReactElement {
 	 * @param {BaseCFCStruct[K]} v
 	 */
 	const changeDateValue = (k: CanvasDateKeys, v: Date): void => {
-		const { canvasStartDate: start, canvasEndDate: end } = changeDate<
-			BaseCFCStruct
-		>(k, v, values)
+		const { canvasStartDate: start, canvasEndDate: end } =
+			changeDate<BaseCFCStruct>(k, v, values)
 
 		// Sets the field value
 		setFieldValue("canvasStartDate", start, false)

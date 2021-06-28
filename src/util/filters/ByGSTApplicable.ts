@@ -9,9 +9,11 @@ import { CashFlow } from "../../data/_config/shape"
  * @param {boolean} reject
  * @returns CashFlow[]
  */
-const GSTApplicable = (reject = false) => (item: CashFlow): boolean => {
-	const res = item.gstApplicable
-	return reject ? !res : res
-}
+const GSTApplicable =
+	(reject = false) =>
+	(item: CashFlow): boolean => {
+		const res = item.gstApplicable
+		return reject ? !res : res
+	}
 
 export default GSTApplicable

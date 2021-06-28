@@ -12,16 +12,12 @@ import {
 import ExpandableNav from "../../components/ExpandableNav"
 import useStyles from "./styles"
 import Spacer from "../../components/Spacer"
-import { setToggleOfflineContent } from "./../../util/helper"
-import useHasInternet from "./../../context/useHasInternet"
+import { setToggleOfflineContent } from "../../util/helper"
+import useHasInternet from "../../context/useHasInternet"
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
-}
+const isDesktop = userAgent.indexOf(" electron/") > -1
 export default function ChangeLevers(): ReactElement {
 	const cls = useStyles()
 	const isOnline = useHasInternet()

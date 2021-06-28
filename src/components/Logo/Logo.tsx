@@ -38,16 +38,12 @@ const useStyles = makeStyles((theme) => ({
 
 type LogoProps = {
 	to: string
-	className?: string
+	className?: string // eslint-disable-line
 }
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
-}
+const isDesktop = userAgent.indexOf(" electron/") > -1
 
 /**
  * Logo component

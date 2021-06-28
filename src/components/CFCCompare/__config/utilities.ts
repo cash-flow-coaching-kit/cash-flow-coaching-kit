@@ -33,12 +33,11 @@ export async function getCanvasData(client: Client): Promise<CFCStruct[]> {
  * @returns {ReducerHOF<SelectFieldOptions, CFCStruct>}
  */
 export function reduceToOptions(): ReducerHOF<SelectFieldOptions, CFCStruct> {
-	return (acc, cur): SelectFieldOptions => {
-		return acc.concat({
+	return (acc, cur): SelectFieldOptions =>
+		acc.concat({
 			value: cur.id || -1,
 			label: canvasDisplayTitle(cur),
 		})
-	}
 }
 
 /**

@@ -10,9 +10,9 @@ export type StateMap = "loading" | "empty" | "hasItems"
  */
 export interface IHCListingSchema {
 	states: {
-		loading: {}
-		empty: {}
-		hasItems: {}
+		loading: Record<string, unknown>
+		empty: Record<string, unknown>
+		hasItems: Record<string, unknown>
 	}
 }
 

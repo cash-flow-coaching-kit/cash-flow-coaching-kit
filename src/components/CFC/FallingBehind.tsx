@@ -51,49 +51,51 @@ const useStyles = makeStyles((theme) => ({
  * }
  * @returns {ReactElement}
  */
-export default React.memo(function FallingBehind({
-	stock,
-	creditors,
-	debtors,
-	assets,
-	loans,
-	totalNetAssets,
-	onChange,
-}: FallingBehindProps): ReactElement {
-	const cls = useStyles()
+export default React.memo(
+	({
+		stock,
+		creditors,
+		debtors,
+		assets,
+		loans,
+		totalNetAssets,
+		onChange,
+	}: FallingBehindProps): ReactElement => {
+		const cls = useStyles()
 
-	return (
-		<ExpandableNav
-			title="Is your business improving its financial position?"
-			subHeading="Complete these fields to record your net asset position."
-			defaultExpanded={false}
-		>
-			<Box className={cls.box}>
-				<Grid container spacing={2}>
-					<Grid item xs={12} sm={6}>
-						<Debtors value={debtors} onChange={onChange} />
+		return (
+			<ExpandableNav
+				title="Is your business improving its financial position?"
+				subHeading="Complete these fields to record your net asset position."
+				defaultExpanded={false}
+			>
+				<Box className={cls.box}>
+					<Grid container spacing={2}>
+						<Grid item xs={12} sm={6}>
+							<Debtors value={debtors} onChange={onChange} />
+						</Grid>
+						<Grid item xs={12} sm={6}>
+							<Creditors value={creditors} onChange={onChange} />
+						</Grid>
+						<Grid item xs={12} sm={6}>
+							<Assets value={assets} onChange={onChange} />
+						</Grid>
+						<Grid item xs={12} sm={6}>
+							<Loans value={loans} onChange={onChange} />
+						</Grid>
+						<Grid item xs={12} sm={6}>
+							<Stock value={stock} onChange={onChange} />
+						</Grid>
+						<Grid item xs={12} sm={6} className={cls.total}>
+							<ComputedPanels
+								title="Total net assets"
+								value={addDollarSign(formatNumber(`${totalNetAssets}`))}
+								wrapped={false}
+							/>
+						</Grid>
 					</Grid>
-					<Grid item xs={12} sm={6}>
-						<Creditors value={creditors} onChange={onChange} />
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<Assets value={assets} onChange={onChange} />
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<Loans value={loans} onChange={onChange} />
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<Stock value={stock} onChange={onChange} />
-					</Grid>
-					<Grid item xs={12} sm={6} className={cls.total}>
-						<ComputedPanels
-							title="Total net assets"
-							value={addDollarSign(formatNumber(`${totalNetAssets}`))}
-							wrapped={false}
-						/>
-					</Grid>
-				</Grid>
-			</Box>
-		</ExpandableNav>
-	)
-})
+				</Box>
+			</ExpandableNav>
+		)
+	}
+)

@@ -18,7 +18,7 @@ import { PrivateRoutes, PublicRoutes } from "../../../util/routes/routes"
 export interface INavRoutes {
 	route: PrivateRoutes | PublicRoutes | string
 	title: string
-	Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>
+	Icon?: OverridableComponent<SvgIconTypeMap<any, "svg">>
 	children?: INavRoutes[]
 	subMenuTitle?: string
 }

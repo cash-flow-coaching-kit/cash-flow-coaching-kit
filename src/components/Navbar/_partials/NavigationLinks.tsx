@@ -99,37 +99,35 @@ const NavigationRoutes = ({
 
 	return (
 		<>
-			{routes.map(
-				(route: INavRoutes, idx: number): ReactElement => {
-					if (route.children) {
-						return (
-							<RouteWithChildren
-								route={route}
-								childRoutes={route.children}
-								// eslint-disable-next-line react/jsx-props-no-spreading
-								{...buttonProps}
-								key={constructKey(key, idx)}
-							/>
-						)
-					}
-
+			{routes.map((route: INavRoutes, idx: number): ReactElement => {
+				if (route.children) {
 					return (
-						<Button
-							startIcon={route.Icon ? <route.Icon /> : null}
-							component={RouterLink}
-							activeStyle={{
-								fontWeight: theme.typography.fontWeightBold,
-							}}
-							to={route.route}
+						<RouteWithChildren
+							route={route}
+							childRoutes={route.children}
 							// eslint-disable-next-line react/jsx-props-no-spreading
 							{...buttonProps}
 							key={constructKey(key, idx)}
-						>
-							{route.title}
-						</Button>
+						/>
 					)
 				}
-			)}
+
+				return (
+					<Button
+						startIcon={route.Icon ? <route.Icon /> : null}
+						component={RouterLink}
+						activeStyle={{
+							fontWeight: theme.typography.fontWeightBold,
+						}}
+						to={route.route}
+						// eslint-disable-next-line react/jsx-props-no-spreading
+						{...buttonProps}
+						key={constructKey(key, idx)}
+					>
+						{route.title}
+					</Button>
+				)
+			})}
 		</>
 	)
 }

@@ -22,17 +22,13 @@ import useDTStyles from "./_config/styles"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
-import { setToggleOfflineContent } from "./../../util/helper"
-import useHasInternet from "./../../context/useHasInternet"
+import { setToggleOfflineContent } from "../../util/helper"
+import useHasInternet from "../../context/useHasInternet"
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
-}
+const isDesktop = userAgent.indexOf(" electron/") > -1
 
 const TrackingPerformance = (): ReactElement => {
 	const styles = useDTStyles()
@@ -114,7 +110,7 @@ const TrackingPerformance = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Tina's Hair &amp; Beauty.{" "}
+											Download Transcript: Tina&rsquo;s Hair &amp; Beauty.{" "}
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -142,7 +138,7 @@ const TrackingPerformance = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Anders' Retirement Plan.{" "}
+											Download Transcript: Anders&rsquo; Retirement Plan.{" "}
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}

@@ -11,11 +11,9 @@ import { ActionChecklistNotesStruct } from "../../../data/_config/shape"
 const addNote = (
 	state: IActionChecklistState,
 	payload: ActionChecklistNotesStruct
-): IActionChecklistState => {
-	return {
-		...state,
-		notes: [...state.notes, payload],
-	}
-}
+): IActionChecklistState => ({
+	...state,
+	notes: [...state.notes, payload],
+})
 
 export default addNote

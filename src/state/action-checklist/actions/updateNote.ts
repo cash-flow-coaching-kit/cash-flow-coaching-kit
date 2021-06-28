@@ -14,11 +14,10 @@ const updateNote = (
 ): IActionChecklistState => {
 	const { data, id } = payload
 	const newNotes = state.notes.reduce(
-		(collection: ActionChecklistNotesStruct[], current) => {
-			return collection.concat(
+		(collection: ActionChecklistNotesStruct[], current) =>
+			collection.concat(
 				current.id === id ? { ...current, ...data, id: current.id } : current
-			)
-		},
+			),
 		[]
 	)
 

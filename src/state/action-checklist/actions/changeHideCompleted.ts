@@ -10,11 +10,9 @@ import { IActionChecklistState } from "../shape"
 const changeHideCompleted = (
 	state: IActionChecklistState,
 	payload: boolean
-): IActionChecklistState => {
-	return {
-		...state,
-		hideCompleted: payload,
-	}
-}
+): IActionChecklistState => ({
+	...state,
+	hideCompleted: payload,
+})
 
 export default changeHideCompleted

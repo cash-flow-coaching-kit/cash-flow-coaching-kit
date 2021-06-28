@@ -15,23 +15,19 @@ import {
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
+import fileSaver from "file-saver"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
-import { setToggleOfflineContent } from "./../../util/helper"
-import useHasInternet from "./../../context/useHasInternet"
+import { setToggleOfflineContent } from "../../util/helper"
+import useHasInternet from "../../context/useHasInternet"
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
-import fileSaver from 'file-saver'
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
-}
+const isDesktop = userAgent.indexOf(" electron/") > -1
 
 const saveFile = async (filename: string) => {
 	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
@@ -64,8 +60,8 @@ const DTPlanningBusiness = (): ReactElement => {
 							have a well researched business plan, you are able to accurately
 							forecast and analyse your business. This helps you to be
 							financially prepared for circumstances outside of your control,
-							find opportunities to grow your business, and ensure you don't run
-							out of money.
+							find opportunities to grow your business, and ensure you
+							don&rsquo;t run out of money.
 						</Typography>
 						<Typography
 							variant="body1"
@@ -120,7 +116,7 @@ const DTPlanningBusiness = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Kirra's Native Foods.{" "}
+											Download Transcript: Kirra&rsquo;s Native Foods.{" "}
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -148,7 +144,7 @@ const DTPlanningBusiness = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Sanjana's Restaurant.{" "}
+											Download Transcript: Sanjana&rsquo;s Restaurant.{" "}
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}

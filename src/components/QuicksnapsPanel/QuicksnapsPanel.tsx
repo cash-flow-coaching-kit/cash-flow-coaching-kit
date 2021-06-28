@@ -1,16 +1,16 @@
 import React, { ReactElement } from "react"
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
+import fileSaver from "file-saver"
 import ExpandableNav from "../ExpandableNav"
-import fileSaver from 'file-saver'
 
 type QPProps = {
 	filename: string
 }
 
-const saveFile = async(filename:string) => {
+const saveFile = async (filename: string) => {
 	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
-	return(fileSaver.saveAs(blob, filename))
+	return fileSaver.saveAs(blob, filename)
 }
 export default function QuicksnapsPanel({ filename }: QPProps): ReactElement {
 	return (

@@ -41,56 +41,54 @@ const QuestionSummaries = ({
 			alignItems="stretch"
 			className={styles.gridRoot}
 		>
-			{questions.map(
-				(q: IQuestionStructure, idx: number): ReactElement => {
-					const { Icon, color } = getOptionByAnswer(
-						tileAnswers[idx],
-						answerTheming
-					)
+			{questions.map((q: IQuestionStructure, idx: number): ReactElement => {
+				const { Icon, color } = getOptionByAnswer(
+					tileAnswers[idx],
+					answerTheming
+				)
 
-					return (
-						<Grid
-							item
-							xs={12}
-							sm={6}
-							md={4}
-							key={constructKey(key, idx)}
-							className={styles.gridItem}
-						>
-							<Card className={styles.cardRoot}>
-								<CardActionArea
-									component={Link}
-									to={q.learnMore || PrivateRoutes.CoachingKit}
-									className={styles.areaRoot}
-								>
-									<CardHeader
-										title={q.question}
-										avatar={<Icon style={{ color }} />}
-										subheader={q.options[tileAnswers[idx]]}
-										subheaderTypographyProps={{
-											style: {
-												color,
-												fontWeight: 500,
-											},
+				return (
+					<Grid
+						item
+						xs={12}
+						sm={6}
+						md={4}
+						key={constructKey(key, idx)}
+						className={styles.gridItem}
+					>
+						<Card className={styles.cardRoot}>
+							<CardActionArea
+								component={Link}
+								to={q.learnMore || PrivateRoutes.CoachingKit}
+								className={styles.areaRoot}
+							>
+								<CardHeader
+									title={q.question}
+									avatar={<Icon style={{ color }} />}
+									subheader={q.options[tileAnswers[idx]]}
+									subheaderTypographyProps={{
+										style: {
+											color,
+											fontWeight: 500,
+										},
+									}}
+									className={styles.cardHeader}
+								/>
+								<CardActions className={styles.cardActions}>
+									<Avatar
+										style={{
+											backgroundColor: theme.palette.primary.main,
+											boxShadow: theme.shadows["3"],
 										}}
-										className={styles.cardHeader}
-									/>
-									<CardActions className={styles.cardActions}>
-										<Avatar
-											style={{
-												backgroundColor: theme.palette.primary.main,
-												boxShadow: theme.shadows["3"],
-											}}
-										>
-											<ArrowForwardIcon />
-										</Avatar>
-									</CardActions>
-								</CardActionArea>
-							</Card>
-						</Grid>
-					)
-				}
-			)}
+									>
+										<ArrowForwardIcon />
+									</Avatar>
+								</CardActions>
+							</CardActionArea>
+						</Card>
+					</Grid>
+				)
+			})}
 		</Grid>
 	)
 }

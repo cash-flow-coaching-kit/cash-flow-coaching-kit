@@ -14,6 +14,7 @@ import {
 	Avatar,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import fileSaver from "file-saver"
 import { PrivateRoutes } from "../util/routes/routes"
 import { setToggleOfflineContent } from "../util/helper"
 import { PublicNavbar } from "../components/Navbar"
@@ -22,8 +23,7 @@ import { ClientContext } from "../state/client"
 import Spacer from "../components/Spacer"
 import ImportClient from "../components/ClientListing/_partials/ImportClient"
 import TakeATour from "../components/TakeATour"
-import useHasInternet from "./../context/useHasInternet"
-import fileSaver from 'file-saver'
+import useHasInternet from "../context/useHasInternet"
 
 const useHomepageStyles = makeStyles((theme) => ({
 	container: {
@@ -108,12 +108,8 @@ const useHomepageStyles = makeStyles((theme) => ({
 }))
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
-}
+const isDesktop = userAgent.indexOf(" electron/") > -1
 
 const saveFile = async (filename: string) => {
 	const blob = await fetch("./docs/" + filename).then((r) => r.blob())
@@ -357,6 +353,7 @@ const Homepage = (): ReactElement => {
 								: "We recommend regularly using the EXPORT DATA function from the Client List to avoid data loss. "}{" "}
 							Please refer to the{" "}
 							<button
+								type="button"
 								onClick={() => saveFile("Terms and Conditions.pdf")}
 								className="pdfDownloadButton"
 								title="Download Terms & Conditions"
@@ -365,6 +362,7 @@ const Homepage = (): ReactElement => {
 							</button>{" "}
 							of use and our{" "}
 							<button
+								type="button"
 								onClick={() => saveFile("Data usage and privacy statement.pdf")}
 								className="pdfDownloadButton"
 								title="Download Data usage and privacy statement"

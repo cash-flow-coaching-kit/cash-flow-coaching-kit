@@ -23,11 +23,11 @@ export type ProcessFileItem = {
 // nb. Cant use MIME type to determine which process to use as requires Excel to be installed
 
 export const generalProcessFile = async (
-	fileBuffer: any
+	fileBuffer: any // eslint-disable-line
 ): Promise<ProcessFileItem[]> => {
 	const res = await excelProcessFile(fileBuffer)
 	if (!res) {
-		alert(`Invalid file. Only Excel files are allowed.`)
+		alert(`Invalid file. Only Excel files are allowed.`) // eslint-disable-line
 		return []
 	}
 	return res

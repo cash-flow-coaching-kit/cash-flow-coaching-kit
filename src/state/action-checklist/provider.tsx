@@ -100,39 +100,38 @@ const createChecklistIfNeeded = async (
  * @param {ClientId} clientId
  * @returns Promise<void>
  */
-const completeSyncing = (
-	dispatch: Dispatch<ActionChecklistReducerActions>,
-	clientId: ClientId
-) => async (response: SyncResponse): Promise<void> => {
-	const [data, priority, notes] = response
+const completeSyncing =
+	(dispatch: Dispatch<ActionChecklistReducerActions>, clientId: ClientId) =>
+	async (response: SyncResponse): Promise<void> => {
+		const [data, priority, notes] = response
 
-	// Check for cash in actions
-	const CIA = await createChecklistIfNeeded(
-		data,
-		priority,
-		notes,
-		"cashInActions",
-		clientId
-	)
+		// Check for cash in actions
+		const CIA = await createChecklistIfNeeded(
+			data,
+			priority,
+			notes,
+			"cashInActions",
+			clientId
+		)
 
-	// Check for cash out actions
-	const COA = await createChecklistIfNeeded(
-		CIA[0],
-		CIA[1],
-		CIA[2],
-		"cashOutActions",
-		clientId
-	)
+		// Check for cash out actions
+		const COA = await createChecklistIfNeeded(
+			CIA[0],
+			CIA[1],
+			CIA[2],
+			"cashOutActions",
+			clientId
+		)
 
-	dispatch({
-		type: ActionChecklistActionTypes.UpdateDatabaseSync,
-		payload: {
-			data: [...COA[0]],
-			priority: [...COA[1]],
-			notes: [...COA[2]],
-		},
-	})
-}
+		dispatch({
+			type: ActionChecklistActionTypes.UpdateDatabaseSync,
+			payload: {
+				data: [...COA[0]],
+				priority: [...COA[1]],
+				notes: [...COA[2]],
+			},
+		})
+	}
 
 /**
  * Context state provider element

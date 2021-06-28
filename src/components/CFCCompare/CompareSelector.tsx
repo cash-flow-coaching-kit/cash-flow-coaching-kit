@@ -27,15 +27,16 @@ export default function CompareSelector({
 }: CompareSelectorProps): ReactElement {
 	const cls = useStyles()
 
-	const selectOptions = useMemo(() => {
-		return allCanvases.reduce(reduceToOptions(), [])
-	}, [allCanvases])
+	const selectOptions = useMemo(
+		() => allCanvases.reduce(reduceToOptions(), []),
+		[allCanvases]
+	)
 
-	const changeSelectedCanvas = (idx: number) => (
-		e: ChangeEvent<HTMLInputElement>
-	): void => {
-		changeSelected(idx, e.target.value)
-	}
+	const changeSelectedCanvas =
+		(idx: number) =>
+		(e: ChangeEvent<HTMLInputElement>): void => {
+			changeSelected(idx, e.target.value)
+		}
 
 	return (
 		<Grid container spacing={2} alignItems="center">

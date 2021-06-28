@@ -111,15 +111,13 @@ export default function Modal({
 
 			// construct all the items (without an id)
 			const items = values.items.reduce(
-				(collection: ActionChecklistStruct[], current) => {
-					return [
-						...collection,
-						{
-							...newChecklistItem(clientId, container),
-							...current,
-						},
-					]
-				},
+				(collection: ActionChecklistStruct[], current) => [
+					...collection,
+					{
+						...newChecklistItem(clientId, container),
+						...current,
+					},
+				],
 				[]
 			)
 

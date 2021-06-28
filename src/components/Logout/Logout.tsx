@@ -32,18 +32,13 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 interface LogoutProps {
-	color?: "inherit" | "primary" | "secondary" | "default"
-	variant?: "text" | "outlined" | "contained"
+	color?: "inherit" | "primary" | "secondary" | "default" // eslint-disable-line
+	variant?: "text" | "outlined" | "contained" // eslint-disable-line
 }
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
-}
-
+const isDesktop = userAgent.indexOf(" electron/") > -1
 export default function Logout({
 	color = "inherit",
 	variant = "text",
@@ -53,9 +48,9 @@ export default function Logout({
 	const [open, setOpen] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const history = useHistory()
-
 	const handleOpen = (): void => setOpen(true)
 	const handleClose = (): void => setOpen(false)
+	const returnToHome = () => history.push("/")
 
 	const exitApplication = async (): Promise<void> => {
 		window.localStorage.removeItem("blockReload")
@@ -71,12 +66,7 @@ export default function Logout({
 		await CFCDB.delete()
 
 		removeStorageClient()
-
 		returnToHome()
-	}
-
-	const returnToHome = () => {
-		history.push("/")
 	}
 
 	return (
