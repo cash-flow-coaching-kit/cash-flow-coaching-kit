@@ -4,8 +4,6 @@
 		"airbnb-typescript",
 		"plugin:@typescript-eslint/recommended",
 		"prettier"
-		// "prettier/@typescript-eslint",
-		// "prettier/react"
 	],
 	"env": {
 		"browser": true,
