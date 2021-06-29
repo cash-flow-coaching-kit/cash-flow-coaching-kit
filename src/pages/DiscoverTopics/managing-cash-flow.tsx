@@ -15,6 +15,7 @@ import {
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import fileSaver from "file-saver"
 import VerticalSplitIcon from "@material-ui/icons/VerticalSplit"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
@@ -22,16 +23,19 @@ import useDTStyles from "./_config/styles"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
-import { setToggleOfflineContent } from "./../../util/helper"
-import useHasInternet from "./../../context/useHasInternet"
+import { setToggleOfflineContent } from "../../util/helper"
+import useHasInternet from "../../context/useHasInternet"
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
+const isDesktop = userAgent.indexOf(" electron/") > -1
+
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
+	return fileSaver.saveAs(blob, filename)
 }
 
 const DTManagingCashFlow = (): ReactElement => {
@@ -106,11 +110,11 @@ const DTManagingCashFlow = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Yularis-cash-flow.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Yularis-cash-flow.docx", "transcripts")
+											}
 										>
-											Download Transcript: Yulari's Cash Flow.{" "}
+											Download Transcript: Yulari&rsquo;s Cash Flow
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -134,11 +138,11 @@ const DTManagingCashFlow = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Camerons-cash-flow.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Camerons-cash-flow.docx", "transcripts")
+											}
 										>
-											Download Transcript: Cameron's Cash Flow.{" "}
+											Download Transcript: Cameron&rsquo;s Cash Flow
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -257,10 +261,10 @@ const DTManagingCashFlow = (): ReactElement => {
 									Why?
 								</Typography>
 								<Typography>
-									Just because cash is sitting in your bank account, doesn't
-									necessarily mean it is all yours. Understanding what amounts
-									may be owed to third parties allows you to make better
-									decisions, and budget for upcoming expenses.
+									Just because cash is sitting in your bank account,
+									doesn&rsquo;t necessarily mean it is all yours. Understanding
+									what amounts may be owed to third parties allows you to make
+									better decisions, and budget for upcoming expenses.
 								</Typography>
 							</Grid>
 							<Grid item sm={6}>

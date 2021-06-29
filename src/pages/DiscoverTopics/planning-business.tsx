@@ -15,27 +15,25 @@ import {
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
+import fileSaver from "file-saver"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
 import useDTStyles from "./_config/styles"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
-import { setToggleOfflineContent } from "./../../util/helper"
-import useHasInternet from "./../../context/useHasInternet"
+import { setToggleOfflineContent } from "../../util/helper"
+import useHasInternet from "../../context/useHasInternet"
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
-import fileSaver from 'file-saver'
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
-}
+const isDesktop = userAgent.indexOf(" electron/") > -1
 
-const saveFile = async (filename: string) => {
-	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
-	fileSaver.saveAs(blob, filename)
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
+	return fileSaver.saveAs(blob, filename)
 }
 
 const DTPlanningBusiness = (): ReactElement => {
@@ -96,7 +94,7 @@ const DTPlanningBusiness = (): ReactElement => {
 								Be financially prepared for circumstances outside your control.
 							</Typography>
 							<Typography component="li" className={styles.list}>
-								Ensure you don’t run out of money.
+								Ensure you don&rsquo;t run out of money.
 							</Typography>
 						</List>
 						<Grid container spacing={3}>
@@ -116,11 +114,11 @@ const DTPlanningBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Kirras-native-foods.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Kirras-native-foods.docx", "transcripts")
+											}
 										>
-											Download Transcript: Kirra's Native Foods.{" "}
+											Download Transcript: Kirra&rsquo;s Native Foods
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -144,11 +142,11 @@ const DTPlanningBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Sanjanas-restaurant.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Sanjanas-restaurant.docx", "transcripts")
+											}
 										>
-											Download Transcript: Sanjana's Restaurant.{" "}
+											Download Transcript: Sanjana&rsquo;s Restaurant
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -372,7 +370,7 @@ const DTPlanningBusiness = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						onClick={() => saveFile("BusinessPlan-Activity.pdf")}
+						onClick={() => saveFile("BusinessPlan-Activity.pdf","pdf")}
 					>
 						Download activity
 					</Button>

@@ -15,6 +15,7 @@ import {
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import fileSaver from "file-saver"
 import VerticalSplitIcon from "@material-ui/icons/VerticalSplit"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
@@ -22,16 +23,19 @@ import useDTStyles from "./_config/styles"
 import { PrivateRoutes } from "../../util/routes/routes"
 import Taskbuilder from "../../components/Taskbuilder"
 import QuicksnapsPanel from "../../components/QuicksnapsPanel"
-import { setToggleOfflineContent } from "./../../util/helper"
-import useHasInternet from "./../../context/useHasInternet"
+import { setToggleOfflineContent } from "../../util/helper"
+import useHasInternet from "../../context/useHasInternet"
 import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
+const isDesktop = userAgent.indexOf(" electron/") > -1
+
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
+	return fileSaver.saveAs(blob, filename)
 }
 
 const TrackingPerformance = (): ReactElement => {
@@ -110,11 +114,11 @@ const TrackingPerformance = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Tinas-hair-and-beauty.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Tinas-hair-and-beauty.docx", "transcripts")
+											}
 										>
-											Download Transcript: Tina's Hair &amp; Beauty.{" "}
+											Download Transcript: Tina&rsquo;s Hair &amp; Beauty
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -138,11 +142,11 @@ const TrackingPerformance = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Anders-retirement-plan.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Anders-retirement-plan.docx", "transcripts")
+											}
 										>
-											Download Transcript: Anders' Retirement Plan.{" "}
+											Download Transcript: Anders&rsquo; Retirement Plan
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}

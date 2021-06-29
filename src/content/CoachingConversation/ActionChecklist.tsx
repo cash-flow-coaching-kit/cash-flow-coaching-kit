@@ -9,6 +9,7 @@ import {
 	CardActions,
 	Button,
 } from "@material-ui/core"
+import fileSaver from "file-saver"
 import ExpandableNav from "../../components/ExpandableNav"
 import useStyles from "./styles"
 import Spacer from "../../components/Spacer"
@@ -16,11 +17,14 @@ import { setToggleOfflineContent } from "./../../util/helper"
 import useHasInternet from "./../../context/useHasInternet"
 
 // Set flag for web or desktop mode
-let isDesktop = false
-
 const userAgent = navigator.userAgent.toLowerCase()
-if (userAgent.indexOf(" electron/") > -1) {
-	isDesktop = true
+const isDesktop = userAgent.indexOf(" electron/") > -1
+
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
+	return fileSaver.saveAs(blob, filename)
 }
 export default function ActionChecklist(): ReactElement {
 	const cls = useStyles()
@@ -43,7 +47,7 @@ export default function ActionChecklist(): ReactElement {
 						create change.
 					</Typography>
 					<Typography component="li">
-						Start prioritising tasks based on your client's needs.
+						Start prioritising tasks based on your client&rsquo;s needs.
 					</Typography>
 					<Typography component="li">
 						The most important part of this whole process is keeping your client
@@ -87,12 +91,12 @@ export default function ActionChecklist(): ReactElement {
 					<CardActions>
 						<Button
 							color="primary"
-							href="./transcripts/Action Checklist coaching tips.docx"
+							onClick={() =>
+								saveFile("Action Checklist coaching tips.docx", "transcripts")
+							}
 							aria-label="Download transcript: Action Checklist coaching tips"
-							target="_blank"
-							rel="noopener noreferrer"
 						>
-							Download Transcript.{" "}
+							Download Transcript
 							{!isOnline && isDesktop
 								? " Internet access is required for closed caption. "
 								: ""}
