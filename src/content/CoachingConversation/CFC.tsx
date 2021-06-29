@@ -9,6 +9,7 @@ import {
 	CardActions,
 	Button,
 } from "@material-ui/core"
+import fileSaver from "file-saver"
 import ExpandableNav from "../../components/ExpandableNav"
 import useStyles from "./styles"
 import Spacer from "../../components/Spacer"
@@ -18,6 +19,13 @@ import useHasInternet from "../../context/useHasInternet"
 // Set flag for web or desktop mode
 const userAgent = navigator.userAgent.toLowerCase()
 const isDesktop = userAgent.indexOf(" electron/") > -1
+
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
+	return fileSaver.saveAs(blob, filename)
+}
 export default function CFC(): ReactElement {
 	const cls = useStyles()
 	const isOnline = useHasInternet()
@@ -81,12 +89,12 @@ export default function CFC(): ReactElement {
 					<CardActions>
 						<Button
 							color="primary"
-							href="./transcripts/Cash Flow Canvas coaching tips.docx"
+							onClick={() =>
+								saveFile("Cash Flow Canvas coaching tips.docx", "transcripts")
+							}
 							aria-label="Download transcript: Cash Flow Canvas coaching tips"
-							target="_blank"
-							rel="noopener noreferrer"
 						>
-							Download Transcript.{" "}
+							Download Transcript
 							{!isOnline && isDesktop
 								? " Internet access is required for closed caption. "
 								: ""}

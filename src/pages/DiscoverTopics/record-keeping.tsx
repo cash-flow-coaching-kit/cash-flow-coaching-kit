@@ -29,9 +29,11 @@ import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 const userAgent = navigator.userAgent.toLowerCase()
 const isDesktop = userAgent.indexOf(" electron/") > -1
 
-const saveFile = async (filename: string) => {
-	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
-	fileSaver.saveAs(blob, filename)
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
+	return fileSaver.saveAs(blob, filename)
 }
 
 const DTRecordKeeping = (): ReactElement => {
@@ -114,11 +116,11 @@ const DTRecordKeeping = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Edens-digital-records.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Edens-digital-records.docx", "transcripts")
+											}
 										>
-											Download Transcript: Eden&rsquo;s Digital Records{" "}
+											Download Transcript: Eden&rsquo;s Digital Records
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -142,11 +144,11 @@ const DTRecordKeeping = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Lisas-paper-records.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Lisas-paper-records.docx", "transcripts")
+											}
 										>
-											Download Transcript: Lisa&rsquo;s Paper Records.{" "}
+											Download Transcript: Lisa&rsquo;s Paper Records
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -346,7 +348,7 @@ const DTRecordKeeping = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						onClick={() => saveFile("RecordKeeping-Activity.pdf")}
+						onClick={() => saveFile("RecordKeeping-Activity.pdf", "pdf")}
 					>
 						Download activity
 					</Button>

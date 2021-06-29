@@ -111,8 +111,10 @@ const useHomepageStyles = makeStyles((theme) => ({
 const userAgent = navigator.userAgent.toLowerCase()
 const isDesktop = userAgent.indexOf(" electron/") > -1
 
-const saveFile = async (filename: string) => {
-	const blob = await fetch("./docs/" + filename).then((r) => r.blob())
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
 	return fileSaver.saveAs(blob, filename)
 }
 
@@ -297,13 +299,16 @@ const Homepage = (): ReactElement => {
 								/>
 								<CardActions>
 									<Button
+										onClick={() =>
+											saveFile(
+												"What-advisors-think-of-the-kit.docx",
+												"transcripts"
+											)
+										}
 										color="primary"
-										href="./transcripts/What-advisors-think-of-the-kit.docx"
 										aria-label="Download transcript: What advisors think of the kit"
-										target="_blank"
-										rel="noopener noreferrer"
 									>
-										Download Transcript.{" "}
+										Download Transcript
 										{!isOnline && isDesktop
 											? " Internet access is required for closed caption. "
 											: ""}
@@ -354,7 +359,7 @@ const Homepage = (): ReactElement => {
 							Please refer to the{" "}
 							<button
 								type="button"
-								onClick={() => saveFile("Terms and Conditions.pdf")}
+								onClick={() => saveFile("Terms and Conditions.pdf", "docs")}
 								className="pdfDownloadButton"
 								title="Download Terms & Conditions"
 							>
@@ -363,7 +368,9 @@ const Homepage = (): ReactElement => {
 							of use and our{" "}
 							<button
 								type="button"
-								onClick={() => saveFile("Data usage and privacy statement.pdf")}
+								onClick={() =>
+									saveFile("Data usage and privacy statement.pdf", "docs")
+								}
 								className="pdfDownloadButton"
 								title="Download Data usage and privacy statement"
 							>

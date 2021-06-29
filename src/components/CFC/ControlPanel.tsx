@@ -57,9 +57,7 @@ export default function ControlPanel(): ReactElement {
 	const printPDF = async () => {
 		if (canvasId && typeof canvasId === "string" && !isCompare()) {
 			const data = await CFCUseCase.findById(canvasId)
-			if (data === undefined) alert("no data")
-			// eslint-disable-line
-			else {
+			if (data !== undefined) {
 				const pdf = await CashFlowCanvasPDF(
 					currentClient?.name ?? "Client",
 					data,

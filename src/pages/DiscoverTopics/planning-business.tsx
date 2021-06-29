@@ -29,9 +29,11 @@ import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 const userAgent = navigator.userAgent.toLowerCase()
 const isDesktop = userAgent.indexOf(" electron/") > -1
 
-const saveFile = async (filename: string) => {
-	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
-	fileSaver.saveAs(blob, filename)
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
+	return fileSaver.saveAs(blob, filename)
 }
 
 const DTPlanningBusiness = (): ReactElement => {
@@ -112,11 +114,11 @@ const DTPlanningBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Kirras-native-foods.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Kirras-native-foods.docx", "transcripts")
+											}
 										>
-											Download Transcript: Kirra&rsquo;s Native Foods.{" "}
+											Download Transcript: Kirra&rsquo;s Native Foods
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -140,11 +142,11 @@ const DTPlanningBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Sanjanas-restaurant.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Sanjanas-restaurant.docx", "transcripts")
+											}
 										>
-											Download Transcript: Sanjana&rsquo;s Restaurant.{" "}
+											Download Transcript: Sanjana&rsquo;s Restaurant
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -368,7 +370,7 @@ const DTPlanningBusiness = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						onClick={() => saveFile("BusinessPlan-Activity.pdf")}
+						onClick={() => saveFile("BusinessPlan-Activity.pdf", "pdf")}
 					>
 						Download activity
 					</Button>

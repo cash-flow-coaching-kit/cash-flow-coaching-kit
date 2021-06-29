@@ -15,6 +15,7 @@ import {
 	Container,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import fileSaver from "file-saver"
 import VerticalSplitIcon from "@material-ui/icons/VerticalSplit"
 import { PageContainer } from "../../components/Layouts"
 import PageTip from "../../components/PageTip"
@@ -29,6 +30,13 @@ import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 // Set flag for web or desktop mode
 const userAgent = navigator.userAgent.toLowerCase()
 const isDesktop = userAgent.indexOf(" electron/") > -1
+
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
+	return fileSaver.saveAs(blob, filename)
+}
 
 const DTManagingCashFlow = (): ReactElement => {
 	const styles = useDTStyles()
@@ -102,11 +110,11 @@ const DTManagingCashFlow = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Yularis-cash-flow.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Yularis-cash-flow.docx", "transcripts")
+											}
 										>
-											Download Transcript: Yulari&rsquo;s Cash Flow.{" "}
+											Download Transcript: Yulari&rsquo;s Cash Flow
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -130,11 +138,11 @@ const DTManagingCashFlow = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Camerons-cash-flow.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Camerons-cash-flow.docx", "transcripts")
+											}
 										>
-											Download Transcript: Cameron&rsquo;s Cash Flow.{" "}
+											Download Transcript: Cameron&rsquo;s Cash Flow
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}

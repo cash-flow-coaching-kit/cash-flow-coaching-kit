@@ -29,9 +29,11 @@ import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 const userAgent = navigator.userAgent.toLowerCase()
 const isDesktop = userAgent.indexOf(" electron/") > -1
 
-const saveFile = async (filename: string) => {
-	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
-	fileSaver.saveAs(blob, filename)
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
+	return fileSaver.saveAs(blob, filename)
 }
 
 const DTPlanningFinanicalCommitments = (): ReactElement => {
@@ -113,11 +115,9 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Micks-farm.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() => saveFile("Micks-farm.docx", "transcripts")}
 										>
-											Download Transcript: Mick&rsquo;s Farm.{" "}
+											Download Transcript: Mick&rsquo;s Farm
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -141,11 +141,14 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Mings-disability-services.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile(
+													"Mings-disability-services.docx",
+													"transcripts"
+												)
+											}
 										>
-											Download Transcript: Ming&rsquo;s Disability Services.{" "}
+											Download Transcript: Ming&rsquo;s Disability Services
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -386,7 +389,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						onClick={() => saveFile("KnowYourCommitments-Activity.pdf")}
+						onClick={() => saveFile("KnowYourCommitments-Activity.pdf", "pdf")}
 					>
 						Download activity
 					</Button>

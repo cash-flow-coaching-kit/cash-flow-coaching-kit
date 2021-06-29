@@ -29,9 +29,11 @@ import DiscoverTopicsTips from "../../content/tips/DiscoverTopicsTips"
 const userAgent = navigator.userAgent.toLowerCase()
 const isDesktop = userAgent.indexOf(" electron/") > -1
 
-const saveFile = async (filename: string) => {
-	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())
-	fileSaver.saveAs(blob, filename)
+const saveFile = async (filename: string, fileSubPath: string) => {
+	const blob = await fetch("./" + fileSubPath + "/" + filename).then((r) =>
+		r.blob()
+	)
+	return fileSaver.saveAs(blob, filename)
 }
 
 const DTFundingBusiness = (): ReactElement => {
@@ -108,9 +110,9 @@ const DTFundingBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Tamakos-funding.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Tamakos-funding.docx", "transcripts")
+											}
 										>
 											Download Transcript: Tamako&rsquo;s Funding.{" "}
 											{!isOnline && isDesktop
@@ -136,11 +138,11 @@ const DTFundingBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="./transcripts/Charlottes-loans.docx"
-											target="_blank"
-											rel="noopener noreferrer"
+											onClick={() =>
+												saveFile("Charlottes-loans.docx", "transcripts")
+											}
 										>
-											Download Transcript: Charlotte&rsquo;s Loans.{" "}
+											Download Transcript: Charlotte&rsquo;s Loans
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}
@@ -467,7 +469,7 @@ const DTFundingBusiness = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						onClick={() => saveFile("Funding-Activity.pdf")}
+						onClick={() => saveFile("Funding-Activity.pdf", "pdf")}
 					>
 						Download activity
 					</Button>
