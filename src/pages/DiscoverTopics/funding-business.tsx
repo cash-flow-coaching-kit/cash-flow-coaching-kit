@@ -114,7 +114,7 @@ const DTFundingBusiness = (): ReactElement => {
 												saveFile("Tamakos-funding.docx", "transcripts")
 											}
 										>
-											Download Transcript: Tamako&rsquo;s Funding.{" "}
+											Download Transcript: Tamako&rsquo;s Funding
 											{!isOnline && isDesktop
 												? " Internet access is required for closed caption. "
 												: ""}

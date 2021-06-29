@@ -94,7 +94,7 @@ const DTPlanningBusiness = (): ReactElement => {
 								Be financially prepared for circumstances outside your control.
 							</Typography>
 							<Typography component="li" className={styles.list}>
-								Ensure you don’t run out of money.
+								Ensure you don&rsquo;t run out of money.
 							</Typography>
 						</List>
 						<Grid container spacing={3}>

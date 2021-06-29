@@ -1,6 +1,6 @@
 {
-	"short_name": "dCFCK",
-	"name": "Cash Flow Coaching Kit",
+	"short_name": "React App",
+	"name": "Create React App Sample",
 	"icons": [
 		{
 			"src": "favicon.ico",
