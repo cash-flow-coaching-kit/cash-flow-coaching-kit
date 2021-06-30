@@ -11,10 +11,9 @@ import { WithClientRelationship, ClientId } from "../../data/_config/shape"
  * @param {ClientId} clientId
  * @returns WithClientRelationship[]
  */
-const filterByClientId = (clientId: ClientId) => (
-	item: WithClientRelationship
-): boolean => {
-	return item.clientId === clientId
-}
+const filterByClientId =
+	(clientId: ClientId) =>
+	(item: WithClientRelationship): boolean =>
+		item.clientId === clientId
 
 export default filterByClientId

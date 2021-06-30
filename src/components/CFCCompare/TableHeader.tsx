@@ -13,30 +13,30 @@ import useStyles from "./__config/styles"
  * }
  * @returns {ReactElement}
  */
-export default React.memo(function TableHeader({
-	selectedCanvases: [left, right],
-}: TableHeaderProps): ReactElement {
-	const cls = useStyles()
+export default React.memo(
+	({ selectedCanvases: [left, right] }: TableHeaderProps): ReactElement => {
+		const cls = useStyles()
 
-	return (
-		<TableHead>
-			<TableRow>
-				<TableCell className={cls.cell1}>
-					<span className="MuiTypography-srOnly">Cash category</span>
-				</TableCell>
-				<TableCell className={cls.cellCanvas} align="right">
-					{canvasDisplayTitle(left)}
-				</TableCell>
-				<TableCell className={cls.cellCanvas} align="right">
-					{canvasDisplayTitle(right)}
-				</TableCell>
-				<TableCell className={cls.cellDifference} align="right">
-					$ Difference
-				</TableCell>
-				<TableCell className={cls.cellDifference} align="right">
-					% Difference
-				</TableCell>
-			</TableRow>
-		</TableHead>
-	)
-})
+		return (
+			<TableHead>
+				<TableRow>
+					<TableCell className={cls.cell1}>
+						<span className="MuiTypography-srOnly">Cash category</span>
+					</TableCell>
+					<TableCell className={cls.cellCanvas} align="right">
+						{canvasDisplayTitle(left)}
+					</TableCell>
+					<TableCell className={cls.cellCanvas} align="right">
+						{canvasDisplayTitle(right)}
+					</TableCell>
+					<TableCell className={cls.cellDifference} align="right">
+						$ Difference
+					</TableCell>
+					<TableCell className={cls.cellDifference} align="right">
+						% Difference
+					</TableCell>
+				</TableRow>
+			</TableHead>
+		)
+	}
+)

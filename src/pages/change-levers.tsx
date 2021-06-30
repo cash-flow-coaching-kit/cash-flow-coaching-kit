@@ -10,6 +10,7 @@ import {
 	makeStyles,
 } from "@material-ui/core"
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf"
+import fileSaver from "file-saver"
 import { PageContainer } from "../components/Layouts"
 import FourQuestions from "../components/HealthCheck/FourQuestions"
 import ExpandableNav from "../components/ExpandableNav"
@@ -26,7 +27,6 @@ import {
 } from "../content/ChangeLevers"
 import Spacer from "../components/Spacer"
 import ChangeLeversTips from "../content/tips/ChangeLeversTips"
-import fileSaver from "file-saver"
 
 const saveFile = async (filename: string) => {
 	const blob = await fetch("./pdf/" + filename).then((r) => r.blob())

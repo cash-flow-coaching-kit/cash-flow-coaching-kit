@@ -62,8 +62,8 @@ const DTPlanningBusiness = (): ReactElement => {
 							have a well researched business plan, you are able to accurately
 							forecast and analyse your business. This helps you to be
 							financially prepared for circumstances outside of your control,
-							find opportunities to grow your business, and ensure you don't run
-							out of money.
+							find opportunities to grow your business, and ensure you
+							don&rsquo;t run out of money.
 						</Typography>
 						<Typography
 							variant="body1"
@@ -370,7 +370,7 @@ const DTPlanningBusiness = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						onClick={() => saveFile("BusinessPlan-Activity.pdf","pdf")}
+						onClick={() => saveFile("BusinessPlan-Activity.pdf", "pdf")}
 					>
 						Download activity
 					</Button>

@@ -12,11 +12,8 @@ import DescriptiveMoneyInput from "../DescriptiveMoneyInput"
  * }
  * @returns {ReactElement}
  */
-export default React.memo(function Assets({
-	value,
-	onChange,
-}: ControlProps<number>): ReactElement {
-	return (
+export default React.memo(
+	({ value, onChange }: ControlProps<number>): ReactElement => (
 		<DescriptiveMoneyInput
 			mini
 			stacked
@@ -29,4 +26,4 @@ export default React.memo(function Assets({
 			description="The value of your business assets at the close of the period."
 		/>
 	)
-})
+)

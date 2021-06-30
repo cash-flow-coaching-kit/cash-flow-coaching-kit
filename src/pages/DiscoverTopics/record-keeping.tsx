@@ -348,7 +348,7 @@ const DTRecordKeeping = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						onClick={() => saveFile("RecordKeeping-Activity.pdf","pdf")}
+						onClick={() => saveFile("RecordKeeping-Activity.pdf", "pdf")}
 					>
 						Download activity
 					</Button>

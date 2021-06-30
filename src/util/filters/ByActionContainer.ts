@@ -12,10 +12,9 @@ import { WithActionContainer } from "../../data/_config/shape"
  * @param {PossibleActionItems} container
  * @returns WithActionContainer[]
  */
-const filterByActionContainer = (container: PossibleActionItems) => (
-	item: WithActionContainer
-): boolean => {
-	return item.actionContainer === container
-}
+const filterByActionContainer =
+	(container: PossibleActionItems) =>
+	(item: WithActionContainer): boolean =>
+		item.actionContainer === container
 
 export default filterByActionContainer

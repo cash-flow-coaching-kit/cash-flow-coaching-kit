@@ -74,7 +74,7 @@ export default function CopyCanvasDialog({
 	const [stateMachine, changeState] = useMachine(fetchMachine)
 	const [useCustomTitle, setUseCustomTitle] = useState(false)
 	const history = useHistory()
-	const { id } = useParams()
+	const { id } = useParams() as any  // eslint-disable-line
 	const [currentClient] = useCurrentClient()
 	const [canvasData, setCanvasData] = useState<CFCStruct>()
 	const [isDuplicate, setIsDuplicate] = useState(false)
@@ -94,54 +94,49 @@ export default function CopyCanvasDialog({
 		return !inPlanOrForecast(oldType) && inPlanOrForecast(type)
 	}
 
-	const {
-		setValues,
-		handleChange,
-		values,
-		handleSubmit,
-		setFieldValue,
-	} = useFormik<CFCPanelSlice>({
-		initialValues: {
-			canvasTitle: "",
-			canvasType: "review",
-			canvasTimeFrame: "biannually",
-			canvasStartDate: new Date(),
-			canvasEndDate: new Date(),
-		},
-		onSubmit: async (formValues: CFCPanelSlice) => {
-			if (canvasData && currentClient?.id) {
-				// Merge the form and canvas data
-				const data: CFCStruct = {
-					...canvasData,
-					...formValues,
-					openingBalance: replaceOpening(
-						canvasData.canvasType,
-						formValues.canvasType
-					)
-						? calcClosingBalance(canvasData)
-						: canvasData.openingBalance,
-					createdAt: newTimestamp(),
-					canvasTitle: useCustomTitle ? formValues.canvasTitle : "",
-				}
-				// apply Track values if required
-				const newData = toTrack ? applyTrackValues(data, divideBy) : data
-				// remove the id & clientid field form data
-				const cleaned = omit(newData, ["id"])
-				// create the new canvas
-				const newCanvasId = await CFCUseCase.create(cleaned)
-				// redirect to the edit page for the new canvas
-				const query = createURLParams(cleaned, useCustomTitle)
-				// eslint-disable-next-line
+	const { setValues, handleChange, values, handleSubmit, setFieldValue } =
+		useFormik<CFCPanelSlice>({
+			initialValues: {
+				canvasTitle: "",
+				canvasType: "review",
+				canvasTimeFrame: "biannually",
+				canvasStartDate: new Date(),
+				canvasEndDate: new Date(),
+			},
+			onSubmit: async (formValues: CFCPanelSlice) => {
+				if (canvasData && currentClient?.id) {
+					// Merge the form and canvas data
+					const data: CFCStruct = {
+						...canvasData,
+						...formValues,
+						openingBalance: replaceOpening(
+							canvasData.canvasType,
+							formValues.canvasType
+						)
+							? calcClosingBalance(canvasData)
+							: canvasData.openingBalance,
+						createdAt: newTimestamp(),
+						canvasTitle: useCustomTitle ? formValues.canvasTitle : "",
+					}
+					// apply Track values if required
+					const newData = toTrack ? applyTrackValues(data, divideBy) : data
+					// remove the id & clientid field form data
+					const cleaned = omit(newData, ["id"])
+					// create the new canvas
+					const newCanvasId = await CFCUseCase.create(cleaned)
+					// redirect to the edit page for the new canvas
+					const query = createURLParams(cleaned, useCustomTitle)
+					// eslint-disable-next-line
 				history.push(
-					`${routeVarReplacement(PrivateRoutes.CFCEdit, [
-						[":id", `${newCanvasId}`],
-					])}?${query}`
-				)
-				// close the modal
-				onClose()
-			}
-		},
-	})
+						`${routeVarReplacement(PrivateRoutes.CFCEdit, [
+							[":id", `${newCanvasId}`],
+						])}?${query}`
+					)
+					// close the modal
+					onClose()
+				}
+			},
+		})
 
 	useEffect(() => {
 		if (!useCustomTitle) {

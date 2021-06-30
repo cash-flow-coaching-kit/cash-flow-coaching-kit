@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react"
 import { AppBar, Box, Toolbar } from "@material-ui/core"
+import ReactGA from "react-ga"
 import { useSharedNavStyles } from "../_config/style"
 import { NavigationRoutes } from "../_partials"
 import { routes } from "./_config/data"
@@ -7,11 +8,10 @@ import { IPublicNavbarProps } from "./_config/shape"
 import { PublicRoutes } from "../../../util/routes/routes"
 import Logo from "../../Logo"
 import Help from "../_partials/Help"
-import ReactGA from "react-ga"
 
 const uploadConfig = {
 	mac: "Cash Flow Coaching Kit.dmg",
-	win: "Cash Flow Coaching Kit.exe"
+	win: "Cash Flow Coaching Kit.exe",
 }
 
 const trackingId = process.env.REACT_APP_GA_ID || ""
@@ -31,7 +31,7 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 	const isMac = navigator.platform.indexOf("Mac") > -1
 	const isWin = navigator.platform.indexOf("Win") > -1
 
-	const desktopDownload = (type: String) => {
+	const desktopDownload = (type: string) => {
 		const macLink =
 			"http://" +
 			process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL +
@@ -46,7 +46,7 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 		return type === "mac" ? macLink : winLink
 	}
 
-	const triggerGATracking = (type: String) => () => {
+	const triggerGATracking = (type: string) => () => {
 		ReactGA.event({
 			category: "Download Desktop ( " + type + " )",
 			action: "User downloaded desktop app for - " + type,
@@ -72,6 +72,7 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 										target="_blank"
 									>
 										<button
+											type="button"
 											onClick={triggerGATracking("mac")}
 											className="download-link"
 											title="Download free desktop application - available for Windows or Mac"
@@ -89,6 +90,7 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 										target="_blank"
 									>
 										<button
+											type="button"
 											onClick={triggerGATracking("win")}
 											className="download-link"
 											title="Download free desktop application - available for Windows or Mac"

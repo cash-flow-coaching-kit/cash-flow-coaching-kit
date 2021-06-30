@@ -33,8 +33,7 @@ import HealthCheckPDF, {
 import { ClientContext } from "../../state/client"
 import { ClientActionTypes } from "../../state/client/client-outline"
 import Spacer from "../../components/Spacer"
-import { setToggleOfflineContent } from "./../../util/helper"
-
+import { setToggleOfflineContent } from "../../util/helper"
 
 const useStyles = makeStyles((theme) => ({
 	summaryActions: {
@@ -69,7 +68,7 @@ const HCSummary = (): ReactElement => {
 	const [currentClient] = useCurrentClient()
 	const isOnline = useHasInternet()
 	const { dispatch } = useContext(ClientContext)
-	const { id } = useParams()
+	const { id } = useParams() as any // eslint-disable-line
 	const [healthCheck, setHealthCheck] = useState<
 		HealthCheckDataStruct | undefined
 	>()
@@ -87,12 +86,8 @@ const HCSummary = (): ReactElement => {
 			;(async function getHC(): Promise<void> {
 				if (typeof currentClient.id !== "undefined") {
 					// Fetches the health checks for the client and sets state values
-					const hc:
-						| HealthCheckDataStruct
-						| undefined = await HealthCheckUseCase.findByClientId(
-						id,
-						currentClient.id
-					)
+					const hc: HealthCheckDataStruct | undefined =
+						await HealthCheckUseCase.findByClientId(id, currentClient.id)
 					if (hc) {
 						setHealthCheck(hc)
 						setTileAnswers(hc.answers)

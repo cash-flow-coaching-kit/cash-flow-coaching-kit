@@ -19,12 +19,14 @@ interface LastSavedProps {
  * @returns {ReactElement}
  */
 export default function LastSaved({ date }: LastSavedProps): ReactElement {
-	const getFormattedText = useCallback((): string => {
-		return formatDistance(date, new Date(), {
-			addSuffix: true,
-			includeSeconds: true,
-		})
-	}, [date])
+	const getFormattedText = useCallback(
+		(): string =>
+			formatDistance(date, new Date(), {
+				addSuffix: true,
+				includeSeconds: true,
+			}),
+		[date]
+	)
 
 	const [msg, setMsg] = useState(getFormattedText())
 

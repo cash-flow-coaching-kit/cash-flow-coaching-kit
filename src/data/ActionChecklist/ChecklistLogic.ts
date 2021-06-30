@@ -37,9 +37,9 @@ class ActionChecklistLogic extends ILogicLayer<
 	 * @memberof ActionChecklistLogic
 	 */
 	bulkUpdate(items: ActionChecklistStruct[]): Promise<ActionChecklistId> {
-		return this.database.transaction("rw", this.table, () => {
-			return this.table.bulkPut(items)
-		})
+		return this.database.transaction("rw", this.table, () =>
+			this.table.bulkPut(items)
+		)
 	}
 
 	/**

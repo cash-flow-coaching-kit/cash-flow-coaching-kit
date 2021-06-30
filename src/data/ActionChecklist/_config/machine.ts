@@ -4,8 +4,8 @@ export type StateMap = "loading" | "content"
 
 export interface IActionChecklistSchema {
 	states: {
-		loading: {}
-		content: {}
+		loading: Record<string, unknown>
+		content: Record<string, unknown>
 	}
 }
 

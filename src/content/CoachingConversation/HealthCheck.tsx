@@ -26,7 +26,6 @@ const saveFile = async (filename: string, fileSubPath: string) => {
 	)
 	return fileSaver.saveAs(blob, filename)
 }
-
 export default function HealthCheck(): ReactElement {
 	const cls = useStyles()
 	const isOnline = useHasInternet()

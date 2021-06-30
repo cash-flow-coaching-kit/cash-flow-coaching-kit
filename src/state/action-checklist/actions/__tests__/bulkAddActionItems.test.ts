@@ -14,19 +14,19 @@ describe("Change the state when adding a bulk of action items", () => {
       hideCompleted: false,
       databaseSyced: false,
       priority: [
-        {...newPriorityItem(6, "cashOutActions"), id: 11, order: [4, 5]},
-        {...newPriorityItem(5, "cashOutActions"), id: 10, order: [2, 3]},
-        {...newPriorityItem(5, "funding"), id: 12},
+        {...newPriorityItem('6', "cashOutActions"), id: '11', order: ['4', '5']},
+        {...newPriorityItem('5', "cashOutActions"), id: '10', order: ['2', '3']},
+        {...newPriorityItem('5', "funding"), id: '12'},
       ],
-      checklistCollection: [{...newChecklistItem(10, "planningBusiness")}],
+      checklistCollection: [{...newChecklistItem('10', "planningBusiness")}],
       notes: [],
     }
     payload = {
-      priorityId: 10,
+      priorityId: '10',
       items: [
-        {...newChecklistItem(5, "cashInActions"), id: 6},
-        {...newChecklistItem(5, "cashInActions"), id: 7},
-        {...newChecklistItem(5, "cashInActions"), id: 8},
+        {...newChecklistItem('5', "cashInActions"), id: '6'},
+        {...newChecklistItem('5', "cashInActions"), id: '7'},
+        {...newChecklistItem('5', "cashInActions"), id: '8'},
       ]
     }
   })
@@ -48,11 +48,11 @@ describe("Change the state when adding a bulk of action items", () => {
   })
 
   it("should create a priority order if there isn't one", function() {
-    payload.priorityId = 13
+    payload.priorityId = '13'
     const newState = bulkAddActionItem(state, payload)
 
     expect(newState.priority.length).toBe(4)
-    expect(newState.priority.find(filterById(13))).not.toBeUndefined()
+    expect(newState.priority.find(filterById('13'))).not.toBeUndefined()
     expect(newState.priority[3].order).toEqual([6, 7, 8])
   })
 

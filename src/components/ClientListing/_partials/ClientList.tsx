@@ -65,50 +65,50 @@ const ClientList = ({
 	 * @param {ClientId|undefined} client
 	 * @returns Promise<void>
 	 */
-	const handleDelete = (client: ClientId | undefined) => async (
-		e: MouseEvent<HTMLButtonElement>
-	): Promise<void> => {
-		e.preventDefault()
-		if (client) {
-			const clientsCopy = clone(clients)
-			// Deletes the client data across the various databases
-			const databaseDataDeleted = await deleteClientRelatedData(client)
+	const handleDelete =
+		(client: ClientId | undefined) =>
+		async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
+			e.preventDefault()
+			if (client) {
+				const clientsCopy = clone(clients)
+				// Deletes the client data across the various databases
+				const databaseDataDeleted = await deleteClientRelatedData(client)
 
-			if (databaseDataDeleted instanceof Error) {
-				showSnackbar(databaseDataDeleted.message, "error")
-				return
-			}
+				if (databaseDataDeleted instanceof Error) {
+					showSnackbar(databaseDataDeleted.message, "error")
+					return
+				}
 
-			// Update current client if it is being deleted
-			if (client === currentClient?.id || clientsCopy.length === 1) {
-				removeStorageClient()
-				dispatch({
-					type: ClientActionTypes.ChangeCurrentClient,
-					payload: emptyClientValue,
+				// Update current client if it is being deleted
+				if (client === currentClient?.id || clientsCopy.length === 1) {
+					removeStorageClient()
+					dispatch({
+						type: ClientActionTypes.ChangeCurrentClient,
+						payload: emptyClientValue,
+					})
+				}
+
+				// Update client context store
+				await syncClientsWithDb(dispatch)
+
+				// ---
+				// Update action checklist context store
+				const checklists = await ActionChecklistUseCase.syncWithDatabase()
+				const priority = await ActionPriorityUseCase.syncWithDatabase()
+				const notes = await ActionNotesUseCase.syncWithDatabase()
+
+				ACDispatch({
+					type: ActionChecklistActionTypes.UpdateDatabaseSync,
+					payload: {
+						data: checklists,
+						priority,
+						notes,
+					},
 				})
+
+				showSnackbar("Client data has been deleted", "success")
 			}
-
-			// Update client context store
-			await syncClientsWithDb(dispatch)
-
-			// ---
-			// Update action checklist context store
-			const checklists = await ActionChecklistUseCase.syncWithDatabase()
-			const priority = await ActionPriorityUseCase.syncWithDatabase()
-			const notes = await ActionNotesUseCase.syncWithDatabase()
-
-			ACDispatch({
-				type: ActionChecklistActionTypes.UpdateDatabaseSync,
-				payload: {
-					data: checklists,
-					priority,
-					notes,
-				},
-			})
-
-			showSnackbar("Client data has been deleted", "success")
 		}
-	}
 
 	return (
 		<>

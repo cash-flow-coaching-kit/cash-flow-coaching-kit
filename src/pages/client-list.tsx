@@ -24,49 +24,46 @@ const isDesktop = userAgent.indexOf(" electron/") > -1
  *
  * @returns ReactElement
  */
-const ClientList = (): ReactElement => {
-	return (
-		<>
-			<PageContainer role="main">
-				<Grid container spacing={3}>
-					<Grid item xs={12} sm={8}>
-						<SectionTitle component="h1">Clients and coaching</SectionTitle>
-						<Box className="content-area">
-							<Typography>Manage and prepare your coaching.</Typography>
-							<Typography>
-								Read our coaching conversation guide to prepare for your client.
-								These materials will help you and your client get the most value
-								from the kit.
-							</Typography>
-							<Typography>
-								You can also import and export client data in your client list.
-							</Typography>
-						</Box>
-					</Grid>
-					<Grid item xs={12} md={6}>
-						<ClientListing />
-					</Grid>
-					<Grid item xs={12} md={6}>
-						<SectionTitle component="h2">
-							Coaching conversation guide
-						</SectionTitle>
-						<Box>
-							<Prepare />
-							<Coaching />
-							<HealthCheck />
-							<DiscoverTopics />
-							<CFC />
-							<ChangeLevers />
-							<ActionChecklist />
-						</Box>
-					</Grid>
+const ClientList = (): ReactElement => (
+	<>
+		<PageContainer role="main">
+			<Grid container spacing={3}>
+				<Grid item xs={12} sm={8}>
+					<SectionTitle component="h1">Clients and coaching</SectionTitle>
+					<Box className="content-area">
+						<Typography>Manage and prepare your coaching.</Typography>
+						<Typography>
+							Read our coaching conversation guide to prepare for your client.
+							These materials will help you and your client get the most value
+							from the kit.
+						</Typography>
+						<Typography>
+							You can also import and export client data in your client list.
+						</Typography>
+					</Box>
 				</Grid>
-			</PageContainer>
+				<Grid item xs={12} md={6}>
+					<ClientListing />
+				</Grid>
+				<Grid item xs={12} md={6}>
+					<SectionTitle component="h2">
+						Coaching conversation guide
+					</SectionTitle>
+					<Box>
+						<Prepare />
+						<Coaching />
+						<HealthCheck />
+						<DiscoverTopics />
+						<CFC />
+						<ChangeLevers />
+						<ActionChecklist />
+					</Box>
+				</Grid>
+			</Grid>
+		</PageContainer>
 
-			{!isDesktop && <PageTip tip={ClientListTips} />}
-
-		</>
-	)
-}
+		{!isDesktop && <PageTip tip={ClientListTips} />}
+	</>
+)
 
 export default ClientList

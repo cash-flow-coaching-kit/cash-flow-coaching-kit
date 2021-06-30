@@ -41,7 +41,7 @@ const useNCDStyles = makeStyles((theme) => ({
 
 interface NewClientFormProps {
 	closeDialog: (cb: () => void) => void
-	handleClose: any
+	handleClose: any // eslint-disable-line
 }
 
 // Set flag for web or desktop mode
@@ -115,12 +115,8 @@ const NewClientForm = ({
 	 * @param {keyof INCFormErrors} key Error item to look for
 	 * @returns boolean
 	 */
-	const hasError = (
-		errors: INCFormErrors,
-		key: keyof INCFormErrors
-	): boolean => {
-		return typeof errors[key] !== "undefined" && errors[key] !== ""
-	}
+	const hasError = (errors: INCFormErrors, key: keyof INCFormErrors): boolean =>
+		typeof errors[key] !== "undefined" && errors[key] !== ""
 
 	return (
 		<form
@@ -152,14 +148,14 @@ const NewClientForm = ({
 					autoFocus
 				/>
 			</DialogContent>
-			{!isDesktop &&
+			{!isDesktop && (
 				<DialogContent className={styles.content}>
 					<DialogContentText>
-						Remember: The kit does not save information between sessions. Use the
-						export function regularly to save your progress.
+						Remember: The kit does not save information between sessions. Use
+						the export function regularly to save your progress.
 					</DialogContentText>
 				</DialogContent>
-			}
+			)}
 			<DialogActions>
 				<Button onClick={handleClose} color="primary">
 					Cancel

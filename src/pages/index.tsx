@@ -299,13 +299,13 @@ const Homepage = (): ReactElement => {
 								/>
 								<CardActions>
 									<Button
-										color="primary"
 										onClick={() =>
 											saveFile(
 												"What-advisors-think-of-the-kit.docx",
 												"transcripts"
 											)
 										}
+										color="primary"
 										aria-label="Download transcript: What advisors think of the kit"
 									>
 										Download Transcript
@@ -358,6 +358,7 @@ const Homepage = (): ReactElement => {
 								: "We recommend regularly using the EXPORT DATA function from the Client List to avoid data loss. "}{" "}
 							Please refer to the{" "}
 							<button
+								type="button"
 								onClick={() => saveFile("Terms and Conditions.pdf", "docs")}
 								className="pdfDownloadButton"
 								title="Download Terms & Conditions"
@@ -366,7 +367,10 @@ const Homepage = (): ReactElement => {
 							</button>{" "}
 							of use and our{" "}
 							<button
-								onClick={() => saveFile("Data usage and privacy statement.pdf","docs")}
+								type="button"
+								onClick={() =>
+									saveFile("Data usage and privacy statement.pdf", "docs")
+								}
 								className="pdfDownloadButton"
 								title="Download Data usage and privacy statement"
 							>

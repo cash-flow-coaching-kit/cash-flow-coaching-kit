@@ -17,9 +17,7 @@ import findObjectIndexByValue from "../../../util/array/findObjectIndexByValue"
 export const getOptionByAnswer = (
 	answer: QuestionOptions,
 	options: IAnswerTheme[]
-): IAnswerTheme => {
-	return options[findObjectIndexByValue(options, "answer", answer)]
-}
+): IAnswerTheme => options[findObjectIndexByValue(options, "answer", answer)]
 
 /**
  * Merges a list of questions with a set of answer options
@@ -31,11 +29,10 @@ export const getOptionByAnswer = (
 export const questionOptionsMap = (
 	questions: string[],
 	options: QuestionOptionsRecord
-): IQuestionStructure[] => {
-	return questions.map(
+): IQuestionStructure[] =>
+	questions.map(
 		(q: string): IQuestionStructure => ({
 			question: q,
 			options,
 		})
 	)
-}

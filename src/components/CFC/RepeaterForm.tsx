@@ -51,134 +51,137 @@ const MANUAL_CALC_TOOLTIP =
  * }
  * @returns {ReactElement}
  */
-export default memo(function RepeaterForm({
-	name,
-	values,
-	onChange,
-	total,
-	gst,
-	addItem,
-	removeItem,
-	beforeTotalChild,
-	manualGSTCalculation,
-	setManualGSTCalc,
-	gstName,
-}: RepeaterFormProps): ReactElement {
-	const cls = useRepeaterStyles()
-	const wrapperCls = useInputWrapper()
-	const dmiCls = useStyles({ mini: true, stacked: false })
-	const gstCls = useGSTStyles()
+export default memo(
+	({
+		name,
+		values,
+		onChange,
+		total,
+		gst,
+		addItem,
+		removeItem,
+		beforeTotalChild,
+		manualGSTCalculation,
+		setManualGSTCalc,
+		gstName,
+	}: RepeaterFormProps): ReactElement => {
+		const cls = useRepeaterStyles()
+		const wrapperCls = useInputWrapper()
+		const dmiCls = useStyles({ mini: true, stacked: false })
+		const gstCls = useGSTStyles()
 
-	/**
-	 * Method to remove a item from the form
-	 *
-	 * @param {CashFlow["id"]} id
-	 * @returns {void}
-	 */
-	const removeFormItem = useCallback(
-		(id: CashFlow["id"]) => (e: MouseEvent<HTMLButtonElement>): void => {
-			e.preventDefault()
-			removeItem(id)
-		},
-		[removeItem]
-	)
-
-	const changeManualCalc = useCallback(() => {
-		setManualGSTCalc(!manualGSTCalculation)
-	}, [setManualGSTCalc, manualGSTCalculation])
-
-	/**
-	 * Checks if the add new button should be disabled
-	 *
-	 * @returns {boolean}
-	 */
-	const isAddDisabled = useCallback(() => {
-		return (
-			values.length >= 6 ||
-			values.findIndex((item) => item.description === "") !== -1
+		/**
+		 * Method to remove a item from the form
+		 *
+		 * @param {CashFlow["id"]} id
+		 * @returns {void}
+		 */
+		const removeFormItem = useCallback(
+			(id: CashFlow["id"]) =>
+				(e: MouseEvent<HTMLButtonElement>): void => {
+					e.preventDefault()
+					removeItem(id)
+				},
+			[removeItem]
 		)
-	}, [values])
 
-	return (
-		<>
-			<Box className={cls.body}>
-				<Typography
-					className={cls.mobileNotice}
-					style={{ fontStyle: "italic" }}
-				>
-					It appears that you are using a mobile device. Remember to scroll to
-					view the full form below
-					<Spacer />
-				</Typography>
-				<Box className={cls.form}>
-					<Box className={cls.formInner}>
-						<FormHeader />
-						{values.map((item, idx) => (
-							<FormItem
-								name={name}
-								value={item}
-								onChange={onChange}
-								index={idx}
-								key={item.id}
-								removeItem={removeFormItem(item.id)}
-							/>
-						))}
+		const changeManualCalc = useCallback(() => {
+			setManualGSTCalc(!manualGSTCalculation)
+		}, [setManualGSTCalc, manualGSTCalculation])
+
+		/**
+		 * Checks if the add new button should be disabled
+		 *
+		 * @returns {boolean}
+		 */
+		const isAddDisabled = useCallback(
+			() =>
+				values.length >= 6 ||
+				values.findIndex((item) => item.description === "") !== -1,
+			[values]
+		)
+
+		return (
+			<>
+				<Box className={cls.body}>
+					<Typography
+						className={cls.mobileNotice}
+						style={{ fontStyle: "italic" }}
+					>
+						It appears that you are using a mobile device. Remember to scroll to
+						view the full form below
+						<Spacer />
+					</Typography>
+					<Box className={cls.form}>
+						<Box className={cls.formInner}>
+							<FormHeader />
+							{values.map((item, idx) => (
+								<FormItem
+									name={name}
+									value={item}
+									onChange={onChange}
+									index={idx}
+									key={item.id}
+									removeItem={removeFormItem(item.id)}
+								/>
+							))}
+						</Box>
 					</Box>
+					<Spacer />
+					<FormActions addItem={addItem} addDisabled={isAddDisabled()} />
 				</Box>
+				{typeof beforeTotalChild !== "undefined" && (
+					<>
+						<Spacer />
+						<Divider />
+						<Spacer />
+						{beforeTotalChild()}
+					</>
+				)}
 				<Spacer />
-				<FormActions addItem={addItem} addDisabled={isAddDisabled()} />
-			</Box>
-			{typeof beforeTotalChild !== "undefined" && (
-				<>
-					<Spacer />
-					<Divider />
-					<Spacer />
-					{beforeTotalChild()}
-				</>
-			)}
-			<Spacer />
-			<Divider />
-			<Spacer />
-			<Box className={cls.body}>
-				<ComputedPanels
-					title="Total (exc GST)"
-					wrapped={false}
-					value={addDollarSign(formatNumber(`${total}`))}
-				/>
-				<Box
-					className={`${wrapperCls.highlightLeft} ${cls.gst} ${dmiCls.root} ${gstCls.root}`}
-				>
-					<Box className={dmiCls.type}>
-						<Typography variant="h6" component="p">
-							GST
-						</Typography>
-						{!manualGSTCalculation && (
-							<Box className={gstCls.manualBox}>
-								<Button variant="outlined" onClick={changeManualCalc}>
-									Calculate{" "}
-									{manualGSTCalculation ? "Automatically" : "Manually"}
-								</Button>
-								<Tooltip title={MANUAL_CALC_TOOLTIP}>
-									<InfoIcon color="primary" />
-								</Tooltip>
-							</Box>
+				<Divider />
+				<Spacer />
+				<Box className={cls.body}>
+					<ComputedPanels
+						title="Total (exc GST)"
+						wrapped={false}
+						value={addDollarSign(formatNumber(`${total}`))}
+					/>
+					<Box
+						className={`${wrapperCls.highlightLeft} ${cls.gst} ${dmiCls.root} ${gstCls.root}`}
+					>
+						<Box className={dmiCls.type}>
+							<Typography variant="h6" component="p">
+								GST
+							</Typography>
+							{!manualGSTCalculation && (
+								<Box className={gstCls.manualBox}>
+									<Button variant="outlined" onClick={changeManualCalc}>
+										Calculate{" "}
+										{manualGSTCalculation ? "Automatically" : "Manually"}
+									</Button>
+									<Tooltip title={MANUAL_CALC_TOOLTIP}>
+										<InfoIcon color="primary" />
+									</Tooltip>
+								</Box>
+							)}
+						</Box>
+						{manualGSTCalculation ? (
+							<MoneyInput
+								onChange={onChange}
+								value={gst}
+								name={gstName}
+								variant="outlined"
+								fullWidth={false}
+							/>
+						) : (
+							<Typography variant="h6">
+								{addDollarSign(formatNumber(`${gst}`))}
+							</Typography>
 						)}
 					</Box>
-					{manualGSTCalculation ? (
-						<MoneyInput
-							onChange={onChange}
-							value={gst}
-							name={gstName}
-							variant="outlined"
-							fullWidth={false}
-						/>
-					) : (
-						<Typography variant="h6">
-							{addDollarSign(formatNumber(`${gst}`))}
-						</Typography>
-					)}
 				</Box>
-			</Box>
-		</>
-	)
-})
+			</>
+		)
+	}
+)

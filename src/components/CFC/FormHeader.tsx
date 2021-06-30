@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
  * @export
  * @returns {ReactElement}
  */
-export default memo(function FormHeader(): ReactElement {
+export default memo((): ReactElement => {
 	const cls = useStyles()
 
 	return (

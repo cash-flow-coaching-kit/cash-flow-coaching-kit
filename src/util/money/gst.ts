@@ -22,8 +22,8 @@ function removeGST(x: number): number {
 	return pipe<number, number, [MathHOF, MathHOF]>(minusBy(gst), Math.round)(x)
 }
 
-const isGSTValid = (value: any): boolean => {
-	return typeof value !== "undefined" && value !== null && !isEmpty(value)
-}
+// eslint-disable-next-line
+const isGSTValid = (value: any): boolean =>
+	typeof value !== "undefined" && value !== null && !isEmpty(value)
 
 export { calculateGST, removeGST, isGSTValid }

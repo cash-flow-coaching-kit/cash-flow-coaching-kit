@@ -26,11 +26,10 @@ export const findByClientAndContainer = <T>(
 	clientId: ClientId,
 	db: Dexie,
 	table: Dexie.Table<T, DatabaseId>
-): Promise<T[]> => {
-	return db.transaction("r", table, () => {
-		return table.where({ actionContainer, clientId }).toArray()
-	})
-}
+): Promise<T[]> =>
+	db.transaction("r", table, () =>
+		table.where({ actionContainer, clientId }).toArray()
+	)
 
 /**
  * Creates the structure for a new checklist item

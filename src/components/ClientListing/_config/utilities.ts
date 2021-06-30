@@ -13,9 +13,8 @@ import CFCUseCase from "../../../data/CFC/CFCLogic"
  * @param {IClientState} store
  * @returns boolean
  */
-export const hasClients = ({ state: { clients } }: IClientState): boolean => {
-	return clients.length !== 0
-}
+export const hasClients = ({ state: { clients } }: IClientState): boolean =>
+	clients.length !== 0
 
 /**
  * Checks if the current client is selected
@@ -27,9 +26,7 @@ export const hasClients = ({ state: { clients } }: IClientState): boolean => {
 export const isClientSelected = (
 	currentClient: ClientDataStruct | undefined,
 	id = ""
-): boolean => {
-	return (currentClient && currentClient.id === id) || false
-}
+): boolean => (currentClient && currentClient.id === id) || false
 
 export const deleteClientRelatedData = async (
 	client: ClientId

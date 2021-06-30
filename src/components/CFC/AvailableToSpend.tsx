@@ -12,14 +12,12 @@ import { addDollarSign, formatNumber } from "../../util/money/formatting"
  * }
  * @returns {ReactElement}
  */
-export default React.memo(function AvailableToSpend({
-	value,
-}: ComputedProps): ReactElement {
-	return (
+export default React.memo(
+	({ value }: ComputedProps): ReactElement => (
 		<ComputedPanels
 			title="Available to Spend (exc GST and Tax)"
 			description="The Opening Balance plus any Cash Surplus minus Income Tax or Company Tax"
 			value={addDollarSign(formatNumber(value))}
 		/>
 	)
-})
+)

@@ -27,8 +27,8 @@ import Spacer from "../Spacer"
  * @interface ConfigPanelProps
  */
 interface ConfigPanelProps extends PanelProps, CustomTitleProps {
-	wrapped?: boolean
-	showDuplicateError?: boolean
+	wrapped?: boolean // eslint-disable-line
+	showDuplicateError?: boolean // eslint-disable-line
 }
 
 // Duplicate canvas error message
@@ -44,88 +44,90 @@ export const DuplicateCanvasError = (): ReactElement => (
  * re-render when required
  *
  */
-const Panel = memo(function Panel({
-	canvasTimeframeValue,
-	canvasTypeValue,
-	startDate,
-	endDate,
-	onChange,
-	onDateChange,
-	customTitle,
-	useCustomTitle,
-}: PanelProps) {
-	const [currentClient, clientSynced] = useCurrentClient()
-	const { id } = useParams()
-	const { dispatch } = useContext(CFCContext)
-	const fetchPossibleDups = useCallback(async () => {
-		if (currentClient?.id) {
-			const dup = await performDupFind(
-				{
-					canvasEndDate: endDate,
-					canvasStartDate: startDate,
-					canvasTitle: customTitle,
-					canvasTimeFrame: canvasTimeframeValue,
-					canvasType: canvasTypeValue,
-				},
-				currentClient.id,
-				useCustomTitle,
-				id || undefined
-			)
-
-			dispatch({
-				type: CFCActionTypes.ChangeDuplicateError,
-				payload: dup !== false,
-			})
-		}
-	}, [
-		canvasTypeValue,
+const Panel = memo(
+	({
 		canvasTimeframeValue,
-		currentClient,
-		endDate,
+		canvasTypeValue,
 		startDate,
+		endDate,
+		onChange,
+		onDateChange,
 		customTitle,
-		id,
-		dispatch,
 		useCustomTitle,
-	])
+	}: PanelProps) => {
+		const [currentClient, clientSynced] = useCurrentClient()
+		const { id } = useParams() as any // eslint-disable-line
+		const { dispatch } = useContext(CFCContext)
+		const fetchPossibleDups = useCallback(async () => {
+			if (currentClient?.id) {
+				const dup = await performDupFind(
+					{
+						canvasEndDate: endDate,
+						canvasStartDate: startDate,
+						canvasTitle: customTitle,
+						canvasTimeFrame: canvasTimeframeValue,
+						canvasType: canvasTypeValue,
+					},
+					currentClient.id,
+					useCustomTitle,
+					id || undefined
+				)
 
-	useEffect(() => {
-		if (clientSynced) {
-			fetchPossibleDups()
-		}
-	}, [fetchPossibleDups, clientSynced, id])
+				dispatch({
+					type: CFCActionTypes.ChangeDuplicateError,
+					payload: dup !== false,
+				})
+			}
+		}, [
+			canvasTypeValue,
+			canvasTimeframeValue,
+			currentClient,
+			endDate,
+			startDate,
+			customTitle,
+			id,
+			dispatch,
+			useCustomTitle,
+		])
 
-	// Checks if the start and end date is valid
-	useEffect(() => {
-		dispatch({
-			type: CFCActionTypes.ChangeInvalidDateError,
-			payload: !isValid(startDate) || !isValid(endDate),
-		})
-	}, [startDate, endDate, dispatch])
+		useEffect(() => {
+			if (clientSynced) {
+				fetchPossibleDups()
+			}
+		}, [fetchPossibleDups, clientSynced, id])
 
-	return (
-		<>
-			<Grid container spacing={2}>
-				<Grid item xs={12} md={3}>
-					<CanvasTypeSelect value={canvasTypeValue} onChange={onChange} />
+		// Checks if the start and end date is valid
+		useEffect(() => {
+			dispatch({
+				type: CFCActionTypes.ChangeInvalidDateError,
+				payload: !isValid(startDate) || !isValid(endDate),
+			})
+		}, [startDate, endDate, dispatch])
+
+		return (
+			<>
+				<Grid container spacing={2}>
+					<Grid item xs={12} md={3}>
+						<CanvasTypeSelect value={canvasTypeValue} onChange={onChange} />
+					</Grid>
+					<Grid item xs={12} md={3}>
+						<CanvasTimeFrameSelect
+							value={canvasTimeframeValue}
+							onChange={onChange}
+						/>
+					</Grid>
+					<Grid item xs={12} md={6}>
+						<DateRange
+							startDate={startDate}
+							endDate={endDate}
+							onChange={onDateChange}
+						/>
+					</Grid>
 				</Grid>
-				<Grid item xs={12} md={3}>
-					<CanvasTimeFrameSelect
-						value={canvasTimeframeValue}
-						onChange={onChange}
-					/>
-				</Grid>
-				<Grid item xs={12} md={6}>
-					<DateRange
-						startDate={startDate}
-						endDate={endDate}
-						onChange={onDateChange}
-					/>
-				</Grid>
-			</Grid>
-		</>
-	)
-})
+			</>
+		)
+	}
+)
 
 /**
  * Config panel component found at the top of the CFC form

@@ -20,12 +20,14 @@ import { canvasDisplayTitle } from "../CFC/__config/utilities"
 import upperFirst from "../../util/strings/upperCaseFirst"
 import { addDollarSign, formatNumber } from "../../util/money/formatting"
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs
+pdfMake.vfs = pdfFonts.pdfMake.vfs // eslint-disable-line
 
 const formatDollars = (value: number) => addDollarSign(formatNumber(`${value}`))
 
-const openingBalanceSection = (openingBalance: number): any => {
-	return frameContent(
+const openingBalanceSection = (
+	openingBalance: number
+): any => // eslint-disable-line
+	frameContent(
 		basicTable([
 			[
 				"Opening Balance",
@@ -33,10 +35,12 @@ const openingBalanceSection = (openingBalance: number): any => {
 			],
 		])
 	)
-}
 
-const cashInSection = (cashInItems: CashFlow[], cashInTotal: number): any => {
-	return frameContent([
+const cashInSection = (
+	cashInItems: CashFlow[],
+	cashInTotal: number
+): any => // eslint-disable-line
+	frameContent([
 		{
 			text: "Cash IN",
 			bold: true,
@@ -55,10 +59,11 @@ const cashInSection = (cashInItems: CashFlow[], cashInTotal: number): any => {
 			],
 		]),
 	])
-}
 
-const gstOnSalesSection = (gstOnSales: number): any => {
-	return frameContent(
+const gstOnSalesSection = (
+	gstOnSales: number
+): any => // eslint-disable-line
+	frameContent(
 		basicTable(
 			[
 				[
@@ -69,13 +74,12 @@ const gstOnSalesSection = (gstOnSales: number): any => {
 			["yellowBlock"]
 		)
 	)
-}
 
 const cashOutSection = (
 	cashOutItems: CashFlow[],
 	cashOutTotal: number
-): any => {
-	return frameContent([
+): any => // eslint-disable-line
+	frameContent([
 		{ text: "Cash OUT", bold: true },
 		basicTable([
 			...cashOutItems.map((line) => [
@@ -91,14 +95,13 @@ const cashOutSection = (
 			],
 		]),
 	])
-}
 
 const gstOnPurchasesSection = (
 	gstOnPurchases: number,
 	paygWithholding: number,
 	superAmount: number
-): any => {
-	return frameContent(
+): any => // eslint-disable-line
+	frameContent(
 		basicTable(
 			[
 				[
@@ -114,10 +117,11 @@ const gstOnPurchasesSection = (
 			["yellowBlock"]
 		)
 	)
-}
 
-const cashSurplusSection = (cashSurplus: number): any => {
-	return frameContent(
+const cashSurplusSection = (
+	cashSurplus: number
+): any => // eslint-disable-line
+	frameContent(
 		basicTable([
 			[
 				"Cash Surplus",
@@ -125,10 +129,11 @@ const cashSurplusSection = (cashSurplus: number): any => {
 			],
 		])
 	)
-}
 
-const incomeSection = (values: BaseCFCStruct): any => {
-	return frameContent(
+const incomeSection = (
+	values: BaseCFCStruct
+): any => // eslint-disable-line
+	frameContent(
 		basicTable(
 			[
 				[
@@ -143,10 +148,11 @@ const incomeSection = (values: BaseCFCStruct): any => {
 			["yellowBlock"]
 		)
 	)
-}
 
-const availableToSpendSection = (availableToSpend: number): any => {
-	return frameContent(
+const availableToSpendSection = (
+	availableToSpend: number
+): any => // eslint-disable-line
+	frameContent(
 		basicTable([
 			[
 				"Available to spend",
@@ -154,13 +160,12 @@ const availableToSpendSection = (availableToSpend: number): any => {
 			],
 		])
 	)
-}
 
 const closingCashBalanceSection = (
 	cashToOwner: number,
 	closingBalance: number
-): any => {
-	return frameContent([
+): any => // eslint-disable-line
+	frameContent([
 		{ text: "Your Closing Cash Balance", bold: true },
 		basicTable([
 			[
@@ -173,10 +178,9 @@ const closingCashBalanceSection = (
 			],
 		]),
 	])
-}
 
-const question2Section = (value: number) => {
-	return frameContent(
+const question2Section = (value: number) =>
+	frameContent(
 		basicTable(
 			[
 				[
@@ -187,7 +191,6 @@ const question2Section = (value: number) => {
 			["yellowBlock"]
 		)
 	)
-}
 
 const yourNetAssetPositionSection = (
 	stock: number,
@@ -196,8 +199,8 @@ const yourNetAssetPositionSection = (
 	assets: number,
 	loans: number,
 	totalNetAssets: number
-): any => {
-	return frameContent([
+): any => // eslint-disable-line
+	frameContent([
 		{ text: "Your net asset position", bold: true },
 		basicTable([
 			["Stocks", { text: formatDollars(stock), style: ["rightAlign"] }],
@@ -211,12 +214,11 @@ const yourNetAssetPositionSection = (
 			],
 		]),
 	])
-}
 
 export default async (
 	title: string,
 	values: BaseCFCStruct,
-	questionValues: any // QuestionValues
+	questionValues: any // eslint-disable-line
 ) => {
 	const {
 		openingBalance,
@@ -247,6 +249,7 @@ export default async (
 		gstOnPurchases,
 	} = calculated
 
+	// eslint-disable-next-line
 	const docDefinition: any = {
 		...pageDefaultSettings(),
 

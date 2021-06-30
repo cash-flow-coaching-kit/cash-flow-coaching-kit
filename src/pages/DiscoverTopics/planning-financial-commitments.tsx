@@ -389,7 +389,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 						color="primary"
 						size="large"
 						endIcon={<ExitToAppIcon />}
-						onClick={() => saveFile("KnowYourCommitments-Activity.pdf","pdf")}
+						onClick={() => saveFile("KnowYourCommitments-Activity.pdf", "pdf")}
 					>
 						Download activity
 					</Button>

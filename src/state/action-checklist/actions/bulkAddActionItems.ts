@@ -35,16 +35,15 @@ const appendOrCreatePriority = (
 	const canFind = priorities.find(filterById(priorityId))
 	if (typeof canFind !== "undefined") {
 		return priorities.reduce(
-			(collection: ActionChecklistPriorityStruct[], current) => {
-				return collection.concat(
+			(collection: ActionChecklistPriorityStruct[], current) =>
+				collection.concat(
 					current.id === priorityId
 						? {
 								...current,
 								order: uniq([...current.order, ...order]),
 						  }
 						: current
-				)
-			},
+				),
 			[]
 		)
 	}
@@ -69,9 +68,11 @@ const bulkAddActionItem = (
 	const { items, priorityId } = payload
 
 	const newChecklist = [...state.checklistCollection, ...items]
-	const additionalOrders = items.reduce((arr: string[], item) => {
-		return typeof item.id === "string" ? [...arr, item.id] : arr
-	}, [])
+	const additionalOrders = items.reduce(
+		(arr: string[], item) =>
+			typeof item.id === "string" ? [...arr, item.id] : arr,
+		[]
+	)
 
 	const newPriority = appendOrCreatePriority(
 		state.priority,

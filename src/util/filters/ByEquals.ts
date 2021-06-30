@@ -9,9 +9,11 @@
  * @param {boolean} reject If reject is true, then it will return the opposite.
  * @returns T[]
  */
-const filterByEquals = <T>(val: T, reject = false) => (item: T): boolean => {
-	const res = item === val
-	return reject ? !res : res
-}
+const filterByEquals =
+	<T>(val: T, reject = false) =>
+	(item: T): boolean => {
+		const res = item === val
+		return reject ? !res : res
+	}
 
 export default filterByEquals

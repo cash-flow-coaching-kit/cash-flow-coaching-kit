@@ -13,8 +13,8 @@ import fileSaver from "file-saver"
 import ExpandableNav from "../../components/ExpandableNav"
 import useStyles from "./styles"
 import Spacer from "../../components/Spacer"
-import { setToggleOfflineContent } from "./../../util/helper"
-import useHasInternet from "./../../context/useHasInternet"
+import { setToggleOfflineContent } from "../../util/helper"
+import useHasInternet from "../../context/useHasInternet"
 
 // Set flag for web or desktop mode
 const userAgent = navigator.userAgent.toLowerCase()
@@ -26,6 +26,7 @@ const saveFile = async (filename: string, fileSubPath: string) => {
 	)
 	return fileSaver.saveAs(blob, filename)
 }
+
 export default function ActionChecklist(): ReactElement {
 	const cls = useStyles()
 	const isOnline = useHasInternet()

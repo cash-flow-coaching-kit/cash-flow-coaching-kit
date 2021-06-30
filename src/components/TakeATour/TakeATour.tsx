@@ -61,7 +61,9 @@ export default function TakeATour(): ReactElement {
 
 	return (
 		<>
+			{/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
 			<TourCard onClick={handleOpen} />
+			{/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
 			<TourDialog onClose={handleClose} open={open} />
 		</>
 	)
@@ -80,9 +82,7 @@ const TourStepper = ({
 	const handleBack = (): void => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1)
 	}
-	const finalStep = (): boolean => {
-		return activeStep === tourSteps.length - 1
-	}
+	const finalStep = (): boolean => activeStep === tourSteps.length - 1
 
 	return (
 		<>
