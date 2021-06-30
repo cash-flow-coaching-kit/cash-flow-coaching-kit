@@ -99,7 +99,7 @@ const TrackingPerformance = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Tina's Hair &amp; Beauty
+											Download Transcript: Tina&rsquo;s Hair &amp; Beauty
 										</Button>
 									</CardActions>
 								</Card>
@@ -120,7 +120,7 @@ const TrackingPerformance = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Anders' Retirement Plan
+											Download Transcript: Anders&rsquo; Retirement Plan
 										</Button>
 									</CardActions>
 								</Card>

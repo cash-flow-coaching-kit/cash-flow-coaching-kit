@@ -10,26 +10,24 @@ import Spacer from "../../components/Spacer"
  *
  * @returns ReactElement
  */
-const HCListing = (): ReactElement => {
-	return (
-		<>
-			<PageContainer role="main">
-				<SectionTitle component="h1">Saved Health Checks</SectionTitle>
-				<Box className="content-area">
-					<Typography>
-						Use your previous Health Checks to review your progress.
-					</Typography>
-					<Typography>
-						View your past results by selecting from the list below.
-					</Typography>
-				</Box>
-				<Spacer space={3} />
-				<Grid item sm={6}>
-					<Listing />
-				</Grid>
-			</PageContainer>
-		</>
-	)
-}
+const HCListing = (): ReactElement => (
+	<>
+		<PageContainer role="main">
+			<SectionTitle component="h1">Saved Health Checks</SectionTitle>
+			<Box className="content-area">
+				<Typography>
+					Use your previous Health Checks to review your progress.
+				</Typography>
+				<Typography>
+					View your past results by selecting from the list below.
+				</Typography>
+			</Box>
+			<Spacer space={3} />
+			<Grid item sm={6}>
+				<Listing />
+			</Grid>
+		</PageContainer>
+	</>
+)
 
 export default HCListing

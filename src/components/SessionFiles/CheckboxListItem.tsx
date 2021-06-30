@@ -7,12 +7,8 @@ import {
 } from "@material-ui/core"
 import { CheckboxListItemProps } from "./__config/shape"
 
-export default React.memo(function CheckboxListItem({
-	label,
-	checked,
-	onClick,
-}: CheckboxListItemProps): ReactElement {
-	return (
+export default React.memo(
+	({ label, checked, onClick }: CheckboxListItemProps): ReactElement => (
 		<ListItem button onClick={onClick}>
 			<ListItemIcon>
 				<Checkbox
@@ -26,4 +22,4 @@ export default React.memo(function CheckboxListItem({
 			<ListItemText>{label}</ListItemText>
 		</ListItem>
 	)
-})
+)

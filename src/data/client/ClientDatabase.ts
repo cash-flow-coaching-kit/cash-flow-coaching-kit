@@ -25,7 +25,7 @@ class ClientDatabase extends Dexie {
 		super("ClientDatabase")
 		this.applyMigrations()
 
-		this.clients = this.table("clients")
+		this.clients = this.table("clients") // eslint-disable-line
 
 		this.replaceIdsWithStrings()
 	}
@@ -51,7 +51,7 @@ class ClientDatabase extends Dexie {
 	private replaceIdsWithStrings(): void {
 		this.clients.toCollection().modify((client) => {
 			if (typeof client.id === "number") {
-				client.id = `${client.id}`
+				client.id = `${client.id}`  // eslint-disable-line
 			}
 		})
 	}

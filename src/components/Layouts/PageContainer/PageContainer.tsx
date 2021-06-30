@@ -24,10 +24,9 @@ const PageContainer = ({
 				Main content anchor
 			</a>
 			<Container
-				role="role"
+				role="role" // eslint-disable-line
 				className={`${styles.container} ${className || ""}`}
-				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...rest}
+				{...rest} // eslint-disable-line react/jsx-props-no-spreading
 			>
 				{children}
 			</Container>

@@ -18,22 +18,24 @@ const SecondaryNavbar = (): ReactElement => {
 	const {
 		state: { lastViewedHC },
 	} = useContext(ClientContext)
-	const navRoutes = useMemo((): INavRoutes[] => {
-		return routes.map((route) => {
-			if (route.title === "Health Check") {
-				return {
-					title: route.title,
-					route:
-						lastViewedHC !== null
-							? routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
-									[":id", `${lastViewedHC}`],
-							  ])
-							: route.route,
+	const navRoutes = useMemo(
+		(): INavRoutes[] =>
+			routes.map((route) => {
+				if (route.title === "Health Check") {
+					return {
+						title: route.title,
+						route:
+							lastViewedHC !== null
+								? routeVarReplacement(PrivateRoutes.HealthCheckSummary, [
+										[":id", `${lastViewedHC}`],
+								  ])
+								: route.route,
+					}
 				}
-			}
-			return route
-		})
-	}, [lastViewedHC])
+				return route
+			}),
+		[lastViewedHC]
+	)
 
 	return (
 		<div className={sharedStyle.root}>

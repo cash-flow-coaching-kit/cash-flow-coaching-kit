@@ -95,7 +95,7 @@ const DTManagingCashFlow = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Yulari's Cash Flow
+											Download Transcript: Yulari&rsquo;s Cash Flow
 										</Button>
 									</CardActions>
 								</Card>
@@ -116,7 +116,7 @@ const DTManagingCashFlow = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Cameron's Cash Flow
+											Download Transcript: Cameron&rsquo;s Cash Flow
 										</Button>
 									</CardActions>
 								</Card>
@@ -232,10 +232,10 @@ const DTManagingCashFlow = (): ReactElement => {
 									Why?
 								</Typography>
 								<Typography>
-									Just because cash is sitting in your bank account, doesn't
-									necessarily mean it is all yours. Understanding what amounts
-									may be owed to third parties allows you to make better
-									decisions, and budget for upcoming expenses.
+									Just because cash is sitting in your bank account,
+									doesn&rsquo;t necessarily mean it is all yours. Understanding
+									what amounts may be owed to third parties allows you to make
+									better decisions, and budget for upcoming expenses.
 								</Typography>
 							</Grid>
 							<Grid item sm={6}>

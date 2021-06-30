@@ -33,7 +33,7 @@ export default function ActionChecklist(): ReactElement {
 						create change.
 					</Typography>
 					<Typography component="li">
-						Start prioritising tasks based on your client's needs.
+						Start prioritising tasks based on your client&rsquo;s needs.
 					</Typography>
 					<Typography component="li">
 						The most important part of this whole process is keeping your client

@@ -33,14 +33,14 @@ interface SelectFieldProps {
  * }
  * @returns {ReactElement}
  */
-export default React.memo(function SelectField({
-	name,
-	label,
-	value,
-	onChange,
-	options,
-}: SelectFieldProps): ReactElement {
-	return (
+export default React.memo(
+	({
+		name,
+		label,
+		value,
+		onChange,
+		options,
+	}: SelectFieldProps): ReactElement => (
 		<FormControl variant="outlined" fullWidth>
 			<InputLabel id={`${name}--label`}>{label}</InputLabel>
 			<Select
@@ -60,4 +60,4 @@ export default React.memo(function SelectField({
 			</Select>
 		</FormControl>
 	)
-})
+)

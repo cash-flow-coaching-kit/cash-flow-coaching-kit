@@ -45,100 +45,98 @@ const useStyles = makeStyles((theme) => ({
  * }
  * @returns {ReactElement}
  */
-const DateRange = memo(function DateRange({
-	startDate,
-	endDate,
-	onChange,
-}: DateRangeProps): ReactElement {
-	const [open, setOpen] = useState<OpenState>({ start: false, end: false })
-	const classes = useStyles()
+const DateRange = memo(
+	({ startDate, endDate, onChange }: DateRangeProps): ReactElement => {
+		const [open, setOpen] = useState<OpenState>({ start: false, end: false })
+		const classes = useStyles()
 
-	/**
-	 * Change the open state of the datepicker modal
-	 *
-	 * @param {keyof OpenState} key
-	 */
-	function onOpen(key: keyof OpenState): void {
-		setOpen({
-			start: false,
-			end: false,
-			[key]: true,
-		})
-	}
-
-	const openStart = useCallback(() => onOpen("start"), [])
-	const openEnd = useCallback(() => onOpen("end"), [])
-
-	/**
-	 * Closes the datepickers
-	 *
-	 */
-	const onClose = useCallback((): void => {
-		setOpen({
-			start: false,
-			end: false,
-		})
-	}, [])
-
-	/**
-	 * Triggers the passed in onChange method
-	 *
-	 * @param {(Date | null)} date
-	 * @param {keyof OpenState} key
-	 */
-	const onDateChange = useCallback(
-		(date: Date | null, key: keyof OpenState): void => {
-			if (date) {
-				if (key === "start") {
-					onChange("canvasStartDate", date)
-				} else {
-					onChange("canvasEndDate", date)
-					onClose()
-				}
-			}
-		},
-		[onChange, onClose]
-	)
-
-	// When the start date is edited and the panel is still open
-	// Change to the end date panel
-	useEffect(() => {
-		if (open.start) {
-			onOpen("end")
+		/**
+		 * Change the open state of the datepicker modal
+		 *
+		 * @param {keyof OpenState} key
+		 */
+		function onOpen(key: keyof OpenState): void {
+			setOpen({
+				start: false,
+				end: false,
+				[key]: true,
+			})
 		}
-		// eslint-disable-next-line
+
+		const openStart = useCallback(() => onOpen("start"), [])
+		const openEnd = useCallback(() => onOpen("end"), [])
+
+		/**
+		 * Closes the datepickers
+		 *
+		 */
+		const onClose = useCallback((): void => {
+			setOpen({
+				start: false,
+				end: false,
+			})
+		}, [])
+
+		/**
+		 * Triggers the passed in onChange method
+		 *
+		 * @param {(Date | null)} date
+		 * @param {keyof OpenState} key
+		 */
+		const onDateChange = useCallback(
+			(date: Date | null, key: keyof OpenState): void => {
+				if (date) {
+					if (key === "start") {
+						onChange("canvasStartDate", date)
+					} else {
+						onChange("canvasEndDate", date)
+						onClose()
+					}
+				}
+			},
+			[onChange, onClose]
+		)
+
+		// When the start date is edited and the panel is still open
+		// Change to the end date panel
+		useEffect(() => {
+			if (open.start) {
+				onOpen("end")
+			}
+			// eslint-disable-next-line
 	}, [startDate])
 
-	return (
-		<MuiPickersUtilsProvider utils={DateFnsUtils}>
-			<Box className={classes.root}>
-				<SinglePicker
-					value={startDate}
-					onChange={onDateChange}
-					open={open.start}
-					onOpen={openStart}
-					onClose={onClose}
-					label="Start Date"
-					compareDay={endDate}
-					id="start"
-				/>
-				<Typography component="span" className={classes.separator}>
-					to
-				</Typography>
-				<SinglePicker
-					value={endDate}
-					onChange={onDateChange}
-					open={open.end}
-					onOpen={openEnd}
-					onClose={onClose}
-					label="End Date"
-					compareDay={startDate}
-					id="end"
-					minDate={startDate}
-				/>
-			</Box>
-		</MuiPickersUtilsProvider>
-	)
-})
+		return (
+			<MuiPickersUtilsProvider utils={DateFnsUtils}>
+				<Box className={classes.root}>
+					<SinglePicker
+						value={startDate}
+						onChange={onDateChange}
+						open={open.start}
+						onOpen={openStart}
+						onClose={onClose}
+						label="Start Date"
+						compareDay={endDate}
+						id="start"
+					/>
+					<Typography component="span" className={classes.separator}>
+						to
+					</Typography>
+					<SinglePicker
+						value={endDate}
+						onChange={onDateChange}
+						open={open.end}
+						onOpen={openEnd}
+						onClose={onClose}
+						label="End Date"
+						compareDay={startDate}
+						id="end"
+						minDate={startDate}
+					/>
+				</Box>
+			</MuiPickersUtilsProvider>
+		)
+	}
+)
 
 export default DateRange

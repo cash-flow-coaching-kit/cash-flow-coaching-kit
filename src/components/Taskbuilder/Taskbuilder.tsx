@@ -36,7 +36,7 @@ export default function Taskbuilder({
 
 				{/* FORM */}
 				<IfElseLoading if={typeof currentClient?.id !== "undefined"}>
-					{/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+					{/* eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain, @typescript-eslint/no-non-null-assertion */}
 					<Form container={container} client={currentClient?.id!} />
 				</IfElseLoading>
 			</Box>

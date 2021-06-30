@@ -87,7 +87,7 @@ const Listing = (): ReactElement => {
 			}
 		} catch (e) {
 			// TODO: At least show a toast message, please
-			console.error(e.stack || e)
+			console.error(e.stack || e) // eslint-disable-line
 		}
 	}
 

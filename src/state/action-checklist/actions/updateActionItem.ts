@@ -15,11 +15,10 @@ const updateActionItem = (
 	const { data, id } = payload
 
 	const newChecklist = state.checklistCollection.reduce(
-		(checklists: ActionChecklistStruct[], current) => {
-			return checklists.concat(
+		(checklists: ActionChecklistStruct[], current) =>
+			checklists.concat(
 				current.id === id ? { ...current, ...data, id: current.id } : current
-			)
-		},
+			),
 		[]
 	)
 

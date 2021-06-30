@@ -10,9 +10,11 @@ import { calculateInitial } from "../Forms/CFC"
 import { calcCashFlowTotal } from "../../state/CFC/accumulators"
 // import arrayFillWith from "../../util/array/arrayFillWith"
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs
+pdfMake.vfs = pdfFonts.pdfMake.vfs // eslint-disable-line
 
+// eslint-disable-next-line
 const rowValue = (values: [number, number], flip = false): any[] => {
+	// eslint-disable-line
 	const [val1, val2] = values
 	return [
 		{ text: addDollarSign(formatNumber(`${val1}`)), alignment: "right" },
@@ -38,6 +40,7 @@ export default async (
 	const leftCalc = calculateInitial(leftSelected)
 	const rightCalc = calculateInitial(rightSelected)
 
+	// eslint-disable-next-line
 	const docDefinition: any = {
 		...pageDefaultSettings(),
 		content: [

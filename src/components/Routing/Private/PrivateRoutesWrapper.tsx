@@ -93,83 +93,81 @@ const CFCCompare = loadable(
  *
  * @returns {ReactElement}
  */
-const PrivateRoutesWrapper = (): ReactElement => {
-	return (
-		<PrivatePage>
-			<Route path={PrivateRoutes.CoachingKit}>
-				<CoachingKit />
-			</Route>
-			<Route path={PrivateRoutes.SessionFiles}>
-				<SessionFiles />
-			</Route>
-			<Route exact path={PrivateRoutes.HealthCheckQuiz}>
-				<HCQuestionnaire />
-			</Route>
-			<Route exact path={PrivateRoutes.HealthCheckList}>
-				<HCListing />
-			</Route>
-			<Route exact path={PrivateRoutes.HealthCheckSummary}>
-				<HCSummary />
-			</Route>
-			<Route path={PrivateRoutes.DiscoverTopics}>
-				<DTListing />
-			</Route>
+const PrivateRoutesWrapper = (): ReactElement => (
+	<PrivatePage>
+		<Route path={PrivateRoutes.CoachingKit}>
+			<CoachingKit />
+		</Route>
+		<Route path={PrivateRoutes.SessionFiles}>
+			<SessionFiles />
+		</Route>
+		<Route exact path={PrivateRoutes.HealthCheckQuiz}>
+			<HCQuestionnaire />
+		</Route>
+		<Route exact path={PrivateRoutes.HealthCheckList}>
+			<HCListing />
+		</Route>
+		<Route exact path={PrivateRoutes.HealthCheckSummary}>
+			<HCSummary />
+		</Route>
+		<Route path={PrivateRoutes.DiscoverTopics}>
+			<DTListing />
+		</Route>
 
-			<CFCProvider>
-				<Route path={PrivateRoutes.CFC} exact>
-					<CFCCanvas />
-				</Route>
-				<Route path={PrivateRoutes.CFCEdit}>
-					<CanvasEdit />
-				</Route>
-				<Route path={PrivateRoutes.CFCListing}>
-					<CFCListing />
-				</Route>
-				<Route path={PrivateRoutes.CFCCompare}>
-					<CFCCompare />
-				</Route>
-			</CFCProvider>
+		<CFCProvider>
+			<Route path={PrivateRoutes.CFC} exact>
+				<CFCCanvas />
+			</Route>
+			<Route path={PrivateRoutes.CFCEdit}>
+				<CanvasEdit />
+			</Route>
+			<Route path={PrivateRoutes.CFCListing}>
+				<CFCListing />
+			</Route>
+			<Route path={PrivateRoutes.CFCCompare}>
+				<CFCCompare />
+			</Route>
+		</CFCProvider>
 
-			{/*
+		{/*
 				Wrap change levers and action checklist in provider since
 				they require the state values provided by this context setup
 			*/}
-			<ActionChecklistProvider>
-				<Route path={PrivateRoutes.ClientList}>
-					<ClientList />
-				</Route>
+		<ActionChecklistProvider>
+			<Route path={PrivateRoutes.ClientList}>
+				<ClientList />
+			</Route>
 
-				<Route path={PrivateRoutes.ChangeLevers}>
-					<ChangeLevers />
-				</Route>
-				<Route path={PrivateRoutes.ActionChecklist}>
-					<ActionChecklist />
-				</Route>
+			<Route path={PrivateRoutes.ChangeLevers}>
+				<ChangeLevers />
+			</Route>
+			<Route path={PrivateRoutes.ActionChecklist}>
+				<ActionChecklist />
+			</Route>
 
-				<Route path={PrivateRoutes.DTFundingBusiness}>
-					<DTFundingBusiness />
-				</Route>
-				<Route path={PrivateRoutes.DTManagingCashFlow}>
-					<DTManagingCashFlow />
-				</Route>
-				<Route path={PrivateRoutes.DTPlanningBusiness}>
-					<DTPlanningBusiness />
-				</Route>
-				<Route path={PrivateRoutes.DTPlanningFinanicalCommitments}>
-					<DTPlanningFinanicalCommitments />
-				</Route>
-				<Route path={PrivateRoutes.DTRecordKeeping}>
-					<DTRecordKeeping />
-				</Route>
-				<Route path={PrivateRoutes.DTSellingClosingSuccession}>
-					<DTSellingClosingSuccession />
-				</Route>
-				<Route path={PrivateRoutes.DTTrackingPerformance}>
-					<DTTrackingPerformance />
-				</Route>
-			</ActionChecklistProvider>
-		</PrivatePage>
-	)
-}
+			<Route path={PrivateRoutes.DTFundingBusiness}>
+				<DTFundingBusiness />
+			</Route>
+			<Route path={PrivateRoutes.DTManagingCashFlow}>
+				<DTManagingCashFlow />
+			</Route>
+			<Route path={PrivateRoutes.DTPlanningBusiness}>
+				<DTPlanningBusiness />
+			</Route>
+			<Route path={PrivateRoutes.DTPlanningFinanicalCommitments}>
+				<DTPlanningFinanicalCommitments />
+			</Route>
+			<Route path={PrivateRoutes.DTRecordKeeping}>
+				<DTRecordKeeping />
+			</Route>
+			<Route path={PrivateRoutes.DTSellingClosingSuccession}>
+				<DTSellingClosingSuccession />
+			</Route>
+			<Route path={PrivateRoutes.DTTrackingPerformance}>
+				<DTTrackingPerformance />
+			</Route>
+		</ActionChecklistProvider>
+	</PrivatePage>
+)
 
 export default PrivateRoutesWrapper

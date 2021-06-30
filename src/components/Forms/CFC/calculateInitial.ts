@@ -19,11 +19,11 @@ import { isGSTValid } from "../../../util/money/gst"
 function calculateInitial(values: BaseCFCStruct): CalculatedValues {
 	return {
 		gstOnSales: isGSTValid(values.gstOnSales)
-			? values.gstOnSales!
+			? values.gstOnSales! // eslint-disable-line
 			: calcCashFlowGST(values.cashInItems),
 		closingBalance: calcClosingBalance(values),
 		gstOnPurchases: isGSTValid(values.gstOnPurchases)
-			? values.gstOnPurchases!
+			? values.gstOnPurchases! // eslint-disable-line
 			: calcCashFlowGST(values.cashOutItems),
 		totalNetAssets: calcTotalNetAssets(values),
 		cashSurplus: calcCashSurplus(values),

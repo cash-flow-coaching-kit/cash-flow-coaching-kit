@@ -25,30 +25,32 @@ import useStyles from "./__config/styles"
  * }
  * @returns {ReactElement}
  */
-export default React.memo(function DescriptiveMoneyInput({
-	title,
-	description,
-	stacked = false,
-	mini = false,
-	fullHeight = false,
-	// eslint-disable-next-line
+export default React.memo(
+	({
+		title,
+		description,
+		stacked = false,
+		mini = false,
+		fullHeight = false,
+		// eslint-disable-next-line
 	...textfieldProps
-}: DescriptiveMoneyInputProps): ReactElement {
-	const styles = useStyles({ stacked, mini, fullHeight })
+	}: DescriptiveMoneyInputProps): ReactElement => {
+		const styles = useStyles({ stacked, mini, fullHeight })
 
-	return (
-		<Box className={styles.root}>
-			<Box className={styles.type}>
-				<Typography variant="h6" component="p">
-					{title}
-				</Typography>
-				<Typography component="span">{description}</Typography>
+		return (
+			<Box className={styles.root}>
+				<Box className={styles.type}>
+					<Typography variant="h6" component="p">
+						{title}
+					</Typography>
+					<Typography component="span">{description}</Typography>
+				</Box>
+				<MoneyInput
+					// eslint-disable-next-line react/jsx-props-no-spreading
+					{...textfieldProps}
+					className={styles.moneyInput}
+				/>
 			</Box>
-			<MoneyInput
-				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...textfieldProps}
-				className={styles.moneyInput}
-			/>
-		</Box>
-	)
-})
+		)
+	}
+)

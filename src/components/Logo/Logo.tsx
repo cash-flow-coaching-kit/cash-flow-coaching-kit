@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 type LogoProps = {
 	to: string
-	className?: string
+	className?: string // eslint-disable-line
 }
 
 /**

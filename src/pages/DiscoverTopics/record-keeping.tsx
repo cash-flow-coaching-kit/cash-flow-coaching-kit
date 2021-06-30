@@ -101,7 +101,7 @@ const DTRecordKeeping = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Eden's Digital Records
+											Download Transcript: Eden&rsquo;s Digital Records
 										</Button>
 									</CardActions>
 								</Card>
@@ -122,7 +122,7 @@ const DTRecordKeeping = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Lisa's Paper Records
+											Download Transcript: Lisa&rsquo;s Paper Records
 										</Button>
 									</CardActions>
 								</Card>

@@ -100,7 +100,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Mick's Farm
+											Download Transcript: Mick&rsquo;s Farm
 										</Button>
 									</CardActions>
 								</Card>
@@ -121,7 +121,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Download Transcript: Ming's Disability Services
+											Download Transcript: Ming&rsquo;s Disability Services
 										</Button>
 									</CardActions>
 								</Card>

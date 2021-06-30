@@ -95,7 +95,7 @@ export function generateTitle(
 		concatStr(format(startDate, "dd/MM/yyyy")),
 		concatStr(" to "),
 		concatStr(format(endDate, "dd/MM/yyyy"))
-	)(upperFirst(`${type} `))
+	)(upperFirst(`${type} `)) as any // eslint-disable-line
 }
 
 /**
@@ -229,7 +229,7 @@ export function calcQuestionTwo(
 		add(payg),
 		add(superAmount),
 		add(incomeTax)
-	)(calculated.gstOnSales)
+	)(calculated.gstOnSales) as any // eslint-disable-line
 }
 
 /**
@@ -246,7 +246,10 @@ export function calcQuestionThree(
 	calculated: CalculatedValues,
 	incomeTax: number
 ): number {
-	return pipe(add(calculated.cashSurplus), minusBy(incomeTax))(openingBalance)
+	return pipe(
+		add(calculated.cashSurplus),
+		minusBy(incomeTax)
+	)(openingBalance) as any // eslint-disable-line
 }
 
 /**

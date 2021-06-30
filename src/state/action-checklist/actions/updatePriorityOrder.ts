@@ -13,9 +13,8 @@ const updatePriorityOrder = (
 	payload: ActionChecklistPriorityStruct
 ): IActionChecklistState => {
 	const newPriority = state.priority.reduce(
-		(collection: ActionChecklistPriorityStruct[], item) => {
-			return collection.concat(item.id === payload.id ? payload : item)
-		},
+		(collection: ActionChecklistPriorityStruct[], item) =>
+			collection.concat(item.id === payload.id ? payload : item),
 		[]
 	)
 

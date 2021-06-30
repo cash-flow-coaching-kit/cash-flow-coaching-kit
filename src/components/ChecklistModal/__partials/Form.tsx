@@ -89,11 +89,8 @@ const Form = React.forwardRef(
 			if (!date) return
 
 			const newItems = form.values.items.reduce(
-				(items: FormItem[], item, index) => {
-					return items.concat(
-						index === idx ? { ...item, reviewBy: date } : item
-					)
-				},
+				(items: FormItem[], item, index) =>
+					items.concat(index === idx ? { ...item, reviewBy: date } : item),
 				[]
 			)
 

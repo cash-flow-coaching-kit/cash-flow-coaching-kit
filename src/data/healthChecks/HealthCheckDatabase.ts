@@ -25,6 +25,7 @@ class HealthCheckDatabase extends Dexie {
 		super("HealthCheckDatabase")
 		this.applyMigrations()
 
+		// eslint-disable-next-line fp/no-mutation
 		this.healthChecks = this.table("healthChecks")
 
 		this.replaceIdsWithStrings()
@@ -50,9 +51,11 @@ class HealthCheckDatabase extends Dexie {
 	private replaceIdsWithStrings(): void {
 		this.healthChecks.toCollection().modify((healthCheck) => {
 			if (typeof healthCheck.id === "number") {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				healthCheck.id = `${healthCheck.id}`
 			}
 			if (typeof healthCheck.clientId === "number") {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				healthCheck.clientId = `${healthCheck.clientId}`
 			}
 		})

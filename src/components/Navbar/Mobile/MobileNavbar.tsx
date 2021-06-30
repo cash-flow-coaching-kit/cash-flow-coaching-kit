@@ -84,30 +84,28 @@ export default function MobileNavbar(): ReactElement {
 		closeDrawer()
 	}, [location.pathname])
 
-	const renderRoutes = (route: INavRoutes): ReactElement => {
-		return (
-			<Fragment key={route.route}>
-				<ListItem component={NavLink} to={route.route} className={cls.item}>
-					{route.Icon && (
-						<ListItemIcon>
-							<route.Icon />
-						</ListItemIcon>
-					)}
-					<ListItemText primary={route.title} />
-				</ListItem>
-
-				{route.children ? (
-					<>
-						<List className={cls.childList}>
-							{route.children.map(renderRoutes)}
-						</List>
-					</>
-				) : (
-					<></>
+	const renderRoutes = (route: INavRoutes): ReactElement => (
+		<Fragment key={route.route}>
+			<ListItem component={NavLink} to={route.route} className={cls.item}>
+				{route.Icon && (
+					<ListItemIcon>
+						<route.Icon />
+					</ListItemIcon>
 				)}
-			</Fragment>
-		)
-	}
+				<ListItemText primary={route.title} />
+			</ListItem>
+
+			{route.children ? (
+				<>
+					<List className={cls.childList}>
+						{route.children.map(renderRoutes)}
+					</List>
+				</>
+			) : (
+				<></>
+			)}
+		</Fragment>
+	)
 
 	return (
 		<>

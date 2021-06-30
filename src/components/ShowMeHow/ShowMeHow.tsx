@@ -5,6 +5,7 @@ import { defer } from "lodash-es"
 import { useSharedNavStyles } from "../Navbar/_config/style"
 
 type ShowMeHowProps = {
+	// eslint-disable-next-line
 	triggerCallback?: () => void
 }
 

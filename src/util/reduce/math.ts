@@ -22,9 +22,7 @@ function sum(): ReducerHOF<number, number> {
  * @returns {MathHOF}
  */
 function add(val: number): MathHOF {
-	return (x): number => {
-		return numOrZero(x) + numOrZero(val)
-	}
+	return (x): number => numOrZero(x) + numOrZero(val)
 }
 
 /**
@@ -34,9 +32,7 @@ function add(val: number): MathHOF {
  * @returns {MathHOF}
  */
 function minusBy(val: number): MathHOF {
-	return (x): number => {
-		return numOrZero(x) - numOrZero(val)
-	}
+	return (x): number => numOrZero(x) - numOrZero(val)
 }
 
 /**
@@ -46,9 +42,8 @@ function minusBy(val: number): MathHOF {
  * @returns {MathHOF}
  */
 function divideBy(val: number): MathHOF {
-	return (x): number => {
-		return numOrZero(val) === 0 ? 0 : numOrZero(x) / numOrZero(val)
-	}
+	return (x): number =>
+		numOrZero(val) === 0 ? 0 : numOrZero(x) / numOrZero(val)
 }
 
 /**
@@ -56,9 +51,12 @@ function divideBy(val: number): MathHOF {
  *
  * @param fns
  */
-const pipe = <Input extends any, Output extends any, Fns extends any[]>(
-	// eslint-disable-next-line
+const pipe =
+	<Input extends any, Output extends any, Fns extends any[]>(
+		// eslint-disable-next-line
 	...fns: Fns
-) => (x: Input): Output => fns.reduce((v, f) => f(v), x)
+	) =>
+	(x: Input): Output =>
+		fns.reduce((v, f) => f(v), x)
 
 export { sum, minusBy, divideBy, pipe, add, numOrZero }

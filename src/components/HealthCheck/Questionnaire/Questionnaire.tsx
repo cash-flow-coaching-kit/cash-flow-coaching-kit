@@ -57,7 +57,7 @@ const Questionnaire = (): ReactElement => {
 	): void => {
 		e.preventDefault()
 		const copy = [...answers]
-		copy[questionCount] = answer
+		copy[questionCount] = answer  // eslint-disable-line
 		setAnswers([...copy])
 	}
 
@@ -74,6 +74,7 @@ const Questionnaire = (): ReactElement => {
 	 * @param {number} id ID of the health check to redirect to
 	 */
 	const redirectToSummary = (id: string): void => {
+		// eslint-disable-next-line
 		history.push(
 			routeVarReplacement(PrivateRoutes.HealthCheckSummary, [[":id", `${id}`]])
 		)
@@ -103,7 +104,7 @@ const Questionnaire = (): ReactElement => {
 			redirectToSummary(dbKey)
 		} catch (e) {
 			// TODO: Proper error checking
-			console.error(e.stack || e)
+			console.error(e.stack || e)  // eslint-disable-line
 		}
 	}
 
@@ -117,61 +118,59 @@ const Questionnaire = (): ReactElement => {
 				style={{ paddingLeft: 0, paddingRight: 0 }}
 			>
 				{stepLabels.map(
-					(label): ReactElement => {
-						return (
-							<Step key={label}>
-								<StepLabel>{label}</StepLabel>
-								<StepContent>
-									<Grid container spacing={2}>
-										{(Object.keys(
-											currentQuestion.options
-										) as QuestionOptions[]).map(
-											(option: QuestionOptions, idx: number): ReactElement => (
-												<Grid item xs={12} sm={4} key={constructKey(key, idx)}>
-													<OptionTile
-														optionKey={option}
-														option={currentQuestion.options[option]}
-														changeAnswer={changeAnswer}
-														currentAnswer={answers[questionCount] || false}
-													/>
-												</Grid>
-											)
-										)}
-									</Grid>
-									<Box className={styles.actions}>
-										<Button
-											startIcon={<ChevronLeftIcon />}
-											variant="outlined"
-											color="primary"
-											disabled={questionCount === 0}
-											onClick={(e: MouseEvent<HTMLButtonElement>): void => {
-												e.preventDefault()
-												setQuestionCount(questionCount - 1)
-											}}
-										>
-											Previous question
-										</Button>
-										<Button
-											endIcon={<ChevronRightIcon />}
-											variant="contained"
-											color="primary"
-											disabled={typeof answers[questionCount] === "undefined"}
-											onClick={(e: MouseEvent<HTMLButtonElement>): void => {
-												e.preventDefault()
-												if (!isFinalQuestion()) {
-													setQuestionCount(questionCount + 1)
-												} else {
-													handleSubmit()
-												}
-											}}
-										>
-											{isFinalQuestion() ? "View results" : "Next question"}
-										</Button>
-									</Box>
-								</StepContent>
-							</Step>
-						)
-					}
+					(label): ReactElement => (
+						<Step key={label}>
+							<StepLabel>{label}</StepLabel>
+							<StepContent>
+								<Grid container spacing={2}>
+									{(
+										Object.keys(currentQuestion.options) as QuestionOptions[]
+									).map(
+										(option: QuestionOptions, idx: number): ReactElement => (
+											<Grid item xs={12} sm={4} key={constructKey(key, idx)}>
+												<OptionTile
+													optionKey={option}
+													option={currentQuestion.options[option]}
+													changeAnswer={changeAnswer}
+													currentAnswer={answers[questionCount] || false}
+												/>
+											</Grid>
+										)
+									)}
+								</Grid>
+								<Box className={styles.actions}>
+									<Button
+										startIcon={<ChevronLeftIcon />}
+										variant="outlined"
+										color="primary"
+										disabled={questionCount === 0}
+										onClick={(e: MouseEvent<HTMLButtonElement>): void => {
+											e.preventDefault()
+											setQuestionCount(questionCount - 1)
+										}}
+									>
+										Previous question
+									</Button>
+									<Button
+										endIcon={<ChevronRightIcon />}
+										variant="contained"
+										color="primary"
+										disabled={typeof answers[questionCount] === "undefined"}
+										onClick={(e: MouseEvent<HTMLButtonElement>): void => {
+											e.preventDefault()
+											if (!isFinalQuestion()) {
+												setQuestionCount(questionCount + 1)
+											} else {
+												handleSubmit()
+											}
+										}}
+									>
+										{isFinalQuestion() ? "View results" : "Next question"}
+									</Button>
+								</Box>
+							</StepContent>
+						</Step>
+					)
 				)}
 			</Stepper>
 		</Box>

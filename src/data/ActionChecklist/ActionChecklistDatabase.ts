@@ -54,8 +54,11 @@ class ActionChecklistDatabase extends Dexie {
 		super("ActionChecklistDatabase")
 		this.applyMigrations()
 
+		// eslint-disable-next-line fp/no-mutation, no-param-reassign
 		this.actionItems = this.table("actionItems")
+		// eslint-disable-next-line fp/no-mutation, no-param-reassign
 		this.priority = this.table("priority")
+		// eslint-disable-next-line fp/no-mutation, no-param-reassign
 		this.notes = this.table("notes")
 
 		this.replaceIdsWithStrings()
@@ -124,29 +127,36 @@ class ActionChecklistDatabase extends Dexie {
 	private replaceIdsWithStrings(): void {
 		this.actionItems.toCollection().modify((items) => {
 			if (typeof items.id === "number") {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				items.id = `${items.id}`
 			}
 			if (typeof items.clientId === "number") {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				items.clientId = `${items.clientId}`
 			}
 		})
 
 		this.notes.toCollection().modify((note) => {
 			if (typeof note.id === "number") {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				note.id = `${note.id}`
 			}
 			if (typeof note.clientId === "number") {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				note.clientId = `${note.clientId}`
 			}
 		})
 
 		this.priority.toCollection().modify((prior) => {
 			if (typeof prior.id === "number") {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				prior.id = `${prior.id}`
 			}
 			if (typeof prior.clientId === "number") {
+				// eslint-disable-next-line fp/no-mutation, no-param-reassign
 				prior.clientId = `${prior.clientId}`
 			}
+			// eslint-disable-next-line fp/no-mutation, no-param-reassign
 			prior.order = prior.order.map((o) => (typeof o === "number" ? `${o}` : o))
 		})
 	}

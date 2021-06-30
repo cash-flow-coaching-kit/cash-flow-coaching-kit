@@ -157,9 +157,10 @@ export default function Form({ container, client }: FormProps): ReactElement {
 	 * @param {number} idx
 	 */
 	function handleCheckbox(checked: boolean, idx: number): void {
-		const newState = formChecklists.reduce((acc: boolean[], cur, i) => {
-			return acc.concat(i === idx ? checked : cur)
-		}, [])
+		const newState = formChecklists.reduce(
+			(acc: boolean[], cur, i) => acc.concat(i === idx ? checked : cur),
+			[]
+		)
 		setFormChecklists(newState)
 	}
 

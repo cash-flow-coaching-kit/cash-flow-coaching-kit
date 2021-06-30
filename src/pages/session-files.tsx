@@ -157,16 +157,16 @@ const SessionFiles = (): ReactElement => {
 		}))
 	}
 
-	const getStaticPdf = (name: string, url: string) => {
+	const getStaticPdf = (name: string, url: string) =>
 		// IE does not support Fetch response.arrayBuffer().
 		// Use Polyfill Fetch for PDF response buffer.
-		return fetchPolyfill(url, {
+		fetchPolyfill(url, {
 			method: "GET",
 		})
-			.then((response: any) => response.arrayBuffer())
-			.then((buffer: any) => ({ fileName: name, buffer }))
-	}
+			.then((response: any) => response.arrayBuffer()) // eslint-disable-line
+			.then((buffer: any) => ({ fileName: name, buffer })) // eslint-disable-line
 
+	// eslint-disable-next-line
 	const makeStaticPdf = async (name: string, path: string): Promise<any> => {
 		const file = encodeURI(`${assetBaseUrl}${path}`)
 		const pdf = await getStaticPdf(name, file)
@@ -176,11 +176,10 @@ const SessionFiles = (): ReactElement => {
 	const pdfMakeBlobPromise = (
 		pdf: pdfMake.TCreatedPdf,
 		filename: string
-	): Promise<{ blob: Blob; filename: string }> => {
-		return new Promise((resolve) => {
+	): Promise<{ blob: Blob; filename: string }> =>
+		new Promise((resolve) => {
 			pdf.getBlob((b: Blob) => resolve({ blob: b, filename }))
 		})
-	}
 
 	const generateZip = async (): Promise<void> => {
 		if (currentClient?.id) {
@@ -217,7 +216,7 @@ const SessionFiles = (): ReactElement => {
 			}
 
 			// Discover Topics
-			const DTPromises: any = selectedFiles.discoverTopics
+			const DTPromises: any = selectedFiles.discoverTopics // eslint-disable-line
 				.map((val, idx) => {
 					if (val) {
 						return makeStaticPdf(
@@ -247,7 +246,7 @@ const SessionFiles = (): ReactElement => {
 							// eslint-disable-next-line
 							HCNames.push(
 								`Completed Health Check ${format(
-									data.createdAt!,
+									data.createdAt!, // eslint-disable-line
 									"dd/MM/yyyy"
 								)}.pdf`
 									.replace(/ /g, "-")
@@ -310,7 +309,7 @@ const SessionFiles = (): ReactElement => {
 								}
 							})
 
-							zip.generateAsync({ type: "blob" }).then(function (content) {
+							zip.generateAsync({ type: "blob" }).then((content) => {
 								// see FileSaver.js
 								saveAs(content, `${currentClient.name.replace(/ /g, "-")}.zip`)
 								setExporting(false)
@@ -332,20 +331,18 @@ const SessionFiles = (): ReactElement => {
 		}
 	}
 
-	const Nav = React.memo(() => {
-		return (
-			<ExpandableNav>
-				<List component="nav" disablePadding>
-					<ListItem button onClick={generateZip}>
-						<ListItemIcon>
-							<GetAppIcon />
-						</ListItemIcon>
-						<ListItemText>Download selected files</ListItemText>
-					</ListItem>
-				</List>
-			</ExpandableNav>
-		)
-	})
+	const Nav = React.memo(() => (
+		<ExpandableNav>
+			<List component="nav" disablePadding>
+				<ListItem button onClick={generateZip}>
+					<ListItemIcon>
+						<GetAppIcon />
+					</ListItemIcon>
+					<ListItemText>Download selected files</ListItemText>
+				</ListItem>
+			</List>
+		</ExpandableNav>
+	))
 
 	const SingleDownloads = ({
 		title,

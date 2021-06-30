@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 interface LogoutProps {
-	color?: "inherit" | "primary" | "secondary" | "default"
-	variant?: "text" | "outlined" | "contained"
+	color?: "inherit" | "primary" | "secondary" | "default" // eslint-disable-line
+	variant?: "text" | "outlined" | "contained" // eslint-disable-line
 }
 
 export default function Logout({

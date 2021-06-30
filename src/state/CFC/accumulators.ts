@@ -78,7 +78,7 @@ export function calcCashFlowTotal(
 ): number {
 	if (isGSTValid(customGST)) {
 		const total = values.reduce(getKeyValue("amount"), []).reduce(sum(), 0)
-		return numOrZero(Math.floor(total - customGST!))
+		return numOrZero(Math.floor(total - customGST!))  // eslint-disable-line
 	}
 
 	return numOrZero(
