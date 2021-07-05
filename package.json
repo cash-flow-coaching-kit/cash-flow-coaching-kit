@@ -47,6 +47,7 @@
 		"react-app-polyfill": "^2.0.0",
 		"react-beautiful-dnd": "^13.0.0",
 		"react-dom": "^17.0.2",
+		"react-ga": "^3.3.0",
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "4.0.3",
 		"reactour": "^1.17.0",
@@ -58,8 +59,7 @@
 		"whatwg-fetch": "3.6.2",
 		"xlsx": "^0.17.0",
 		"xstate": "4.20.1",
-		"yarn": "1.22.10",
-		"react-ga": "^3.3.0"
+		"yarn": "1.22.10"
 	},
 	"scripts": {
 		"start:web": "react-scripts start",
