@@ -58,7 +58,8 @@
 		"whatwg-fetch": "3.6.2",
 		"xlsx": "^0.17.0",
 		"xstate": "4.20.1",
-		"yarn": "1.22.10"
+		"yarn": "1.22.10",
+		"react-ga": "^3.3.0"
 	},
 	"scripts": {
 		"start:web": "react-scripts start",
