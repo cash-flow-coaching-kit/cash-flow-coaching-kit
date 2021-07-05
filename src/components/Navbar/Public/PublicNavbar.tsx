@@ -32,14 +32,8 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 	const isWin = navigator.platform.indexOf("Win") > -1
 
 	const desktopDownload = (type: string) => {
-		const macLink = `https://,
-			${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL},
-			/mac/,
-			${uploadConfig.mac}`
-		const winLink = `https://,
-			${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL},
-			/win/,
-			${uploadConfig.win}`
+		const macLink = `https://${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL}/mac/${uploadConfig.mac}`
+		const winLink = `https://${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL}/win/${uploadConfig.win}`
 
 		return type === "mac" ? macLink : winLink
 	}
@@ -70,7 +64,7 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 										target="_blank"
 									>
 										<button
-											type="button"
+											type="submit"
 											onClick={triggerGATracking("mac")}
 											className="download-link"
 											title="Download free desktop application - available for Windows or Mac"
@@ -88,7 +82,7 @@ const PublicNavbar = ({ hasClients }: IPublicNavbarProps): ReactElement => {
 										target="_blank"
 									>
 										<button
-											type="button"
+											type="submit"
 											onClick={triggerGATracking("win")}
 											className="download-link"
 											title="Download free desktop application - available for Windows or Mac"
