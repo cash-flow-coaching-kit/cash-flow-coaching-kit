@@ -91,7 +91,7 @@ const DTFundingBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Tamakos-funding.docx"
+											href="/transcripts/Tamakos funding.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -112,7 +112,7 @@ const DTFundingBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Charlottes-loans.docx"
+											href="/transcripts/Charlottes loans.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>

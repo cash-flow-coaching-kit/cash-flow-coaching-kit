@@ -91,7 +91,7 @@ const DTManagingCashFlow = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Yularis-cash-flow.docx"
+											href="/transcripts/Yularis cash flow.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -112,7 +112,7 @@ const DTManagingCashFlow = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Camerons-cash-flow.docx"
+											href="/transcripts/Camerons cash flow.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>

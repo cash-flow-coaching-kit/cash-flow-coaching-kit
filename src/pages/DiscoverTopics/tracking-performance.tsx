@@ -95,7 +95,7 @@ const TrackingPerformance = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Tinas-hair-and-beauty.docx"
+											href="/transcripts/Tinas hair and beauty.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -116,7 +116,7 @@ const TrackingPerformance = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Anders-retirement-plan.docx"
+											href="/transcripts/Anders retirement plan.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>

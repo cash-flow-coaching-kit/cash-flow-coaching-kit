@@ -70,7 +70,7 @@ export default function CFC(): ReactElement {
 					<CardActions>
 						<Button
 							color="primary"
-							href="/transcripts/Cash Flow Canvas coaching tips.docx"
+							href="/transcripts/Cash Flow Canvas coaching tips.pdf"
 							aria-label="Download transcript: Cash Flow Canvas coaching tips"
 							target="_blank"
 							rel="noopener noreferrer"

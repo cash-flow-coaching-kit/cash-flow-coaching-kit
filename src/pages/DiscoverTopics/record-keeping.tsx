@@ -97,7 +97,7 @@ const DTRecordKeeping = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Edens-digital-records.docx"
+											href="/transcripts/Edens digital records.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -118,7 +118,7 @@ const DTRecordKeeping = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Lisas-paper-records.docx"
+											href="/transcripts/Lisas paper records.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>

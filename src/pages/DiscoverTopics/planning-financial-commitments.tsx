@@ -96,7 +96,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Micks-farm.docx"
+											href="/transcripts/Micks farm.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -117,7 +117,7 @@ const DTPlanningFinanicalCommitments = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Mings-disability-services.docx"
+											href="/transcripts/Mings disability services.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>

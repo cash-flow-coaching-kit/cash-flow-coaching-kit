@@ -94,7 +94,7 @@ const DTPlanningBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Kirras-native-foods.docx"
+											href="/transcripts/Kirras native foods.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -115,7 +115,7 @@ const DTPlanningBusiness = (): ReactElement => {
 									<CardActions>
 										<Button
 											color="primary"
-											href="/transcripts/Sanjanas-restaurant.docx"
+											href="/transcripts/Sanjanas restaurant.pdf"
 											target="_blank"
 											rel="noopener noreferrer"
 										>

@@ -66,7 +66,7 @@ export default function Coaching(): ReactElement {
 					<CardActions>
 						<Button
 							color="primary"
-							href="/transcripts/What-advisors-think-of-the-kit.docx"
+							href="/transcripts/What advisors think of the kit.pdf"
 							aria-label="Download transcript: What advisors think of the kit"
 							target="_blank"
 							rel="noopener noreferrer"

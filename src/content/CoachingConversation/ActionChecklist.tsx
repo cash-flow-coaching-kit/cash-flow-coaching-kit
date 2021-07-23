@@ -73,7 +73,7 @@ export default function ActionChecklist(): ReactElement {
 					<CardActions>
 						<Button
 							color="primary"
-							href="/transcripts/Action Checklist coaching tips.docx"
+							href="/transcripts/Action Checklist coaching tips.pdf"
 							aria-label="Download transcript: Action Checklist coaching tips"
 							target="_blank"
 							rel="noopener noreferrer"

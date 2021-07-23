@@ -234,27 +234,6 @@ const Homepage = (): ReactElement => {
 						<Grid item xs={12} md={6}>
 							<TakeATour />
 						</Grid>
-						{/* <Grid item xs={12} md={6}>
-							<Card variant="outlined">
-								<CardHeader title="Take a tour of the kit" />
-								<CardMedia
-									className={styles.embed}
-									component="iframe"
-									title="Take a tour of the kit"
-									src="https://www.youtube.com/embed/vSoCk1sgV3M?rel=0&modestbranding=1"
-								/>
-								<CardActions>
-									<Button
-										color="primary"
-										href="/transcripts/Take-a-tour-of-the-kit.docx"
-										aria-label="Download transcript: Take a tour of the kit"
-										target="_blank" rel="noopener noreferrer"
-									>
-										Download Transcript
-									</Button>
-								</CardActions>
-							</Card>
-						</Grid> */}
 						<Grid item xs={12} md={6}>
 							<Card variant="outlined">
 								<CardHeader title="What advisors think of the kit" />
@@ -267,7 +246,7 @@ const Homepage = (): ReactElement => {
 								<CardActions>
 									<Button
 										color="primary"
-										href="/transcripts/What-advisors-think-of-the-kit.docx"
+										href="/transcripts/What advisors think of the kit.pdf"
 										aria-label="Download transcript: What advisors think of the kit"
 										target="_blank"
 										rel="noopener noreferrer"
