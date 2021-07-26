@@ -442,7 +442,7 @@ const DTPlanningBusiness = (): ReactElement => {
 								size="large"
 								className={styles.button}
 								title="Licenses or permits you may require"
-								href="https://ablis.business.gov.au/pages/home.aspx"
+								href="https://ablis.business.gov.au/"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
