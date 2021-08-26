@@ -1,10 +1,4 @@
-import React, {
-	ReactElement,
-	useState,
-	useCallback,
-	useEffect,
-	useContext,
-} from "react"
+import React, { ReactElement, useState, useCallback, useEffect } from "react"
 import {
 	Grid,
 	Typography,
@@ -58,12 +52,17 @@ import ActionNotesUseCase from "../data/ActionChecklist/NotesLogic"
 import ActionChecklistPDF from "../components/PDF/ActionChecklistPDF"
 import CashFlowCanvasPDF from "../components/PDF/CashFlowCanvasPDF"
 import hasProperty from "../util/object/hasProperty"
-import { canvasDisplayTitle } from "../components/CFC/__config/utilities"
+import {
+	calcQuestionOne,
+	calcQuestionThree,
+	calcQuestionTwo,
+	canvasDisplayTitle,
+} from "../components/CFC/__config/utilities"
 import SnackbarMsg, {
 	SnackbarMsgData,
 } from "../components/SnackbarMsg/SnackbarMsg"
 import ActionPriorityUseCase from "../data/ActionChecklist/PriorityLogic"
-import CFCContext from "../state/CFC/context"
+import { calculateInitial } from "../components/Forms/CFC"
 
 const useSessionStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -98,8 +97,6 @@ const SessionFiles = (): ReactElement => {
 		open: false,
 		msg: "",
 	})
-
-	const { questionValues } = useContext(CFCContext)
 
 	function showSnackbar(
 		msg: SnackbarMsgData["msg"],
@@ -273,6 +270,25 @@ const SessionFiles = (): ReactElement => {
 									.replace(/ /g, "-")
 									.replace(/\//g, "-")
 							)
+
+							// build the question as we do not have the CFC provider
+
+							const calculated = calculateInitial(data)
+							const questionValues = {
+								one: calcQuestionOne(calculated),
+								two: calcQuestionTwo(
+									calculated,
+									data.paygWithholding,
+									data.superAmount,
+									calculated.incomeTaxPercentage
+								),
+								three: calcQuestionThree(
+									data.openingBalance,
+									calculated,
+									calculated.incomeTaxPercentage
+								),
+								four: undefined,
+							}
 
 							return CashFlowCanvasPDF(
 								currentClient?.name ?? "Client",
