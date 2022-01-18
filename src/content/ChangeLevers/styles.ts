@@ -13,7 +13,7 @@ const useChangeLeversStyles = makeStyles((theme) => ({
 		},
 	},
 	contentHeadings: {
-		fontWeight: theme.typography.fontWeightMedium,
+		fontWeight: 500,
 	},
 }))
 

@@ -29,7 +29,7 @@ const tooltipContent = [
 
 const useStyles = makeStyles((theme) => ({
 	valueText: {
-		fontWeight: theme.typography.fontWeightMedium,
+		fontWeight: 500,
 		marginTop: "4px",
 		display: "flex",
 		alignItems: "center",

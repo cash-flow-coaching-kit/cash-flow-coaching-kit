@@ -15,7 +15,7 @@ const useExpandableNavStyles = makeStyles((theme) => ({
 	subHeading: {
 		color: theme.palette.grey[700],
 		fontSize: theme.typography.caption.fontSize,
-		fontWeight: theme.typography.fontWeightRegular,
+		fontWeight: 400,
 		display: "block",
 	},
 }))

@@ -58,7 +58,7 @@
 		"uuid": "8.3.2",
 		"whatwg-fetch": "3.6.2",
 		"xlsx": "^0.17.0",
-		"xstate": "4.20.1",
+		"xstate": "^4.27.0",
 		"yarn": "1.22.10"
 	},
 	"scripts": {

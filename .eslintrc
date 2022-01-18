@@ -27,6 +27,7 @@
 		"fp"
 	],
 	"rules": {
+		"react/jsx-no-bind": "warn",
 		"no-irregular-whitespace": "warn",
 		"no-trailing-spaces": "warn",
 		"arrow-parens": ["error", "always"],

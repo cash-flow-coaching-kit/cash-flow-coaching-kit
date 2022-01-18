@@ -10,7 +10,7 @@ import Spacer from "../Spacer/Spacer"
 
 const useStyles = makeStyles((theme) => ({
 	label: {
-		fontWeight: theme.typography.fontWeightMedium,
+		fontWeight: 500,
 		fontSize: theme.typography.fontSize,
 		paddingBottom: "4px",
 	},
