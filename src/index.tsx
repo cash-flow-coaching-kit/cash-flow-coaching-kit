@@ -12,6 +12,7 @@ import "./theme/sass/style.scss"
 import App from "./App"
 import * as serviceWorker from "./serviceWorker"
 
+// Mount app
 ReactDOM.render(
 	<React.StrictMode>
 		<App />
