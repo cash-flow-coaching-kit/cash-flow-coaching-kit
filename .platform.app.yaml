@@ -44,16 +44,3 @@ web:
           expires: 4w
 
 disk: 1024
-# hooks:
-#   build: |
-#     set -e
-#     curl -sS https://platform.sh/cli/installer | php
-#     unset NPM_CONFIG_PREFIX
-#     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-#     export NVM_DIR="$PLATFORM_APP_DIR/.nvm"
-#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
-#     nvm install 14
-#     nvm use 14
-
-#     yarn
-#     yarn build
