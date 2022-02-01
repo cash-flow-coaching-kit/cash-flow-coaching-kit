@@ -35,6 +35,7 @@
 		"detect-browser": "5.2.0",
 		"dexie": "3.0.3",
 		"dexie-export-import": "^1.0.0-rc.2",
+		"dotenv": "^15.0.0",
 		"file-saver": "2.0.5",
 		"formik": "2.2.9",
 		"jszip": "^3.5.0",
