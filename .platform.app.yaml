@@ -4,7 +4,13 @@
 name: "app"
 
 # The type key specifies the language and version for your application.
-type: "nodejs:12"
+type: "nodejs:14"
+
+variables:
+  env:
+    # Update these for your desired NVM and Node versions.
+    NVM_VERSION: v0.36.0
+    NODE_VERSION: v14.13.1
 
 build:
   flavor: none
@@ -33,7 +39,21 @@ web:
       allow: true
       expires: 1m
       rules:
-        ? \.(css|js|gif|jpe?g|png|ttf|eot|woff2?|otf|cast|mp4|json|yaml|ico|svg?|cast|mp4|json|yaml|svg?|ttf)$
-        : expires: 4w
+        \.(css|js|gif|jpe?g|png|ttf|eot|woff2?|otf|cast|mp4|json|yaml|ico|svg?|cast|mp4|json|yaml|svg?|ttf)$:
+          expires: 4w
 
 disk: 1024
+
+hooks:
+  build: |
+    set -e
+    bash install-redis.sh 4.3.0
+    curl -sS https://platform.sh/cli/installer | php
+    unset NPM_CONFIG_PREFIX
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | dash
+    export NVM_DIR="$PLATFORM_APP_DIR/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
+    nvm install 14
+    nvm use 14
+    yarn
+    yarn build
