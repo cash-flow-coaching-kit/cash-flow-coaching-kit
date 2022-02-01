@@ -9,20 +9,21 @@ type: "nodejs:14"
 variables:
   env:
     # Update these for your desired NVM and Node versions.
-    NVM_VERSION: v0.36.0
-    NODE_VERSION: v14.13.1
+    NVM_VERSION: v0.39.1
+    NODE_VERSION: v14.17.6
 
 build:
   flavor: none
 
-# dependencies:
-#   nodejs:
-#     yarn: "*"
+dependencies:
+  nodejs:
+    yarn: "1.22.17"
 
-# hooks:
-#   build: |
-#     set -e
-#     yarn build
+hooks:
+  build: |
+    set -e
+    yarn
+    yarn build
 
 # The configuration of the application when it is exposed to the web.
 web:
@@ -43,16 +44,16 @@ web:
           expires: 4w
 
 disk: 1024
+# hooks:
+#   build: |
+#     set -e
+#     curl -sS https://platform.sh/cli/installer | php
+#     unset NPM_CONFIG_PREFIX
+#     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+#     export NVM_DIR="$PLATFORM_APP_DIR/.nvm"
+#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
+#     nvm install 14
+#     nvm use 14
 
-hooks:
-  build: |
-    set -e
-    curl -sS https://platform.sh/cli/installer | php
-    unset NPM_CONFIG_PREFIX
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | dash
-    export NVM_DIR="$PLATFORM_APP_DIR/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
-    nvm install 14
-    nvm use 14
-    yarn
-    yarn build
+#     yarn
+#     yarn build
