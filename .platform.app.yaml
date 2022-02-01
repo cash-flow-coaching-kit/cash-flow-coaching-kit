@@ -47,7 +47,6 @@ disk: 1024
 hooks:
   build: |
     set -e
-    bash install-redis.sh 4.3.0
     curl -sS https://platform.sh/cli/installer | php
     unset NPM_CONFIG_PREFIX
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | dash
