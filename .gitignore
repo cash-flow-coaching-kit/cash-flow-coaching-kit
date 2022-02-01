@@ -176,7 +176,7 @@ $RECYCLE.BIN/
 
 coverage/
 
-# build/
+build/
 
 .vercel
 /.husky
