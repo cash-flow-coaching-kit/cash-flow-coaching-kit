@@ -138,6 +138,7 @@ export default function CanvasForm({
 		useFormik<BaseCFCStruct>({
 			initialValues,
 			// Submit is not used for this form
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			onSubmit: (): void => {},
 		})
 	const [previousValues, setPreviousValues] = useState(initialValues)

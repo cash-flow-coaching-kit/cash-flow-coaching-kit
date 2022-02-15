@@ -7,9 +7,9 @@ import { getCanvasData } from "../__config/utilities"
 describe("Unit test for the getCanvasData function", () => {
   beforeEach(async () => {
     const items: CFCStruct[] = [
-      {...initialValues, clientId: 1},
-      {...initialValues, clientId: 1},
-      {...initialValues, clientId: 2}
+      {...initialValues, clientId: '1'},
+      {...initialValues, clientId: '1'},
+      {...initialValues, clientId: '2'}
     ]
 
     await CFCDB.canvases.clear()
@@ -22,7 +22,7 @@ describe("Unit test for the getCanvasData function", () => {
   })
 
   it("should be able to find all client data", async function() {
-    const data = await getCanvasData(1)
+    const data = await getCanvasData('1')
     expect(data).toHaveLength(2)
   })
 

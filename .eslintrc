@@ -1,11 +1,8 @@
 {
 	"root": true,
 	"extends": [
-		"airbnb-typescript",
 		"plugin:@typescript-eslint/recommended",
 		"prettier"
-		// "prettier/@typescript-eslint",
-		// "prettier/react"
 	],
 	"env": {
 		"browser": true,
@@ -20,14 +17,15 @@
 		"project": "./tsconfig.json"
 	},
 	"plugins": [
-		"@typescript-eslint/eslint-plugin",
-		"react",
-		"prettier",
+		// "@typescript-eslint/eslint-plugin",
+		// "react",
+		// "prettier",
+		"jsx-a11y",
 		"import",
 		"fp"
 	],
 	"rules": {
-		"react/jsx-no-bind": "warn",
+		"react/jsx-no-bind": "off",
 		"no-irregular-whitespace": "warn",
 		"no-trailing-spaces": "warn",
 		"arrow-parens": ["error", "always"],
@@ -40,34 +38,41 @@
 		"prefer-spread": "error",
 		"prefer-template": "error",
 		"no-console": "warn",
-		"prettier/prettier": "error",
+		//"prettier/prettier": "error",
 		"no-unused-vars": "off",
 		"@typescript-eslint/no-unused-vars": "warn",
+		"jsx-a11y/anchor-is-valid": "warn",
 		"valid-typeof": "off",
 		"@typescript-eslint/interface-name-prefix": [2, "always"],
 		"import/no-cycle": [0, "never"],
-		"import/no-unresolved": "error",
+		//"import/no-unresolved": "error",
+		
 		"@typescript-eslint/explicit-module-boundary-types": "off",
+		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/no-non-null-assertion": "off",
+		"@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+		"@typescript-eslint/no-empty-function": "warn",
 
 		// Functional programming errors
-		"fp/no-arguments": "error",
+		//"fp/no-arguments": "error",
 		"fp/no-class": "off",
-		"fp/no-delete": "error",
-		"fp/no-events": "error",
-		"fp/no-get-set": "error",
-		"fp/no-let": "error",
-		"fp/no-loops": "error",
-		"fp/no-mutating-assign": "error",
-		"fp/no-mutating-methods": "error",
-		"fp/no-mutation": "error",
+		// "fp/no-delete": "error",
+		// "fp/no-events": "error",
+		// "fp/no-get-set": "error",
+		// "fp/no-let": "error",
+		// "fp/no-loops": "error",
+		// "fp/no-mutating-assign": "error",
+		// "fp/no-mutating-methods": "error",
+		"fp/no-mutation": "off",
 		"fp/no-nil": "off",
-		"fp/no-proxy": "error",
-		"fp/no-rest-parameters": "error",
+		//"fp/no-proxy": "error",
+		// "fp/no-rest-parameters": "error",
 		"fp/no-this": "off",
-		"fp/no-throw": "error",
+		//"fp/no-throw": "error",
 		"fp/no-unused-expression": "off",
-		"fp/no-valueof-field": "error",
-		"no-var": "error"
+		"import/prefer-default-export": "off"
+		// "fp/no-valueof-field": "error",
+		// "no-var": "error"
 	},
 	"settings": {
 		"import/parsers": {

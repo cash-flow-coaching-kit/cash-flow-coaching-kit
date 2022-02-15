@@ -8,7 +8,7 @@ export type ReadFilePromiseResult = Promise<
  * @param {Blob} blob
  * @returns {Promise<any>}
  */
-export default function readFile(blob: Blob): ReadFilePromiseResult {
+export default function readFile(blob: Blob | undefined): ReadFilePromiseResult {
 	return new Promise((resolve, reject) => {
 		if (!blob) {
 			reject(new Error("Reading a file requires a valid file to be passed"))
@@ -23,6 +23,9 @@ export default function readFile(blob: Blob): ReadFilePromiseResult {
 		fr.onloadend = () => {
 			resolve(fr.result)
 		}
-		fr.readAsText(blob)
+
+		if(blob){
+			fr.readAsText(blob)
+		}
 	})
 }
