@@ -10,17 +10,14 @@ import { createMachine } from "xstate"
 
 type Context = Record<string, unknown>;
 
-// type States = {
-// 	value: "loading" | "success" | "failure";
-// 	context: Context;
-// };
-type Typestate =
-| { value: "type"; context: Context }
-| { value: "success"; context: Context }
-| { value: "failure"; context: Context };
+type States = {
+	value: "loading" | "success" | "failure";
+	context: Context;
+};
+
 type Events = { type: "RESOLVE" } | { type: "REJECT" } | { type: "RETRY" }
 
-const fetchMachine = createMachine<Context, Events, Typestate>({
+const fetchMachine = createMachine<Context, Events, States>({
 	id: "fetch",
 	initial: "loading",
 	states: {
