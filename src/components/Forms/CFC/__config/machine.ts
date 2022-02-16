@@ -8,12 +8,12 @@ import { createMachine } from "xstate"
 // 	}
 // }
 
-type Context = Record<string, unknown>;
+type Context = Record<string, unknown>
 
 type States = {
-	value: "loading" | "success" | "failure";
-	context: Context;
-};
+	value: "loading" | "success" | "failure"
+	context: Context
+}
 
 type Events = { type: "RESOLVE" } | { type: "REJECT" } | { type: "RETRY" }
 
