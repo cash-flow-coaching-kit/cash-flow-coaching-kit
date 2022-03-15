@@ -5,7 +5,7 @@ import { ClientId, CFCStruct } from "../../_config/shape"
 import { initialValues } from "../../../components/Forms/CFC"
 
 describe("Unit tests for CFC database", () => {
-  const clientId: ClientId = 1
+  const clientId: ClientId = '1'
   const item = {...initialValues, clientId}
 
   beforeEach(async () => {

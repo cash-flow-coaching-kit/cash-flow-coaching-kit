@@ -1,15 +1,23 @@
-import { Machine } from "xstate"
+import { createMachine } from "xstate"
 
-interface Schema {
-	states: {
-		loading: Record<string, unknown>
-		success: Record<string, unknown>
-		failure: Record<string, unknown>
-	}
+// interface Schema {
+// 	states: {
+// 		loading: Record<string, unknown>
+// 		success: Record<string, unknown>
+// 		failure: Record<string, unknown>
+// 	}
+// }
+
+type Context = Record<string, unknown>
+
+type States = {
+	value: "loading" | "success" | "failure"
+	context: Context
 }
+
 type Events = { type: "RESOLVE" } | { type: "REJECT" } | { type: "RETRY" }
 
-const fetchMachine = Machine<null, Schema, Events>({
+const fetchMachine = createMachine<Context, Events, States>({
 	id: "fetch",
 	initial: "loading",
 	states: {

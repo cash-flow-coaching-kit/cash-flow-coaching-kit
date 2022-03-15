@@ -8,7 +8,7 @@ describe("Unit tests for calculated values", function() {
 
   beforeEach(() => {
     cashFlowItem = {
-      id: 1,
+      id: '1',
       amount: 100,
       description: "",
       gstApplicable: true
