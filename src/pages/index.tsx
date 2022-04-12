@@ -1,5 +1,7 @@
 import React, { ReactElement, useContext } from "react"
 import { Link as RouterLink } from "react-router-dom"
+import ReactGA from "react-ga"
+
 import {
 	Typography,
 	Container,
@@ -18,8 +20,7 @@ import { PublicNavbar } from "../components/Navbar"
 import { NewClientDialog } from "../content/dialog"
 import { ClientContext } from "../state/client"
 import Spacer from "../components/Spacer"
-import ImportClient from "../components/ClientListing/_partials/ImportClient"
-import TakeATour from "../components/TakeATour"
+import handleOpen from "../components/TakeATour"
 
 const useHomepageStyles = makeStyles((theme) => ({
 	container: {
@@ -32,7 +33,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 	buttonBox: {
 		marginTop: theme.spacing(5),
 		display: "flex",
-		justifyContent: "center",
+		justifyContent: "left",
 		"& .MuiButton-root + .MuiButton-root": {
 			marginLeft: theme.spacing(1),
 		},
@@ -42,7 +43,8 @@ const useHomepageStyles = makeStyles((theme) => ({
 		border: "none",
 	},
 	containerIndigo: {
-		backgroundColor: "#e8eaf6", // indigo50
+		backgroundColor: "#5C5C5C", // indigo50
+		color: "white",
 		padding: theme.spacing(5),
 		marginTop: theme.spacing(8),
 	},
@@ -51,22 +53,55 @@ const useHomepageStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2),
 		marginTop: theme.spacing(3),
 	},
+	containerGreyHeight: {
+		backgroundColor: "#f5f5f5",
+		padding: theme.spacing(2),
+		marginTop: theme.spacing(3),
+		height: "600px",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		alignContent: "center",
+	},
 	contentText: {
 		margin: theme.spacing(2, 0),
 		width: "100%",
+	},
+	footerText: {
+		margin: theme.spacing(2, 0),
+		width: "50%",
 	},
 	aboutText: {
 		textAlign: "center",
 		marginBottom: 24,
 	},
+	splitCont: {
+		width: "55%",
+		float: "right",
+		height: "auto",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-center",
+	},
+
+	splitContLeft: {
+		width: "45%",
+		float: "left",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "right",
+
+		alignContent: "right",
+	},
 	alignJustifyContent: {
 		display: "flex",
 		flexDirection: "column",
-		flexWrap: "nowrap",
-		justifyContent: "center",
+		flexWrap: "wrap",
+		justifyContent: "flex-end",
 		alignItems: "center",
 		alignContent: "center",
-		margin: theme.spacing(2, 0),
+		margin: theme.spacing(2, 1),
 	},
 	purple: {
 		color: theme.palette.getContrastText("#9c27b0"),
@@ -110,6 +145,24 @@ const Homepage = (): ReactElement => {
 	const styles = useHomepageStyles()
 
 	const hasClients = (): boolean => clients.length > 0
+	const triggerGATracking = (type: string) => () => {
+		ReactGA.event({
+			category: `Download Desktop ( , ${type}  )`,
+			action: `User downloaded desktop app for - ,${type}`,
+			label: "Download desktop app",
+		})
+	}
+
+	const uploadConfig = {
+		mac: "Cash Flow Coaching Kit.dmg",
+		win: "Cash Flow Coaching Kit.exe",
+	}
+	const desktopDownload = (type: string) => {
+		const macLink = `https://${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL}/mac/${uploadConfig.mac}`
+		const winLink = `https://${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL}/win/${uploadConfig.win}`
+
+		return type === "mac" ? macLink : winLink
+	}
 
 	return (
 		<>
@@ -117,122 +170,176 @@ const Homepage = (): ReactElement => {
 			<Box role="main">
 				<Container className={styles.container}>
 					<Typography
-						align="center"
+						align="left"
 						component="h1"
 						className={styles.MainHeading}
 					>
-						Cash Flow Coaching Kit
+						Help buisiness understand <br></br> their business
 					</Typography>
-					<Typography align="center" component="p" variant="h5">
-						Understand and improve small business cash flow
-					</Typography>
+					<div className="w-[50%]">
+						<Typography align="left" component="p" variant="h5">
+							Help small businesses build cash flow capability, meet financial
+							<br></br>
+							commitments and remain viable with this simple, free toolkit
+						</Typography>
+					</div>
+					<Button
+						type="submit"
+						variant="contained"
+						onClick={handleOpen}
+						size="medium"
+						color="primary"
+						title="Download free desktop application - available for Windows or Mac"
+					>
+						Take a tour
+					</Button>
 				</Container>
 				<Container
 					maxWidth={false}
 					component="div"
-					className={styles.containerGrey}
+					className={styles.containerGreyHeight}
 				>
 					<Container component="div" maxWidth="lg">
-						<Grid container spacing={3}>
-							<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
-								<Avatar className={styles.purple}>1</Avatar>
-								<Typography
-									component="h2"
-									variant="h5"
-									className={styles.SectionTitle}
-								>
-									Discover
-								</Typography>
+						<div className={styles.containerGrey}>
+							<div className={styles.splitContLeft}>
+								<h2 className={styles.SectionTitle}>
+									Turn cash flow theory into <br></br>practical solutions
+								</h2>
 								<Typography
 									variant="body1"
 									component="p"
 									className={styles.contentText}
-									align="center"
+									align="left"
 								>
-									Learn about cash flow management.
+									The Cash Flow Coaching Kit turns cash flow theory into
+									practical solutions by identifying cash flow success factors
+									and focuses on 4 key questions for small businesses
 								</Typography>
-							</Grid>
-							<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
-								<Avatar className={styles.green}>2</Avatar>
-								<Typography
-									component="h2"
-									variant="h5"
-									className={styles.SectionTitle}
-								>
-									Apply
-								</Typography>
-								<Typography
-									variant="body1"
-									component="p"
-									className={styles.contentText}
-									align="center"
-								>
-									Understand your current cash flow and plan improvements.
-								</Typography>
-							</Grid>
-							<Grid item xs={12} sm={4} className={styles.alignJustifyContent}>
-								<Avatar className={styles.blue}>3</Avatar>
-								<Typography
-									component="h2"
-									variant="h5"
-									className={styles.SectionTitle}
-								>
-									Plan &amp; Action
-								</Typography>
-								<Typography
-									variant="body1"
-									component="p"
-									className={styles.contentText}
-									align="center"
-								>
-									Create an Action Checklist and track your progress.
-								</Typography>
-							</Grid>
-						</Grid>
+								<Box className={styles.buttonBox}>
+									{hasClients() ? (
+										<Button
+											color="primary"
+											variant="contained"
+											component={RouterLink}
+											to={PrivateRoutes.ClientList}
+											size="medium"
+										>
+											Get Started
+										</Button>
+									) : (
+										<NewClientDialog triggerText="Get Started" />
+									)}
+									<form
+										method="get"
+										action={desktopDownload("mac")}
+										target="_blank"
+									>
+										<Button
+											type="submit"
+											variant="contained"
+											onClick={triggerGATracking("mac")}
+											size="medium"
+											title="Download free desktop application - available for Windows or Mac"
+										>
+											Download free desktop app
+										</Button>
+									</form>
+								</Box>
+							</div>
+							<div className={styles.splitCont}>
+								<Grid container spacing={4}>
+									<Grid
+										item
+										xs={10}
+										sm={4}
+										className={styles.alignJustifyContent}
+									>
+										<Avatar className={styles.purple}>1</Avatar>
+
+										<Typography
+											variant="h6"
+											component="h3"
+											className={styles.contentText}
+											align="center"
+										>
+											Are you trading profitably?
+										</Typography>
+									</Grid>
+									<Grid
+										item
+										xs={12}
+										sm={4}
+										className={styles.alignJustifyContent}
+									>
+										<Avatar className={styles.green}>2</Avatar>
+
+										<Typography
+											variant="h6"
+											component="h3"
+											className={styles.contentText}
+											align="center"
+										>
+											Can you meet your regular financial commitments?{" "}
+										</Typography>
+									</Grid>
+									<Grid
+										item
+										xs={12}
+										sm={4}
+										className={styles.alignJustifyContent}
+									>
+										<Avatar className={styles.blue}>3</Avatar>
+
+										<Typography
+											variant="h6"
+											component="h3"
+											className={styles.contentText}
+											align="center"
+										>
+											3 Does you have enough to spend on yourself and others?{" "}
+										</Typography>
+									</Grid>
+									<Grid
+										item
+										xs={12}
+										sm={4}
+										className={styles.alignJustifyContent}
+									>
+										<Avatar className={styles.blue}>4</Avatar>
+
+										<Typography
+											variant="h6"
+											component="h3"
+											className={styles.contentText}
+											align="center"
+										>
+											Are you improving your financial position year-on-year?{" "}
+										</Typography>
+									</Grid>
+								</Grid>
+							</div>
+						</div>
 					</Container>
 				</Container>
 				<Spacer space={5} />
 				<Container>
 					<Grid container spacing={3}>
-						<Grid item xs={12} sm={12}>
-							<Typography className={styles.aboutText}>
-								The Cash Flow Coaching Kit is a coaching resource for tax
-								professionals and business advisors to help their small business
-								clients manage their cash flow.
-							</Typography>
-							<Typography className={styles.aboutText}>
-								Small businesses are encouraged to seek the assistance of a
-								trusted advisor about ways to better manage cash flow and use
-								the Cash Flow Coaching Kit.
-							</Typography>
-							<Typography className={styles.aboutText}>
-								GET STARTED to add a new client
-							</Typography>
-							<Typography className={styles.aboutText}>
-								IMPORT DATA to view data from a previous session
-							</Typography>
-						</Grid>
-					</Grid>
-					<Spacer space={5} />
-					<Box className={styles.buttonBox}>
-						{hasClients() ? (
-							<Button
-								color="primary"
-								variant="contained"
-								component={RouterLink}
-								to={PrivateRoutes.ClientList}
-								size="large"
+						<Grid item xs={12} sm={4}>
+							<h2 className={styles.SectionTitle}>
+								Join thousands of advisors helping their clients’ businesses
+								succeed
+							</h2>
+
+							<Typography
+								variant="body1"
+								component="p"
+								className={styles.contentText}
+								align="left"
 							>
-								Get Started
-							</Button>
-						) : (
-							<NewClientDialog triggerText="Get Started" />
-						)}
-						<ImportClient />
-					</Box>
-					<Grid container spacing={3} className={styles.grid}>
-						<Grid item xs={12} md={6}>
-							<TakeATour />
+								Tax professionals, business advisors and financial counsellors
+								across the country are using the free Cash Flow Coaching kit to
+								help small businesses improve the viability of their business.
+							</Typography>
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<Card variant="outlined">
@@ -257,6 +364,7 @@ const Homepage = (): ReactElement => {
 							</Card>
 						</Grid>
 					</Grid>
+					<Spacer space={5} />
 				</Container>
 				<Container
 					component="div"
@@ -264,11 +372,12 @@ const Homepage = (): ReactElement => {
 					maxWidth={false}
 				>
 					<Container maxWidth="lg">
+						<h2>We value your privacy</h2>
 						<Typography
 							variant="body2"
 							component="p"
-							className={styles.contentText}
-							align="center"
+							className={styles.footerText}
+							align="left"
 						>
 							This website does not collect or store any personal information,
 							including the name of your business, any financial records you
@@ -278,8 +387,8 @@ const Homepage = (): ReactElement => {
 						<Typography
 							variant="body2"
 							component="p"
-							className={styles.contentText}
-							align="center"
+							className={styles.footerText}
+							align="left"
 						>
 							The data you enter into the Cash Flow Coaching Kit will be stored
 							on this device only. Exiting or clearing your browser cache will
@@ -288,8 +397,8 @@ const Homepage = (): ReactElement => {
 						<Typography
 							variant="body2"
 							component="p"
-							className={styles.contentText}
-							align="center"
+							className={styles.footerText}
+							align="left"
 						>
 							We recommend regularly using the EXPORT DATA function from the
 							Client List to avoid data loss. Please refer to the{" "}
