@@ -46,7 +46,6 @@ const useHomepageStyles = makeStyles((theme) => ({
 		backgroundColor: "#5C5C5C", // indigo50
 		color: "white",
 		padding: theme.spacing(5),
-		marginTop: theme.spacing(8),
 	},
 	containerGrey: {
 		backgroundColor: "#f5f5f5",
@@ -365,6 +364,103 @@ const Homepage = (): ReactElement => {
 						</Grid>
 					</Grid>
 					<Spacer space={5} />
+				</Container>
+				<Container
+					maxWidth={false}
+					component="div"
+					className={styles.containerGreyHeight}
+				>
+					<Container maxWidth="lg">
+						<div className={styles.containerGrey}>
+							<Grid container spacing={2}>
+								<Grid
+									item
+									xs={10}
+									sm={3}
+									className={styles.alignJustifyContent}
+								>
+									<Avatar className={styles.green}>2</Avatar>
+
+									<Typography
+										variant="h6"
+										component="h3"
+										className={styles.contentText}
+										align="center"
+									>
+										Can you meet your regular financial commitments?{" "}
+									</Typography>
+								</Grid>
+								<Grid
+									item
+									xs={10}
+									sm={3}
+									className={styles.alignJustifyContent}
+								>
+									<Avatar className={styles.green}>2</Avatar>
+
+									<Typography
+										variant="h6"
+										component="h3"
+										className={styles.contentText}
+										align="center"
+									>
+										Can you meet your regular financial commitments?{" "}
+									</Typography>
+								</Grid>
+								<Grid
+									item
+									xs={10}
+									sm={3}
+									className={styles.alignJustifyContent}
+								>
+									<Avatar className={styles.green}>2</Avatar>
+
+									<Typography
+										variant="h6"
+										component="h3"
+										className={styles.contentText}
+										align="center"
+									>
+										Can you meet your regular financial commitments?{" "}
+									</Typography>
+								</Grid>
+								<Grid
+									item
+									xs={10}
+									sm={3}
+									className={styles.alignJustifyContent}
+								>
+									<Avatar className={styles.green}>2</Avatar>
+
+									<Typography
+										variant="h6"
+										component="h3"
+										className={styles.contentText}
+										align="center"
+									>
+										Can you meet your regular financial commitments?{" "}
+									</Typography>
+								</Grid>
+								<Grid
+									item
+									xs={10}
+									sm={3}
+									className={styles.alignJustifyContent}
+								>
+									<Avatar className={styles.green}>2</Avatar>
+
+									<Typography
+										variant="h6"
+										component="h3"
+										className={styles.contentText}
+										align="center"
+									>
+										Can you meet your regular financial commitments?{" "}
+									</Typography>
+								</Grid>
+							</Grid>
+						</div>
+					</Container>
 				</Container>
 				<Container
 					component="div"
