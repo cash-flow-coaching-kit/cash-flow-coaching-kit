@@ -63,6 +63,7 @@ export default function TakeATour(): ReactElement {
 		<>
 			{/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
 			<TourCard onClick={handleOpen} />
+
 			{/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
 			<TourDialog onClose={handleClose} open={open} />
 		</>
@@ -205,7 +206,9 @@ const TourCard = ({ onClick }: { onClick: () => void }): ReactElement => {
 					</Typography>
 				</CardContent>
 				<CardActions>
-					<Button color="primary">Take a tour</Button>
+					<div className="brookesButton">
+						<Button color="primary">Take a tour</Button>
+					</div>
 				</CardActions>
 			</CardActionArea>
 		</Card>

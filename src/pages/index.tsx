@@ -20,7 +20,6 @@ import { PublicNavbar } from "../components/Navbar"
 import { NewClientDialog } from "../content/dialog"
 import { ClientContext } from "../state/client"
 import Spacer from "../components/Spacer"
-import handleOpen from "../components/TakeATour"
 
 const useHomepageStyles = makeStyles((theme) => ({
 	container: {
@@ -182,16 +181,7 @@ const Homepage = (): ReactElement => {
 							commitments and remain viable with this simple, free toolkit
 						</Typography>
 					</div>
-					<Button
-						type="submit"
-						variant="contained"
-						onClick={handleOpen}
-						size="medium"
-						color="primary"
-						title="Download free desktop application - available for Windows or Mac"
-					>
-						Take a tour
-					</Button>
+					<CardActions />
 				</Container>
 				<Container
 					maxWidth={false}
