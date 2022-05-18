@@ -151,15 +151,16 @@ const useHomepageStyles = makeStyles((theme) => ({
 		paddingTop: theme.spacing(2),
 		paddingBottom: theme.spacing(1),
 		fontSize: "2.2rem",
-		fontWeight: "bold",
 	},
 	SectionTitle: {
 		paddingTop: theme.spacing(1),
-		fontSize: "1.8rem",
+		fontSize: "34px",
+		fontFamily: "Roboto, Helvetica",
 	},
 	SectionTitleSecond: {
 		paddingTop: theme.spacing(1),
-		fontSize: "1.8rem",
+		fontSize: "34px",
+		fontFamily: "Roboto, Helvetica",
 		textAlign: "center",
 	},
 	testing: {
@@ -276,8 +277,8 @@ const Homepage = (): ReactElement => {
 										<Avatar className={styles.purple}>1</Avatar>
 
 										<Typography
-											variant="h6"
-											component="h3"
+											variant="body1"
+											component="p"
 											className={styles.contentText}
 											align="center"
 										>
@@ -293,8 +294,8 @@ const Homepage = (): ReactElement => {
 										<Avatar className={styles.green}>2</Avatar>
 
 										<Typography
-											variant="h6"
-											component="h3"
+											variant="body1"
+											component="p"
 											className={styles.contentText}
 											align="center"
 										>
@@ -311,8 +312,8 @@ const Homepage = (): ReactElement => {
 										<Avatar className={styles.blue}>3</Avatar>
 
 										<Typography
-											variant="h6"
-											component="h3"
+											variant="body1"
+											component="p"
 											className={styles.contentText}
 											align="center"
 										>
@@ -329,8 +330,8 @@ const Homepage = (): ReactElement => {
 										<Avatar className={styles.red}>4</Avatar>
 
 										<Typography
-											variant="h6"
-											component="h3"
+											variant="body1"
+											component="p"
 											className={styles.contentText}
 											align="center"
 										>
