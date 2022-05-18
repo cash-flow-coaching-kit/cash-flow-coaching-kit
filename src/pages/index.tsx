@@ -157,6 +157,11 @@ const useHomepageStyles = makeStyles((theme) => ({
 		paddingTop: theme.spacing(1),
 		fontSize: "1.8rem",
 	},
+	SectionTitleSecond: {
+		paddingTop: theme.spacing(1),
+		fontSize: "1.8rem",
+		textAlign: "center",
+	},
 	testing: {
 		display: "flex",
 		flexWrap: "wrap",
@@ -390,7 +395,9 @@ const Homepage = (): ReactElement => {
 				>
 					<div className={styles.padding}>
 						<Container maxWidth="lg">
-							<h2 className={styles.SectionTitle}>See how the tools work</h2>
+							<h2 className={styles.SectionTitleSecond}>
+								See how the tools work
+							</h2>
 							<div className={styles.testing}>
 								<div className={styles.gridWrap}>
 									<Grid item>
