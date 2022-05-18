@@ -127,3 +127,15 @@ code {
 		background-color: rgb(44, 56, 126);
 	}
 }
+
+#footerID {
+	@media only screen and (max-width: 800px) {		
+		width: 100%;
+	}
+}
+
+#floatFull {
+	@media only screen and (max-width: 800px) {		
+		width: 100%;
+	}
+}

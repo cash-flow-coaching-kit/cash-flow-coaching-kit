@@ -69,7 +69,6 @@ const useHomepageStyles = makeStyles((theme) => ({
 		backgroundColor: "#f5f5f5",
 		padding: theme.spacing(2),
 		marginTop: theme.spacing(3),
-		height: "600px",
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
@@ -182,24 +181,6 @@ const Homepage = (): ReactElement => {
 	const styles = useHomepageStyles()
 
 	const hasClients = (): boolean => clients.length > 0
-	// const triggerGATracking = (type: string) => () => {
-	// 	ReactGA.event({
-	// 		category: `Download Desktop ( , ${type}  )`,
-	// 		action: `User downloaded desktop app for - ,${type}`,
-	// 		label: "Download desktop app",
-	// 	})
-	// }
-
-	// const uploadConfig = {
-	// 	mac: "Cash Flow Coaching Kit.dmg",
-	// 	win: "Cash Flow Coaching Kit.exe",
-	// }
-	// const desktopDownload = (type: string) => {
-	// 	const macLink = `https://${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL}/mac/${uploadConfig.mac}`
-	// 	const winLink = `https://${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL}/win/${uploadConfig.win}`
-
-	// 	return type === "mac" ? macLink : winLink
-	// }
 
 	return (
 		<>
@@ -213,7 +194,7 @@ const Homepage = (): ReactElement => {
 					>
 						Help businesses improve <br></br>their cash flow
 					</Typography>
-					<div className="w-[50%]">
+					<div className="w-[40%]">
 						<Typography align="left" component="p" variant="h5">
 							Help small businesses build cash flow capability, meet their
 							<br></br>
@@ -225,7 +206,9 @@ const Homepage = (): ReactElement => {
 							better manage cash flow in your business.
 						</Typography>
 					</div>
-					<TakeATourButton />
+					<div className="w-[25%]">
+						<TakeATourButton />
+					</div>
 					<CardActions />
 				</Container>
 				<Container
@@ -234,8 +217,8 @@ const Homepage = (): ReactElement => {
 					className={styles.containerGreyHeight}
 				>
 					<Container component="div" maxWidth="lg">
-						<div className={styles.containerGrey}>
-							<div className={styles.splitContLeft}>
+						<div className={styles.testing}>
+							<div className={styles.splitContLeft} id="floatFull">
 								<h2 className={styles.SectionTitle}>
 									Turn cash flow theory into <br></br>practical solutions
 								</h2>
@@ -551,6 +534,7 @@ const Homepage = (): ReactElement => {
 							component="p"
 							className={styles.footerText}
 							align="left"
+							id="footerID"
 						>
 							This website does not collect or store any personal information,
 							including the name of your business, any financial records, or any
@@ -563,6 +547,7 @@ const Homepage = (): ReactElement => {
 							component="p"
 							className={styles.footerText}
 							align="left"
+							id="footerID"
 						>
 							The data you enter the Kit will be stored on this device only.
 							Exiting or clearing your browser cache will erase all unsaved
@@ -574,6 +559,7 @@ const Homepage = (): ReactElement => {
 							component="p"
 							className={styles.footerText}
 							align="left"
+							id="footerID"
 						>
 							Please refer to the
 							<a
