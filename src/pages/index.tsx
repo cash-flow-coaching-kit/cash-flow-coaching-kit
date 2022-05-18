@@ -1,7 +1,8 @@
 import React, { ReactElement, useContext } from "react"
 import { Link as RouterLink } from "react-router-dom"
-import ReactGA from "react-ga"
-
+// import ReactGA from "react-ga"
+import ImportClient from "../components/ClientListing/_partials/ImportClient"
+import TakeATourButton from "../components/TakeATour/TakeATourButton"
 import {
 	Typography,
 	Container,
@@ -10,6 +11,7 @@ import {
 	Card,
 	CardMedia,
 	CardActions,
+	CardContent,
 	Box,
 	CardHeader,
 	Avatar,
@@ -29,6 +31,11 @@ const useHomepageStyles = makeStyles((theme) => ({
 	grid: {
 		marginTop: theme.spacing(8),
 	},
+	gridWrap: {
+		width: "320px",
+		marginTop: "30px",
+		marginBottom: "10px",
+	},
 	buttonBox: {
 		marginTop: theme.spacing(5),
 		display: "flex",
@@ -41,10 +48,17 @@ const useHomepageStyles = makeStyles((theme) => ({
 		minHeight: "300px",
 		border: "none",
 	},
+	cardActions: {
+		justifyContent: "flex-end",
+	},
 	containerIndigo: {
 		backgroundColor: "#5C5C5C", // indigo50
 		color: "white",
 		padding: theme.spacing(5),
+	},
+	padding: {
+		paddingTop: "60px",
+		paddingBottom: "60px",
 	},
 	containerGrey: {
 		backgroundColor: "#f5f5f5",
@@ -96,7 +110,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "column",
 		flexWrap: "wrap",
-		justifyContent: "flex-end",
+		justifyContent: "flex-start",
 		alignItems: "center",
 		alignContent: "center",
 		margin: theme.spacing(2, 1),
@@ -125,14 +139,33 @@ const useHomepageStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(2),
 		fontSize: "1.8rem",
 	},
+	red: {
+		color: theme.palette.getContrastText("#c74f23"),
+		backgroundColor: "#c74f23",
+		width: theme.spacing(7),
+		height: theme.spacing(7),
+		marginTop: theme.spacing(2),
+		fontSize: "1.8rem",
+	},
 	MainHeading: {
 		paddingTop: theme.spacing(2),
 		paddingBottom: theme.spacing(1),
 		fontSize: "2.2rem",
+		fontWeight: "bold",
 	},
 	SectionTitle: {
 		paddingTop: theme.spacing(1),
 		fontSize: "1.8rem",
+	},
+	testing: {
+		display: "flex",
+		flexWrap: "wrap",
+		justifyContent: "space-around",
+	},
+	testing2: {
+		display: "flex",
+		flexWrap: "wrap",
+		justifyContent: "space-between",
 	},
 }))
 
@@ -143,44 +176,50 @@ const Homepage = (): ReactElement => {
 	const styles = useHomepageStyles()
 
 	const hasClients = (): boolean => clients.length > 0
-	const triggerGATracking = (type: string) => () => {
-		ReactGA.event({
-			category: `Download Desktop ( , ${type}  )`,
-			action: `User downloaded desktop app for - ,${type}`,
-			label: "Download desktop app",
-		})
-	}
+	// const triggerGATracking = (type: string) => () => {
+	// 	ReactGA.event({
+	// 		category: `Download Desktop ( , ${type}  )`,
+	// 		action: `User downloaded desktop app for - ,${type}`,
+	// 		label: "Download desktop app",
+	// 	})
+	// }
 
-	const uploadConfig = {
-		mac: "Cash Flow Coaching Kit.dmg",
-		win: "Cash Flow Coaching Kit.exe",
-	}
-	const desktopDownload = (type: string) => {
-		const macLink = `https://${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL}/mac/${uploadConfig.mac}`
-		const winLink = `https://${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL}/win/${uploadConfig.win}`
+	// const uploadConfig = {
+	// 	mac: "Cash Flow Coaching Kit.dmg",
+	// 	win: "Cash Flow Coaching Kit.exe",
+	// }
+	// const desktopDownload = (type: string) => {
+	// 	const macLink = `https://${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL}/mac/${uploadConfig.mac}`
+	// 	const winLink = `https://${process.env.REACT_APP_AWS_CONTENT_DELIVERY_URL}/win/${uploadConfig.win}`
 
-		return type === "mac" ? macLink : winLink
-	}
+	// 	return type === "mac" ? macLink : winLink
+	// }
 
 	return (
 		<>
 			<PublicNavbar hasClients={hasClients()} />
 			<Box role="main">
-				<Container className={styles.container}>
+				<Container maxWidth="lg" className={styles.container}>
 					<Typography
 						align="left"
 						component="h1"
 						className={styles.MainHeading}
 					>
-						Help buisiness understand <br></br> their business
+						Help businesses improve <br></br>their cash flow
 					</Typography>
 					<div className="w-[50%]">
 						<Typography align="left" component="p" variant="h5">
-							Help small businesses build cash flow capability, meet financial
+							Help small businesses build cash flow capability, meet their
 							<br></br>
-							commitments and remain viable with this simple, free toolkit
+							financial commitments and take action to thrive with this<br></br>
+							practical toolkit.
+							<br></br>
+							Ask your trusted adviser about the Cash Flow Coaching Kit to
+							<br></br>
+							better manage cash flow in your business.
 						</Typography>
 					</div>
+					<TakeATourButton />
 					<CardActions />
 				</Container>
 				<Container
@@ -200,9 +239,9 @@ const Homepage = (): ReactElement => {
 									className={styles.contentText}
 									align="left"
 								>
-									The Cash Flow Coaching Kit turns cash flow theory into
-									practical solutions by identifying cash flow success factors
-									and focuses on 4 key questions for small businesses
+									Use the Cash Flow Coaching Kit to help small businesses
+									recognise <br></br>the cash flow success factors and focus on
+									four key questions:
 								</Typography>
 								<Box className={styles.buttonBox}>
 									{hasClients() ? (
@@ -211,32 +250,18 @@ const Homepage = (): ReactElement => {
 											variant="contained"
 											component={RouterLink}
 											to={PrivateRoutes.ClientList}
-											size="medium"
+											size="large"
 										>
 											Get Started
 										</Button>
 									) : (
 										<NewClientDialog triggerText="Get Started" />
 									)}
-									<form
-										method="get"
-										action={desktopDownload("mac")}
-										target="_blank"
-									>
-										<Button
-											type="submit"
-											variant="contained"
-											onClick={triggerGATracking("mac")}
-											size="medium"
-											title="Download free desktop application - available for Windows or Mac"
-										>
-											Download free desktop app
-										</Button>
-									</form>
+									<ImportClient />
 								</Box>
 							</div>
 							<div className={styles.splitCont}>
-								<Grid container spacing={4}>
+								<div className={styles.testing}>
 									<Grid
 										item
 										xs={10}
@@ -268,7 +293,8 @@ const Homepage = (): ReactElement => {
 											className={styles.contentText}
 											align="center"
 										>
-											Can you meet your regular financial commitments?{" "}
+											Have you put enough aside to meet your regular financial
+											commitments?{" "}
 										</Typography>
 									</Grid>
 									<Grid
@@ -285,7 +311,8 @@ const Homepage = (): ReactElement => {
 											className={styles.contentText}
 											align="center"
 										>
-											3 Does you have enough to spend on yourself and others?{" "}
+											Does your business have enough to spend on yourself and
+											pay others?{" "}
 										</Typography>
 									</Grid>
 									<Grid
@@ -294,7 +321,7 @@ const Homepage = (): ReactElement => {
 										sm={4}
 										className={styles.alignJustifyContent}
 									>
-										<Avatar className={styles.blue}>4</Avatar>
+										<Avatar className={styles.red}>4</Avatar>
 
 										<Typography
 											variant="h6"
@@ -302,17 +329,17 @@ const Homepage = (): ReactElement => {
 											className={styles.contentText}
 											align="center"
 										>
-											Are you improving your financial position year-on-year?{" "}
+											Is your business improving its financial position?{" "}
 										</Typography>
 									</Grid>
-								</Grid>
+								</div>
 							</div>
 						</div>
 					</Container>
 				</Container>
 				<Spacer space={5} />
-				<Container>
-					<Grid container spacing={3}>
+				<Container maxWidth="lg">
+					<div className={styles.testing2}>
 						<Grid item xs={12} sm={4}>
 							<h2 className={styles.SectionTitle}>
 								Join thousands of advisors helping their clients’ businesses
@@ -325,10 +352,11 @@ const Homepage = (): ReactElement => {
 								className={styles.contentText}
 								align="left"
 							>
-								Tax professionals, business advisors and financial counsellors
-								across the country are using the free Cash Flow Coaching kit to
-								help small businesses improve the viability of their business.
+								Trusted advisers across the country are using the Cash Flow
+								Coaching Kit to help small businesses uplift their financial and
+								cash flow capability.
 							</Typography>
+							<TakeATourButton />
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<Card variant="outlined">
@@ -352,113 +380,164 @@ const Homepage = (): ReactElement => {
 								</CardActions>
 							</Card>
 						</Grid>
-					</Grid>
+					</div>
 					<Spacer space={5} />
 				</Container>
 				<Container
 					maxWidth={false}
 					component="div"
-					className={styles.containerGreyHeight}
+					className={styles.containerGrey}
 				>
-					<Container maxWidth="lg">
-						<div className={styles.containerGrey}>
-							<Grid container spacing={2}>
-								<Grid
-									item
-									xs={10}
-									sm={3}
-									className={styles.alignJustifyContent}
-								>
-									<Avatar className={styles.green}>2</Avatar>
-
-									<Typography
-										variant="h6"
-										component="h3"
-										className={styles.contentText}
-										align="center"
-									>
-										Can you meet your regular financial commitments?{" "}
-									</Typography>
-								</Grid>
-								<Grid
-									item
-									xs={10}
-									sm={3}
-									className={styles.alignJustifyContent}
-								>
-									<Avatar className={styles.green}>2</Avatar>
-
-									<Typography
-										variant="h6"
-										component="h3"
-										className={styles.contentText}
-										align="center"
-									>
-										Can you meet your regular financial commitments?{" "}
-									</Typography>
-								</Grid>
-								<Grid
-									item
-									xs={10}
-									sm={3}
-									className={styles.alignJustifyContent}
-								>
-									<Avatar className={styles.green}>2</Avatar>
-
-									<Typography
-										variant="h6"
-										component="h3"
-										className={styles.contentText}
-										align="center"
-									>
-										Can you meet your regular financial commitments?{" "}
-									</Typography>
-								</Grid>
-								<Grid
-									item
-									xs={10}
-									sm={3}
-									className={styles.alignJustifyContent}
-								>
-									<Avatar className={styles.green}>2</Avatar>
-
-									<Typography
-										variant="h6"
-										component="h3"
-										className={styles.contentText}
-										align="center"
-									>
-										Can you meet your regular financial commitments?{" "}
-									</Typography>
-								</Grid>
-								<Grid
-									item
-									xs={10}
-									sm={3}
-									className={styles.alignJustifyContent}
-								>
-									<Avatar className={styles.green}>2</Avatar>
-
-									<Typography
-										variant="h6"
-										component="h3"
-										className={styles.contentText}
-										align="center"
-									>
-										Can you meet your regular financial commitments?{" "}
-									</Typography>
-								</Grid>
-							</Grid>
-						</div>
-					</Container>
+					<div className={styles.padding}>
+						<Container maxWidth="lg">
+							<h2 className={styles.SectionTitle}>See how the tools work</h2>
+							<div className={styles.testing}>
+								<div className={styles.gridWrap}>
+									<Grid item>
+										<Card>
+											<CardMedia
+												component="img"
+												height="155"
+												image="/images/healthCheck_thumb.png"
+												title="Health check"
+											/>
+											<CardContent>
+												<Typography gutterBottom variant="h5" component="h2">
+													Health Check
+												</Typography>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													Answer 10 questions to learn about the health of your
+													business.
+												</Typography>
+											</CardContent>
+											<CardActions className={styles.cardActions}></CardActions>
+										</Card>
+									</Grid>
+								</div>
+								<div className={styles.gridWrap}>
+									<Grid item>
+										<Card>
+											<CardMedia
+												component="img"
+												alt="Discover Topics"
+												height="155"
+												image="/images/discoverTopics_thumb.png"
+												title="Discover Topics"
+											/>
+											<CardContent>
+												<Typography gutterBottom variant="h5" component="h2">
+													Discover Topics
+												</Typography>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													Build your business knowledge with activities and
+													ideas that you can do at any time.
+												</Typography>
+											</CardContent>
+											<CardActions className={styles.cardActions}></CardActions>
+										</Card>
+									</Grid>
+								</div>
+								<div className={styles.gridWrap}>
+									<Grid item>
+										<Card>
+											<CardMedia
+												component="img"
+												alt="Cash Flow Canvas"
+												height="155"
+												image="/images/cashFlowCanvas_thumb.png"
+												title="Cash Flow Canvas"
+											/>
+											<CardContent>
+												<Typography gutterBottom variant="h5" component="h2">
+													Cash Flow Canvas
+												</Typography>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													Input simple figures to review, plan, change and track
+													your cash flow.
+												</Typography>
+											</CardContent>
+											<CardActions className={styles.cardActions}></CardActions>
+										</Card>
+									</Grid>
+								</div>
+								<div className={styles.gridWrap}>
+									<Grid item>
+										<Card>
+											<CardMedia
+												component="img"
+												alt="Change Levers"
+												height="155"
+												image="/images/changeLevers_thumb.png"
+												title="Change Levers"
+											/>
+											<CardContent>
+												<Typography gutterBottom variant="h5" component="h2">
+													Change Levers
+												</Typography>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													Explore practical ideas and actions to improve your
+													cash flow.
+												</Typography>
+											</CardContent>
+											<CardActions className={styles.cardActions}></CardActions>
+										</Card>
+									</Grid>
+								</div>
+								<div className={styles.gridWrap}>
+									<Grid item>
+										<Card>
+											<CardMedia
+												component="img"
+												alt="Action Checklist"
+												height="155"
+												image="/images/actionChecklist_thumb.png"
+												title="Action Checklist"
+											/>
+											<CardContent>
+												<Typography gutterBottom variant="h5" component="h2">
+													Action Checklist
+												</Typography>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													Maintain a list of actions and deadlines to help you
+													track your cash flow improvements over time.
+												</Typography>
+											</CardContent>
+											<CardActions className={styles.cardActions}></CardActions>
+										</Card>
+									</Grid>
+								</div>
+							</div>
+						</Container>
+					</div>
 				</Container>
+
 				<Container
 					component="div"
 					className={styles.containerIndigo}
 					maxWidth={false}
 				>
 					<Container maxWidth="lg">
-						<h2>We value your privacy</h2>
+						<h2>Privacy</h2>
 						<Typography
 							variant="body2"
 							component="p"
@@ -466,9 +545,10 @@ const Homepage = (): ReactElement => {
 							align="left"
 						>
 							This website does not collect or store any personal information,
-							including the name of your business, any financial records you
-							input or upload, or any of the actions you are taking with your
-							business.
+							including the name of your business, any financial records, or any
+							action you are taking with your business. Please refer to the
+							Terms and Conditions for use and our Data usage and privacy
+							statement.
 						</Typography>
 						<Typography
 							variant="body2"
@@ -476,9 +556,10 @@ const Homepage = (): ReactElement => {
 							className={styles.footerText}
 							align="left"
 						>
-							The data you enter into the Cash Flow Coaching Kit will be stored
-							on this device only. Exiting or clearing your browser cache will
-							erase all unsaved client data.
+							The data you enter the Kit will be stored on this device only.
+							Exiting or clearing your browser cache will erase all unsaved
+							client data. We recommend regularly using the Export data function
+							from the Client List to avoid data loss.
 						</Typography>
 						<Typography
 							variant="body2"
@@ -486,8 +567,7 @@ const Homepage = (): ReactElement => {
 							className={styles.footerText}
 							align="left"
 						>
-							We recommend regularly using the EXPORT DATA function from the
-							Client List to avoid data loss. Please refer to the{" "}
+							Please refer to the
 							<a
 								href="/docs/Terms and Conditions.pdf"
 								target="_blank"
@@ -495,15 +575,14 @@ const Homepage = (): ReactElement => {
 							>
 								Terms &amp; Conditions
 							</a>{" "}
-							of use and our{" "}
+							for use and our Data usage and{" "}
 							<a
 								href="/docs/Data usage and privacy statement.pdf"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Data usage and privacy statement
+								privacy statement.
 							</a>
-							.
 						</Typography>
 					</Container>
 				</Container>
