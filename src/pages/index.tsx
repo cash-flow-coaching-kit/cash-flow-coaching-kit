@@ -150,15 +150,16 @@ const useHomepageStyles = makeStyles((theme) => ({
 		paddingTop: theme.spacing(2),
 		paddingBottom: theme.spacing(1),
 		fontSize: "2.2rem",
+		fontWeight: "bold",
 	},
 	SectionTitle: {
 		paddingTop: theme.spacing(1),
-		fontSize: "34px",
+		fontSize: "28px",
 		fontFamily: "Roboto, Helvetica",
 	},
 	SectionTitleSecond: {
 		paddingTop: theme.spacing(1),
-		fontSize: "34px",
+		fontSize: "28px",
 		fontFamily: "Roboto, Helvetica",
 		textAlign: "center",
 	},
@@ -199,8 +200,10 @@ const Homepage = (): ReactElement => {
 							Help small businesses build cash flow capability, meet their
 							<br></br>
 							financial commitments and take action to thrive with this<br></br>
-							practical toolkit.
-							<br></br>
+							practical toolkit.{" "}
+						</Typography>
+						<br></br>
+						<Typography align="left" component="p" variant="h5">
 							Ask your trusted adviser about the Cash Flow Coaching Kit to
 							<br></br>
 							better manage cash flow in your business.
@@ -345,7 +348,6 @@ const Homepage = (): ReactElement => {
 								Coaching Kit to help small businesses uplift their financial and
 								cash flow capability.
 							</Typography>
-							<TakeATourButton />
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<Card variant="outlined">
