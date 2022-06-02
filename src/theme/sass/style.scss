@@ -139,3 +139,10 @@ code {
 		width: 100%;
 	}
 }
+
+#flexLeft { 
+	justify-content: space-around;
+	@media only screen and (max-width: 800px) {		
+		justify-content: flex-start ;
+	}
+}

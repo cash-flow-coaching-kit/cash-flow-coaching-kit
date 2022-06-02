@@ -23,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
 	media: {
 		height: 271,
 	},
-	brookesButton: {
+	wrapButton: {
 		marginTop: "30px",
-		width: "131px",
+		width: "145px",
 	},
 	appbar: {
 		position: "relative",
@@ -50,6 +50,10 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(1),
 		border: `1px solid ${theme.palette.grey["300"]}`,
 		borderRadius: theme.shape.borderRadius,
+	},
+	button2: {
+		padding: "8px",
+		fontSize: "15px",
 	},
 }))
 
@@ -190,11 +194,11 @@ const TourCard = ({ onClick }: { onClick: () => void }): ReactElement => {
 	const cls = useStyles()
 
 	return (
-		<div className={cls.brookesButton}>
+		<div className={cls.wrapButton}>
 			<div>
 				{" "}
 				<CardActionArea onClick={onClick}>
-					<Button color="primary" variant="contained">
+					<Button size="large" color="primary" variant="contained">
 						Take a tour
 					</Button>
 				</CardActionArea>

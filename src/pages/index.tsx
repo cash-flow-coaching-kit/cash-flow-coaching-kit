@@ -35,6 +35,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 		width: "320px",
 		marginTop: "30px",
 		marginBottom: "10px",
+		marginRight: "40px",
 	},
 	buttonBox: {
 		marginTop: theme.spacing(5),
@@ -52,8 +53,8 @@ const useHomepageStyles = makeStyles((theme) => ({
 		justifyContent: "flex-end",
 	},
 	containerIndigo: {
-		backgroundColor: "#5C5C5C", // indigo50
-		color: "white",
+		backgroundColor: "#e8eaf6", // indigo50
+		color: "black",
 		padding: theme.spacing(5),
 	},
 	padding: {
@@ -80,7 +81,8 @@ const useHomepageStyles = makeStyles((theme) => ({
 	},
 	footerText: {
 		margin: theme.spacing(2, 0),
-		width: "50%",
+		width: "80%",
+		fontSize: "12px!important",
 	},
 	aboutText: {
 		textAlign: "center",
@@ -140,7 +142,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 	},
 	red: {
 		color: theme.palette.getContrastText("#c74f23"),
-		backgroundColor: "#c74f23",
+		backgroundColor: "#FF9800",
 		width: theme.spacing(7),
 		height: theme.spacing(7),
 		marginTop: theme.spacing(2),
@@ -157,16 +159,10 @@ const useHomepageStyles = makeStyles((theme) => ({
 		fontSize: "28px",
 		fontFamily: "Roboto, Helvetica",
 	},
-	SectionTitleSecond: {
-		paddingTop: theme.spacing(1),
-		fontSize: "28px",
-		fontFamily: "Roboto, Helvetica",
-		textAlign: "center",
-	},
+
 	testing: {
 		display: "flex",
 		flexWrap: "wrap",
-		justifyContent: "space-around",
 	},
 	testing2: {
 		display: "flex",
@@ -193,21 +189,20 @@ const Homepage = (): ReactElement => {
 						component="h1"
 						className={styles.MainHeading}
 					>
-						Help businesses improve <br></br>their cash flow
+						Cash Flow Coaching Kit
 					</Typography>
 					<div className="w-[40%]">
-						<Typography align="left" component="p" variant="h5">
+						<Typography align="left" component="p" variant="body1">
 							Help small businesses build cash flow capability, meet their
-							<br></br>
-							financial commitments and take action to thrive with this<br></br>
+							financial commitments and take action to thrive with this
 							practical toolkit.{" "}
 						</Typography>
-						<br></br>
-						<Typography align="left" component="p" variant="h5">
+
+						<Typography align="left" component="p" variant="body1">
 							Ask your trusted adviser about the Cash Flow Coaching Kit to
-							<br></br>
 							better manage cash flow in your business.
 						</Typography>
+						<br></br>
 					</div>
 					<div className="w-[25%]">
 						<TakeATourButton />
@@ -253,7 +248,7 @@ const Homepage = (): ReactElement => {
 								</Box>
 							</div>
 							<div className={styles.splitCont}>
-								<div className={styles.testing}>
+								<div id="flexLeft" className={styles.testing}>
 									<Grid
 										item
 										xs={10}
@@ -381,9 +376,7 @@ const Homepage = (): ReactElement => {
 				>
 					<div className={styles.padding}>
 						<Container maxWidth="lg">
-							<h2 className={styles.SectionTitleSecond}>
-								See how the tools work
-							</h2>
+							<h2 className={styles.SectionTitle}>See how the tools work</h2>
 							<div className={styles.testing}>
 								<div className={styles.gridWrap}>
 									<Grid item>
@@ -512,7 +505,7 @@ const Homepage = (): ReactElement => {
 													component="p"
 												>
 													Maintain a list of actions and deadlines to help you
-													track your cash flow improvements over time.
+													track your cash flow improvements.
 												</Typography>
 											</CardContent>
 											<CardActions className={styles.cardActions}></CardActions>
@@ -520,6 +513,22 @@ const Homepage = (): ReactElement => {
 									</Grid>
 								</div>
 							</div>
+							<Box className={styles.buttonBox}>
+								{hasClients() ? (
+									<Button
+										color="primary"
+										variant="contained"
+										component={RouterLink}
+										to={PrivateRoutes.ClientList}
+										size="large"
+									>
+										Get Started
+									</Button>
+								) : (
+									<NewClientDialog triggerText="Get Started" />
+								)}
+								<ImportClient />
+							</Box>
 						</Container>
 					</div>
 				</Container>
@@ -539,31 +548,13 @@ const Homepage = (): ReactElement => {
 							id="footerID"
 						>
 							This website does not collect or store any personal information,
-							including the name of your business, any financial records, or any
-							action you are taking with your business. Please refer to the
-							Terms and Conditions for use and our Data usage and privacy
-							statement.
-						</Typography>
-						<Typography
-							variant="body2"
-							component="p"
-							className={styles.footerText}
-							align="left"
-							id="footerID"
-						>
-							The data you enter the Kit will be stored on this device only.
-							Exiting or clearing your browser cache will erase all unsaved
-							client data. We recommend regularly using the Export data function
-							from the Client List to avoid data loss.
-						</Typography>
-						<Typography
-							variant="body2"
-							component="p"
-							className={styles.footerText}
-							align="left"
-							id="footerID"
-						>
-							Please refer to the
+							including the name of your business, any financial records you
+							input or upload, or any of the actions you are taking with your
+							business. The data you enter into the Cash Flow Coaching Kit will
+							be stored on this device only. Exiting or clearing your browser
+							cache will erase all unsaved client data. We recommend regularly
+							using the EXPORT DATA function from the Client List to avoid data
+							loss. <br></br>Please refer to the{" "}
 							<a
 								href="/docs/Terms and Conditions.pdf"
 								target="_blank"
@@ -571,14 +562,15 @@ const Homepage = (): ReactElement => {
 							>
 								Terms &amp; Conditions
 							</a>{" "}
-							for use and our Data usage and{" "}
+							of use and our{" "}
 							<a
 								href="/docs/Data usage and privacy statement.pdf"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								privacy statement.
+								Data usage and privacy statement
 							</a>
+							.
 						</Typography>
 					</Container>
 				</Container>
