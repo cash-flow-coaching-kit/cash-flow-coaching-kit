@@ -82,7 +82,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 	footerText: {
 		margin: theme.spacing(2, 0),
 		width: "80%",
-		fontSize: "12px!important",
+		fontSize: "14px!important",
 	},
 	aboutText: {
 		textAlign: "center",
