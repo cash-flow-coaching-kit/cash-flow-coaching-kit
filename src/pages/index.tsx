@@ -159,6 +159,12 @@ const useHomepageStyles = makeStyles((theme) => ({
 		fontSize: "28px",
 		fontFamily: "Roboto, Helvetica",
 	},
+	SectionTitleNoPad: {
+		paddingTop: "0px",
+		marginTop: "0px",
+		fontSize: "28px",
+		fontFamily: "Roboto, Helvetica",
+	},
 
 	testing: {
 		display: "flex",
@@ -207,7 +213,7 @@ const Homepage = (): ReactElement => {
 					<div className="w-[25%]">
 						<TakeATourButton />
 					</div>
-					<CardActions />
+					{/* <CardActions /> */}
 				</Container>
 				<Container
 					maxWidth={false}
@@ -378,7 +384,9 @@ const Homepage = (): ReactElement => {
 				>
 					<div className={styles.padding}>
 						<Container maxWidth="lg">
-							<h2 className={styles.SectionTitle}>See how the tools work</h2>
+							<h2 className={styles.SectionTitleNoPad}>
+								See how the tools work
+							</h2>
 							<div className={styles.testing}>
 								<div className={styles.gridWrap}>
 									<Grid item>

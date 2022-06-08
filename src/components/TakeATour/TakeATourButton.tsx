@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 		height: 271,
 	},
 	wrapButton: {
-		marginTop: "30px",
+		marginTop: "50px",
 		width: "145px",
 	},
 	appbar: {
