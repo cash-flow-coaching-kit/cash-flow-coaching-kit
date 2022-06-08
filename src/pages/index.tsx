@@ -224,7 +224,7 @@ const Homepage = (): ReactElement => {
 						<div className={styles.testing}>
 							<div className={styles.splitContLeft} id="floatFull">
 								<div>
-									<h2 className={styles.SectionTitle}>
+									<h2 className={styles.SectionTitleNoPad}>
 										Turn cash flow theory into <br></br>practical solutions
 									</h2>
 									<Typography
