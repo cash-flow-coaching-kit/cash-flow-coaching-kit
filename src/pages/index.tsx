@@ -102,7 +102,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 		float: "left",
 		display: "flex",
 		flexDirection: "column",
-		justifyContent: "center",
+		justifyContent: "space-evenly",
 		alignItems: "right",
 
 		alignContent: "right",
@@ -199,7 +199,7 @@ const Homepage = (): ReactElement => {
 						</Typography>
 
 						<Typography align="left" component="p" variant="body1">
-							Ask your trusted adviser about the Cash Flow Coaching Kit to
+							Ask your trusted advisor about the Cash Flow Coaching Kit to
 							better manage cash flow in your business.
 						</Typography>
 						<br></br>
@@ -217,19 +217,21 @@ const Homepage = (): ReactElement => {
 					<Container component="div" maxWidth="lg">
 						<div className={styles.testing}>
 							<div className={styles.splitContLeft} id="floatFull">
-								<h2 className={styles.SectionTitle}>
-									Turn cash flow theory into <br></br>practical solutions
-								</h2>
-								<Typography
-									variant="body1"
-									component="p"
-									className={styles.contentText}
-									align="left"
-								>
-									Use the Cash Flow Coaching Kit to help small businesses
-									recognise <br></br>the cash flow success factors and focus on
-									four key questions:
-								</Typography>
+								<div>
+									<h2 className={styles.SectionTitle}>
+										Turn cash flow theory into <br></br>practical solutions
+									</h2>
+									<Typography
+										variant="body1"
+										component="p"
+										className={styles.contentText}
+										align="left"
+									>
+										Use the Cash Flow Coaching Kit to help small businesses
+										recognise <br></br>the cash flow success factors and focus
+										on four key questions:
+									</Typography>
+								</div>
 								<Box className={styles.buttonBox}>
 									{hasClients() ? (
 										<Button
@@ -327,7 +329,7 @@ const Homepage = (): ReactElement => {
 				<Spacer space={5} />
 				<Container maxWidth="lg">
 					<div className={styles.testing2}>
-						<Grid item xs={12} sm={4}>
+						<Grid id="advisors" item xs={12} sm={4}>
 							<h2 className={styles.SectionTitle}>
 								Join thousands of advisors helping their clients’ businesses
 								succeed
