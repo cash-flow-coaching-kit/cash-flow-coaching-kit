@@ -76,9 +76,7 @@ const NewClientDialog = ({
 				fullWidth
 				maxWidth="sm"
 			>
-				<DialogTitle id="new-client-dialog-title">
-					First, add a business name.
-				</DialogTitle>
+				<DialogTitle id="new-client-dialog-title">Start a session </DialogTitle>
 				{/* Moved the DialogContent into the form for the submit to work in IE11 */}
 				<NewClientForm
 					closeDialog={onFormCloseTrigger}

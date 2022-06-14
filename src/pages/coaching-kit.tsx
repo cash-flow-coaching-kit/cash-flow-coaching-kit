@@ -98,6 +98,7 @@ const useCKStyles = makeStyles((theme) => ({
 		width: "390px",
 		marginRight: "20px",
 		marginTop: "20px",
+		marginLeft: "10px",
 	},
 	sectionWhite: {
 		width: "100%",
@@ -323,38 +324,40 @@ const CoachingKit = (): ReactElement => {
 								cash flow improvements.
 							</Typography>
 						</Grid>
-						<div className={styles.square}>
-							<Card>
-								<CardActionArea
-									component={RouterLink}
-									to={PrivateRoutes.ActionChecklist}
-								>
-									<CardMedia
-										component="img"
-										alt="Action Checklist"
-										height="155"
-										image="/images/actionChecklist_thumb.png"
-										title="Action Checklist"
-									/>
-									<CardContent>
-										<Typography gutterBottom variant="h5" component="h2">
-											Action Checklist
-										</Typography>
-										<Typography
-											variant="body2"
-											color="textSecondary"
-											component="p"
-										>
-											Maintain a list of actions and deadlines to help you track
-											your cash flow improvements over time.
-										</Typography>
-									</CardContent>
-									<CardActions className={styles.cardActions}>
-										<Arrow />
-									</CardActions>
-								</CardActionArea>
-							</Card>
-						</div>
+						<Grid container spacing={3} direction="row">
+							<div className={styles.square}>
+								<Card>
+									<CardActionArea
+										component={RouterLink}
+										to={PrivateRoutes.ActionChecklist}
+									>
+										<CardMedia
+											component="img"
+											alt="Action Checklist"
+											height="155"
+											image="/images/actionChecklist_thumb.png"
+											title="Action Checklist"
+										/>
+										<CardContent>
+											<Typography gutterBottom variant="h5" component="h2">
+												Action Checklist
+											</Typography>
+											<Typography
+												variant="body2"
+												color="textSecondary"
+												component="p"
+											>
+												Maintain a list of actions and deadlines to help you
+												track your cash flow improvements over time.
+											</Typography>
+										</CardContent>
+										<CardActions className={styles.cardActions}>
+											<Arrow />
+										</CardActions>
+									</CardActionArea>
+								</Card>
+							</div>
+						</Grid>
 					</Container>
 				</div>
 				<PageTip tip={CoachingKitTips} />

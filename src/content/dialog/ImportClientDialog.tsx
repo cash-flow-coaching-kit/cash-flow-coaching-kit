@@ -363,14 +363,8 @@ export default function ImportClientDialog({
 			<DialogTitle>Import client data</DialogTitle>
 			<DialogContent>
 				<Typography component="p" variant="body1" className={cls.contentText}>
-					If you have used the Cash Flow Coaching Kit before and have previously
-					exported your work, you&rsquo;ll be able to import that data from your
-					device and continue where you left off.
-				</Typography>
-				<Typography component="p" variant="body1" className={cls.contentText}>
-					The data you enter into the kit will be stored on this device only.
-					Exiting or clearing your browser cache will erase all unsaved client
-					data.
+					If you have created sessions and used EXPORT DATA to save your work,
+					you can select a file to import and continue where you left off.
 				</Typography>
 			</DialogContent>
 			<DialogContent>
