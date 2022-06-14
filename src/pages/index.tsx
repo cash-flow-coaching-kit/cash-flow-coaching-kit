@@ -104,7 +104,6 @@ const useHomepageStyles = makeStyles((theme) => ({
 		flexDirection: "column",
 		justifyContent: "space-evenly",
 		alignItems: "right",
-
 		alignContent: "right",
 	},
 	alignJustifyContent: {
@@ -199,20 +198,20 @@ const Homepage = (): ReactElement => {
 					</Typography>
 					<div className="w-[40%]">
 						<Typography align="left" component="p" variant="body1">
-							Help small businesses build cash flow capability, meet their
-							financial commitments and take action to thrive with this
-							practical toolkit.{" "}
+							A coaching resource for tax professionals and business advisors to
+							help small businesses build cash flow capability and take action
+							to thrive.{" "}
 						</Typography>
 
 						<Typography align="left" component="p" variant="body1">
 							Ask your trusted advisor about the Cash Flow Coaching Kit to
 							better manage cash flow in your business.
 						</Typography>
-						<br></br>
+						<div className="w-[25%]">
+							<TakeATourButton />
+						</div>
 					</div>
-					<div className="w-[25%]">
-						<TakeATourButton />
-					</div>
+
 					{/* <CardActions /> */}
 				</Container>
 				<Container
@@ -234,26 +233,26 @@ const Homepage = (): ReactElement => {
 										align="left"
 									>
 										Use the Cash Flow Coaching Kit to help small businesses
-										recognise <br></br>the cash flow success factors and focus
-										on four key questions:
+										recognise the cash flow success factors and focus on four
+										key questions.
 									</Typography>
+									<Box className={styles.buttonBox}>
+										{hasClients() ? (
+											<Button
+												color="primary"
+												variant="contained"
+												component={RouterLink}
+												to={PrivateRoutes.ClientList}
+												size="large"
+											>
+												Get Started
+											</Button>
+										) : (
+											<NewClientDialog triggerText="Get Started" />
+										)}
+										<ImportClient />
+									</Box>
 								</div>
-								<Box className={styles.buttonBox}>
-									{hasClients() ? (
-										<Button
-											color="primary"
-											variant="contained"
-											component={RouterLink}
-											to={PrivateRoutes.ClientList}
-											size="large"
-										>
-											Get Started
-										</Button>
-									) : (
-										<NewClientDialog triggerText="Get Started" />
-									)}
-									<ImportClient />
-								</Box>
 							</div>
 							<div className={styles.splitCont}>
 								<div id="flexLeft" className={styles.testing}>
@@ -337,7 +336,7 @@ const Homepage = (): ReactElement => {
 					<div className={styles.testing2}>
 						<Grid id="advisors" item xs={12} sm={4}>
 							<h2 className={styles.SectionTitle}>
-								Join thousands of advisors helping their clients’ businesses
+								Join thousands of advisors helping their small business clients
 								succeed
 							</h2>
 
@@ -347,7 +346,7 @@ const Homepage = (): ReactElement => {
 								className={styles.contentText}
 								align="left"
 							>
-								Trusted advisers across the country are using the Cash Flow
+								Trusted advisors across the country are using the Cash Flow
 								Coaching Kit to help small businesses uplift their financial and
 								cash flow capability.
 							</Typography>
