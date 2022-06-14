@@ -6,19 +6,17 @@ import {
 	Card,
 	CardActions,
 	CardContent,
+	Container,
 	CardMedia,
 	makeStyles,
 	Avatar,
-	List,
-	ListItem,
+	Box,
 	CardActionArea,
 	useTheme,
 } from "@material-ui/core"
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
-import { PageContainer } from "../components/Layouts"
 import { PrivateRoutes, routeVarReplacement } from "../util/routes/routes"
 import PageTip from "../components/PageTip"
-import Spacer from "../components/Spacer"
 import CoachingKitTips from "../content/tips/CoachingKitTips"
 
 const Arrow = (): ReactElement => {
@@ -39,11 +37,21 @@ const useCKStyles = makeStyles((theme) => ({
 	MainHeading: {
 		paddingTop: theme.spacing(0),
 		marginBottom: theme.spacing(2),
-		fontSize: "1.8rem",
+		fontSize: "2.2rem",
+		fontWeight: "bold",
 	},
 	SectionTitle: {
 		paddingTop: theme.spacing(1),
-		fontSize: "1.8rem",
+		fontSize: "28px",
+	},
+	container: {
+		paddingTop: theme.spacing(5),
+		paddingBottom: theme.spacing(5),
+	},
+	containerGrey: {
+		backgroundColor: "#f5f5f5",
+		padding: theme.spacing(2),
+		marginTop: theme.spacing(3),
 	},
 	purple: {
 		color: theme.palette.getContrastText("#9c27b0"),
@@ -74,16 +82,37 @@ const useCKStyles = makeStyles((theme) => ({
 		flexDirection: "column",
 		flexWrap: "nowrap",
 		justifyContent: "center",
-		alignItems: "center",
-		alignContent: "center",
+		alignItems: "flex-start",
+		alignContent: "start",
 		margin: theme.spacing(2, 0),
 	},
 	contentText: {
 		margin: theme.spacing(1, 0),
-		width: "100%",
+		width: "50%",
+		marginBottom: "20px",
 	},
 	cardActions: {
 		justifyContent: "flex-end",
+	},
+	square: {
+		width: "390px",
+		marginRight: "20px",
+		marginTop: "20px",
+	},
+	sectionWhite: {
+		width: "100%",
+	},
+	sectionGrey: {
+		width: "100%",
+		backgroundColor: "#f5f5f5",
+		paddingBottom: "40px",
+	},
+	SectionTitleNoPad: {
+		padding: "0px",
+		marginTop: "0px",
+		marginBottom: "0px",
+		fontSize: "28px",
+		fontFamily: "Roboto, Helvetica",
 	},
 }))
 
@@ -92,88 +121,44 @@ const CoachingKit = (): ReactElement => {
 
 	return (
 		<>
-			<PageContainer role="main">
-				<Typography
-					component="h1"
-					className={styles.MainHeading}
-					align="center"
-				>
-					Cash Flow Coaching Kit
-				</Typography>
+			{" "}
+			<Box role="main">
+				<Container maxWidth="lg" className={styles.container}>
+					<Typography
+						component="h2"
+						className={styles.MainHeading}
+						align="left"
+					>
+						Cash Flow Coaching Kit
+					</Typography>
 
-				<Grid container spacing={0}>
-					<Grid item sm={2} />
-					<Grid item xs={12} sm={8}>
-						<Typography className={styles.contentText} align="center">
-							Four key questions unlock fundamental concepts for good cash flow
-							management.
-						</Typography>
-						<Typography className={styles.contentText} align="center">
-							They focus on profit, provisioning, liquidity and meeting goals.
-						</Typography>
-						<Typography className={styles.contentText} align="center">
-							Use the Coaching Conversation Guide on the Client List page to get
-							the most value from the kit.
-						</Typography>
-						<Typography className={styles.contentText} align="center">
-							Use the tools in the coaching phases; Discover, Apply and Plan
-							&amp; Action to help small businesses answer the questions,
-							understand cash flow and identify areas to improve.
+					<Grid container spacing={0}>
+						<Typography className="contentText" align="left">
+							Use the tools in the coaching phases: Discover, Apply and Plan &
+							Action to help small businesses understand cash flow and identify
+							areas to improve.
 						</Typography>
 					</Grid>
-				</Grid>
-
-				<Spacer space={2} />
-
-				<Grid container spacing={0}>
-					<Grid item sm={2} />
-					<Grid item xs={12} sm={8}>
-						<Typography variant="h6" component="h2">
-							What are the <em> Four Key Questions</em>?
-						</Typography>
-						<List style={{ padding: 0 }}>
-							<ListItem className={styles.contentText}>
-								1. Are you trading profitably?
-							</ListItem>
-							<ListItem className={styles.contentText}>
-								2. Have you put enough aside to meet your regular financial
-								commitments?
-							</ListItem>
-							<ListItem className={styles.contentText}>
-								3. Does your business have enough to spend on yourself and pay
-								others?
-							</ListItem>
-							<ListItem className={styles.contentText}>
-								4. Is your business improving its financial position?
-							</ListItem>
-						</List>
-					</Grid>
-				</Grid>
-
-				<Spacer space={2} />
-
-				<Grid container spacing={3}>
-					<Grid item sm={4}>
-						<Grid container spacing={3} direction="column">
-							<Grid item className={styles.alignJustifyContent}>
-								<Avatar className={styles.purple}>1</Avatar>
-								<Typography
-									component="h2"
-									variant="h5"
-									className={styles.SectionTitle}
-								>
-									Discover
-								</Typography>
-								<Typography
-									variant="body1"
-									component="p"
-									className={styles.contentText}
-									align="center"
-								>
-									Learn about cash flow management.
-								</Typography>
-							</Grid>
-							<Grid item>
+				</Container>
+				<div className={styles.sectionGrey}>
+					<Container
+						maxWidth="lg"
+						className={styles.containerGrey}
+						component="div"
+					>
+						<Grid item className={styles.alignJustifyContent}>
+							<h2 className={styles.SectionTitleNoPad}>Discover</h2>
+							<Typography
+								variant="body1"
+								component="p"
+								className="contentText"
+								align="left"
+							>
+								Learn about cash flow management.
+							</Typography>
+						</Grid>
+						<Grid container spacing={3} direction="row">
+							<div className={styles.square}>
 								<Card>
 									<CardActionArea
 										component={RouterLink}
@@ -205,8 +190,8 @@ const CoachingKit = (): ReactElement => {
 										</CardActions>
 									</CardActionArea>
 								</Card>
-							</Grid>
-							<Grid item>
+							</div>
+							<div className={styles.square}>
 								<Card>
 									<CardActionArea
 										component={RouterLink}
@@ -237,30 +222,26 @@ const CoachingKit = (): ReactElement => {
 										</CardActions>
 									</CardActionArea>
 								</Card>
-							</Grid>
+							</div>
 						</Grid>
-					</Grid>
-					<Grid item sm={4}>
-						<Grid container spacing={3} direction="column">
-							<Grid item className={styles.alignJustifyContent}>
-								<Avatar className={styles.green}>2</Avatar>
-								<Typography
-									component="h2"
-									variant="h5"
-									className={styles.SectionTitle}
-								>
-									Apply
-								</Typography>
-								<Typography
-									variant="body1"
-									component="p"
-									className={styles.contentText}
-									align="center"
-								>
-									Understand your current cash flow and plan improvements.
-								</Typography>
-							</Grid>
-							<Grid item>
+					</Container>
+				</div>
+
+				<div className={styles.sectionWhite}>
+					<Container maxWidth="lg" className={styles.container} component="div">
+						<Grid item className={styles.alignJustifyContent}>
+							<h2 className={styles.SectionTitleNoPad}>Apply</h2>
+							<Typography
+								variant="body1"
+								component="p"
+								className="contentText"
+								align="left"
+							>
+								Understand your current cash flow and plan improvements.
+							</Typography>
+						</Grid>
+						<Grid container spacing={3} direction="row">
+							<div className={styles.square}>
 								<Card>
 									<CardActionArea component={RouterLink} to={PrivateRoutes.CFC}>
 										<CardMedia
@@ -288,8 +269,8 @@ const CoachingKit = (): ReactElement => {
 										</CardActions>
 									</CardActionArea>
 								</Card>
-							</Grid>
-							<Grid item>
+							</div>
+							<div className={styles.square}>
 								<Card>
 									<CardActionArea
 										component={RouterLink}
@@ -320,67 +301,64 @@ const CoachingKit = (): ReactElement => {
 										</CardActions>
 									</CardActionArea>
 								</Card>
-							</Grid>
+							</div>
 						</Grid>
-					</Grid>
-					<Grid item sm={4}>
-						<Grid container spacing={3} direction="column">
-							<Grid item className={styles.alignJustifyContent}>
-								<Avatar className={styles.blue}>3</Avatar>
-								<Typography
-									component="h2"
-									variant="h5"
-									className={styles.SectionTitle}
-								>
-									Plan &amp; Action
-								</Typography>
-								<Typography
-									variant="body1"
-									component="p"
-									className={styles.contentText}
-									align="center"
-								>
-									Create a list of actions and deadlines to help you track you
-									cash flow improvements over time.
-								</Typography>
-							</Grid>
-							<Grid item>
-								<Card>
-									<CardActionArea
-										component={RouterLink}
-										to={PrivateRoutes.ActionChecklist}
-									>
-										<CardMedia
-											component="img"
-											alt="Action Checklist"
-											height="155"
-											image="/images/actionChecklist_thumb.png"
-											title="Action Checklist"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="h5" component="h2">
-												Action Checklist
-											</Typography>
-											<Typography
-												variant="body2"
-												color="textSecondary"
-												component="p"
-											>
-												Maintain a list of actions and deadlines to help you
-												track your cash flow improvements over time.
-											</Typography>
-										</CardContent>
-										<CardActions className={styles.cardActions}>
-											<Arrow />
-										</CardActions>
-									</CardActionArea>
-								</Card>
-							</Grid>
+					</Container>
+				</div>
+				<div className={styles.sectionGrey}>
+					<Container
+						maxWidth="lg"
+						className={styles.containerGrey}
+						component="div"
+					>
+						<Grid item className={styles.alignJustifyContent}>
+							<h2 className={styles.SectionTitleNoPad}>Plan &amp; Action</h2>{" "}
+							<Typography
+								variant="body1"
+								component="p"
+								className="contentText"
+								align="left"
+							>
+								Create a list of actions and deadlines to help you track you
+								cash flow improvements.
+							</Typography>
 						</Grid>
-					</Grid>
-				</Grid>
+						<div className={styles.square}>
+							<Card>
+								<CardActionArea
+									component={RouterLink}
+									to={PrivateRoutes.ActionChecklist}
+								>
+									<CardMedia
+										component="img"
+										alt="Action Checklist"
+										height="155"
+										image="/images/actionChecklist_thumb.png"
+										title="Action Checklist"
+									/>
+									<CardContent>
+										<Typography gutterBottom variant="h5" component="h2">
+											Action Checklist
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+											component="p"
+										>
+											Maintain a list of actions and deadlines to help you track
+											your cash flow improvements over time.
+										</Typography>
+									</CardContent>
+									<CardActions className={styles.cardActions}>
+										<Arrow />
+									</CardActions>
+								</CardActionArea>
+							</Card>
+						</div>
+					</Container>
+				</div>
 				<PageTip tip={CoachingKitTips} />
-			</PageContainer>
+			</Box>
 		</>
 	)
 }
