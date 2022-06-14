@@ -58,8 +58,8 @@ const useHomepageStyles = makeStyles((theme) => ({
 		padding: theme.spacing(5),
 	},
 	padding: {
-		paddingTop: "60px",
-		paddingBottom: "60px",
+		paddingTop: "24px",
+		paddingBottom: "24px",
 	},
 	containerGrey: {
 		backgroundColor: "#f5f5f5",
