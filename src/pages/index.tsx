@@ -53,26 +53,12 @@ const useHomepageStyles = makeStyles((theme) => ({
 	containerIndigo: {
 		backgroundColor: "#e8eaf6", // indigo50
 		color: "black",
-		padding: theme.spacing(5),
 	},
 	padding: {
 		paddingTop: "24px",
 		paddingBottom: "24px",
 	},
-	containerGrey: {
-		backgroundColor: "#f5f5f5",
-		padding: theme.spacing(2),
-		marginTop: theme.spacing(3),
-	},
-	containerGreyHeight: {
-		backgroundColor: "#f5f5f5",
-		padding: theme.spacing(2),
-		marginTop: theme.spacing(3),
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-		alignContent: "center",
-	},
+
 	grey: {
 		backgroundColor: "#f5f5f5",
 	},
@@ -536,13 +522,8 @@ const Homepage = (): ReactElement => {
 						</Box>
 					</Container>
 				</div>
-
-				<Container
-					component="div"
-					className={styles.containerIndigo}
-					maxWidth={false}
-				>
-					<Container maxWidth="lg">
+				<div className={styles.containerIndigo}>
+					<Container component="div" className={styles.container} maxWidth="lg">
 						<h2>Privacy</h2>
 						<Typography
 							variant="body2"
@@ -558,7 +539,8 @@ const Homepage = (): ReactElement => {
 							be stored on this device only. Exiting or clearing your browser
 							cache will erase all unsaved client data. We recommend regularly
 							using the EXPORT DATA function from the Client List to avoid data
-							loss. <br></br>Please refer to the{" "}
+							loss. <br></br>
+							Please refer to the{" "}
 							<a
 								href="/docs/Terms and Conditions.pdf"
 								target="_blank"
@@ -577,7 +559,7 @@ const Homepage = (): ReactElement => {
 							.
 						</Typography>
 					</Container>
-				</Container>
+				</div>
 			</Box>
 		</>
 	)
