@@ -51,7 +51,8 @@ export default function Help(): ReactElement {
 							.
 						</Typography>
 						<Typography style={{ marginTop: 6 }}>
-							Our service standard for resolution is generally one business day.
+							Our service standard for resolution is generally five business
+							days.
 						</Typography>
 						<Typography style={{ fontWeight: "bold", marginTop: 12 }}>
 							Help and tips
