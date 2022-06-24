@@ -32,17 +32,17 @@ const Arrow = (): ReactElement => {
 		</Avatar>
 	)
 }
-
 const useCKStyles = makeStyles((theme) => ({
 	MainHeading: {
 		paddingTop: theme.spacing(0),
 		marginBottom: theme.spacing(2),
-		fontSize: "2.2rem",
-		fontWeight: "bold",
+		fontSize: "32px",
+		fontWeight: "normal",
 	},
 	SectionTitle: {
 		paddingTop: theme.spacing(1),
 		fontSize: "28px",
+		fontWeight: "normal",
 	},
 	container: {
 		paddingTop: theme.spacing(5),
@@ -95,8 +95,9 @@ const useCKStyles = makeStyles((theme) => ({
 		justifyContent: "flex-end",
 	},
 	square: {
-		width: "390px",
-		marginRight: "20px",
+		width: "420px",
+		height: "323px",
+		marginRight: "40px",
 		marginTop: "20px",
 		marginLeft: "10px",
 	},
@@ -106,7 +107,11 @@ const useCKStyles = makeStyles((theme) => ({
 	sectionGrey: {
 		width: "100%",
 		backgroundColor: "#f5f5f5",
-		paddingBottom: "40px",
+	},
+	sectionGreyBottom: {
+		width: "100%",
+		backgroundColor: "#f5f5f5",
+		paddingBottom: "100px",
 	},
 	SectionTitleNoPad: {
 		padding: "0px",
@@ -114,6 +119,10 @@ const useCKStyles = makeStyles((theme) => ({
 		marginBottom: "0px",
 		fontSize: "28px",
 		fontFamily: "Roboto, Helvetica",
+		fontWeight: "normal",
+	},
+	addLeg: {
+		marginLeft: "30px",
 	},
 }))
 
@@ -126,9 +135,9 @@ const CoachingKit = (): ReactElement => {
 			<Box role="main">
 				<Container maxWidth="lg" className={styles.container}>
 					<Typography
-						component="h2"
-						className={styles.MainHeading}
+						component="h1"
 						align="left"
+						className={styles.MainHeading}
 					>
 						Cash Flow Coaching Kit
 					</Typography>
@@ -142,11 +151,7 @@ const CoachingKit = (): ReactElement => {
 					</Grid>
 				</Container>
 				<div className={styles.sectionGrey}>
-					<Container
-						maxWidth="lg"
-						className={styles.containerGrey}
-						component="div"
-					>
+					<Container maxWidth="lg" className={styles.container} component="div">
 						<Grid item className={styles.alignJustifyContent}>
 							<h2 className={styles.SectionTitleNoPad}>Discover</h2>
 							<Typography
@@ -158,73 +163,75 @@ const CoachingKit = (): ReactElement => {
 								Learn about cash flow management.
 							</Typography>
 						</Grid>
-						<Grid container spacing={3} direction="row">
-							<div className={styles.square}>
-								<Card>
-									<CardActionArea
-										component={RouterLink}
-										to={routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
-											[":id?", ""],
-										])}
-									>
-										<CardMedia
-											component="img"
-											height="155"
-											image="/images/healthCheck_thumb.png"
-											title="Health check"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="h5" component="h2">
-												Health Check
-											</Typography>
-											<Typography
-												variant="body2"
-												color="textSecondary"
-												component="p"
-											>
-												Answer 10 questions to learn about the health of your
-												business.
-											</Typography>
-										</CardContent>
-										<CardActions className={styles.cardActions}>
-											<Arrow />
-										</CardActions>
-									</CardActionArea>
-								</Card>
-							</div>
-							<div className={styles.square}>
-								<Card>
-									<CardActionArea
-										component={RouterLink}
-										to={PrivateRoutes.DiscoverTopics}
-									>
-										<CardMedia
-											component="img"
-											alt="Discover Topics"
-											height="155"
-											image="/images/discoverTopics_thumb.png"
-											title="Discover Topics"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="h5" component="h2">
-												Discover Topics
-											</Typography>
-											<Typography
-												variant="body2"
-												color="textSecondary"
-												component="p"
-											>
-												Build your business knowledge with activities and ideas
-												that you can do at any time.
-											</Typography>
-										</CardContent>
-										<CardActions className={styles.cardActions}>
-											<Arrow />
-										</CardActions>
-									</CardActionArea>
-								</Card>
-							</div>
-						</Grid>
+						<div className={styles.addLeg}>
+							<Grid container spacing={3} direction="row">
+								<div className={styles.square}>
+									<Card>
+										<CardActionArea
+											component={RouterLink}
+											to={routeVarReplacement(PrivateRoutes.HealthCheckQuiz, [
+												[":id?", ""],
+											])}
+										>
+											<CardMedia
+												component="img"
+												height="155"
+												image="/images/healthCheck_thumb.png"
+												title="Health check"
+											/>
+											<CardContent>
+												<Typography gutterBottom variant="h5" component="h2">
+													Health Check
+												</Typography>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													Answer 10 questions to learn about the health of your
+													business.
+												</Typography>
+											</CardContent>
+											<CardActions className={styles.cardActions}>
+												<Arrow />
+											</CardActions>
+										</CardActionArea>
+									</Card>
+								</div>
+								<div className={styles.square}>
+									<Card>
+										<CardActionArea
+											component={RouterLink}
+											to={PrivateRoutes.DiscoverTopics}
+										>
+											<CardMedia
+												component="img"
+												alt="Discover Topics"
+												height="155"
+												image="/images/discoverTopics_thumb.png"
+												title="Discover Topics"
+											/>
+											<CardContent>
+												<Typography gutterBottom variant="h5" component="h2">
+													Discover Topics
+												</Typography>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													Build your business knowledge with activities and
+													ideas that you can do at any time.
+												</Typography>
+											</CardContent>
+											<CardActions className={styles.cardActions}>
+												<Arrow />
+											</CardActions>
+										</CardActionArea>
+									</Card>
+								</div>
+							</Grid>
+						</div>
 					</Container>
 				</div>
 
@@ -241,77 +248,78 @@ const CoachingKit = (): ReactElement => {
 								Understand your current cash flow and plan improvements.
 							</Typography>
 						</Grid>
-						<Grid container spacing={3} direction="row">
-							<div className={styles.square}>
-								<Card>
-									<CardActionArea component={RouterLink} to={PrivateRoutes.CFC}>
-										<CardMedia
-											component="img"
-											alt="Cash Flow Canvas"
-											height="155"
-											image="/images/cashFlowCanvas_thumb.png"
-											title="Cash Flow Canvas"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="h5" component="h2">
-												Cash Flow Canvas
-											</Typography>
-											<Typography
-												variant="body2"
-												color="textSecondary"
-												component="p"
-											>
-												Input simple figures to review, plan, change and track
-												your cash flow.
-											</Typography>
-										</CardContent>
-										<CardActions className={styles.cardActions}>
-											<Arrow />
-										</CardActions>
-									</CardActionArea>
-								</Card>
-							</div>
-							<div className={styles.square}>
-								<Card>
-									<CardActionArea
-										component={RouterLink}
-										to={PrivateRoutes.ChangeLevers}
-									>
-										<CardMedia
-											component="img"
-											alt="Change Levers"
-											height="155"
-											image="/images/changeLevers_thumb.png"
-											title="Change Levers"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="h5" component="h2">
-												Change Levers
-											</Typography>
-											<Typography
-												variant="body2"
-												color="textSecondary"
-												component="p"
-											>
-												Explore practical ideas and actions to improve your cash
-												flow.
-											</Typography>
-										</CardContent>
-										<CardActions className={styles.cardActions}>
-											<Arrow />
-										</CardActions>
-									</CardActionArea>
-								</Card>
-							</div>
-						</Grid>
+						<div className={styles.addLeg}>
+							<Grid container spacing={3} direction="row">
+								<div className={styles.square}>
+									<Card>
+										<CardActionArea
+											component={RouterLink}
+											to={PrivateRoutes.CFC}
+										>
+											<CardMedia
+												component="img"
+												alt="Cash Flow Canvas"
+												height="155"
+												image="/images/cashFlowCanvas_thumb.png"
+												title="Cash Flow Canvas"
+											/>
+											<CardContent>
+												<Typography gutterBottom variant="h5" component="h2">
+													Cash Flow Canvas
+												</Typography>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													Input simple figures to review, plan, change and track
+													your cash flow.
+												</Typography>
+											</CardContent>
+											<CardActions className={styles.cardActions}>
+												<Arrow />
+											</CardActions>
+										</CardActionArea>
+									</Card>
+								</div>
+								<div className={styles.square}>
+									<Card>
+										<CardActionArea
+											component={RouterLink}
+											to={PrivateRoutes.ChangeLevers}
+										>
+											<CardMedia
+												component="img"
+												alt="Change Levers"
+												height="155"
+												image="/images/changeLevers_thumb.png"
+												title="Change Levers"
+											/>
+											<CardContent>
+												<Typography gutterBottom variant="h5" component="h2">
+													Change Levers
+												</Typography>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													Explore practical ideas and actions to improve your
+													cash flow.
+												</Typography>
+											</CardContent>
+											<CardActions className={styles.cardActions}>
+												<Arrow />
+											</CardActions>
+										</CardActionArea>
+									</Card>
+								</div>
+							</Grid>
+						</div>
 					</Container>
 				</div>
-				<div className={styles.sectionGrey}>
-					<Container
-						maxWidth="lg"
-						className={styles.containerGrey}
-						component="div"
-					>
+				<div className={styles.sectionGreyBottom}>
+					<Container maxWidth="lg" className={styles.container} component="div">
 						<Grid item className={styles.alignJustifyContent}>
 							<h2 className={styles.SectionTitleNoPad}>Plan &amp; Action</h2>{" "}
 							<Typography
@@ -324,40 +332,42 @@ const CoachingKit = (): ReactElement => {
 								cash flow improvements.
 							</Typography>
 						</Grid>
-						<Grid container spacing={3} direction="row">
-							<div className={styles.square}>
-								<Card>
-									<CardActionArea
-										component={RouterLink}
-										to={PrivateRoutes.ActionChecklist}
-									>
-										<CardMedia
-											component="img"
-											alt="Action Checklist"
-											height="155"
-											image="/images/actionChecklist_thumb.png"
-											title="Action Checklist"
-										/>
-										<CardContent>
-											<Typography gutterBottom variant="h5" component="h2">
-												Action Checklist
-											</Typography>
-											<Typography
-												variant="body2"
-												color="textSecondary"
-												component="p"
-											>
-												Maintain a list of actions and deadlines to help you
-												track your cash flow improvements over time.
-											</Typography>
-										</CardContent>
-										<CardActions className={styles.cardActions}>
-											<Arrow />
-										</CardActions>
-									</CardActionArea>
-								</Card>
-							</div>
-						</Grid>
+						<div className={styles.addLeg}>
+							<Grid container spacing={3} direction="row">
+								<div className={styles.square}>
+									<Card>
+										<CardActionArea
+											component={RouterLink}
+											to={PrivateRoutes.ActionChecklist}
+										>
+											<CardMedia
+												component="img"
+												alt="Action Checklist"
+												height="155"
+												image="/images/actionChecklist_thumb.png"
+												title="Action Checklist"
+											/>
+											<CardContent>
+												<Typography gutterBottom variant="h5" component="h2">
+													Action Checklist
+												</Typography>
+												<Typography
+													variant="body2"
+													color="textSecondary"
+													component="p"
+												>
+													Maintain a list of actions and deadlines to help you
+													track your cash flow improvements over time.
+												</Typography>
+											</CardContent>
+											<CardActions className={styles.cardActions}>
+												<Arrow />
+											</CardActions>
+										</CardActionArea>
+									</Card>
+								</div>
+							</Grid>
+						</div>
 					</Container>
 				</div>
 				<PageTip tip={CoachingKitTips} />

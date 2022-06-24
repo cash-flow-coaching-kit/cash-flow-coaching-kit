@@ -30,15 +30,13 @@ const useHomepageStyles = makeStyles((theme) => ({
 	},
 	grid: {
 		marginTop: theme.spacing(8),
+		gap: "30px",
 	},
 	gridWrap: {
 		width: "320px",
-		marginTop: "30px",
-		marginBottom: "10px",
-		marginRight: "40px",
 	},
 	buttonBox: {
-		marginTop: theme.spacing(5),
+		marginTop: "80px",
 		display: "flex",
 		justifyContent: "left",
 		"& .MuiButton-root + .MuiButton-root": {
@@ -75,6 +73,9 @@ const useHomepageStyles = makeStyles((theme) => ({
 		alignItems: "center",
 		alignContent: "center",
 	},
+	grey: {
+		backgroundColor: "#f5f5f5",
+	},
 	contentText: {
 		margin: theme.spacing(2, 0),
 		width: "100%",
@@ -102,7 +103,6 @@ const useHomepageStyles = makeStyles((theme) => ({
 		float: "left",
 		display: "flex",
 		flexDirection: "column",
-		justifyContent: "space-evenly",
 		alignItems: "right",
 		alignContent: "right",
 	},
@@ -149,7 +149,7 @@ const useHomepageStyles = makeStyles((theme) => ({
 	},
 	MainHeading: {
 		paddingTop: theme.spacing(2),
-		paddingBottom: theme.spacing(1),
+		paddingBottom: "30px",
 		fontSize: "2.2rem",
 		fontWeight: "bold",
 	},
@@ -159,15 +159,22 @@ const useHomepageStyles = makeStyles((theme) => ({
 		fontFamily: "Roboto, Helvetica",
 	},
 	SectionTitleNoPad: {
-		paddingTop: "0px",
+		paddingTop: "16px",
 		marginTop: "0px",
+		marginBottom: "30px",
 		fontSize: "28px",
 		fontFamily: "Roboto, Helvetica",
 	},
 
-	testing: {
+	secondGrid: {
 		display: "flex",
 		flexWrap: "wrap",
+	},
+
+	gridMake: {
+		display: "flex",
+		flexWrap: "wrap",
+		gap: "30px",
 	},
 	testing2: {
 		display: "flex",
@@ -214,13 +221,9 @@ const Homepage = (): ReactElement => {
 
 					{/* <CardActions /> */}
 				</Container>
-				<Container
-					maxWidth={false}
-					component="div"
-					className={styles.containerGreyHeight}
-				>
-					<Container component="div" maxWidth="lg">
-						<div className={styles.testing}>
+				<div className={styles.grey}>
+					<Container maxWidth="lg" component="div" className={styles.container}>
+						<div className={styles.secondGrid}>
 							<div className={styles.splitContLeft} id="floatFull">
 								<div>
 									<h2 className={styles.SectionTitleNoPad}>
@@ -255,7 +258,7 @@ const Homepage = (): ReactElement => {
 								</div>
 							</div>
 							<div className={styles.splitCont}>
-								<div id="flexLeft" className={styles.testing}>
+								<div id="flexLeft" className={styles.secondGrid}>
 									<Grid
 										item
 										xs={10}
@@ -330,12 +333,12 @@ const Homepage = (): ReactElement => {
 							</div>
 						</div>
 					</Container>
-				</Container>
+				</div>
 				<Spacer space={5} />
 				<Container maxWidth="lg">
 					<div className={styles.testing2}>
 						<Grid id="advisors" item xs={12} sm={4}>
-							<h2 className={styles.SectionTitle}>
+							<h2 className={styles.SectionTitleNoPad}>
 								Join thousands of advisors helping their small business clients
 								succeed
 							</h2>
@@ -347,7 +350,7 @@ const Homepage = (): ReactElement => {
 								align="left"
 							>
 								Trusted advisors across the country are using the Cash Flow
-								Coaching Kit to help small businesses uplift their financial and
+								Coaching Kit to help small businesses build their financial and
 								cash flow capability.
 							</Typography>
 						</Grid>
@@ -376,171 +379,163 @@ const Homepage = (): ReactElement => {
 					</div>
 					<Spacer space={5} />
 				</Container>
-				<Container
-					maxWidth={false}
-					component="div"
-					className={styles.containerGrey}
-				>
-					<div className={styles.padding}>
-						<Container maxWidth="lg">
-							<h2 className={styles.SectionTitleNoPad}>
-								See how the tools work
-							</h2>
-							<div className={styles.testing}>
-								<div className={styles.gridWrap}>
-									<Grid item>
-										<Card>
-											<CardMedia
-												component="img"
-												height="155"
-												image="/images/healthCheck_thumb.png"
-												title="Health check"
-											/>
-											<CardContent>
-												<Typography gutterBottom variant="h5" component="h2">
-													Health Check
-												</Typography>
-												<Typography
-													variant="body2"
-													color="textSecondary"
-													component="p"
-												>
-													Answer 10 questions to learn about the health of your
-													business.
-												</Typography>
-											</CardContent>
-											<CardActions className={styles.cardActions}></CardActions>
-										</Card>
-									</Grid>
-								</div>
-								<div className={styles.gridWrap}>
-									<Grid item>
-										<Card>
-											<CardMedia
-												component="img"
-												alt="Discover Topics"
-												height="155"
-												image="/images/discoverTopics_thumb.png"
-												title="Discover Topics"
-											/>
-											<CardContent>
-												<Typography gutterBottom variant="h5" component="h2">
-													Discover Topics
-												</Typography>
-												<Typography
-													variant="body2"
-													color="textSecondary"
-													component="p"
-												>
-													Build your business knowledge with activities and
-													ideas that you can do at any time.
-												</Typography>
-											</CardContent>
-											<CardActions className={styles.cardActions}></CardActions>
-										</Card>
-									</Grid>
-								</div>
-								<div className={styles.gridWrap}>
-									<Grid item>
-										<Card>
-											<CardMedia
-												component="img"
-												alt="Cash Flow Canvas"
-												height="155"
-												image="/images/cashFlowCanvas_thumb.png"
-												title="Cash Flow Canvas"
-											/>
-											<CardContent>
-												<Typography gutterBottom variant="h5" component="h2">
-													Cash Flow Canvas
-												</Typography>
-												<Typography
-													variant="body2"
-													color="textSecondary"
-													component="p"
-												>
-													Input simple figures to review, plan, change and track
-													your cash flow.
-												</Typography>
-											</CardContent>
-											<CardActions className={styles.cardActions}></CardActions>
-										</Card>
-									</Grid>
-								</div>
-								<div className={styles.gridWrap}>
-									<Grid item>
-										<Card>
-											<CardMedia
-												component="img"
-												alt="Change Levers"
-												height="155"
-												image="/images/changeLevers_thumb.png"
-												title="Change Levers"
-											/>
-											<CardContent>
-												<Typography gutterBottom variant="h5" component="h2">
-													Change Levers
-												</Typography>
-												<Typography
-													variant="body2"
-													color="textSecondary"
-													component="p"
-												>
-													Explore practical ideas and actions to improve your
-													cash flow.
-												</Typography>
-											</CardContent>
-											<CardActions className={styles.cardActions}></CardActions>
-										</Card>
-									</Grid>
-								</div>
-								<div className={styles.gridWrap}>
-									<Grid item>
-										<Card>
-											<CardMedia
-												component="img"
-												alt="Action Checklist"
-												height="155"
-												image="/images/actionChecklist_thumb.png"
-												title="Action Checklist"
-											/>
-											<CardContent>
-												<Typography gutterBottom variant="h5" component="h2">
-													Action Checklist
-												</Typography>
-												<Typography
-													variant="body2"
-													color="textSecondary"
-													component="p"
-												>
-													Maintain a list of actions and deadlines to help you
-													track your cash flow improvements.
-												</Typography>
-											</CardContent>
-											<CardActions className={styles.cardActions}></CardActions>
-										</Card>
-									</Grid>
-								</div>
+				<div className={styles.grey}>
+					<Container maxWidth="lg" component="div" className={styles.container}>
+						<h2 className={styles.SectionTitleNoPad}>See how the tools work</h2>
+						<div className={styles.gridMake}>
+							<div className={styles.gridWrap}>
+								<Grid item>
+									<Card>
+										<CardMedia
+											component="img"
+											height="155"
+											image="/images/healthCheck_thumb.png"
+											title="Health check"
+										/>
+										<CardContent>
+											<Typography gutterBottom variant="h5" component="h2">
+												Health Check
+											</Typography>
+											<Typography
+												variant="body2"
+												color="textSecondary"
+												component="p"
+											>
+												Answer 10 questions to learn about the health of your
+												business.
+											</Typography>
+										</CardContent>
+										<CardActions className={styles.cardActions}></CardActions>
+									</Card>
+								</Grid>
 							</div>
-							<Box className={styles.buttonBox}>
-								{hasClients() ? (
-									<Button
-										color="primary"
-										variant="contained"
-										component={RouterLink}
-										to={PrivateRoutes.ClientList}
-										size="large"
-									>
-										Get Started
-									</Button>
-								) : (
-									<NewClientDialog triggerText="Get Started" />
-								)}
-								<ImportClient />
-							</Box>
-						</Container>
-					</div>
-				</Container>
+							<div className={styles.gridWrap}>
+								<Grid item>
+									<Card>
+										<CardMedia
+											component="img"
+											alt="Discover Topics"
+											height="155"
+											image="/images/discoverTopics_thumb.png"
+											title="Discover Topics"
+										/>
+										<CardContent>
+											<Typography gutterBottom variant="h5" component="h2">
+												Discover Topics
+											</Typography>
+											<Typography
+												variant="body2"
+												color="textSecondary"
+												component="p"
+											>
+												Build your business knowledge with activities and ideas
+												that you can do at any time.
+											</Typography>
+										</CardContent>
+										<CardActions className={styles.cardActions}></CardActions>
+									</Card>
+								</Grid>
+							</div>
+							<div className={styles.gridWrap}>
+								<Grid item>
+									<Card>
+										<CardMedia
+											component="img"
+											alt="Cash Flow Canvas"
+											height="155"
+											image="/images/cashFlowCanvas_thumb.png"
+											title="Cash Flow Canvas"
+										/>
+										<CardContent>
+											<Typography gutterBottom variant="h5" component="h2">
+												Cash Flow Canvas
+											</Typography>
+											<Typography
+												variant="body2"
+												color="textSecondary"
+												component="p"
+											>
+												Input simple figures to review, plan, change and track
+												your cash flow.
+											</Typography>
+										</CardContent>
+										<CardActions className={styles.cardActions}></CardActions>
+									</Card>
+								</Grid>
+							</div>
+							<div className={styles.gridWrap}>
+								<Grid item>
+									<Card>
+										<CardMedia
+											component="img"
+											alt="Change Levers"
+											height="155"
+											image="/images/changeLevers_thumb.png"
+											title="Change Levers"
+										/>
+										<CardContent>
+											<Typography gutterBottom variant="h5" component="h2">
+												Change Levers
+											</Typography>
+											<Typography
+												variant="body2"
+												color="textSecondary"
+												component="p"
+											>
+												Explore practical ideas and actions to improve your cash
+												flow.
+											</Typography>
+										</CardContent>
+										<CardActions className={styles.cardActions}></CardActions>
+									</Card>
+								</Grid>
+							</div>
+							<div className={styles.gridWrap}>
+								<Grid item>
+									<Card>
+										<CardMedia
+											component="img"
+											alt="Action Checklist"
+											height="155"
+											image="/images/actionChecklist_thumb.png"
+											title="Action Checklist"
+										/>
+										<CardContent>
+											<Typography gutterBottom variant="h5" component="h2">
+												Action Checklist
+											</Typography>
+											<Typography
+												variant="body2"
+												color="textSecondary"
+												component="p"
+											>
+												Maintain a list of actions and deadlines to help you
+												track your cash flow improvements.
+											</Typography>
+										</CardContent>
+										<CardActions className={styles.cardActions}></CardActions>
+									</Card>
+								</Grid>
+							</div>
+						</div>
+						<Box className={styles.buttonBox}>
+							{hasClients() ? (
+								<Button
+									color="primary"
+									variant="contained"
+									component={RouterLink}
+									to={PrivateRoutes.ClientList}
+									size="large"
+								>
+									Get Started
+								</Button>
+							) : (
+								<NewClientDialog triggerText="Get Started" />
+							)}
+							<ImportClient />
+						</Box>
+					</Container>
+				</div>
 
 				<Container
 					component="div"
