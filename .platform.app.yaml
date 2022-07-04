@@ -42,5 +42,15 @@ web:
       rules:
         \.(css|js|gif|jpe?g|png|ttf|eot|woff2?|otf|cast|mp4|json|yaml|ico|svg?|cast|mp4|json|yaml|svg?|ttf)$:
           expires: 4w
+    "/files":
+      root: "files"
+      scripts: false
 
-disk: 1024
+disk: 2048
+
+# The 'mounts' describe writable, persistent filesystem mounts in the application.
+mounts:
+  # The default Drupal files directory.
+  "/files":
+    source: local
+    source_path: "files"
