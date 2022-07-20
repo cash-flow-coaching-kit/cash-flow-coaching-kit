@@ -36,7 +36,8 @@ const useHomepageStyles = makeStyles((theme) => ({
 		width: "320px",
 	},
 	buttonBox: {
-		marginTop: "80px",
+		marginTop: "40px",
+		marginBottom: "40px",
 		display: "flex",
 		justifyContent: "left",
 		"& .MuiButton-root + .MuiButton-root": {
@@ -367,7 +368,25 @@ const Homepage = (): ReactElement => {
 				</Container>
 				<div className={styles.grey}>
 					<Container maxWidth="lg" component="div" className={styles.container}>
-						<h2 className={styles.SectionTitleNoPad}>See how the tools work</h2>
+						<h2 className={styles.SectionTitleNoPad}>
+							Get started to use the tools
+						</h2>
+						<Box className={styles.buttonBox}>
+							{hasClients() ? (
+								<Button
+									color="primary"
+									variant="contained"
+									component={RouterLink}
+									to={PrivateRoutes.ClientList}
+									size="large"
+								>
+									Get Started
+								</Button>
+							) : (
+								<NewClientDialog triggerText="Get Started" />
+							)}
+							<ImportClient />
+						</Box>
 						<div className={styles.gridMake}>
 							<div className={styles.gridWrap}>
 								<Grid item>
@@ -504,22 +523,6 @@ const Homepage = (): ReactElement => {
 								</Grid>
 							</div>
 						</div>
-						<Box className={styles.buttonBox}>
-							{hasClients() ? (
-								<Button
-									color="primary"
-									variant="contained"
-									component={RouterLink}
-									to={PrivateRoutes.ClientList}
-									size="large"
-								>
-									Get Started
-								</Button>
-							) : (
-								<NewClientDialog triggerText="Get Started" />
-							)}
-							<ImportClient />
-						</Box>
 					</Container>
 				</div>
 				<div className={styles.containerIndigo}>
