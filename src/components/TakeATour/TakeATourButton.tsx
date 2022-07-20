@@ -198,7 +198,12 @@ const TourCard = ({ onClick }: { onClick: () => void }): ReactElement => {
 			<div>
 				{" "}
 				<CardActionArea onClick={onClick}>
-					<Button size="large" color="primary" variant="contained">
+					<Button
+						size="large"
+						color="primary"
+						className="ButtonPadding"
+						variant="contained"
+					>
 						Take a tour
 					</Button>
 				</CardActionArea>
