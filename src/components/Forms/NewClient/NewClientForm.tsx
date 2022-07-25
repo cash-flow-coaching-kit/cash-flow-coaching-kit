@@ -124,7 +124,8 @@ const NewClientForm = ({
 			{/* Moved the DialogContent into the form for the submit to work in IE11 */}
 			<DialogContent>
 				<Typography>
-					If you have multiple businesses, you can add more later.
+					Add a business name to explore the Cash Flow Coaching Kit or use with
+					your client{" "}
 				</Typography>
 				<Spacer />
 				<TextField
@@ -146,8 +147,8 @@ const NewClientForm = ({
 			</DialogContent>
 			<DialogContent className={styles.content}>
 				<DialogContentText>
-					Remember: The kit does not save information between sessions. Use the
-					export function regularly to save your progress.
+					The kit does not save information between sessions. <br></br>Use
+					EXPORT DATA from Client List to save your files before you exit.
 				</DialogContentText>
 			</DialogContent>
 			<DialogActions>

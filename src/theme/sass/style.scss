@@ -127,3 +127,34 @@ code {
 		background-color: rgb(44, 56, 126);
 	}
 }
+
+#footerID {
+	@media only screen and (max-width: 800px) {		
+		width: 100%;
+	}
+}
+
+#floatFull {
+	@media only screen and (max-width: 800px) {		
+		width: 100%;
+	}
+}
+
+#flexLeft { 
+	justify-content: space-around;
+	@media only screen and (max-width: 800px) {		
+		justify-content: flex-start ;
+	}
+}
+
+.contentText {
+	margin-bottom: "20px";
+	@media only screen and (max-width: 800px) {		
+		width: 100% ;
+	}
+}
+
+.ButtonPadding {
+	padding-left: 15px !important;
+	padding-right: 15px !important ;
+}

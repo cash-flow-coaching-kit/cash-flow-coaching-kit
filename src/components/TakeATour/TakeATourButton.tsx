@@ -1,10 +1,6 @@
 import React, { ReactElement, useState } from "react"
 import {
-	Card,
-	CardMedia,
-	CardContent,
 	Typography,
-	CardActions,
 	Button,
 	makeStyles,
 	Dialog,
@@ -26,6 +22,10 @@ import tourSteps from "./__config/content"
 const useStyles = makeStyles((theme) => ({
 	media: {
 		height: 271,
+	},
+	wrapButton: {
+		marginTop: "80px",
+		width: "145px",
 	},
 	appbar: {
 		position: "relative",
@@ -51,9 +51,13 @@ const useStyles = makeStyles((theme) => ({
 		border: `1px solid ${theme.palette.grey["300"]}`,
 		borderRadius: theme.shape.borderRadius,
 	},
+	button2: {
+		padding: "8px",
+		fontSize: "15px",
+	},
 }))
 
-export default function TakeATour(): ReactElement {
+export default function TakeATourButton(): ReactElement {
 	const [open, setOpen] = useState(false)
 
 	const handleOpen = (): void => setOpen(true)
@@ -188,29 +192,22 @@ const TourDialog = ({
 
 const TourCard = ({ onClick }: { onClick: () => void }): ReactElement => {
 	const cls = useStyles()
+
 	return (
-		<Card>
-			<CardActionArea onClick={onClick}>
-				<CardMedia
-					className={cls.media}
-					image="/take-a-tour/card-preview.png"
-					title="Preview of the Cash Flow Coaching Kit"
-				/>
-				<CardContent>
-					<Typography gutterBottom variant="h6" component="h5">
-						Welcome to the Cash Flow Coaching Kit.
-					</Typography>
-					<Typography color="textSecondary" component="p">
-						Starting a coaching session with your client is simple, let&apos;s
-						show you around.
-					</Typography>
-				</CardContent>
-				<CardActions>
-					<div className="brookesButton">
-						<Button color="primary">Take a tour</Button>
-					</div>
-				</CardActions>
-			</CardActionArea>
-		</Card>
+		<div className={cls.wrapButton}>
+			<div>
+				{" "}
+				<CardActionArea onClick={onClick}>
+					<Button
+						size="large"
+						color="primary"
+						className="ButtonPadding"
+						variant="contained"
+					>
+						Take a tour
+					</Button>
+				</CardActionArea>
+			</div>
+		</div>
 	)
 }
