@@ -29,7 +29,14 @@ yarn install
 yarn build
 ```
 
+3. Run via Local host 
+```
+yarn start:web
+```
 ## How to run this
 
 - The dCFCK can run using a standard Node.js server running Node.js 12.x.
 - The original dCFCK is hosted on Platform.sh. The repository includes configuration files to run it under your own account.
+- Check platform.sh for branch environments 
+
+
