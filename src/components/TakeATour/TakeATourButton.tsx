@@ -109,7 +109,6 @@ const TourStepper = ({
 			</DialogContent>
 			<DialogActions>
 				<MobileStepper
-					variant="progress"
 					steps={tourSteps.length}
 					position="static"
 					activeStep={activeStep}
