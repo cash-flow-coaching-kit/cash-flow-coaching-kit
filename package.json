@@ -46,6 +46,7 @@
 		"fs": "^0.0.1-security",
 		"json5": "2.2.2",
 		"jszip": "3.8.0",
+		"loader-utils": "3.2.1",
 		"lodash-es": "^4.17.15",
 		"minimatch": "3.0.5",
 		"minimist": "1.2.6",
