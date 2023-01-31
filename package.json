@@ -43,7 +43,7 @@
 		"file-saver": "2.0.5",
 		"formik": "2.2.9",
 		"fs": "^0.0.1-security",
-		"jszip": "^3.5.0",
+		"jszip": "3.8.0",
 		"lodash-es": "^4.17.15",
 		"minimatch": "3.0.5",
 		"minimist": "1.2.6",
