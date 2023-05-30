@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - "desktop-app"
+      - "feature/home-get-started-updates"
 
 # List contents
 jobs:
