@@ -59,12 +59,12 @@ export default function CompareCanvases(): ReactElement {
 						leftCalc,
 						left.paygWithholding,
 						left.superAmount,
-						left.incomeTax
+						leftCalc.incomeTaxPercentage
 					),
 					three: calcQuestionThree(
 						left.openingBalance,
 						leftCalc,
-						left.incomeTax
+						leftCalc.incomeTaxPercentage
 					),
 					four: calcQuestionFour(leftCalc, rightCalc),
 				},
