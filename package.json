@@ -106,7 +106,6 @@
 		"@commitlint/cli": "^12.1.4",
 		"@commitlint/config-conventional": "^12.1.4",
 		"@typescript-eslint/eslint-plugin": "^4.28.0",
-		"commitizen": "4.2.4",
 		"cz-conventional-changelog": "3.3.0",
 		"eslint": "^7.29.0",
 		"eslint-config-airbnb-typescript": "^12.3.1",
@@ -140,11 +139,6 @@
 		"hooks": {
 			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
 			"pre-commit": "pretty-quick --staged"
-		}
-	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
 		}
 	},
 	"jest": {
