@@ -29,7 +29,7 @@ yarn install
 yarn build
 ```
 
-3. Run via Local host
+3. Run via Local
 
 ```
 yarn start:web
