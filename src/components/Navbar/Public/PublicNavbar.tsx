@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
 import { AppBar, Box, Toolbar } from "@material-ui/core"
-import ReactGA from "react-ga"
+import ReactGA from "react-ga4"
 import { useSharedNavStyles } from "../_config/style"
 import { NavigationRoutes } from "../_partials"
 import { routes } from "./_config/data"
