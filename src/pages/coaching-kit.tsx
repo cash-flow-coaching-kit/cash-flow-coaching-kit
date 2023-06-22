@@ -328,7 +328,7 @@ const CoachingKit = (): ReactElement => {
 								className="contentText"
 								align="left"
 							>
-								Create a list of actions and deadlines to help you track you
+								Create a list of actions and deadlines to help you track your
 								cash flow improvements.
 							</Typography>
 						</Grid>

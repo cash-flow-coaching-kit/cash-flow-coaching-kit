@@ -439,12 +439,12 @@ const DTRecordKeeping = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								title="key webinar topics for small business"
-								href="https://www.ato.gov.au/Business/Starting-your-own-business/Small-business-webinars-and-workshops/Small-business-webinars/"
+								title="Small business webinars and worksop"
+								href="https://www.ato.gov.au/Business/Starting-your-own-business/Small-business-webinars-and-workshops/#Webinarsforsmallbusiness"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Key webinar topics for small business
+								Small business webinars and worksops
 							</Button>
 						</Grid>
 						<Grid item sm={6} md={3}>

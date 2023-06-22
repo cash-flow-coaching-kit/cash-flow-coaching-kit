@@ -513,11 +513,11 @@ const DTFundingBusiness = (): ReactElement => {
 								fullWidth
 								size="large"
 								className={styles.button}
-								href="https://www.business.gov.au/Finance/Seeking-finance/Reasons-and-options-for-seeking-finance"
+								href="https://business.gov.au/finance/funding/choose-your-funding"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Reasons for seeking finance
+								Choose your funding type
 							</Button>
 						</Grid>
 					</Grid>
