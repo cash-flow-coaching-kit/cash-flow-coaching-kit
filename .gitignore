@@ -180,3 +180,4 @@ build/
 
 .vercel
 /.husky
+yarn-audit.html
