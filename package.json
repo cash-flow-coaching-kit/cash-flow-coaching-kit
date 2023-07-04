@@ -1,7 +1,7 @@
 {
 	"name": "dcfck-app",
 	"version": "0.1.0",
-	"private": true,	
+	"private": true,		
 	"dependencies": {
 		"@date-io/date-fns": "1.x",
 		"@loadable/component": "5.15.0",
@@ -103,7 +103,7 @@
 			"last 1 safari version"
 		]
 	},
-	"devDependencies": {		
+	"devDependencies": {			
 		"@commitlint/cli": "^12.1.4",
 		"@commitlint/config-conventional": "^12.1.4",
 		"@typescript-eslint/eslint-plugin": "^4.28.0",
