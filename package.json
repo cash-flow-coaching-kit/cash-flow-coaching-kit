@@ -1,7 +1,7 @@
 {
 	"name": "dcfck-app",
 	"version": "0.1.0",
-	"private": true,
+	"private": true,		
 	"dependencies": {
 		"@date-io/date-fns": "1.x",
 		"@loadable/component": "5.15.0",
@@ -37,7 +37,8 @@
 		"date-fns": "2.22.1",
 		"decode-uri-component": "0.2.2",
 		"detect-browser": "5.2.0",
-		"dexie": "3.0.4",
+		"dexie": "3.2.2",
+		"react-scripts": "5.0.1",
 		"dexie-export-import": "^1.0.0-rc.2",
 		"dotenv": "^15.0.0",
 		"ejs": "3.1.7",
@@ -63,8 +64,7 @@
 		"react-dom": "^17.0.2",
 		"react-ga": "^3.3.0",
 		"react-ga4": "^2.1.0",
-		"react-router-dom": "^5.1.2",
-		"react-scripts": "5.0.0",
+		"react-router-dom": "^5.1.2",		
 		"reactour": "^1.17.0",
 		"regenerator-runtime": "^0.13.5",
 		"source-map-explorer": "2.5.2",
@@ -74,7 +74,7 @@
 		"uuid": "8.3.2",
 		"webpack": "5.76.0",
 		"whatwg-fetch": "3.6.2",
-		"xlsx": "^0.17.0",
+		"xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz",
 		"xstate": "^4.30.0",
 		"yarn": "1.22.10"
 	},
@@ -103,7 +103,7 @@
 			"last 1 safari version"
 		]
 	},
-	"devDependencies": {
+	"devDependencies": {			
 		"@commitlint/cli": "^12.1.4",
 		"@commitlint/config-conventional": "^12.1.4",
 		"@typescript-eslint/eslint-plugin": "^4.28.0",
@@ -123,7 +123,8 @@
 		"prettier": "2.3.2",
 		"pretty-quick": "^3.1.1",
 		"sass": "^1.49.7",
-		"typescript-eslint-parser": "^22.0.0"
+		"typescript-eslint-parser": "^22.0.0",
+		"yarn-audit-html": "^7.2.0"
 	},
 	"eslintIgnore": [
 		"**/*.d.ts",
@@ -161,6 +162,6 @@
 		]
 	},
 	"resolutions": {
-		"workbox-webpack-plugin":"6.5.4"
+		"workbox-webpack-plugin": "6.5.4"
 	}
 }
