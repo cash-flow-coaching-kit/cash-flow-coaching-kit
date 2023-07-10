@@ -124,7 +124,7 @@
 		"pretty-quick": "^3.1.1",
 		"sass": "^1.49.7",
 		"typescript-eslint-parser": "^22.0.0",
-		"yarn-audit-html": "^7.2.0"
+		"yarn-audit-html": "^6.2.0"
 	},
 	"eslintIgnore": [
 		"**/*.d.ts",
