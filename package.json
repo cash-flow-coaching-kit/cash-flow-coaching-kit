@@ -35,8 +35,8 @@
 		"@types/uuid": "8.3.0",
 		"@xstate/react": "^1.4.0",
 		"body-scroll-lock": "4.0.0-beta.0",
-		"core-js": "3.15.1",
 		"concurrently": "^6.0.2",
+		"core-js": "3.15.1",
 		"date-fns": "2.22.1",
 		"detect-browser": "5.2.0",
 		"dexie": "3.0.3",
@@ -120,7 +120,7 @@
 		"asarUnpack": [
 			"**/*.node"
 		],
-		"npmRebuild": false,
+		"npmRebuild": true,
 		"publish": [
 			{
 				"provider": "github",
@@ -168,9 +168,9 @@
 		"fake-indexeddb": "^3.0.0",
 		"foreman": "^3.0.1",
 		"husky": "^6.0.0",
+		"npm-run-all": "^4.1.5",
 		"prettier": "2.3.2",
 		"pretty-quick": "^3.1.1",
-		"npm-run-all": "^4.1.5",
 		"puppeteer": "^9.0.0",
 		"typescript-eslint-parser": "^22.0.0"
 	},

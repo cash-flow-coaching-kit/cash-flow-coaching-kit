@@ -13,8 +13,8 @@
 		"editor.formatOnSave": false
 	},
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true,
-		"source.addMissingImports": false
+		"source.fixAll.eslint": "explicit",
+		"source.addMissingImports": "never"
 	},
 	"eslint.validate": [
 		"typescript",
