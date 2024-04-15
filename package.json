@@ -64,7 +64,6 @@
 		"react-ga": "^3.3.0",
 		"react-ga4": "^2.1.0",
 		"react-router-dom": "^5.1.2",
-		"react-scripts": "5.0.1",
 		"reactour": "^1.17.0",
 		"regenerator-runtime": "^0.13.5",
 		"source-map-explorer": "2.5.2",
@@ -72,11 +71,11 @@
 		"terser": "^4.8.1",
 		"typescript": "~4.3.4",
 		"uuid": "8.3.2",
-		"webpack": "5.76.0",
+		"webpack": "^5.76.0",
 		"whatwg-fetch": "3.6.2",
 		"xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz",
 		"xstate": "^4.30.0",
-		"yarn": "1.22.10"
+		"yarn": "^1.22.13"
 	},
 	"scripts": {
 		"start:web": "react-app-rewired start",
@@ -104,6 +103,7 @@
 		]
 	},
 	"devDependencies": {
+		"react-scripts": "^5.0.1",
 		"@commitlint/cli": "^12.1.4",
 		"@commitlint/config-conventional": "^12.1.4",
 		"@typescript-eslint/eslint-plugin": "^4.28.0",
