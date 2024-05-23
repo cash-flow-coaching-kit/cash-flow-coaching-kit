@@ -405,7 +405,7 @@ const DTRecordKeeping = (): ReactElement => {
 						You might like to visit these links for more information
 					</Typography>
 					<Grid container spacing={3}>
-						<Grid item sm={6} md={3}>
+						<Grid item sm={6} md={4}>
 							<Button
 								variant="contained"
 								fullWidth
@@ -419,7 +419,7 @@ const DTRecordKeeping = (): ReactElement => {
 								What books &amp; records should my company keep
 							</Button>
 						</Grid>
-						<Grid item sm={6} md={3}>
+						<Grid item sm={6} md={4}>
 							<Button
 								variant="contained"
 								fullWidth
@@ -433,21 +433,7 @@ const DTRecordKeeping = (): ReactElement => {
 								Record keeping for small business
 							</Button>
 						</Grid>
-						<Grid item sm={6} md={3}>
-							<Button
-								variant="contained"
-								fullWidth
-								size="large"
-								className={styles.button}
-								title="Small business webinars and worksop"
-								href="https://www.ato.gov.au/Business/Starting-your-own-business/Small-business-webinars-and-workshops/#Webinarsforsmallbusiness"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								Small business webinars and worksops
-							</Button>
-						</Grid>
-						<Grid item sm={6} md={3}>
+						<Grid item sm={6} md={4}>
 							<Button
 								variant="contained"
 								fullWidth
