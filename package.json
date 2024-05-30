@@ -73,7 +73,7 @@
 		"uuid": "8.3.2",
 		"webpack": "^5.76.0",
 		"whatwg-fetch": "3.6.2",
-		"xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz",
+		"xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz",
 		"xstate": "^4.30.0",
 		"yarn": "^1.22.13"
 	},
